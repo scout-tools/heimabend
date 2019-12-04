@@ -28,7 +28,7 @@
                 <v-textarea
                   outlined
                   label="Beschreibung"
-                  :value="data.shortDescription"
+                  v-model="data.beschreibung"
                 ></v-textarea>
               </v-col>
               <v-col cols="4">
@@ -36,7 +36,7 @@
                   outlined
                   label="Material Liste"
                   required
-                  :value="data.material"
+                  v-model="data.material"
                 ></v-textarea>
               </v-col>
               <v-col cols="3">
@@ -55,8 +55,8 @@
               </v-col>
               <v-col cols="2">
                 <v-sheet class="pa-3">
-                  <v-switch v-model="data.inside" label="Drinnen möglich?"></v-switch>
-                  <v-switch v-model="data.outside" label="Draußen möglich?"></v-switch>
+                  <v-switch v-model="data.isPossibleInside" label="Drinnen möglich?"></v-switch>
+                  <v-switch v-model="data.isPossibleOutside" label="Draußen möglich?"></v-switch>
                 </v-sheet>
               </v-col>
               <v-col cols="2">
@@ -104,7 +104,7 @@ export default {
   data: () => ({
     dialog: false,
     data: [],
-    isCreate: false,
+    isCreate: true,
     isUpdate: false,
   }),
 
@@ -112,30 +112,38 @@ export default {
     formSubmit() {
       const currentObj = this;
       if (this.isCreate) {
-        axios.post('http://localhost:5000/ringMember', {
-          stamm: this.data.stamm,
-          city: this.data.city,
-          members: this.data.members,
-          latitude: this.data.latitude,
-          longitude: this.data.longitude,
+        debugger;
+        axios.post('http://localhost:8000/basic/event/', {
+          title: this.data.title,
+          beschreibung: this.data.beschreibung,
+          tags: this.getUrlTagList(this.data.tags),
+          material: this.data.material,
+          isPossibleOutside: this.data.isPossibleOutside,
+          isPossibleInside: this.data.isPossibleInside,
+          prepairationRating: this.data.prepairationRating,
         })
           .then(() => {
+            debugger;
             // console.log(response);
             this.$emit('dialogClose');
           })
           .catch((error) => {
+            debugger;
             currentObj.output = error;
           });
       } else if (this.isUpdate) {
         axios.put('http://localhost:5000/ringMember', {
           id: this.data.id,
-          stamm: this.data.stamm,
-          city: this.data.city,
-          members: this.data.members,
-          latitude: this.data.latitude,
-          longitude: this.data.longitude,
+          title: this.data.title,
+          beschreibung: this.data.beschreibung,
+          tags: this.getUrlTagList(this.data.tags),
+          material: this.data.material,
+          isPossibleOutside: this.data.isPossibleOutside,
+          isPossibleInside: this.data.isPossibleInside,
+          prepairationRating: this.data.prepairationRating,
         })
           .then(() => {
+            debugger;
             // console.log(response);
             this.$emit('dialogClose');
           })
@@ -143,6 +151,14 @@ export default {
             currentObj.output = error;
           });
       }
+    },
+    getUrlTagList(tagList) {
+      const ary = [];
+      tagList.forEach((tag) => {
+        ary.push(`http://localhost:8000/basic/tag/${tag}/`);
+      });
+      debugger;
+      return ary;
     },
     show(item) {
       this.dialog = true;
