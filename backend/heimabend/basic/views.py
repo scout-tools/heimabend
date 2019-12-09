@@ -12,6 +12,5 @@ class TagViewSet(viewsets.ModelViewSet):
     serializer_class = TagSerializer
 
 class EventViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Event.objects.all().order_by('title')
     serializer_class = EventSerializer

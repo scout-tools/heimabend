@@ -4,13 +4,22 @@
     "pk": 1,
     "fields": {
       "title": "Brot backen auf dem Lagerfeuer",
-      "beschreibung": "Sipplinge können viele unterschiedliche Arten ausprobiert und verglichen werden, wie man am besten auf dem Feuer Brot backen kann. z.b. Im Hordentopf.",
+      "description": "Sipplinge können viele unterschiedliche Arten ausprobiert und verglichen werden, wie man am besten auf dem Feuer Brot backen kann. z.b. Im Hordentopf.",
+      "isPossibleOutside": true,
+      "isPossibleInside": false,
       "tags": [],
       "material": "Mehl, Wasser, Backpulver, Alufolie, Hordentopf, Steine, Stöcke, Brennholz, Streichhölzer",
       "costsRating": 2,
-      "isPossibleOutside": 1,
-      "isPossibleInside": 0,
-      "prepairationRating": 2
+      "executionTimeRating": 2,
+      "isPrepairationNeeded": true,
+      "isActive": true,
+      "createdBy": "Robert",
+      "createdByEmail": "Robert@Hratuga.de",
+      "updatedBy": null,
+      "updatedAt": null,
+      "isLvlOne": false,
+      "isLvlTwo": true,
+      "isLvlThree": false
     }
   },
   {
@@ -18,13 +27,22 @@
     "pk": 2,
     "fields": {
       "title": "Bündisch oder Scoutistisch?",
-      "beschreibung": "Sipplinge können verschiedene Situationen aus dem Stammesleben erzählt werden und die Sipplinge sollen jeweils einschätzen ob die Sache Bündisch oder Scoutistisch ist.",
+      "description": "Sipplinge können verschiedene Situationen aus dem Stammesleben erzählt werden und die Sipplinge sollen jeweils einschätzen ob die Sache Bündisch oder Scoutistisch ist.",
+      "isPossibleOutside": true,
+      "isPossibleInside": false,
       "tags": [],
       "material": "-",
-      "costsRating": 1,
-      "isPossibleOutside": 1,
-      "isPossibleInside": 1,
-      "prepairationRating": 1
+      "costsRating": 2,
+      "executionTimeRating": 2,
+      "isPrepairationNeeded": true,
+      "isActive": false,
+      "createdBy": "Robert",
+      "createdByEmail": "Robert@Hratuga.de",
+      "updatedBy": null,
+      "updatedAt": null,
+      "isLvlOne": false,
+      "isLvlTwo": false,
+      "isLvlThree": true
     }
   },
   {
@@ -32,13 +50,22 @@
     "pk": 3,
     "fields": {
       "title": "Trage bauen",
-      "beschreibung": "Sipplinge können in den Wald gehen und dort nur aus Seil und gefundenen Holz eine Trage bauen, welche einen Sippling tragen kann.",
+      "description": "Sipplinge können in den Wald gehen und dort nur aus Seil und gefundenen Holz eine Trage bauen, welche einen Sippling tragen kann.",
+      "isPossibleOutside": true,
+      "isPossibleInside": false,
       "tags": [],
       "material": "Seile, Dreckeckstücher",
-      "costsRating": 1,
-      "isPossibleOutside": 1,
-      "isPossibleInside": 0,
-      "prepairationRating": 1
+      "costsRating": 2,
+      "executionTimeRating": 2,
+      "isPrepairationNeeded": true,
+      "isActive": true,
+      "createdBy": "Robert",
+      "createdByEmail": "Robert@Hratuga.de",
+      "updatedBy": null,
+      "updatedAt": null,
+      "isLvlOne": true,
+      "isLvlTwo": false,
+      "isLvlThree": false
     }
   },
   {
@@ -46,13 +73,22 @@
     "pk": 4,
     "fields": {
       "title": "Rucksack packen",
-      "beschreibung": "Sipplinge können ihren Rucksack mitbringen und über jedes Teil wird geredet.",
+      "description": "Sipplinge können ihren Rucksack mitbringen und über jedes Teil wird geredet.",
+      "isPossibleOutside": true,
+      "isPossibleInside": false,
       "tags": [],
       "material": "-",
-      "costsRating": 1,
-      "isPossibleOutside": 1,
-      "isPossibleInside": 1,
-      "prepairationRating": 2
+      "costsRating": 2,
+      "executionTimeRating": 2,
+      "isPrepairationNeeded": true,
+      "isActive": true,
+      "createdBy": "Robert",
+      "createdByEmail": "Robert@Hratuga.de",
+      "updatedBy": null,
+      "updatedAt": null,
+      "isLvlOne": true,
+      "isLvlTwo": true,
+      "isLvlThree": false
     }
   },
   {
@@ -60,13 +96,22 @@
     "pk": 5,
     "fields": {
       "title": "Holzbrettchen erstellen",
-      "beschreibung": "Sipplinge können blanke Holzbrettchen verschönern und mit Namen versehen. Dazu können Sie beliebige Werkzeuge wie Messer oder Lötkolben verwenden.",
+      "description": "Sipplinge können blanke Holzbrettchen verschönern und mit Namen versehen. Dazu können Sie beliebige Werkzeuge wie Messer oder Lötkolben verwenden.",
+      "isPossibleOutside": true,
+      "isPossibleInside": false,
       "tags": [],
       "material": "Holzbrettchen, Lötkolben",
-      "costsRating": 3,
-      "isPossibleOutside": 0,
-      "isPossibleInside": 1,
-      "prepairationRating": 2
+      "costsRating": 2,
+      "executionTimeRating": 2,
+      "isPrepairationNeeded": true,
+      "isActive": false,
+      "createdBy": "Robert",
+      "createdByEmail": "Robert@Hratuga.de",
+      "updatedBy": null,
+      "updatedAt": null,
+      "isLvlOne": false,
+      "isLvlTwo": true,
+      "isLvlThree": true
     }
   },
   {
@@ -74,13 +119,22 @@
     "pk": 6,
     "fields": {
       "title": "Blattbuch erstellen",
-      "beschreibung": "Die Sipplinge sollen ein Blattbuch erstellen. Dafür sollen Sie Blätter sammeln, trocknen und in ein Buch einkleben. Blüten und Rinde sollen ebenfalls hinzukommen, sowie eine Beschriftung.",
+      "description": "Die Sipplinge sollen ein Blattbuch erstellen. Dafür sollen Sie Blätter sammeln, trocknen und in ein Buch einkleben. Blüten und Rinde sollen ebenfalls hinzukommen, sowie eine Beschriftung.",
+      "isPossibleOutside": true,
+      "isPossibleInside": false,
       "tags": [],
       "material": "leere A6-Hefte",
       "costsRating": 2,
-      "isPossibleOutside": 1,
-      "isPossibleInside": 0,
-      "prepairationRating": 2
+      "executionTimeRating": 2,
+      "isPrepairationNeeded": true,
+      "isActive": true,
+      "createdBy": "Robert",
+      "createdByEmail": "Robert@Hratuga.de",
+      "updatedBy": null,
+      "updatedAt": null,
+      "isLvlOne": true,
+      "isLvlTwo": false,
+      "isLvlThree": true
     }
   },
   {
@@ -88,13 +142,22 @@
     "pk": 8,
     "fields": {
       "title": "Wildpflanzen suchen",
-      "beschreibung": "Die Sipplinge sollen die 5 der 10 häufigsten Wildpflanzen finden und ins Heim bringen.",
+      "description": "Die Sipplinge sollen die 5 der 10 häufigsten Wildpflanzen finden und ins Heim bringen.",
+      "isPossibleOutside": true,
+      "isPossibleInside": false,
       "tags": [],
       "material": "-",
-      "costsRating": 1,
-      "isPossibleOutside": 1,
-      "isPossibleInside": 0,
-      "prepairationRating": 1
+      "costsRating": 2,
+      "executionTimeRating": 2,
+      "isPrepairationNeeded": true,
+      "isActive": true,
+      "createdBy": "Robert",
+      "createdByEmail": "Robert@Hratuga.de",
+      "updatedBy": null,
+      "updatedAt": null,
+      "isLvlOne": true,
+      "isLvlTwo": true,
+      "isLvlThree": true
     }
   },
   {
@@ -102,13 +165,22 @@
     "pk": 9,
     "fields": {
       "title": "Kompass selber bauen",
-      "beschreibung": "Die Sipplinge sollen einen Kompass selber bauen.",
+      "description": "Die Sipplinge sollen einen Kompass selber bauen.",
+      "isPossibleOutside": true,
+      "isPossibleInside": false,
       "tags": [],
       "material": "Nadel, Magnet, Schale mit Wasser",
-      "costsRating": 1,
-      "isPossibleOutside": 1,
-      "isPossibleInside": 1,
-      "prepairationRating": 2
+      "costsRating": 2,
+      "executionTimeRating": 2,
+      "isPrepairationNeeded": true,
+      "isActive": true,
+      "createdBy": "Robert",
+      "createdByEmail": "Robert@Hratuga.de",
+      "updatedBy": null,
+      "updatedAt": null,
+      "isLvlOne": true,
+      "isLvlTwo": false,
+      "isLvlThree": false
     }
   },
   {
@@ -116,13 +188,22 @@
     "pk": 10,
     "fields": {
       "title": "1. Hilfe Fallbeispiele",
-      "beschreibung": "Die Sipplinge sollen typische Pfadfinder-Erste-Hilfe Fälle realistisch nachspielen.",
+      "description": "Die Sipplinge sollen typische Pfadfinder-Erste-Hilfe Fälle realistisch nachspielen.",
+      "isPossibleOutside": true,
+      "isPossibleInside": false,
       "tags": [],
       "material": "Erste Hilfe Rucksack/Tasche",
       "costsRating": 2,
-      "isPossibleOutside": 1,
-      "isPossibleInside": 1,
-      "prepairationRating": 2
+      "executionTimeRating": 2,
+      "isPrepairationNeeded": true,
+      "isActive": true,
+      "createdBy": "Robert",
+      "createdByEmail": "Robert@Hratuga.de",
+      "updatedBy": null,
+      "updatedAt": null,
+      "isLvlOne": false,
+      "isLvlTwo": false,
+      "isLvlThree": true
     }
   },
   {
@@ -130,13 +211,22 @@
     "pk": 11,
     "fields": {
       "title": "Sonnenuhr bauen",
-      "beschreibung": "Die Sipplinge sollen eine Sonnenuhr selber bauen.",
+      "description": "Die Sipplinge sollen eine Sonnenuhr selber bauen.",
+      "isPossibleOutside": true,
+      "isPossibleInside": false,
       "tags": [],
       "material": "Stock, Kompass",
-      "costsRating": 1,
-      "isPossibleOutside": 1,
-      "isPossibleInside": 0,
-      "prepairationRating": 2
+      "costsRating": 2,
+      "executionTimeRating": 2,
+      "isPrepairationNeeded": true,
+      "isActive": true,
+      "createdBy": "Robert",
+      "createdByEmail": "Robert@Hratuga.de",
+      "updatedBy": null,
+      "updatedAt": null,
+      "isLvlOne": false,
+      "isLvlTwo": false,
+      "isLvlThree": true
     }
   },
   {
@@ -144,13 +234,22 @@
     "pk": 12,
     "fields": {
       "title": "Gewürze erschmecken",
-      "beschreibung": "Die Sipplinge sollen Gewürze erschmecken.",
+      "description": "Die Sipplinge sollen Gewürze erschmecken.",
+      "isPossibleOutside": true,
+      "isPossibleInside": true,
       "tags": [],
       "material": "Gewürze",
-      "costsRating": 3,
-      "isPossibleOutside": 1,
-      "isPossibleInside": 1,
-      "prepairationRating": 3
+      "costsRating": 2,
+      "executionTimeRating": 2,
+      "isPrepairationNeeded": true,
+      "isActive": true,
+      "createdBy": "Robert",
+      "createdByEmail": "Robert@Hratuga.de",
+      "updatedBy": null,
+      "updatedAt": null,
+      "isLvlOne": false,
+      "isLvlTwo": true,
+      "isLvlThree": false
     }
   }
 ]

@@ -7,7 +7,11 @@ from .models import Tag, Event
 class TagSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Tag
-        fields = ('id', 'name', 'beschreibung', 'color')
+        fields = (
+            'id',
+            'name',
+            'description',
+            'color')
 
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
@@ -16,11 +20,20 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
         fields = (
             'id',
             'title',
-            'beschreibung',
+            'description',
             'isPossibleOutside',
             'isPossibleInside',
             'tags',
-            'createdAt',
             'material',
             'costsRating',
-            'prepairationRating')
+            'executionTimeRating',
+            'isPrepairationNeeded',
+            'isActive',
+            'isLvlOne',
+            'isLvlTwo',
+            'isLvlThree',
+            'createdBy',
+            'createdByEmail',
+            'updatedBy',
+            'createdAt',
+            'updatedAt')

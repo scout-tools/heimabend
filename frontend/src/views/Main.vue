@@ -25,14 +25,6 @@
         clearable
         :dense="isMobil"
       />
-      <v-btn
-        icon
-        fab
-        large
-        @click="onNewClick()"
-      >
-        <v-icon color="green">mdi-pencil-plus</v-icon>
-      </v-btn>
       <v-spacer />
       <img v-on:click="onLoginClick" class="mr-2" :src="require('../assets/logo.gif')" height="50"/>
 
@@ -42,10 +34,12 @@
     <MenuLeft
       ref="mainMenuLeft"
       :filterStatus="filterStatus"
+      :levelFilter="levelFilter"
       :tags="tags"
       @onTagFilterChanged="onTagFilterChanged"
       @openImpressum="onImpressumClick"
       @openAboutProject="onAboutProjectClick"
+      @onLevelFilterChanged="onLevelFilterChanged"
       :drawer="drawer"
     />
 
@@ -56,6 +50,7 @@
             :items="getItems"
             :isMobil="isMobil"
             :tags="tags"
+            @onUpdateClick="onUpdateClick"
           />
           <v-btn
             class="ma-10"
@@ -65,8 +60,22 @@
             Alle Filter zurücksetzen
           </v-btn>
         </div>
+   <v-fab-transition>
+      <v-btn
+      @click="onNewClick"
+        fab
+        color="green"
+        dark
+        fixed
+        bottom
+        right
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+    </v-fab-transition>
       </div>
     </v-content>
+
     <CreateDialog
       ref="createGroupClassModal"
       v-on:dialogClose="onDialogClose"
@@ -89,7 +98,7 @@
 import axios from 'axios';
 
 import CreateDialog from './components/dialogs/CreateDialog.vue';
-import Login from './components/dialogs/Login.vue';
+import Login from './components/dialogs/Login.vue'; // eslint-disable-line
 import Impressum from './components/dialogs/Impressum.vue';
 import AboutProject from './components/dialogs/AboutProject.vue';
 import HeimabendCard from './components/cards/Heimabend.vue';
@@ -113,7 +122,7 @@ export default {
   computed: {
     getItems() {
       return this.items
-        .filter(item => item.beschreibung.includes(this.searchInput)
+        .filter(item => item.description.includes(this.searchInput)
           || item.title.includes(this.searchInput))
       // .filter(item => this.filterTags.filter(element => item.tags.includes(element)).length
       // || !this.filterTags.length)
@@ -121,8 +130,21 @@ export default {
           || item.isPossibleInside === this.filterStatus.isPossibleInside)
         .filter(item => !this.filterStatus.isPossibleOutside
           || item.isPossibleOutside === this.filterStatus.isPossibleOutside)
-        .filter(item => !this.filterStatus.withoutPreperation || item.prepairationRating === 1)
+        .filter((item) => {
+          const allowOne = this.levelFilter.includes(0);
+          const allowTwo = this.levelFilter.includes(1);
+          const allowThree = this.levelFilter.includes(2);
+          const allow = (allowOne && allowOne === item.isLvlOne)
+            || (allowTwo && allowTwo === item.isLvlTwo)
+            || (allowThree && allowThree === item.isLvlThree);
+          return allow;
+        })
+        .filter(item => !this.filterStatus.withoutPreperation || item.isPrepairationNeeded === 1)
+        .filter(item => this.filterStatus.justActive === item.isActive)
         .filter(item => !this.filterStatus.withoutCosts || item.costsRating === 1);
+    },
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
     },
   },
   methods: {
@@ -139,16 +161,30 @@ export default {
       this.$refs.login.show();
     },
     onUpdateClick(item) {
+      const tags = item.tags; // eslint-disable-line
+      debugger;
+      tags.forEach((tag, index) => {
+        item.tags[index] = this.convertUrlToId(tag); // eslint-disable-line
+      });
       this.$refs.createGroupClassModal.show(item);
+    },
+    convertUrlToId(url) {
+      const idStringArray = url.split('/');
+      const id = idStringArray[idStringArray.length - 2];
+
+      return parseInt(id, 10);
     },
     getTagById(id) {
       return this.tags.find(tag => tag.id === id);
     },
     onDialogClose() {
-      // reload
+      this.getEvents();
     },
     onTagFilterChanged(data) {
       this.filterTags = data;
+    },
+    onLevelFilterChanged(data) {
+      this.levelFilter = data;
     },
     onResetClick() {
       this.filterStatus = {
@@ -156,15 +192,16 @@ export default {
         isPossibleOutside: false,
         withoutPreperation: false,
         withoutCosts: false,
+        justActive: true,
       };
+      this.levelFilter = [0, 1, 2];
       this.$refs.mainMenuLeft.resetTags();
     },
     getEvents() {
-      const path = 'http://localhost:8000/basic/event/';
+      const path = `${this.API_URL}basic/event/`;
       axios.get(path)
         .then((res) => {
-          debugger;
-          this.items = res.data;
+          this.items = res;
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -172,10 +209,10 @@ export default {
         });
     },
     getTags() {
-      const path = 'http://localhost:8000/basic/tag/';
+      const path = `${this.API_URL}basic/tag/`;
       axios.get(path)
         .then((res) => {
-          this.tags = res.data;
+          this.tags = res;
         })
         .catch((error) => {
           // eslint-disable-next-line
@@ -188,14 +225,17 @@ export default {
     this.getTags();
   },
   data: () => ({
+    API_URL: process.env.VUE_APP_API,
     filterTags: [],
-    drawer: null,
+    drawer: true,
     filterStatus: {
       isPossibleInside: false,
       isPossibleOutside: false,
       withoutPreperation: false,
       withoutCosts: false,
+      justActive: true,
     },
+    levelFilter: [0, 1, 2],
     searchInput: '',
     fab: false,
     colorFab: 'green',

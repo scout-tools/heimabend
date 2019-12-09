@@ -1,8 +1,12 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-top-transition">
-      <v-card >
-      <v-toolbar dark color="primary">
+    <v-dialog
+      v-model="dialog"
+      persistent
+      hide-overlay
+      max-width="70%">
+      <v-card>
+       <v-toolbar dark color="primary">
           <v-btn icon dark @click="cancel()">
             <v-icon>mdi-close</v-icon>
           </v-btn>
@@ -10,41 +14,95 @@
           <v-toolbar-title v-if="isUpdate">Heimabend ändern</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn dark text @click="save()" >Speichern</v-btn>
+            <v-btn
+              dark
+              text
+              @click="save()" >
+                Speichern
+              </v-btn>
           </v-toolbar-items>
         </v-toolbar>
         <v-card-text>
+          <v-form
+              ref="form"
+              v-model="valid"
+            >
           <v-container>
             <v-row>
-              <v-col cols="4">
+      <v-checkbox
+        color="secondary"
+        :rules="[v => !!v || 'Nur mit der Einverständniserklärung kannst du Ideen einreichen']"
+        label="Ich möchte meine Heimabend veröffentlichen und es
+          dürfen in Zukunft andere Änderungen an der Idee vornehmen?"
+        required
+      ></v-checkbox>
+            </v-row>
+            <v-row>
+              <v-col cols="12">
                 <v-text-field
                   outlined
+                  autofocus
+                  :counter="40"
+                  :rules="rules.title"
+                  name="123"
                   label="Titel"
                   v-model="data.title"
                   required>
                 </v-text-field>
               </v-col>
-              <v-col cols="8">
+            </v-row>
+            <v-row>
+              <v-col cols="12">
                 <v-textarea
                   outlined
                   label="Beschreibung"
-                  v-model="data.beschreibung"
+                  :counter="2000"
+                  auto-grow
+                  :rules="rules.description"
+                  v-model="data.description"
+                  required
                 ></v-textarea>
               </v-col>
-              <v-col cols="4">
-                <v-textarea
+            </v-row>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field
                   outlined
                   label="Material Liste"
+                  :counter="200"
                   required
+                  :rules="rules.material"
                   v-model="data.material"
-                ></v-textarea>
+                ></v-text-field>
               </v-col>
+           </v-row>
+            <v-row>
               <v-col cols="3">
+                <v-sheet class="pa-3">
+                  <v-switch
+                    v-model="data.isPossibleInside"
+                    color="secondary"
+                    label="Drinnen möglich?">
+                  </v-switch>
+                  <v-switch
+                    v-model="data.isPossibleOutside"
+                    color="secondary"
+                    label="Draußen möglich?">
+                  </v-switch>
+                  <v-switch
+                    v-model="data.isPrepairationNeeded"
+                    color="secondary"
+                    label="Vorbereitung nötig?">
+                  </v-switch>
+                </v-sheet>
+              </v-col>
+              <v-col cols="3" class="mt-5">
                 <v-select
                     v-model="data.tags"
                     :items="tags"
                     item-value="id"
                     item-color="color"
+                    :rules="rules.tags"
                     item-text="name"
                     deletable-chips
                     chips
@@ -53,13 +111,7 @@
                     outlined
                   ></v-select>
               </v-col>
-              <v-col cols="2">
-                <v-sheet class="pa-3">
-                  <v-switch v-model="data.isPossibleInside" label="Drinnen möglich?"></v-switch>
-                  <v-switch v-model="data.isPossibleOutside" label="Draußen möglich?"></v-switch>
-                </v-sheet>
-              </v-col>
-              <v-col cols="2">
+              <v-col cols="3">
                 <v-sheet class="pa-3">
                 <v-text>
                   Wieviel Geld ist nötig?
@@ -74,90 +126,271 @@
                   length="3"
                 ></v-rating>
                 <v-text>
-                  Wieviel Vorbereitungszeit ist nötig?
+                  Wieviel Durchführungszeit ist erforderlich?
                 </v-text>
                 <v-rating
-                  v-model="data.prepairationRating"
+                  v-model="data.executionTimeRating"
                   emptyIcon="mdi-clock"
                   fullIcon="mdi-clock"
-                  color="red"
+                  color="black"
                   background-color="grey"
                   min="1"
                   length="3"
                 ></v-rating>
                 </v-sheet>
               </v-col>
+              <v-col cols="3" class="mt-5">
+                <v-text-field
+                  outlined
+                  label="Dein Name"
+                  :disabled="isAuthenticated"
+                  v-model="data.createdBy"
+                  required>
+                </v-text-field>
+                <v-text-field
+                  outlined
+                  label="Deine E-Mail Adresse"
+                  :disabled="isAuthenticated"
+                  v-model="data.createdByEmail"
+                  required>
+                </v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+               <v-col cols="3">
+                <v-sheet class="pa-3">
+                <v-text>
+                  Für welche Erfahrung ist der Heimabend geeignet?
+                </v-text>
+                <v-btn-toggle
+                  v-model="levelFilter"
+                  multiple
+                  shaped
+                  mandatory
+                >
+                  <v-btn>
+                    <v-img
+                      v-if="getOrange"
+                      class="mx-1"
+                      :src="require('../../../assets/knot_orange.png')"
+                      max-width="40"
+                    />
+                    <v-img
+                      v-if="!getOrange"
+                      class="mx-1"
+                      :src="require('../../../assets/knot_grey.png')"
+                      max-width="40"
+                    ></v-img>
+                  </v-btn>
+                  <v-btn>
+                    <v-img
+                      v-if="getBlue"
+                      class="mx-1"
+                      :src="require('../../../assets/knot_blue.png')"
+                      max-width="40"
+                    ></v-img>
+                    <v-img
+                      v-if="!getBlue"
+                      class="mx-1"
+                      :src="require('../../../assets/knot_grey.png')"
+                      max-width="40"
+                    ></v-img>
+                  </v-btn>
+                  <v-btn>
+                    <v-img
+                      v-if="getRed"
+                      class="mx-1"
+                      :src="require('../../../assets/knot_red.png')"
+                      max-width="40"
+                    ></v-img>
+                    <v-img
+                      v-if="!getRed"
+                      class="mx-1"
+                      :src="require('../../../assets/knot_grey.png')"
+                      max-width="40"
+                    ></v-img>
+                  </v-btn>
+                </v-btn-toggle>
+                </v-sheet>
+              </v-col>
+              <v-col cols="3">
+                <v-sheet class="pa-3">
+                  <v-switch
+                    v-model="data.isActive"
+                    :disabled="!isAuthenticated"
+                    color="secondary"
+                    label="Veröffentlicht">
+                  </v-switch>
+                </v-sheet>
+              </v-col>
             </v-row>
           </v-container>
+   </v-form>
         </v-card-text>
       </v-card>
     </v-dialog>
+    <ErrorMessage
+      :showError="showError"
+      :responseObj="responseObj"
+    />
+    <SuccessMessage
+      :showSuccess="showSuccess"/>
   </v-row>
 </template>
 
 <script>
 import axios from 'axios';
 
+import ErrorMessage from '@/views/components/common/ErrorMessage.vue';
+import SuccessMessage from '@/views/components/common/SuccessMessage.vue';
+
+
 export default {
   props: ['tags'],
 
+  components: {
+    ErrorMessage,
+    SuccessMessage,
+  },
+
   data: () => ({
+    API_URL: process.env.VUE_APP_API,
     dialog: false,
-    data: [],
+    valid: true,
+    showError: false,
+    showSuccess: false,
+    responseObj: {},
+    rules: {
+      title: [
+        v => !!v || 'Titel ist erforderlich',
+        v => (v && v.length >= 10) || 'Name must be more than 10 characters',
+        v => (v && v.length <= 40) || 'Name must be less than 40 characters',
+      ],
+      description: [
+        v => !!v || 'Beschreibung ist erforderlich',
+        v => (v && v.length >= 75) || 'Name must be more than 75 characters',
+        v => (v && v.length <= 2000) || 'Name must be less than 1000 characters',
+      ],
+      material: [
+        v => (v.length <= 200) || 'Name must be less than 200 characters',
+      ],
+      tags: [
+        v => (v && v.length > 0) || 'Mindestens ein Tag ist erforderlich',
+      ],
+    },
+    data: {
+      title: 'Rucksack packen',
+      description: '',
+      isPossibleOutside: true,
+      isPossibleInside: true,
+      tags: [],
+      material: null,
+      costsRating: 1,
+      executionTimeRating: 1,
+      isPrepairationNeeded: true,
+      isActive: false,
+      createdBy: null,
+      updatedBy: null,
+      updatedAt: null,
+      isLvlOne: true,
+      isLvlTwo: true,
+      isLvlThree: true,
+    },
     isCreate: true,
     isUpdate: false,
+    levelFilter: [0, 1, 2],
   }),
+
+  computed: {
+    getOrange() {
+      if (this.levelFilter) {
+        return this.levelFilter.includes(0);
+      }
+      return false;
+    },
+    getBlue() {
+      if (this.levelFilter) {
+        return this.levelFilter.includes(1);
+      }
+      return false;
+    },
+    getRed() {
+      if (this.levelFilter) {
+        return this.levelFilter.includes(2);
+      }
+      return false;
+    },
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    },
+  },
 
   methods: {
     formSubmit() {
-      const currentObj = this;
+      if (!this.$refs.form.validate()) {
+        return;
+      }
       if (this.isCreate) {
-        debugger;
-        axios.post('http://localhost:8000/basic/event/', {
+        axios.post(`${this.API_URL}basic/event/`, {
           title: this.data.title,
-          beschreibung: this.data.beschreibung,
-          tags: this.getUrlTagList(this.data.tags),
-          material: this.data.material,
+          description: this.data.description,
           isPossibleOutside: this.data.isPossibleOutside,
           isPossibleInside: this.data.isPossibleInside,
-          prepairationRating: this.data.prepairationRating,
+          tags: this.getUrlTagList(this.data.tags),
+          material: this.data.material,
+          costsRating: this.data.costsRating,
+          executionTimeRating: this.data.executionTimeRating,
+          isPrepairationNeeded: this.data.isPrepairationNeeded,
+          isActive: this.data.isActive,
+          isLvlOne: this.getLevel(0, this.data.material),
+          isLvlTwo: this.getLevel(1, this.data.material),
+          isLvlThree: this.getLevel(2, this.data.material),
+          createdBy: this.data.createdBy,
+          createdByEmail: this.data.createdByEmail,
         })
           .then(() => {
-            debugger;
-            // console.log(response);
+            this.dialog = false;
             this.$emit('dialogClose');
+            this.showSuccess = true;
           })
           .catch((error) => {
-            debugger;
-            currentObj.output = error;
+            this.showError = true;
+            console.error(error);
           });
       } else if (this.isUpdate) {
-        axios.put('http://localhost:5000/ringMember', {
+        axios.put(`${this.API_URL}basic/event/${this.data.id}/`, {
           id: this.data.id,
           title: this.data.title,
-          beschreibung: this.data.beschreibung,
-          tags: this.getUrlTagList(this.data.tags),
-          material: this.data.material,
+          description: this.data.description,
           isPossibleOutside: this.data.isPossibleOutside,
           isPossibleInside: this.data.isPossibleInside,
-          prepairationRating: this.data.prepairationRating,
+          tags: this.getUrlTagList(this.data.tags),
+          material: this.data.material,
+          costsRating: this.data.costsRating,
+          executionTimeRating: this.data.executionTimeRating,
+          isPrepairationNeeded: this.data.isPrepairationNeeded,
+          isActive: this.data.isActive,
+          isLvlOne: this.getLevel(0, this.data.material),
+          isLvlTwo: this.getLevel(1, this.data.material),
+          isLvlThree: this.getLevel(2, this.data.material),
         })
           .then(() => {
-            debugger;
-            // console.log(response);
+            this.dialog = false;
             this.$emit('dialogClose');
+            this.showSuccess = true;
           })
           .catch((error) => {
-            currentObj.output = error;
+            this.showError = true;
+            console.error(error);
           });
       }
     },
     getUrlTagList(tagList) {
+      debugger;
       const ary = [];
       tagList.forEach((tag) => {
-        ary.push(`http://localhost:8000/basic/tag/${tag}/`);
+        ary.push(`${process.env.VUE_APP_API}basic/tag/${tag}/`);
       });
-      debugger;
       return ary;
     },
     show(item) {
@@ -166,10 +399,10 @@ export default {
         this.isCreate = false;
         this.isUpdate = true;
         this.data = item;
+        debugger;
       } else {
         this.isCreate = true;
         this.isUpdate = false;
-        this.data = [];
       }
     },
 
@@ -180,8 +413,18 @@ export default {
 
     save() {
       this.formSubmit();
-      this.dialog = false;
+    },
+    getLevel(value, array) {
+      console.log(array);
+      return true;
     },
   },
 };
 </script>
+
+<style scoped>
+.v-btn:not(.v-btn--text):not(.v-btn--outlined).v-btn--active:before {
+    opacity: 0.4;
+    color: limegreen
+}
+</style>

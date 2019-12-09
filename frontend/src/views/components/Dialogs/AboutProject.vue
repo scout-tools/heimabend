@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   props: ['tags'],
 
@@ -32,57 +30,6 @@ export default {
   }),
 
   methods: {
-    formSubmit() {
-      const currentObj = this;
-      if (this.isCreate) {
-        debugger;
-        axios.post('http://localhost:8000/basic/event/', {
-          title: this.data.title,
-          beschreibung: this.data.beschreibung,
-          tags: this.getUrlTagList(this.data.tags),
-          material: this.data.material,
-          isPossibleOutside: this.data.isPossibleOutside,
-          isPossibleInside: this.data.isPossibleInside,
-          prepairationRating: this.data.prepairationRating,
-        })
-          .then(() => {
-            debugger;
-            // console.log(response);
-            this.$emit('dialogClose');
-          })
-          .catch((error) => {
-            debugger;
-            currentObj.output = error;
-          });
-      } else if (this.isUpdate) {
-        axios.put('http://localhost:5000/ringMember', {
-          id: this.data.id,
-          title: this.data.title,
-          beschreibung: this.data.beschreibung,
-          tags: this.getUrlTagList(this.data.tags),
-          material: this.data.material,
-          isPossibleOutside: this.data.isPossibleOutside,
-          isPossibleInside: this.data.isPossibleInside,
-          prepairationRating: this.data.prepairationRating,
-        })
-          .then(() => {
-            debugger;
-            // console.log(response);
-            this.$emit('dialogClose');
-          })
-          .catch((error) => {
-            currentObj.output = error;
-          });
-      }
-    },
-    getUrlTagList(tagList) {
-      const ary = [];
-      tagList.forEach((tag) => {
-        ary.push(`http://localhost:8000/basic/tag/${tag}/`);
-      });
-      debugger;
-      return ary;
-    },
     show(item) {
       this.dialog = true;
       if (item) {

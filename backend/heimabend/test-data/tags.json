@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "name": "Schnitzen",
-      "beschreibung": "",
+      "description": "",
       "color": "#C0FF97"
     }
   },
@@ -13,7 +13,7 @@
     "pk": 2,
     "fields": {
       "name": "Backen",
-      "beschreibung": "",
+      "description": "",
       "color": "#FFBBBB"
     }
   },
@@ -22,7 +22,7 @@
     "pk": 4,
     "fields": {
       "name": "Unsere Erde",
-      "beschreibung": "",
+      "description": "",
       "color": "#BBEBFF"
     }
   },
@@ -31,7 +31,7 @@
     "pk": 6,
     "fields": {
       "name": "D. Pfadfindergesch.",
-      "beschreibung": "",
+      "description": "",
       "color": "#D7D1F8"
     }
   },
@@ -40,7 +40,7 @@
     "pk": 7,
     "fields": {
       "name": "Int. Pfadfindergesch.",
-      "beschreibung": "",
+      "description": "",
       "color": "#A3FEBA"
     }
   },
@@ -49,7 +49,7 @@
     "pk": 8,
     "fields": {
       "name": "Unser Bund",
-      "beschreibung": "",
+      "description": "",
       "color": "#FFFFB5"
     }
   },
@@ -58,7 +58,7 @@
     "pk": 9,
     "fields": {
       "name": "1. Hilfe",
-      "beschreibung": "",
+      "description": "",
       "color": "#FFCFA4"
     }
   },
@@ -67,7 +67,7 @@
     "pk": 10,
     "fields": {
       "name": "Feuer machen",
-      "beschreibung": "",
+      "description": "",
       "color": "#F1F1B1"
     }
   },
@@ -76,7 +76,7 @@
     "pk": 11,
     "fields": {
       "name": "Versprechen",
-      "beschreibung": "",
+      "description": "",
       "color": "#DEB19E"
     }
   },
@@ -85,7 +85,7 @@
     "pk": 12,
     "fields": {
       "name": "Karte Kompass",
-      "beschreibung": "",
+      "description": "",
       "color": "#F4CAD6"
     }
   },
@@ -94,7 +94,7 @@
     "pk": 13,
     "fields": {
       "name": "Kim-Spiele",
-      "beschreibung": "",
+      "description": "",
       "color": "#C6C6FF"
     }
   },
@@ -103,7 +103,7 @@
     "pk": 15,
     "fields": {
       "name": "Symbolik",
-      "beschreibung": "",
+      "description": "",
       "color": "#DCEDEA"
     }
   },
@@ -112,7 +112,7 @@
     "pk": 16,
     "fields": {
       "name": "Knoten",
-      "beschreibung": "",
+      "description": "",
       "color": "#B4D1B6"
     }
   },
@@ -121,7 +121,7 @@
     "pk": 17,
     "fields": {
       "name": "Küche",
-      "beschreibung": "",
+      "description": "",
       "color": "#B5FFFC"
     }
   },
@@ -130,7 +130,7 @@
     "pk": 18,
     "fields": {
       "name": "Lagerbauten",
-      "beschreibung": "",
+      "description": "",
       "color": "#EDDFFB"
     }
   },
@@ -139,7 +139,7 @@
     "pk": 19,
     "fields": {
       "name": "Schwarzzelte",
-      "beschreibung": "",
+      "description": "",
       "color": "#DDCEFF"
     }
   },
@@ -148,7 +148,7 @@
     "pk": 20,
     "fields": {
       "name": "Musisches",
-      "beschreibung": "",
+      "description": "",
       "color": "#FFC895"
     }
   },
@@ -157,7 +157,7 @@
     "pk": 21,
     "fields": {
       "name": "Packen",
-      "beschreibung": "",
+      "description": "",
       "color": "#D7ACAC"
     }
   },
@@ -166,7 +166,7 @@
     "pk": 22,
     "fields": {
       "name": "Schätzen",
-      "beschreibung": "",
+      "description": "",
       "color": "#00000"
     }
   },
@@ -175,7 +175,7 @@
     "pk": 23,
     "fields": {
       "name": "Haik",
-      "beschreibung": "",
+      "description": "",
       "color": "#E994AB"
     }
   },
@@ -184,7 +184,7 @@
     "pk": 24,
     "fields": {
       "name": "Lebensraum Baum",
-      "beschreibung": "",
+      "description": "",
       "color": "#D5AAFF"
     }
   }

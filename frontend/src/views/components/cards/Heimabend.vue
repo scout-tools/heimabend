@@ -1,28 +1,32 @@
 <template>
+<v-slide-y-transition>
 <div v-if="dataReady">
   <v-card
     max-width="800"
     shaped
     class="mx-auto ma-5"
-    color="lightgrey"
+    color="backgroundGrey"
     v-for="(item, index) in items"
     :key="index"
   >
     <v-list-item
-      class="blue lighten-4 pl-6 pr-0">
+      class="lightPrimary pl-6 pr-0">
       <v-img
         class="mx-1"
         :src="require('../../../assets/knot_orange.png')"
+        v-if="item.isLvlOne"
         max-width="30"
       ></v-img>
       <v-img
         class="mx-1"
         :src="require('../../../assets/knot_blue.png')"
+        v-if="item.isLvlTwo"
         max-width="30"
       ></v-img>
       <v-img
         class="mx-1"
         :src="require('../../../assets/knot_red.png')"
+        v-if="item.isLvlThree"
         max-width="30"
       ></v-img>
       <v-divider class="mx-2" vertical></v-divider>
@@ -32,13 +36,25 @@
             {{ item.title }}
         </v-list-item-title>
       </v-list-item-content>
-      <v-divider class="mx-2 ml-12" vertical></v-divider>
-      <v-btn class="ma-1 ml-0" text icon color="gray lighten-2" @click="onUpdateClick(item)">
-        <v-icon>mdi-eye</v-icon>
+      <v-divider class="mx-2 ml-12" v-if="!item.isActive" vertical/>
+      <v-icon color="red" v-if="!item.isActive">
+        mdi-eye-off-outline
+      </v-icon>
+      <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
+      <v-btn
+        class="ma-1 ml-0"
+        text
+        icon
+        color="gray lighten-2"
+        v-if="isAuthenticated"
+        @click="onUpdateClick(item)">
+        <v-icon>mdi-pencil-outline</v-icon>
       </v-btn>
     </v-list-item>
     <v-divider />
-    <v-card-text big class="text--primary">{{ item.beschreibung}}</v-card-text>
+    <v-card-text big class="text--primary">
+      {{ item.description }}
+    </v-card-text>
     <v-card-text>{{ `Material: ${item.material}` }}</v-card-text>
     <v-container>
       <v-chip
@@ -49,7 +65,7 @@
       >{{ getTagNameById(tag) }}</v-chip>
     </v-container>
     <v-divider />
-    <v-card-actions class="grey lighten-4">
+    <v-card-actions class="accent">
       <div class="caption mr-1">{{ formatDate(item.createdAt)}}</div>
 
       <v-divider :class="verticalMargin" vertical v-if="item.isPossibleOutside" />
@@ -85,7 +101,7 @@
                     <v-btn
                       :x-small="isMobil"
                       depressed
-                      color="lightgrey"
+                      color="backgroundGrey"
                       v-on="on">
                       <v-rating
                         v-model="item.costsRating"
@@ -108,17 +124,35 @@
                     <v-btn
                       :x-small="isMobil"
                       depressed
-                      color="lightgrey"
+                      color="backgroundGrey"
+                      v-on="on"
+                    >
+                      <v-icon
+                        v-model="item.isPrepairationNeeded"
+                        :color="item.isPrepairationNeeded ? 'black': 'grey'">
+                        mdi-clipboard-list-outline
+                      </v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Mit Vorbereitung?</span>
+                </v-tooltip>
+                <v-divider :class="verticalMargin" vertical/>
+                <v-tooltip open-on-hover bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      :x-small="isMobil"
+                      depressed
+                      color="backgroundGrey"
                       v-on="on"
                     >
                       <v-rating
-                        v-model="item.prepairationRating"
+                        v-model="item.executionTimeRating"
                         emptyIcon="mdi-clock"
                         fullIcon="mdi-clock"
                         color="black"
                         background-color="grey"
                         dense
-                        length="4"
+                        length="3"
                         :size="ratingSize"
                         readonly
                       />
@@ -137,6 +171,7 @@
     </v-card-actions>
   </v-card>
 </div>
+</v-slide-y-transition>
 </template>
 
 <script>
@@ -156,16 +191,19 @@ export default {
       return !this.isMobil ? 'mx-2' : 'mx-0';
     },
     getTagNameById(idString) {
+      debugger;
+      console.log(idString);
       const idStringArray = idString.split('/');
       const id = idStringArray[idStringArray.length - 2];
       const returnTag = this.tags.find(tag => tag.id === parseInt(id, 10));
       if (returnTag && returnTag.name) {
         return returnTag.name;
       }
-      debugger;
       return false;
     },
     getTagColorById(idString) {
+      debugger;
+      console.log(idString);
       const idStringArray = idString.split('/');
       const id = idStringArray[idStringArray.length - 2];
       const returnTag = this.tags.find(tag => tag.id === parseInt(id, 10));
@@ -174,13 +212,15 @@ export default {
       }
       return false;
     },
+    onUpdateClick(item) {
+      this.$emit('onUpdateClick', item);
+    },
     ready() {
       const me = this;
       // here is code that should be done first before vue render all authData
-      const path = 'http://localhost:8000/basic/tag/';
+      const path = `${this.API_URL}basic/tag/`;
       axios.get(path)
         .then((res) => {
-          debugger;
           me.tags = res.data;
           me.dataReady = true;
         })
@@ -199,12 +239,16 @@ export default {
   },
   data() {
     return {
+      API_URL: process.env.VUE_APP_API,
       dataReady: false,
     };
   },
   computed: {
     ratingSize() {
       return !this.isMobil ? 20 : 12;
+    },
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
     },
   },
 };

@@ -10,7 +10,6 @@
           <v-spacer></v-spacer>
         </v-toolbar>
         <v-card-text>
-         
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -18,8 +17,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   props: [],
 

@@ -5,13 +5,31 @@
       app
       clipped
       width="300"
-      color="grey lighten-3"
-      z-index="-10000"
+      color="accent"
     >
       <v-list
         dense
-        class="grey lighten-3"
+        class="accent"
       >
+      <v-toolbar v-if="isAuthenticated" dense class="lightPrimary mx-4 mb-3">
+        <v-spacer/>
+          <v-btn icon>
+            <v-icon>mdi-account-group-outline</v-icon>
+          </v-btn>
+          <v-btn icon>
+            <v-icon>mdi-tag-text-outline</v-icon>
+          </v-btn>
+          <v-btn icon>
+            <v-icon>mdi-earth</v-icon>
+          </v-btn>
+          <v-btn icon>
+            <v-icon>mdi-message-text-outline</v-icon>
+          </v-btn>
+          <v-btn icon>
+            <v-icon>mdi-archive-outline</v-icon>
+          </v-btn>
+        <v-spacer/>
+        </v-toolbar>
         <template>
           <v-row align="center">
             <v-card
@@ -19,7 +37,7 @@
               class="mx-auto"
               shaped
             >
-              <v-list-item class="blue lighten-4 pa-0 ma-0">
+              <v-list-item class="lightPrimary pa-0 ma-0">
                 <v-list-item-content>
                   <v-list-item-title>Filter</v-list-item-title>
                 </v-list-item-content>
@@ -32,6 +50,7 @@
                     v-model="filterStatus.isPossibleInside"
                     label="Nur im Haus"
                     dense
+                    color="secondary"
                     hide-details
                   />
                   </v-col>
@@ -48,6 +67,7 @@
                     v-model="filterStatus.isPossibleOutside"
                     label="Nur Draußen"
                     dense
+                    color="secondary"
                     hide-details
                   />
                   </v-col>
@@ -64,6 +84,7 @@
                     v-model="filterStatus.withoutPreperation"
                     label="Nur ohne Vorbereitung"
                     dense
+                    color="secondary"
                     hide-details
                   />
                   </v-col>
@@ -80,12 +101,30 @@
                     v-model="filterStatus.withoutCosts"
                     label="Nur ohne Kosten"
                     dense
+                    color="secondary"
                     hide-details
                   />
                   </v-col>
                   <v-col cols="2" class="pa-0 ma-0" align-self="center">
                     <v-icon color="orange">
                       mdi-currency-eur
+                    </v-icon>
+                  </v-col>
+                </v-row>
+                <v-divider v-if="isAuthenticated"/>
+                <v-row class="px-2 pb-2" v-if="isAuthenticated">
+                  <v-col cols="10" class="pa-0 ma-0" align-self="center">
+                  <v-switch
+                    v-model="filterStatus.justActive"
+                    label="Nur Veröffentlicht"
+                    dense
+                    color="secondary"
+                    hide-details
+                  />
+                  </v-col>
+                  <v-col cols="2" class="pa-0 ma-0" align-self="center">
+                    <v-icon color="red">
+                      mdi-eye-off-outline
                     </v-icon>
                   </v-col>
                 </v-row>
@@ -100,9 +139,9 @@
               class="mx-auto"
               shaped
             >
-              <v-list-item class="blue lighten-4 pa-0 ma-0">
+              <v-list-item class="lightPrimary pa-0 ma-0">
                 <v-list-item-content>
-                  <v-list-item-title>Stufen</v-list-item-title>
+                  <v-list-item-title>StufenA</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item>
@@ -112,20 +151,21 @@
         class="my-5"
       >
         <v-btn-toggle
-          v-model="toggle_exclusive"
+          v-model="levelFilter"
+          @change="onChangeLevelFilter"
           multiple
           shaped
           mandatory
         >
-          <v-btn active-class="">
+          <v-btn>
             <v-img
-            v-if="getOrange"
+              v-if="getOrange"
               class="mx-1"
               :src="require('../../../assets/knot_orange.png')"
               max-width="40"
             />
             <v-img
-            v-if="!getOrange"
+              v-if="!getOrange"
               class="mx-1"
               :src="require('../../../assets/knot_grey.png')"
               max-width="40"
@@ -133,13 +173,13 @@
           </v-btn>
           <v-btn>
             <v-img
-            v-if="getBlue"
+              v-if="getBlue"
               class="mx-1"
               :src="require('../../../assets/knot_blue.png')"
               max-width="40"
             ></v-img>
             <v-img
-            v-if="!getBlue"
+              v-if="!getBlue"
               class="mx-1"
               :src="require('../../../assets/knot_grey.png')"
               max-width="40"
@@ -147,13 +187,13 @@
           </v-btn>
           <v-btn>
             <v-img
-            v-if="getRed"
+              v-if="getRed"
               class="mx-1"
               :src="require('../../../assets/knot_red.png')"
               max-width="40"
             ></v-img>
             <v-img
-            v-if="!getRed"
+              v-if="!getRed"
               class="mx-1"
               :src="require('../../../assets/knot_grey.png')"
               max-width="40"
@@ -171,7 +211,7 @@
               class="mx-auto"
               shaped
             >
-              <v-list-item class="blue lighten-4">
+              <v-list-item class="lightPrimary">
                 <v-list-item-content>
                   <v-list-item-title>
                     Themen-Auswahl
@@ -206,7 +246,7 @@
               class="mx-auto"
               shaped
             >
-              <v-list-item class="blue lighten-4">
+              <v-list-item class="secondary">
                 <v-list-item-content>
                   <v-list-item-title>Likes</v-list-item-title>
                 </v-list-item-content>
@@ -217,7 +257,7 @@
                     Minimale Anzahl von Likes
                     <v-slider
                       prepend-icon="mdi-thumb-up"
-                      icon-color="blue lighten-2"
+                      icon-color="secondary"
                       thumb-label
                       dense
                       max="20"
@@ -231,7 +271,7 @@
         </template>
       </v-list>
 
-      <v-list dense nav bottom>
+      <v-list dense bottom>
         <v-list-item link bottom>
           <v-list-item-icon>
             <v-icon>mdi-help-circle-outline</v-icon>
@@ -258,16 +298,19 @@ export default {
   props: {
     drawer: Boolean,
     filterStatus: Object,
+    levelFilter: Array,
     tags: Array,
   },
   data: () => ({
     filterTags: [],
     mini: true,
-    toggle_exclusive: [0, 1, 2],
   }),
   methods: {
     onChange() {
       this.$emit('onTagFilterChanged', this.filterTags);
+    },
+    onChangeLevelFilter() {
+      this.$emit('onLevelFilterChanged', this.levelFilter);
     },
     resetTags() {
       this.filterTags = [];
@@ -282,14 +325,33 @@ export default {
   },
   computed: {
     getOrange() {
-      return this.toggle_exclusive.includes(0);
+      if (this.levelFilter) {
+        return this.levelFilter.includes(0);
+      }
+      return false;
     },
     getBlue() {
-      return this.toggle_exclusive.includes(1);
+      if (this.levelFilter) {
+        return this.levelFilter.includes(1);
+      }
+      return false;
     },
     getRed() {
-      return this.toggle_exclusive.includes(2);
+      if (this.levelFilter) {
+        return this.levelFilter.includes(2);
+      }
+      return false;
+    },
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
     },
   },
 };
 </script>
+
+<style scoped>
+.v-btn:not(.v-btn--text):not(.v-btn--outlined).v-btn--active:before {
+    opacity: 0.4;
+    color: limegreen
+}
+</style>

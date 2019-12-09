@@ -1,0 +1,41 @@
+<template>
+  <v-snackbar
+    v-model="showSuccess"
+    color="success"
+    y='top'
+  >
+    {{ 'Juhu, es hat geklappt' }}
+    <v-btn
+      dark
+      text
+      @click="showSuccess = false"
+    >
+      Schließen
+    </v-btn>
+  </v-snackbar>
+</template>
+
+<script>
+// import axios from 'axios';
+import router from '@/router'; // eslint-disable-line
+// import store from '@/store';
+
+
+export default {
+  props: {
+    showSuccess: Boolean,
+  },
+
+  data: () => ({
+    showSuccess: false,
+  }),
+
+  methods: {
+  },
+  computed: {
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    },
+  },
+};
+</script>
