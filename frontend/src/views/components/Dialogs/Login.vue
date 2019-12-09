@@ -86,7 +86,7 @@ export default {
     dialog: false,
     showError: false,
     showSuccess: false,
-    responseObj: {},
+    responseObj: null,
     API_URL: process.env.VUE_APP_API,
     data: {
       username: '',

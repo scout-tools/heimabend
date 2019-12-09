@@ -113,9 +113,9 @@
               </v-col>
               <v-col cols="3">
                 <v-sheet class="pa-3">
-                <v-text>
+                <span class="subtitle-1">
                   Wieviel Geld ist nötig?
-                </v-text>
+                </span>
                 <v-rating
                   v-model="data.costsRating"
                   emptyIcon="mdi-currency-eur"
@@ -125,9 +125,9 @@
                   min="1"
                   length="3"
                 ></v-rating>
-                <v-text>
+                <span class="subtitle-1">
                   Wieviel Durchführungszeit ist erforderlich?
-                </v-text>
+                </span>
                 <v-rating
                   v-model="data.executionTimeRating"
                   emptyIcon="mdi-clock"
@@ -159,9 +159,9 @@
             <v-row>
                <v-col cols="3">
                 <v-sheet class="pa-3">
-                <v-text>
+                <span class="subtitle-1">
                   Für welche Erfahrung ist der Heimabend geeignet?
-                </v-text>
+                </span>
                 <v-btn-toggle
                   v-model="levelFilter"
                   multiple
@@ -259,7 +259,7 @@ export default {
     valid: true,
     showError: false,
     showSuccess: false,
-    responseObj: {},
+    responseObj: null,
     rules: {
       title: [
         v => !!v || 'Titel ist erforderlich',
@@ -284,7 +284,7 @@ export default {
       isPossibleOutside: true,
       isPossibleInside: true,
       tags: [],
-      material: null,
+      material: '',
       costsRating: 1,
       executionTimeRating: 1,
       isPrepairationNeeded: true,

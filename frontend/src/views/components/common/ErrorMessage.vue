@@ -20,13 +20,18 @@ import router from '@/router'; // eslint-disable-line
 
 
 export default {
-  props: [
-    'showError',
-    'responseObj',
-  ],
+  props: {
+    showError: {
+      type: Boolean,
+      default: false,
+    },
+    responseObj: {
+      type: Error,
+      default: {},
+    },
+  },
 
   data: () => ({
-    showError: false,
   }),
 
   methods: {
@@ -36,16 +41,16 @@ export default {
       return this.$store.getters.isAuthenticated;
     },
     statusText() {
-      if (this.responseObj.response) {
+      if (this.responseObj && this.responseObj.response) {
         return this.responseObj.response.statusText;
       }
-      return ':-(';
+      return 'Fehler';
     },
     details() {
-      if (this.responseObj.response) {
+      if (this.responseObj && this.responseObj.response) {
         return this.responseObj.response.data.detail;
       }
-      return ':-(';
+      return 'Fehler';
     },
   },
 };

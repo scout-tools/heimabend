@@ -7,7 +7,7 @@
       color="#1a4b7e"
       dark
     >
-    <v-app-bar-nav-icon @click="drawer = !drawer"/>
+    <v-app-bar-nav-icon @click="toogleDrawer()"/>
       <span class="title ml-3 mr-5" v-if="!isMobil">
         Heimabend&nbsp;
         <span class="font-weight-light">
@@ -40,7 +40,6 @@
       @openImpressum="onImpressumClick"
       @openAboutProject="onAboutProjectClick"
       @onLevelFilterChanged="onLevelFilterChanged"
-      :drawer="drawer"
     />
 
     <v-content id="lateral">
@@ -49,7 +48,6 @@
           <HeimabendCard
             :items="getItems"
             :isMobil="isMobil"
-            :tags="tags"
             @onUpdateClick="onUpdateClick"
           />
           <v-btn
@@ -146,8 +144,14 @@ export default {
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
+    isDrawer() {
+      return this.$store.getters.isDrawer;
+    },
   },
   methods: {
+    toogleDrawer() {
+      this.$store.commit('toogleDrawer');
+    },
     onNewClick() {
       this.$refs.createGroupClassModal.show();
     },
@@ -227,7 +231,6 @@ export default {
   data: () => ({
     API_URL: process.env.VUE_APP_API,
     filterTags: [],
-    drawer: true,
     filterStatus: {
       isPossibleInside: false,
       isPossibleOutside: false,

@@ -23,11 +23,13 @@ import router from '@/router'; // eslint-disable-line
 
 export default {
   props: {
-    showSuccess: Boolean,
+    showSuccess: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data: () => ({
-    showSuccess: false,
   }),
 
   methods: {

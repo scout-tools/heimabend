@@ -1,7 +1,7 @@
 <template>
 <div>
     <v-navigation-drawer
-      v-model="drawer"
+      v-model="isDrawer"
       app
       clipped
       width="300"
@@ -296,7 +296,6 @@
 <script>
 export default {
   props: {
-    drawer: Boolean,
     filterStatus: Object,
     levelFilter: Array,
     tags: Array,
@@ -344,6 +343,14 @@ export default {
     },
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
+    },
+    isDrawer: {
+      get() {
+        return this.$store.getters.isDrawer;
+      },
+      set() {
+        return false;
+      },
     },
   },
 };

@@ -52,8 +52,13 @@
       </v-btn>
     </v-list-item>
     <v-divider />
-    <v-card-text big class="text--primary">
-      {{ item.description }}
+    <!-- <v-card-text big class="text--primary" :v-html="item.description"/> -->
+    <v-card-text>
+      <p
+        class="text-left"
+        v-html="htmlText(item)"
+      >
+      </p>
     </v-card-text>
     <v-card-text>{{ `Material: ${item.material}` }}</v-card-text>
     <v-container>
@@ -180,7 +185,6 @@ import axios from 'axios';
 export default {
   props: {
     items: Array,
-    tags: Array,
     isMobil: Boolean,
   },
   methods: {
@@ -191,8 +195,6 @@ export default {
       return !this.isMobil ? 'mx-2' : 'mx-0';
     },
     getTagNameById(idString) {
-      debugger;
-      console.log(idString);
       const idStringArray = idString.split('/');
       const id = idStringArray[idStringArray.length - 2];
       const returnTag = this.tags.find(tag => tag.id === parseInt(id, 10));
@@ -202,8 +204,6 @@ export default {
       return false;
     },
     getTagColorById(idString) {
-      debugger;
-      console.log(idString);
       const idStringArray = idString.split('/');
       const id = idStringArray[idStringArray.length - 2];
       const returnTag = this.tags.find(tag => tag.id === parseInt(id, 10));
@@ -221,7 +221,7 @@ export default {
       const path = `${this.API_URL}basic/tag/`;
       axios.get(path)
         .then((res) => {
-          me.tags = res.data;
+          me.tags = res;
           me.dataReady = true;
         })
         .catch((error) => {
@@ -232,6 +232,9 @@ export default {
     formatDate(date) {
       const dateObj = new Date(date);
       return `${dateObj.getDate()}.${dateObj.getMonth() + 1}.${dateObj.getFullYear()} `;
+    },
+    htmlText(item) {
+      return item.description.replace(/(?:\r\n|\r|\n)/g, '<br>');
     },
   },
   mounted() {
@@ -253,3 +256,6 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+</style>

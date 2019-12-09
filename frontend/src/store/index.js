@@ -9,13 +9,20 @@ export default new Vuex.Store({
     accessToken: null,
     refreshToken: null,
     currentUser: null,
+    drawer: false,
   },
   getters: {
     isAuthenticated(state) {
       return !!state.accessToken;
     },
+    isDrawer(state) {
+      return !!state.drawer;
+    },
   },
   mutations: {
+    toogleDrawer(state) {
+      state.drawer = !state.drawer;
+    },
     setTokens(state, access, refresh) {
       state.accessToken = access;
       state.refreshToken = refresh;
