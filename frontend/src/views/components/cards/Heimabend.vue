@@ -1,38 +1,41 @@
 <template>
-<v-slide-y-transition>
 <div v-if="dataReady">
+<v-slide-y-transition  group>
   <v-card
     max-width="800"
     shaped
     class="mx-auto ma-5"
+    :style="{ transitionDelay: delay }"
     color="backgroundGrey"
     v-for="(item, index) in items"
     :key="index"
   >
     <v-list-item
-      class="lightPrimary pl-6 pr-0">
+      class="lightPrimary pr-0"
+      :class="paddingleftLebvelIcons"
+    >
       <v-img
-        class="mx-1"
+        class="ml-1"
         :src="require('../../../assets/knot_orange.png')"
         v-if="item.isLvlOne"
-        max-width="30"
+        :max-width="maxWidthKnots"
       ></v-img>
       <v-img
-        class="mx-1"
+        class="ml-1"
         :src="require('../../../assets/knot_blue.png')"
         v-if="item.isLvlTwo"
-        max-width="30"
+        :max-width="maxWidthKnots"
       ></v-img>
       <v-img
-        class="mx-1"
+        class="ml-1"
         :src="require('../../../assets/knot_red.png')"
         v-if="item.isLvlThree"
-        max-width="30"
+        :max-width="maxWidthKnots"
       ></v-img>
       <v-divider class="mx-2" vertical></v-divider>
       <v-list-item-content>
         <v-list-item-title
-          :class="titleClass">
+          :class="titleClass()">
             {{ item.title }}
         </v-list-item-title>
       </v-list-item-content>
@@ -55,12 +58,23 @@
     <!-- <v-card-text big class="text--primary" :v-html="item.description"/> -->
     <v-card-text>
       <p
-        class="text-left"
+        class="text-left subtitle-1"
         v-html="htmlText(item)"
       >
       </p>
     </v-card-text>
-    <v-card-text>{{ `Material: ${item.material}` }}</v-card-text>
+    <v-divider class="mb-4"/>
+
+    <div class="text-left caption">
+      <ul>
+          <li
+            v-for="(item, index4) in getMaterialArray(item.material)"
+            :key="index4">
+          {{ item }}
+        </li>
+      </ul>
+    </div>
+
     <v-container>
       <v-chip
         class="ma-2"
@@ -106,7 +120,7 @@
                     <v-btn
                       :x-small="isMobil"
                       depressed
-                      color="backgroundGrey"
+                      color="accent"
                       v-on="on">
                       <v-rating
                         v-model="item.costsRating"
@@ -129,7 +143,7 @@
                     <v-btn
                       :x-small="isMobil"
                       depressed
-                      color="backgroundGrey"
+                      color="accent"
                       v-on="on"
                     >
                       <v-icon
@@ -147,7 +161,7 @@
                     <v-btn
                       :x-small="isMobil"
                       depressed
-                      color="backgroundGrey"
+                      color="accent"
                       v-on="on"
                     >
                       <v-rating
@@ -175,8 +189,8 @@
       </div>-->
     </v-card-actions>
   </v-card>
+  </v-slide-y-transition>
 </div>
-</v-slide-y-transition>
 </template>
 
 <script>
@@ -189,10 +203,10 @@ export default {
   },
   methods: {
     titleClass() {
-      return !this.isMobil ? 'headline' : 'subtitle-1';
+      return this.$vuetify.breakpoint.mdAndUp ? 'headline' : 'subtitle-1';
     },
     verticalMargin() {
-      return !this.isMobil ? 'mx-2' : 'mx-0';
+      return !this.$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-0';
     },
     getTagNameById(idString) {
       const idStringArray = idString.split('/');
@@ -236,6 +250,9 @@ export default {
     htmlText(item) {
       return item.description.replace(/(?:\r\n|\r|\n)/g, '<br>');
     },
+    getMaterialArray(string) {
+      return string.split(',');
+    },
   },
   mounted() {
     this.ready();
@@ -244,14 +261,21 @@ export default {
     return {
       API_URL: process.env.VUE_APP_API,
       dataReady: false,
+      delay: '0.1s',
     };
   },
   computed: {
     ratingSize() {
-      return !this.isMobil ? 20 : 12;
+      return this.$vuetify.breakpoint.mdAndUp ? 20 : 12;
     },
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
+    },
+    paddingleftLebvelIcons() {
+      return !this.$vuetify.breakpoint.mdAndUp ? 'pl-6' : 'pl-1';
+    },
+    maxWidthKnots() {
+      return this.$vuetify.breakpoint.mdAndUp ? '30' : '18';
     },
   },
 };

@@ -11,28 +11,10 @@
         dense
         class="accent"
       >
-      <v-toolbar v-if="isAuthenticated" dense class="lightPrimary mx-4 mb-3">
-        <v-spacer/>
-          <v-btn icon>
-            <v-icon>mdi-account-group-outline</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>mdi-tag-text-outline</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>mdi-earth</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>mdi-message-text-outline</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>mdi-archive-outline</v-icon>
-          </v-btn>
-        <v-spacer/>
-        </v-toolbar>
         <template>
           <v-row align="center">
-            <v-card
+             <v-card
+              v-if="isAuthenticated"
               width="270"
               class="mx-auto"
               shaped
@@ -44,79 +26,13 @@
               </v-list-item>
               <v-list-item>
                 <v-container>
-                <v-row class="px-2 pb-2">
-                  <v-col cols="10" class="pa-0 ma-0" align-self="center">
-                  <v-switch
-                    v-model="filterStatus.isPossibleInside"
-                    label="Nur im Haus"
-                    dense
-                    color="secondary"
-                    hide-details
-                  />
-                  </v-col>
-                  <v-col cols="2" class="pa-0 ma-0" align-self="center">
-                    <v-icon color="darkgrey">
-                      mdi-home
-                    </v-icon>
-                  </v-col>
-                </v-row>
-                <v-divider/>
-                <v-row class="px-2 pb-2">
-                  <v-col cols="10" class="pa-0 ma-0" align-self="center">
-                  <v-switch
-                    v-model="filterStatus.isPossibleOutside"
-                    label="Nur Draußen"
-                    dense
-                    color="secondary"
-                    hide-details
-                  />
-                  </v-col>
-                  <v-col class="pa-0 ma-0" align-self="center">
-                    <v-icon cols="2" color="green">
-                      mdi-nature-people
-                    </v-icon>
-                  </v-col>
-                </v-row>
-                <v-divider/>
-                <v-row class="px-2 pb-2">
-                  <v-col cols="10" class="pa-0 ma-0" align-self="center">
-                  <v-switch
-                    v-model="filterStatus.withoutPreperation"
-                    label="Nur ohne Vorbereitung"
-                    dense
-                    color="secondary"
-                    hide-details
-                  />
-                  </v-col>
-                  <v-col cols="2" class="pa-0 ma-0" align-self="center">
-                    <v-icon color="black">
-                      mdi-clipboard-list-outline
-                    </v-icon>
-                  </v-col>
-                </v-row>
-                <v-divider/>
-                <v-row class="px-2 pb-2">
-                  <v-col cols="10" class="pa-0 ma-0" align-self="center">
-                  <v-switch
-                    v-model="filterStatus.withoutCosts"
-                    label="Nur ohne Kosten"
-                    dense
-                    color="secondary"
-                    hide-details
-                  />
-                  </v-col>
-                  <v-col cols="2" class="pa-0 ma-0" align-self="center">
-                    <v-icon color="orange">
-                      mdi-currency-eur
-                    </v-icon>
-                  </v-col>
-                </v-row>
                 <v-divider v-if="isAuthenticated"/>
                 <v-row class="px-2 pb-2" v-if="isAuthenticated">
                   <v-col cols="10" class="pa-0 ma-0" align-self="center">
                   <v-switch
-                    v-model="filterStatus.justActive"
-                    label="Nur Veröffentlicht"
+                    v-model="isJustActive"
+                    @change="onToggleJustActive"
+                    label="Veröffentlicht"
                     dense
                     color="secondary"
                     hide-details
@@ -129,78 +45,6 @@
                   </v-col>
                 </v-row>
                 </v-container>
-              </v-list-item>
-            </v-card>
-          </v-row>
-          <v-spacer dark class="my-6"/>
-          <v-row>
-            <v-card
-              width="270"
-              class="mx-auto"
-              shaped
-            >
-              <v-list-item class="lightPrimary pa-0 ma-0">
-                <v-list-item-content>
-                  <v-list-item-title>StufenA</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item>
-      <v-row
-        align="center"
-        justify="center"
-        class="my-5"
-      >
-        <v-btn-toggle
-          v-model="levelFilter"
-          @change="onChangeLevelFilter"
-          multiple
-          shaped
-          mandatory
-        >
-          <v-btn>
-            <v-img
-              v-if="getOrange"
-              class="mx-1"
-              :src="require('../../../assets/knot_orange.png')"
-              max-width="40"
-            />
-            <v-img
-              v-if="!getOrange"
-              class="mx-1"
-              :src="require('../../../assets/knot_grey.png')"
-              max-width="40"
-            ></v-img>
-          </v-btn>
-          <v-btn>
-            <v-img
-              v-if="getBlue"
-              class="mx-1"
-              :src="require('../../../assets/knot_blue.png')"
-              max-width="40"
-            ></v-img>
-            <v-img
-              v-if="!getBlue"
-              class="mx-1"
-              :src="require('../../../assets/knot_grey.png')"
-              max-width="40"
-            ></v-img>
-          </v-btn>
-          <v-btn>
-            <v-img
-              v-if="getRed"
-              class="mx-1"
-              :src="require('../../../assets/knot_red.png')"
-              max-width="40"
-            ></v-img>
-            <v-img
-              v-if="!getRed"
-              class="mx-1"
-              :src="require('../../../assets/knot_grey.png')"
-              max-width="40"
-            ></v-img>
-          </v-btn>
-        </v-btn-toggle>
-      </v-row>
               </v-list-item>
             </v-card>
           </v-row>
@@ -230,12 +74,30 @@
                       filter
                       small
                       v-for="(tag, index) in tags"
+                      :value="tag.id"
                       :key="index"
                       :color="tag.color">
                       {{ tag.name }}
                     </v-chip>
                   </v-chip-group>
                 </v-row>
+              </v-list-item>
+            </v-card>
+          </v-row>
+          <v-spacer dark class="my-6"/>
+          <v-row v-if="!$vuetify.breakpoint.mdAndUp">
+            <v-card
+              width="270"
+              class="mx-auto"
+              shaped
+            >
+              <v-list-item class="lightPrimary pa-0 ma-0">
+                <v-list-item-content>
+                  <v-list-item-title>Sortierung</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+              <Sorter/>
               </v-list-item>
             </v-card>
           </v-row>
@@ -270,33 +132,49 @@
           <!-- <v-spacer dark class="my-6"/> -->
         </template>
       </v-list>
-
-      <v-list dense bottom>
-        <v-list-item link bottom>
-          <v-list-item-icon>
-            <v-icon>mdi-help-circle-outline</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content @click="onClickAboutProjectItem()">
-            <v-list-item-title>Über das Projekt</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link>
-          <v-list-item-icon>
-            <v-icon>mdi-information-outline</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content @click="onClickImpressumItem()">
-            <v-list-item-title>Impressum/Datenschutz</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+      <template v-slot:append>
+        <v-list bottom >
+          <v-divider v-if="isAuthenticated"/>
+          <v-list-item v-if="isAuthenticated" link bottom>
+            <v-list-item-icon>
+              <v-icon>mdi-tag-text-outline</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content @click="onClickTags()">
+              <v-list-item-title>Tags</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <!-- <v-divider/>
+          <v-list-item link bottom>
+            <v-list-item-icon>
+              <v-icon>mdi-help-circle-outline</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content @click="onClickAboutProjectItem()">
+              <v-list-item-title>Über das Projekt</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item> -->
+        <v-divider/>
+          <v-list-item link>
+            <v-list-item-icon>
+              <v-icon>mdi-information-outline</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content @click="onClickImpressumItem()">
+              <v-list-item-title>Impressum/Datenschutz</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+     </template>
     </v-navigation-drawer>
 </div>
 </template>
 
 <script>
+import Sorter from '@/views/components/dropdown/Sorter.vue'; //eslint-disable-line
+
 export default {
+  components: {
+    Sorter,
+  },
   props: {
-    filterStatus: Object,
     levelFilter: Array,
     tags: Array,
   },
@@ -315,11 +193,17 @@ export default {
       this.filterTags = [];
       this.$emit('onTagFilterChanged', this.filterTags);
     },
+    onClickTags() {
+      this.$emit('tagOverview');
+    },
     onClickImpressumItem() {
       this.$emit('openImpressum');
     },
     onClickAboutProjectItem() {
       this.$emit('openAboutProject');
+    },
+    onToggleJustActive() {
+      this.$store.commit('toggleJustActive');
     },
   },
   computed: {
@@ -351,6 +235,9 @@ export default {
       set() {
         return false;
       },
+    },
+    isJustActive() {
+      return this.$store.getters.justActive;
     },
   },
 };

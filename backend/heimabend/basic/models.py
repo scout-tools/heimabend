@@ -39,7 +39,7 @@ class Event(models.Model):
     isPossibleOutside = models.BooleanField(default=1)
     isPossibleInside = models.BooleanField(default=1)
     tags = models.ManyToManyField(Tag, default='')
-    material = models.CharField(max_length=200, default='')
+    material = models.CharField(max_length=200, default='', blank=True)
     costsRating = models.SmallIntegerField(
         default=1, validators=[
             MinValueValidator(1), MaxValueValidator(3)])
@@ -50,8 +50,8 @@ class Event(models.Model):
     isLvlOne = models.BooleanField(default=1)
     isLvlTwo = models.BooleanField(default=0)
     isLvlThree = models.BooleanField(default=0)
-    createdBy = models.CharField(max_length=60, default='')
-    createdByEmail = models.CharField(max_length=60, default='')
+    createdBy = models.CharField(max_length=60, blank=True)
+    createdByEmail = models.CharField(max_length=60, blank=True)
     updatedBy = models.CharField(max_length=60, null=True, blank=True)
     createdAt = models.DateTimeField(default=now, editable=False)
     updatedAt = models.DateTimeField(null=True, blank=True)

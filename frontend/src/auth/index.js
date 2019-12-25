@@ -15,6 +15,10 @@ export default {
     }, err => Promise.reject(err));
     axios.interceptors.response.use(response => response.data, (error) => {
       // Do something with response error
+      if (error.response.status === 401) {
+        store.commit('clearTokens');
+        this.$router.push({ name: 'main' });
+      }
       console.log(error.response);
       return Promise.reject(error);
     });

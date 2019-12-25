@@ -20,7 +20,7 @@
         v-model="searchInput"
         outlined
         hide-details
-        label="Suche"
+        :label="getLabel"
         prepend-inner-icon="mdi-magnify"
         clearable
         :dense="isMobil"
@@ -33,16 +33,25 @@
 
     <MenuLeft
       ref="mainMenuLeft"
-      :filterStatus="filterStatus"
       :levelFilter="levelFilter"
       :tags="tags"
       @onTagFilterChanged="onTagFilterChanged"
       @openImpressum="onImpressumClick"
       @openAboutProject="onAboutProjectClick"
       @onLevelFilterChanged="onLevelFilterChanged"
+      @tagOverview="onTagOverviewClick"
     />
 
     <v-content id="lateral">
+      <Topbar
+        ref="topFilterToolbar"
+        :levelFilter="levelFilter"
+        :tags="tags"
+        @openImpressum="onImpressumClick"
+        @openAboutProject="onAboutProjectClick"
+        @onLevelFilterChanged="onLevelFilterChanged"
+        @tagOverview="onTagOverviewClick"
+      />
       <div class="row mx-2" justify="center">
         <div class="col-sm-12">
           <HeimabendCard
@@ -76,17 +85,21 @@
 
     <CreateDialog
       ref="createGroupClassModal"
-      v-on:dialogClose="onDialogClose"
+      @dialogClose="onDialogClose"
       :tags="tags"
+    />
+    <Tags
+      ref="tagsOverview"
+      @dialogClose="onDialogClose"
     />
     <Impressum
       ref="impressumDialog"
     />
     <AboutProject
-    ref="aboutProject"
+      ref="aboutProject"
     />
     <Login
-    ref="login"
+      ref="login"
     />
   </v-app>
 </div>
@@ -98,9 +111,11 @@ import axios from 'axios';
 import CreateDialog from './components/dialogs/CreateDialog.vue';
 import Login from './components/dialogs/Login.vue'; // eslint-disable-line
 import Impressum from './components/dialogs/Impressum.vue';
+import Tags from './tags/Main.vue';
 import AboutProject from './components/dialogs/AboutProject.vue';
 import HeimabendCard from './components/cards/Heimabend.vue';
 import MenuLeft from './components/menu/Left.vue';
+import Topbar from './components/toolbar/FilterTopBar.vue';
 
 export default {
   components: {
@@ -110,6 +125,8 @@ export default {
     MenuLeft,
     Impressum,
     Login,
+    Tags,
+    Topbar,
   },
   props: {
     source: String,
@@ -119,15 +136,22 @@ export default {
   },
   computed: {
     getItems() {
-      return this.items
-        .filter(item => item.description.includes(this.searchInput)
-          || item.title.includes(this.searchInput))
-      // .filter(item => this.filterTags.filter(element => item.tags.includes(element)).length
-      // || !this.filterTags.length)
-        .filter(item => !this.filterStatus.isPossibleInside
-          || item.isPossibleInside === this.filterStatus.isPossibleInside)
-        .filter(item => !this.filterStatus.isPossibleOutside
-          || item.isPossibleOutside === this.filterStatus.isPossibleOutside)
+      const {
+        isPossibleInside,
+        isPossibleOutside,
+        withoutPreperation,
+        justActive,
+        withoutCosts,
+        getSorter,
+      } = this.$store.getters;
+      let returnArray = this.items
+        .filter(item => item.description.toLowerCase().includes(this.searchInput.toLowerCase())
+          || item.title.toLowerCase().includes(this.searchInput.toLowerCase())
+          || item.material.toLowerCase().includes(this.searchInput.toLowerCase()))
+        .filter(item => this.isTagMatchToEvent(item))
+        .filter(item => (isPossibleInside === item.isPossibleInside
+          || isPossibleOutside === item.isPossibleOutside)
+          && (isPossibleInside || isPossibleOutside))
         .filter((item) => {
           const allowOne = this.levelFilter.includes(0);
           const allowTwo = this.levelFilter.includes(1);
@@ -137,9 +161,21 @@ export default {
             || (allowThree && allowThree === item.isLvlThree);
           return allow;
         })
-        .filter(item => !this.filterStatus.withoutPreperation || item.isPrepairationNeeded === 1)
-        .filter(item => this.filterStatus.justActive === item.isActive)
-        .filter(item => !this.filterStatus.withoutCosts || item.costsRating === 1);
+        .filter(item => !withoutPreperation || item.isPrepairationNeeded === 0)
+        .filter(item => justActive === item.isActive)
+        .filter(item => !withoutCosts || item.costsRating === 1);
+      debugger;
+      if (getSorter === 'alpha' && returnArray) {
+        returnArray = this._.orderBy(returnArray, ['title'], ['asc']);
+      }
+      if (getSorter === 'newest' && returnArray) {
+        returnArray = this._.orderBy(returnArray, ['createdAt'], ['asc']);
+      }
+      if (getSorter === 'random' && returnArray) {
+        debugger;
+        // returnArray = this._.shuffle(returnArray);
+      }
+      return returnArray;
     },
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
@@ -147,8 +183,22 @@ export default {
     isDrawer() {
       return this.$store.getters.isDrawer;
     },
+    getLabel() {
+      return `Suche in ${this.getItems.length} Heimabenden`;
+    },
   },
   methods: {
+    isTagMatchToEvent(item) {
+      const eventTagArray = [];
+      item.tags.forEach((tag) => {
+        eventTagArray.push(this.convertUrlToId(tag)); // eslint-disable-line
+      });
+      if (this.filterTags && this.filterTags.length) {
+        const matches = eventTagArray.filter(element => this.filterTags.includes(element));
+        return !!matches.length;
+      }
+      return true;
+    },
     toogleDrawer() {
       this.$store.commit('toogleDrawer');
     },
@@ -161,12 +211,14 @@ export default {
     onAboutProjectClick() {
       this.$refs.aboutProject.show();
     },
+    onTagOverviewClick() {
+      this.$refs.tagsOverview.show();
+    },
     onLoginClick() {
       this.$refs.login.show();
     },
     onUpdateClick(item) {
       const tags = item.tags; // eslint-disable-line
-      debugger;
       tags.forEach((tag, index) => {
         item.tags[index] = this.convertUrlToId(tag); // eslint-disable-line
       });
@@ -183,6 +235,7 @@ export default {
     },
     onDialogClose() {
       this.getEvents();
+      this.getTags();
     },
     onTagFilterChanged(data) {
       this.filterTags = data;
@@ -191,14 +244,7 @@ export default {
       this.levelFilter = data;
     },
     onResetClick() {
-      this.filterStatus = {
-        isPossibleInside: false,
-        isPossibleOutside: false,
-        withoutPreperation: false,
-        withoutCosts: false,
-        justActive: true,
-      };
-      this.levelFilter = [0, 1, 2];
+      this.$store.commit('clearFilters');
       this.$refs.mainMenuLeft.resetTags();
     },
     getEvents() {
@@ -231,13 +277,6 @@ export default {
   data: () => ({
     API_URL: process.env.VUE_APP_API,
     filterTags: [],
-    filterStatus: {
-      isPossibleInside: false,
-      isPossibleOutside: false,
-      withoutPreperation: false,
-      withoutCosts: false,
-      justActive: true,
-    },
     levelFilter: [0, 1, 2],
     searchInput: '',
     fab: false,

@@ -5,13 +5,6 @@
     y='top'
   >
     {{ 'Juhu, es hat geklappt' }}
-    <v-btn
-      dark
-      text
-      @click="showSuccess = false"
-    >
-      Schließen
-    </v-btn>
   </v-snackbar>
 </template>
 

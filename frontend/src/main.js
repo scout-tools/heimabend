@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import VueAnalytics from 'vue-analytics';
+import VueLodash from 'vue-lodash';
 // import Axios from 'axios';
 import App from './App.vue';
 import router from './router';
@@ -16,3 +18,15 @@ new Vue({
   vuetify,
   render: h => h(App),
 }).$mount('#app');
+
+Vue.use(VueAnalytics, {
+  id: 'UA-154886286-1',
+  autoTracking: {
+    screenview: true,
+  },
+  router,
+});
+
+const options = { name: 'lodash' }; // customize the way you want to call it
+
+Vue.use(VueLodash, options); // options is optional

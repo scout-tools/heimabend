@@ -31,6 +31,7 @@
             <v-row>
       <v-checkbox
         color="secondary"
+        v-model="isAuthenticated"
         :rules="[v => !!v || 'Nur mit der Einverständniserklärung kannst du Ideen einreichen']"
         label="Ich möchte meine Heimabend veröffentlichen und es
           dürfen in Zukunft andere Änderungen an der Idee vornehmen?"
@@ -141,18 +142,21 @@
               </v-col>
               <v-col cols="3" class="mt-5">
                 <v-text-field
+                  v-if="!isAuthenticated || isUpdate"
                   outlined
                   label="Dein Name"
-                  :disabled="isAuthenticated"
                   v-model="data.createdBy"
+                  :disabled="isUpdate"
+                  :rules="rules.createdBy"
                   required>
                 </v-text-field>
                 <v-text-field
+                  v-if="!isAuthenticated || isUpdate"
                   outlined
                   label="Deine E-Mail Adresse"
                   :disabled="isAuthenticated"
                   v-model="data.createdByEmail"
-                  required>
+                >
                 </v-text-field>
               </v-col>
             </v-row>
@@ -277,9 +281,12 @@ export default {
       tags: [
         v => (v && v.length > 0) || 'Mindestens ein Tag ist erforderlich',
       ],
+      createdBy: [
+        v => (v && v.length > 3) || 'Mindestens drei Zeichen',
+      ],
     },
     data: {
-      title: 'Rucksack packen',
+      title: '',
       description: '',
       isPossibleOutside: true,
       isPossibleInside: true,
@@ -323,6 +330,9 @@ export default {
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
+    currentUsername() {
+      return this.$store.getters.getUsername;
+    },
   },
 
   methods: {
@@ -345,7 +355,8 @@ export default {
           isLvlOne: this.getLevel(0, this.data.material),
           isLvlTwo: this.getLevel(1, this.data.material),
           isLvlThree: this.getLevel(2, this.data.material),
-          createdBy: this.data.createdBy,
+          createdBy: !this.isAuthenticated
+            ? this.data.createdBy : this._.startCase(this.currentUsername),
           createdByEmail: this.data.createdByEmail,
         })
           .then(() => {
@@ -386,7 +397,6 @@ export default {
       }
     },
     getUrlTagList(tagList) {
-      debugger;
       const ary = [];
       tagList.forEach((tag) => {
         ary.push(`${process.env.VUE_APP_API}basic/tag/${tag}/`);
@@ -399,7 +409,6 @@ export default {
         this.isCreate = false;
         this.isUpdate = true;
         this.data = item;
-        debugger;
       } else {
         this.isCreate = true;
         this.isUpdate = false;

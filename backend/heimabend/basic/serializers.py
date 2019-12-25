@@ -5,13 +5,19 @@ from .models import Tag, Event
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
+
+    tag_count = serializers.SerializerMethodField()
     class Meta:
         model = Tag
         fields = (
             'id',
             'name',
+            'tag_count',
             'description',
             'color')
+
+    def get_tag_count(self, obj):
+        return 5
 
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):

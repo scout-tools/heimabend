@@ -68,10 +68,10 @@
 
 <script>
 import axios from 'axios';
-import store from '@/store';
+import store from '@/store'; // eslint-disable-line
 
-import ErrorMessage from '@/views/components/common/ErrorMessage.vue';
-import SuccessMessage from '@/views/components/common/SuccessMessage.vue';
+import ErrorMessage from '@/views/components/common/ErrorMessage.vue'; // eslint-disable-line import/no-unresolved
+import SuccessMessage from '@/views/components/common/SuccessMessage.vue'; // eslint-disable-line import/no-unresolved
 
 
 export default {
@@ -108,12 +108,13 @@ export default {
       }
     },
     login() {
-      debugger;
+      const me = this; // eslint-disable-line
       axios.post(`${this.API_URL}api/token/`, this.data)
         .then((response) => {
           store.commit('setTokens', response.access, response.refresh);
           this.dialog = false;
           this.showSuccess = true;
+          this.onSuccessfulLogin();
         })
         .catch((error) => {
           this.responseObj = error;
@@ -121,11 +122,12 @@ export default {
           console.error(error);
         });
     },
+    onSuccessfulLogin() {
+      this.$store.commit('setCurrentUser', this.data.username);
+    },
     onLogoutClick() {
-      // this.logout();
       store.commit('clearTokens');
     },
-    // ...mapActions('logout'),
   },
   computed: {
     isAuthenticated() {
