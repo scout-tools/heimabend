@@ -135,7 +135,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CORS_ORIGIN_WHITELIST = [
-    'https://heimabend.hratuga.de/',
+    "https://heimabend.hratuga.de",
     "https://hratuga.de",
     "http://localhost:8080",
     "http://127.0.0.1:8080",
