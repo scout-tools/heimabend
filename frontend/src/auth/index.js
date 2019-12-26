@@ -19,7 +19,6 @@ export default {
         store.commit('clearTokens');
         this.$router.push({ name: 'main' });
       }
-      (error.response);
       return Promise.reject(error);
     });
   },
