@@ -245,8 +245,8 @@
 <script>
 import axios from 'axios';
 
-import ErrorMessage from '@/views/components/common/ErrorMessage.vue';
-import SuccessMessage from '@/views/components/common/SuccessMessage.vue';
+import ErrorMessage from '@/views/components/common/ErrorMessage.vue'; // eslint-disable-line
+import SuccessMessage from '@/views/components/common/SuccessMessage.vue'; // eslint-disable-line
 
 
 export default {
@@ -364,9 +364,8 @@ export default {
             this.$emit('dialogClose');
             this.showSuccess = true;
           })
-          .catch((error) => {
+          .catch(() => {
             this.showError = true;
-            console.error(error);
           });
       } else if (this.isUpdate) {
         axios.put(`${this.API_URL}basic/event/${this.data.id}/`, {
@@ -390,9 +389,8 @@ export default {
             this.$emit('dialogClose');
             this.showSuccess = true;
           })
-          .catch((error) => {
+          .catch(() => {
             this.showError = true;
-            console.error(error);
           });
       }
     },
@@ -422,10 +420,6 @@ export default {
 
     save() {
       this.formSubmit();
-    },
-    getLevel(value, array) {
-      console.log(array);
-      return true;
     },
   },
 };

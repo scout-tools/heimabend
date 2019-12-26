@@ -19,7 +19,7 @@ export default {
         store.commit('clearTokens');
         this.$router.push({ name: 'main' });
       }
-      console.log(error.response);
+      (error.response);
       return Promise.reject(error);
     });
   },

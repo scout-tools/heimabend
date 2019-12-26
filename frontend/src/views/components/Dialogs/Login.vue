@@ -119,7 +119,6 @@ export default {
         .catch((error) => {
           this.responseObj = error;
           this.showError = true;
-          console.error(error);
         });
     },
     onSuccessfulLogin() {

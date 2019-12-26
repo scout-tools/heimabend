@@ -87,9 +87,8 @@ export default {
           this.$emit('refresh');
           this.showSuccess = true;
         })
-        .catch((error) => {
+        .catch(() => {
           this.showError = true;
-          console.error(error);
         });
     },
     show(item) {

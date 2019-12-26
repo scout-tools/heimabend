@@ -164,7 +164,6 @@ export default {
         .filter(item => !withoutPreperation || item.isPrepairationNeeded === 0)
         .filter(item => justActive === item.isActive)
         .filter(item => !withoutCosts || item.costsRating === 1);
-      debugger;
       if (getSorter === 'alpha' && returnArray) {
         returnArray = this._.orderBy(returnArray, ['title'], ['asc']);
       }
@@ -172,7 +171,6 @@ export default {
         returnArray = this._.orderBy(returnArray, ['createdAt'], ['asc']);
       }
       if (getSorter === 'random' && returnArray) {
-        debugger;
         // returnArray = this._.shuffle(returnArray);
       }
       return returnArray;
@@ -253,9 +251,7 @@ export default {
         .then((res) => {
           this.items = res;
         })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.error(error);
+        .catch(() => {
         });
     },
     getTags() {
@@ -264,9 +260,7 @@ export default {
         .then((res) => {
           this.tags = res;
         })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.error(error);
+        .catch(() => {
         });
     },
   },

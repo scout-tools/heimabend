@@ -181,9 +181,7 @@ export default {
         .then((res) => {
           this.tags = res;
         })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.error(error);
+        .catch(() => {
         });
     },
     onNewTag() {
@@ -217,10 +215,6 @@ export default {
 
     save() {
       this.formSubmit();
-    },
-    getLevel(value, array) {
-      console.log(array);
-      return true;
     },
   },
   created() {

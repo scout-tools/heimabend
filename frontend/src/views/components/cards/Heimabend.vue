@@ -238,9 +238,7 @@ export default {
           me.tags = res;
           me.dataReady = true;
         })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.error(error);
+        .catch(() => {
         });
     },
     formatDate(date) {
