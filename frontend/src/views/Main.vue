@@ -131,10 +131,10 @@ export default {
   props: {
     source: String,
   },
-  mounted() {
-    this.isMobil = this.$vuetify.breakpoint.smAndDown;
-  },
   computed: {
+    isMobil() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
     getItems() {
       const {
         isPossibleInside,
@@ -164,14 +164,14 @@ export default {
         .filter(item => !withoutPreperation || item.isPrepairationNeeded === 0)
         .filter(item => justActive === item.isActive)
         .filter(item => !withoutCosts || item.costsRating === 1);
-      if (getSorter === 'alpha' && returnArray) {
+      if (getSorter === 'alpha' && returnArray && returnArray.length) {
         returnArray = this._.orderBy(returnArray, ['title'], ['asc']);
       }
-      if (getSorter === 'newest' && returnArray) {
+      if (getSorter === 'newest' && returnArray && returnArray.length) {
         returnArray = this._.orderBy(returnArray, ['createdAt'], ['asc']);
       }
-      if (getSorter === 'random' && returnArray) {
-        // returnArray = this._.shuffle(returnArray);
+      if (getSorter === 'random' && returnArray && returnArray.length) {
+        returnArray = this._.shuffle(returnArray);
       }
       return returnArray;
     },
@@ -182,7 +182,10 @@ export default {
       return this.$store.getters.isDrawer;
     },
     getLabel() {
-      return `Suche in ${this.getItems.length} Heimabenden`;
+      if (this.$vuetify.breakpoint.mdAndUp) {
+        return `Suche in ${this.getItems.length} Heimabenden`;
+      }
+      return `${this.getItems.length} Heimabende`;
     },
   },
   methods: {
@@ -276,7 +279,6 @@ export default {
     fab: false,
     colorFab: 'green',
     iconFab: 'mdi-plus',
-    isMobil: false,
     tags: [],
     items: [],
   }),

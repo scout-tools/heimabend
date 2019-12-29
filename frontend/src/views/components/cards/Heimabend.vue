@@ -199,7 +199,6 @@ import axios from 'axios';
 export default {
   props: {
     items: Array,
-    isMobil: Boolean,
   },
   methods: {
     titleClass() {
@@ -264,16 +263,19 @@ export default {
   },
   computed: {
     ratingSize() {
-      return this.$vuetify.breakpoint.mdAndUp ? 20 : 12;
+      return !this.isMobil ? 20 : 12;
     },
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
     paddingleftLebvelIcons() {
-      return !this.$vuetify.breakpoint.mdAndUp ? 'pl-6' : 'pl-1';
+      return !this.isMobil ? 'pl-6' : 'pl-1';
     },
     maxWidthKnots() {
-      return this.$vuetify.breakpoint.mdAndUp ? '30' : '18';
+      return !this.isMobil ? '30' : '18';
+    },
+    isMobil() {
+      return this.$vuetify.breakpoint.smAndDown;
     },
   },
 };

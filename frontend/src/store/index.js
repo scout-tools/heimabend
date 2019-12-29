@@ -11,7 +11,7 @@ export default new Vuex.Store({
     accessToken: null,
     refreshToken: null,
     currentUser: null,
-    drawer: true,
+    drawer: false,
     isPossibleInside: true,
     isPossibleOutside: true,
     withoutPreperation: false,

@@ -23,11 +23,11 @@
       <v-icon>
         {{ data.item.icon }}
       </v-icon>
-      <v-list-tile-content>
-        <v-list-tile-title>
+      <v-list-item-content>
+        <v-list-item-title>
           {{ data.item.text }}
-        </v-list-tile-title>
-      </v-list-tile-content>
+        </v-list-item-title>
+      </v-list-item-content>
     </template>
   </v-select>
 </template>
@@ -40,8 +40,13 @@ export default {
     },
   },
   computed: {
-    selectedFilter() {
-      return this.$store.getters.getSorter;
+    selectedFilter: {
+      get() {
+        return this.$store.getters.getSorter;
+      },
+      set() {
+        return false;
+      },
     },
   },
   data() {
