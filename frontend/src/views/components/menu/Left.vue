@@ -175,19 +175,16 @@ export default {
     Sorter,
   },
   props: {
-    levelFilter: Array,
     tags: Array,
   },
   data: () => ({
     filterTags: [],
     mini: true,
+    isDrawer: false,
   }),
   methods: {
     onChange() {
       this.$emit('onTagFilterChanged', this.filterTags);
-    },
-    onChangeLevelFilter() {
-      this.$emit('onLevelFilterChanged', this.levelFilter);
     },
     resetTags() {
       this.filterTags = [];
@@ -205,36 +202,13 @@ export default {
     onToggleJustActive() {
       this.$store.commit('toggleJustActive');
     },
+    toggleDrawer() {
+      this.isDrawer = !this.isDrawer;
+    },
   },
   computed: {
-    getOrange() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(0);
-      }
-      return false;
-    },
-    getBlue() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(1);
-      }
-      return false;
-    },
-    getRed() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(2);
-      }
-      return false;
-    },
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
-    },
-    isDrawer: {
-      get() {
-        return this.$store.getters.isDrawer;
-      },
-      set() {
-        return false;
-      },
     },
     isJustActive() {
       return this.$store.getters.justActive;

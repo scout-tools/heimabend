@@ -87,7 +87,12 @@
     <v-card-actions class="accent">
       <div class="caption mr-1">{{ formatDate(item.createdAt)}}</div>
 
-      <v-divider :class="verticalMargin" vertical v-if="item.isPossibleOutside" />
+      <v-divider
+        :class="verticalMargin"
+        vertical
+        v-if="item.isPossibleOutside"
+      />
+
       <v-tooltip open-on-hover bottom v-if="item.isPossibleOutside">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
@@ -96,7 +101,12 @@
         </template>
         <span>Für Draußen geeignet</span>
       </v-tooltip>
-      <v-divider :class="verticalMargin" vertical v-if="item.isPossibleInside" />
+
+      <v-divider
+        :class="verticalMargin"
+        vertical
+        v-if="item.isPossibleInside"
+      />
       <v-tooltip open-on-hover bottom v-if="item.isPossibleInside">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
@@ -109,7 +119,7 @@
       <v-tooltip open-on-hover bottom v-if="item.needPrepairaion">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
-            <v-icon color="green" v-if="item.needPrepairaion">mdi-clipboard-list-outline</v-icon>
+            <v-icon color="green" v-if="item.needPrepairaion">mdi-card-bulleted-off-outline</v-icon>
           </v-btn>
         </template>
         <span>Vorbereitung nötig?</span>
@@ -124,8 +134,8 @@
                       v-on="on">
                       <v-rating
                         v-model="item.costsRating"
-                        emptyIcon="mdi-currency-eur"
-                        fullIcon="mdi-currency-eur"
+                        emptyIcon="mdi-currency-usd"
+                        fullIcon="mdi-currency-usd"
                         color="orange"
                         background-color="grey"
                         dense
@@ -138,7 +148,9 @@
                   <span>Kosten</span>
                 </v-tooltip>
               <v-divider :class="verticalMargin" vertical/>
-                <v-tooltip open-on-hover bottom>
+                <v-tooltip
+                  v-if="item.isPrepairationNeeded"
+                  open-on-hover bottom>
                   <template v-slot:activator="{ on }">
                     <v-btn
                       :x-small="isMobil"
@@ -148,8 +160,9 @@
                     >
                       <v-icon
                         v-model="item.isPrepairationNeeded"
-                        :color="item.isPrepairationNeeded ? 'black': 'grey'">
-                        mdi-clipboard-list-outline
+                        color="black"
+                        v-if="item.isPrepairationNeeded">
+                        mdi-card-bulleted-off-outline
                       </v-icon>
                     </v-btn>
                   </template>
@@ -208,8 +221,13 @@ export default {
       return !this.$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-0';
     },
     getTagNameById(idString) {
-      const idStringArray = idString.split('/');
-      const id = idStringArray[idStringArray.length - 2];
+      let id;
+      if (idString && typeof idString === 'string') {
+        const idStringArray = idString.split('/');
+        id = idStringArray[idStringArray.length - 2];
+      } else {
+        id = idString;
+      }
       const returnTag = this.tags.find(tag => tag.id === parseInt(id, 10));
       if (returnTag && returnTag.name) {
         return returnTag.name;
@@ -217,8 +235,13 @@ export default {
       return false;
     },
     getTagColorById(idString) {
-      const idStringArray = idString.split('/');
-      const id = idStringArray[idStringArray.length - 2];
+      let id;
+      if (idString && typeof idString === 'string') {
+        const idStringArray = idString.split('/');
+        id = idStringArray[idStringArray.length - 2];
+      } else {
+        id = idString;
+      }
       const returnTag = this.tags.find(tag => tag.id === parseInt(id, 10));
       if (returnTag && returnTag.color) {
         return returnTag.color;

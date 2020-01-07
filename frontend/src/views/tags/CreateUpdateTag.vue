@@ -132,7 +132,6 @@ export default {
     },
     isCreate: true,
     isUpdate: false,
-    levelFilter: [0, 1, 2],
   }),
 
   computed: {
@@ -147,7 +146,7 @@ export default {
         axios.post(`${this.API_URL}basic/tag/`, {
           name: this.data.name,
           description: this.data.description,
-          color: this.data.color,
+          color: this.data.color.hex,
         })
           .then(() => {
             this.dialog = false;
@@ -200,6 +199,7 @@ export default {
       } else {
         this.isCreate = true;
         this.isUpdate = false;
+        this.data = [];
       }
     },
 

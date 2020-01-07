@@ -11,20 +11,17 @@ export default new Vuex.Store({
     accessToken: null,
     refreshToken: null,
     currentUser: null,
-    drawer: false,
     isPossibleInside: true,
     isPossibleOutside: true,
     withoutPreperation: false,
     withoutCosts: false,
     justActive: true,
     sorter: 'random',
+    levelFilter: [0, 1, 2],
   },
   getters: {
     isAuthenticated(state) {
       return !!state.accessToken;
-    },
-    isDrawer(state) {
-      return !!state.drawer;
     },
     isPossibleInside(state) {
       return !!state.isPossibleInside;
@@ -47,14 +44,13 @@ export default new Vuex.Store({
     getSorter(state) {
       return state.sorter;
     },
+    levelFilter(state) {
+      return state.levelFilter;
+    },
   },
   mutations: {
     changeSorter(state, newSorter) {
       state.sorter = newSorter;
-    },
-    toogleDrawer(state) {
-      state.drawer = !state.drawer;
-      event('user-click', 'toogle', 'drawer', state.drawer);
     },
     tooglePossibleInside(state) {
       state.isPossibleInside = !state.isPossibleInside;
@@ -75,6 +71,9 @@ export default new Vuex.Store({
     toggleJustActive(state) {
       state.justActive = !state.justActive;
       event('user-click', 'toogle', 'possibleInside', state.justActive);
+    },
+    setLevelFilter(state, newFilter) {
+      state.levelFilter = newFilter;
     },
     setTokens(state, access, refresh) {
       state.accessToken = access;

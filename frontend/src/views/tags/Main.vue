@@ -19,7 +19,7 @@
             <v-btn
               dark
               text
-              @click="cancel()" >
+              @click="cancel" >
                 Fertig
               </v-btn>
           </v-toolbar-items>
@@ -39,9 +39,8 @@
               <v-btn
                 color="green"
                 dark
-                @click="newTag()"
+                @click="onNewTag()"
                 class="mb-2"
-                v-on="onNewTag()"
               >
                 Neuer Tag
               </v-btn>
@@ -85,10 +84,11 @@
   </v-row>
   <CreateUpdateTag
     ref="createTagModal"
+    @dialogClose="onRefreshTags"
   />
   <DeleteModal
     ref="deleteTagModal"
-    @refresh="onRefreshEvent"
+    @refresh="onRefreshTags"
   />
   </div>
 </template>
@@ -144,28 +144,9 @@ export default {
     },
     isCreate: true,
     isUpdate: false,
-    levelFilter: [0, 1, 2],
   }),
 
   computed: {
-    getOrange() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(0);
-      }
-      return false;
-    },
-    getBlue() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(1);
-      }
-      return false;
-    },
-    getRed() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(2);
-      }
-      return false;
-    },
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
@@ -185,9 +166,10 @@ export default {
         });
     },
     onNewTag() {
-      // this.show();
+      this.$refs.createTagModal.show();
     },
-    onRefreshEvent() {
+    onRefreshTags() {
+      this.tags = [];
       this.getTags();
     },
     editItem(item) {

@@ -72,7 +72,6 @@ export default {
     },
     isCreate: true,
     isUpdate: false,
-    levelFilter: [0, 1, 2],
   }),
 
   computed: {

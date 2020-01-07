@@ -33,23 +33,19 @@
 
     <MenuLeft
       ref="mainMenuLeft"
-      :levelFilter="levelFilter"
       :tags="tags"
       @onTagFilterChanged="onTagFilterChanged"
       @openImpressum="onImpressumClick"
       @openAboutProject="onAboutProjectClick"
-      @onLevelFilterChanged="onLevelFilterChanged"
       @tagOverview="onTagOverviewClick"
     />
 
     <v-content id="lateral">
       <Topbar
         ref="topFilterToolbar"
-        :levelFilter="levelFilter"
         :tags="tags"
         @openImpressum="onImpressumClick"
         @openAboutProject="onAboutProjectClick"
-        @onLevelFilterChanged="onLevelFilterChanged"
         @tagOverview="onTagOverviewClick"
       />
       <div class="row mx-2" justify="center">
@@ -108,7 +104,7 @@
 <script>
 import axios from 'axios';
 
-import CreateDialog from './components/dialogs/CreateDialog.vue';
+import CreateDialog from '@/views/createHeimabend/CreateDialog.vue'; // eslint-disable-line
 import Login from './components/dialogs/Login.vue'; // eslint-disable-line
 import Impressum from './components/dialogs/Impressum.vue';
 import Tags from './tags/Main.vue';
@@ -143,6 +139,7 @@ export default {
         justActive,
         withoutCosts,
         getSorter,
+        levelFilter, // eslint-disable-line
       } = this.$store.getters;
       let returnArray = this.items
         .filter(item => item.description.toLowerCase().includes(this.searchInput.toLowerCase())
@@ -153,22 +150,22 @@ export default {
           || isPossibleOutside === item.isPossibleOutside)
           && (isPossibleInside || isPossibleOutside))
         .filter((item) => {
-          const allowOne = this.levelFilter.includes(0);
-          const allowTwo = this.levelFilter.includes(1);
-          const allowThree = this.levelFilter.includes(2);
+          const allowOne = levelFilter.includes(0);
+          const allowTwo = levelFilter.includes(1);
+          const allowThree = levelFilter.includes(2);
           const allow = (allowOne && allowOne === item.isLvlOne)
             || (allowTwo && allowTwo === item.isLvlTwo)
             || (allowThree && allowThree === item.isLvlThree);
           return allow;
         })
-        .filter(item => !withoutPreperation || item.isPrepairationNeeded === 0)
+        .filter(item => !withoutPreperation || item.isPrepairationNeeded === false)
         .filter(item => justActive === item.isActive)
         .filter(item => !withoutCosts || item.costsRating === 1);
       if (getSorter === 'alpha' && returnArray && returnArray.length) {
         returnArray = this._.orderBy(returnArray, ['title'], ['asc']);
       }
       if (getSorter === 'newest' && returnArray && returnArray.length) {
-        returnArray = this._.orderBy(returnArray, ['createdAt'], ['asc']);
+        returnArray = this._.orderBy(returnArray, ['createdAt'], ['desc']);
       }
       if (getSorter === 'random' && returnArray && returnArray.length) {
         returnArray = this._.shuffle(returnArray);
@@ -177,9 +174,6 @@ export default {
     },
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
-    },
-    isDrawer() {
-      return this.$store.getters.isDrawer;
     },
     getLabel() {
       if (this.$vuetify.breakpoint.mdAndUp) {
@@ -201,7 +195,7 @@ export default {
       return true;
     },
     toogleDrawer() {
-      this.$store.commit('toogleDrawer');
+      this.$refs.mainMenuLeft.toggleDrawer();
     },
     onNewClick() {
       this.$refs.createGroupClassModal.show();
@@ -226,10 +220,13 @@ export default {
       this.$refs.createGroupClassModal.show(item);
     },
     convertUrlToId(url) {
-      const idStringArray = url.split('/');
-      const id = idStringArray[idStringArray.length - 2];
+      if (url && typeof url === 'string') {
+        const idStringArray = url.split('/');
+        const id = idStringArray[idStringArray.length - 2];
 
-      return parseInt(id, 10);
+        return parseInt(id, 10);
+      }
+      return url;
     },
     getTagById(id) {
       return this.tags.find(tag => tag.id === id);
@@ -240,9 +237,6 @@ export default {
     },
     onTagFilterChanged(data) {
       this.filterTags = data;
-    },
-    onLevelFilterChanged(data) {
-      this.levelFilter = data;
     },
     onResetClick() {
       this.$store.commit('clearFilters');
@@ -274,7 +268,6 @@ export default {
   data: () => ({
     API_URL: process.env.VUE_APP_API,
     filterTags: [],
-    levelFilter: [0, 1, 2],
     searchInput: '',
     fab: false,
     colorFab: 'green',

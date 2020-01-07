@@ -31,6 +31,14 @@ export default {
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
+    isShowSuccess: {
+      get() {
+        return this.showSuccess;
+      },
+      set() {
+        return false;
+      },
+    },
   },
 };
 </script>
