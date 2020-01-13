@@ -8,7 +8,11 @@
       dark
     >
     <v-app-bar-nav-icon @click="toogleDrawer()"/>
-      <span class="title ml-3 mr-5" v-if="!isMobil">
+      <span
+        class="title ml-3 mr-5"
+        v-if="!isMobil"
+        @click="onHeaderClick()"
+      >
         Heimabend&nbsp;
         <span class="font-weight-light">
           Inspirator
@@ -34,7 +38,6 @@
     <MenuLeft
       ref="mainMenuLeft"
       :tags="tags"
-      @onTagFilterChanged="onTagFilterChanged"
       @openImpressum="onImpressumClick"
       @openAboutProject="onAboutProjectClick"
       @tagOverview="onTagOverviewClick"
@@ -43,59 +46,40 @@
     <v-content id="lateral">
       <Topbar
         ref="topFilterToolbar"
-        :tags="tags"
         @openImpressum="onImpressumClick"
         @openAboutProject="onAboutProjectClick"
         @tagOverview="onTagOverviewClick"
       />
       <div class="row mx-2" justify="center">
-        <div class="col-sm-12">
-          <HeimabendCard
-            :items="getItems"
-            :isMobil="isMobil"
-            @onUpdateClick="onUpdateClick"
-          />
+        <router-view
+          class="content ma-10"
+          @onUpdateClick="onUpdateClick"
+        />
+
+        <v-fab-transition
+          v-if="!isMobil"
+        >
           <v-btn
-            class="ma-10"
-            v-if="!getItems.length"
-            @click="onResetClick()"
+          @click="onNewClick"
+            fab
+            color="green"
+            dark
+            fixed
+            bottom
+            right
           >
-            Alle Filter zurücksetzen
+            <v-icon>mdi-plus</v-icon>
           </v-btn>
-        </div>
-   <v-fab-transition>
-      <v-btn
-      @click="onNewClick"
-        fab
-        color="green"
-        dark
-        fixed
-        bottom
-        right
-      >
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-    </v-fab-transition>
+        </v-fab-transition>
       </div>
     </v-content>
-
-    <CreateDialog
+    <Login
+      ref="login"
+    />
+    <create-dialog
       ref="createGroupClassModal"
       @dialogClose="onDialogClose"
       :tags="tags"
-    />
-    <Tags
-      ref="tagsOverview"
-      @dialogClose="onDialogClose"
-    />
-    <Impressum
-      ref="impressumDialog"
-    />
-    <AboutProject
-      ref="aboutProject"
-    />
-    <Login
-      ref="login"
     />
   </v-app>
 </div>
@@ -104,24 +88,16 @@
 <script>
 import axios from 'axios';
 
-import CreateDialog from '@/views/createHeimabend/CreateDialog.vue'; // eslint-disable-line
 import Login from './components/dialogs/Login.vue'; // eslint-disable-line
-import Impressum from './components/dialogs/Impressum.vue';
-import Tags from './tags/Main.vue';
-import AboutProject from './components/dialogs/AboutProject.vue';
-import HeimabendCard from './components/cards/Heimabend.vue';
 import MenuLeft from './components/menu/Left.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
+import CreateDialog from './heimabend/create/Dialog.vue'; // eslint-disable-line
 
 export default {
   components: {
     CreateDialog,
-    AboutProject,
-    HeimabendCard,
     MenuLeft,
-    Impressum,
     Login,
-    Tags,
     Topbar,
   },
   props: {
@@ -131,55 +107,16 @@ export default {
     isMobil() {
       return this.$vuetify.breakpoint.smAndDown;
     },
-    getItems() {
-      const {
-        isPossibleInside,
-        isPossibleOutside,
-        withoutPreperation,
-        justActive,
-        withoutCosts,
-        getSorter,
-        levelFilter, // eslint-disable-line
-      } = this.$store.getters;
-      let returnArray = this.items
-        .filter(item => item.description.toLowerCase().includes(this.searchInput.toLowerCase())
-          || item.title.toLowerCase().includes(this.searchInput.toLowerCase())
-          || item.material.toLowerCase().includes(this.searchInput.toLowerCase()))
-        .filter(item => this.isTagMatchToEvent(item))
-        .filter(item => (isPossibleInside === item.isPossibleInside
-          || isPossibleOutside === item.isPossibleOutside)
-          && (isPossibleInside || isPossibleOutside))
-        .filter((item) => {
-          const allowOne = levelFilter.includes(0);
-          const allowTwo = levelFilter.includes(1);
-          const allowThree = levelFilter.includes(2);
-          const allow = (allowOne && allowOne === item.isLvlOne)
-            || (allowTwo && allowTwo === item.isLvlTwo)
-            || (allowThree && allowThree === item.isLvlThree);
-          return allow;
-        })
-        .filter(item => !withoutPreperation || item.isPrepairationNeeded === false)
-        .filter(item => justActive === item.isActive)
-        .filter(item => !withoutCosts || item.costsRating === 1);
-      if (getSorter === 'alpha' && returnArray && returnArray.length) {
-        returnArray = this._.orderBy(returnArray, ['title'], ['asc']);
-      }
-      if (getSorter === 'newest' && returnArray && returnArray.length) {
-        returnArray = this._.orderBy(returnArray, ['createdAt'], ['desc']);
-      }
-      if (getSorter === 'random' && returnArray && returnArray.length) {
-        returnArray = this._.shuffle(returnArray);
-      }
-      return returnArray;
-    },
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
     getLabel() {
-      if (this.$vuetify.breakpoint.mdAndUp) {
-        return `Suche in ${this.getItems.length} Heimabenden`;
-      }
-      return `${this.getItems.length} Heimabende`;
+      const counter = this.$store.getters.heimabendCounter;
+      return `${counter} Heimabende`;
+    },
+
+    getFilterTags() {
+      return this.$store.getters.filterTags;
     },
   },
   methods: {
@@ -188,11 +125,18 @@ export default {
       item.tags.forEach((tag) => {
         eventTagArray.push(this.convertUrlToId(tag)); // eslint-disable-line
       });
-      if (this.filterTags && this.filterTags.length) {
-        const matches = eventTagArray.filter(element => this.filterTags.includes(element));
+      if (this.getFilterTags && this.getFilterTags.length) {
+        const matches = eventTagArray.filter(element => this.getFilterTags.includes(element));
         return !!matches.length;
       }
       return true;
+    },
+    onUpdateClick(item) {
+      const tags = item.tags; // eslint-disable-line
+      tags.forEach((tag, index) => {
+        item.tags[index] = this.convertUrlToId(tag); // eslint-disable-line
+      });
+      this.$refs.createGroupClassModal.show(item);
     },
     toogleDrawer() {
       this.$refs.mainMenuLeft.toggleDrawer();
@@ -212,13 +156,6 @@ export default {
     onLoginClick() {
       this.$refs.login.show();
     },
-    onUpdateClick(item) {
-      const tags = item.tags; // eslint-disable-line
-      tags.forEach((tag, index) => {
-        item.tags[index] = this.convertUrlToId(tag); // eslint-disable-line
-      });
-      this.$refs.createGroupClassModal.show(item);
-    },
     convertUrlToId(url) {
       if (url && typeof url === 'string') {
         const idStringArray = url.split('/');
@@ -235,9 +172,6 @@ export default {
       this.getEvents();
       this.getTags();
     },
-    onTagFilterChanged(data) {
-      this.filterTags = data;
-    },
     onResetClick() {
       this.$store.commit('clearFilters');
       this.$refs.mainMenuLeft.resetTags();
@@ -246,7 +180,7 @@ export default {
       const path = `${this.API_URL}basic/event/`;
       axios.get(path)
         .then((res) => {
-          this.items = res;
+          this.items = res.data;
         })
         .catch(() => {
         });
@@ -255,10 +189,13 @@ export default {
       const path = `${this.API_URL}basic/tag/`;
       axios.get(path)
         .then((res) => {
-          this.tags = res;
+          this.tags = res.data;
         })
         .catch(() => {
         });
+    },
+    onHeaderClick() {
+      this.$router.push({ name: 'overview' });
     },
   },
   created() {
@@ -267,7 +204,6 @@ export default {
   },
   data: () => ({
     API_URL: process.env.VUE_APP_API,
-    filterTags: [],
     searchInput: '',
     fab: false,
     colorFab: 'green',
@@ -286,4 +222,7 @@ export default {
     margin: 0 0 16px 16px;
   }
 
+  .content {
+    flex: 1;
+  }
 </style>

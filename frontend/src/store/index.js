@@ -18,6 +18,8 @@ export default new Vuex.Store({
     justActive: true,
     sorter: 'random',
     levelFilter: [0, 1, 2],
+    filterTags: [],
+    heimabendCounter: 0,
   },
   getters: {
     isAuthenticated(state) {
@@ -47,10 +49,19 @@ export default new Vuex.Store({
     levelFilter(state) {
       return state.levelFilter;
     },
+    filterTags(state) {
+      return state.filterTags;
+    },
+    heimabendCounter(state) {
+      return state.heimabendCounter;
+    },
   },
   mutations: {
     changeSorter(state, newSorter) {
       state.sorter = newSorter;
+    },
+    changeFilterTags(state, newTags) {
+      state.filterTags = newTags;
     },
     tooglePossibleInside(state) {
       state.isPossibleInside = !state.isPossibleInside;
@@ -72,6 +83,9 @@ export default new Vuex.Store({
       state.justActive = !state.justActive;
       event('user-click', 'toogle', 'possibleInside', state.justActive);
     },
+    setHeimabendCounter(state, payload) {
+      state.heimabendCounter = payload;
+    },
     setLevelFilter(state, newFilter) {
       state.levelFilter = newFilter;
     },
@@ -85,6 +99,7 @@ export default new Vuex.Store({
       state.withoutPreperation = false;
       state.withoutCosts = false;
       state.justActive = true;
+      state.filterTags = [];
     },
     clearAccessToken(state) {
       state.accessToken = null;

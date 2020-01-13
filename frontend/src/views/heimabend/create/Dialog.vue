@@ -298,28 +298,29 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-    <ErrorMessage
-      :showError="showError"
-      :responseObj="responseObj"
-    />
-    <SuccessMessage
-      :showSuccess="showSuccess"/>
+    <v-snackbar
+      v-model="showSuccess"
+      color="error"
+      y='top'
+      :timeout="timeout"
+    >
+      {{ 'Fehler beim Speichern des Heimabends' }}
+    </v-snackbar>
+    <v-snackbar
+      v-model="showSuccess"
+      color="success"
+      y='top'
+      :timeout="timeout"
+    >
+      {{ 'Der Heimabend wurde erfolgreich gespeichert und warte auf die Freigabe' }}
+    </v-snackbar>
   </v-row>
 </template>
 
 <script>
 import axios from 'axios';
 
-import ErrorMessage from '@/views/components/common/ErrorMessage.vue'; // eslint-disable-line
-import SuccessMessage from '@/views/components/common/SuccessMessage.vue'; // eslint-disable-line
-
-
 export default {
-
-  components: {
-    ErrorMessage,
-    SuccessMessage,
-  },
 
   data: () => ({
     API_URL: process.env.VUE_APP_API,
@@ -328,6 +329,7 @@ export default {
     valid: true,
     showError: false,
     showSuccess: false,
+    timeout: 3000,
     responseObj: null,
     agreeBox: false,
     tags: [],
@@ -557,7 +559,7 @@ export default {
       const path = `${this.API_URL}basic/tag/`;
       axios.get(path)
         .then((res) => {
-          this.tags = res;
+          this.tags = res.data;
         })
         .catch(() => {
         });

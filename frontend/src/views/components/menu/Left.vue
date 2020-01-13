@@ -7,11 +7,23 @@
       width="300"
       color="accent"
     >
-      <v-list
-        dense
-        class="accent"
-      >
-        <template>
+      <v-list>
+        <v-list-item link>
+          <v-list-item-icon>
+            <v-icon>mdi-ballot-outline</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content
+            @click="onClickHeimabendItem()"
+          >
+            <v-list-item-title>
+              Heimabende
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-divider class="mb-6"/>
+
           <v-row align="center">
              <v-card
               v-if="isAuthenticated"
@@ -130,10 +142,9 @@
             </v-card>
           </v-row> -->
           <!-- <v-spacer dark class="my-6"/> -->
-        </template>
       </v-list>
       <template v-slot:append>
-        <v-list bottom >
+        <v-list bottom>
           <v-divider v-if="isAuthenticated"/>
           <v-list-item v-if="isAuthenticated" link bottom>
             <v-list-item-icon>
@@ -143,15 +154,19 @@
               <v-list-item-title>Tags</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <!-- <v-divider/>
+          <v-divider/>
           <v-list-item link bottom>
             <v-list-item-icon>
               <v-icon>mdi-help-circle-outline</v-icon>
             </v-list-item-icon>
-            <v-list-item-content @click="onClickAboutProjectItem()">
-              <v-list-item-title>Über das Projekt</v-list-item-title>
+            <v-list-item-content
+              @click="onClickAboutProjectItem()"
+            >
+              <v-list-item-title>
+                Über das Projekt
+              </v-list-item-title>
             </v-list-item-content>
-          </v-list-item> -->
+          </v-list-item>
         <v-divider/>
           <v-list-item link>
             <v-list-item-icon>
@@ -168,36 +183,53 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Sorter from '@/views/components/dropdown/Sorter.vue'; //eslint-disable-line
 
 export default {
   components: {
     Sorter,
   },
-  props: {
-    tags: Array,
+  created() {
+    this.getTags();
   },
   data: () => ({
+    API_URL: process.env.VUE_APP_API,
     filterTags: [],
     mini: true,
     isDrawer: false,
+    tags: [],
   }),
   methods: {
+    getTags() {
+      const path = `${this.API_URL}basic/tag/`;
+      axios.get(path)
+        .then((res) => {
+          this.tags = res.data;
+        })
+        .catch(() => {
+        });
+    },
     onChange() {
       this.$emit('onTagFilterChanged', this.filterTags);
+      this.$store.commit('changeFilterTags', this.filterTags);
     },
     resetTags() {
       this.filterTags = [];
       this.$emit('onTagFilterChanged', this.filterTags);
+      this.$store.commit('changeFilterTags', []);
     },
     onClickTags() {
-      this.$emit('tagOverview');
+      this.$router.push({ name: 'tags' });
+    },
+    onClickHeimabendItem() {
+      this.$router.push({ name: 'overview' });
     },
     onClickImpressumItem() {
-      this.$emit('openImpressum');
+      this.$router.push({ name: 'impressum' });
     },
     onClickAboutProjectItem() {
-      this.$emit('openAboutProject');
+      this.$router.push({ name: 'aboutProject' });
     },
     onToggleJustActive() {
       this.$store.commit('toggleJustActive');
@@ -212,6 +244,10 @@ export default {
     },
     isJustActive() {
       return this.$store.getters.justActive;
+    },
+    getFilterTags() {
+      this.filterTags = this.$store.getters.filterTags; // eslint-disable-line
+      return this.$store.getters.filterTags;
     },
   },
 };

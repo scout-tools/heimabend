@@ -12,9 +12,13 @@
           multiple
           group
           dense
+          mandatory
         >
           <!-- Drinnen -->
-          <v-tooltip bottom>
+          <v-tooltip
+            nudge-left="80"
+            bottom
+          >
             <template v-slot:activator="{ on }">
               <v-btn
                 @click="onIsPossibleInside()"
@@ -22,7 +26,9 @@
                 text
                 :class="isPossibleInsideButtonActive"
               >
-                <v-icon color="darkgrey darken-2">
+                <v-icon
+                  :color="isPossibleInside ? 'black' : 'grey'"
+                >
                   mdi-home
                 </v-icon>
                 <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
@@ -31,12 +37,15 @@
               </v-btn>
             </template>
             <span>
-              Ist für Drinnen geeignet
+              Zeigt Heimabende an die im Haus durchgeführt werden können.
             </span>
           </v-tooltip>
 
           <!-- Draußen -->
-          <v-tooltip bottom>
+          <v-tooltip
+            bottom
+            nudge-left="80"
+            >
             <template v-slot:activator="{ on }">
               <v-btn
                 @click="onIsPossibleOutside()"
@@ -45,7 +54,7 @@
                 :class="isPossibleOutsideButtonActive"
               >
                 <v-icon
-                  :color="isPossibleOutside ? 'green darken-2' : 'darkgrey'"
+                  :color="isPossibleOutside ? 'green darken-2' : 'grey'"
                 >
                   mdi-nature-people
                 </v-icon>
@@ -55,21 +64,26 @@
               </v-btn>
             </template>
             <span>
-              Ist für Drau0en geeignet
+              Zeigt Heimabende an die Draußen durchgeführt werden können.
             </span>
           </v-tooltip>
 
           <!-- Ohne Vorbereitung -->
-          <v-tooltip bottom>
+          <v-tooltip
+            nudge-left="80"
+            bottom
+          >
             <template v-slot:activator="{ on }">
               <v-btn
                 @click="onWithoutPreperation()"
                 v-on="on"
                 text
+                tile
+                dense
                 :class="isWithoutPreperationButtonActive"
               >
                 <v-icon
-                  :color="withoutPreperation ? 'black' : 'darkgrey'"
+                  :color="withoutPreperation ? 'black' : 'grey'"
                 >
                   mdi-card-bulleted-off-outline
                 </v-icon>
@@ -79,22 +93,26 @@
               </v-btn>
             </template>
             <span>
-              Ist ohne weitere Vorbereitung durchführbar
+              Zeigt nur Heimabende an die keine Vorbereitung benötigen
             </span>
           </v-tooltip>
 
           <!-- Ohne Kosten -->
-          <v-tooltip bottom>
+          <v-tooltip
+            nudge-left="80"
+            bottom
+          >
             <template v-slot:activator="{ on }">
               <v-btn
                 @click="onWithoutCosts()"
-                v-model="withoutCosts"
                 v-on="on"
                 text
+                tile
+                dense
                 :class="isWithoutCostsButtonActive"
               >
                 <v-icon
-                :color="withoutCosts ? 'orange darken-2' : 'darkgrey'"
+                :color="withoutCosts ? 'red darken-2' : 'grey'"
                 >
                   mdi-currency-usd-off
                 </v-icon>
@@ -104,10 +122,10 @@
               </v-btn>
             </template>
             <span>
-              Ohne Kosten durchführbar
+              Zeigt Heimabende an für die keine Kosten entstehen.
             </span>
           </v-tooltip>
-        </v-btn-toggle>
+       </v-btn-toggle>
 
       <v-divider v-if="$vuetify.breakpoint.mdAndUp" class="mx-2" vertical/>
 
@@ -120,7 +138,10 @@
           dense
         >
           <!-- orange -->
-          <v-tooltip bottom>
+          <v-tooltip
+            bottom
+            nudge-left="80"
+          >
             <template v-slot:activator="{ on }">
               <v-btn
                 v-on="on"
@@ -149,7 +170,10 @@
           </v-tooltip>
 
           <!-- blue -->
-          <v-tooltip bottom>
+          <v-tooltip
+            bottom
+            nudge-left="80"
+            >
             <template v-slot:activator="{ on }">
               <v-btn
                 v-on="on"
@@ -175,7 +199,10 @@
           </v-tooltip>
 
           <!-- red -->
-          <v-tooltip bottom>
+          <v-tooltip
+            nudge-left="80"
+            bottom
+          >
             <template v-slot:activator="{ on }">
               <v-btn
                 v-on="on"
@@ -213,9 +240,6 @@ import Sorter from '@/views/components/dropdown/Sorter.vue'; //eslint-disable-li
 export default {
   components: {
     Sorter,
-  },
-  props: {
-    tags: Array,
   },
   data() {
     return {
@@ -262,37 +286,17 @@ export default {
       }
       return false;
     },
-    isPossibleInside: {
-      get() {
-        return this.$store.getters.isPossibleInside;
-      },
-      set() {
-        return false;
-      },
+    isPossibleInside() {
+      return this.$store.getters.isPossibleInside;
     },
-    isPossibleOutside: {
-      get() {
-        return this.$store.getters.isPossibleOutside;
-      },
-      set() {
-        return false;
-      },
+    isPossibleOutside() {
+      return this.$store.getters.isPossibleOutside;
     },
-    withoutPreperation: {
-      get() {
-        return this.$store.getters.withoutPreperation;
-      },
-      set() {
-        return false;
-      },
+    withoutPreperation() {
+      return this.$store.getters.withoutPreperation;
     },
-    withoutCosts: {
-      get() {
-        return this.$store.getters.withoutCosts;
-      },
-      set() {
-        return false;
-      },
+    withoutCosts() {
+      return this.$store.getters.withoutCosts;
     },
     toggle_exclusive: {
       get() {
@@ -302,6 +306,12 @@ export default {
         }
         if (this.isPossibleOutside) {
           output.push(1);
+        }
+        if (this.withoutPreperation) {
+          output.push(2);
+        }
+        if (this.withoutCosts) {
+          output.push(3);
         }
         return output;
       },
@@ -345,10 +355,6 @@ export default {
 .v-btn--active:before {
     opacity: 0.4;
     color: limegreen
-}
-
-.btn-disabled  {
-  color: gray !important;
 }
 
 .theme--light.v-btn--active:hover::before,

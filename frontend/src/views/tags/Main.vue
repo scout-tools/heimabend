@@ -1,86 +1,71 @@
 <template>
 <div>
-  <v-row justify="center">
-    <v-dialog
-      v-model="dialog"
-      persistent
-      fullscreen
-      hide-overlay
-      transition="dialog-top-transition"
+  <v-row
+    justify="center"
+  >
+    <v-card>
+      <v-card-title>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-search"
+          label="Suche"
+          single-line
+          hide-details
+        />
+        <v-spacer/>
+        <v-btn
+          color="green"
+          dark
+          @click="onNewTag()"
+          class="mb-2"
+        >
+          Neuer Tag
+        </v-btn>
+        </v-card-title>
+        <v-data-table
+          :headers="headers"
+          :items="getItems"
+          :search="search"
+          :items-per-page="itemsPerPage"
+        >
+        <template v-slot:item.color="{ item }">
+          <v-chip
+            :color="item.color"
+          >
+            {{ item.color }}
+          </v-chip>
+        </template>
+        <template v-slot:item.action="{ item }">
+          <v-icon
+            class="mr-2"
+            @click="editItem(item)"
+          >
+            mdi-pencil
+          </v-icon>
+          <v-icon
+            @click="deleteItem(item)"
+          >
+            mdi-delete
+          </v-icon>
+        </template>
+      </v-data-table>
+    </v-card>
+    <v-snackbar
+      v-model="showError"
+      color="error"
+      y='top'
+      :timeout="timeout"
     >
-      <v-card>
-       <v-toolbar dark color="primary">
-          <v-btn icon dark @click="cancel()">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-          <v-toolbar-title>Themen</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-toolbar-items>
-            <v-btn
-              dark
-              text
-              @click="cancel" >
-                Fertig
-              </v-btn>
-          </v-toolbar-items>
-        </v-toolbar>
-        <v-card-text>
-          <v-card>
-            <v-card-title>
-
-              <v-text-field
-                v-model="search"
-                append-icon="mdi-search"
-                label="Suche"
-                single-line
-                hide-details
-              />
-              <v-spacer/>
-              <v-btn
-                color="green"
-                dark
-                @click="onNewTag()"
-                class="mb-2"
-              >
-                Neuer Tag
-              </v-btn>
-              </v-card-title>
-              <v-data-table
-                :headers="headers"
-                :items="getItems"
-                :search="search"
-              >
-              <template v-slot:item.color="{ item }">
-                <v-chip
-                  :color="item.color"
-                >
-                  {{ item.color }}
-                </v-chip>
-              </template>
-              <template v-slot:item.action="{ item }">
-                <v-icon
-                  class="mr-2"
-                  @click="editItem(item)"
-                >
-                  mdi-pencil
-                </v-icon>
-                <v-icon
-                  @click="deleteItem(item)"
-                >
-                  mdi-delete
-                </v-icon>
-              </template>
-            </v-data-table>
-          </v-card>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
-    <ErrorMessage
-      :showError="showError"
-      :responseObj="responseObj"
-    />
-    <SuccessMessage
-      :showSuccess="showSuccess"/>
+      {{ 'Es ist ein Fehler aufgetreten' }}
+    </v-snackbar>
+    <v-snackbar
+      v-model="showSuccess"
+      color="success"
+      y='top'
+      :timeout="timeout"
+    >
+      {{ 'Du bist jetzt im Internen Bereich. Viel Spaß' }}
+    </v-snackbar>
   </v-row>
   <CreateUpdateTag
     ref="createTagModal"
@@ -96,16 +81,12 @@
 <script>
 import axios from 'axios';
 
-import ErrorMessage from '@/views/components/common/ErrorMessage.vue'; //eslint-disable-line
-import SuccessMessage from '@/views/components/common/SuccessMessage.vue'; //eslint-disable-line
 import CreateUpdateTag from './CreateUpdateTag.vue';
 import DeleteModal from './DeleteModal.vue';
 
 
 export default {
   components: {
-    ErrorMessage,
-    SuccessMessage,
     CreateUpdateTag,
     DeleteModal,
   },
@@ -113,6 +94,7 @@ export default {
   data: () => ({
     tags: [],
     search: '',
+    timeout: 3000,
     headers: [
       { text: 'Name', value: 'name' },
       { text: 'Beschreibung', value: 'description' },
@@ -124,6 +106,7 @@ export default {
     showError: false,
     showSuccess: false,
     responseObj: null,
+    itemsPerPage: 30,
     data: {
       title: 'Rucksack packen',
       description: '',
@@ -160,7 +143,7 @@ export default {
       const path = `${this.API_URL}basic/tag/`;
       axios.get(path)
         .then((res) => {
-          this.tags = res;
+          this.tags = res.data;
         })
         .catch(() => {
         });

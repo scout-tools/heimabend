@@ -57,12 +57,22 @@
       </v-card>
     </v-dialog>
   </v-row>
-<ErrorMessage
-  :showError="showError"
-  :responseObj="responseObj"
-/>
-<SuccessMessage
-  :showSuccess="showSuccess"/>
+    <v-snackbar
+      v-model="showError"
+      color="error"
+      y='top'
+      :timeout="timeout"
+    >
+      {{ 'Du hast eine falsche Kombination von Benutzername und Passwort eingegeben' }}
+    </v-snackbar>
+    <v-snackbar
+      v-model="showSuccess"
+      color="success"
+      y='top'
+      :timeout="timeout"
+    >
+      {{ 'Du bist jetzt im Internen Bereich. Viel Spaß' }}
+    </v-snackbar>
 </v-container>
 </template>
 
@@ -70,22 +80,13 @@
 import axios from 'axios';
 import store from '@/store'; // eslint-disable-line
 
-import ErrorMessage from '@/views/components/common/ErrorMessage.vue'; // eslint-disable-line import/no-unresolved
-import SuccessMessage from '@/views/components/common/SuccessMessage.vue'; // eslint-disable-line import/no-unresolved
-
-
 export default {
-  props: [],
-
-  components: {
-    ErrorMessage,
-    SuccessMessage,
-  },
 
   data: () => ({
     dialog: false,
     showError: false,
     showSuccess: false,
+    timeout: 3000,
     responseObj: null,
     API_URL: process.env.VUE_APP_API,
     data: {

@@ -12,7 +12,7 @@
   >
     <v-list-item
       class="lightPrimary pr-0"
-      :class="paddingleftLebvelIcons"
+      :class="paddingleftLebelIcons"
     >
       <v-img
         class="ml-1"
@@ -65,7 +65,7 @@
     </v-card-text>
     <v-divider class="mb-4"/>
 
-    <div class="text-left caption">
+    <div class="text-left font-italic font-weight-light">
       <ul>
           <li
             v-for="(item, index4) in getMaterialArray(item.material)"
@@ -85,7 +85,7 @@
     </v-container>
     <v-divider />
     <v-card-actions class="accent">
-      <div class="caption mr-1">{{ formatDate(item.createdAt)}}</div>
+      <div class="caption mr-1">{{ formatDate(item.createdAt) + '\n von ' + item.createdBy }}</div>
 
       <v-divider
         :class="verticalMargin"
@@ -93,13 +93,29 @@
         v-if="item.isPossibleOutside"
       />
 
-      <v-tooltip open-on-hover bottom v-if="item.isPossibleOutside">
+      <v-tooltip
+        open-on-hover
+        bottom
+        nudge-left="80"
+        v-if="item.isPossibleOutside"
+      >
         <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-icon color="green" v-if="item.isPossibleOutside">mdi-nature-people</v-icon>
+          <v-btn
+            icon
+            :small="isMobil"
+            v-on="on">
+            <v-icon
+              :size="getIconSize"
+              color="green"
+              v-if="item.isPossibleOutside"
+            >
+              mdi-nature-people
+            </v-icon>
           </v-btn>
         </template>
-        <span>Für Draußen geeignet</span>
+        <span>
+          Für Draußen geeignet
+        </span>
       </v-tooltip>
 
       <v-divider
@@ -107,25 +123,56 @@
         vertical
         v-if="item.isPossibleInside"
       />
-      <v-tooltip open-on-hover bottom v-if="item.isPossibleInside">
+      <v-tooltip
+        open-on-hover
+        nudge-left="80"
+        bottom
+        v-if="item.isPossibleInside">
         <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-icon v-if="item.isPossibleInside">mdi-home</v-icon>
+          <v-btn
+            :small="isMobil"
+            icon
+            v-on="on"
+          >
+            <v-icon
+              :size="getIconSize"
+              v-if="item.isPossibleInside"
+            >
+              mdi-home
+            </v-icon>
           </v-btn>
         </template>
-        <span>Für das Haus geeignet</span>
+        <span>
+          Für das Haus geeignet
+        </span>
       </v-tooltip>
       <v-divider :class="verticalMargin" vertical v-if="item.needPrepairaion" />
       <v-tooltip open-on-hover bottom v-if="item.needPrepairaion">
         <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
-            <v-icon color="green" v-if="item.needPrepairaion">mdi-card-bulleted-off-outline</v-icon>
+          <v-btn
+            :small="isMobil"
+            icon
+            v-on="on"
+          >
+            <v-icon
+              color="green"
+              v-if="item.needPrepairaion"
+            >
+              mdi-card-bulleted-off-outline
+            </v-icon>
           </v-btn>
         </template>
-        <span>Vorbereitung nötig?</span>
+        <span>
+          Es ist keine Vorbereitung notwendig
+        </span>
       </v-tooltip>
          <v-divider :class="verticalMargin" vertical/>
-                <v-tooltip open-on-hover bottom>
+                <v-tooltip
+                  v-if="item.costsRating > 1"
+                  open-on-hover
+                  bottom
+                  nudge-left="80"
+                >
                   <template v-slot:activator="{ on }">
                     <v-btn
                       :x-small="isMobil"
@@ -145,31 +192,61 @@
                       />
                     </v-btn>
                   </template>
-                  <span>Kosten</span>
+                  <span>Höhe der Kosten</span>
+                </v-tooltip>
+                <v-tooltip
+                  v-if="item.costsRating === 1"
+                  open-on-hover
+                  bottom
+                  nudge-left="80"
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      icon
+                      v-on="on"
+                    >
+                      <v-icon
+                        :size="getIconSize"
+                        color="red"
+                      >
+                        mdi-currency-usd-off
+                      </v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Keine Kosten</span>
                 </v-tooltip>
               <v-divider :class="verticalMargin" vertical/>
                 <v-tooltip
                   v-if="item.isPrepairationNeeded"
-                  open-on-hover bottom>
+                  open-on-hover
+                  nudge-left="80"
+                  bottom
+                >
                   <template v-slot:activator="{ on }">
                     <v-btn
-                      :x-small="isMobil"
-                      depressed
+                      icon
                       color="accent"
                       v-on="on"
                     >
                       <v-icon
                         v-model="item.isPrepairationNeeded"
                         color="black"
+                        :size="getIconSize"
                         v-if="item.isPrepairationNeeded">
                         mdi-card-bulleted-off-outline
                       </v-icon>
                     </v-btn>
                   </template>
-                  <span>Mit Vorbereitung?</span>
+                  <span>
+                    Es ist keine Vorbereitung notwendig
+                  </span>
                 </v-tooltip>
                 <v-divider :class="verticalMargin" vertical/>
-                <v-tooltip open-on-hover bottom>
+                <v-tooltip
+                  nudge-left="80"
+                  open-on-hover
+                  bottom
+                >
                   <template v-slot:activator="{ on }">
                     <v-btn
                       :x-small="isMobil"
@@ -190,10 +267,10 @@
                       />
                     </v-btn>
                   </template>
-                  <span>Durchführungszeit</span>
+                  <span>Zeit für die Durchführung</span>
                 </v-tooltip>
               <v-divider class="mx-2" vertical/>
-      <v-spacer />
+              <v-spacer />
       <!-- <v-divider vertical></v-divider>
             <div>
               <v-btn class="ma-2" text icon color="green lighten-2">
@@ -215,8 +292,9 @@ export default {
   },
   methods: {
     titleClass() {
-      return this.$vuetify.breakpoint.mdAndUp ? 'headline' : 'subtitle-1';
+      return this.$vuetify.breakpoint.mdAndUp ? 'headline font-weight-medium' : 'title';
     },
+
     verticalMargin() {
       return !this.$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-0';
     },
@@ -257,7 +335,7 @@ export default {
       const path = `${this.API_URL}basic/tag/`;
       axios.get(path)
         .then((res) => {
-          me.tags = res;
+          me.tags = res.data;
           me.dataReady = true;
         })
         .catch(() => {
@@ -286,12 +364,15 @@ export default {
   },
   computed: {
     ratingSize() {
-      return !this.isMobil ? 20 : 12;
+      return !this.isMobil ? 20 : 16;
+    },
+    getIconSize() {
+      return !this.isMobil ? 20 : 16;
     },
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
-    paddingleftLebvelIcons() {
+    paddingleftLebelIcons() {
       return !this.isMobil ? 'pl-6' : 'pl-1';
     },
     maxWidthKnots() {

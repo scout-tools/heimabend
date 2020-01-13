@@ -34,29 +34,30 @@
       </v-card>
     </v-dialog>
   </v-row>
-      <ErrorMessage
-      :showError="showError"
-      :responseObj="responseObj"
-    />
-    <SuccessMessage
-      :showSuccess="showSuccess"/>
+    <v-snackbar
+      v-model="showError"
+      color="error"
+      y='top'
+      :timeout="timeout"
+    >
+      {{ 'Es ist ein  Fehler aufgetreten' }}
+    </v-snackbar>
+    <v-snackbar
+      v-model="showSuccess"
+      color="success"
+      y='top'
+      :timeout="timeout"
+    >
+      {{ 'Der Tag wurde erfolgreich gelöscht' }}
+    </v-snackbar>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
 
-import ErrorMessage from '@/views/components/common/ErrorMessage.vue'; // eslint-disable-line
-import SuccessMessage from '@/views/components/common/SuccessMessage.vue'; // eslint-disable-line
-
-
 export default {
   props: ['tags'],
-
-  components: {
-    ErrorMessage,
-    SuccessMessage,
-  },
 
   data: () => ({
     API_URL: process.env.VUE_APP_API,
@@ -64,6 +65,7 @@ export default {
     showError: false,
     showSuccess: false,
     responseObj: null,
+    timeout: 3000,
     data: {
       id: null,
       name: null,

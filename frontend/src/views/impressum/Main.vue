@@ -1,49 +1,40 @@
 <template>
-  <v-row justify="center">
-    <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-top-transition">
-      <v-card >
-      <v-toolbar dark color="primary">
-          <v-btn icon dark @click="cancel()">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-          <v-toolbar-title>Impressum</v-toolbar-title>
-          <v-spacer></v-spacer>
-        </v-toolbar>
-        <v-card-text>
-          <div>
+  <v-row
+    justify="center">
+          <div class="ma-12">
+          <h2 class="py-5">
           Angaben gemäß § 5 TMG
-          </div>
+          </h2>
 
-          <div>
-          Max Mustermann
-          Musterstraße 11
-          90210 Musterstadt
-          </div>
+          <p class="font-weight-medium">
+          Robert Bagdahn <br>
+          Goebenstr. 31 <br>
+          53113 Bonn <br>
+          </p>
 
-          <div>
+          <h2 class="py-5">
           Kontakt:
-          </div>
+          </h2>
 
-          <div>
-          Telefon: +49 (0) 123 44 55 66
-          E-Mail: mustermann@musterfirma.de
-          </div>
+          <p class="font-weight-medium">
+          E-Mail: robertbagdahn@gmail.com <br>
+          </p>
 
-          <div>
+          <h2 class="py-5">
           Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
-          </div>
+          </h2>
 
-          <div>
-          Max Mustermann
-          Musterstraße 11
-          90210 Musterstadt
-          </div>
+          <p class="font-weight-medium">
+          Robert Bagdahn <br>
+          Goebenstr. 31 <br>
+          53113 Bonn <br>
+          </p>
 
-          <div>
+          <h2 class="py-5">
           Haftung für Inhalte
-          </div>
+          </h2>
 
-          <div>
+          <p class="font-weight-medium">
           Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte
           auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.
           Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
@@ -57,13 +48,13 @@
           der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden
           von entsprechenden Rechtsverletzungen
           werden wir diese Inhalte umgehend entfernen.
-          </div>
+          </p>
 
-          <div>
+          <h2 class="py-5">
           Haftung für Links
-          </div>
+          </h2>
 
-          <div>
+          <p class="font-weight-medium">
           Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte
           wir keinen Einfluss haben. Deshalb
           können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die
@@ -76,10 +67,13 @@
           konkrete Anhaltspunkte einer Rechtsverletzung
           nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige
           Links umgehend entfernen.
-          Urheberrecht
-          </div>
+          </p>
 
-          <div>
+          <h2 class="py-5">
+            Urheberrecht
+          </h2>
+
+          <p class="font-weight-medium">
           Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten
           unterliegen dem deutschen Urheberrecht. Die
           Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb
@@ -94,10 +88,8 @@
           bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen
           werden wir derartige
           Inhalte umgehend entfernen
+          </p>
           </div>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
   </v-row>
 </template>
 

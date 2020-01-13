@@ -1,14 +1,32 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Main from '../views/Main.vue';
+import Heimabend from '../views/heimabend/Main.vue';
+import AboutProject from '../views/aboutProject/Main.vue';
+import Impressum from '../views/impressum/Main.vue';
+import Tags from '../views/tags/Main.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'main',
-    component: Main,
+    name: 'overview',
+    component: Heimabend,
+  },
+  {
+    path: '/about',
+    name: 'aboutProject',
+    component: AboutProject,
+  },
+  {
+    path: '/impressum',
+    name: 'impressum',
+    component: Impressum,
+  },
+  {
+    path: '/tags',
+    name: 'tags',
+    component: Tags,
   },
 ];
 

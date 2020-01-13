@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueAnalytics from 'vue-analytics';
 import VueLodash from 'vue-lodash';
-// import Axios from 'axios';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -20,7 +19,7 @@ new Vue({
 }).$mount('#app');
 
 Vue.use(VueAnalytics, {
-  id: 'UA-154886286-1',
+  id: 'UA-154886286-2',
   autoTracking: {
     screenview: true,
   },
