@@ -194,6 +194,7 @@
                   </template>
                   <span>Höhe der Kosten</span>
                 </v-tooltip>
+
                 <v-tooltip
                   v-if="item.costsRating === 1"
                   open-on-hover
@@ -215,7 +216,13 @@
                   </template>
                   <span>Keine Kosten</span>
                 </v-tooltip>
-              <v-divider :class="verticalMargin" vertical/>
+
+              <v-divider
+                :class="verticalMargin"
+                v-if="item.costsRating === 1"
+                vertical
+              />
+
                 <v-tooltip
                   v-if="item.isPrepairationNeeded"
                   open-on-hover
@@ -241,7 +248,11 @@
                     Es ist keine Vorbereitung notwendig
                   </span>
                 </v-tooltip>
-                <v-divider :class="verticalMargin" vertical/>
+                <v-divider
+                  v-if="item.isPrepairationNeeded"
+                  :class="verticalMargin"
+                  vertical
+                />
                 <v-tooltip
                   nudge-left="80"
                   open-on-hover

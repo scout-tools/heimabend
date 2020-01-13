@@ -50,9 +50,10 @@
         @openAboutProject="onAboutProjectClick"
         @tagOverview="onTagOverviewClick"
       />
-      <div class="row mx-2" justify="center">
+      <template>
         <router-view
-          class="content ma-10"
+          class="content"
+          :class="getMargin"
           @onUpdateClick="onUpdateClick"
         />
 
@@ -71,7 +72,7 @@
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </v-fab-transition>
-      </div>
+      </template>
     </v-content>
     <Login
       ref="login"
@@ -114,7 +115,9 @@ export default {
       const counter = this.$store.getters.heimabendCounter;
       return `${counter} Heimabende`;
     },
-
+    getMargin() {
+      return this.isMobil ? 'ma-1' : 'ma-10';
+    },
     getFilterTags() {
       return this.$store.getters.filterTags;
     },
@@ -215,7 +218,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
   #lateral .v-btn--example {
     bottom: 0;
     position: absolute;
@@ -224,5 +227,8 @@ export default {
 
   .content {
     flex: 1;
+  }
+  .v-btn-toggle--group > .v-btn.v-btn {
+    margin: 2px !important;
   }
 </style>

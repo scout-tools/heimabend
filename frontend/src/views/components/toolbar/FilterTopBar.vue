@@ -3,6 +3,7 @@
     dense
     fixed
   >
+  <v-spacer/>
     <template>
       <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
 
@@ -231,6 +232,7 @@
       <v-divider v-if="$vuetify.breakpoint.mdAndUp" class="mx-2" vertical/>
       <Sorter v-if="$vuetify.breakpoint.mdAndUp"/>
     </template>
+  <v-spacer/>
   </v-toolbar>
 </template>
 
