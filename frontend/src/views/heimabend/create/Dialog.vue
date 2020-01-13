@@ -351,7 +351,7 @@ export default {
         v => (v && v.length > 0) || 'Mindestens ein Tag ist erforderlich',
       ],
       createdBy: [
-        v => (v && v.length > 3) || 'Mindestens drei Zeichen',
+        v => (v && v.length >= 3) || 'Mindestens drei Zeichen',
       ],
     },
     data: {

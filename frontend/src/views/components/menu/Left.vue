@@ -242,8 +242,13 @@ export default {
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
-    isJustActive() {
-      return this.$store.getters.justActive;
+    isJustActive: {
+      get() {
+        return this.$store.getters.justActive;
+      },
+      set() {
+        return false;
+      },
     },
     getFilterTags() {
       this.filterTags = this.$store.getters.filterTags; // eslint-disable-line
