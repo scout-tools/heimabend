@@ -43,3 +43,22 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             'updatedBy',
             'createdAt',
             'updatedAt')
+
+# class TagSerializer(serializers.Serializer):
+#     tag_count = serializers.SerializerMethodField()
+
+#     class Meta:
+#         model = Tag
+#         fields = (
+#             'id',
+#             'name',
+#             'tag_count',
+#             'description',
+#             'sub',
+#             'color')
+
+#     def get_tag_count(self, obj):
+#         entry_list = Event.objects.values('tags')
+#         # print(entry_list)
+#         print(obj.id)
+#         return Event.objects.filter(isLvlOne=False).count()

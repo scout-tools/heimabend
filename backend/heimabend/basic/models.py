@@ -42,9 +42,9 @@ class Event(models.Model):
     material = models.CharField(max_length=200, default='', blank=True)
     costsRating = models.SmallIntegerField(
         default=1, validators=[
-            MinValueValidator(1), MaxValueValidator(3)])
+            MinValueValidator(0), MaxValueValidator(3)])
     executionTimeRating = models.SmallIntegerField(
-        default=1, validators=[MinValueValidator(1), MaxValueValidator(3)])
+        default=1, validators=[MinValueValidator(0), MaxValueValidator(3)])
     isPrepairationNeeded = models.BooleanField(default=1)
     isActive = models.BooleanField(default=0)
     isLvlOne = models.BooleanField(default=1)
