@@ -7,9 +7,11 @@
       color="#1a4b7e"
       dark
     >
-    <v-app-bar-nav-icon @click="toogleDrawer()"/>
+    <v-app-bar-nav-icon
+      @click="toogleDrawer()"
+    />
       <span
-        class="title ml-3 mr-5"
+        class="title hand-cursor ml-3 mr-5"
         v-if="!isMobil"
         @click="onHeaderClick()"
       >
@@ -28,40 +30,40 @@
         prepend-inner-icon="mdi-magnify"
         clearable
         :dense="isMobil"
+        @input="onChangeSearchInput()"
       />
       <v-spacer />
-      <img v-on:click="onLoginClick" class="mr-2" :src="require('../assets/logo.gif')" height="50"/>
+      <img
+        v-on:click="onLoginClick"
+        class="mr-2"
+        :src="require('../assets/logo.gif')" height="50"
+      />
 
 
     </v-app-bar>
 
     <MenuLeft
       ref="mainMenuLeft"
-      :tags="tags"
-      @openImpressum="onImpressumClick"
-      @openAboutProject="onAboutProjectClick"
-      @tagOverview="onTagOverviewClick"
     />
 
     <v-content id="lateral">
-      <Topbar
+      <topbar
+        v-if="isMainPage"
         ref="topFilterToolbar"
-        @openImpressum="onImpressumClick"
-        @openAboutProject="onAboutProjectClick"
-        @tagOverview="onTagOverviewClick"
+      />
+      <sub-pages-top-bar
+        v-if="!isMainPage"
       />
       <template>
         <router-view
           class="content"
           :class="getMargin"
-          @onUpdateClick="onUpdateClick"
         />
-
         <v-fab-transition
-          v-if="!isMobil"
+          v-if="isMainPage"
         >
           <v-btn
-          @click="onNewClick"
+            @click="onNewClick"
             fab
             color="green"
             dark
@@ -77,11 +79,6 @@
     <Login
       ref="login"
     />
-    <create-dialog
-      ref="createGroupClassModal"
-      @dialogClose="onDialogClose"
-      :tags="tags"
-    />
   </v-app>
 </div>
 </template>
@@ -92,24 +89,18 @@ import axios from 'axios';
 import Login from './components/dialogs/Login.vue'; // eslint-disable-line
 import MenuLeft from './components/menu/Left.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
-import CreateDialog from './heimabend/create/Dialog.vue'; // eslint-disable-line
+import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
 
 export default {
   components: {
-    CreateDialog,
     MenuLeft,
     Login,
     Topbar,
-  },
-  props: {
-    source: String,
+    SubPagesTopBar,
   },
   computed: {
     isMobil() {
       return this.$vuetify.breakpoint.smAndDown;
-    },
-    isAuthenticated() {
-      return this.$store.getters.isAuthenticated;
     },
     getLabel() {
       const counter = this.$store.getters.heimabendCounter;
@@ -118,81 +109,34 @@ export default {
     getMargin() {
       return this.isMobil ? 'ma-1' : 'ma-10';
     },
-    getFilterTags() {
-      return this.$store.getters.filterTags;
+    tags() {
+      return this.$store.getters.tags;
+    },
+    isMainPage() {
+      return this.currentRouteName === 'overview';
+    },
+    currentRouteName() {
+      return this.$route.name;
     },
   },
   methods: {
-    isTagMatchToEvent(item) {
-      const eventTagArray = [];
-      item.tags.forEach((tag) => {
-        eventTagArray.push(this.convertUrlToId(tag)); // eslint-disable-line
-      });
-      if (this.getFilterTags && this.getFilterTags.length) {
-        const matches = eventTagArray.filter(element => this.getFilterTags.includes(element));
-        return !!matches.length;
-      }
-      return true;
-    },
-    onUpdateClick(item) {
-      const tags = item.tags; // eslint-disable-line
-      tags.forEach((tag, index) => {
-        item.tags[index] = this.convertUrlToId(tag); // eslint-disable-line
-      });
-      this.$refs.createGroupClassModal.show(item);
+    onChangeSearchInput() {
+      this.$store.commit('setSearchInput', this.searchInput);
     },
     toogleDrawer() {
       this.$refs.mainMenuLeft.toggleDrawer();
     },
     onNewClick() {
-      this.$refs.createGroupClassModal.show();
-    },
-    onImpressumClick() {
-      this.$refs.impressumDialog.show();
-    },
-    onAboutProjectClick() {
-      this.$refs.aboutProject.show();
-    },
-    onTagOverviewClick() {
-      this.$refs.tagsOverview.show();
+      this.$router.push({ name: 'heimabendCreate' });
     },
     onLoginClick() {
       this.$refs.login.show();
-    },
-    convertUrlToId(url) {
-      if (url && typeof url === 'string') {
-        const idStringArray = url.split('/');
-        const id = idStringArray[idStringArray.length - 2];
-
-        return parseInt(id, 10);
-      }
-      return url;
-    },
-    getTagById(id) {
-      return this.tags.find(tag => tag.id === id);
-    },
-    onDialogClose() {
-      this.getEvents();
-      this.getTags();
-    },
-    onResetClick() {
-      this.$store.commit('clearFilters');
-      this.$refs.mainMenuLeft.resetTags();
-    },
-    getEvents() {
-      const path = `${this.API_URL}basic/event/`;
-      axios.get(path)
-        .then((res) => {
-          this.items = res.data;
-        })
-        .catch(() => {
-        });
     },
     getTags() {
       const path = `${this.API_URL}basic/tag/`;
       axios.get(path)
         .then((res) => {
-          this.tags = res.data;
+          this.$store.commit('setTags', res.data);
         })
         .catch(() => {
         });
@@ -202,8 +146,8 @@ export default {
     },
   },
   created() {
-    this.getEvents();
     this.getTags();
+    this.$store.commit('enableJustActive');
   },
   data: () => ({
     API_URL: process.env.VUE_APP_API,
@@ -211,8 +155,6 @@ export default {
     fab: false,
     colorFab: 'green',
     iconFab: 'mdi-plus',
-    tags: [],
-    items: [],
   }),
 };
 
@@ -230,5 +172,8 @@ export default {
   }
   .v-btn-toggle--group > .v-btn.v-btn {
     margin: 2px !important;
+  }
+  .hand-cursor {
+    cursor: pointer
   }
 </style>

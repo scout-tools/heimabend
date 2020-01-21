@@ -1,9 +1,8 @@
 <template>
-<div v-if="dataReady">
+<div>
 <v-slide-y-transition  group>
   <v-card
     max-width="800"
-    shaped
     class="mx-auto ma-5"
     :style="{ transitionDelay: delay }"
     color="backgroundGrey"
@@ -48,6 +47,16 @@
         class="ma-1 ml-0"
         text
         icon
+        color="red lighten-2"
+        v-if="isAuthenticated"
+        @click="onDeleteClick(item)">
+        <v-icon>mdi-delete-outline</v-icon>
+      </v-btn>
+      <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
+      <v-btn
+        class="ma-1 ml-0"
+        text
+        icon
         color="gray lighten-2"
         v-if="isAuthenticated"
         @click="onUpdateClick(item)">
@@ -55,21 +64,24 @@
       </v-btn>
     </v-list-item>
     <v-divider />
-    <!-- <v-card-text big class="text--primary" :v-html="item.description"/> -->
     <v-card-text>
       <p
         class="text-left subtitle-1"
-        v-html="htmlText(item)"
+        v-html="item.description"
       >
       </p>
     </v-card-text>
-    <v-divider class="mb-4"/>
 
+    <v-divider class="mb-4"/>
+    <div class="text-left ml-3">
+      <u>Material</u>
+    </div>
     <div class="text-left font-italic font-weight-light">
       <ul>
-          <li
-            v-for="(item, index4) in getMaterialArray(item.material)"
-            :key="index4">
+        <li
+          v-for="(item, index4) in getMaterialArray(item.material)"
+          :key="index4"
+        >
           {{ item }}
         </li>
       </ul>
@@ -81,7 +93,9 @@
         :color="getTagColorById(tag)"
         v-for="(tag, index2) in item.tags"
         :key="index2"
-      >{{ getTagNameById(tag) }}</v-chip>
+      >
+        {{ getTagNameById(tag) }}
+      </v-chip>
     </v-container>
     <v-divider />
     <v-card-actions class="accent">
@@ -168,7 +182,7 @@
       </v-tooltip>
          <v-divider :class="verticalMargin" vertical/>
                 <v-tooltip
-                  v-if="item.costsRating > 1"
+                  v-if="item.costsRating > 0"
                   open-on-hover
                   bottom
                   nudge-left="80"
@@ -196,7 +210,7 @@
                 </v-tooltip>
 
                 <v-tooltip
-                  v-if="item.costsRating === 1"
+                  v-if="item.costsRating === 0"
                   open-on-hover
                   bottom
                   nudge-left="80"
@@ -219,7 +233,7 @@
 
               <v-divider
                 :class="verticalMargin"
-                v-if="item.costsRating === 1"
+                v-if="item.isPrepairationNeeded"
                 vertical
               />
 
@@ -249,12 +263,13 @@
                   </span>
                 </v-tooltip>
                 <v-divider
-                  v-if="item.isPrepairationNeeded"
                   :class="verticalMargin"
                   vertical
                 />
+
                 <v-tooltip
                   nudge-left="80"
+                  v-if="item.executionTimeRating > 0"
                   open-on-hover
                   bottom
                 >
@@ -280,7 +295,28 @@
                   </template>
                   <span>Zeit für die Durchführung</span>
                 </v-tooltip>
-              <v-divider class="mx-2" vertical/>
+
+                <v-tooltip
+                  v-if="item.executionTimeRating === 0"
+                  open-on-hover
+                  bottom
+                  nudge-left="80"
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      icon
+                      v-on="on"
+                    >
+                      <v-icon
+                        :size="getIconSize"
+                        color="black"
+                      >
+                        mdi-table-large
+                      </v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Groß Projekt</span>
+                </v-tooltip>
               <v-spacer />
       <!-- <v-divider vertical></v-divider>
             <div>
@@ -291,6 +327,22 @@
     </v-card-actions>
   </v-card>
   </v-slide-y-transition>
+    <v-snackbar
+      v-model="showError"
+      color="error"
+      y='top'
+      :timeout="timeout"
+    >
+      {{ 'Fehler beim Speichern des Heimabends' }}
+    </v-snackbar>
+    <v-snackbar
+      v-model="showSuccess"
+      color="success"
+      y='top'
+      :timeout="timeout"
+    >
+      {{ 'Der Heimabend wurde erfolgreich gelöscht' }}
+    </v-snackbar>
 </div>
 </template>
 
@@ -337,40 +389,37 @@ export default {
       }
       return false;
     },
-    onUpdateClick(item) {
-      this.$emit('onUpdateClick', item);
-    },
-    ready() {
-      const me = this;
-      // here is code that should be done first before vue render all authData
-      const path = `${this.API_URL}basic/tag/`;
-      axios.get(path)
-        .then((res) => {
-          me.tags = res.data;
-          me.dataReady = true;
-        })
-        .catch(() => {
-        });
+    onUpdateClick(params) {
+      this.$router.push({ name: 'heimabendUpdate', params });
     },
     formatDate(date) {
       const dateObj = new Date(date);
       return `${dateObj.getDate()}.${dateObj.getMonth() + 1}.${dateObj.getFullYear()} `;
     },
-    htmlText(item) {
-      return item.description.replace(/(?:\r\n|\r|\n)/g, '<br>');
-    },
     getMaterialArray(string) {
       return string.split(',');
     },
-  },
-  mounted() {
-    this.ready();
+    onDeleteClick(item) {
+      axios.delete(`${this.API_URL}basic/event/${item.id}/`, {
+        id: item.id,
+      })
+        .then(() => {
+          this.showSuccess = true;
+          this.$emit('refresh');
+        })
+        .catch(() => {
+          this.showError = true;
+        });
+    },
   },
   data() {
     return {
-      API_URL: process.env.VUE_APP_API,
       dataReady: false,
       delay: '0.1s',
+      API_URL: process.env.VUE_APP_API,
+      showError: false,
+      showSuccess: false,
+      timeout: 3000,
     };
   },
   computed: {
@@ -391,6 +440,9 @@ export default {
     },
     isMobil() {
       return this.$vuetify.breakpoint.smAndDown;
+    },
+    tags() {
+      return this.$store.getters.tags;
     },
   },
 };

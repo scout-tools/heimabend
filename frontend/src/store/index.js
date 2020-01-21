@@ -20,10 +20,18 @@ export default new Vuex.Store({
     levelFilter: [0, 1, 2],
     filterTags: [],
     heimabendCounter: 0,
+    tags: [],
+    searchInput: '',
   },
   getters: {
     isAuthenticated(state) {
       return !!state.accessToken;
+    },
+    tags(state) {
+      return state.tags;
+    },
+    tagById(state, id) {
+      return state.tags.find(tag => tag.id === id);
     },
     isPossibleInside(state) {
       return !!state.isPossibleInside;
@@ -55,10 +63,19 @@ export default new Vuex.Store({
     heimabendCounter(state) {
       return state.heimabendCounter;
     },
+    searchInput(state) {
+      return state.searchInput;
+    },
   },
   mutations: {
     changeSorter(state, newSorter) {
       state.sorter = newSorter;
+    },
+    setTags(state, newTags) {
+      state.tags = newTags;
+    },
+    setSearchInput(state, newSearchInput) {
+      state.searchInput = newSearchInput;
     },
     changeFilterTags(state, newTags) {
       state.filterTags = newTags;
@@ -82,6 +99,9 @@ export default new Vuex.Store({
     toggleJustActive(state) {
       state.justActive = !state.justActive;
       event('user-click', 'toogle', 'possibleInside', state.justActive);
+    },
+    enableJustActive(state) {
+      state.justActive = true;
     },
     setHeimabendCounter(state, payload) {
       state.heimabendCounter = payload;

@@ -112,7 +112,6 @@ export default {
       const me = this; // eslint-disable-line
       axios.post(`${this.API_URL}api/token/`, this.data)
         .then((response) => {
-          debugger;
           store.commit('setTokens', response.data.access, response.data.refresh);
           this.dialog = false;
           this.showSuccess = true;

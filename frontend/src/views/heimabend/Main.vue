@@ -2,9 +2,9 @@
 <div>
   <div class="col-sm-12">
     <heimabend-card
+      @refresh="refresh()"
       :items="getItems"
       :isMobil="isMobil"
-      @onUpdateClick="onUpdateClick"
     />
     <v-btn
       class="ma-10"
@@ -39,13 +39,14 @@ export default {
         justActive,
         withoutCosts,
         getSorter,
+        searchInput,
         levelFilter, // eslint-disable-line
       } = this.$store.getters;
       if (this.items && this.items.filter) {
         let returnArray = this.items
-          .filter(item => item.description.toLowerCase().includes(this.searchInput.toLowerCase())
-            || item.title.toLowerCase().includes(this.searchInput.toLowerCase())
-            || item.material.toLowerCase().includes(this.searchInput.toLowerCase()))
+          .filter(item => item.description.toLowerCase().includes(searchInput.toLowerCase())
+            || item.title.toLowerCase().includes(searchInput.toLowerCase())
+            || item.material.toLowerCase().includes(searchInput.toLowerCase()))
           .filter(item => this.getFilterTags !== '13213' && this.isTagMatchToEvent(item))
           .filter(item => (isPossibleInside === item.isPossibleInside
             || isPossibleOutside === item.isPossibleOutside)
@@ -82,9 +83,17 @@ export default {
     getFilterTags() {
       return this.$store.getters.filterTags;
     },
+    tags() {
+      return this.$store.getters.tags;
+    },
   },
 
   methods: {
+
+    refresh() {
+      this.items = [];
+      this.getEvents();
+    },
     getEvents() {
       const path = `${this.API_URL}basic/event/`;
       axios.get(path)
@@ -92,18 +101,6 @@ export default {
           this.items = res.data;
         })
         .catch(() => {
-        });
-    },
-    getTags() {
-      const path = `${this.API_URL}basic/tag/`;
-      axios.get(path)
-        .then((res) => {
-          this.tags = res.data;
-        })
-        .catch(() => {
-        })
-        .finally(() => {
-          this.loading = false;
         });
     },
 
@@ -119,9 +116,6 @@ export default {
         return parseInt(id, 10);
       }
       return url;
-    },
-    getTagById(id) {
-      return this.tags.find(tag => tag.id === id);
     },
     onResetClick() {
       this.$store.commit('clearFilters');
@@ -141,13 +135,10 @@ export default {
 
   created() {
     this.getEvents();
-    this.getTags();
   },
 
   data: () => ({
     API_URL: process.env.VUE_APP_API,
-    searchInput: '',
-    tags: [],
     items: {},
     loading: true,
   }),

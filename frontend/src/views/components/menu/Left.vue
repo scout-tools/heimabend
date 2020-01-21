@@ -8,28 +8,11 @@
       color="accent"
     >
       <v-list>
-        <v-list-item link>
-          <v-list-item-icon>
-            <v-icon>mdi-ballot-outline</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content
-            @click="onClickHeimabendItem()"
-          >
-            <v-list-item-title>
-              Heimabende
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-divider class="mb-6"/>
-
           <v-row align="center">
              <v-card
               v-if="isAuthenticated"
               width="270"
               class="mx-auto"
-              shaped
             >
               <v-list-item class="lightPrimary pa-0 ma-0">
                 <v-list-item-content>
@@ -50,8 +33,8 @@
                     hide-details
                   />
                   </v-col>
-                  <v-col cols="2" class="pa-0 ma-0" align-self="center">
-                    <v-icon color="red">
+                  <v-col class="pa-0 ma-0"  align-self="center">
+                    <v-icon class="pt-5" color="red">
                       mdi-eye-off-outline
                     </v-icon>
                   </v-col>
@@ -65,7 +48,6 @@
             <v-card
               width="270"
               class="mx-auto"
-              shaped
             >
               <v-list-item class="lightPrimary">
                 <v-list-item-content>
@@ -101,7 +83,6 @@
             <v-card
               width="270"
               class="mx-auto"
-              shaped
             >
               <v-list-item class="lightPrimary pa-0 ma-0">
                 <v-list-item-content>
@@ -118,7 +99,6 @@
             <v-card
               width="200"
               class="mx-auto"
-              shaped
             >
               <v-list-item class="secondary">
                 <v-list-item-content>
@@ -183,33 +163,18 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Sorter from '@/views/components/dropdown/Sorter.vue'; //eslint-disable-line
 
 export default {
   components: {
     Sorter,
   },
-  created() {
-    this.getTags();
-  },
   data: () => ({
     API_URL: process.env.VUE_APP_API,
     filterTags: [],
-    mini: true,
     isDrawer: false,
-    tags: [],
   }),
   methods: {
-    getTags() {
-      const path = `${this.API_URL}basic/tag/`;
-      axios.get(path)
-        .then((res) => {
-          this.tags = res.data;
-        })
-        .catch(() => {
-        });
-    },
     onChange() {
       this.$emit('onTagFilterChanged', this.filterTags);
       this.$store.commit('changeFilterTags', this.filterTags);
@@ -253,6 +218,9 @@ export default {
     getFilterTags() {
       this.filterTags = this.$store.getters.filterTags; // eslint-disable-line
       return this.$store.getters.filterTags;
+    },
+    tags() {
+      return this.$store.getters.tags;
     },
   },
 };
