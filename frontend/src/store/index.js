@@ -22,10 +22,15 @@ export default new Vuex.Store({
     heimabendCounter: 0,
     tags: [],
     searchInput: '',
+    apiIsDown: false,
+    acceptedPrivacy: false,
   },
   getters: {
     isAuthenticated(state) {
       return !!state.accessToken;
+    },
+    acceptedPrivacy(state) {
+      return !!state.acceptedPrivacy;
     },
     tags(state) {
       return state.tags;
@@ -66,8 +71,17 @@ export default new Vuex.Store({
     searchInput(state) {
       return state.searchInput;
     },
+    apiIsDown(state) {
+      return state.apiIsDown;
+    },
   },
   mutations: {
+    acceptedPrivacy(state, acceptedPrivacy) {
+      state.acceptedPrivacy = acceptedPrivacy;
+    },
+    apiIsDown(state, status) {
+      state.apiIsDown = status;
+    },
     changeSorter(state, newSorter) {
       state.sorter = newSorter;
     },

@@ -21,7 +21,6 @@
               </v-list-item>
               <v-list-item>
                 <v-container>
-                <v-divider v-if="isAuthenticated"/>
                 <v-row class="px-2 pb-2" v-if="isAuthenticated">
                   <v-col cols="10" class="pa-0 ma-0" align-self="center">
                   <v-switch

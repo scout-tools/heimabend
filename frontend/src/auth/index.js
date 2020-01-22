@@ -5,7 +5,7 @@ export default {
     authenticated: false,
   },
 
-  interceptorsSetup(store) {
+  interceptorsSetup(store, router) {
     axios.interceptors.request.use((config) => {
       const { accessToken } = store.state;
       if (accessToken) {
@@ -13,11 +13,19 @@ export default {
       }
       return config;
     }, err => Promise.reject(err));
-    axios.interceptors.response.use(response => response.data, (error) => {
-      // Do something with response error
+
+    axios.interceptors.response.use((response) => {
+      store.commit('apiIsDown', false);
+      return response;
+    }, (error) => {
+      if (error.response === undefined) {
+        debugger;
+        store.commit('apiIsDown', true);
+      }
+
       if (error.response.status === 401) {
         store.commit('clearTokens');
-        this.$router.push({ name: 'main' });
+        router.push({ name: 'overview' });
       }
       return Promise.reject(error);
     });

@@ -73,16 +73,30 @@
     </v-card-text>
 
     <v-divider class="mb-4"/>
-    <div class="text-left ml-3">
+    <div
+      class="text-left ml-3">
       <u>Material</u>
     </div>
-    <div class="text-left font-italic font-weight-light">
+    <div
+      v-if="item.material !== ''"
+      class="text-left font-italic font-weight-light"
+    >
       <ul>
         <li
           v-for="(item, index4) in getMaterialArray(item.material)"
           :key="index4"
         >
           {{ item }}
+        </li>
+      </ul>
+    </div>
+    <div
+      v-else
+      class="text-left font-weight-light"
+    >
+      <ul>
+        <li>
+          {{ emptyMaterialText }}
         </li>
       </ul>
     </div>
@@ -420,6 +434,7 @@ export default {
       showError: false,
       showSuccess: false,
       timeout: 3000,
+      emptyMaterialText: 'Juhu, kein Material nötig ^^',
     };
   },
   computed: {

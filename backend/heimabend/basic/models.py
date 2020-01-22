@@ -11,8 +11,8 @@ class Tag(models.Model):
         primary_key=True,
         serialize=False,
         verbose_name='ID')
-    name = models.CharField(max_length=60)
-    description = models.CharField(max_length=60)
+    name = models.CharField(max_length=20)
+    description = models.CharField(max_length=100, blank=True)
     color = models.CharField(max_length=7)
 
     def __str__(self):

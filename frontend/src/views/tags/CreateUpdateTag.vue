@@ -62,7 +62,6 @@
                     :hide-canvas="hideCanvas"
                     :hide-inputs="hideInputs"
                     :hide-mode-switch="hideModeSwitch"
-                    :mode.sync="mode"
                     :show-swatches="showSwatches"
                     class="mx-auto"
                     :rules="rules.color"

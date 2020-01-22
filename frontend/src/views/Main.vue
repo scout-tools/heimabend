@@ -8,6 +8,7 @@
       dark
     >
     <v-app-bar-nav-icon
+      v-if="!apiIsDown"
       @click="toogleDrawer()"
     />
       <span
@@ -43,24 +44,28 @@
     </v-app-bar>
 
     <MenuLeft
+      v-if="!apiIsDown"
       ref="mainMenuLeft"
     />
 
-    <v-content id="lateral">
+    <v-content
+      id="lateral"
+      >
       <topbar
-        v-if="isMainPage"
+        v-if="isMainPage && !apiIsDown"
         ref="topFilterToolbar"
       />
       <sub-pages-top-bar
-        v-if="!isMainPage"
+        v-if="!isMainPage && !apiIsDown"
       />
       <template>
         <router-view
+          v-if="!apiIsDown"
           class="content"
           :class="getMargin"
         />
         <v-fab-transition
-          v-if="isMainPage"
+          v-if="isMainPage && !apiIsDown"
         >
           <v-btn
             @click="onNewClick"
@@ -75,7 +80,13 @@
           </v-btn>
         </v-fab-transition>
       </template>
+    <api-down-banner
+      v-if="apiIsDown"
+    />
     </v-content>
+    <pricacy-banner
+      v-if="!acceptedPrivacy"
+    />
     <Login
       ref="login"
     />
@@ -88,6 +99,8 @@ import axios from 'axios';
 
 import Login from './components/dialogs/Login.vue'; // eslint-disable-line
 import MenuLeft from './components/menu/Left.vue';
+import ApiDownBanner from './components/banner/ApiDown.vue';
+import PricacyBanner from './components/banner/Privacy.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
 import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
 
@@ -97,6 +110,8 @@ export default {
     Login,
     Topbar,
     SubPagesTopBar,
+    ApiDownBanner,
+    PricacyBanner,
   },
   computed: {
     isMobil() {
@@ -117,6 +132,12 @@ export default {
     },
     currentRouteName() {
       return this.$route.name;
+    },
+    apiIsDown() {
+      return !!this.$store.getters.apiIsDown;
+    },
+    acceptedPrivacy() {
+      return !!this.$store.getters.acceptedPrivacy;
     },
   },
   methods: {
@@ -169,6 +190,7 @@ export default {
 
   .content {
     flex: 1;
+    background-image: ''
   }
   .v-btn-toggle--group > .v-btn.v-btn {
     margin: 2px !important;

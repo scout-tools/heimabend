@@ -1,6 +1,5 @@
 <template>
   <v-select
-    max-width="50"
     :items="items"
     v-model="selectedFilter"
     label="Filter"

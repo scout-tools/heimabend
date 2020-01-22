@@ -230,7 +230,10 @@
         </v-btn-toggle>
 
       <v-divider v-if="$vuetify.breakpoint.mdAndUp" class="mx-2" vertical/>
-      <Sorter v-if="$vuetify.breakpoint.mdAndUp"/>
+      <Sorter
+        v-if="$vuetify.breakpoint.mdAndUp"
+        style="max-width: 250px"
+      />
     </template>
   <v-spacer/>
   </v-toolbar>

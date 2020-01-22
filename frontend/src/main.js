@@ -3,10 +3,14 @@ import VueAnalytics from 'vue-analytics';
 import VueLodash from 'vue-lodash';
 import App from './App.vue';
 import router from './router';
+import auth from './auth';
 import store from './store';
 import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
+
+// and running it somewhere here
+auth.interceptorsSetup(store, router);
 
 new Vue({
   router,
