@@ -19,7 +19,6 @@ export default {
       return response;
     }, (error) => {
       if (error.response === undefined) {
-        debugger;
         store.commit('apiIsDown', true);
       }
 
