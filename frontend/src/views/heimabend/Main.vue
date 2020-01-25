@@ -66,7 +66,7 @@ export default {
               || (allowThree && allowThree === item.isLvlThree);
             return allow;
           })
-          .filter(item => !withoutPreperation || item.isPrepairationNeeded === true)
+          .filter(item => !withoutPreperation || item.isPrepairationNeeded === false)
           .filter(item => justActive === item.isActive)
           .filter(item => !withoutCosts || item.costsRating === 1);
         if (getSorter === 'alpha' && returnArray && returnArray.length) {

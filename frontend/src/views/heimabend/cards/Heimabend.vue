@@ -105,7 +105,9 @@
       <v-tooltip
         v-for="(tag, index2) in item.tags"
         :key="index2"
-        slot="append" bottom
+        slot="append"
+        bottom
+        nudge-left="80"
       >
       <template v-slot:activator="{ on }">
       <v-chip
@@ -152,7 +154,7 @@
           </v-btn>
         </template>
         <span>
-          Für Draußen geeignet
+          Für draußen geeignet
         </span>
       </v-tooltip>
 
@@ -181,171 +183,154 @@
           </v-btn>
         </template>
         <span>
-          Für das Haus geeignet
+          Für drinnen geeignet
         </span>
       </v-tooltip>
-      <v-divider :class="verticalMargin" vertical v-if="item.needPrepairaion" />
-      <v-tooltip open-on-hover bottom v-if="item.needPrepairaion">
-        <template v-slot:activator="{ on }">
-          <v-btn
-            :small="isMobil"
-            icon
-            v-on="on"
-          >
-            <v-icon
-              color="green"
-              v-if="item.needPrepairaion"
-            >
-              mdi-card-bulleted-off-outline
-            </v-icon>
-          </v-btn>
-        </template>
-        <span>
-          Es ist keine Vorbereitung notwendig
-        </span>
-      </v-tooltip>
-         <v-divider :class="verticalMargin" vertical/>
-                <v-tooltip
-                  v-if="item.costsRating > 0"
-                  open-on-hover
-                  bottom
-                  nudge-left="80"
-                >
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                      :x-small="isMobil"
-                      depressed
-                      color="accent"
-                      v-on="on">
-                      <v-rating
-                        v-model="item.costsRating"
-                        emptyIcon="mdi-currency-usd"
-                        fullIcon="mdi-currency-usd"
-                        color="orange"
-                        background-color="grey"
-                        dense
-                        length="3"
-                        :size="ratingSize"
-                        readonly
-                      />
-                    </v-btn>
-                  </template>
-                  <span>
-                    {{ getCostsToolTip(item.costsRating) }}
-                  </span>
-                </v-tooltip>
 
-                <v-tooltip
-                  v-if="item.costsRating === 0"
-                  open-on-hover
-                  bottom
-                  nudge-left="80"
-                >
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                      icon
-                      v-on="on"
-                    >
-                      <v-icon
-                        :size="getIconSize"
-                        color="red"
-                      >
-                        mdi-currency-usd-off
-                      </v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Keine Kosten</span>
-                </v-tooltip>
+      <v-divider :class="verticalMargin" vertical/>
 
-              <v-divider
-                :class="verticalMargin"
-                v-if="item.isPrepairationNeeded"
-                vertical
+        <v-tooltip
+          v-if="item.costsRating > 0"
+          open-on-hover
+          bottom
+          nudge-left="80"
+        >
+          <template v-slot:activator="{ on }">
+            <v-btn
+              :x-small="isMobil"
+              depressed
+              color="accent"
+              v-on="on">
+              <v-rating
+                v-model="item.costsRating"
+                emptyIcon="mdi-currency-usd"
+                fullIcon="mdi-currency-usd"
+                color="orange"
+                background-color="grey"
+                dense
+                length="3"
+                :size="ratingSize"
+                readonly
               />
+            </v-btn>
+          </template>
+          <span>
+            {{ getCostsToolTip(item.costsRating) }}
+          </span>
+        </v-tooltip>
 
-                <v-tooltip
-                  v-if="item.isPrepairationNeeded"
-                  open-on-hover
-                  nudge-left="80"
-                  bottom
-                >
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                      icon
-                      color="accent"
-                      v-on="on"
-                    >
-                      <v-icon
-                        v-model="item.isPrepairationNeeded"
-                        color="black"
-                        :size="getIconSize"
-                        v-if="item.isPrepairationNeeded">
-                        mdi-card-bulleted-off-outline
-                      </v-icon>
-                    </v-btn>
-                  </template>
-                  <span>
-                    Es ist keine Vorbereitung notwendig
-                  </span>
-                </v-tooltip>
-                <v-divider
-                  :class="verticalMargin"
-                  vertical
-                />
+        <v-tooltip
+          v-if="item.costsRating === 0"
+          open-on-hover
+          bottom
+          nudge-left="80"
+        >
+          <template v-slot:activator="{ on }">
+            <v-btn
+              icon
+              v-on="on"
+            >
+              <v-icon
+                :size="getIconSize"
+                color="red"
+              >
+                mdi-currency-usd-off
+              </v-icon>
+            </v-btn>
+          </template>
+          <span>Ohne Einkaufskosten</span>
+        </v-tooltip>
 
-                <v-tooltip
-                  nudge-left="80"
-                  v-if="item.executionTimeRating > 0"
-                  open-on-hover
-                  bottom
-                >
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                      :x-small="isMobil"
-                      depressed
-                      color="accent"
-                      v-on="on"
-                    >
-                      <v-rating
-                        v-model="item.executionTimeRating"
-                        emptyIcon="mdi-clock"
-                        fullIcon="mdi-clock"
-                        color="black"
-                        background-color="grey"
-                        dense
-                        length="3"
-                        :size="ratingSize"
-                        readonly
-                      />
-                    </v-btn>
-                  </template>
-                  <span>
-                    {{ getExecutionTimeRatingTooltip(item.executionTimeRating)}}
-                  </span>
-                </v-tooltip>
+        <v-divider
+          :class="verticalMargin"
+          v-if="!item.isPrepairationNeeded"
+          vertical
+        />
 
-                <v-tooltip
-                  v-if="item.executionTimeRating === 0"
-                  open-on-hover
-                  bottom
-                  nudge-left="80"
-                >
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                      icon
-                      v-on="on"
-                    >
-                      <v-icon
-                        :size="getIconSize"
-                        color="black"
-                      >
-                        mdi-table-large
-                      </v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Groß Projekt</span>
-                </v-tooltip>
-              <v-spacer />
+        <v-tooltip
+          v-if="!item.isPrepairationNeeded"
+          open-on-hover
+          nudge-left="80"
+          bottom
+        >
+          <template v-slot:activator="{ on }">
+            <v-btn
+              icon
+              color="accent"
+              v-on="on"
+            >
+              <v-icon
+                v-model="item.isPrepairationNeeded"
+                color="black"
+                :size="getIconSize"
+                v-if="!item.isPrepairationNeeded">
+                mdi-card-bulleted-off-outline
+              </v-icon>
+            </v-btn>
+          </template>
+          <span>
+            Ohne Vorbereitungen
+          </span>
+        </v-tooltip>
+        <v-divider
+          :class="verticalMargin"
+          vertical
+        />
+
+        <v-tooltip
+          nudge-left="80"
+          v-if="item.executionTimeRating > 0"
+          open-on-hover
+          bottom
+        >
+          <template v-slot:activator="{ on }">
+            <v-btn
+              :x-small="isMobil"
+              depressed
+              color="accent"
+              v-on="on"
+            >
+              <v-rating
+                v-model="item.executionTimeRating"
+                emptyIcon="mdi-clock"
+                fullIcon="mdi-clock"
+                color="black"
+                background-color="grey"
+                dense
+                length="3"
+                :size="ratingSize"
+                readonly
+              />
+            </v-btn>
+          </template>
+          <span>
+            {{ getExecutionTimeRatingTooltip(item.executionTimeRating)}}
+          </span>
+        </v-tooltip>
+
+        <v-tooltip
+          v-if="item.executionTimeRating === 0"
+          open-on-hover
+          bottom
+          nudge-left="80"
+        >
+          <template v-slot:activator="{ on }">
+            <v-btn
+              icon
+              v-on="on"
+            >
+              <v-icon
+                :size="getIconSize"
+                color="black"
+              >
+                mdi-table-large
+              </v-icon>
+            </v-btn>
+          </template>
+          <span>Großprojekt</span>
+        </v-tooltip>
+
+        <v-spacer />
       <!-- <v-divider vertical></v-divider>
             <div>
               <v-btn class="ma-2" text icon color="green lighten-2">
