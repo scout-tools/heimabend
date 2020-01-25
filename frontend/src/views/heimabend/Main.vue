@@ -2,17 +2,23 @@
 <div>
   <div class="col-sm-12">
     <heimabend-card
+      v-if="getItems.length && !loading"
       @refresh="refresh()"
       :items="getItems"
       :isMobil="isMobil"
     />
     <v-btn
       class="ma-10"
-      v-if="!getItems.length"
+      v-if="!getItems.length && !loading"
       @click="onResetClick()"
     >
       Alle Filter zurücksetzen
     </v-btn>
+    <v-progress-circular
+      v-if="loading"
+      color="primary"
+      indeterminate
+    />
   </div>
 </div>
 </template>
@@ -96,11 +102,14 @@ export default {
     },
     getEvents() {
       const path = `${this.API_URL}basic/event/`;
+      this.loading = true;
       axios.get(path)
         .then((res) => {
           this.items = res.data;
+          this.loading = false;
         })
         .catch(() => {
+          this.loading = false;
         });
     },
 
@@ -143,6 +152,4 @@ export default {
     loading: true,
   }),
 };
-
-
 </script>

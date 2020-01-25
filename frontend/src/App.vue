@@ -1,17 +1,17 @@
 <template>
   <v-app>
   <div id="app">
-    <Main/>
+    <main-comp/>
   </div>
   </v-app>
 </template>
 
 <script>
-import Main from './views/Main.vue';
+import MainComp from './views/Main.vue';
 
 export default {
   components: {
-    Main,
+    MainComp,
   },
 };
 </script>

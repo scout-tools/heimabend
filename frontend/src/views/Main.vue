@@ -43,14 +43,14 @@
 
     </v-app-bar>
 
-    <MenuLeft
+    <menu-left
       v-if="!apiIsDown"
       ref="mainMenuLeft"
     />
 
     <v-content
       id="lateral"
-      >
+    >
       <topbar
         v-if="isMainPage && !apiIsDown"
         ref="topFilterToolbar"
@@ -76,7 +76,9 @@
             bottom
             right
           >
-            <v-icon>mdi-plus</v-icon>
+            <v-icon>
+              mdi-plus
+            </v-icon>
           </v-btn>
         </v-fab-transition>
       </template>
@@ -87,9 +89,16 @@
     <pricacy-banner
       v-if="!acceptedPrivacy"
     />
-    <Login
+    <login
       ref="login"
     />
+    <v-snackbar
+      v-model="showError"
+      color="error"
+      y='top'
+    >
+      {{ 'Es ist ein Fehler aufgetreten' }}
+    </v-snackbar>
   </v-app>
 </div>
 </template>
@@ -160,15 +169,16 @@ export default {
           this.$store.commit('setTags', res.data);
         })
         .catch(() => {
+          this.showError = true;
         });
     },
     onHeaderClick() {
       this.$router.push({ name: 'overview' });
     },
   },
-  created() {
+  mounted() {
     this.getTags();
-    this.$store.commit('enableJustActive');
+    this.$store.dispatch('resetFilters');
   },
   data: () => ({
     API_URL: process.env.VUE_APP_API,
@@ -176,6 +186,7 @@ export default {
     fab: false,
     colorFab: 'green',
     iconFab: 'mdi-plus',
+    showError: false,
   }),
 };
 

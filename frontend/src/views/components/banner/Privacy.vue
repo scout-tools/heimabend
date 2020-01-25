@@ -1,6 +1,10 @@
 <template>
   <div class="text-center">
-    <v-bottom-sheet v-model="sheet" persistent>
+    <v-bottom-sheet
+      v-model="sheet"
+      :hide-overlay="isHideOverlay"
+      :persistent="isPersistent"
+    >
       <v-sheet class="text-center" height="200px">
         <v-btn
           class="mt-6"
@@ -18,6 +22,8 @@
 export default {
   data: () => ({
     sheet: true,
+    isHideOverlay: true,
+    isPersistent: true,
   }),
   methods: {
     onButtonClick() {

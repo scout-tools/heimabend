@@ -310,7 +310,7 @@
               v-model="agreeBox"
             :rules="[v => !!v || 'Nur mit der Einverständniserklärung kannst du Ideen einreichen']"
               label="Ich möchte meine Heimabend veröffentlichen und es
-                dürfen in Zukunft andere Änderungen an der Idee vornehmen?"
+                dürfen in Zukunft andere Änderungen an der Idee vornehmen."
               required
             >
             </v-checkbox>
@@ -365,14 +365,14 @@ export default {
     rules: {
       title: [
         v => !!v || 'Titel ist erforderlich',
-        v => (v && v.length >= 10) || 'Name must be more than 10 characters',
-        v => (v && v.length <= 40) || 'Name must be less than 40 characters',
+        v => (v && v.length >= 10) || 'Der Titel braucht mehr als 10 Zeichen',
+        v => (v && v.length <= 40) || 'Der Titel darf nicht mehr als 40 Zeichen haben',
       ],
       tags: [
         v => (v && v.length > 0) || 'Mindestens ein Tag ist erforderlich',
       ],
       createdBy: [
-        v => (v && v.length >= 3) || 'Mindestens drei Zeichen',
+        v => (v && v.length >= 3) || 'Der Name braucht mindestens drei Zeichen',
       ],
     },
     data: {

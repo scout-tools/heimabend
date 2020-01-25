@@ -43,7 +43,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history', // add fallback route to prod server
   base: process.env.BASE_URL,
   routes,
 });

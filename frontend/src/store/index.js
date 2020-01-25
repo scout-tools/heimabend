@@ -153,6 +153,11 @@ export default new Vuex.Store({
       commit('clearTokens');
       commit('setCurrentUser', null);
     },
+    resetFilters({ commit }) {
+      commit('enableJustActive');
+      commit('changeFilterTags', []);
+      commit('setSearchInput', '');
+    },
   },
   plugins: [createPersistedState()],
 });

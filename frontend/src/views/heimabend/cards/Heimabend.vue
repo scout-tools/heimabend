@@ -10,7 +10,7 @@
     :key="index"
   >
     <v-list-item
-      class="lightPrimary pr-0"
+      class="lightPrimary px-0"
       :class="paddingleftLebelIcons"
     >
       <v-img
@@ -102,14 +102,24 @@
     </div>
 
     <v-container>
-      <v-chip
-        class="ma-2"
-        :color="getTagColorById(tag)"
+      <v-tooltip
         v-for="(tag, index2) in item.tags"
         :key="index2"
+        slot="append" bottom
+      >
+      <template v-slot:activator="{ on }">
+      <v-chip
+        v-on="on"
+        class="ma-2"
+        :color="getTagColorById(tag)"
       >
         {{ getTagNameById(tag) }}
       </v-chip>
+      </template>
+      <span>
+        {{ getDescriptionNameById(tag) }}
+      </span>
+      </v-tooltip>
     </v-container>
     <v-divider />
     <v-card-actions class="accent">
@@ -220,7 +230,9 @@
                       />
                     </v-btn>
                   </template>
-                  <span>Höhe der Kosten</span>
+                  <span>
+                    {{ getCostsToolTip(item.costsRating) }}
+                  </span>
                 </v-tooltip>
 
                 <v-tooltip
@@ -307,7 +319,9 @@
                       />
                     </v-btn>
                   </template>
-                  <span>Zeit für die Durchführung</span>
+                  <span>
+                    {{ getExecutionTimeRatingTooltip(item.executionTimeRating)}}
+                  </span>
                 </v-tooltip>
 
                 <v-tooltip
@@ -341,39 +355,89 @@
     </v-card-actions>
   </v-card>
   </v-slide-y-transition>
-    <v-snackbar
-      v-model="showError"
-      color="error"
-      y='top'
-      :timeout="timeout"
-    >
-      {{ 'Fehler beim Speichern des Heimabends' }}
-    </v-snackbar>
-    <v-snackbar
-      v-model="showSuccess"
-      color="success"
-      y='top'
-      :timeout="timeout"
-    >
-      {{ 'Der Heimabend wurde erfolgreich gelöscht' }}
-    </v-snackbar>
+  <v-snackbar
+    v-model="showError"
+    color="error"
+    y='top'
+    :timeout="timeout"
+  >
+    {{ 'Fehler beim Speichern des Heimabends' }}
+  </v-snackbar>
+  <v-snackbar
+    v-model="showSuccess"
+    color="success"
+    y='top'
+    :timeout="timeout"
+  >
+    {{ 'Der Heimabend wurde erfolgreich gelöscht' }}
+  </v-snackbar>
+  <DeleteModal
+    ref="deleteTagModal"
+    @refresh="onRefreshHeimabende"
+  />
 </div>
 </template>
 
 <script>
-import axios from 'axios';
+import DeleteModal from '../dialogs/DeleteModal.vue';
 
 export default {
   props: {
     items: Array,
   },
+  components: {
+    DeleteModal,
+  },
   methods: {
+    getCostsToolTip(costsRating) {
+      switch (costsRating) {
+        case 1:
+          return '0,00€ - 0,50€ pro Person';
+        case 2:
+          return '1€ - 2€ pro Person';
+        case 3:
+          return 'mehr als 2€ pro Person';
+        default:
+          return 'Fehler';
+      }
+    },
+    getExecutionTimeRatingTooltip(executionTimeRating) {
+      switch (executionTimeRating) {
+        case 1:
+          return 'bis 30 min';
+        case 2:
+          return '30 min - 60 min ';
+        case 3:
+          return 'mehr als 60 min ';
+        default:
+          return 'Fehler';
+      }
+    },
+    onRefreshHeimabende() {
+      this.$emit('refresh');
+    },
     titleClass() {
       return this.$vuetify.breakpoint.mdAndUp ? 'headline font-weight-medium' : 'title';
     },
-
     verticalMargin() {
       return !this.$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-0';
+    },
+    getDescriptionNameById(idString) {
+      let id;
+      if (idString && typeof idString === 'string') {
+        const idStringArray = idString.split('/');
+        id = idStringArray[idStringArray.length - 2];
+      } else {
+        id = idString;
+      }
+      const returnTag = this.tags.find(tag => tag.id === parseInt(id, 10));
+      if (returnTag && returnTag.description) {
+        return returnTag.description;
+      }
+      if (returnTag && returnTag.name) {
+        return returnTag.name;
+      }
+      return 'Keine Beschreibung vorhanden';
     },
     getTagNameById(idString) {
       let id;
@@ -414,16 +478,7 @@ export default {
       return string.split(',');
     },
     onDeleteClick(item) {
-      axios.delete(`${this.API_URL}basic/event/${item.id}/`, {
-        id: item.id,
-      })
-        .then(() => {
-          this.showSuccess = true;
-          this.$emit('refresh');
-        })
-        .catch(() => {
-          this.showError = true;
-        });
+      this.$refs.deleteTagModal.show(item);
     },
   },
   data() {
@@ -448,7 +503,7 @@ export default {
       return this.$store.getters.isAuthenticated;
     },
     paddingleftLebelIcons() {
-      return !this.isMobil ? 'pl-6' : 'pl-1';
+      return !this.isMobil ? 'pl-2' : 'pl-1';
     },
     maxWidthKnots() {
       return !this.isMobil ? '30' : '18';
