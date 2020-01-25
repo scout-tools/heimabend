@@ -13,7 +13,7 @@
       <small>Füge Texte zum Heimabend hinzu</small>
     </v-stepper-step>
 
-    <v-stepper-content step="1">
+    <v-stepper-content :class="getClassForTextContentSteps" step="1">
         <v-form
         ref="form1"
         v-model="valid"
@@ -93,7 +93,7 @@
       </small>
     </v-stepper-step>
 
-    <v-stepper-content step="2">
+    <v-stepper-content :class="getClassForTextContentSteps" step="2">
       <v-form
         ref="form2"
         v-model="valid"
@@ -397,6 +397,9 @@ export default {
   }),
 
   computed: {
+    isMobil() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
     getOrange() {
       if (this.levelFilter) {
         return this.levelFilter.includes(0);
@@ -460,6 +463,9 @@ export default {
     },
     withoutCostsIconColor() {
       return this.isWithoutCosts ? 'red darken-2' : 'grey';
+    },
+    getClassForTextContentSteps() {
+      return this.isMobil ? 'mx-0 px-1' : '';
     },
   },
 
