@@ -309,8 +309,8 @@
               color="green"
               v-model="agreeBox"
             :rules="[v => !!v || 'Nur mit der Einverständniserklärung kannst du Ideen einreichen']"
-              label="Ich möchte meine Heimabend veröffentlichen und es
-                dürfen in Zukunft andere Änderungen an der Idee vornehmen."
+              label="Ich möchte meine Heimabendidee veröffentlichen und bin damit einverstanden,
+                dass die Betreiber der Website ggf. Bearbeitungen an dem Beitrag vornehmen."
               required
             >
             </v-checkbox>
