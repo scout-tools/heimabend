@@ -38,6 +38,8 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             'isLvlOne',
             'isLvlTwo',
             'isLvlThree',
+            'isPossibleDigital',
+            'isPossibleAlone',
             'createdBy',
             'createdByEmail',
             'updatedBy',

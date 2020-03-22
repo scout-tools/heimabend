@@ -49,6 +49,8 @@ class Event(models.Model):
     isActive = models.BooleanField(default=0)
     isLvlOne = models.BooleanField(default=1)
     isLvlTwo = models.BooleanField(default=0)
+    isPossibleDigital = models.BooleanField(default=0)
+    isPossibleAlone = models.BooleanField(default=0)
     isLvlThree = models.BooleanField(default=0)
     createdBy = models.CharField(max_length=60, blank=True)
     createdByEmail = models.CharField(max_length=60, blank=True)
