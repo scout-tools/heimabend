@@ -39,8 +39,10 @@ export default {
     },
     getItems() {
       const {
-        isPossibleInside,
-        isPossibleOutside,
+        // isPossibleInside,
+        // isPossibleOutside,
+        isPossibleAlone,
+        isPossibleDigital,
         withoutPreperation,
         justActive,
         withoutCosts,
@@ -54,9 +56,8 @@ export default {
             || item.title.toLowerCase().includes(searchInput.toLowerCase())
             || item.material.toLowerCase().includes(searchInput.toLowerCase()))
           .filter(item => this.getFilterTags !== '13213' && this.isTagMatchToEvent(item))
-          .filter(item => (isPossibleInside === item.isPossibleInside
-            || isPossibleOutside === item.isPossibleOutside)
-            && (isPossibleInside || isPossibleOutside))
+          .filter(item => (!isPossibleAlone || isPossibleAlone === item.isPossibleAlone))
+          .filter(item => (!isPossibleDigital || isPossibleDigital === item.isPossibleDigital))
           .filter((item) => {
             const allowOne = levelFilter.includes(0);
             const allowTwo = levelFilter.includes(1);

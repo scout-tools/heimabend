@@ -130,14 +130,14 @@
       <v-divider
         :class="verticalMargin"
         vertical
-        v-if="item.isPossibleOutside"
+        v-if="item.isPossibleDigital"
       />
 
       <v-tooltip
         open-on-hover
         bottom
         nudge-left="80"
-        v-if="item.isPossibleOutside"
+        v-if="item.isPossibleDigital"
       >
         <template v-slot:activator="{ on }">
           <v-btn
@@ -146,28 +146,28 @@
             v-on="on">
             <v-icon
               :size="getIconSize"
-              color="green"
-              v-if="item.isPossibleOutside"
+              color="red"
+              v-if="item.isPossibleDigital"
             >
-              mdi-nature-people
+              mdi-robot
             </v-icon>
           </v-btn>
         </template>
         <span>
-          Für draußen geeignet
+          Dieser Heimabend ist digital durchführbar
         </span>
       </v-tooltip>
 
       <v-divider
         :class="verticalMargin"
         vertical
-        v-if="item.isPossibleInside"
+        v-if="item.isPossibleAlone"
       />
       <v-tooltip
         open-on-hover
         nudge-left="80"
         bottom
-        v-if="item.isPossibleInside">
+        v-if="item.isPossibleAlone">
         <template v-slot:activator="{ on }">
           <v-btn
             :small="isMobil"
@@ -176,14 +176,14 @@
           >
             <v-icon
               :size="getIconSize"
-              v-if="item.isPossibleInside"
+              v-if="item.isPossibleAlone"
             >
-              mdi-home
+              mdi-account-cowboy-hat
             </v-icon>
           </v-btn>
         </template>
         <span>
-          Für drinnen geeignet
+          Dieser Heimabend ist alleine durchführbar
         </span>
       </v-tooltip>
 

@@ -7,9 +7,10 @@
           </h2>
 
           <p class="font-weight-medium">
-          Robert Bagdahn <br>
-          Goebenstr. 31 <br>
-          53113 Bonn <br>
+            David Miron <br>
+            Deutscher Pfadfinderbund Mosaik <br>
+            Neue Maastrichter Str. 5-7 <br>
+            50672 Köln <br>
           </p>
 
           <h2 class="py-5">
@@ -17,7 +18,7 @@
           </h2>
 
           <p class="font-weight-medium">
-          E-Mail: robertbagdahn@gmail.com <br>
+          <a href="https://dpbm.de/impressum/">E-Mail hier </a> <br>
           </p>
 
           <h2 class="py-5">
@@ -25,9 +26,10 @@
           </h2>
 
           <p class="font-weight-medium">
-          Robert Bagdahn <br>
-          Goebenstr. 31 <br>
-          53113 Bonn <br>
+            David Miron <br>
+            Deutscher Pfadfinderbund Mosaik <br>
+            Neue Maastrichter Str. 5-7 <br>
+            50672 Köln <br>
           </p>
 
           <h2 class="py-5">

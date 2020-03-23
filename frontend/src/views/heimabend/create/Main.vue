@@ -121,6 +121,16 @@
                 color="secondary"
                 label="Vorbereitung nötig?">
               </v-switch>
+              <v-switch
+                v-model="data.isPossibleDigital"
+                color="secondary"
+                label="Online Durchführbar?">
+              </v-switch>
+              <v-switch
+                v-model="data.isPossibleAlone"
+                color="secondary"
+                label="Alleine Durchführbar?">
+              </v-switch>
             </v-sheet>
           </v-col>
           <v-col
@@ -380,6 +390,8 @@ export default {
       description: '',
       isPossibleOutside: true,
       isPossibleInside: true,
+      isPossibleAlone: false,
+      isPossibleDigital: true,
       tags: [],
       material: '',
       costsRating: 1,
@@ -538,6 +550,8 @@ export default {
           description: this.data.description,
           isPossibleOutside: this.data.isPossibleOutside,
           isPossibleInside: this.data.isPossibleInside,
+          isPossibleDigital: this.data.isPossibleDigital,
+          isPossibleAlone: this.data.isPossibleAlone,
           tags: this.getUrlTagList(this.data.tags),
           material: this.data.material,
           costsRating: this.data.costsRating,
@@ -565,6 +579,8 @@ export default {
           description: this.data.description,
           isPossibleOutside: this.data.isPossibleOutside,
           isPossibleInside: this.data.isPossibleInside,
+          isPossibleDigital: this.data.isPossibleDigital,
+          isPossibleAlone: this.data.isPossibleAlone,
           tags: this.getUrlTagList(this.data.tags),
           material: this.data.material,
           costsRating: this.data.costsRating,

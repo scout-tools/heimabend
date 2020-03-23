@@ -13,6 +13,8 @@ export default new Vuex.Store({
     currentUser: null,
     isPossibleInside: true,
     isPossibleOutside: true,
+    isPossibleDigital: true,
+    isPossibleAlone: true,
     withoutPreperation: false,
     withoutCosts: false,
     justActive: true,
@@ -43,6 +45,12 @@ export default new Vuex.Store({
     },
     isPossibleOutside(state) {
       return !!state.isPossibleOutside;
+    },
+    isPossibleAlone(state) {
+      return !!state.isPossibleAlone;
+    },
+    isPossibleDigital(state) {
+      return !!state.isPossibleDigital;
     },
     withoutPreperation(state) {
       return !!state.withoutPreperation;
@@ -102,6 +110,14 @@ export default new Vuex.Store({
       state.isPossibleOutside = !state.isPossibleOutside;
       event('user-click', 'toogle', 'isPossibleOutside', state.isPossibleOutside);
     },
+    tooglePossibleAlone(state) {
+      state.isPossibleAlone = !state.isPossibleAlone;
+      event('user-click', 'toogle', 'isPossibleAlone', state.isPossibleAlone);
+    },
+    tooglePossibleDigital(state) {
+      state.isPossibleDigital = !state.isPossibleDigital;
+      event('user-click', 'toogle', 'isPossibleDigital', state.isPossibleDigital);
+    },
     toogleWithoutPreperation(state) {
       state.withoutPreperation = !state.withoutPreperation;
       event('user-click', 'toogle', 'possibleInside', state.withoutPreperation);
@@ -130,6 +146,8 @@ export default new Vuex.Store({
     clearFilters(state) {
       state.isPossibleInside = true;
       state.isPossibleOutside = true;
+      state.isPossibleDigital = true;
+      state.isPossibleAlone = false;
       state.withoutPreperation = false;
       state.withoutCosts = false;
       state.justActive = true;

@@ -86,9 +86,9 @@
       v-if="apiIsDown"
     />
     </v-content>
-    <pricacy-banner
+    <!-- <pricacy-banner
       v-if="!acceptedPrivacy"
-    />
+    /> -->
     <login
       ref="login"
     />
@@ -109,7 +109,7 @@ import axios from 'axios';
 import Login from './components/dialogs/Login.vue'; // eslint-disable-line
 import MenuLeft from './components/menu/Left.vue';
 import ApiDownBanner from './components/banner/ApiDown.vue';
-import PricacyBanner from './components/banner/Privacy.vue';
+// import PricacyBanner from './components/banner/Privacy.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
 import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
 
@@ -120,7 +120,7 @@ export default {
     Topbar,
     SubPagesTopBar,
     ApiDownBanner,
-    PricacyBanner,
+    // PricacyBanner,
   },
   computed: {
     isMobil() {

@@ -13,8 +13,35 @@
           multiple
           group
           dense
-          mandatory
         >
+
+          <v-tooltip
+            bottom
+            nudge-left="80"
+            >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                @click="onIsPossibleDigital()"
+                v-on="on"
+                text
+                :class="isPossibleDigitalButtonActive"
+              >
+                <v-icon
+                  :color="isPossibleDigital ? 'red darken-2' : 'grey'"
+                >
+                  mdi-robot
+                </v-icon>
+                <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
+                  Digital?
+                </span>
+              </v-btn>
+            </template>
+            <span>
+              Zeigt Heimabende an die digital durchgeführt werden können.
+            </span>
+          </v-tooltip>
+
+
           <!-- Drinnen -->
           <v-tooltip
             nudge-left="80"
@@ -22,52 +49,28 @@
           >
             <template v-slot:activator="{ on }">
               <v-btn
-                @click="onIsPossibleInside()"
+                @click="onIsPossibleAlone()"
                 v-on="on"
                 text
-                :class="isPossibleInsideButtonActive"
+                :class="isPossibleAloneButtonActive"
               >
                 <v-icon
-                  :color="isPossibleInside ? 'black' : 'grey'"
+                  :color="isPossibleAlone ? 'black' : 'grey'"
                 >
-                  mdi-home
+                  mdi-account-cowboy-hat
                 </v-icon>
                 <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
-                  Drinnen
+                  Alleine?
                 </span>
               </v-btn>
             </template>
             <span>
-              Zeigt Heimabende an die im Haus durchgeführt werden können.
+              Zeigt Heimabende an die alleine durchführbar sind
             </span>
           </v-tooltip>
 
           <!-- Draußen -->
-          <v-tooltip
-            bottom
-            nudge-left="80"
-            >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                @click="onIsPossibleOutside()"
-                v-on="on"
-                text
-                :class="isPossibleOutsideButtonActive"
-              >
-                <v-icon
-                  :color="isPossibleOutside ? 'green darken-2' : 'grey'"
-                >
-                  mdi-nature-people
-                </v-icon>
-                <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
-                  Draußen
-                </span>
-              </v-btn>
-            </template>
-            <span>
-              Zeigt Heimabende an die Draußen durchgeführt werden können.
-            </span>
-          </v-tooltip>
+
 
           <!-- Ohne Vorbereitung -->
           <v-tooltip
@@ -161,12 +164,12 @@
                   v-if="$vuetify.breakpoint.mdAndUp"
                   class="mx-1"
                 >
-                  Anfänger
+                  Wölflinge
                 </span>
               </v-btn>
             </template>
             <span>
-              Dieser Heimabend ist für Anfänger geeignet
+              Dieser Heimabend ist für Wölflinge geeignet
             </span>
           </v-tooltip>
 
@@ -190,12 +193,12 @@
                   max-width="28"
                 ></v-img>
                 <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
-                  Erfahren
+                  Pfadis
                 </span>
               </v-btn>
             </template>
             <span>
-              Dieser Heimabend ist für erfahre Sipplinge geeignet
+              Dieser Heimabend ist für Sipplinge geeignet
             </span>
           </v-tooltip>
 
@@ -219,12 +222,12 @@
                   max-width="28"
                 ></v-img>
               <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
-                Experten
+                Rover
               </span>
               </v-btn>
             </template>
             <span>
-              Dieser Heimabend ist für Experten geeignet
+              Dieser Heimabend ist für Rover geeignet
             </span>
           </v-tooltip>
         </v-btn-toggle>
@@ -265,6 +268,12 @@ export default {
     onIsPossibleOutside() {
       this.$store.commit('tooglePossibleOutside');
     },
+    onIsPossibleDigital() {
+      this.$store.commit('tooglePossibleDigital');
+    },
+    onIsPossibleAlone() {
+      this.$store.commit('tooglePossibleAlone');
+    },
     onWithoutPreperation() {
       this.$store.commit('toogleWithoutPreperation');
     },
@@ -297,6 +306,12 @@ export default {
     isPossibleOutside() {
       return this.$store.getters.isPossibleOutside;
     },
+    isPossibleDigital() {
+      return this.$store.getters.isPossibleDigital;
+    },
+    isPossibleAlone() {
+      return this.$store.getters.isPossibleAlone;
+    },
     withoutPreperation() {
       return this.$store.getters.withoutPreperation;
     },
@@ -306,10 +321,10 @@ export default {
     toggle_exclusive: {
       get() {
         const output = [];
-        if (this.isPossibleInside) {
+        if (this.isPossibleDigital) {
           output.push(0);
         }
-        if (this.isPossibleOutside) {
+        if (this.isPossibleAlone) {
           output.push(1);
         }
         if (this.withoutPreperation) {
@@ -324,14 +339,26 @@ export default {
         return false;
       },
     },
-    isPossibleInsideButtonActive() {
-      if (!this.isPossibleInside) {
+    // isPossibleInsideButtonActive() {
+    //   if (!this.isPossibleInside) {
+    //     return 'btn-disabled';
+    //   }
+    //   return '';
+    // },
+    // isPossibleOutsideButtonActive() {
+    //   if (!this.isPossibleOutside) {
+    //     return 'btn-disabled';
+    //   }
+    //   return '';
+    // },
+    isPossibleDigitalButtonActive() {
+      if (!this.isPossibleDigital) {
         return 'btn-disabled';
       }
       return '';
     },
-    isPossibleOutsideButtonActive() {
-      if (!this.isPossibleOutside) {
+    isPossibleAloneButtonActive() {
+      if (!this.isPossibleAlone) {
         return 'btn-disabled';
       }
       return '';
