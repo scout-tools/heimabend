@@ -111,7 +111,7 @@
           </li>
 
           <li class="ma-3">
-            Wenn du einen <b>erbesserungsvorschlag</b> oder eine <b>geniale Idee</b>
+            Wenn du einen <b>Verbesserungsvorschlag</b> oder eine <b>geniale Idee</b>
             hast wie wir den Heimabend Inspirator verbessern können sind wir dir
             natürlich auch sehr dankbar.
           </li>
