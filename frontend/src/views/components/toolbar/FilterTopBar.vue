@@ -152,12 +152,12 @@
               >
                 <v-img
                   v-if="getOrange"
-                  :src="require('@/assets/knot_orange.png')"
+                  :src="require('@/assets/wolfskopf.png')"
                   max-width="28"
                 />
                 <v-img
                   v-if="!getOrange"
-                  :src="require('../../../assets/knot_grey.png')"
+                  :src="require('../../../assets/wolfskopf_grau.png')"
                   max-width="28"
                 />
                 <span

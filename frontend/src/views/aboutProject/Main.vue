@@ -7,7 +7,7 @@
       sm7
     >
     <div class="display-3">
-      Unser Projekt
+      Über das Projekt
     </div>
       <v-card class="ma-10 pa-10">
         <div class="pa-3 display-1">
@@ -87,6 +87,46 @@
         <div class="ma-3 subtitle-1">
           Euer Team hinter dem Heimabend-Inspirator
         </div>
+      </v-card>
+
+      <v-card class="ma-10 pa-10">
+        <div class="pa-3 display-1">
+          <u>
+            Kontakt
+          </u>
+        </div>
+
+        <div class="ma-3 subtitle-1">
+            Du möchtest uns eine <b>Nachricht</b> schicken? Gerne!
+
+          <li class="ma-3">
+            Wir freuen uns natürlich über alle Arten von <b>Heimabend Ideen</b>.
+            Gerne kannst du sie direkt mit dem "Grünen Plus" unten rechts eintragen
+            oder uns einfach per E-Mail senden.
+          </li>
+
+          <li class="ma-3">
+            Wenn du einen <b>Fehler</b> findest freuen wir uns riesig, wenn du uns
+            ihn mitteilst, damit wir ihn so schnell wie möglich für euch alle beheben können.
+          </li>
+
+          <li class="ma-3">
+            Wenn du einen <b>erbesserungsvorschlag</b> oder eine <b>geniale Idee</b>
+            hast wie wir den Heimabend Inspirator verbessern können sind wir dir
+            natürlich auch sehr dankbar.
+          </li>
+
+          <li class="ma-3">
+            Zögere nicht uns zu schreiben, wir <b>freuen uns auf deine Nachricht</b>.
+          </li>
+
+          <img
+            class="mr-2"
+            :src="require('@/assets/inspiratorMailAdresse.jpg')" height="50"
+          />
+          <p>Aus Spam-Schutz ist diese E-Mail-Adresse nicht zum Anklicken.</p>
+        </div>
+
       </v-card>
     </v-flex>
   </v-row>

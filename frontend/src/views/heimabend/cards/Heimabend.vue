@@ -15,7 +15,7 @@
     >
       <v-img
         class="ml-1"
-        :src="require('../../../assets/knot_orange.png')"
+        :src="require('@/assets/wolfskopf.png')"
         v-if="item.isLvlOne"
         :max-width="maxWidthKnots"
       ></v-img>
