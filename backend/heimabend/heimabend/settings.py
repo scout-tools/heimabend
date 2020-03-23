@@ -92,10 +92,10 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'heimabend',
-        'USER': 'heimabend',
-        'PASSWORD': 'Kidy45$0',
-        'HOST': 'localhost',
+        'NAME': 'xxx',
+        'USER': 'xxx',
+        'PASSWORD': 'xxx',
+        'HOST': 'xxx',
         'PORT': '3306',
     }
 }
@@ -142,8 +142,6 @@ STATIC_URL = '/static/'
 CORS_ORIGIN_WHITELIST = [
     "https://inspirator.dpbmm.de",
     "https://dpbm.de",
-    "http://localhost:8080",
-    "http://127.0.0.1:8080",
     "https://localhost:8080",
     "https://127.0.0.1:8080",
 ]
