@@ -25,7 +25,7 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
         return count_loop
 
 
-class LikeSerializer(serializers.HyperlinkedModelSerializers):
+class LikeSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_score(self, obj):
         return 3
@@ -56,22 +56,3 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             'updatedBy',
             'createdAt',
             'updatedAt')
-
-# class TagSerializer(serializers.Serializer):
-#     tag_count = serializers.SerializerMethodField()
-
-#     class Meta:
-#         model = Tag
-#         fields = (
-#             'id',
-#             'name',
-#             'tag_count',
-#             'description',
-#             'sub',
-#             'color')
-
-#     def get_tag_count(self, obj):
-#         entry_list = Event.objects.values('tags')
-#         # print(entry_list)
-#         print(obj.id)
-#         return Event.objects.filter(isLvlOne=False).count()
