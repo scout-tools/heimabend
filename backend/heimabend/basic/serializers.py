@@ -5,8 +5,8 @@ from .models import Tag, Event
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
-
     tag_count = serializers.SerializerMethodField()
+
     class Meta:
         model = Tag
         fields = (
@@ -17,7 +17,18 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
             'color')
 
     def get_tag_count(self, obj):
-        return 5
+        count_loop = 0
+        for singleE in Event.objects.all():
+            if obj in singleE.tags.all():
+                count_loop += 1
+
+        return count_loop
+
+
+class LikeSerializer(serializers.HyperlinkedModelSerializers):
+
+    def get_score(self, obj):
+        return 3
 
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
