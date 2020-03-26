@@ -68,7 +68,7 @@
             <v-col cols="12">
               <v-text-field
                 outlined
-                label="Material Liste"
+                label="Materialliste"
                 :counter="200"
                 required
                 :rules="rules.material"
@@ -109,27 +109,27 @@
                <v-switch
                 v-model="data.isPossibleInside"
                 color="secondary"
-                label="Drinnen möglich?">
+                label="Ist Drinnen möglich?">
               </v-switch>
               <v-switch
                 v-model="data.isPossibleOutside"
                 color="secondary"
-                label="Draußen möglich?">
+                label="Ist Draußen möglich?">
               </v-switch>
               <v-switch
                 v-model="data.isPrepairationNeeded"
                 color="secondary"
-                label="Vorbereitung nötig?">
+                label="Hat Vorbereitung nötig?">
               </v-switch>
               <v-switch
                 v-model="data.isPossibleDigital"
                 color="secondary"
-                label="Online Durchführbar?">
+                label="Ist Online mit der Sippe durchführbar?">
               </v-switch>
               <v-switch
                 v-model="data.isPossibleAlone"
                 color="secondary"
-                label="Alleine Durchführbar?">
+                label="Ist alleine durchführbar?">
               </v-switch>
             </v-sheet>
           </v-col>
@@ -161,17 +161,37 @@
             <v-sheet class="pa-3">
               <span class="subtitle-1">
                 Wieviel Geld ist nötig?
-              </span>
+              </span>  <!-- -->
               <v-row justify="center">
-                <v-rating
-                  v-model="data.costsRating"
-                  emptyIcon="mdi-currency-usd"
-                  fullIcon="mdi-currency-usd"
-                  color="orange"
-                  background-color="grey"
-                  min="0"
-                  length="3"
-                ></v-rating>
+                <v-tooltip
+                  nudge-left="80"
+                  open-on-hover
+                  bottom
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      v-on="on"
+                      text
+                    >
+                        <v-rating
+                          v-model="data.costsRating"
+                          emptyIcon="mdi-currency-usd"
+                          fullIcon="mdi-currency-usd"
+                          color="orange"
+                          background-color="grey"
+                          min="0"
+                          length="3"
+                        ></v-rating>
+                    </v-btn>
+                  </template>
+                  <span>
+                    <p class="text-left">
+                    Stufe 1: 0,00€ - 0,50€ pro Person <br>
+                    Stufe 2: 1€ - 2€ pro Person <br>
+                    Stufe 3: mehr als 2€ pro Person <br>
+                    </p>
+                  </span>
+                </v-tooltip>
                 <v-btn
                   :color="withoutCostsButtomColor"
                   small
@@ -190,6 +210,16 @@
               Wieviel Durchführungszeit ist erforderlich?
             </span>
               <v-row justify="center">
+               <v-tooltip
+                  nudge-left="80"
+                  open-on-hover
+                  bottom
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      v-on="on"
+                      text
+                    >
                 <v-rating
                   v-model="data.executionTimeRating"
                   emptyIcon="mdi-clock"
@@ -199,6 +229,16 @@
                   min="0"
                   length="3"
                 ></v-rating>
+                    </v-btn>
+                  </template>
+                  <span>
+                    <p class="text-left">
+                    Stufe 1: bis 30 min <br>
+                    Stufe 2: 30 min - 60 min<br>
+                    Stufe 3: mehr als 60 min<br>
+                    </p>
+                  </span>
+                </v-tooltip>
                   <v-btn
                   :color="largeProjectButtomColor"
                   small
@@ -222,7 +262,7 @@
           >
             <v-sheet class="pa-3">
             <span class="subtitle-1">
-              Für welche Erfahrung ist der Heimabend geeignet?
+              Für welche Stufe ist der Heimabend geeignet?
             </span>
             <v-btn-toggle
               v-model="levelFilter"
@@ -233,13 +273,13 @@
                 <v-img
                   v-if="getOrange"
                   class="mx-1"
-                  :src="require('@/assets/knot_orange.png')"
+                  :src="require('@/assets/wolfskopf.png')"
                   max-width="40"
                 />
                 <v-img
                   v-if="!getOrange"
                   class="mx-1"
-                  :src="require('@/assets/knot_grey.png')"
+                  :src="require('@/assets/wolfskopf_grau.png')"
                   max-width="40"
                 ></v-img>
               </v-btn>

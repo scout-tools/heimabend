@@ -69,7 +69,7 @@ export default {
           })
           .filter(item => !withoutPreperation || item.isPrepairationNeeded === false)
           .filter(item => justActive === item.isActive)
-          .filter(item => !withoutCosts || item.costsRating === 1);
+          .filter(item => !withoutCosts || item.costsRating === 0);
         if (getSorter === 'alpha' && returnArray && returnArray.length) {
           returnArray = this._.orderBy(returnArray, ['title'], ['asc']);
         }

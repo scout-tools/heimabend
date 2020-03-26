@@ -99,6 +99,7 @@ export default {
       { text: 'Name', value: 'name' },
       { text: 'Beschreibung', value: 'description' },
       { text: 'Farbe', value: 'color' },
+      { text: 'Wie oft verwendet?', value: 'tag_count' },
       { text: 'Aktion', value: 'action', sortable: false },
     ],
     API_URL: process.env.VUE_APP_API,
