@@ -1,4 +1,5 @@
 # serializers.py
+import timeit
 from rest_framework import serializers
 
 from .models import Tag, Event
@@ -17,12 +18,7 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
             'color')
 
     def get_tag_count(self, obj):
-        count_loop = 0
-        for singleE in Event.objects.all():
-            if obj in singleE.tags.all():
-                count_loop += 1
-
-        return count_loop
+        return Event.objects.filter(tags__name__contains=obj).distinct().count()
 
 
 class LikeSerializer(serializers.HyperlinkedModelSerializer):
