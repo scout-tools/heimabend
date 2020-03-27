@@ -26,10 +26,14 @@ export default new Vuex.Store({
     searchInput: '',
     apiIsDown: false,
     acceptedPrivacy: false,
+    liked: [],
   },
   getters: {
     isAuthenticated(state) {
       return !!state.accessToken;
+    },
+    liked(state) {
+      return state.liked;
     },
     acceptedPrivacy(state) {
       return !!state.acceptedPrivacy;
@@ -164,6 +168,9 @@ export default new Vuex.Store({
     },
     setCurrentUser(state, payload) {
       state.currentUser = payload;
+    },
+    setLiked(state, id) {
+      state.liked.push(id);
     },
   },
   actions: {

@@ -62,6 +62,19 @@
         @click="onUpdateClick(item)">
         <v-icon>mdi-pencil-outline</v-icon>
       </v-btn>
+        <v-divider
+          v-if="!isAuthenticated"
+          vertical/>
+          <v-btn
+            v-if="!isAuthenticated"
+            class="ma-2"
+            :disabled="isAlreadyVoted(item)"
+            text
+            icon
+            @click="onLikedClicked(item)"
+            color="green lighten-2">
+            <v-icon>mdi-thumb-up</v-icon>
+          </v-btn>
     </v-list-item>
     <v-divider />
     <v-card-text>
@@ -331,12 +344,6 @@
         </v-tooltip>
 
         <v-spacer />
-      <!-- <v-divider vertical></v-divider>
-            <div>
-              <v-btn class="ma-2" text icon color="green lighten-2">
-                <v-icon>mdi-thumb-up</v-icon>
-              </v-btn>
-      </div>-->
     </v-card-actions>
   </v-card>
   </v-slide-y-transition>
@@ -360,10 +367,29 @@
     ref="deleteTagModal"
     @refresh="onRefreshHeimabende"
   />
+  <v-snackbar
+    v-model="showSuccessLiked"
+    color="success"
+    y='top'
+    :timeout="timeout"
+  >
+    {{ 'Danke, für deine Meinung' }}
+  </v-snackbar>
+  <v-snackbar
+    v-model="showErrorLiked"
+    color="error"
+    y='top'
+    :timeout="timeout"
+  >
+    {{ 'Dein Like konnte nicht entgegen genonnen werden' }}
+  </v-snackbar>
 </div>
 </template>
 
 <script>
+import axios from 'axios';
+
+import store from '@/store'; // eslint-disable-line
 import DeleteModal from '../dialogs/DeleteModal.vue';
 
 export default {
@@ -374,6 +400,28 @@ export default {
     DeleteModal,
   },
   methods: {
+    onLikedClicked(item) {
+      const eventId = item.id;
+
+      this.callEventLikeService(eventId);
+    },
+    isAlreadyVoted(event) {
+      return this.liked.includes(event.id);
+    },
+    callEventLikeService(id) {
+      const me = this; // eslint-disable-line
+      store.commit('setLiked', id); // delete that line
+      axios.post(`${this.API_URL}basic/like/`, this.data)
+        .then(() => {
+          store.commit('setLiked', id);
+          this.showSuccessLiked = true;
+        })
+        .catch((error) => {
+          this.responseObj = error;
+          this.showError = true;
+        });
+      console.log(id);
+    },
     getCostsToolTip(costsRating) {
       switch (costsRating) {
         case 1:
@@ -473,7 +521,9 @@ export default {
       API_URL: process.env.VUE_APP_API,
       showError: false,
       showSuccess: false,
+      showErrorLiked: false,
       timeout: 3000,
+      showSuccessLiked: false,
       emptyMaterialText: 'Juhu, kein Material nötig ^^',
     };
   },
@@ -486,6 +536,9 @@ export default {
     },
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
+    },
+    liked() {
+      return this.$store.getters.liked;
     },
     paddingleftLebelIcons() {
       return !this.isMobil ? 'pl-2' : 'pl-1';
