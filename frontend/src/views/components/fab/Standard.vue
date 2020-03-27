@@ -36,7 +36,7 @@
 <script>
 export default {
   data: () => ({
-    fab: true,
+    fab: false,
   }),
   methods: {
     onNewEventClick() {
