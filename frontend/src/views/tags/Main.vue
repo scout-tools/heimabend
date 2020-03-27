@@ -1,8 +1,7 @@
 <template>
-<div>
-  <v-row
-    justify="center"
-  >
+<v-container>
+  <v-row justify="center">
+    <v-flex ma-3 lg7>
     <v-card>
       <v-card-title>
         <v-text-field
@@ -50,23 +49,16 @@
         </template>
       </v-data-table>
     </v-card>
+    </v-flex>
+  </v-row>
     <v-snackbar
       v-model="showError"
       color="error"
       y='top'
       :timeout="timeout"
     >
-      {{ 'Es ist ein Fehler aufgetreten' }}
+      {{ 'Es ist ein Fehler adasdasufgetreten' }}
     </v-snackbar>
-    <v-snackbar
-      v-model="showSuccess"
-      color="success"
-      y='top'
-      :timeout="timeout"
-    >
-      {{ 'Du bist jetzt im Internen Bereich. Viel Spaß' }}
-    </v-snackbar>
-  </v-row>
   <CreateUpdateTag
     ref="createTagModal"
     @dialogClose="onRefreshTags"
@@ -75,7 +67,7 @@
     ref="deleteTagModal"
     @refresh="onRefreshTags"
   />
-  </div>
+  </v-container>
 </template>
 
 <script>

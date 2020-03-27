@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import VueAnalytics from 'vue-analytics';
 import VueLodash from 'vue-lodash';
 import App from './App.vue';
 import router from './router';
@@ -9,7 +8,6 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
 
-// and running it somewhere here
 auth.interceptorsSetup(store, router);
 
 new Vue({
@@ -19,13 +17,6 @@ new Vue({
   render: h => h(App),
 }).$mount('#app');
 
-Vue.use(VueAnalytics, {
-  id: 'UA-154886286-2',
-  autoTracking: {
-    screenview: true,
-  },
-  router,
-});
 
 const options = { name: 'lodash' }; // customize the way you want to call it
 

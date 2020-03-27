@@ -420,7 +420,6 @@ export default {
           this.responseObj = error;
           this.showError = true;
         });
-      console.log(id);
     },
     getCostsToolTip(costsRating) {
       switch (costsRating) {

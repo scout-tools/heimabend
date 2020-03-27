@@ -2,7 +2,7 @@
 import timeit
 from rest_framework import serializers
 
-from .models import Tag, Event
+from .models import Tag, Event, Message
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
@@ -52,3 +52,14 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             'updatedBy',
             'createdAt',
             'updatedAt')
+
+class MessageSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Message
+        fields = (
+            'id',
+            'name',
+            'email',
+            'topic',
+            'messageBody',
+            'createdAt')

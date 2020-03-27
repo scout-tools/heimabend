@@ -1,10 +1,17 @@
 <template>
-  <v-row
-    justify="center">
+<v-container>
+  <v-row justify="center">
+    <v-flex ma-3 lg7>
+      <div class="display-3">
+        Impressum / Datenschutz
+      </div>
+
+      <v-card class="ma-10 pa-10">
+        <div>
           <div class="ma-12">
-          <h2 class="py-5">
-          Angaben gemäß § 5 TMG
-          </h2>
+            <h2 class="py-5">
+              Angaben gemäß § 5 TMG
+            </h2>
 
           <p class="font-weight-medium">
             David Miron <br>
@@ -18,7 +25,17 @@
           </h2>
 
           <p class="font-weight-medium">
-          <a href="https://dpbm.de/impressum/">E-Mail hier </a> <br>
+          <a href="https://dpbm.de/impressum/">Kontakt zum Bundesamt hier </a>
+          <br>
+          <v-btn class="ma-10" @click="onClickHeimabendItem">
+            Kontaktforumalar an das Team
+          </v-btn>
+          <br>
+          <img
+            class="mr-2"
+            :src="require('@/assets/inspiratorMailAdresse.jpg')" height="50"
+          />
+          <br>
           </p>
 
           <h2 class="py-5">
@@ -92,7 +109,11 @@
           Inhalte umgehend entfernen
           </p>
           </div>
+  </div>
+      </v-card>
+    </v-flex>
   </v-row>
+</v-container>
 </template>
 
 <script>
@@ -111,6 +132,9 @@ export default {
     cancel() {
       this.dialog = false;
       this.$emit('dialogClose');
+    },
+    onClickHeimabendItem() {
+      this.$router.push({ name: 'message' });
     },
   },
 };
