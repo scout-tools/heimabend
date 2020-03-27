@@ -129,6 +129,32 @@
         </div>
 
       </v-card>
+
+      <v-card class="ma-10 pa-10">
+        <div class="pa-3 display-1">
+          <u>
+            Open Source
+          </u>
+        </div>
+
+        <div class="ma-3 subtitle-1 text-left">
+            Alles was wir aufbauen ist für jeden frei verwendbar,
+            der seinen Inhalt ebenfalls frei verwendbar macht.
+
+          <li class="ma-5">
+            Unsere Heimabende dürfen für Open-Source Projekte kopiert werden
+          </li>
+
+          <li class="ma-5">
+            Unser Quellcode ist hier veröffentlicht:
+            <a href="https://github.com/RobertBagdahn/heimabend">Github</a>
+          </li>
+
+          <li class="ma-5">
+            Wenn du Fragen hast, dann kannst du uns gerne kontaktieren.
+          </li>
+        </div>
+      </v-card>
     </v-flex>
   </v-row>
 </v-container>

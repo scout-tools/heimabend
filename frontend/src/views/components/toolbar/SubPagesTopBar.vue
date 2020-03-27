@@ -44,7 +44,13 @@ export default {
         return 'Neuen Heimabend erstellen';
       }
       if (route === 'tags') {
-        return 'Tag Übersicht';
+        return 'Themen Übersicht';
+      }
+      if (route === 'message') {
+        return 'Kontakt Formular';
+      }
+      if (route === 'messageOverview') {
+        return 'Nachrichten';
       }
       return route;
     },

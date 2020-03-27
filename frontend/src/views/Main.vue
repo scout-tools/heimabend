@@ -64,23 +64,9 @@
           class="content"
           :class="getMargin"
         />
-        <v-fab-transition
-          v-if="isMainPage && !apiIsDown"
-        >
-          <v-btn
-            @click="onNewClick"
-            fab
-            color="green"
-            dark
-            fixed
-            bottom
-            right
-          >
-            <v-icon>
-              mdi-plus
-            </v-icon>
-          </v-btn>
-        </v-fab-transition>
+      <Fab
+        v-if="isMainPage && !apiIsDown"
+      />
       </template>
     <api-down-banner
       v-if="apiIsDown"
@@ -112,6 +98,7 @@ import ApiDownBanner from './components/banner/ApiDown.vue';
 // import PricacyBanner from './components/banner/Privacy.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
 import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
+import Fab from '@/views/components/fab/Standard.vue'; // eslint-disable-line
 
 export default {
   components: {
@@ -120,6 +107,7 @@ export default {
     Topbar,
     SubPagesTopBar,
     ApiDownBanner,
+    Fab,
     // PricacyBanner,
   },
   computed: {
@@ -128,7 +116,7 @@ export default {
     },
     getLabel() {
       const counter = this.$store.getters.heimabendCounter;
-      return `${counter} Heimabende`;
+      return `Suche in ${counter} Heimabenden ...`;
     },
     getMargin() {
       return this.isMobil ? 'ma-1' : 'ma-10';
@@ -155,9 +143,6 @@ export default {
     },
     toogleDrawer() {
       this.$refs.mainMenuLeft.toggleDrawer();
-    },
-    onNewClick() {
-      this.$router.push({ name: 'heimabendCreate' });
     },
     onLoginClick() {
       this.$refs.login.show();

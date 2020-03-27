@@ -125,6 +125,7 @@
       <template v-slot:append>
         <v-list bottom>
           <v-divider v-if="isAuthenticated"/>
+
           <v-list-item v-if="isAuthenticated" link bottom>
             <v-list-item-icon>
               <v-icon>mdi-tag-text-outline</v-icon>
@@ -133,6 +134,18 @@
               <v-list-item-title>Tags</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+
+          <v-divider/>
+
+          <v-list-item v-if="isAuthenticated" link bottom>
+            <v-list-item-icon>
+              <v-icon>mdi-message-text-outline</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content @click="onClickMessage()">
+              <v-list-item-title>Nachrichten</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
           <v-divider/>
           <v-list-item link bottom>
             <v-list-item-icon>
@@ -194,6 +207,9 @@ export default {
     },
     onClickAboutProjectItem() {
       this.$router.push({ name: 'aboutProject' });
+    },
+    onClickMessage() {
+      this.$router.push({ name: 'messageOverview' });
     },
     onToggleJustActive() {
       this.$store.commit('toggleJustActive');

@@ -60,3 +60,18 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
+class Message(models.Model):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    name = models.CharField(max_length=50)
+    email = models.CharField(max_length=60)
+    topic = models.CharField(max_length=40)
+    messageBody = models.CharField(max_length=1000)
+    createdAt = models.DateTimeField(default=now, editable=False)
+
+    def __str__(self):
+        return self.name

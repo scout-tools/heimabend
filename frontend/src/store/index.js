@@ -12,8 +12,8 @@ export default new Vuex.Store({
     refreshToken: null,
     currentUser: null,
     isPossibleInside: true,
-    isPossibleOutside: true,
-    isPossibleDigital: true,
+    isPossibleOutside: false,
+    isPossibleDigital: false,
     isPossibleAlone: true,
     withoutPreperation: false,
     withoutCosts: false,
@@ -150,7 +150,7 @@ export default new Vuex.Store({
     clearFilters(state) {
       state.isPossibleInside = true;
       state.isPossibleOutside = true;
-      state.isPossibleDigital = true;
+      state.isPossibleDigital = false;
       state.isPossibleAlone = false;
       state.withoutPreperation = false;
       state.withoutCosts = false;

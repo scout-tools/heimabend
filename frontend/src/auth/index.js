@@ -5,7 +5,7 @@ export default {
     authenticated: false,
   },
 
-  interceptorsSetup(store, router) {
+  interceptorsSetup(store) {
     axios.interceptors.request.use((config) => {
       const { accessToken } = store.state;
       if (accessToken) {
@@ -24,7 +24,7 @@ export default {
 
       if (error.response.status === 401) {
         store.commit('clearTokens');
-        router.push({ name: 'overview' });
+        window.location.href = '/';
       }
       return Promise.reject(error);
     });
