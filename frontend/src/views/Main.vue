@@ -92,13 +92,13 @@
 <script>
 import axios from 'axios';
 
-import Login from '@/views/components/dialogs/Login.vue'; // eslint-disable-line
-import MenuLeft from '@/views/components/menu/Left.vue';
-import ApiDownBanner from '@/views/components/banner/ApiDown.vue';
+import MenuLeft from './components/menu/Left.vue';
+import ApiDownBanner from './components/banner/ApiDown.vue';
 // import PricacyBanner from '@/views/components/banner/Privacy.vue';
-import Topbar from '@/views/components/toolbar/FilterTopBar.vue';
-import SubPagesTopBar from '@/views/components/toolbar/SubPagesTopBar.vue';
-import Fab from '@/views/components/fab/Standard.vue'; // eslint-disable-line
+import Topbar from './components/toolbar/FilterTopBar.vue';
+import Login from './components/dialogs/Login.vue';
+import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
+import Fab from './components/fab/Standard.vue';
 
 export default {
   components: {
