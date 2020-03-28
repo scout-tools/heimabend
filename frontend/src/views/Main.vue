@@ -90,90 +90,90 @@
 </template>
 
 <script>
-// import axios from 'axios';
+import axios from 'axios';
 
-// import MenuLeft from './components/menu/Left.vue';
-// import ApiDownBanner from './components/banner/ApiDown.vue';
-// // import PricacyBanner from '@/views/components/banner/Privacy.vue';
-// import Topbar from './components/toolbar/FilterTopBar.vue';
-// import Login from './components/dialogs/Login.vue';
-// import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
-// import Fab from './components/fab/Standard.vue';
+import MenuLeft from './components/menu/Left.vue';
+import ApiDownBanner from './components/banner/ApiDown.vue';
+// import PricacyBanner from '@/views/components/banner/Privacy.vue';
+import Topbar from './components/toolbar/FilterTopBar.vue';
+import Login from './components/dialogs/Login.vue';
+import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
+import Fab from './components/fab/Standard.vue';
 
-// export default {
-//   components: {
-//     MenuLeft,
-//     Login,
-//     Topbar,
-//     SubPagesTopBar,
-//     ApiDownBanner,
-//     Fab,
-//     // PricacyBanner,
-//   },
-//   computed: {
-//     isMobil() {
-//       return this.$vuetify.breakpoint.smAndDown;
-//     },
-//     getLabel() {
-//       const counter = this.$store.getters.heimabendCounter;
-//       return `Suche in ${counter} Heimabenden ...`;
-//     },
-//     getMargin() {
-//       return this.isMobil ? 'ma-1' : 'ma-10';
-//     },
-//     tags() {
-//       return this.$store.getters.tags;
-//     },
-//     isMainPage() {
-//       return this.currentRouteName === 'overview';
-//     },
-//     currentRouteName() {
-//       return this.$route.name;
-//     },
-//     apiIsDown() {
-//       return !!this.$store.getters.apiIsDown;
-//     },
-//     acceptedPrivacy() {
-//       return !!this.$store.getters.acceptedPrivacy;
-//     },
-//   },
-//   methods: {
-//     onChangeSearchInput() {
-//       this.$store.commit('setSearchInput', this.searchInput);
-//     },
-//     toogleDrawer() {
-//       this.$refs.mainMenuLeft.toggleDrawer();
-//     },
-//     onLoginClick() {
-//       this.$refs.login.show();
-//     },
-//     getTags() {
-//       const path = `${this.API_URL}basic/tag/`;
-//       axios.get(path)
-//         .then((res) => {
-//           this.$store.commit('setTags', res.data);
-//         })
-//         .catch(() => {
-//           this.showError = true;
-//         });
-//     },
-//     onHeaderClick() {
-//       this.$router.push({ name: 'overview' });
-//     },
-//   },
-//   mounted() {
-//     this.getTags();
-//     this.$store.dispatch('resetFilters');
-//   },
-//   data: () => ({
-//     API_URL: process.env.VUE_APP_API,
-//     searchInput: '',
-//     fab: false,
-//     colorFab: 'green',
-//     iconFab: 'mdi-plus',
-//     showError: false,
-//   }),
-// };
+export default {
+  components: {
+    MenuLeft,
+    Login,
+    Topbar,
+    SubPagesTopBar,
+    ApiDownBanner,
+    Fab,
+    // PricacyBanner,
+  },
+  computed: {
+    isMobil() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
+    getLabel() {
+      const counter = this.$store.getters.heimabendCounter;
+      return `Suche in ${counter} Heimabenden ...`;
+    },
+    getMargin() {
+      return this.isMobil ? 'ma-1' : 'ma-10';
+    },
+    tags() {
+      return this.$store.getters.tags;
+    },
+    isMainPage() {
+      return this.currentRouteName === 'overview';
+    },
+    currentRouteName() {
+      return this.$route.name;
+    },
+    apiIsDown() {
+      return !!this.$store.getters.apiIsDown;
+    },
+    acceptedPrivacy() {
+      return !!this.$store.getters.acceptedPrivacy;
+    },
+  },
+  methods: {
+    onChangeSearchInput() {
+      this.$store.commit('setSearchInput', this.searchInput);
+    },
+    toogleDrawer() {
+      this.$refs.mainMenuLeft.toggleDrawer();
+    },
+    onLoginClick() {
+      this.$refs.login.show();
+    },
+    getTags() {
+      const path = `${this.API_URL}basic/tag/`;
+      axios.get(path)
+        .then((res) => {
+          this.$store.commit('setTags', res.data);
+        })
+        .catch(() => {
+          this.showError = true;
+        });
+    },
+    onHeaderClick() {
+      this.$router.push({ name: 'overview' });
+    },
+  },
+  mounted() {
+    this.getTags();
+    this.$store.dispatch('resetFilters');
+  },
+  data: () => ({
+    API_URL: process.env.VUE_APP_API,
+    searchInput: '',
+    fab: false,
+    colorFab: 'green',
+    iconFab: 'mdi-plus',
+    showError: false,
+  }),
+};
 
 </script>
 
