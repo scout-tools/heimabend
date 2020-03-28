@@ -135,7 +135,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-divider/>
+          <v-divider v-if="isAuthenticated"/>
 
           <v-list-item v-if="isAuthenticated" link bottom>
             <v-list-item-icon>

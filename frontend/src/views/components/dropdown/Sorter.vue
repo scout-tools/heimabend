@@ -6,7 +6,6 @@
     return-object
     hide-details
     item-value="id"
-    prepend-icon="mdi-filter"
     single-line
     @change="onFilterChanged"
   >

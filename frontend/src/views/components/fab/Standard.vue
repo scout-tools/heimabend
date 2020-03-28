@@ -3,6 +3,7 @@
       v-model="fab"
       bottom
       right
+      open-on-hover
       direction="top"
       transition="slide-y-reverse-transition"
       fixed
@@ -16,20 +17,38 @@
           <v-icon v-else>mdi-plus</v-icon>
         </v-btn>
       </template>
-      <v-btn
-        @click="onNewEventClick"
-        fab
-        dark
-        color="blue">
-        <v-icon>mdi-calendar-heart</v-icon>
-      </v-btn>
-      <v-btn
-        @click="onNewMessageClick"
-        fab
-        dark
-        color="orange">
-        <v-icon>mdi-message-text</v-icon>
-      </v-btn>
+      <v-tooltip bottom nudge-left="80">
+        <template v-slot:activator="{ on }">
+          <v-btn
+            @click="onNewEventClick"
+            fab
+            dark
+            color="blue"
+            v-on="on"
+          >
+            <v-icon>mdi-calendar-heart</v-icon>
+          </v-btn>
+        </template>
+       <span class="subtitle-1">
+          Hiermit kannst du einen neuen Heimabend anlegen
+        </span>
+      </v-tooltip>
+      <v-tooltip bottom nudge-left="80">
+        <template v-slot:activator="{ on }">
+          <v-btn
+            @click="onNewMessageClick"
+            fab
+            dark
+            color="orange"
+            v-on="on"
+          >
+            <v-icon>mdi-message-text</v-icon>
+          </v-btn>
+        </template>
+        <span class="subtitle-1">
+          Hiermit kannst du uns eine Nachricht schicken
+        </span>
+      </v-tooltip>
     </v-speed-dial>
 </template>
 

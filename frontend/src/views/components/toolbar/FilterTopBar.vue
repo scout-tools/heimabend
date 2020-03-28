@@ -37,7 +37,7 @@
               </v-btn>
             </template>
             <span>
-              Zeigt Heimabende an die digital durchgeführt werden können.
+              Zeigt Heimabende an die mit deiner Sippe digital durchgeführt werden können.
             </span>
           </v-tooltip>
 

@@ -38,10 +38,26 @@
             {{ item.title }}
         </v-list-item-title>
       </v-list-item-content>
-      <v-divider class="mx-2 ml-12" v-if="!item.isActive" vertical/>
-      <v-icon color="red" v-if="!item.isActive">
-        mdi-eye-off-outline
-      </v-icon>
+      <v-divider class="mx-2 ml-12" v-if="!item.isActive && isAuthenticated" vertical/>
+        <v-tooltip
+          nudge-left="80"
+          v-if="!item.isActive && isAuthenticated"
+          bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              class="ma-2"
+              v-on="on"
+              icon>
+              <v-icon color="red">
+                mdi-eye-off-outline
+              </v-icon>
+            </v-btn>
+          </template>
+          <span class="mx-1">
+            Nicht Öffentlich
+          </span>
+        </v-tooltip>
+
       <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
       <v-btn
         class="ma-1 ml-0"
@@ -52,29 +68,38 @@
         @click="onDeleteClick(item)">
         <v-icon>mdi-delete-outline</v-icon>
       </v-btn>
-      <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
-      <v-btn
-        class="ma-1 ml-0"
-        text
-        icon
-        color="gray lighten-2"
-        v-if="isAuthenticated"
-        @click="onUpdateClick(item)">
-        <v-icon>mdi-pencil-outline</v-icon>
-      </v-btn>
-        <v-divider
-          v-if="!isAuthenticated"
-          vertical/>
+
+        <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
+        <v-btn
+          class="ma-1 ml-0"
+          text
+          icon
+          color="gray lighten-2"
+          v-if="isAuthenticated"
+          @click="onUpdateClick(item)">
+          <v-icon>mdi-pencil-outline</v-icon>
+        </v-btn>
+
+        <v-divider v-if="!isAuthenticated" vertical/>
+      <v-tooltip
+        nudge-left="80"
+        bottom
+        v-if="!isAuthenticated">
+        <template v-slot:activator="{ on }">
           <v-btn
-            v-if="!isAuthenticated"
             class="ma-2"
-            :disabled="isAlreadyVoted(item)"
+            v-on="on"
+            :color="getLikeColor(item)"
             text
             icon
-            @click="onLikedClicked(item)"
-            color="green lighten-2">
-            <v-icon>mdi-thumb-up</v-icon>
+            @click="onLikedClicked(item)">
+            <v-icon>{{ getLikeIcon(item) }}</v-icon>
           </v-btn>
+        </template>
+            <span class="mx-1">
+              Gefällt mir!
+            </span>
+      </v-tooltip>
     </v-list-item>
     <v-divider />
     <v-card-text>
@@ -167,7 +192,7 @@
           </v-btn>
         </template>
         <span>
-          Dieser Heimabend ist digital durchführbar
+          Dieser Heimabend ist mit deiner Sippe digital durchführbar
         </span>
       </v-tooltip>
 
@@ -404,6 +429,12 @@ export default {
       const eventId = item.id;
 
       this.callEventLikeService(eventId);
+    },
+    getLikeColor(item) {
+      return this.isAlreadyVoted(item) ? 'green lighten-2' : 'darkgray';
+    },
+    getLikeIcon(item) {
+      return this.isAlreadyVoted(item) ? 'mdi-thumb-up' : 'mdi-thumb-up-outline';
     },
     isAlreadyVoted(event) {
       return this.liked.includes(event.id);

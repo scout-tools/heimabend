@@ -14,6 +14,11 @@
           >
             mdi-eye
           </v-icon>
+          <v-icon
+            @click="deleteItem(item)"
+          >
+            mdi-delete
+          </v-icon>
         </template>
       </v-data-table>
       <ViewMessageDialog
@@ -21,17 +26,21 @@
       />
     </v-flex>
   </v-row>
+  <DeleteModal
+    ref="deleteMessageModal"
+  />
 </v-container>
 </template>
-
 <script>
 import axios from 'axios';
 
 import ViewMessageDialog from './ViewMessageDialog.vue'; // eslint-disable-line
+import DeleteModal from './DeleteModal.vue';
 
 export default {
   components: {
     ViewMessageDialog,
+    DeleteModal,
   },
 
   data: () => ({
@@ -73,7 +82,7 @@ export default {
         .catch(() => {
         });
     },
-    onRefreshTags() {
+    onRefreshMessages() {
       this.messages = [];
       this.getMessages();
     },
@@ -84,9 +93,13 @@ export default {
       this.dialog = false;
       this.$emit('dialogClose');
     },
+    deleteItem(item) {
+      this.$refs.deleteMessageModal.show(item);
+    },
   },
   created() {
     this.getMessages();
   },
+
 };
 </script>
