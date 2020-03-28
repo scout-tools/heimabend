@@ -1,8 +1,8 @@
 # models.py
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.timezone import now
 from django.core.validators import MaxValueValidator, MinValueValidator, MinLengthValidator, MaxLengthValidator
+from django.utils.translation import gettext_lazy as _
 
 
 class Tag(models.Model):
@@ -55,11 +55,12 @@ class Event(models.Model):
     createdBy = models.CharField(max_length=60, blank=True)
     createdByEmail = models.CharField(max_length=60, blank=True)
     updatedBy = models.CharField(max_length=60, null=True, blank=True)
-    createdAt = models.DateTimeField(default=now, editable=False)
+    createdAt = models.DateTimeField(auto_now_add=True, editable=False)
     updatedAt = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.title
+
 
 class Message(models.Model):
     id = models.AutoField(
@@ -71,7 +72,22 @@ class Message(models.Model):
     email = models.CharField(max_length=60)
     topic = models.CharField(max_length=40)
     messageBody = models.CharField(max_length=1000)
-    createdAt = models.DateTimeField(default=now, editable=False)
+    createdAt = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
         return self.name
+
+
+class Like(models.Model):
+    class OptionType(models.IntegerChoices):
+        LIKE = 1, _('Like'),
+        DISLIKE = -1, _('Dislike'),
+
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    eventId = models.ForeignKey(Event, on_delete=models.CASCADE)
+    opinionTypeId = models.IntegerField(choices=OptionType.choices, default=OptionType.LIKE)
+    like_created = models.DateTimeField(auto_now_add=True, editable=False)

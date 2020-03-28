@@ -1,8 +1,7 @@
 # serializers.py
 import timeit
 from rest_framework import serializers
-
-from .models import Tag, Event, Message
+from .models import Tag, Event, Message, Like
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
@@ -22,12 +21,18 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class LikeSerializer(serializers.HyperlinkedModelSerializer):
-
-    def get_score(self, obj):
-        return 3
+    class Meta:
+        model = Like
+        fields = (
+            'eventId',
+            'opinionTypeId',
+            'like_created'
+        )
 
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
+    like_score = serializers.SerializerMethodField()
+
     class Meta:
         model = Event
         fields = (
@@ -51,7 +56,12 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             'createdByEmail',
             'updatedBy',
             'createdAt',
-            'updatedAt')
+            'updatedAt',
+            'like_score')
+
+    def get_like_score(self, obj):
+        return 3
+
 
 class MessageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

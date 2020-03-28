@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@tinymce/tinymce-vue": "^3.0.1",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "core-js": "^3.3.2",
     "js-cookie": "^2.2.1",
     "vue": "^2.6.10",
@@ -29,7 +29,7 @@
     "@vue/cli-plugin-router": "^4.0.0",
     "@vue/cli-plugin-unit-jest": "^4.0.0",
     "@vue/cli-plugin-vuex": "^4.0.0",
-    "@vue/cli-service": "^4.0.0",
+    "@vue/cli-service": "^4.2.3",
     "@vue/eslint-config-airbnb": "^4.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-eslint": "^10.0.3",
