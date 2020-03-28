@@ -77,67 +77,67 @@
 </template>
 
 <script>
-import axios from 'axios';
-import store from '@/store'; // eslint-disable-line
+// import axios from 'axios';
+// import store from '@/store'; // eslint-disable-line
 
-export default {
+// export default {
 
-  data: () => ({
-    dialog: false,
-    showError: false,
-    showSuccess: false,
-    timeout: 3000,
-    responseObj: null,
-    API_URL: process.env.VUE_APP_API,
-    data: {
-      username: '',
-      password: '',
-    },
-  }),
+//   data: () => ({
+//     dialog: false,
+//     showError: false,
+//     showSuccess: false,
+//     timeout: 3000,
+//     responseObj: null,
+//     API_URL: process.env.VUE_APP_API,
+//     data: {
+//       username: '',
+//       password: '',
+//     },
+//   }),
 
-  methods: {
-    show() {
-      this.dialog = true;
-    },
-    cancel() {
-      this.dialog = false;
-      this.$emit('dialogClose');
-    },
-    onPasswortTypInPasswordField(event) { // eslint-disable-line
-      if (event.code === 'Enter') {
-        this.login();
-      }
-    },
-    login() {
-      const me = this; // eslint-disable-line
-      axios.post(`${this.API_URL}api/token/`, this.data)
-        .then((response) => {
-          store.commit('setTokens', response.data.access, response.data.refresh);
-          this.dialog = false;
-          this.showSuccess = true;
-          this.onSuccessfulLogin();
-        })
-        .catch((error) => {
-          this.responseObj = error;
-          this.showError = true;
-        });
-    },
-    onSuccessfulLogin() {
-      this.$store.commit('setCurrentUser', this.data.username);
-    },
-    onLogoutClick() {
-      store.commit('clearTokens');
-    },
-  },
-  computed: {
-    isAuthenticated() {
-      return this.$store.getters.isAuthenticated;
-    },
-    getHeader() {
-      return !this.isAuthenticated
-        ? 'Du kannst dich einloggen'
-        : 'Du bist bereits eingelogt';
-    },
-  },
-};
+//   methods: {
+//     show() {
+//       this.dialog = true;
+//     },
+//     cancel() {
+//       this.dialog = false;
+//       this.$emit('dialogClose');
+//     },
+//     onPasswortTypInPasswordField(event) { // eslint-disable-line
+//       if (event.code === 'Enter') {
+//         this.login();
+//       }
+//     },
+//     login() {
+//       const me = this; // eslint-disable-line
+//       axios.post(`${this.API_URL}api/token/`, this.data)
+//         .then((response) => {
+//           store.commit('setTokens', response.data.access, response.data.refresh);
+//           this.dialog = false;
+//           this.showSuccess = true;
+//           this.onSuccessfulLogin();
+//         })
+//         .catch((error) => {
+//           this.responseObj = error;
+//           this.showError = true;
+//         });
+//     },
+//     onSuccessfulLogin() {
+//       this.$store.commit('setCurrentUser', this.data.username);
+//     },
+//     onLogoutClick() {
+//       store.commit('clearTokens');
+//     },
+//   },
+//   computed: {
+//     isAuthenticated() {
+//       return this.$store.getters.isAuthenticated;
+//     },
+//     getHeader() {
+//       return !this.isAuthenticated
+//         ? 'Du kannst dich einloggen'
+//         : 'Du bist bereits eingelogt';
+//     },
+//   },
+// };
 </script>
