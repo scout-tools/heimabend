@@ -10,6 +10,9 @@ django = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
+drf-api-tracking = "*"
+six = "*"
+pymysql = "*"
 
 [requires]
-python_version = "3.5"
+python_version = "3.7"
