@@ -2,9 +2,10 @@
 <div>
 <v-slide-y-transition  group>
   <v-card
-    max-width="800"
+    :max-width="getMaxWidth()"
     class="mx-auto ma-5"
     :style="{ transitionDelay: delay }"
+    v-bind:id="`eventcard-${item.id}`"
     color="backgroundGrey"
     v-for="(item, index) in items"
     :key="index"
@@ -80,50 +81,52 @@
           <v-icon>mdi-pencil-outline</v-icon>
         </v-btn>
 
-        <v-divider v-if="!isAuthenticated" vertical/>
-      <v-tooltip
-        nudge-left="80"
-        bottom
-        v-if="!isAuthenticated">
-        <template v-slot:activator="{ on }">
-          <v-btn
-            class="ma-2"
-            v-on="on"
-            :color="getLikeColor(item)"
-            text
-            icon
-            @click="onLikedClicked(item)">
-            <v-icon>{{ getLikeIcon(item) }}</v-icon>
-          </v-btn>
-        </template>
-            <span class="mx-1">
-              Gefällt mir!
-            </span>
-      </v-tooltip>
+      <v-divider
+        v-if="!isAuthenticated && !isDetailsView"
+        class="mx-2 ml-2"
+        vertical/>
+        <v-tooltip
+          nudge-left="80"
+          v-if="!isAuthenticated && !isDetailsView"
+          bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              class="ma-1 ml-0"
+              v-on="on"
+              text
+              icon
+              color="black lighten-2"
+              @click="onDetailsClick(item)">
+              <v-icon>mdi-information-outline</v-icon>
+            </v-btn>
+          </template>
+          <span class="mx-1">
+            Weitere Informationen
+          </span>
+        </v-tooltip>
     </v-list-item>
-    <v-divider />
+
+    <v-divider/>
     <v-card-text>
       <p
         class="text-left subtitle-1"
-        v-html="item.description"
-      >
+        v-html="item.description">
       </p>
     </v-card-text>
 
     <v-divider class="mb-4"/>
-    <div
-      class="text-left ml-3">
-      <u>Material</u>
+    <div class="text-left ml-3">
+      <u>
+        Material
+      </u>
     </div>
     <div
       v-if="item.material !== ''"
-      class="text-left font-italic font-weight-light"
-    >
+      class="text-left font-italic font-weight-light">
       <ul>
         <li
           v-for="(item, index4) in getMaterialArray(item.material)"
-          :key="index4"
-        >
+          :key="index4">
           {{ item }}
         </li>
       </ul>
@@ -163,20 +166,43 @@
     </v-container>
     <v-divider />
     <v-card-actions class="accent">
-      <div class="caption mr-1">{{ formatDate(item.createdAt) + '\n von ' + item.createdBy }}</div>
-
+      <!-- eslint-disable-next-line max-len -->
+      <div class="caption mr-1" v-if="isDetailsView || !isMobil">
+        {{ formatDate(item.createdAt) + '\n von ' + item.createdBy }}
+      </div>
       <v-divider
         :class="verticalMargin"
         vertical
-        v-if="item.isPossibleDigital"
-      />
+        v-if="isDetailsView"/>
+      <v-tooltip
+        nudge-left="80"
+        bottom
+        v-if="!isAuthenticated">
+        <template v-slot:activator="{ on }">
+          <v-btn
+            class="ma-2"
+            v-on="on"
+            :color="getLikeColor(item)"
+            text
+            icon
+            @click="onLikedClicked(item)">
+            <v-icon>{{ getLikeIcon(item) }}</v-icon>
+          </v-btn>
+        </template>
+          <span class="mx-1">
+            Gefällt mir!
+          </span>
+      </v-tooltip>
+      <v-divider
+        :class="verticalMargin"
+        vertical
+        v-if="item.isPossibleDigital"/>
 
       <v-tooltip
         open-on-hover
         bottom
         nudge-left="80"
-        v-if="item.isPossibleDigital"
-      >
+        v-if="item.isPossibleDigital">
         <template v-slot:activator="{ on }">
           <v-btn
             icon
@@ -185,8 +211,7 @@
             <v-icon
               :size="getIconSize"
               color="red"
-              v-if="item.isPossibleDigital"
-            >
+              v-if="item.isPossibleDigital">
               mdi-robot
             </v-icon>
           </v-btn>
@@ -199,8 +224,7 @@
       <v-divider
         :class="verticalMargin"
         vertical
-        v-if="item.isPossibleAlone"
-      />
+        v-if="item.isPossibleAlone"/>
       <v-tooltip
         open-on-hover
         nudge-left="80"
@@ -210,12 +234,10 @@
           <v-btn
             :small="isMobil"
             icon
-            v-on="on"
-          >
+            v-on="on">
             <v-icon
               :size="getIconSize"
-              v-if="item.isPossibleAlone"
-            >
+              v-if="item.isPossibleAlone">
               mdi-account-cowboy-hat
             </v-icon>
           </v-btn>
@@ -226,13 +248,11 @@
       </v-tooltip>
 
       <v-divider :class="verticalMargin" vertical/>
-
         <v-tooltip
           v-if="item.costsRating > 0"
           open-on-hover
           bottom
-          nudge-left="80"
-        >
+          nudge-left="80">
           <template v-slot:activator="{ on }">
             <v-btn
               :x-small="isMobil"
@@ -248,8 +268,7 @@
                 dense
                 length="3"
                 :size="ratingSize"
-                readonly
-              />
+                readonly/>
             </v-btn>
           </template>
           <span>
@@ -261,17 +280,14 @@
           v-if="item.costsRating === 0"
           open-on-hover
           bottom
-          nudge-left="80"
-        >
+          nudge-left="80">
           <template v-slot:activator="{ on }">
             <v-btn
               icon
-              v-on="on"
-            >
+              v-on="on">
               <v-icon
                 :size="getIconSize"
-                color="red"
-              >
+                color="red">
                 mdi-currency-usd-off
               </v-icon>
             </v-btn>
@@ -282,21 +298,17 @@
         <v-divider
           :class="verticalMargin"
           v-if="!item.isPrepairationNeeded"
-          vertical
-        />
-
+          vertical/>
         <v-tooltip
           v-if="!item.isPrepairationNeeded"
           open-on-hover
           nudge-left="80"
-          bottom
-        >
+          bottom>
           <template v-slot:activator="{ on }">
             <v-btn
               icon
               color="accent"
-              v-on="on"
-            >
+              v-on="on">
               <v-icon
                 v-model="item.isPrepairationNeeded"
                 color="black"
@@ -310,24 +322,21 @@
             Ohne Vorbereitungen
           </span>
         </v-tooltip>
+
         <v-divider
           :class="verticalMargin"
-          vertical
-        />
-
+          vertical/>
         <v-tooltip
           nudge-left="80"
           v-if="item.executionTimeRating > 0"
           open-on-hover
-          bottom
-        >
+          bottom>
           <template v-slot:activator="{ on }">
             <v-btn
               :x-small="isMobil"
               depressed
               color="accent"
-              v-on="on"
-            >
+              v-on="on">
               <v-rating
                 v-model="item.executionTimeRating"
                 emptyIcon="mdi-clock"
@@ -337,8 +346,7 @@
                 dense
                 length="3"
                 :size="ratingSize"
-                readonly
-              />
+                readonly/>
             </v-btn>
           </template>
           <span>
@@ -367,8 +375,37 @@
           </template>
           <span>Großprojekt</span>
         </v-tooltip>
-
         <v-spacer />
+        <v-divider
+          :class="verticalMargin"
+          vertical/>
+        <v-tooltip
+          nudge-left="80"
+          open-on-hover
+          bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              :x-small="isMobil"
+              depressed
+              color="accent"
+              v-on="on">
+              <v-rating
+                v-model="item.like_score"
+                emptyIcon="mdi-star-face"
+                fullIcon="mdi-star-face"
+                color="primary"
+                background-color="grey"
+                dense
+                length="3"
+                :size="ratingSize"
+                readonly/>
+            </v-btn>
+          </template>
+          <span>
+            {{ getLikeScoreTooltip(item.like_score)}}
+          </span>
+        </v-tooltip>
+
     </v-card-actions>
   </v-card>
   </v-slide-y-transition>
@@ -420,6 +457,10 @@ import DeleteModal from '../dialogs/DeleteModal.vue';
 export default {
   props: {
     items: Array,
+    isDetailsView: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     DeleteModal,
@@ -427,8 +468,9 @@ export default {
   methods: {
     onLikedClicked(item) {
       const eventId = item.id;
-
-      this.callEventLikeService(eventId);
+      if (!this.isAlreadyVoted(item)) {
+        this.callEventLikeService(eventId);
+      }
     },
     getLikeColor(item) {
       return this.isAlreadyVoted(item) ? 'green lighten-2' : 'darkgray';
@@ -439,12 +481,14 @@ export default {
     isAlreadyVoted(event) {
       return this.liked.includes(event.id);
     },
-    callEventLikeService(id) {
+    callEventLikeService(eventId) {
       const me = this; // eslint-disable-line
-      store.commit('setLiked', id); // delete that line
-      axios.post(`${this.API_URL}basic/like/`, this.data)
+      store.commit('setLiked', eventId); // delete that line
+      axios.post(`${this.API_URL}basic/like/`, {
+        eventId: `${process.env.VUE_APP_API}basic/event/${eventId}/`,
+      })
         .then(() => {
-          store.commit('setLiked', id);
+          store.commit('setLiked', eventId);
           this.showSuccessLiked = true;
         })
         .catch((error) => {
@@ -476,11 +520,28 @@ export default {
           return 'Fehler';
       }
     },
+    getLikeScoreTooltip(score) {
+      switch (score) {
+        case 0:
+          return '0 Beliebheits-Sterne';
+        case 1:
+          return '1 Beliebheits-Sterne';
+        case 2:
+          return '2 Beliebheits-Sterne';
+        case 3:
+          return '3 Beliebheits-Sterne';
+        default:
+          return 'Fehler';
+      }
+    },
     onRefreshHeimabende() {
       this.$emit('refresh');
     },
     titleClass() {
       return this.$vuetify.breakpoint.mdAndUp ? 'headline font-weight-medium' : 'title';
+    },
+    getMaxWidth() {
+      return this.isDetailsView ? '1000' : '800';
     },
     verticalMargin() {
       return !this.$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-0';
@@ -533,6 +594,9 @@ export default {
     onUpdateClick(params) {
       this.$router.push({ name: 'heimabendUpdate', params });
     },
+    onDetailsClick(params) {
+      this.$router.push({ name: 'heimabendDetails', params });
+    },
     formatDate(date) {
       const dateObj = new Date(date);
       return `${dateObj.getDate()}.${dateObj.getMonth() + 1}.${dateObj.getFullYear()} `;
@@ -542,6 +606,16 @@ export default {
     },
     onDeleteClick(item) {
       this.$refs.deleteTagModal.show(item);
+    },
+    scrollToId() {
+      const searchId = `eventcard-${this.getId()}`;
+      const elem = document.getElementById(searchId);
+      if (elem) {
+        elem.scrollIntoView(false);
+      }
+    },
+    getId() {
+      return this.$route.params.id;
     },
   },
   data() {
@@ -556,6 +630,9 @@ export default {
       showSuccessLiked: false,
       emptyMaterialText: 'Juhu, kein Material nötig ^^',
     };
+  },
+  mounted() {
+    this.scrollToId();
   },
   computed: {
     ratingSize() {

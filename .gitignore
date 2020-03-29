@@ -3,6 +3,9 @@ node_modules
 frontend/dist
 
 # local env files
+frontend/.env
+/frontend/.env
+*.env
 .env.local
 .env.*.local
 

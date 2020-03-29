@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueLodash from 'vue-lodash';
+import lodash from 'lodash';
 import App from './App.vue';
 import router from './router';
 import auth from './auth';
@@ -18,6 +19,8 @@ new Vue({
 }).$mount('#app');
 
 
-const options = { name: 'lodash' }; // customize the way you want to call it
-
-Vue.use(VueLodash, options); // options is optional
+Vue.use(VueLodash,
+  {
+    name: 'custom',
+    lodash,
+  });

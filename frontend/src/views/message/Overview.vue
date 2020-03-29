@@ -77,9 +77,11 @@ export default {
       const path = `${this.API_URL}basic/message/`;
       axios.get(path)
         .then((res) => {
+          this.showSuccess = true;
           this.messages = res.data;
         })
         .catch(() => {
+          this.showError = true;
         });
     },
     onRefreshMessages() {

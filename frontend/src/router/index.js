@@ -7,6 +7,7 @@ import Impressum from '../views/impressum/Main.vue';
 import Tags from '../views/tags/Main.vue';
 import HeimabendCreate from '../views/heimabend/create/Main.vue';
 import MessageOverview from '../views/message/Overview.vue';
+import HeimabendDetails from '../views/heimabend/details/Main.vue';
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,12 @@ const routes = [
     path: '/',
     name: 'overview',
     component: Heimabend,
+  },
+  {
+    path: '/:id',
+    name: 'overview-id',
+    component: Heimabend,
+    props: true,
   },
   {
     path: '/about',
@@ -50,6 +57,12 @@ const routes = [
     path: '/heimabend/update/:id',
     name: 'heimabendUpdate',
     component: HeimabendCreate,
+
+  },
+  {
+    path: '/heimabend/:id',
+    name: 'heimabendDetails',
+    component: HeimabendDetails,
     props: true,
   },
 ];

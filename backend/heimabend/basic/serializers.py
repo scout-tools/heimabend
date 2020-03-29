@@ -82,6 +82,8 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
         else:
             query = Like.objects.filter(eventId=obj.id).all().aggregate(sum=Sum('opinionTypeId'))
             likes = query['sum']
+            if likes is None:
+                likes = 0
             border = median * 0.1
             if likes > median + border:
                 cache.set(score_id, 3, timeout=20)
@@ -89,6 +91,9 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             elif likes < median - border:
                 cache.set(score_id, 1, timeout=20)
                 return 1
+            elif likes == 0:
+                cache.set(score_id, 0, timeout=20)
+                return 0
             else:
                 cache.set(score_id, 2, timeout=20)
                 return 2

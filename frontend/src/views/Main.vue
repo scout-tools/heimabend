@@ -125,7 +125,8 @@ export default {
       return this.$store.getters.tags;
     },
     isMainPage() {
-      return this.currentRouteName === 'overview';
+      return this.currentRouteName === 'overview'
+        || this.currentRouteName === 'overview-id';
     },
     currentRouteName() {
       return this.$route.name;
