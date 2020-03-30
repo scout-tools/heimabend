@@ -51,15 +51,21 @@ export default {
     return {
       items: [
         {
-          id: 'random',
-          text: 'Zufällige Sortierung',
-          icon: 'mdi-dice-multiple-outline',
-        },
-        {
           id: 'newest',
           text: 'Neuste Zuerst',
           icon: 'mdi-timer',
         },
+        {
+          id: 'rating',
+          text: 'Bewertung',
+          icon: 'mdi-star-face',
+        },
+        {
+          id: 'random',
+          text: 'Zufällige Sortierung',
+          icon: 'mdi-dice-multiple-outline',
+        },
+
         {
           id: 'alpha',
           text: 'Titel A-Z',

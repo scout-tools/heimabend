@@ -81,9 +81,37 @@
           <v-icon>mdi-pencil-outline</v-icon>
         </v-btn>
 
-      <v-divider
+        <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
+
+        <v-tooltip
+          v-if="!isMobil && !isAuthenticated"
+          nudge-left="80"
+          open-on-hover
+          bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              class="px-2"
+              :x-small="isMobil"
+              depressed
+              color="lightPrimary"
+              v-on="on">
+              <v-icon
+                v-for="i in item.like_score"
+                color="yellow darken-3"
+                :key="i"
+                :size="30"
+                readonly>
+                mdi-star-face
+              </v-icon>
+            </v-btn>
+          </template>
+          <span>
+            {{ getLikeScoreTooltip(item.like_score)}}
+          </span>
+        </v-tooltip>
+
+      <!-- <v-divider
         v-if="!isAuthenticated && !isDetailsView"
-        class="mx-2 ml-2"
         vertical/>
         <v-tooltip
           nudge-left="80"
@@ -91,7 +119,7 @@
           bottom>
           <template v-slot:activator="{ on }">
             <v-btn
-              class="ma-1 ml-0"
+              class="ma-2"
               v-on="on"
               text
               icon
@@ -103,23 +131,48 @@
           <span class="mx-1">
             Weitere Informationen
           </span>
-        </v-tooltip>
+        </v-tooltip> -->
     </v-list-item>
 
     <v-divider/>
     <v-card-text>
+      <div>
       <p
         class="text-left subtitle-1"
+        :class="getDescriptionClass()"
         v-html="item.description">
       </p>
+        <v-tooltip
+          nudge-left="80"
+          v-if="!isAuthenticated && !isDetailsView"
+          bottom>
+          <template v-slot:activator="{ on }">
+      <v-btn
+      v-if="!isDetailsView"
+        @click="onDetailsClick(item)"
+        color="#ffe897"
+        depressed
+        small
+        v-on="on"
+        rounded>
+        Weitere Informationen
+      </v-btn>
+          </template>
+          <span class="mx-1">
+            Weitere Informationen
+          </span>
+        </v-tooltip>
+      </div>
     </v-card-text>
 
-    <v-divider class="mb-4"/>
+    <v-divider class="my-2"/>
+    <div v-if="isDetailsView">
     <div class="text-left ml-3">
       <u>
         Material
       </u>
     </div>
+
     <div
       v-if="item.material !== ''"
       class="text-left font-italic font-weight-light">
@@ -140,6 +193,7 @@
           {{ emptyMaterialText }}
         </li>
       </ul>
+    </div>
     </div>
 
     <v-container>
@@ -165,15 +219,8 @@
       </v-tooltip>
     </v-container>
     <v-divider />
+
     <v-card-actions class="accent">
-      <!-- eslint-disable-next-line max-len -->
-      <div class="caption mr-1" v-if="isDetailsView || !isMobil">
-        {{ formatDate(item.createdAt) + '\n von ' + item.createdBy }}
-      </div>
-      <v-divider
-        :class="verticalMargin"
-        vertical
-        v-if="isDetailsView"/>
       <v-tooltip
         nudge-left="80"
         bottom
@@ -183,7 +230,6 @@
             class="ma-2"
             v-on="on"
             :color="getLikeColor(item)"
-            text
             icon
             @click="onLikedClicked(item)">
             <v-icon>{{ getLikeIcon(item) }}</v-icon>
@@ -378,34 +424,17 @@
         <v-spacer />
         <v-divider
           :class="verticalMargin"
-          vertical/>
-        <v-tooltip
-          nudge-left="80"
-          open-on-hover
-          bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              :x-small="isMobil"
-              depressed
-              color="accent"
-              v-on="on">
-              <v-rating
-                v-model="item.like_score"
-                emptyIcon="mdi-star-face"
-                fullIcon="mdi-star-face"
-                color="primary"
-                background-color="grey"
-                dense
-                length="3"
-                :size="ratingSize"
-                readonly/>
-            </v-btn>
-          </template>
-          <span>
-            {{ getLikeScoreTooltip(item.like_score)}}
-          </span>
-        </v-tooltip>
+          vertical
+          v-if="isDetailsView || !isMobil"/>
 
+        <div class="caption ma-1">
+          <v-divider
+            :class="verticalMargin"
+            vertical
+            v-if="isDetailsView || !isMobil"/>
+
+          {{ formatDate(item.createdAt) + '\n von ' + item.createdBy }}
+        </div>
     </v-card-actions>
   </v-card>
   </v-slide-y-transition>
@@ -445,6 +474,14 @@
   >
     {{ 'Dein Like konnte nicht entgegen genonnen werden' }}
   </v-snackbar>
+  <v-snackbar
+    v-model="alreadyVotedSnackbar"
+    color="success"
+    y='top'
+    :timeout="timeout"
+  >
+    {{ 'Du hast diesen Heimabend bereits geliked' }}
+  </v-snackbar>
 </div>
 </template>
 
@@ -466,10 +503,15 @@ export default {
     DeleteModal,
   },
   methods: {
+    getDescriptionClass() {
+      return !this.isDetailsView ? 'giveMeEllipsis' : '';
+    },
     onLikedClicked(item) {
       const eventId = item.id;
       if (!this.isAlreadyVoted(item)) {
         this.callEventLikeService(eventId);
+      } else {
+        this.alreadyVotedSnackbar = true;
       }
     },
     getLikeColor(item) {
@@ -523,13 +565,13 @@ export default {
     getLikeScoreTooltip(score) {
       switch (score) {
         case 0:
-          return '0 Beliebheits-Sterne';
+          return 'Dieser Heimabend hat sich Inspirator-Stern verdient';
         case 1:
-          return '1 Beliebheits-Sterne';
+          return 'Dieser Heimabend hat sich einen Inspirator-Stern verdient';
         case 2:
-          return '2 Beliebheits-Sterne';
+          return 'Dieser Heimabend hat sich zwei Inspirator-Sterne verdient';
         case 3:
-          return '3 Beliebheits-Sterne';
+          return 'Dieser Heimabend hat sich drei Inspirator-Sterne verdient';
         default:
           return 'Fehler';
       }
@@ -628,6 +670,7 @@ export default {
       showErrorLiked: false,
       timeout: 3000,
       showSuccessLiked: false,
+      alreadyVotedSnackbar: false,
       emptyMaterialText: 'Juhu, kein Material nötig ^^',
     };
   },
@@ -664,4 +707,8 @@ export default {
 </script>
 
 <style scoped>
+  .giveMeEllipsis {
+    overflow: hidden;
+    max-height: 500px;
+  }
 </style>

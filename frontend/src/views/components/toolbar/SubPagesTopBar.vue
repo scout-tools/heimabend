@@ -24,7 +24,6 @@ export default {
   },
   methods: {
     onBackClick() {
-      console.log(this.$route.params.id);
       if (this.$route.name === 'heimabendDetails') {
         this.$router.push({ name: 'overview-id', params: this.$route.params.id });
       } else {
@@ -58,7 +57,7 @@ export default {
         return 'Nachrichten';
       }
       if (route === 'heimabendDetails') {
-        return 'Erweiterführende Informmationen';
+        return 'Zurück zur Übersicht';
       }
       return route;
     },

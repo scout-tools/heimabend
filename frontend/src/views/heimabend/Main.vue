@@ -79,6 +79,9 @@ export default {
         if (getSorter === 'random' && returnArray && returnArray.length) {
           returnArray = this._.shuffle(returnArray);
         }
+        if (getSorter === 'rating' && returnArray && returnArray.length) {
+          returnArray = this._.orderBy(returnArray, ['like_score'], ['desc']);
+        }
         this.$store.commit('setHeimabendCounter', returnArray.length);
         return returnArray;
       }

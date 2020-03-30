@@ -76,7 +76,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
     def get_like_score(self, obj):
         global median
         score_id = 'like_score_' + str(obj.id)
-        likescore = cache.get(score_id)
+        likescore = None # cache.get(score_id)
         if likescore is not None:
             return likescore
         else:
@@ -84,19 +84,22 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             likes = query['sum']
             if likes is None:
                 likes = 0
-            border = median * 0.1
-            if likes > median + border:
-                cache.set(score_id, 3, timeout=20)
-                return 3
-            elif likes < median - border:
-                cache.set(score_id, 1, timeout=20)
-                return 1
-            elif likes == 0:
+
+            if likes < 3:
                 cache.set(score_id, 0, timeout=20)
                 return 0
-            else:
+            elif likes < 10:
+                cache.set(score_id, 1, timeout=20)
+                return 1
+            elif likes < 20:
                 cache.set(score_id, 2, timeout=20)
                 return 2
+            elif likes == 30:
+                cache.set(score_id, 3, timeout=20)
+                return 3
+            else:
+                cache.set(score_id, 0, timeout=20)
+                return 0
 
 
 class MessageSerializer(serializers.HyperlinkedModelSerializer):

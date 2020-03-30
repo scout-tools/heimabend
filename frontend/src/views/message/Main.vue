@@ -35,13 +35,13 @@
             ></v-select>
             <v-textarea
               v-model="messageBody"
-              label="Nachticht"
+              label="Nachricht"
               solo
               required
               :error-messages="messageBodyErrors"
               @change="$v.messageBody.$touch()"
               @blur="$v.messageBody.$touch()"
-              hint="Hier keine Nachticht eintippen."></v-textarea>
+              hint="Hier keine Nachricht eintippen."></v-textarea>
 
             <v-btn class="mr-4" @click="submit">Absenden</v-btn>
           </form>
@@ -54,7 +54,7 @@
       y='top'
       :timeout="timeout"
     >
-      {{ 'Fehler beim Sender der Nachticht' }}
+      {{ 'Fehler beim Sender der Nachricht' }}
     </v-snackbar>
     <v-snackbar
       v-model="showSuccess"
@@ -62,7 +62,7 @@
       y='top'
       :timeout="timeout"
     >
-      {{ 'Die Nachticht wurde erfolgreich an uns gesendet' }}
+      {{ 'Die Nachricht wurde erfolgreich an uns gesendet' }}
     </v-snackbar>
   </v-container>
 </template>
@@ -129,8 +129,8 @@ export default {
     messageBodyErrors() {
       const errors = [];
       if (!this.$v.messageBody.$dirty) return errors;
-      !this.$v.messageBody.minLength && errors.push('Nachticht ist zu kurz'); // eslint-disable-line
-      !this.$v.messageBody.maxLength && errors.push('Nachticht ist zu lang'); // eslint-disable-line
+      !this.$v.messageBody.minLength && errors.push('Nachricht ist zu kurz'); // eslint-disable-line
+      !this.$v.messageBody.maxLength && errors.push('Nachricht ist zu lang'); // eslint-disable-line
       return errors;
     },
   },
