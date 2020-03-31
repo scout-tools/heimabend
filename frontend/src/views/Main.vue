@@ -11,7 +11,7 @@
       v-if="!apiIsDown"
       @click="toogleDrawer()"
     />
-      <span
+      <h1
         class="title hand-cursor ml-3 mr-5"
         v-if="!isMobil"
         @click="onHeaderClick()"
@@ -20,7 +20,7 @@
         <span class="font-weight-light">
           Inspirator
         </span>
-      </span>
+      </h1>
 
       <v-text-field
         class="px-3"
@@ -37,7 +37,9 @@
       <img
         v-on:click="onLoginClick"
         class="mr-2"
-        :src="require('../assets/logo.gif')" height="50"
+        :src="require('../assets/logo.gif')"
+        height="50"
+        alt = "Bundesabzeichen vom Deutschen PFadfinderbund Mosaik"
       />
 
 

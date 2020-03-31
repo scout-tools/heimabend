@@ -27,7 +27,7 @@ export default {
       if (this.$route.name === 'heimabendDetails') {
         this.$router.push({ name: 'overview-id', params: this.$route.params.id });
       } else {
-        this.$router.go(-1);
+        this.$router.push('overview');
       }
     },
   },

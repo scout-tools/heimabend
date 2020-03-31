@@ -26,9 +26,6 @@
             <network network="facebook" id="facebook">
               <font-awesome-icon :icon="['fab', 'facebook']" />
             </network>
-            <network network="pinterest" id="pinterest">
-              <font-awesome-icon :icon="['fab', 'pinterest']" />
-            </network>
             <network network="whatsapp" id="whatsapp">
               <font-awesome-icon :icon="['fab', 'whatsapp']" />
             </network>
@@ -149,20 +146,9 @@ export default {
   cursor: pointer;
   margin: 5px;
   padding: 5px;
-  color: #E60023;
-  font-size: 32px;
-  border: #E60023 ;
-  border-style: solid;
-  border-width: 2px;
-}
-
-#pinterest {
-  cursor: pointer;
-  margin: 5px;
-  padding: 5px;
-  color: #4266B2;
-  font-size: 32px;
-  border: #4266B2 ;
+  color: rgba(10, 151, 245, 0.829);
+  font-size: 28px;
+  border: rgba(10, 151, 245, 0.767) ;
   border-style: solid;
   border-width: 2px;
 }
@@ -171,8 +157,8 @@ export default {
   cursor: pointer;
   margin: 5px;
   padding: 5px;
-  color: black;
-  font-size: 32px;
+  color: rgba(0, 0, 0, 0.774);
+  font-size: 28px;
   border: black ;
   border-style: solid;
   border-width: 2px;
@@ -181,9 +167,9 @@ export default {
   cursor: pointer;
   margin: 5px;
   padding: 5px;
-  color: rgb(5, 173, 89);
-  font-size: 32px;
-  border: rgb(5, 173, 89) ;
+  color: rgba(5, 173, 89, 0.856);
+  font-size: 28px;
+  border: rgba(5, 173, 89, 0.822) ;
   border-style: solid;
   border-width: 2px;
 }
@@ -191,9 +177,9 @@ export default {
   cursor: pointer;
   margin: 5px;
   padding: 5px;
-  color: #33ABE0;
-  font-size: 32px;
-  border: #33ABE0 ;
+  color: rgba(51, 172, 224, 0.836);
+  font-size: 28px;
+  border: rgba(51, 172, 224, 0.795) ;
   border-style: solid;
   border-width: 2px;
 }

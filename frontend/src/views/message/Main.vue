@@ -2,8 +2,10 @@
   <v-container>
     <v-row justify="center">
       <v-flex ma-3 lg7>
-        <v-card class="ma-10 pa-10">
-          <div class="display-3 ma-10">Kontakt</div>
+        <v-card :class="cardClass">
+          <div :class="divClass">
+            Kontakt
+          </div>
           <form>
             <v-text-field
               v-model="name"
@@ -52,7 +54,6 @@
       v-model="showError"
       color="error"
       y='top'
-      :timeout="timeout"
     >
       {{ 'Fehler beim Sender der Nachricht' }}
     </v-snackbar>
@@ -60,7 +61,6 @@
       v-model="showSuccess"
       color="success"
       y='top'
-      :timeout="timeout"
     >
       {{ 'Die Nachricht wurde erfolgreich an uns gesendet' }}
     </v-snackbar>
@@ -106,6 +106,21 @@ export default {
   }),
 
   computed: {
+    cardClass() {
+      if (!this.isMobil) {
+        return 'ma-10 pa-10';
+      }
+      return 'ma-2 pa-2';
+    },
+    divClass() {
+      if (!this.isMobil) {
+        return 'display-3 ma-10';
+      }
+      return 'display-1 ma-2';
+    },
+    isMobil() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
     nameErrors() {
       const errors = [];
       if (!this.$v.name.$dirty) return errors;
