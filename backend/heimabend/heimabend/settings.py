@@ -59,6 +59,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'heimabend.urls'
@@ -98,6 +101,23 @@ DATABASES = {
     #     'PORT': '3306',
     # }
 }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+
+# Key in `CACHES` dict
+CACHE_MIDDLEWARE_ALIAS = 'default'
+
+# Additional prefix for cache keys
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
+# Cache key TTL in seconds
+CACHE_MIDDLEWARE_SECONDS = 600
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

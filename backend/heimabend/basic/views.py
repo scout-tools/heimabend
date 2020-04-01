@@ -18,7 +18,7 @@ class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 
 class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):
-    queryset = Message.objects.all()
+    queryset = Message.objects.all().order_by('createdAt')
     serializer_class = MessageSerializer
 
 

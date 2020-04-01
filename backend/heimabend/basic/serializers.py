@@ -4,6 +4,7 @@ from rest_framework import serializers
 from .models import Tag, Event, Message, Like
 from django.db.models import Sum
 from django.core.cache import cache
+from django.views.decorators.cache import cache_control
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
@@ -19,7 +20,12 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
             'color')
 
     def get_tag_count(self, obj):
-        return Event.objects.filter(tags__id=obj.id).distinct().count()
+        tag_id = 'tag_' + str(obj.id)
+        tag_count = cache.get(tag_id)
+        if tag_count is None:
+            tag_count = Event.objects.filter(tags__id=obj.id).distinct().count()
+            cache.set(tag_id, tag_count, timeout=24 * 60 * 60)
+        return tag_count
 
 
 class LikeSerializer(serializers.HyperlinkedModelSerializer):
@@ -35,13 +41,16 @@ class LikeSerializer(serializers.HyperlinkedModelSerializer):
         )
 
     def get_current_median(self, obj):
-        global median
+        return getmedian()
+
+
+def getmedian():
+    median = cache.get('median')
+    if median is None:
         query = Like.objects.values("eventId__id").annotate(sum=Sum('opinionTypeId')).order_by('sum')
         median = query[int(query.count() / 2)]['sum']
-        return median
-
-
-median = 0
+        cache.set('median', median, timeout=12 * 60 * 60)
+    return median
 
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
@@ -74,32 +83,29 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             'like_score')
 
     def get_like_score(self, obj):
-        global median
+        median = getmedian()
         score_id = 'like_score_' + str(obj.id)
-        likescore = None # cache.get(score_id)
-        if likescore is not None:
-            return likescore
-        else:
+        likescore = cache.get(score_id)
+        if likescore is None:
             query = Like.objects.filter(eventId=obj.id).all().aggregate(sum=Sum('opinionTypeId'))
             likes = query['sum']
+
             if likes is None:
                 likes = 0
 
             if likes < 3:
-                cache.set(score_id, 0, timeout=20)
-                return 0
+                likescore = 0
             elif likes < 10:
-                cache.set(score_id, 1, timeout=20)
-                return 1
+                likescore = 1
             elif likes < 20:
-                cache.set(score_id, 2, timeout=20)
-                return 2
+                likescore = 2
             elif likes == 30:
-                cache.set(score_id, 3, timeout=20)
-                return 3
+                likescore = 3
             else:
-                cache.set(score_id, 0, timeout=20)
-                return 0
+                likescore = 0
+            cache.set(score_id, likescore, timeout=13 * 60 * 60)
+
+        return likescore
 
 
 class MessageSerializer(serializers.HyperlinkedModelSerializer):
