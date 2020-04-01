@@ -8,6 +8,7 @@ import Tags from '../views/tags/Main.vue';
 import HeimabendCreate from '../views/heimabend/create/Main.vue';
 import MessageOverview from '../views/message/Overview.vue';
 import HeimabendDetails from '../views/heimabend/details/Main.vue';
+import RankingOverview from '../views/ranking/Main.vue';
 
 Vue.use(VueRouter);
 
@@ -64,6 +65,12 @@ const routes = [
     name: 'heimabendDetails',
     component: HeimabendDetails,
     props: true,
+  },
+  {
+    path: '/ranking',
+    name: 'ranking-overview',
+    component: RankingOverview,
+
   },
 ];
 

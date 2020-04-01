@@ -1,6 +1,6 @@
 <template>
 <div>
-<v-slide-y-transition  group>
+<!-- <v-slide-y-transition group> -->
   <v-card
     :max-width="getMaxWidth()"
     class="mx-auto ma-5"
@@ -109,42 +109,19 @@
             {{ getLikeScoreTooltip(item.like_score)}}
           </span>
         </v-tooltip>
-
-      <!-- <v-divider
-        v-if="!isAuthenticated && !isDetailsView"
-        vertical/>
-        <v-tooltip
-          nudge-left="80"
-          v-if="!isAuthenticated && !isDetailsView"
-          bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              class="ma-2"
-              v-on="on"
-              text
-              icon
-              color="black lighten-2"
-              @click="onDetailsClick(item)">
-              <v-icon>mdi-information-outline</v-icon>
-            </v-btn>
-          </template>
-          <span class="mx-1">
-            Weitere Informationen
-          </span>
-        </v-tooltip> -->
     </v-list-item>
 
     <v-divider/>
     <v-card-text>
       <div>
-      <p
-        class="text-left subtitle-1"
-        :class="getDescriptionClass()"
-        v-html="item.description">
-      </p>
+        <p
+          class="text-left subtitle-1"
+          :class="getDescriptionClass()"
+          v-html="item.description">
+        </p>
         <v-tooltip
           nudge-left="80"
-          v-if="!isAuthenticated && !isDetailsView"
+          v-if="!isDetailsView"
           bottom>
           <template v-slot:activator="{ on }">
       <v-btn
@@ -437,7 +414,7 @@
         </div>
     </v-card-actions>
   </v-card>
-  </v-slide-y-transition>
+  <!-- </v-slide-y-transition> -->
   <v-snackbar
     v-model="showError"
     color="error"

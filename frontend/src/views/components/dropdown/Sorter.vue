@@ -57,7 +57,7 @@ export default {
         },
         {
           id: 'rating',
-          text: 'Bewertung',
+          text: 'Beste Bewertung',
           icon: 'mdi-star-face',
         },
         {

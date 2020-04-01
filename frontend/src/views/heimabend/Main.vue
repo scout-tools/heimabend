@@ -99,7 +99,6 @@ export default {
   },
 
   methods: {
-
     refresh() {
       this.items = [];
       this.getEvents();

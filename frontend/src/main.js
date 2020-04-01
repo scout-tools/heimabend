@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import {
   faWhatsapp, faTelegram, faPinterest, faFacebook,
 } from '@fortawesome/free-brands-svg-icons';
+import VueGoogleCharts from 'vue-google-charts';
+
 import App from './App.vue';
 import router from './router';
 import auth from './auth';
@@ -36,6 +38,7 @@ new Vue({
 }).$mount('#app');
 
 Vue.use(SocialSharing);
+Vue.use(VueGoogleCharts);
 Vue.use(VueLodash,
   {
     name: 'custom',

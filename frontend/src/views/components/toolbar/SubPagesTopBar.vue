@@ -59,7 +59,7 @@ export default {
       if (route === 'heimabendDetails') {
         return 'Zurück zur Übersicht';
       }
-      return route;
+      return 'Zurück zur Übersicht';
     },
   },
 };

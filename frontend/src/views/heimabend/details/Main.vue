@@ -11,6 +11,11 @@
       color="primary"
       indeterminate
     />
+    <v-container class="mx-auto ma-5">
+    <v-row justify="center">
+      Teilen über:
+    </v-row>
+      <v-row justify="center">
     <social-sharing
       :url="getUrl()"
       title="Heimabend Inspirator"
@@ -34,6 +39,8 @@
             </network>
         </div>
       </social-sharing>
+    </v-row>
+    </v-container>
   </div>
 </div>
 </template>

@@ -94,36 +94,20 @@
             </v-card>
           </v-row>
           <v-spacer dark class="my-6"/>
-          <!-- <v-row>
-            <v-card
-              width="200"
-              class="mx-auto"
-            >
-              <v-list-item class="secondary">
-                <v-list-item-content>
-                  <v-list-item-title>Likes</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item>
-                <v-card-text mx-5>
-                  <v-col cols="12">
-                    Minimale Anzahl von Likes
-                    <v-slider
-                      prepend-icon="mdi-thumb-up"
-                      icon-color="secondary"
-                      thumb-label
-                      dense
-                      max="20"
-                    ></v-slider>
-                  </v-col>
-                </v-card-text>
-              </v-list-item>
-            </v-card>
-          </v-row> -->
-          <!-- <v-spacer dark class="my-6"/> -->
       </v-list>
       <template v-slot:append>
         <v-list bottom>
+          <v-divider v-if="!isAuthenticated"/>
+
+          <v-list-item v-if="!isAuthenticated" link bottom>
+            <v-list-item-icon>
+              <v-icon>mdi-medal-outline</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content @click="onClickRanking()">
+              <v-list-item-title>Ranking</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
           <v-divider v-if="isAuthenticated"/>
 
           <v-list-item v-if="isAuthenticated" link bottom>
@@ -210,6 +194,9 @@ export default {
     },
     onClickMessage() {
       this.$router.push({ name: 'messageOverview' });
+    },
+    onClickRanking() {
+      this.$router.push({ name: 'ranking-overview' });
     },
     onToggleJustActive() {
       this.$store.commit('toggleJustActive');
