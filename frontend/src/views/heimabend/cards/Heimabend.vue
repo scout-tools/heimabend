@@ -1,40 +1,46 @@
 <template>
 <div>
-<!-- <v-slide-y-transition group> -->
+  <span
+    class="deinHeimabendSpan"
+    :class="yourHeimabendSpan()">
+    dein Heimabend.
+  </span>
+  <span class="bg"/>
   <v-card
     :max-width="getMaxWidth()"
-    class="mx-auto ma-5"
+    elevation=15
+    class="mx-auto ma-3 mb-10 test-color"
     :style="{ transitionDelay: delay }"
     v-bind:id="`eventcard-${item.id}`"
-    color="backgroundGrey"
     v-for="(item, index) in items"
     :key="index"
   >
     <v-list-item
-      class="lightPrimary px-0"
+      class="primary px-0"
       :class="paddingleftLebelIcons"
     >
       <v-img
         class="ml-1"
         :src="require('@/assets/wolfskopf.png')"
-        v-if="item.isLvlOne"
+        v-if="item.isLvlOne && isDetailsView"
         :max-width="maxWidthKnots"
       ></v-img>
       <v-img
         class="ml-1"
         :src="require('../../../assets/knot_blue.png')"
-        v-if="item.isLvlTwo"
+        v-if="item.isLvlTwo && isDetailsView"
         :max-width="maxWidthKnots"
       ></v-img>
       <v-img
         class="ml-1"
         :src="require('../../../assets/knot_red.png')"
-        v-if="item.isLvlThree"
+        v-if="item.isLvlThree && isDetailsView"
         :max-width="maxWidthKnots"
       ></v-img>
-      <v-divider class="mx-2" vertical></v-divider>
+      <v-divider v-if="isDetailsView" class="mx-2" vertical></v-divider>
       <v-list-item-content>
         <v-list-item-title
+          class="whiteText"
           :class="titleClass()">
             {{ item.title }}
         </v-list-item-title>
@@ -64,7 +70,7 @@
         class="ma-1 ml-0"
         text
         icon
-        color="red lighten-2"
+        color="red lighten-3"
         v-if="isAuthenticated"
         @click="onDeleteClick(item)">
         <v-icon>mdi-delete-outline</v-icon>
@@ -75,7 +81,7 @@
           class="ma-1 ml-0"
           text
           icon
-          color="gray lighten-2"
+          color="lightPrimary"
           v-if="isAuthenticated"
           @click="onUpdateClick(item)">
           <v-icon>mdi-pencil-outline</v-icon>
@@ -84,7 +90,7 @@
         <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
 
         <v-tooltip
-          v-if="!isMobil && !isAuthenticated"
+          v-if="!isMobil && !isAuthenticated && item.like_score > 0"
           nudge-left="80"
           open-on-hover
           bottom>
@@ -93,11 +99,11 @@
               class="px-2"
               :x-small="isMobil"
               depressed
-              color="lightPrimary"
+              color="primary"
               v-on="on">
               <v-icon
                 v-for="i in item.like_score"
-                color="yellow darken-3"
+                color="#F6D300"
                 :key="i"
                 :size="30"
                 readonly>
@@ -115,7 +121,7 @@
     <v-card-text>
       <div>
         <p
-          class="text-left subtitle-1"
+          class="text-left subtitle-1 mx-10 font-weight-light test-color-text"
           :class="getDescriptionClass()"
           v-html="item.description">
         </p>
@@ -127,11 +133,12 @@
       <v-btn
       v-if="!isDetailsView"
         @click="onDetailsClick(item)"
-        color="#ffe897"
         depressed
         small
-        v-on="on"
-        rounded>
+        outlined
+        class="test-color-text"
+        block
+        v-on="on">
         Weitere Informationen
       </v-btn>
           </template>
@@ -142,9 +149,9 @@
       </div>
     </v-card-text>
 
-    <v-divider class="my-2"/>
+    <v-divider v-if="isDetailsView" class="my-2"/>
     <div v-if="isDetailsView">
-    <div class="text-left ml-3">
+    <div class="text-left ml-10">
       <u>
         Material
       </u>
@@ -152,7 +159,7 @@
 
     <div
       v-if="item.material !== ''"
-      class="text-left font-italic font-weight-light">
+      class="text-left font-italic font-weight-light ml-10">
       <ul>
         <li
           v-for="(item, index4) in getMaterialArray(item.material)"
@@ -197,19 +204,21 @@
     </v-container>
     <v-divider />
 
-    <v-card-actions class="accent">
+    <v-card-actions px-0 class="lightPrimary no-padding">
       <v-tooltip
         nudge-left="80"
-        bottom
-        v-if="!isAuthenticated">
+        bottom>
         <template v-slot:activator="{ on }">
           <v-btn
-            class="ma-2"
             v-on="on"
-            :color="getLikeColor(item)"
             icon
+            :small="isMobil"
+            :color="getLikeColor(item)"
             @click="onLikedClicked(item)">
-            <v-icon>{{ getLikeIcon(item) }}</v-icon>
+            <v-icon
+              :size="getIconSize">
+              {{ getLikeIcon(item) }}
+            </v-icon>
           </v-btn>
         </template>
           <span class="mx-1">
@@ -280,7 +289,7 @@
             <v-btn
               :x-small="isMobil"
               depressed
-              color="accent"
+              color="lightPrimary"
               v-on="on">
               <v-rating
                 v-model="item.costsRating"
@@ -330,7 +339,7 @@
           <template v-slot:activator="{ on }">
             <v-btn
               icon
-              color="accent"
+              color="lightPrimary"
               v-on="on">
               <v-icon
                 v-model="item.isPrepairationNeeded"
@@ -358,7 +367,7 @@
             <v-btn
               :x-small="isMobil"
               depressed
-              color="accent"
+              color="lightPrimary"
               v-on="on">
               <v-rating
                 v-model="item.executionTimeRating"
@@ -401,16 +410,11 @@
         <v-spacer />
         <v-divider
           :class="verticalMargin"
-          vertical
-          v-if="isDetailsView || !isMobil"/>
+          vertical/>
+
 
         <div class="caption ma-1">
-          <v-divider
-            :class="verticalMargin"
-            vertical
-            v-if="isDetailsView || !isMobil"/>
-
-          {{ formatDate(item.createdAt) + '\n von ' + item.createdBy }}
+          {{ formatDate(item.createdAt) + '\n' + item.createdBy }}
         </div>
     </v-card-actions>
   </v-card>
@@ -441,7 +445,7 @@
     y='top'
     :timeout="timeout"
   >
-    {{ 'Danke, für deine Meinung' }}
+    {{ 'Danke für deine Bewertung!' }}
   </v-snackbar>
   <v-snackbar
     v-model="showErrorLiked"
@@ -457,7 +461,7 @@
     y='top'
     :timeout="timeout"
   >
-    {{ 'Du hast diesen Heimabend bereits geliked' }}
+    {{ 'Du hast diese Heimabend-Idee bereits bewertet' }}
   </v-snackbar>
 </div>
 </template>
@@ -466,7 +470,9 @@
 import axios from 'axios';
 
 import store from '@/store'; // eslint-disable-line
+// eslint-disable-next-line import/no-unresolved
 import DeleteModal from '../dialogs/DeleteModal.vue';
+
 
 export default {
   props: {
@@ -480,6 +486,9 @@ export default {
     DeleteModal,
   },
   methods: {
+    yourHeimabendSpan() {
+      return this.isMobil ? 'headerIsMobile' : 'headerIsDesktop';
+    },
     getDescriptionClass() {
       return !this.isDetailsView ? 'giveMeEllipsis' : '';
     },
@@ -683,9 +692,51 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
   .giveMeEllipsis {
     overflow: hidden;
     max-height: 500px;
+  }
+  .test-color {
+    background-color: rgba(255, 254, 254, 0.952) !important;
+  }
+  .test-color-text {
+    color: rgba(0, 0, 0, 0.829)
+  }
+  .whiteText {
+    color: white !important;
+  }
+  .deinHeimabendSpan {
+    font-family: "Special Elite", sans-serif !important;
+    color: rgba(255, 255, 255, 0.692);
+    margin-top: 60px;
+    margin-bottom: 10px;
+  }
+
+  .headerIsMobile {
+    letter-spacing: 0.1em;
+    font-size: 2.0rem !important;
+  }
+
+  .headerIsDesktop {
+    font-size: 3.5rem !important;
+    letter-spacing: 0.4em;
+  }
+
+  .no-padding{
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+  }
+
+.bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url( 'back-2.jpg') no-repeat center center;
+    background-size: 2000px 1300px;
+    background-attachment: fixed;
+    z-index: -1;
   }
 </style>

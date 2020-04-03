@@ -2,13 +2,11 @@
 <div>
   <v-stepper
     v-model="e6"
-    vertical
-  >
+    vertical>
     <v-stepper-step
       editable
       :complete="e6 > 1"
-      step="1"
-    >
+      step="1">
       Text Informationen
       <small>Füge Texte zum Heimabend hinzu</small>
     </v-stepper-step>
@@ -325,7 +323,6 @@
               outlined
               label="Dein Name"
               v-model="data.createdBy"
-              :disabled="isUpdate"
               :rules="rules.createdBy"
               required>
             </v-text-field>
@@ -333,7 +330,6 @@
               v-if="!isAuthenticated || isUpdate"
               outlined
               label="Deine E-Mail Adresse"
-              :disabled="isAuthenticated"
               v-model="data.createdByEmail"
             >
             </v-text-field>
@@ -480,10 +476,10 @@ export default {
       return this.$store.getters.tags;
     },
     isCreate() {
-      return !this.$attrs.id;
+      return !this.$route.params.id;
     },
     isUpdate() {
-      return !!this.$attrs.id;
+      return !!this.$route.params.id;
     },
     getCustomText() {
       const value = this.data.description;
@@ -493,8 +489,8 @@ export default {
       if (value && value.length <= 75) {
         return 'Name must be more than 75 characters';
       }
-      if (value && value.length >= 2000) {
-        return 'Name must be less than 1000 characters';
+      if (value && value.length >= 2500) {
+        return 'Beschreibung ist zu lang';
       }
       return 'Ok';
     },
@@ -606,7 +602,7 @@ export default {
           createdByEmail: this.data.createdByEmail,
         })
           .then(() => {
-            this.$router.push({ name: 'overview' });
+            this.$router.replace({ name: 'overview' });
             this.showSuccess = true;
           })
           .catch(() => {
@@ -630,6 +626,8 @@ export default {
           isLvlOne: this.getLevel(0, this.levelFilter),
           isLvlTwo: this.getLevel(1, this.levelFilter),
           isLvlThree: this.getLevel(2, this.levelFilter),
+          createdBy: this.data.createdBy,
+          createdByEmail: this.data.createdByEmail,
         })
           .then(() => {
             this.$router.push({ name: 'overview' });
@@ -670,13 +668,13 @@ export default {
 <style scoped>
 .v-btn:not(.v-btn--text):not(.v-btn--outlined).v-btn--active:before {
     opacity: 0.4;
-    color: limegreen
+    color: rgb(40, 158, 40)
 }
 .customerRequired {
   text-align: left;
 }
 
 .limegreen {
-    background-color: #32CD3266 !important;
+    background-color: rgb(40, 158, 40) !important;
 }
 </style>

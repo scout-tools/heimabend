@@ -184,6 +184,6 @@ export default {
 <style scoped>
 .v-btn:not(.v-btn--text):not(.v-btn--outlined).v-btn--active:before {
     opacity: 0.4;
-    color: limegreen
+    color: rgb(40, 158, 40)
 }
 </style>

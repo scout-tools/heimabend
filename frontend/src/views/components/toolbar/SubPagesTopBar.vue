@@ -2,7 +2,6 @@
   <v-toolbar
     dense
     fixed
-    color="accent"
   >
     <v-btn icon @click="onBackClick()">
       <v-icon>mdi-arrow-left</v-icon>
@@ -25,9 +24,9 @@ export default {
   methods: {
     onBackClick() {
       if (this.$route.name === 'heimabendDetails') {
-        this.$router.push({ name: 'overview-id', params: this.$route.params.id });
+        this.$router.replace({ name: 'overview-id', params: this.$route.params.id });
       } else {
-        this.$router.push('overview');
+        this.$router.replace('overview');
       }
     },
   },
@@ -35,29 +34,14 @@ export default {
   computed: {
     currentRouteName() {
       const route = this.$route.name;
-      if (route === 'aboutProject') {
-        return 'Über das Projekt';
-      }
-      if (route === 'impressum') {
-        return 'Impressum';
-      }
       if (route === 'heimabendUpdate') {
         return 'Heimabend Bearbeiten';
       }
       if (route === 'heimabendCreate') {
         return 'Neuen Heimabend erstellen';
       }
-      if (route === 'tags') {
-        return 'Themen Übersicht';
-      }
       if (route === 'message') {
         return 'Kontakt Formular';
-      }
-      if (route === 'messageOverview') {
-        return 'Nachrichten';
-      }
-      if (route === 'heimabendDetails') {
-        return 'Zurück zur Übersicht';
       }
       return 'Zurück zur Übersicht';
     },
@@ -72,7 +56,7 @@ export default {
 }
 .v-btn--active:before {
     opacity: 0.4;
-    color: limegreen
+    color: rgb(149, 201, 240)
 }
 
 .theme--light.v-btn--active:hover::before,

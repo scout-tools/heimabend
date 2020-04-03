@@ -34,13 +34,6 @@
         @input="onChangeSearchInput()"
       />
       <v-spacer />
-      <img
-        v-on:click="onLoginClick"
-        class="mr-2"
-        :src="require('../assets/logo.gif')"
-        height="50"
-        alt = "Bundesabzeichen vom Deutschen PFadfinderbund Mosaik"
-      />
 
 
     </v-app-bar>
@@ -49,6 +42,8 @@
       v-if="!apiIsDown"
       ref="mainMenuLeft"
     />
+
+    <menu-right/>
 
     <v-content
       id="lateral"
@@ -77,9 +72,6 @@
     <!-- <pricacy-banner
       v-if="!acceptedPrivacy"
     /> -->
-    <login
-      ref="login"
-    />
     <v-snackbar
       v-model="showError"
       color="error"
@@ -95,17 +87,17 @@
 import axios from 'axios';
 
 import MenuLeft from './components/menu/Left.vue';
+import MenuRight from './components/menu/Right.vue';
 import ApiDownBanner from './components/banner/ApiDown.vue';
 // import PricacyBanner from '@/views/components/banner/Privacy.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
-import Login from './components/dialogs/Login.vue';
 import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
 import Fab from './components/fab/Standard.vue';
 
 export default {
   components: {
     MenuLeft,
-    Login,
+    MenuRight,
     Topbar,
     SubPagesTopBar,
     ApiDownBanner,
@@ -121,7 +113,7 @@ export default {
       return `Suche in ${counter} Heimabenden ...`;
     },
     getMargin() {
-      return this.isMobil ? 'ma-1' : 'ma-10';
+      return this.isMobil ? 'ma-1' : 'ma-5';
     },
     tags() {
       return this.$store.getters.tags;
@@ -146,9 +138,6 @@ export default {
     },
     toogleDrawer() {
       this.$refs.mainMenuLeft.toggleDrawer();
-    },
-    onLoginClick() {
-      this.$refs.login.show();
     },
     getTags() {
       const path = `${this.API_URL}basic/tag/`;
@@ -189,12 +178,14 @@ export default {
 
   .content {
     flex: 1;
-    background-image: ''
   }
   .v-btn-toggle--group > .v-btn.v-btn {
     margin: 2px !important;
   }
   .hand-cursor {
     cursor: pointer
+  }
+  .theme--light.v-application {
+    background: transparent !important;
   }
 </style>

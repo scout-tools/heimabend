@@ -1,13 +1,41 @@
 <template>
   <v-toolbar
+    class="top-toolbar"
     dense
     fixed
-  >
+    :extension-height="extensionHeightNumber"
+    :extended="isExtended && isMobil">
   <v-spacer/>
     <template>
       <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
-
-      <div v-if="$vuetify.breakpoint.mdAndUp" class="mx-4"></div>
+        <v-btn-toggle
+          v-model="toggle_exclusive"
+          multiple
+          group
+          dense
+        >
+          <v-tooltip
+            v-if="isMobil"
+            nudge-left="80"
+            bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                @click="onExpandClick()"
+                dense
+                class="pa-0"
+                v-on="on"
+                text
+              >
+                <v-icon>
+                  mdi-tune
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>
+              Mehr Filter
+            </span>
+          </v-tooltip>
+        </v-btn-toggle>
         <v-btn-toggle
           v-model="toggle_exclusive"
           multiple
@@ -32,7 +60,7 @@
                   mdi-robot
                 </v-icon>
                 <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
-                  Digital?
+                  Digital
                 </span>
               </v-btn>
             </template>
@@ -60,7 +88,7 @@
                   mdi-account-cowboy-hat
                 </v-icon>
                 <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
-                  Alleine?
+                  Alleine
                 </span>
               </v-btn>
             </template>
@@ -92,7 +120,7 @@
                   mdi-card-bulleted-off-outline
                 </v-icon>
                 <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
-                  Ohne Vorbereitung
+                  Ohne Vorbe.
                 </span>
               </v-btn>
             </template>
@@ -121,7 +149,7 @@
                   mdi-currency-usd-off
                 </v-icon>
                 <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
-                  Ohne Kosten
+                  0 €
                 </span>
               </v-btn>
             </template>
@@ -151,21 +179,9 @@
                 v-on="on"
               >
                 <v-img
-                  v-if="getOrange"
                   :src="require('@/assets/wolfskopf.png')"
                   max-width="28"
                 />
-                <v-img
-                  v-if="!getOrange"
-                  :src="require('../../../assets/wolfskopf_grau.png')"
-                  max-width="28"
-                />
-                <span
-                  v-if="$vuetify.breakpoint.mdAndUp"
-                  class="mx-1"
-                >
-                  Wölflinge
-                </span>
               </v-btn>
             </template>
             <span>
@@ -183,18 +199,9 @@
                 v-on="on"
               >
                 <v-img
-                  v-if="getBlue"
                   :src="require('../../../assets/knot_blue.png')"
                   max-width="28"
                 ></v-img>
-                <v-img
-                  v-if="!getBlue"
-                  :src="require('../../../assets/knot_grey.png')"
-                  max-width="28"
-                ></v-img>
-                <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
-                  Pfadis
-                </span>
               </v-btn>
             </template>
             <span>
@@ -212,18 +219,9 @@
                 v-on="on"
               >
                 <v-img
-                  v-if="getRed"
                   :src="require('../../../assets/knot_red.png')"
                   max-width="28"
                 ></v-img>
-                <v-img
-                  v-if="!getRed"
-                  :src="require('../../../assets/knot_grey.png')"
-                  max-width="28"
-                ></v-img>
-              <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
-                Rover
-              </span>
               </v-btn>
             </template>
             <span>
@@ -231,13 +229,43 @@
             </span>
           </v-tooltip>
         </v-btn-toggle>
-
-      <v-divider v-if="$vuetify.breakpoint.mdAndUp" class="mx-2" vertical/>
+        <div class="mr-12"></div>
+      <!-- <v-divider v-if="$vuetify.breakpoint.mdAndUp" class="mx-2" vertical/>
       <Sorter
         v-if="$vuetify.breakpoint.mdAndUp"
         style="max-width: 250px"
-      />
+      /> -->
+
     </template>
+  <template
+        #extension
+        v-if="isExtended && isMobil"
+      >
+    <v-container class="pa-0" style="margin: 0px; width: 100%">
+
+      <v-layout wrap>
+        <div class="pa-0">
+          <v-chip-group
+            multiple
+            :column="isMobil"
+            v-model="filterTags"
+            @change="onChange()"
+          >
+            <v-chip
+              filter
+              small
+              v-for="(tag, index) in tags"
+              :value="tag.id"
+              :key="index"
+              :color="tag.color">
+              {{ tag.name }}
+            </v-chip>
+          </v-chip-group>
+        </div>
+      </v-layout>
+    </v-container>
+
+      </template>
   <v-spacer/>
   </v-toolbar>
 </template>
@@ -247,20 +275,21 @@ import Sorter from '@/views/components/dropdown/Sorter.vue'; //eslint-disable-li
 
 export default {
   components: {
-    Sorter,
+    // Sorter,
   },
   data() {
     return {
       levelFilter: [0, 1, 2],
+      isExtended: false,
+      filterTags: [],
     };
   },
   methods: {
+    onExpandClick() {
+      this.isExtended = !this.isExtended;
+    },
     onChangeLevelFilter() {
       this.$store.commit('setLevelFilter', this.levelFilter);
-    },
-    resetTags() {
-      this.filterTags = [];
-      this.$emit('onTagFilterChanged', this.filterTags);
     },
     onIsPossibleInside() {
       this.$store.commit('tooglePossibleInside');
@@ -280,8 +309,23 @@ export default {
     onWithoutCosts() {
       this.$store.commit('toogleWithoutCosts');
     },
+    onChange() {
+      this.$emit('onTagFilterChanged', this.filterTags);
+      this.$store.commit('changeFilterTags', this.filterTags);
+    },
+    resetTags() {
+      this.filterTags = [];
+      this.$emit('onTagFilterChanged', this.filterTags);
+      this.$store.commit('changeFilterTags', []);
+    },
+    onClickTags() {
+      this.$router.push({ name: 'tags' });
+    },
   },
   computed: {
+    extensionHeightNumber() {
+      return this.isMobil ? '350px' : '50px';
+    },
     getOrange() {
       if (this.levelFilter) {
         return this.levelFilter.includes(0);
@@ -375,6 +419,27 @@ export default {
       }
       return '';
     },
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    },
+    isJustActive: {
+      get() {
+        return this.$store.getters.justActive;
+      },
+      set() {
+        return false;
+      },
+    },
+    tags() {
+      return this.$store.getters.tags;
+    },
+    isMobil() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
+    getFilterTags() {
+      this.filterTags = this.$store.getters.filterTags; // eslint-disable-line
+      return this.$store.getters.filterTags;
+    },
   },
 };
 </script>
@@ -382,15 +447,26 @@ export default {
 <style scoped>
 .v-btn:not(.v-btn--text):not(.v-btn--outlined).v-btn--active:before {
     opacity: 0.4;
-    color: limegreen
+    color: rgb(40, 158, 40)
 }
 .v-btn--active:before {
     opacity: 0.4;
-    color: limegreen
+    color: rgb(40, 158, 40)
+}
+
+.v-btn {
+  padding-left: 6px !important;
+  padding-right: 6px !important;
 }
 
 .theme--light.v-btn--active:hover::before,
 .theme--light.v-btn--active::before {
-  opacity: 0.3;
+    opacity: 0.3;
+}
+.top-toolbar {
+  /* margin-right: 240px; */
+}
+span {
+  font-size: 12px !important;
 }
 </style>

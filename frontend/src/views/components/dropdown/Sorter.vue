@@ -65,7 +65,6 @@ export default {
           text: 'Zufällige Sortierung',
           icon: 'mdi-dice-multiple-outline',
         },
-
         {
           id: 'alpha',
           text: 'Titel A-Z',

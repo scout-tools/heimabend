@@ -2,10 +2,10 @@
   <v-container>
     <v-row justify="center">
       <v-flex ma-3 lg7>
+        <div :class="divClass">
+          Kontakt
+        </div>
         <v-card :class="cardClass">
-          <div :class="divClass">
-            Kontakt
-          </div>
           <form>
             <v-text-field
               v-model="name"
@@ -84,13 +84,14 @@ export default {
     name: { required, minLength: minLength(3), maxLength: maxLength(20) },
     email: { email },
     topic: { required },
-    messageBody: { required, minLength: minLength(10), maxLength: maxLength(1000) },
+    messageBody: { required, minLength: minLength(10), maxLength: maxLength(2500) },
   },
 
   data: () => ({
     name: '',
     email: '',
     topic: null,
+    messageBody: '',
     showError: false,
     API_URL: process.env.VUE_APP_API,
     showSuccess: false,

@@ -7,6 +7,7 @@
       direction="top"
       transition="slide-y-reverse-transition"
       fixed
+      class="main"
     >
       <template v-slot:activator>
         <v-btn
@@ -76,5 +77,9 @@ export default {
 
 #create .v-btn--floating {
   position: relative;
+}
+
+.main {
+ z-index: 100000000000;
 }
 </style>

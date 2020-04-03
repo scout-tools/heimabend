@@ -12,9 +12,6 @@
       indeterminate
     />
     <v-container class="mx-auto ma-5">
-    <v-row justify="center">
-      Teilen über:
-    </v-row>
       <v-row justify="center">
     <social-sharing
       :url="getUrl()"
@@ -151,42 +148,46 @@ export default {
 <style>
 #facebook{
   cursor: pointer;
-  margin: 5px;
+  margin: 10px;
   padding: 5px;
-  color: rgba(10, 151, 245, 0.829);
-  font-size: 28px;
-  border: rgba(10, 151, 245, 0.767) ;
+  color: white;
+  background-color: rgba(10, 151, 245, 0.829);;
+  font-size: 32px;
+  border: white;
   border-style: solid;
   border-width: 2px;
 }
 
 #email {
   cursor: pointer;
-  margin: 5px;
+  margin: 10px;
   padding: 5px;
-  color: rgba(0, 0, 0, 0.774);
-  font-size: 28px;
-  border: black ;
+  color: lightgray;
+  background-color: rgba(0, 0, 0, 0.774);
+  font-size: 32px;
+  border: lightgray ;
   border-style: solid;
   border-width: 2px;
 }
 #whatsapp {
   cursor: pointer;
-  margin: 5px;
+  margin: 10px;
   padding: 5px;
-  color: rgba(5, 173, 89, 0.856);
-  font-size: 28px;
-  border: rgba(5, 173, 89, 0.822) ;
+  color: white;;
+  background-color: rgba(5, 173, 89, 0.856);;
+  font-size: 32px;
+  border: white;
   border-style: solid;
   border-width: 2px;
 }
 #telegram {
   cursor: pointer;
-  margin: 5px;
+  margin: 10px;
   padding: 5px;
-  color: rgba(51, 172, 224, 0.836);
-  font-size: 28px;
-  border: rgba(51, 172, 224, 0.795) ;
+  color: white;
+  background-color: rgba(51, 172, 224, 0.836);
+  font-size: 32px;
+  border: white;
   border-style: solid;
   border-width: 2px;
 }
