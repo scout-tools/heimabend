@@ -8,6 +8,7 @@ router.register(r'tag', views.TagViewSet)
 router.register(r'event', views.EventViewSet)
 router.register(r'message', views.MessageViewSet)
 router.register(r'like', views.LikeViewSet)
+router.register(r'highscore', views.HighscoreView)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

@@ -2,7 +2,7 @@
 from rest_framework import viewsets, mixins, generics
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework_tracking.mixins import LoggingMixin
-from .serializers import TagSerializer, EventSerializer, MessageSerializer, LikeSerializer
+from .serializers import TagSerializer, EventSerializer, MessageSerializer, LikeSerializer, HighscoreSerializer
 from .models import Tag, Event, Message, Like
 
 
@@ -25,3 +25,8 @@ class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):
 class LikeViewSet(LoggingMixin, mixins.CreateModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
+
+
+class HighscoreView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
+    queryset = Event.objects.values('createdBy').distinct()
+    serializer_class = HighscoreSerializer

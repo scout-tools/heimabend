@@ -2,7 +2,7 @@
 import timeit
 from rest_framework import serializers
 from .models import Tag, Event, Message, Like
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from django.core.cache import cache
 from django.views.decorators.cache import cache_control
 
@@ -60,27 +60,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Event
         fields = (
-            'id',
-            'title',
-            'description',
-            'isPossibleOutside',
-            'isPossibleInside',
-            'tags',
-            'material',
-            'costsRating',
-            'executionTimeRating',
-            'isPrepairationNeeded',
-            'isActive',
-            'isLvlOne',
-            'isLvlTwo',
-            'isLvlThree',
-            'isPossibleDigital',
-            'isPossibleAlone',
-            'createdBy',
-            'createdByEmail',
-            'updatedBy',
-            'createdAt',
-            'updatedAt',
+            '__all__'
             'like_score')
 
     def get_like_score(self, obj):
@@ -118,3 +98,18 @@ class MessageSerializer(serializers.HyperlinkedModelSerializer):
             'topic',
             'messageBody',
             'createdAt')
+
+
+class HighscoreSerializer(serializers.HyperlinkedModelSerializer):
+    highscore = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Event
+        fields = (
+            'createdBy',
+            'highscore',
+        )
+
+    def get_highscore(self, obj):
+        score = Event.objects.filter(createdBy=obj['createdBy']).count()
+        return score
