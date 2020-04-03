@@ -5,7 +5,7 @@
     :class="yourHeimabendSpan()">
     dein Heimabend.
   </span>
-  <span class="bg"/>
+  <span v-if="!isMobil" class="bg"/>
   <div
     v-infinite-scroll="loadMore"
     spinner="spiral"
@@ -737,7 +737,6 @@ export default {
   }
   .deinHeimabendSpan {
     font-family: "Special Elite", sans-serif !important;
-    color: rgba(255, 255, 255, 0.692);
     margin-top: 60px;
     margin-bottom: 10px;
   }
@@ -745,11 +744,13 @@ export default {
   .headerIsMobile {
     letter-spacing: 0.1em;
     font-size: 2.0rem !important;
+    color: rgba(14, 12, 12, 0.692);
   }
 
   .headerIsDesktop {
     font-size: 3.5rem !important;
     letter-spacing: 0.4em;
+    color: rgba(255, 255, 255, 0.692);
   }
 
   .no-padding{
