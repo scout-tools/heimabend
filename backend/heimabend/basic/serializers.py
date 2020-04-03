@@ -60,8 +60,28 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Event
         fields = (
-            '__all__'
-            'like_score')
+            'id',
+            'title',
+            'description',
+            'isPossibleOutside',
+            'isPossibleInside',
+            'tags',
+            'material',
+            'costsRating',
+            'executionTimeRating',
+            'isPrepairationNeeded',
+            'isActive',
+            'isLvlOne',
+            'isLvlTwo',
+            'isLvlThree',
+            'isPossibleDigital',
+            'isPossibleAlone',
+            'createdBy',
+            'createdByEmail',
+            'updatedBy',
+            'createdAt',
+            'updatedAt', '
+                         'like_score')
 
     def get_like_score(self, obj):
         # median = getmedian()
