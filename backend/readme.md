@@ -1,8 +1,12 @@
 `pipenv shell`
 
 `python manage.py loaddata test-data/*.json`
+# nginx config: /etc/nginx/nginx.conf
 
-# nginx config
+    user benutzername; #benutzername muss dem eigenem benutzernamen entsprechen
+
+
+# nginx config: /etc/nginx/sites-available/heimabend_nginx.conf
 
     upstream django {
          server unix:///root/heimabend/backend/heimabend/heimabend.sock;
@@ -52,3 +56,64 @@
 # How to install nginx for django
     
  https://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html
+ 
+# packages needed
+    python3(.8)
+    python3(.8)-dev
+    
+ 
+# requirements.txt for all pip3 dependencies
+    asgiref==3.2.5
+    Django==3.0.4
+    django-cors-headers==3.2.1
+    djangorestframework==3.11.0
+    djangorestframework-simplejwt==4.4.0
+    drf-api-tracking==1.6.0
+    PyJWT==1.7.1
+    PyMySQL==0.9.3
+    python-memcached==1.59
+    pytz==2019.3
+    six==1.14.0
+    sqlparse==0.3.1
+    uWSGI==2.0.18
+    
+# uwsgi ini file: heimabend_uswgi.ini
+     [uwsgi]
+    # Django-related settings
+    env = LANG=de_DE.UTF-8
+    # the base directory (full path)
+    chdir           = /root/heimabend/backend/heimabend
+    # Django's wsgi file
+    wsgi-file          = /root/heimabend/backend/heimabend/heimabend/wsgi.py
+    # the virtualenv (full path)
+    home            = /root/heimabend/backend/backendenv
+
+    # process-related settings
+    # master
+    master          = true
+    # maximum number of worker processes
+    processes       = 2
+    # the socket (use the full path to be safe
+    socket          = /root/heimabend/backend/heimabend/heimabend.sock
+    # ... with appropriate permissions - may be needed
+    chmod-socket    = 666
+    # clear environment on exit
+    vacuum          = false
+    threads = true
+ 
+# To start/restart uwsgi server
+    
+    1)enter tmux session
+    tmux a -t backend
+    (or create new one with tmux new -s backend)
+    
+    2)enter virtualenv
+    source /root/heimabend/backend/backend/bin/activate
+    
+    3)enter directory
+    cd /root/heimabend/backend/heimabend
+    
+    4)start uswsgi
+    uwsgi --ini heimabend_uwsgi.ini
+    
+    
