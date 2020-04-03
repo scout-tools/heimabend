@@ -10,6 +10,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import VueGoogleCharts from 'vue-google-charts';
 import VueFullPage from 'vue-fullpage.js';
+import infiniteScroll from 'vue-infinite-scroll';
 
 import App from './App.vue';
 import router from './router';
@@ -38,6 +39,8 @@ new Vue({
   render: h => h(App),
 }).$mount('#app');
 
+
+Vue.use(infiniteScroll);
 Vue.use(VueFullPage);
 Vue.use(SocialSharing);
 Vue.use(VueGoogleCharts);

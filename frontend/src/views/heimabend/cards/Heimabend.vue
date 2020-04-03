@@ -6,13 +6,20 @@
     dein Heimabend.
   </span>
   <span class="bg"/>
+  <div
+    v-infinite-scroll="loadMore"
+    spinner="spiral"
+    infinite-scroll-disabled="busy"
+    infinite-scroll-distance="200">
+
+    <span slot="no-more"></span>
   <v-card
     :max-width="getMaxWidth()"
     elevation=15
     class="mx-auto ma-3 mb-10 test-color"
     :style="{ transitionDelay: delay }"
     v-bind:id="`eventcard-${item.id}`"
-    v-for="(item, index) in items"
+    v-for="(item, index) in data"
     :key="index"
   >
     <v-list-item
@@ -418,6 +425,7 @@
         </div>
     </v-card-actions>
   </v-card>
+  </div>
   <!-- </v-slide-y-transition> -->
   <v-snackbar
     v-model="showError"
@@ -463,6 +471,12 @@
   >
     {{ 'Du hast diese Heimabend-Idee bereits bewertet' }}
   </v-snackbar>
+<v-progress-circular
+      v-show="busy"
+      indeterminate
+      size="40"
+      color="white"
+    ></v-progress-circular>
 </div>
 </template>
 
@@ -486,6 +500,18 @@ export default {
     DeleteModal,
   },
   methods: {
+    loadMore() {
+      const currentData = this.data.length;
+      const maxLength = this.items.length;
+      if (currentData < maxLength) {
+        this.busy = true;
+        setTimeout(() => {
+          const newData = this.items.slice(currentData, currentData + 3);
+          this.data = this.data.concat(newData);
+          this.busy = false;
+        }, 500);
+      }
+    },
     yourHeimabendSpan() {
       return this.isMobil ? 'headerIsMobile' : 'headerIsDesktop';
     },
@@ -658,6 +684,9 @@ export default {
       showSuccessLiked: false,
       alreadyVotedSnackbar: false,
       emptyMaterialText: 'Juhu, kein Material nötig ^^',
+      data: [],
+      busy: false,
+      count: 0,
     };
   },
   mounted() {
