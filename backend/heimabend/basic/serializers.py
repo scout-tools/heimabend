@@ -80,8 +80,8 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             'createdByEmail',
             'updatedBy',
             'createdAt',
-            'updatedAt', '
-                         'like_score')
+            'updatedAt',
+            'like_score')
 
     def get_like_score(self, obj):
         # median = getmedian()
