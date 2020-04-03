@@ -9,6 +9,7 @@ import {
   faWhatsapp, faTelegram, faPinterest, faFacebook,
 } from '@fortawesome/free-brands-svg-icons';
 import VueGoogleCharts from 'vue-google-charts';
+import VueFullPage from 'vue-fullpage.js';
 
 import App from './App.vue';
 import router from './router';
@@ -37,6 +38,7 @@ new Vue({
   render: h => h(App),
 }).$mount('#app');
 
+Vue.use(VueFullPage);
 Vue.use(SocialSharing);
 Vue.use(VueGoogleCharts);
 Vue.use(VueLodash,

@@ -13,10 +13,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, index) in items" :key="item.name">
+              <tr v-for="(item, index) in gerOrdered" :key="item.createdBy">
                 <td class="text-left">{{ index + 1 }}</td>
-                <td class="text-left">{{ item.name }}</td>
-                <td class="text-left">{{ item.count }}</td>
+                <td class="text-left">{{ item.createdBy }}</td>
+                <td class="text-left">{{ item.highscore }}</td>
                 <td class="text-left">
                   <v-icon :color="getAwardColor(index + 1)">{{ getIcon(index + 1) }}</v-icon>
                 </td>
@@ -30,27 +30,14 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      items: [
-        {
-          name: 'Robert',
-          count: 23,
-        },
-        {
-          name: 'Dorothea',
-          count: 10,
-        },
-        {
-          name: 'Sheldon',
-          count: 8,
-        },
-        {
-          name: 'Jan',
-          count: 6,
-        },
-      ],
+      loading: true,
+      items: [],
+      API_URL: process.env.VUE_APP_API,
     };
   },
   methods: {
@@ -70,6 +57,27 @@ export default {
       }
       return '';
     },
+    getCallHighscoreService() {
+      this.loading = true;
+      axios.get(`${this.API_URL}basic/highscore/`)
+        .then((response) => {
+          this.items = response.data;
+          this.loading = false;
+        })
+        .catch((error) => {
+          this.loading = false;
+          this.responseObj = error;
+          this.showError = true;
+        });
+    },
+  },
+  computed: {
+    gerOrdered() {
+      return this._.sortBy(this.items, ['highscore']).reverse();
+    },
+  },
+  created() {
+    this.getCallHighscoreService();
   },
 };
 </script>
