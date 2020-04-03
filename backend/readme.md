@@ -43,3 +43,12 @@
         ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
     }
+ 
+ 
+# How to set up TLS certificate:
+    
+  https://www.digitalocean.com/community/tutorials/how-to-set-up-let-s-encrypt-with-nginx-server-blocks-on-ubuntu-16-04
+    
+# How to install nginx for django
+    
+ https://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html
