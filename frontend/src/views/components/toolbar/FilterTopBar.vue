@@ -148,9 +148,6 @@
                 >
                   mdi-currency-usd-off
                 </v-icon>
-                <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
-                  0 €
-                </span>
               </v-btn>
             </template>
             <span>
@@ -463,8 +460,8 @@ export default {
 .theme--light.v-btn--active::before {
     opacity: 0.3;
 }
-.top-toolbar {
-  /* margin-right: 240px; */
+.right-menu-margin {
+  margin-right: 240px;
 }
 span {
   font-size: 12px !important;

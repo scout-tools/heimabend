@@ -56,7 +56,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-divider/>
+          <v-divider v-if="isAuthenticated"/>
 
           <v-list-item v-if="isAuthenticated" link bottom>
             <v-list-item-icon>
@@ -69,7 +69,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-divider/>
+          <v-divider v-if="isAuthenticated"/>
 
           <v-list-item v-if="isAuthenticated" link bottom>
             <v-list-item-icon>
@@ -118,7 +118,7 @@
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-      <v-divider></v-divider>
+
           <v-divider/>
           <v-list-item link bottom>
             <v-list-item-icon>

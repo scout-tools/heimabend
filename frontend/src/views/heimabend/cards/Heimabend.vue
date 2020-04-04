@@ -19,7 +19,7 @@
     class="mx-auto ma-3 mb-10 test-color"
     :style="{ transitionDelay: delay }"
     v-bind:id="`eventcard-${item.id}`"
-    v-for="(item, index) in data"
+    v-for="(item, index) in getItems"
     :key="index"
   >
     <v-list-item
@@ -472,7 +472,7 @@
     {{ 'Du hast diese Heimabend-Idee bereits bewertet' }}
   </v-snackbar>
 <v-progress-circular
-      v-show="busy"
+      v-show="busy && !isDetailsView"
       indeterminate
       size="40"
       color="white"
@@ -693,6 +693,12 @@ export default {
     this.scrollToId();
   },
   computed: {
+    getItems() {
+      if (!this.isDetailsView) {
+        return this.data;
+      }
+      return this.items;
+    },
     ratingSize() {
       return !this.isMobil ? 20 : 16;
     },
