@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 from rest_framework_tracking.mixins import LoggingMixin
 from .serializers import TagSerializer, EventSerializer, MessageSerializer, LikeSerializer, HighscoreSerializer
 from .models import Tag, Event, Message, Like
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -20,6 +21,13 @@ class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = Event.objects.all().order_by('title')
     serializer_class = EventSerializer
     pagination_class = EventPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['isPossibleOutside',
+                        'isPossibleAlone',
+                        'isPossibleDigital',
+                        'isPrepairationNeeded',
+                        'isActive',
+                        ]
 
 
 class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):
