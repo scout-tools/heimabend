@@ -107,15 +107,15 @@
           >
             <template v-slot:activator="{ on }">
               <v-btn
-                @click="onWithoutPreperation()"
+                @click="onIsPrepairationNeeded()"
                 v-on="on"
                 text
                 tile
                 dense
-                :class="isWithoutPreperationButtonActive"
+                :class="isIsPrepairationNeededButtonActive"
               >
                 <v-icon
-                  :color="withoutPreperation ? 'black' : 'grey'"
+                  :color="isPrepairationNeeded ? 'black' : 'grey'"
                 >
                   mdi-card-bulleted-off-outline
                 </v-icon>
@@ -263,7 +263,7 @@
     </v-container>
 
       </template>
-  <v-spacer/>
+  <v-spacer class="right-menu-margin"/>
   </v-toolbar>
 </template>
 
@@ -300,8 +300,8 @@ export default {
     onIsPossibleAlone() {
       this.$store.commit('tooglePossibleAlone');
     },
-    onWithoutPreperation() {
-      this.$store.commit('toogleWithoutPreperation');
+    onIsPrepairationNeeded() {
+      this.$store.commit('toogleIsPreperationNeeded');
     },
     onWithoutCosts() {
       this.$store.commit('toogleWithoutCosts');
@@ -353,8 +353,8 @@ export default {
     isPossibleAlone() {
       return this.$store.getters.isPossibleAlone;
     },
-    withoutPreperation() {
-      return this.$store.getters.withoutPreperation;
+    isPrepairationNeeded() {
+      return this.$store.getters.isPrepairationNeeded;
     },
     withoutCosts() {
       return this.$store.getters.withoutCosts;
@@ -368,7 +368,7 @@ export default {
         if (this.isPossibleAlone) {
           output.push(1);
         }
-        if (this.withoutPreperation) {
+        if (this.isPrepairationNeeded) {
           output.push(2);
         }
         if (this.withoutCosts) {
@@ -404,8 +404,8 @@ export default {
       }
       return '';
     },
-    isWithoutPreperationButtonActive() {
-      if (!this.withoutPreperation) {
+    isIsPrepairationNeededButtonActive() {
+      if (!this.isPrepairationNeeded) {
         return 'btn-disabled';
       }
       return '';
@@ -419,9 +419,9 @@ export default {
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
-    isJustActive: {
+    isIsActive: {
       get() {
-        return this.$store.getters.justActive;
+        return this.$store.getters.isActive;
       },
       set() {
         return false;

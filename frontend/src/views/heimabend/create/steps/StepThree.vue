@@ -1,0 +1,359 @@
+<template>
+        <v-form
+        ref="form3"
+        v-model="valid"
+      >
+<v-container>
+  <v-row class="mt-6 ml-4">
+    <span class="subtitle-1">
+      Wieviel Geld ist nötig?
+    </span>
+  </v-row>
+
+  <v-row>
+    <v-tooltip
+      nudge-left="80"
+      open-on-hover
+      bottom
+    >
+      <template v-slot:activator="{ on }">
+        <v-btn
+          v-on="on"
+          text
+        >
+          <v-rating
+            v-model="data.costsRating"
+            emptyIcon="mdi-currency-usd"
+            fullIcon="mdi-currency-usd"
+            color="orange"
+            background-color="grey"
+            min="0"
+            length="3"
+          ></v-rating>
+        </v-btn>
+      </template>
+      <span>
+        <p class="text-left">
+        Stufe 1: 0,00€ - 0,50€ pro Person <br>
+        Stufe 2: 1€ - 2€ pro Person <br>
+        Stufe 3: mehr als 2€ pro Person <br>
+        </p>
+      </span>
+    </v-tooltip>
+    <v-btn
+      :color="withoutCostsButtomColor"
+      small
+      class="ma-2"
+      @click="onResetPriceClick()"
+    >
+    <v-icon
+      :color="withoutCostsIconColor"
+    >
+      mdi-currency-usd-off
+    </v-icon>
+      Ohne Kosten
+    </v-btn>
+  </v-row>
+
+  <v-row class="mt-6 ml-4">
+    <span class="subtitle-1">
+      Wieviel Durchführungszeit ist erforderlich?
+    </span>
+  </v-row>
+  <v-row>
+    <v-tooltip
+      nudge-left="80"
+      open-on-hover
+      bottom
+    >
+      <template v-slot:activator="{ on }">
+        <v-btn
+          v-on="on"
+          text
+        >
+        <v-rating
+          v-model="data.executionTimeRating"
+          emptyIcon="mdi-clock"
+          fullIcon="mdi-clock"
+          color="black"
+          background-color="grey"
+          min="0"
+          length="3"
+        ></v-rating>
+          </v-btn>
+        </template>
+        <span>
+          <p class="text-left">
+          Stufe 1: bis 30 min <br>
+          Stufe 2: 30 min - 60 min<br>
+          Stufe 3: mehr als 60 min<br>
+          </p>
+        </span>
+      </v-tooltip>
+        <v-btn
+        :color="largeProjectButtomColor"
+        small
+        class="ma-2"
+        @click="onLargeProjectClick()"
+      >
+      <v-icon
+        :color="largeProjectIconColor"
+      >
+        mdi-table-large
+      </v-icon>
+        Großprojekt
+      </v-btn>
+    </v-row>
+    <v-divider class="my-2"/>
+    <v-row class="mt-6 ml-4">
+      <span class="subtitle-1">
+        Für welche Stufe ist der Heimabend geeignet?
+      </span>
+    </v-row>
+    <v-row class="mx-6">
+      <v-switch
+      v-model="data.isLvlOne"
+      label="Geeignet für die Wölflingsstufe (7 bis 11 Jahren)">
+      </v-switch>
+        <v-img
+          class="ma-4"
+          :src="require('@/assets/wolfskopf.png')"
+          max-width="40"
+        />
+    </v-row>
+    <v-row class="mx-6">
+      <v-switch
+      v-model="data.isLvlTwo"
+      label="Geeignet für die Pfadfinderstufe (12 bis 16 Jahren)">
+      </v-switch>
+        <v-img
+          class="ma-4"
+          :src="require('@/assets/knot_blue.png')"
+          max-width="40"
+        ></v-img>
+    </v-row>
+    <v-row class="mx-6">
+      <v-switch
+      v-model="data.isLvlThree"
+      label="Geeignet für die Roverstufe (ab 16 Jahren)">
+      </v-switch>
+        <v-img
+          class="ma-4"
+          :src="require('@/assets/knot_red.png')"
+          max-width="40"
+        ></v-img>
+    </v-row>
+    <v-divider class="my-2"/>
+    <v-row class="mt-6 ml-4">
+      <span class="subtitle-1">
+        Wähle so viele passende Themen zu deinen Heimabend aus wie möglich?
+      </span>
+    </v-row>
+    <v-row class="ma-6">
+      <v-select
+        v-model="data.tags"
+        :items="tags"
+        item-value="id"
+        item-color="color"
+        :rules="rules.tags"
+        item-text="name"
+        deletable-chips
+        chips
+        label="Themen"
+        multiple
+        outlined
+      ></v-select>
+    </v-row>
+    <v-row justify="center">
+      <v-btn
+        class="mr-5"
+        @click="prevStep()"
+      >
+        Zurück
+      </v-btn>
+
+      <v-btn
+        color="primary"
+        @click="nextStep()"
+      >
+        Weiter
+      </v-btn>
+    </v-row>
+</v-container>
+        </v-form>
+</template>
+
+<script>
+export default {
+  data: () => ({
+    rules: {
+      tags: [
+        v => (v && v.length > 0) || 'Mindestens ein Tag ist erforderlich',
+      ],
+    },
+    data: {
+      tags: [],
+      isLvlOne: true,
+      isLvlTwo: true,
+      isLvlThree: true,
+    },
+    levelFilter: [0, 1, 2],
+  }),
+
+  computed: {
+    isMobil() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
+    getOrange() {
+      if (this.levelFilter) {
+        return this.levelFilter.includes(0);
+      }
+      return false;
+    },
+    getBlue() {
+      if (this.levelFilter) {
+        return this.levelFilter.includes(1);
+      }
+      return false;
+    },
+    getRed() {
+      if (this.levelFilter) {
+        return this.levelFilter.includes(2);
+      }
+      return false;
+    },
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    },
+    currentUsername() {
+      return this.$store.getters.getUsername;
+    },
+    tags() {
+      return this.$store.getters.tags;
+    },
+    isCreate() {
+      return !this.$route.params.id;
+    },
+    isUpdate() {
+      return !!this.$route.params.id;
+    },
+    getCustomText() {
+      const value = this.data.description;
+      if (!value) {
+        return 'Beschreibung ist erforderlich';
+      }
+      if (value && value.length <= 75) {
+        return 'Name must be more than 75 characters';
+      }
+      if (value && value.length >= 2500) {
+        return 'Beschreibung ist zu lang';
+      }
+      return 'Ok';
+    },
+    isLargeProject() {
+      return this.data.executionTimeRating === 0;
+    },
+    largeProjectButtomColor() {
+      return this.isLargeProject ? 'limegreen' : 'lightgrey';
+    },
+    largeProjectIconColor() {
+      return this.isLargeProject ? 'black' : 'grey';
+    },
+    isWithoutCosts() {
+      return this.data.costsRating === 0;
+    },
+    withoutCostsButtomColor() {
+      return this.isWithoutCosts ? 'limegreen' : 'lightgrey';
+    },
+    withoutCostsIconColor() {
+      return this.isWithoutCosts ? 'red darken-2' : 'grey';
+    },
+    getClassForTextContentSteps() {
+      return this.isMobil ? 'mx-0 px-1' : '';
+    },
+  },
+
+  mounted() {
+    if (this.$route.params.id) {
+      this.data = this.$route.params;
+      if (this.data.tags && this.data.tags.length) {
+        this.data.tags = this.setIntTags(this.data.tags);
+      }
+    }
+  },
+
+  created() {
+    this.agreeBox = !!this.$store.getters.isAuthenticated;
+  },
+
+
+  methods: {
+    onResetPriceClick() {
+      this.data.costsRating = 0;
+    },
+    onLargeProjectClick() {
+      this.data.executionTimeRating = 0;
+    },
+    convertUrlToId(url) {
+      if (url && typeof url === 'string') {
+        const idStringArray = url.split('/');
+        const id = idStringArray[idStringArray.length - 2];
+
+        return parseInt(id, 10);
+      }
+      return url;
+    },
+    setIntTags(urlTags) {
+      const tagList = [];
+      urlTags.forEach((tag) => {
+        tagList.push(this.convertUrlToId(tag));
+      });
+      return tagList;
+    },
+    onNextClick() {
+      if (!this.$refs.form1.validate()
+        || this.getCustomText !== 'Ok') {
+        return false;
+      }
+      this.levelFilter = [];
+      if (this.data.isLvlOne) {
+        this.levelFilter.push(0);
+      }
+      if (this.data.isLvlTwo) {
+        this.levelFilter.push(1);
+      }
+      if (this.data.isLvlThree) {
+        this.levelFilter.push(2);
+      }
+      this.e6 = 2;
+      return true;
+    },
+    prevStep() {
+      this.$emit('prevStep');
+    },
+    nextStep() {
+      if (!this.$refs.form3.validate()) {
+        return;
+      }
+      this.$emit('nextStep');
+    },
+    getData() {
+      return this.data;
+    },
+  },
+};
+</script>
+
+<style scoped>
+.v-btn:not(.v-btn--text):not(.v-btn--outlined).v-btn--active:before {
+    opacity: 0.4;
+    color: rgb(40, 158, 40)
+}
+.customerRequired {
+  text-align: left;
+}
+
+.limegreen {
+    background-color: rgb(40, 158, 40) !important;
+}
+</style>

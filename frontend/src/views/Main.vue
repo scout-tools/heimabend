@@ -24,7 +24,7 @@
 
       <v-text-field
         class="px-3"
-        v-model="searchInput"
+        v-model="currentSearchInput"
         outlined
         hide-details
         :label="getLabel"
@@ -85,6 +85,7 @@
 
 <script>
 import axios from 'axios';
+import { mapGetters } from 'vuex';
 
 import MenuLeft from './components/menu/Left.vue';
 import MenuRight from './components/menu/Right.vue';
@@ -105,6 +106,9 @@ export default {
     // PricacyBanner,
   },
   computed: {
+    ...mapGetters([
+      'searchInput',
+    ]),
     isMobil() {
       return this.$vuetify.breakpoint.smAndDown;
     },
@@ -132,9 +136,16 @@ export default {
       return !!this.$store.getters.acceptedPrivacy;
     },
   },
+  watch: {
+    searchInput(value) {
+      if (value === '') {
+        this.currentSearchInput = value;
+      }
+    },
+  },
   methods: {
     onChangeSearchInput() {
-      this.$store.commit('setSearchInput', this.searchInput);
+      this.$store.commit('setSearchInput', this.currentSearchInput);
     },
     toogleDrawer() {
       this.$refs.mainMenuLeft.toggleDrawer();
@@ -159,11 +170,11 @@ export default {
   },
   data: () => ({
     API_URL: process.env.VUE_APP_API,
-    searchInput: '',
     fab: false,
     colorFab: 'green',
     iconFab: 'mdi-plus',
     showError: false,
+    currentSearchInput: '',
   }),
 };
 

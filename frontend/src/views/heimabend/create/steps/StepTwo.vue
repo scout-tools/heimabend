@@ -116,7 +116,7 @@ export default {
         return 'Beschreibung ist erforderlich';
       }
       if (value && value.length <= 75) {
-        return 'Inhalt des Heimabends nuss mindestens 75 Zeichen haben.';
+        return 'Name must be more than 75 characters';
       }
       if (value && value.length >= 2500) {
         return 'Beschreibung ist zu lang';

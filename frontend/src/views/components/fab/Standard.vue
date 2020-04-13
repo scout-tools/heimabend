@@ -3,7 +3,6 @@
       v-model="fab"
       bottom
       right
-      open-on-hover
       direction="top"
       transition="slide-y-reverse-transition"
       fixed

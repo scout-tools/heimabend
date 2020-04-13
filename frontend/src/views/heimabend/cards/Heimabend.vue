@@ -1,25 +1,28 @@
 <template>
 <div>
-  <span
+  <h2
     class="deinHeimabendSpan"
     :class="yourHeimabendSpan()">
     dein Heimabend.
-  </span>
-  <span v-if="!isMobil" class="bg"/>
+  </h2>
   <div
     v-infinite-scroll="loadMore"
     spinner="spiral"
-    infinite-scroll-disabled="busy"
+    infinite-scroll-disabled="loading"
     infinite-scroll-distance="200">
 
-    <span slot="no-more"></span>
   <v-card
     :max-width="getMaxWidth()"
-    elevation=15
+    elevation=30
+    hover
+    data-aos="zoom-in"
+    data-aos-duration="600"
+    data-aos-delay="60"
+    data-aos-anchor-placement="top-bottom"
     class="mx-auto ma-3 mb-10 test-color"
     :style="{ transitionDelay: delay }"
     v-bind:id="`eventcard-${item.id}`"
-    v-for="(item, index) in getItems"
+    v-for="(item, index) in items"
     :key="index"
   >
     <v-list-item
@@ -472,7 +475,7 @@
     {{ 'Du hast diese Heimabend-Idee bereits bewertet' }}
   </v-snackbar>
 <v-progress-circular
-      v-show="busy && !isDetailsView"
+      v-show="loading && !isDetailsView"
       indeterminate
       size="40"
       color="white"
@@ -484,6 +487,7 @@
 import axios from 'axios';
 
 import store from '@/store'; // eslint-disable-line
+import { mapGetters } from 'vuex';
 // eslint-disable-next-line import/no-unresolved
 import DeleteModal from '../dialogs/DeleteModal.vue';
 
@@ -491,6 +495,10 @@ import DeleteModal from '../dialogs/DeleteModal.vue';
 export default {
   props: {
     items: Array,
+    loading: {
+      type: Boolean,
+      default: true,
+    },
     isDetailsView: {
       type: Boolean,
       default: false,
@@ -501,16 +509,7 @@ export default {
   },
   methods: {
     loadMore() {
-      const currentData = this.data.length;
-      const maxLength = this.items.length;
-      if (currentData < maxLength) {
-        this.busy = true;
-        setTimeout(() => {
-          const newData = this.items.slice(currentData, currentData + 3);
-          this.data = this.data.concat(newData);
-          this.busy = false;
-        }, 500);
-      }
+      this.$emit('loadMore');
     },
     yourHeimabendSpan() {
       return this.isMobil ? 'headerIsMobile' : 'headerIsDesktop';
@@ -685,7 +684,6 @@ export default {
       alreadyVotedSnackbar: false,
       emptyMaterialText: 'Juhu, kein Material nötig ^^',
       data: [],
-      busy: false,
       count: 0,
     };
   },
@@ -693,23 +691,16 @@ export default {
     this.scrollToId();
   },
   computed: {
-    getItems() {
-      if (!this.isDetailsView) {
-        return this.data;
-      }
-      return this.items;
-    },
+    ...mapGetters([
+      'tags',
+      'liked',
+      'isAuthenticated',
+    ]),
     ratingSize() {
-      return !this.isMobil ? 20 : 16;
+      return !this.isMobil ? 22 : 16;
     },
     getIconSize() {
-      return !this.isMobil ? 20 : 16;
-    },
-    isAuthenticated() {
-      return this.$store.getters.isAuthenticated;
-    },
-    liked() {
-      return this.$store.getters.liked;
+      return !this.isMobil ? 22 : 16;
     },
     paddingleftLebelIcons() {
       return !this.isMobil ? 'pl-2' : 'pl-1';
@@ -719,9 +710,6 @@ export default {
     },
     isMobil() {
       return this.$vuetify.breakpoint.smAndDown;
-    },
-    tags() {
-      return this.$store.getters.tags;
     },
   },
 };
@@ -762,17 +750,5 @@ export default {
   .no-padding{
     padding-top: 0px !important;
     padding-bottom: 0px !important;
-  }
-
-.bg {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: url( 'back-2.jpg') no-repeat center center;
-    background-size: 2000px 1300px;
-    background-attachment: fixed;
-    z-index: -1;
   }
 </style>

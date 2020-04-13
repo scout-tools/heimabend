@@ -1,5 +1,4 @@
 <template>
-<div>
     <v-navigation-drawer
       v-model="isDrawer"
       app
@@ -19,8 +18,8 @@
                 <v-row class="px-2 pb-2" v-if="isAuthenticated">
                   <v-col cols="10" class="pa-0 ma-0" align-self="center">
                   <v-switch
-                    v-model="isJustActive"
-                    @change="onToggleJustActive"
+                    v-model="isIsActive"
+                    @change="onToggleIsActive"
                     label="Veröffentlicht"
                     dense
                     color="secondary"
@@ -177,9 +176,9 @@
           </v-list-item>
         </v-list>
      </template>
+      <login ref="login"/>
     </v-navigation-drawer>
-    <login ref="login"/>
-</div>
+
 </template>
 
 <script>
@@ -221,13 +220,13 @@ export default {
       this.$refs.login.onLogoutClick();
     },
     onClickMessage() {
-      this.$router.replace({ name: 'message' });
+      this.$router.replace({ name: 'messageOverview' });
     },
     onClickRanking() {
       this.$router.replace({ name: 'ranking-overview' });
     },
-    onToggleJustActive() {
-      this.$store.commit('toggleJustActive');
+    onToggleIsActive() {
+      this.$store.commit('toggleIsActive');
     },
     toggleDrawer() {
       this.isDrawer = !this.isDrawer;
@@ -237,9 +236,9 @@ export default {
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
-    isJustActive: {
+    isIsActive: {
       get() {
-        return this.$store.getters.justActive;
+        return this.$store.getters.isActive;
       },
       set() {
         return false;
