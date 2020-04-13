@@ -1,5 +1,5 @@
 # views.py
-from rest_framework import viewsets, mixins, generics
+from rest_framework import pagination, viewsets, mixins, generics
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework_tracking.mixins import LoggingMixin
 from .serializers import TagSerializer, EventSerializer, MessageSerializer, LikeSerializer, HighscoreSerializer
@@ -12,9 +12,14 @@ class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
     serializer_class = TagSerializer
 
 
+class EventPagination(pagination.PageNumberPagination):
+    page_size = 3  # the no. of company objects you want to send in one go
+
+
 class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = Event.objects.all().order_by('title')
     serializer_class = EventSerializer
+    pagination_class = EventPagination
 
 
 class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):
