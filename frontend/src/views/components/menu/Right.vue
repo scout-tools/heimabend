@@ -1,11 +1,10 @@
    <template>
-   <div>
     <v-navigation-drawer
       right
       fixed
       app
-      dark
-      v-if="!isMobil"
+      light
+      v-if="!isMobil && isOverviewRoute"
       color="primary"
       class="test"
     >
@@ -23,6 +22,7 @@
                   <v-chip-group
                     multiple
                     column
+                    light
                     v-model="filterTags"
                     @change="onChange()"
                   >
@@ -41,12 +41,12 @@
           </v-list-item-content>
         </v-list-item>
       </template>
-    </v-navigation-drawer>
     <login ref="login"/>
-    </div>
+    </v-navigation-drawer>
 </template>
 
 <script>
+// eslint-disable-next-line import/no-unresolved
 import Login from '@/views/components/dialogs/Login.vue';
 
 export default {
@@ -68,6 +68,9 @@ export default {
       this.filterTags = this.$store.getters.filterTags; // eslint-disable-line
       return this.$store.getters.filterTags;
     },
+    isOverviewRoute() {
+      return this.$route.name === 'overview' || this.$route.name === 'overview-id';
+    },
   },
   methods: {
     onLoginClick() {
@@ -84,6 +87,10 @@ export default {
     },
     onClickTags() {
       this.$router.push({ name: 'tags' });
+    },
+  },
+  watch: {
+    getFilterTags() {
     },
   },
 };

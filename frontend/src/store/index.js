@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate'; // eslint-disable-line
-import { event } from 'vue-analytics';
 
 Vue.use(Vuex);
 
@@ -15,10 +14,10 @@ export default new Vuex.Store({
     isPossibleOutside: false,
     isPossibleDigital: false,
     isPossibleAlone: false,
-    withoutPreperation: false,
+    isPrepairationNeeded: false,
     withoutCosts: false,
-    justActive: true,
-    sorter: 'newest',
+    isActive: true,
+    sorter: 'random',
     levelFilter: [0, 1, 2],
     filterTags: [],
     heimabendCounter: 0,
@@ -56,19 +55,19 @@ export default new Vuex.Store({
     isPossibleDigital(state) {
       return !!state.isPossibleDigital;
     },
-    withoutPreperation(state) {
-      return !!state.withoutPreperation;
+    isPrepairationNeeded(state) {
+      return !!state.isPrepairationNeeded;
     },
     withoutCosts(state) {
       return !!state.withoutCosts;
     },
-    justActive(state) {
-      return !!state.justActive;
+    isActive(state) {
+      return !!state.isActive;
     },
     getUsername(state) {
       return state.currentUser;
     },
-    getSorter(state) {
+    sorter(state) {
       return state.sorter;
     },
     levelFilter(state) {
@@ -108,34 +107,27 @@ export default new Vuex.Store({
     },
     tooglePossibleInside(state) {
       state.isPossibleInside = !state.isPossibleInside;
-      event('user-click', 'toogle', 'possibleInside', state.isPossibleInside);
     },
     tooglePossibleOutside(state) {
       state.isPossibleOutside = !state.isPossibleOutside;
-      event('user-click', 'toogle', 'isPossibleOutside', state.isPossibleOutside);
     },
     tooglePossibleAlone(state) {
       state.isPossibleAlone = !state.isPossibleAlone;
-      event('user-click', 'toogle', 'isPossibleAlone', state.isPossibleAlone);
     },
     tooglePossibleDigital(state) {
       state.isPossibleDigital = !state.isPossibleDigital;
-      event('user-click', 'toogle', 'isPossibleDigital', state.isPossibleDigital);
     },
-    toogleWithoutPreperation(state) {
-      state.withoutPreperation = !state.withoutPreperation;
-      event('user-click', 'toogle', 'possibleInside', state.withoutPreperation);
+    toogleIsPreperationNeeded(state) {
+      state.isPrepairationNeeded = !state.isPrepairationNeeded;
     },
     toogleWithoutCosts(state) {
       state.withoutCosts = !state.withoutCosts;
-      event('user-click', 'toogle', 'possibleInside', state.withoutCosts);
     },
-    toggleJustActive(state) {
-      state.justActive = !state.justActive;
-      event('user-click', 'toogle', 'possibleInside', state.justActive);
+    toggleIsActive(state) {
+      state.isActive = !state.isActive;
     },
-    enableJustActive(state) {
-      state.justActive = true;
+    enableIsActive(state) {
+      state.isActive = true;
     },
     setHeimabendCounter(state, payload) {
       state.heimabendCounter = payload;
@@ -152,9 +144,11 @@ export default new Vuex.Store({
       state.isPossibleOutside = true;
       state.isPossibleDigital = false;
       state.isPossibleAlone = false;
-      state.withoutPreperation = false;
+      state.levelFilter = [0, 1, 2];
+      state.searchInput = '';
+      state.isPrepairationNeeded = false;
       state.withoutCosts = false;
-      state.justActive = true;
+      state.isActive = true;
       state.filterTags = [];
     },
     clearAccessToken(state) {
@@ -179,7 +173,7 @@ export default new Vuex.Store({
       commit('setCurrentUser', null);
     },
     resetFilters({ commit }) {
-      commit('enableJustActive');
+      commit('enableIsActive');
       commit('changeFilterTags', []);
       commit('setSearchInput', '');
     },

@@ -40,7 +40,7 @@ export default {
   computed: {
     selectedFilter: {
       get() {
-        return this.$store.getters.getSorter;
+        return this.$store.getters.sorter;
       },
       set() {
         return false;
