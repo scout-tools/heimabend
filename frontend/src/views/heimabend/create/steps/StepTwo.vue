@@ -1,8 +1,8 @@
 <template>
-        <v-form
-        ref="form2"
-        v-model="valid"
-      >
+  <v-form
+    ref="form2"
+    v-model="valid"
+  >
   <v-container>
     <v-row class="mt-6 ml-4">
       <span class="subtitle-1">
@@ -14,7 +14,7 @@
         <v-combobox
           outlined
           autofocus
-          v-model="data.material"
+          v-model="data.materialArray"
           label="Material Liste"
           multiple
           required
@@ -90,9 +90,9 @@ export default {
     dialog: false,
     valid: true,
     data: {
-      material: '',
-      isPossibleInside: false,
-      isPossibleOutside: false,
+      materialArray: [],
+      isPossibleInside: true,
+      isPossibleOutside: true,
       isPrepairationNeeded: false,
       isPossibleDigital: false,
       isPossibleAlone: false,
@@ -110,29 +110,20 @@ export default {
     isUpdate() {
       return !!this.$route.params.id;
     },
-    getCustomText() {
-      const value = this.data.description;
-      if (!value) {
-        return 'Beschreibung ist erforderlich';
-      }
-      if (value && value.length <= 75) {
-        return 'Name must be more than 75 characters';
-      }
-      if (value && value.length >= 2500) {
-        return 'Beschreibung ist zu lang';
-      }
-      return 'Ok';
-    },
-  },
-
-  mounted() {
   },
 
   created() {
+    if (this.$route.params.id) {
+      this.data = this.$route.params;
+      this.convertMaterialString(this.data.material);
+    }
   },
 
 
   methods: {
+    convertMaterialString(array) {
+      this.data.materialArray = array.split(',');
+    },
     prevStep() {
       this.$emit('prevStep');
     },
@@ -143,7 +134,14 @@ export default {
       this.$emit('nextStep');
     },
     getData() {
-      return this.data;
+      return {
+        material: this.data.materialArray,
+        isPossibleInside: this.data.isPossibleInside,
+        isPossibleOutside: this.data.isPossibleOutside,
+        isPrepairationNeeded: this.data.isPrepairationNeeded,
+        isPossibleDigital: this.data.isPossibleDigital,
+        isPossibleAlone: this.data.isPossibleAlone,
+      };
     },
   },
 };

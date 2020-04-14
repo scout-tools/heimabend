@@ -52,11 +52,8 @@ export default {
       'isPrepairationNeeded',
       'isActive',
       'withoutCosts',
-      'isActive',
       'searchInput',
-      'withoutCosts',
       'sorter',
-      'searchInput',
       'levelFilter',
       'filterTags',
       'tags',
@@ -68,45 +65,74 @@ export default {
     },
     axiosParams() {
       const params = new URLSearchParams();
-      params.append('isPossibleOutside', this.isPossibleOutside);
-      params.append('isPossibleInside', this.isPossibleInside);
-      params.append('isPossibleAlone', this.isPossibleAlone);
-      params.append('isPossibleDigital', this.isPossibleDigital);
-      params.append('isPrepairationNeeded', this.isPrepairationNeeded);
-      params.append('levelFilter', this.levelFilter);
-      params.append('isActive', this.isActive);
-      params.append('withoutCosts', this.withoutCosts);
-      params.append('searchInput', this.searchInput);
-      params.append('filterTags', this.filterTags);
+      const isLvlOne = this.levelFilter.includes(0);
+      const isLvlTwo = this.levelFilter.includes(1);
+      const isLvlThree = this.levelFilter.includes(2);
+      // if (this.isPossibleOutside) {
+      //   params.append('isPossibleOutside', this.isPossibleOutside);
+      // }
+      // if (this.isPossibleInside) {
+      //   params.append('isPossibleInside', this.isPossibleInside);
+      // }
+      if (this.isPossibleAlone) {
+        params.append('isPossibleAlone', this.isPossibleAlone);
+      }
+      if (this.isPossibleDigital) {
+        params.append('isPossibleDigital', this.isPossibleDigital);
+      }
+      if (this.isPrepairationNeeded) {
+        params.append('isPrepairationNeeded', this.isPrepairationNeeded);
+      }
+      if (this.withoutCosts) {
+        params.append('withoutCosts', this.withoutCosts);
+      }
+      if (!isLvlOne) {
+        params.append('isLvlOne', isLvlOne);
+      }
+      if (!isLvlTwo) {
+        params.append('isLvlTwo', isLvlTwo);
+      }
+      if (!isLvlThree) {
+        params.append('isLvlThree', isLvlThree);
+      }
+      if (this.searchInput && this.searchInput !== '') {
+        params.append('search', this.searchInput);
+      }
+      if (this.filterTags && this.filterTags.length) {
+        params.append('filterTags', this.filterTags);
+      }
+      if (this.isAuthenticated) {
+        params.append('isActive', this.isActive);
+      }
       params.append('sorter', this.sorter);
-      params.append('steps', this.steps);
       params.append('page', 1);
+      params.append('ts', Date.now());
       return params;
     },
   },
 
   methods: {
     loadMore() {
-      if (!this.items.length || (this.heimabendCounter !== this.items.length)) {
+      const stillRunning = this.isLoadingMore;
+      this.isLoadingMore = true;
+
+      if (!stillRunning && this.nextPath !== null) {
         this.getMoreItems(this.axiosParams);
       }
     },
 
-    async getMoreItems(params) {
-      this.loading = true;
-      const path = `${this.API_URL}basic/event/`;
-
-      axios.get(path, { params })
+    async getMoreItems() {
+      axios.get(this.nextPath)
         .then((res) => {
-          const { length } = this.items;
-          this.data = res.data;
-          this.addItems = this.getItems(this.data, length, length + this.steps);
-          this.items = this.items.concat(this.addItems);
+          this.items = this.items.concat(res.data.results);
+          this.nextPath = res.data.next;
           this.loading = false;
+          this.isLoadingMore = false;
         });
     },
 
     refresh() {
+      debugger;
       this.items = [];
       this.getAllEventItems();
     },
@@ -119,8 +145,10 @@ export default {
         params: this.axiosParams,
       })
         .then((res) => {
-          this.data = res.data;
-          this.items = this.getItems(this.data, 0, this.steps);
+          this.items = res.data.results;
+          this.nextPath = res.data.next;
+
+          this.$store.commit('setHeimabendCounter', res.data.count);
           this.loading = false;
         })
         .catch(() => {
@@ -200,7 +228,6 @@ export default {
         if (sorter === 'rating' && returnArray && returnArray.length) {
           returnArray = this._.orderBy(returnArray, ['like_score'], ['desc']);
         }
-        this.$store.commit('setHeimabendCounter', returnArray.length);
         return returnArray.slice(size, page);
       }
       return [];
@@ -216,6 +243,7 @@ export default {
     items: {},
     loading: true,
     steps: 3,
+    nextPath: null,
   }),
 };
 </script>

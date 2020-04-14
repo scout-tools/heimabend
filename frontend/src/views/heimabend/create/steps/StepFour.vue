@@ -133,27 +133,11 @@ export default {
     currentUsername() {
       return this.$store.getters.getUsername;
     },
-    tags() {
-      return this.$store.getters.tags;
-    },
     isCreate() {
       return !this.$route.params.id;
     },
     isUpdate() {
       return !!this.$route.params.id;
-    },
-    getCustomText() {
-      const value = this.data.description;
-      if (!value) {
-        return 'Beschreibung ist erforderlich';
-      }
-      if (value && value.length <= 75) {
-        return 'Name must be more than 75 characters';
-      }
-      if (value && value.length >= 2500) {
-        return 'Beschreibung ist zu lang';
-      }
-      return 'Ok';
     },
     isLargeProject() {
       return this.data.executionTimeRating === 0;
@@ -177,28 +161,17 @@ export default {
       return this.isMobil ? 'mx-0 px-1' : '';
     },
   },
-
-  mounted() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-      if (this.data.tags && this.data.tags.length) {
-        this.data.tags = this.setIntTags(this.data.tags);
-      }
-    }
-  },
-
   created() {
     this.agreeBox = !!this.$store.getters.isAuthenticated;
+    if (this.$route.params.id) {
+      this.data = this.$route.params;
+    }
   },
 
 
   methods: {
     prevStep() {
       this.$emit('prevStep');
-    },
-    cancel() {
-      this.dialog = false;
-      this.$emit('dialogClose');
     },
 
     finish() {
@@ -207,24 +180,13 @@ export default {
       }
       this.$emit('finish');
     },
-
     getData() {
-      return this.data;
+      return {
+        createdBy: this.data.createdBy,
+        createdByEmail: this.data.createdByEmail,
+        isActive: this.data.isActive,
+      };
     },
   },
 };
 </script>
-
-<style scoped>
-.v-btn:not(.v-btn--text):not(.v-btn--outlined).v-btn--active:before {
-    opacity: 0.4;
-    color: rgb(40, 158, 40)
-}
-.customerRequired {
-  text-align: left;
-}
-
-.limegreen {
-    background-color: rgb(40, 158, 40) !important;
-}
-</style>

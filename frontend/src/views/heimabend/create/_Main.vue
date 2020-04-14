@@ -400,7 +400,6 @@ export default {
   },
 
   data: () => ({
-    API_URL: process.env.VUE_APP_API,
     e6: 1,
     dialog: false,
     valid: true,

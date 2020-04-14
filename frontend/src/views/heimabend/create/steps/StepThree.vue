@@ -6,7 +6,29 @@
 <v-container>
   <v-row class="mt-6 ml-4">
     <span class="subtitle-1">
-      Wieviel Geld ist nötig?
+      Wähle so viele passende Themen zu deinen Heimabend aus wie möglich?
+    </span>
+  </v-row>
+  <v-row class="ma-6">
+    <v-select
+      v-model="data.tags"
+      :items="tags"
+      item-value="id"
+      item-color="color"
+      :rules="rules.tags"
+      item-text="name"
+      deletable-chips
+      chips
+      label="Wähle aus der Liste Themen aus."
+      no-data-text="Wähle aus der Liste Themen aus."
+      multiple
+      outlined
+    ></v-select>
+  </v-row>
+  <v-divider class="my-2"/>
+  <v-row class="mt-6 ml-4">
+    <span class="subtitle-1">
+      Welche Kosten entstehen bei der Durchführung des Heimabends?
     </span>
   </v-row>
 
@@ -40,19 +62,16 @@
         </p>
       </span>
     </v-tooltip>
-    <v-btn
-      :color="withoutCostsButtomColor"
+    <v-switch
+      color="secondary"
+      v-model="isWithoutCosts"
       small
+      label="Keine Kosten"
       class="ma-2"
       @click="onResetPriceClick()"
     >
-    <v-icon
-      :color="withoutCostsIconColor"
-    >
-      mdi-currency-usd-off
-    </v-icon>
       Ohne Kosten
-    </v-btn>
+    </v-switch>
   </v-row>
 
   <v-row class="mt-6 ml-4">
@@ -90,19 +109,16 @@
           </p>
         </span>
       </v-tooltip>
-        <v-btn
-        :color="largeProjectButtomColor"
-        small
-        class="ma-2"
-        @click="onLargeProjectClick()"
-      >
-      <v-icon
-        :color="largeProjectIconColor"
-      >
-        mdi-table-large
-      </v-icon>
-        Großprojekt
-      </v-btn>
+    <v-switch
+      color="secondary"
+      v-model="isLargeProject"
+      small
+      label="Ist ein Großprojekt?"
+      class="ma-2"
+      @click="onLargeProjectClick()"
+    >
+      Ohne Kosten
+    </v-switch>
     </v-row>
     <v-divider class="my-2"/>
     <v-row class="mt-6 ml-4">
@@ -112,6 +128,7 @@
     </v-row>
     <v-row class="mx-6">
       <v-switch
+      color="secondary"
       v-model="data.isLvlOne"
       label="Geeignet für die Wölflingsstufe (7 bis 11 Jahren)">
       </v-switch>
@@ -123,6 +140,7 @@
     </v-row>
     <v-row class="mx-6">
       <v-switch
+      color="secondary"
       v-model="data.isLvlTwo"
       label="Geeignet für die Pfadfinderstufe (12 bis 16 Jahren)">
       </v-switch>
@@ -134,6 +152,7 @@
     </v-row>
     <v-row class="mx-6">
       <v-switch
+      color="secondary"
       v-model="data.isLvlThree"
       label="Geeignet für die Roverstufe (ab 16 Jahren)">
       </v-switch>
@@ -142,27 +161,6 @@
           :src="require('@/assets/knot_red.png')"
           max-width="40"
         ></v-img>
-    </v-row>
-    <v-divider class="my-2"/>
-    <v-row class="mt-6 ml-4">
-      <span class="subtitle-1">
-        Wähle so viele passende Themen zu deinen Heimabend aus wie möglich?
-      </span>
-    </v-row>
-    <v-row class="ma-6">
-      <v-select
-        v-model="data.tags"
-        :items="tags"
-        item-value="id"
-        item-color="color"
-        :rules="rules.tags"
-        item-text="name"
-        deletable-chips
-        chips
-        label="Themen"
-        multiple
-        outlined
-      ></v-select>
     </v-row>
     <v-row justify="center">
       <v-btn
@@ -192,12 +190,14 @@ export default {
       ],
     },
     data: {
-      tags: [],
+      executionTimeRating: 1,
+      costsRating: 1,
       isLvlOne: true,
       isLvlTwo: true,
       isLvlThree: true,
     },
     levelFilter: [0, 1, 2],
+    valid: true,
   }),
 
   computed: {
@@ -284,6 +284,9 @@ export default {
 
   created() {
     this.agreeBox = !!this.$store.getters.isAuthenticated;
+    if (this.$route.params.id) {
+      this.data = this.$route.params;
+    }
   },
 
 
@@ -338,7 +341,14 @@ export default {
       this.$emit('nextStep');
     },
     getData() {
-      return this.data;
+      return {
+        isLvlOne: this.data.isLvlOne,
+        isLvlTwo: this.data.isLvlTwo,
+        isLvlThree: this.data.isLvlThree,
+        tags: this.data.tags,
+        costsRating: this.data.costsRating,
+        executionTimeRating: this.data.executionTimeRating,
+      };
     },
   },
 };
@@ -355,5 +365,9 @@ export default {
 
 .limegreen {
     background-color: rgb(40, 158, 40) !important;
+}
+
+.v-btn:before {
+    background-color: transparent !important;
 }
 </style>

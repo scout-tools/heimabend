@@ -26,7 +26,7 @@ export default {
       if (this.$route.name === 'heimabendDetails') {
         this.$router.replace({ name: 'overview-id', params: this.$route.params.id });
       } else {
-        this.$router.replace('overview');
+        this.$router.go(-1);
       }
     },
   },

@@ -15,7 +15,7 @@
         autofocus
         :counter="40"
         :rules="rules.title"
-        label="Titel"
+        label="Überschrift"
         v-model="data.title"
         required>
       </v-text-field>
@@ -36,6 +36,7 @@
             v-model="data.description"
             :rules="rules.description"
             required
+            @onInit="onInit()"
             :init="{
               height: 500,
               menubar: false,
@@ -58,6 +59,11 @@
               </div>
             </div>
           </div>
+      <v-progress-circular
+        v-show="loading"
+        color="primary"
+        indeterminate
+      />
       </v-col>
     </v-row>
     <v-row justify="center">
@@ -84,15 +90,17 @@ export default {
   data: () => ({
     rules: {
       title: [
-        v => !!v || 'Titel ist erforderlich',
-        v => (v && v.length >= 10) || 'Der Titel braucht mehr als 10 Zeichen',
-        v => (v && v.length <= 40) || 'Der Titel darf nicht mehr als 40 Zeichen haben',
+        v => !!v || 'Überschrift ist erforderlich.',
+        v => (v && v.length >= 10) || 'Die Überschrift ist zu kurz.',
+        v => (v && v.length <= 40) || 'Die Überschtift ist zu lang.',
       ],
     },
     data: {
       title: '',
       description: '',
     },
+    loading: true,
+    valid: true,
   }),
 
   computed: {
@@ -105,27 +113,39 @@ export default {
     getCustomText() {
       const value = this.data.description;
       if (!value) {
-        return 'Beschreibung ist erforderlich';
+        return 'Du musst eine Beschreibung hinzufügen.';
       }
       if (value && value.length <= 75) {
-        return 'Die Beschreibung muss mindestens 75 Zeichen haben.';
+        return 'Die Beschreibung ist zu kurz.';
       }
       if (value && value.length >= 1000) {
-        return 'Beschreibung ist zu lang. Er darf maximal 1000 Zeichen besitzen.';
+        return 'Beschreibung ist zu lang. Sie darf maximal 1000 Zeichen besitzen.';
       }
       return 'Ok';
     },
   },
 
+  created() {
+    if (this.$route.params.id) {
+      this.data = this.$route.params;
+    }
+  },
+
   methods: {
     nextStep() {
-      if (!this.$refs.form1.validate()) {
+      if (!this.$refs.form1.validate() || this.getCustomText !== 'Ok') {
         return;
       }
       this.$emit('nextStep');
     },
     getData() {
-      return this.data;
+      return {
+        title: this.data.title,
+        description: this.data.description,
+      };
+    },
+    onInit() {
+      this.loading = false;
     },
   },
 };

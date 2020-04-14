@@ -9,15 +9,16 @@
     v-infinite-scroll="loadMore"
     spinner="spiral"
     infinite-scroll-disabled="loading"
-    infinite-scroll-distance="200">
+    infinite-scroll-distance="1200"
+    infinite-scroll-throttle-delay="2000">
 
   <v-card
     :max-width="getMaxWidth()"
     elevation=30
     hover
     data-aos="zoom-in"
-    data-aos-duration="600"
-    data-aos-delay="60"
+    data-aos-duration="1200"
+    data-aos-delay="0"
     data-aos-anchor-placement="top-bottom"
     class="mx-auto ma-3 mb-10 test-color"
     :style="{ transitionDelay: delay }"
