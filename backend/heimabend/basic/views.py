@@ -27,7 +27,8 @@ class EventFilter(FilterSet):
     sorter = OrderingFilter(fields=(
         ('-createdAt', 'newest'),
         ('?', 'random'),
-        ('title', 'alpha')
+        ('title', 'alpha'),
+        ('-like_score', 'rating'),
     ))
 
     filterTags = ModelMultipleChoiceFilter(field_name='tags__id',
@@ -66,7 +67,7 @@ class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
     pagination_class = EventPagination
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     filterset_class = EventFilter
-    search_fields = ['^title', 'description', 'material']
+    search_fields = ['title', 'description', 'material']
 
 
 class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):

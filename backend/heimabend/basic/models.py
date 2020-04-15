@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator, MinLengthValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
+from django.db.models import Sum
 
 
 class Tag(models.Model):
@@ -57,6 +58,7 @@ class Event(models.Model):
     updatedBy = models.CharField(max_length=60, null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True, editable=False)
     updatedAt = models.DateTimeField(null=True, blank=True)
+    like_score = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -91,3 +93,28 @@ class Like(models.Model):
     eventId = models.ForeignKey(Event, on_delete=models.CASCADE)
     opinionTypeId = models.IntegerField(choices=OptionType.choices, default=OptionType.LIKE)
     like_created = models.DateTimeField(auto_now_add=True, editable=False)
+
+    def save(self, *args, **kwargs):
+
+        super(Like, self).save(*args, **kwargs)
+        if self.id:
+            query = Like.objects.filter(eventId=self.eventId).all().aggregate(sum=Sum('opinionTypeId'))
+            likes = query['sum']
+
+            if likes is None:
+                likes = 0
+
+            if likes < 3:
+                likescore = 0
+            elif likes < 10:
+                likescore = 1
+            elif likes < 20:
+                likescore = 2
+            elif likes >= 20:
+                likescore = 3
+            else:
+                likescore = 0
+
+            event = Event.objects.filter(id=self.eventId.id).first()
+            event.like_score = likescore
+            event.save()
