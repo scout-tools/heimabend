@@ -33,7 +33,7 @@ class EventFilter(FilterSet):
     filterTags = ModelMultipleChoiceFilter(field_name='tags__id',
                                            to_field_name='id',
                                            queryset=Tag.objects.all(),
-                                           lookup_expr='contains', )
+                                           lookup_expr='exact', )
     isLvlOne = BooleanFilter(field_name='isLvlOne')
     isLvlTwo = BooleanFilter(field_name='isLvlTwo')
     isLvlThree = BooleanFilter(field_name='isLvlThree')
