@@ -25,8 +25,7 @@ class EventFilter(FilterSet):
     isActive = BooleanFilter(field_name='isActive')
     withoutCosts = BooleanFilter(method='get_CostRating', field_name='costsRating')
     sorter = OrderingFilter(fields=(
-        ('createdAt', 'newest'),
-        ('title', 'rating'),
+        ('-createdAt', 'newest'),
         ('?', 'random'),
         ('title', 'alpha')
     ))
