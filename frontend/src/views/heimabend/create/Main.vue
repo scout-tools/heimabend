@@ -82,9 +82,12 @@
       v-model="showSuccess"
       color="success"
       y='top'
-      :timeout="timeout"
+      timeout=7000
     >
-      {{ 'Der Heimabend wurde erfolgreich gespeichert und warte auf die Freigabe' }}
+      {{
+        'Vielen Dank für deinen Beitrag zum Heimabend Inspirator! ' +
+        'Deine Heimabenidee wurde erfolgreich gespeichert und wartet ' +
+        'darauf, von uns freigeschaltet zu werden.' }}
     </v-snackbar>
   </v-container>
 </template>
@@ -115,9 +118,9 @@ export default {
       timeout: 3000,
       headerStep: [
         'Beschreibung',
-        'Eigenschaften(1/2)',
-        'Eigenschaften(2/2)',
-        'Abschließen',
+        'Eigenschaften',
+        'Themenauswahl',
+        'Abschluss',
       ],
       data: [],
     };
@@ -152,9 +155,11 @@ export default {
   methods: {
     nextStep() {
       this.currentStep += 1;
+      this.showSuccess = true;
     },
     prevStep() {
       this.currentStep -= 1;
+      this.showSuccess = true;
     },
 
     finish() {
@@ -162,7 +167,6 @@ export default {
       const dataStep2 = this.$refs.step2.getData();
       const dataStep3 = this.$refs.step3.getData();
       const dataStep4 = this.$refs.step4.getData();
-      debugger;
       if (this.isCreate) {
         axios.post(`${this.API_URL}basic/event/`, {
           title: dataStep1.title,

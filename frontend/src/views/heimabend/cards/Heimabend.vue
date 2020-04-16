@@ -17,7 +17,7 @@
     elevation=30
     hover
     data-aos="zoom-in"
-    data-aos-duration="1200"
+    data-aos-duration="800"
     data-aos-delay="0"
     data-aos-anchor-placement="top-bottom"
     class="mx-auto ma-3 mb-10 test-color"
@@ -527,10 +527,10 @@ export default {
       }
     },
     getLikeColor(item) {
-      return this.isAlreadyVoted(item) ? 'green lighten-2' : 'darkgray';
+      return this.isAlreadyVoted(item) ? 'red lighten-1' : 'darkgray';
     },
     getLikeIcon(item) {
-      return this.isAlreadyVoted(item) ? 'mdi-thumb-up' : 'mdi-thumb-up-outline';
+      return this.isAlreadyVoted(item) ? 'mdi-heart' : 'mdi-heart-outline';
     },
     isAlreadyVoted(event) {
       return this.liked.includes(event.id);
@@ -732,7 +732,7 @@ export default {
   }
   .deinHeimabendSpan {
     font-family: "Special Elite", sans-serif !important;
-    margin-top: 60px;
+    margin-top: 10px;
     margin-bottom: 10px;
   }
 

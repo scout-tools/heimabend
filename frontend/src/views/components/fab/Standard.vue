@@ -30,7 +30,7 @@
           </v-btn>
         </template>
        <span class="subtitle-1">
-          Hiermit kannst du einen neuen Heimabend anlegen
+          Hiermit kannst du eine neue Heimabendidee hinzufügen.
         </span>
       </v-tooltip>
       <v-tooltip bottom nudge-left="80">
@@ -46,7 +46,7 @@
           </v-btn>
         </template>
         <span class="subtitle-1">
-          Hiermit kannst du uns eine Nachricht schicken
+          Hiermit kannst du uns eine Nachricht senden.
         </span>
       </v-tooltip>
     </v-speed-dial>

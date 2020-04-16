@@ -6,7 +6,7 @@
   <v-container>
     <v-row class="mt-6 ml-4">
       <span class="subtitle-1">
-        Füge hier alle Materialien hinzu. Bestätige jede Objekt mit "Enter".
+        Füge hier alle Materialien hinzu. Bestätige jedes Objekt mit "Enter".
       </span>
     </v-row>
     <v-row>
@@ -29,39 +29,39 @@
 
     <v-row class="mt-6 ml-4">
       <span class="subtitle-1">
-        Wähle so viele passende Themen zu deinen Heimabend aus wie möglich?
+        Beantworte jede Frage für deinen Heimabend.
       </span>
     </v-row>
         <v-sheet class="pa-8">
           <v-switch
           v-model="data.isPossibleInside"
           color="secondary"
-          label="Dieser Heimabend ist Drinnen in einem Haus durchführbar?">
+          label="Ist diese Heimabendidee drinnen (in einem Haus) durchführbar?">
         </v-switch>
         <v-switch
           v-model="data.isPossibleOutside"
           color="secondary"
-          label="Dieser Heimabend ist Draußen im z.B. Garten oder Wald durchführbar?">
+          label="Ist diese Heimabendidee draußen (im z.B. Garten oder Wald) durchführbar?">
         </v-switch>
         <v-switch
           v-model="data.isPrepairationNeeded"
           color="secondary"
-          label="Dieser Heimabend benötigt Zeit in der Vorbereitung?">
+          label="Benötigt diese Heimabendidee benötigt Zeit zur Vorbereitung?">
         </v-switch>
         <v-switch
           v-model="data.isPossibleDigital"
           color="secondary"
-          label="Ist Online mit deiner Sippe durchführbar?">
+          label="Ist diese Heimabendidee online mit deiner Gruppe durchführbar?">
         </v-switch>
         <v-switch
           v-model="data.isPossibleAlone"
           color="secondary"
-          label="Ist alleine durchführbar?">
+          label="Ist diese Heimabendidee alleine durchführbar?">
         </v-switch>
         </v-sheet>
     </v-row>
 
-    <v-row justify="center">
+    <v-row class="ma-3" justify="center">
       <v-btn
         class="mr-5"
         @click="prevStep()"

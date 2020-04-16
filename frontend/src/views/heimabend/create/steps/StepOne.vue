@@ -6,7 +6,7 @@
   <v-container>
     <v-row class="mt-6 ml-2">
       <span class="subtitle-1">
-        Gebe eine Passende Überschrift für deinen Heimabend ein.
+        Gib eine passende Überschrift für deine Heimabendidee ein.
       </span>
     </v-row>
     <v-row class="ma-4">
@@ -23,9 +23,12 @@
 
     <v-divider class="my-2"/>
 
-    <v-row class="mt-6 ml-2">
+    <v-row  class="mt-6 ml-2 text-left">
       <span class="subtitle-1">
-        Gebe eine Passende Überschrift für deinen Heimabend ein.
+        Hier kannst du deine Heimabendidee beschreiben. Nutze dafür gerne die Gelegenheit einzelne
+        Punkte fett oder kusiv hervorzuheben und Arbeitsschritte mit
+        Aufzählungszeichen zu versehen, um so deine Heimabendidee zu gliedern
+        und ansprechend darzustellen. <br> Viel Spaß dabei!
       </span>
     </v-row>
     <v-row>
@@ -66,7 +69,7 @@
       />
       </v-col>
     </v-row>
-    <v-row justify="center">
+    <v-row class="ma-3" justify="center">
     <v-btn
       color="primary"
       @click="nextStep(n)"
@@ -118,8 +121,8 @@ export default {
       if (value && value.length <= 75) {
         return 'Die Beschreibung ist zu kurz.';
       }
-      if (value && value.length >= 1000) {
-        return 'Beschreibung ist zu lang. Sie darf maximal 1000 Zeichen besitzen.';
+      if (value && value.length >= 2500) {
+        return 'Beschreibung ist zu lang. Sie darf maximal 2000 Zeichen besitzen.';
       }
       return 'Ok';
     },

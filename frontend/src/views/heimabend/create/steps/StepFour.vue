@@ -6,13 +6,14 @@
   <v-container>
     <v-row class="mt-6 ml-2">
       <span class="subtitle-1">
-        Dieser Name wird Veröffentlich. Nutze gerne deinen Fahrten Namen.
+        Die Heimabendidee wird unter deinem Namen veröffentlicht.
+        Nutze dafür gerne deinen Fahrtennamen.
       </span>
     </v-row>
     <v-row class="ma-3">
       <v-text-field
         outlined
-        label="Dein Name"
+        label="Dein Pfadfindername"
         v-model="data.createdBy"
         :rules="rules.createdBy"
         required>
@@ -20,7 +21,7 @@
     </v-row>
     <v-row class="mt-6 ml-2">
       <span class="subtitle-1">
-        Diese E-Mail Adresse ist nur für das Redaktions-Team für Rückfragen sichtbar.
+        Diese E-Mail Adresse ist nur für das Redaktions-Team bei evtuellen Rückfragen sichtbar.
       </span>
     </v-row>
     <v-row class="ma-3">
@@ -42,15 +43,16 @@
       <v-checkbox
         color="green"
         v-model="agreeBox"
-      :rules="[v => !!v || 'Nur mit der Einverständniserklärung kannst du Ideen einreichen']"
-        label="Ich möchte, dass diese Heimabendidee, nach einer Inhaltlichen Prüfung, veröffentlicht
-          wird und ich bin damit einverstanden,
-          dass die der Heimabend später verändert, gekürzt oder erweitert wird. "
+        :rules="[v => !!v || 'Nur mit der Einverständniserklärung kannst du Ideen einreichen']"
+        label="Ich möchte, dass diese Heimabendidee, nach einer inhaltlichen Prüfung, veröffentlicht
+          wird und ich bin damit einverstanden, dass diese Heimabendidee später verändert,
+          gekürzt oder ergänzt werden könnte. Dabei habe ich weder Textbausteine noch Bilder
+          unrechtmäßigmäßig verwendet oder kopiert."
         required
       >
       </v-checkbox>
     </v-row>
-    <v-row justify="center">
+    <v-row class="ma-3" justify="center">
       <v-btn
         class="mr-5"
         @click="prevStep()"
@@ -66,7 +68,7 @@
       </v-btn>
     </v-row>
   </v-container>
-        </v-form>
+  </v-form>
 </template>
 
 <script>
@@ -91,7 +93,7 @@ export default {
         v => (v && v.length <= 40) || 'Der Titel darf nicht mehr als 40 Zeichen haben',
       ],
       tags: [
-        v => (v && v.length > 0) || 'Mindestens ein Tag ist erforderlich',
+        v => (v && v.length > 0) || 'Mindestens ein Thema ist erforderlich',
       ],
       createdBy: [
         v => (v && v.length >= 3) || 'Der Name braucht mindestens drei Zeichen',

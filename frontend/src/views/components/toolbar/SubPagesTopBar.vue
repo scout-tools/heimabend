@@ -4,7 +4,7 @@
     fixed
   >
     <v-btn icon @click="onBackClick()">
-      <v-icon>mdi-arrow-left</v-icon>
+      <v-icon>mdi-close</v-icon>
     </v-btn>
     <v-toolbar-title>
       {{ currentRouteName }}
@@ -26,7 +26,7 @@ export default {
       if (this.$route.name === 'heimabendDetails') {
         this.$router.replace({ name: 'overview-id', params: this.$route.params.id });
       } else {
-        this.$router.go(-1);
+        this.$router.push({ path: '/' });
       }
     },
   },
@@ -38,7 +38,7 @@ export default {
         return 'Heimabend Bearbeiten';
       }
       if (route === 'heimabendCreate') {
-        return 'Neuen Heimabend erstellen';
+        return 'Neue Heimabendidee erstellen';
       }
       if (route === 'message') {
         return 'Kontakt Formular';

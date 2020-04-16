@@ -115,9 +115,7 @@
             auch sehr dankbar.
           </li>
 
-          <li class="ma-5">
             Zögere nicht uns zu schreiben, wir <b>freuen uns auf deine Nachricht</b> an:
-          </li>
         </div>
         <div>
           <img

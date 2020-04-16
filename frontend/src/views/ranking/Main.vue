@@ -7,7 +7,7 @@
      centered>
       <v-tabs-slider/>
       <v-tab>Inspiratoren</v-tab>
-      <v-tab>Heimabende</v-tab>
+      <!-- <v-tab>Heimabende</v-tab> -->
       <!-- <v-tab>Meist aufgerufen</v-tab> -->
       <!-- <v-tab disabled>Bescuher</v-tab> -->
 
@@ -93,7 +93,7 @@ export default {
     },
   },
   created() {
-    this.getEvents();
+    // this.getEvents();
   },
 };
 </script>

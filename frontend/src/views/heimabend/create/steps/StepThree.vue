@@ -6,7 +6,7 @@
 <v-container>
   <v-row class="mt-6 ml-4">
     <span class="subtitle-1">
-      Wähle so viele passende Themen zu deinen Heimabend aus wie möglich?
+      Wähle so viele Themen aus, wie du deiner Heimabendidee passen.
     </span>
   </v-row>
   <v-row class="ma-6">
@@ -28,7 +28,7 @@
   <v-divider class="my-2"/>
   <v-row class="mt-6 ml-4">
     <span class="subtitle-1">
-      Welche Kosten entstehen bei der Durchführung des Heimabends?
+      Welche Kosten entstehen bei der Durchführung dieser Heimabendidee?
     </span>
   </v-row>
 
@@ -113,7 +113,7 @@
       color="secondary"
       v-model="isLargeProject"
       small
-      label="Ist ein Großprojekt?"
+      label="Handelt es sich um ein Großprojekt?"
       class="ma-2"
       @click="onLargeProjectClick()"
     >
@@ -123,16 +123,17 @@
     <v-divider class="my-2"/>
     <v-row class="mt-6 ml-4">
       <span class="subtitle-1">
-        Für welche Stufe ist der Heimabend geeignet?
+        Für welche Stufe ist die Heimabendidee geeignet?
       </span>
     </v-row>
     <v-row class="mx-6">
       <v-switch
       color="secondary"
       v-model="data.isLvlOne"
-      label="Geeignet für die Wölflingsstufe (7 bis 11 Jahren)">
+      label="Geeignet für die Wölflingsstufe (7 bis 10 Jahren).">
       </v-switch>
         <v-img
+          v-if="!isMobil"
           class="ma-4"
           :src="require('@/assets/wolfskopf.png')"
           max-width="40"
@@ -142,9 +143,10 @@
       <v-switch
       color="secondary"
       v-model="data.isLvlTwo"
-      label="Geeignet für die Pfadfinderstufe (12 bis 16 Jahren)">
+      label="Geeignet für die Pfadfinderstufe (11 bis 14 Jahren).">
       </v-switch>
         <v-img
+          v-if="!isMobil"
           class="ma-4"
           :src="require('@/assets/knot_blue.png')"
           max-width="40"
@@ -154,15 +156,16 @@
       <v-switch
       color="secondary"
       v-model="data.isLvlThree"
-      label="Geeignet für die Roverstufe (ab 16 Jahren)">
+      label="Geeignet für die Roverstufe (ab 15 Jahren).">
       </v-switch>
         <v-img
+          v-if="!isMobil"
           class="ma-4"
           :src="require('@/assets/knot_red.png')"
           max-width="40"
         ></v-img>
     </v-row>
-    <v-row justify="center">
+    <v-row class="ma-3" justify="center">
       <v-btn
         class="mr-5"
         @click="prevStep()"
@@ -186,7 +189,7 @@ export default {
   data: () => ({
     rules: {
       tags: [
-        v => (v && v.length > 0) || 'Mindestens ein Tag ist erforderlich',
+        v => (v && v.length > 0) || 'Mindestens ein Thema ist erforderlich',
       ],
     },
     data: {

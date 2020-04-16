@@ -99,7 +99,9 @@ export default {
         params.append('search', this.searchInput);
       }
       if (this.filterTags && this.filterTags.length) {
-        params.append('filterTags', this.filterTags);
+        this.filterTags.forEach((filterTag) => {
+          params.append('filterTags', filterTag);
+        });
       }
       if (this.isAuthenticated) {
         params.append('isActive', this.isActive);
@@ -132,7 +134,6 @@ export default {
     },
 
     refresh() {
-      debugger;
       this.items = [];
       this.getAllEventItems();
     },

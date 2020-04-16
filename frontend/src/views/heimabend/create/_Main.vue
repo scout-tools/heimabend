@@ -107,12 +107,12 @@
                <v-switch
                 v-model="data.isPossibleInside"
                 color="secondary"
-                label="Dieser Heimabend ist Drinnen in einem Haus durchführbar?">
+                label="Dieser Heimabend ist drinnen in einem Haus durchführbar?">
               </v-switch>
               <v-switch
                 v-model="data.isPossibleOutside"
                 color="secondary"
-                label="Dieser Heimabend ist Draußen im z.B. Garten oder Wald durchführbar?">
+                label="Dieser Heimabend ist draußen im z.B. Garten oder Wald durchführbar?">
               </v-switch>
               <v-switch
                 v-model="data.isPrepairationNeeded"
@@ -262,7 +262,7 @@
           >
             <v-sheet class="pa-3">
             <span class="subtitle-1">
-              Für welche Stufe ist der Heimabend geeignet?
+              Für welche Stufe ist die Heimabendidee geeignet?
             </span>
             <v-btn-toggle
               v-model="levelFilter"
@@ -416,7 +416,7 @@ export default {
         v => (v && v.length <= 40) || 'Der Titel darf nicht mehr als 40 Zeichen haben',
       ],
       tags: [
-        v => (v && v.length > 0) || 'Mindestens ein Tag ist erforderlich',
+        v => (v && v.length > 0) || 'Mindestens ein Thema ist erforderlich',
       ],
       createdBy: [
         v => (v && v.length >= 3) || 'Der Name braucht mindestens drei Zeichen',
