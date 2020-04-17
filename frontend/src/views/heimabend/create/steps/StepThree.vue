@@ -6,7 +6,7 @@
 <v-container>
   <v-row class="mt-6 ml-4">
     <span class="subtitle-1">
-      Wähle so viele Themen aus, wie du deiner Heimabendidee passen.
+      Wähle so viele Themen aus, wie du deiner Heimabend-Idee passen.
     </span>
   </v-row>
   <v-row class="ma-6">
@@ -28,7 +28,7 @@
   <v-divider class="my-2"/>
   <v-row class="mt-6 ml-4">
     <span class="subtitle-1">
-      Welche Kosten entstehen bei der Durchführung dieser Heimabendidee?
+      Welche Kosten entstehen bei der Durchführung dieser Heimabend-Idee?
     </span>
   </v-row>
 
@@ -123,7 +123,7 @@
     <v-divider class="my-2"/>
     <v-row class="mt-6 ml-4">
       <span class="subtitle-1">
-        Für welche Stufe ist die Heimabendidee geeignet?
+        Für welche Stufe ist die Heimabend-Idee geeignet?
       </span>
     </v-row>
     <v-row class="mx-6">

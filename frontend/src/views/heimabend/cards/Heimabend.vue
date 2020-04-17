@@ -9,8 +9,8 @@
     v-infinite-scroll="loadMore"
     spinner="spiral"
     infinite-scroll-disabled="loading"
-    infinite-scroll-distance="1200"
-    infinite-scroll-throttle-delay="2000">
+    infinite-scroll-distance="900"
+    infinite-scroll-throttle-delay="1000">
 
   <v-card
     :max-width="getMaxWidth()"
@@ -141,17 +141,17 @@
           v-if="!isDetailsView"
           bottom>
           <template v-slot:activator="{ on }">
-      <v-btn
-      v-if="!isDetailsView"
-        @click="onDetailsClick(item)"
-        depressed
-        small
-        outlined
-        class="test-color-text"
-        block
-        v-on="on">
-        Weitere Informationen
-      </v-btn>
+            <v-btn
+            v-if="!isDetailsView"
+              @click="onDetailsClick(item)"
+              depressed
+              small
+              outlined
+              class="test-color-text"
+              block
+              v-on="on">
+              Weitere Informationen
+            </v-btn>
           </template>
           <span class="mx-1">
             Weitere Informationen
@@ -643,7 +643,7 @@ export default {
       if (returnTag && returnTag.color) {
         return returnTag.color;
       }
-      return false;
+      return 'gray';
     },
     onUpdateClick(params) {
       this.$router.push({ name: 'heimabendUpdate', params });
@@ -698,10 +698,10 @@ export default {
       'isAuthenticated',
     ]),
     ratingSize() {
-      return !this.isMobil ? 22 : 16;
+      return !this.isMobil ? 20 : 16;
     },
     getIconSize() {
-      return !this.isMobil ? 22 : 16;
+      return !this.isMobil ? 20 : 16;
     },
     paddingleftLebelIcons() {
       return !this.isMobil ? 'pl-2' : 'pl-1';

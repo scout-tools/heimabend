@@ -6,7 +6,7 @@
   <v-container>
     <v-row class="mt-6 ml-2">
       <span class="subtitle-1">
-        Die Heimabendidee wird unter deinem Namen veröffentlicht.
+        Die Heimabend-Idee wird unter deinem Namen veröffentlicht.
         Nutze dafür gerne deinen Fahrtennamen.
       </span>
     </v-row>
@@ -44,8 +44,9 @@
         color="green"
         v-model="agreeBox"
         :rules="[v => !!v || 'Nur mit der Einverständniserklärung kannst du Ideen einreichen']"
-        label="Ich möchte, dass diese Heimabendidee, nach einer inhaltlichen Prüfung, veröffentlicht
-          wird und ich bin damit einverstanden, dass diese Heimabendidee später verändert,
+        label="Ich möchte, dass diese Heimabend-Idee, nach einer inhaltlichen Prüfung,
+          veröffentlicht
+          wird und ich bin damit einverstanden, dass diese Heimabend-Idee später verändert,
           gekürzt oder ergänzt werden könnte. Dabei habe ich weder Textbausteine noch Bilder
           unrechtmäßigmäßig verwendet oder kopiert."
         required

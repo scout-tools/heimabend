@@ -55,11 +55,11 @@ export default {
           text: 'Neuste Zuerst',
           icon: 'mdi-timer',
         },
-        // {
-        //   id: 'rating',
-        //   text: 'Beste Bewertung',
-        //   icon: 'mdi-star-face',
-        // },
+        {
+          id: 'rating',
+          text: 'Beste Bewertung',
+          icon: 'mdi-star-face',
+        },
         {
           id: 'random',
           text: 'Zufällige Sortierung',

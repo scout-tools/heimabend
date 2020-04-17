@@ -82,7 +82,7 @@
       v-model="showSuccess"
       color="success"
       y='top'
-      timeout=7000
+      :timeout="timeout"
     >
       {{
         'Vielen Dank für deinen Beitrag zum Heimabend Inspirator! ' +
@@ -115,7 +115,7 @@ export default {
       steps: 4,
       showError: false,
       showSuccess: false,
-      timeout: 3000,
+      timeout: 7000,
       headerStep: [
         'Beschreibung',
         'Eigenschaften',

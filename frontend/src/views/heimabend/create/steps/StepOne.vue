@@ -6,7 +6,7 @@
   <v-container>
     <v-row class="mt-6 ml-2">
       <span class="subtitle-1">
-        Gib eine passende Überschrift für deine Heimabendidee ein.
+        Gib eine passende Überschrift für deine Heimabend-Idee ein.
       </span>
     </v-row>
     <v-row class="ma-4">
@@ -25,10 +25,13 @@
 
     <v-row  class="mt-6 ml-2 text-left">
       <span class="subtitle-1">
-        Hier kannst du deine Heimabendidee beschreiben. Nutze dafür gerne die Gelegenheit einzelne
-        Punkte fett oder kusiv hervorzuheben und Arbeitsschritte mit
-        Aufzählungszeichen zu versehen, um so deine Heimabendidee zu gliedern
-        und ansprechend darzustellen. <br> Viel Spaß dabei!
+        Bitte fasse im ersten Absatz deine Idee zusammmen und beschreibe
+        danach deine Idee ausführlicher. <br>
+        Nutze am besten die Möglichkeit einzelne Punkte fett oder kursiv
+        hervorzuheben und Arbeitsschritte mit Aufzählungszeichen zu versehen,
+        um deine Idee übersichtlich zu gliedern und ansprechender darzustellen.
+        <br>
+        Viel Spaß dabei!
       </span>
     </v-row>
     <v-row>

@@ -1,8 +1,9 @@
 <template>
+<div>
   <v-toolbar
+    flat
     dense
-    fixed
-  >
+    fixed>
     <v-btn icon @click="onBackClick()">
       <v-icon>mdi-close</v-icon>
     </v-btn>
@@ -11,6 +12,8 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
   </v-toolbar>
+    <v-divider/>
+</div>
 </template>
 
 <script>
@@ -38,10 +41,7 @@ export default {
         return 'Heimabend Bearbeiten';
       }
       if (route === 'heimabendCreate') {
-        return 'Neue Heimabendidee erstellen';
-      }
-      if (route === 'message') {
-        return 'Kontakt Formular';
+        return 'Neue Heimabend-Idee erstellen';
       }
       return 'Zurück zur Übersicht';
     },

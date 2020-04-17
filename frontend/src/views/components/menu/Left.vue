@@ -44,39 +44,39 @@
       <v-spacer dark class="my-6"/>
     <v-subheader>Daten</v-subheader>
       <v-divider></v-divider>
-          <v-list-item link bottom>
+          <v-list-item link bottom :to="{ name: 'ranking-overview' }">
             <v-list-item-icon>
               <v-icon color="orange">
                 mdi-medal-outline
               </v-icon>
             </v-list-item-icon>
-            <v-list-item-content @click="onClickRanking()">
+            <v-list-item-content>
               <v-list-item-title>Statistik</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
           <v-divider v-if="isAuthenticated"/>
 
-          <v-list-item v-if="isAuthenticated" link bottom>
+          <v-list-item v-if="isAuthenticated" link bottom :to="{ name: 'tags' }">
             <v-list-item-icon>
               <v-icon color="green">
                 mdi-tag-text-outline
               </v-icon>
             </v-list-item-icon>
-            <v-list-item-content @click="onClickTags()">
+            <v-list-item-content>
               <v-list-item-title>Tags</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
           <v-divider v-if="isAuthenticated"/>
 
-          <v-list-item v-if="isAuthenticated" link bottom>
+          <v-list-item v-if="isAuthenticated"  link bottom :to="{ name: 'messageOverview' }">
             <v-list-item-icon>
               <v-icon color="black">
                 mdi-message-text-outline
                 </v-icon>
             </v-list-item-icon>
-            <v-list-item-content @click="onClickMessage()">
+            <v-list-item-content>
               <v-list-item-title>Nachrichten</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -119,15 +119,13 @@
           </v-list-item>
 
           <v-divider/>
-          <v-list-item link bottom>
+          <v-list-item link bottom :to="{ name: 'message' }">
             <v-list-item-icon>
               <v-icon color="blue">
                 mdi-android-messages
                 </v-icon>
             </v-list-item-icon>
-            <v-list-item-content
-              @click="onClickCreateMessage()"
-            >
+            <v-list-item-content>
               <v-list-item-title>
                 Kontakt / Nachricht
               </v-list-item-title>
@@ -149,28 +147,26 @@
             </v-list-item-content>
           </v-list-item>
         <v-divider/> -->
-          <v-list-item link bottom>
+          <v-list-item link bottom :to="{ name: 'aboutProject' }">
             <v-list-item-icon>
               <v-icon color="purple">
                 mdi-emoticon-happy-outline
               </v-icon>
             </v-list-item-icon>
-            <v-list-item-content
-              @click="onClickAboutProjectItem()"
-            >
+            <v-list-item-content>
               <v-list-item-title>
                 Über das Projekt
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         <v-divider/>
-          <v-list-item link>
+          <v-list-item link bottom :to="{ name: 'impressum' }">
             <v-list-item-icon>
               <v-icon color="red">
                 mdi-shield-sun-outline
               </v-icon>
             </v-list-item-icon>
-            <v-list-item-content @click="onClickImpressumItem()">
+            <v-list-item-content>
               <v-list-item-title>Impressum/Datenschutz</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -247,6 +243,9 @@ export default {
     isMobil() {
       return this.$vuetify.breakpoint.smAndDown;
     },
+  },
+  created() {
+    this.isDrawer = !this.isMobil;
   },
 };
 </script>

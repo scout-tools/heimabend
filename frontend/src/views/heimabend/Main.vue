@@ -243,7 +243,6 @@ export default {
     API_URL: process.env.VUE_APP_API,
     items: {},
     loading: true,
-    steps: 3,
     nextPath: null,
   }),
 };

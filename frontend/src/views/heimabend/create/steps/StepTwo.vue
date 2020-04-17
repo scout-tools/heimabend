@@ -36,27 +36,27 @@
           <v-switch
           v-model="data.isPossibleInside"
           color="secondary"
-          label="Ist diese Heimabendidee drinnen (in einem Haus) durchführbar?">
+          label="Ist diese Heimabend-Idee drinnen (in einem Haus) durchführbar?">
         </v-switch>
         <v-switch
           v-model="data.isPossibleOutside"
           color="secondary"
-          label="Ist diese Heimabendidee draußen (im z.B. Garten oder Wald) durchführbar?">
+          label="Ist diese Heimabend-Idee draußen (im z.B. Garten oder Wald) durchführbar?">
         </v-switch>
         <v-switch
           v-model="data.isPrepairationNeeded"
           color="secondary"
-          label="Benötigt diese Heimabendidee benötigt Zeit zur Vorbereitung?">
+          label="Benötigt diese Heimabend-Idee benötigt Zeit zur Vorbereitung?">
         </v-switch>
         <v-switch
           v-model="data.isPossibleDigital"
           color="secondary"
-          label="Ist diese Heimabendidee online mit deiner Gruppe durchführbar?">
+          label="Ist diese Heimabend-Idee online mit deiner Gruppe durchführbar?">
         </v-switch>
         <v-switch
           v-model="data.isPossibleAlone"
           color="secondary"
-          label="Ist diese Heimabendidee alleine durchführbar?">
+          label="Ist diese Heimabend-Idee alleine durchführbar?">
         </v-switch>
         </v-sheet>
     </v-row>

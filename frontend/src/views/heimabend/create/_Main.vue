@@ -262,7 +262,7 @@
           >
             <v-sheet class="pa-3">
             <span class="subtitle-1">
-              Für welche Stufe ist die Heimabendidee geeignet?
+              Für welche Stufe ist die Heimabend-Idee geeignet?
             </span>
             <v-btn-toggle
               v-model="levelFilter"
@@ -357,7 +357,7 @@
               color="green"
               v-model="agreeBox"
             :rules="[v => !!v || 'Nur mit der Einverständniserklärung kannst du Ideen einreichen']"
-              label="Ich möchte meine Heimabendidee veröffentlichen und bin damit einverstanden,
+              label="Ich möchte meine Heimabend-Idee veröffentlichen und bin damit einverstanden,
                 dass die Betreiber der Website ggf. Bearbeitungen an dem Beitrag vornehmen."
               required
             >
