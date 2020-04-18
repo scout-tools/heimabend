@@ -19,6 +19,8 @@ class EventPagination(pagination.PageNumberPagination):
 
 
 class EventFilter(FilterSet):
+    isPossibleInside = BooleanFilter(field_name='isPossibleInside')
+    isPossibleOutside = BooleanFilter(field_name='isPossibleOutside')
     isPossibleDigital = BooleanFilter(field_name='isPossibleDigital')
     isPossibleAlone = BooleanFilter(field_name='isPossibleAlone')
     isPrepairationNeeded = BooleanFilter(field_name='isPrepairationNeeded')
@@ -41,19 +43,19 @@ class EventFilter(FilterSet):
 
     class Meta:
         model = Event
-        fields = [  # 'isPossibleInside',
-            # 'isPossibleOutside',
-            'isPossibleAlone',
-            'isPossibleDigital',
-            'isPrepairationNeeded',
-            'isActive',
-            'withoutCosts',
-            'sorter',
-            'filterTags',
-            'isLvlOne',
-            'isLvlTwo',
-            'isLvlThree'
-        ]
+        fields = ['isPossibleInside',
+                  'isPossibleOutside',
+                  'isPossibleAlone',
+                  'isPossibleDigital',
+                  'isPrepairationNeeded',
+                  'isActive',
+                  'withoutCosts',
+                  'sorter',
+                  'filterTags',
+                  'isLvlOne',
+                  'isLvlTwo',
+                  'isLvlThree'
+                  ]
 
     def get_CostRating(self, queryset, field_name, value):
         if value:
