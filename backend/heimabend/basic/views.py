@@ -15,7 +15,7 @@ class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 
 class EventPagination(pagination.PageNumberPagination):
-    page_size = 3  # the no. of company objects you want to send in one go
+    page_size = 5  # the no. of company objects you want to send in one go
 
 
 class EventFilter(FilterSet):
@@ -35,9 +35,9 @@ class EventFilter(FilterSet):
                                            to_field_name='id',
                                            queryset=Tag.objects.all(),
                                            lookup_expr='exact', )
-    isLvlOne = BooleanFilter(field_name='isLvlOne')
-    isLvlTwo = BooleanFilter(field_name='isLvlTwo')
-    isLvlThree = BooleanFilter(field_name='isLvlThree')
+    isLvlOne = BooleanFilter(field_name='isLvlOne', lookup_expr='iexact')
+    isLvlTwo = BooleanFilter(field_name='isLvlTwo', lookup_expr='iexact')
+    isLvlThree = BooleanFilter(field_name='isLvlThree', lookup_expr='iexact')
 
     class Meta:
         model = Event
