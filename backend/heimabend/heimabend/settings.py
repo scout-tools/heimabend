@@ -46,9 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework_tracking',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -106,7 +108,6 @@ CACHES = {
     }
 }
 
-
 # Key in `CACHES` dict
 CACHE_MIDDLEWARE_ALIAS = 'default'
 
@@ -151,6 +152,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 CORS_ORIGIN_WHITELIST = [
     "https://inspirator.dpbmm.de",
@@ -165,9 +167,9 @@ CORS_ORIGIN_REGEX_WHITELIST = [
 CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication', ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend',
+                                'rest_framework.filters.SearchFilter'],
 }
 
 SIMPLE_JWT = {
