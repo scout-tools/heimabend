@@ -18,7 +18,9 @@ export default new Vuex.Store({
     withoutCosts: false,
     isActive: true,
     sorter: 'random',
-    levelFilter: [0, 1, 2],
+    isLvlOne: false,
+    isLvlTwo: false,
+    isLvlThree: false,
     filterTags: [],
     heimabendCounter: 0,
     tags: [],
@@ -28,6 +30,15 @@ export default new Vuex.Store({
     liked: [],
   },
   getters: {
+    isLvlOne(state) {
+      return state.isLvlOne;
+    },
+    isLvlTwo(state) {
+      return state.isLvlTwo;
+    },
+    isLvlThree(state) {
+      return state.isLvlThree;
+    },
     isAuthenticated(state) {
       return !!state.accessToken;
     },
@@ -70,9 +81,6 @@ export default new Vuex.Store({
     sorter(state) {
       return state.sorter;
     },
-    levelFilter(state) {
-      return state.levelFilter;
-    },
     filterTags(state) {
       return state.filterTags;
     },
@@ -105,23 +113,23 @@ export default new Vuex.Store({
     changeFilterTags(state, newTags) {
       state.filterTags = newTags;
     },
-    tooglePossibleInside(state) {
-      state.isPossibleInside = !state.isPossibleInside;
+    setPossibleInside(state, value) {
+      state.isPossibleInside = value;
     },
-    tooglePossibleOutside(state) {
-      state.isPossibleOutside = !state.isPossibleOutside;
+    setPossibleOutside(state, value) {
+      state.isPossibleOutside = value;
     },
-    tooglePossibleAlone(state) {
-      state.isPossibleAlone = !state.isPossibleAlone;
+    setPossibleAlone(state, value) {
+      state.isPossibleAlone = value;
     },
-    tooglePossibleDigital(state) {
-      state.isPossibleDigital = !state.isPossibleDigital;
+    setPossibleDigital(state, value) {
+      state.isPossibleDigital = value;
     },
-    toogleIsPreperationNeeded(state) {
-      state.isPrepairationNeeded = !state.isPrepairationNeeded;
+    setIsPreperationNeeded(state, value) {
+      state.isPrepairationNeeded = value;
     },
-    toogleWithoutCosts(state) {
-      state.withoutCosts = !state.withoutCosts;
+    setWithoutCosts(state, value) {
+      state.withoutCosts = value;
     },
     toggleIsActive(state) {
       state.isActive = !state.isActive;
@@ -132,8 +140,14 @@ export default new Vuex.Store({
     setHeimabendCounter(state, payload) {
       state.heimabendCounter = payload;
     },
-    setLevelFilter(state, newFilter) {
-      state.levelFilter = newFilter;
+    setIsLvlOne(state, value) {
+      state.isLvlOne = value;
+    },
+    setIsLvlTwo(state, value) {
+      state.isLvlTwo = value;
+    },
+    setIsLvlThree(state, value) {
+      state.isLvlThree = value;
     },
     setTokens(state, access, refresh) {
       state.accessToken = access;
@@ -144,7 +158,9 @@ export default new Vuex.Store({
       state.isPossibleOutside = true;
       state.isPossibleDigital = false;
       state.isPossibleAlone = false;
-      state.levelFilter = [0, 1, 2];
+      state.isLvlOne = false;
+      state.isLvlTwo = false;
+      state.isLvlThree = false;
       state.searchInput = '';
       state.isPrepairationNeeded = false;
       state.withoutCosts = false;

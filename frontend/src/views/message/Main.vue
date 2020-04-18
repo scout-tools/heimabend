@@ -120,7 +120,7 @@ export default {
       return 'display-1 ma-2';
     },
     isMobil() {
-      return this.$vuetify.breakpoint.smAndDown;
+      return this.$vuetify.breakpoint.mdAndDown;
     },
     nameErrors() {
       const errors = [];

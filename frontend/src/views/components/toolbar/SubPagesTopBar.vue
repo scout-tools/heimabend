@@ -19,11 +19,6 @@
 <script>
 
 export default {
-  data() {
-    return {
-      levelFilter: [0, 1, 2],
-    };
-  },
   methods: {
     onBackClick() {
       if (this.$route.name === 'heimabendDetails') {

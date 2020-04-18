@@ -111,7 +111,7 @@ export default {
 
   computed: {
     isMobil() {
-      return this.$vuetify.breakpoint.smAndDown;
+      return this.$vuetify.breakpoint.mdAndDown;
     },
     isUpdate() {
       return !!this.$route.params.id;

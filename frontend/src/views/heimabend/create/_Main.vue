@@ -447,7 +447,7 @@ export default {
 
   computed: {
     isMobil() {
-      return this.$vuetify.breakpoint.smAndDown;
+      return this.$vuetify.breakpoint.mdAndDown;
     },
     getOrange() {
       if (this.levelFilter) {

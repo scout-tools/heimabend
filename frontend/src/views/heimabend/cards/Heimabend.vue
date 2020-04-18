@@ -10,425 +10,442 @@
     spinner="spiral"
     infinite-scroll-disabled="loading"
     infinite-scroll-distance="900"
-    infinite-scroll-throttle-delay="1000">
-
-  <v-card
-    :max-width="getMaxWidth()"
-    elevation=30
-    hover
-    data-aos="zoom-in"
-    data-aos-duration="800"
-    data-aos-delay="0"
-    data-aos-anchor-placement="top-bottom"
-    class="mx-auto ma-3 mb-10 test-color"
-    :style="{ transitionDelay: delay }"
-    v-bind:id="`eventcard-${item.id}`"
-    v-for="(item, index) in items"
-    :key="index"
+    infinite-scroll-throttle-delay="1000"
   >
-    <v-list-item
-      class="primary px-0"
-      :class="paddingleftLebelIcons"
+    <v-card
+      :max-width="getMaxWidth()"
+      elevation=30
+      hover
+      data-aos="zoom-in"
+      data-aos-duration="800"
+      data-aos-delay="0"
+      data-aos-anchor-placement="top-bottom"
+      class="mx-auto ma-3 mb-10 test-color"
+      :style="{ transitionDelay: delay }"
+      v-bind:id="`eventcard-${item.id}`"
+      v-for="(item, index) in items"
+      :key="index"
     >
-      <v-img
-        class="ml-1"
-        :src="require('@/assets/wolfskopf.png')"
-        v-if="item.isLvlOne && isDetailsView"
-        :max-width="maxWidthKnots"
-      ></v-img>
-      <v-img
-        class="ml-1"
-        :src="require('../../../assets/knot_blue.png')"
-        v-if="item.isLvlTwo && isDetailsView"
-        :max-width="maxWidthKnots"
-      ></v-img>
-      <v-img
-        class="ml-1"
-        :src="require('../../../assets/knot_red.png')"
-        v-if="item.isLvlThree && isDetailsView"
-        :max-width="maxWidthKnots"
-      ></v-img>
-      <v-divider v-if="isDetailsView" class="mx-2" vertical></v-divider>
-      <v-list-item-content>
-        <v-list-item-title
-          class="whiteText"
-          :class="titleClass()">
-            {{ item.title }}
-        </v-list-item-title>
-      </v-list-item-content>
-      <v-divider class="mx-2 ml-12" v-if="!item.isActive && isAuthenticated" vertical/>
-        <v-tooltip
-          nudge-left="80"
-          v-if="!item.isActive && isAuthenticated"
-          bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              class="ma-2"
-              v-on="on"
-              icon>
-              <v-icon color="red">
-                mdi-eye-off-outline
-              </v-icon>
-            </v-btn>
-          </template>
-          <span class="mx-1">
-            Nicht Öffentlich
-          </span>
-        </v-tooltip>
+      <v-list-item
+        class="primary px-0"
+        :class="paddingleftLebelIcons"
+      >
+        <v-img
+          class="ml-1"
+          :src="require('@/assets/wolfskopf.png')"
+          v-if="item.isLvlOne && isDetailsView"
+          :max-width="maxWidthKnots"
+        />
+        <v-img
+          class="ml-1"
+          :src="require('../../../assets/knot_blue.png')"
+          v-if="item.isLvlTwo && isDetailsView"
+          :max-width="maxWidthKnots"
+        />
+        <v-img
+          class="ml-1"
+          :src="require('../../../assets/knot_red.png')"
+          v-if="item.isLvlThree && isDetailsView"
+          :max-width="maxWidthKnots"
+        />
 
-      <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
-      <v-btn
-        class="ma-1 ml-0"
-        text
-        icon
-        color="red lighten-3"
-        v-if="isAuthenticated"
-        @click="onDeleteClick(item)">
-        <v-icon>mdi-delete-outline</v-icon>
-      </v-btn>
+        <v-divider
+          v-if="isDetailsView"
+          class="mx-2"
+          vertical
+        />
+
+        <v-list-item-content>
+          <v-list-item-title
+            class="whiteText"
+            :class="titleClass()">
+              {{ item.title }}
+          </v-list-item-title>
+        </v-list-item-content>
+        <v-divider class="mx-2 ml-12" v-if="!item.isActive && isAuthenticated" vertical/>
+          <v-tooltip
+            nudge-left="80"
+            v-if="!item.isActive && isAuthenticated"
+            bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                class="ma-2"
+                v-on="on"
+                icon>
+                <v-icon color="red">
+                  mdi-eye-off-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span class="mx-1">
+              Nicht Öffentlich
+            </span>
+          </v-tooltip>
 
         <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
         <v-btn
           class="ma-1 ml-0"
           text
           icon
-          color="lightPrimary"
+          color="red lighten-3"
           v-if="isAuthenticated"
-          @click="onUpdateClick(item)">
-          <v-icon>mdi-pencil-outline</v-icon>
+          @click="onDeleteClick(item)">
+          <v-icon>mdi-delete-outline</v-icon>
         </v-btn>
 
-        <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
+          <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
+          <v-btn
+            class="ma-1 ml-0"
+            text
+            icon
+            color="lightPrimary"
+            v-if="isAuthenticated"
+            @click="onUpdateClick(item)">
+            <v-icon>mdi-pencil-outline</v-icon>
+          </v-btn>
 
-        <v-tooltip
-          v-if="!isMobil && !isAuthenticated && item.like_score > 0"
-          nudge-left="80"
-          open-on-hover
-          bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              class="px-2"
-              :x-small="isMobil"
-              depressed
-              color="primary"
-              v-on="on">
-              <v-icon
-                v-for="i in item.like_score"
-                color="#F6D300"
-                :key="i"
-                :size="30"
-                readonly>
-                mdi-star-face
-              </v-icon>
-            </v-btn>
-          </template>
-          <span>
-            {{ getLikeScoreTooltip(item.like_score)}}
-          </span>
-        </v-tooltip>
-    </v-list-item>
+          <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
+          <v-tooltip
+            v-if="!isMobil && !isAuthenticated && item.like_score > 0"
+            nudge-left="80"
+            open-on-hover
+            bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                class="px-2"
+                :x-small="isMobil"
+                depressed
+                color="primary"
+                v-on="on">
+                <v-icon
+                  v-for="i in item.like_score"
+                  color="#F6D300"
+                  :key="i"
+                  :size="30"
+                  readonly>
+                  mdi-star-face
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>
+              {{ getLikeScoreTooltip(item.like_score)}}
+            </span>
+          </v-tooltip>
+      </v-list-item>
 
-    <v-divider/>
-    <v-card-text>
-      <div>
-        <p
-          class="text-left subtitle-1 mx-10 font-weight-light test-color-text"
-          :class="getDescriptionClass()"
-          v-html="item.description">
-        </p>
-        <v-tooltip
-          nudge-left="80"
-          v-if="!isDetailsView"
-          bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn
+      <v-divider/>
+      <v-card-text>
+        <div>
+          <p
+            class="text-left subtitle-1 font-weight-light test-color-text"
+            :class="getDescriptionClass()"
+            v-html="item.description">
+          </p>
+          <v-container
             v-if="!isDetailsView"
-              @click="onDetailsClick(item)"
-              depressed
-              small
-              outlined
-              class="test-color-text"
-              block
-              v-on="on">
-              Weitere Informationen
-            </v-btn>
-          </template>
-          <span class="mx-1">
-            Weitere Informationen
-          </span>
-        </v-tooltip>
+          >
+            <v-row>
+              <v-col cols="2">
+              </v-col>
+              <v-col cols="8">
+                <v-tooltip
+                  nudge-left="80"
+                  bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      @click="onDetailsClick(item)"
+                      depressed
+                      outlined
+                      class="test-color-text"
+                      block
+                      v-on="on">
+                      {{ getLikeButtonText }}
+                    </v-btn>
+                  </template>
+                  <span class="mx-1">
+                    Hier gelangst du zur Detailierten Heimabendansicht mit vielen
+                    weiteren Informationen und Möglichkeiten
+                  </span>
+                </v-tooltip>
+              </v-col>
+              <v-col cols="2">
+                <v-tooltip
+                  nudge-left="80"
+                  bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      icon
+                      v-on="on"
+                      :color="getLikeColor(item)"
+                      @click="onLikedClicked(item)">
+                      <v-icon
+                        :size="getLikeIconSize">
+                        {{ getLikeIcon(item) }}
+                      </v-icon>
+                    </v-btn>
+                  </template>
+                    <span class="mx-1">
+                      Gefällt mir!
+                    </span>
+                </v-tooltip>
+              </v-col>
+            </v-row>
+          </v-container>
+        </div>
+      </v-card-text>
+
+      <v-divider v-if="isDetailsView" class="my-2"/>
+      <div v-if="isDetailsView">
+        <div class="text-left ml-10">
+          <u>
+            Material
+          </u>
+        </div>
+
+        <div
+          v-if="item.material !== ''"
+          class="text-left font-italic font-weight-light ml-10">
+          <ul>
+            <li
+              v-for="(item, index4) in getMaterialArray(item.material)"
+              :key="index4">
+              {{ item }}
+            </li>
+          </ul>
+        </div>
+        <div
+          v-else
+          class="text-left font-weight-light"
+        >
+          <ul>
+            <li>
+              {{ emptyMaterialText }}
+            </li>
+          </ul>
+        </div>
       </div>
-    </v-card-text>
 
-    <v-divider v-if="isDetailsView" class="my-2"/>
-    <div v-if="isDetailsView">
-    <div class="text-left ml-10">
-      <u>
-        Material
-      </u>
-    </div>
-
-    <div
-      v-if="item.material !== ''"
-      class="text-left font-italic font-weight-light ml-10">
-      <ul>
-        <li
-          v-for="(item, index4) in getMaterialArray(item.material)"
-          :key="index4">
-          {{ item }}
-        </li>
-      </ul>
-    </div>
-    <div
-      v-else
-      class="text-left font-weight-light"
-    >
-      <ul>
-        <li>
-          {{ emptyMaterialText }}
-        </li>
-      </ul>
-    </div>
-    </div>
-
-    <v-container>
-      <v-tooltip
-        v-for="(tag, index2) in item.tags"
-        :key="index2"
-        slot="append"
-        bottom
-        nudge-left="80"
-      >
-      <template v-slot:activator="{ on }">
-      <v-chip
-        v-on="on"
-        class="ma-2"
-        :color="getTagColorById(tag)"
-      >
-        {{ getTagNameById(tag) }}
-      </v-chip>
-      </template>
-      <span>
-        {{ getDescriptionNameById(tag) }}
-      </span>
-      </v-tooltip>
-    </v-container>
-    <v-divider />
-
-    <v-card-actions px-0 class="lightPrimary no-padding">
-      <v-tooltip
-        nudge-left="80"
-        bottom>
-        <template v-slot:activator="{ on }">
-          <v-btn
-            v-on="on"
-            icon
-            :small="isMobil"
-            :color="getLikeColor(item)"
-            @click="onLikedClicked(item)">
-            <v-icon
-              :size="getIconSize">
-              {{ getLikeIcon(item) }}
-            </v-icon>
-          </v-btn>
-        </template>
-          <span class="mx-1">
-            Gefällt mir!
-          </span>
-      </v-tooltip>
-      <v-divider
-        :class="verticalMargin"
-        vertical
-        v-if="item.isPossibleDigital"/>
-
-      <v-tooltip
-        open-on-hover
-        bottom
-        nudge-left="80"
-        v-if="item.isPossibleDigital">
-        <template v-slot:activator="{ on }">
-          <v-btn
-            icon
-            :small="isMobil"
-            v-on="on">
-            <v-icon
-              :size="getIconSize"
-              color="red"
-              v-if="item.isPossibleDigital">
-              mdi-robot
-            </v-icon>
-          </v-btn>
-        </template>
-        <span>
-          Dieser Heimabend ist mit deiner Sippe digital durchführbar
-        </span>
-      </v-tooltip>
-
-      <v-divider
-        :class="verticalMargin"
-        vertical
-        v-if="item.isPossibleAlone"/>
-      <v-tooltip
-        open-on-hover
-        nudge-left="80"
-        bottom
-        v-if="item.isPossibleAlone">
-        <template v-slot:activator="{ on }">
-          <v-btn
-            :small="isMobil"
-            icon
-            v-on="on">
-            <v-icon
-              :size="getIconSize"
-              v-if="item.isPossibleAlone">
-              mdi-account-cowboy-hat
-            </v-icon>
-          </v-btn>
-        </template>
-        <span>
-          Dieser Heimabend ist alleine durchführbar
-        </span>
-      </v-tooltip>
-
-      <v-divider :class="verticalMargin" vertical/>
+      <v-container>
         <v-tooltip
-          v-if="item.costsRating > 0"
-          open-on-hover
-          bottom
-          nudge-left="80">
-          <template v-slot:activator="{ on }">
-            <v-btn
-              :x-small="isMobil"
-              depressed
-              color="lightPrimary"
-              v-on="on">
-              <v-rating
-                v-model="item.costsRating"
-                emptyIcon="mdi-currency-usd"
-                fullIcon="mdi-currency-usd"
-                color="orange"
-                background-color="grey"
-                dense
-                length="3"
-                :size="ratingSize"
-                readonly/>
-            </v-btn>
-          </template>
-          <span>
-            {{ getCostsToolTip(item.costsRating) }}
-          </span>
-        </v-tooltip>
-
-        <v-tooltip
-          v-if="item.costsRating === 0"
-          open-on-hover
-          bottom
-          nudge-left="80">
-          <template v-slot:activator="{ on }">
-            <v-btn
-              icon
-              v-on="on">
-              <v-icon
-                :size="getIconSize"
-                color="red">
-                mdi-currency-usd-off
-              </v-icon>
-            </v-btn>
-          </template>
-          <span>Ohne Einkaufskosten</span>
-        </v-tooltip>
-
-        <v-divider
-          :class="verticalMargin"
-          v-if="!item.isPrepairationNeeded"
-          vertical/>
-        <v-tooltip
-          v-if="!item.isPrepairationNeeded"
-          open-on-hover
-          nudge-left="80"
-          bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              icon
-              color="lightPrimary"
-              v-on="on">
-              <v-icon
-                v-model="item.isPrepairationNeeded"
-                color="black"
-                :size="getIconSize"
-                v-if="!item.isPrepairationNeeded">
-                mdi-card-bulleted-off-outline
-              </v-icon>
-            </v-btn>
-          </template>
-          <span>
-            Ohne Vorbereitungen
-          </span>
-        </v-tooltip>
-
-        <v-divider
-          :class="verticalMargin"
-          vertical/>
-        <v-tooltip
-          nudge-left="80"
-          v-if="item.executionTimeRating > 0"
-          open-on-hover
-          bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              :x-small="isMobil"
-              depressed
-              color="lightPrimary"
-              v-on="on">
-              <v-rating
-                v-model="item.executionTimeRating"
-                emptyIcon="mdi-clock"
-                fullIcon="mdi-clock"
-                color="black"
-                background-color="grey"
-                dense
-                length="3"
-                :size="ratingSize"
-                readonly/>
-            </v-btn>
-          </template>
-          <span>
-            {{ getExecutionTimeRatingTooltip(item.executionTimeRating)}}
-          </span>
-        </v-tooltip>
-
-        <v-tooltip
-          v-if="item.executionTimeRating === 0"
-          open-on-hover
+          v-for="(tag, index2) in item.tags"
+          :key="index2"
+          slot="append"
           bottom
           nudge-left="80"
         >
+        <template v-slot:activator="{ on }">
+        <v-chip
+          v-on="on"
+          class="ma-2"
+          :color="getTagColorById(tag)"
+        >
+          {{ getTagNameById(tag) }}
+        </v-chip>
+        </template>
+        <span>
+          {{ getDescriptionNameById(tag) }}
+        </span>
+        </v-tooltip>
+      </v-container>
+
+      <v-divider
+        v-if="item.isPossibleDigital"
+      />
+
+      <v-card-actions px-0 class="lightPrimary no-padding">
+        <v-tooltip
+          open-on-hover
+          bottom
+          nudge-left="80"
+          v-if="item.isPossibleDigital">
           <template v-slot:activator="{ on }">
             <v-btn
               icon
-              v-on="on"
-            >
+              :small="isMobil"
+              v-on="on">
               <v-icon
                 :size="getIconSize"
-                color="black"
-              >
-                mdi-table-large
+                color="red"
+                v-if="item.isPossibleDigital">
+                mdi-robot
               </v-icon>
             </v-btn>
           </template>
-          <span>Großprojekt</span>
+          <span>
+            Dieser Heimabend ist mit deiner Sippe digital durchführbar
+          </span>
         </v-tooltip>
-        <v-spacer />
+
         <v-divider
           :class="verticalMargin"
-          vertical/>
+          vertical
+          v-if="item.isPossibleAlone"/>
+        <v-tooltip
+          open-on-hover
+          nudge-left="80"
+          bottom
+          v-if="item.isPossibleAlone">
+          <template v-slot:activator="{ on }">
+            <v-btn
+              :small="isMobil"
+              icon
+              v-on="on">
+              <v-icon
+                :size="getIconSize"
+                v-if="item.isPossibleAlone">
+                mdi-account-cowboy-hat
+              </v-icon>
+            </v-btn>
+          </template>
+          <span>
+            Dieser Heimabend ist alleine durchführbar
+          </span>
+        </v-tooltip>
 
+        <v-divider
+          v-if="item.costsRating > 0"
+          :class="verticalMargin"
+          vertical
+        />
+          <v-tooltip
+            v-if="item.costsRating > 0"
+            open-on-hover
+            bottom
+            nudge-left="80">
+            <template v-slot:activator="{ on }">
+              <v-btn
+                :x-small="isMobil"
+                depressed
+                color="lightPrimary"
+                v-on="on">
+                <v-rating
+                  v-model="item.costsRating"
+                  emptyIcon="mdi-currency-usd"
+                  fullIcon="mdi-currency-usd"
+                  color="orange"
+                  background-color="grey"
+                  dense
+                  length="3"
+                  :size="ratingSize"
+                  readonly/>
+              </v-btn>
+            </template>
+            <span>
+              {{ getCostsToolTip(item.costsRating) }}
+            </span>
+          </v-tooltip>
 
-        <div class="caption ma-1">
-          {{ formatDate(item.createdAt) + '\n' + item.createdBy }}
-        </div>
-    </v-card-actions>
-  </v-card>
+          <v-tooltip
+            v-if="item.costsRating === 0"
+            open-on-hover
+            bottom
+            nudge-left="80">
+            <template v-slot:activator="{ on }">
+              <v-btn
+                icon
+                v-on="on">
+                <v-icon
+                  :size="getIconSize"
+                  color="red">
+                  mdi-currency-usd-off
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>Ohne Einkaufskosten</span>
+          </v-tooltip>
+
+          <v-divider
+            :class="verticalMargin"
+            v-if="!item.isPrepairationNeeded"
+            vertical/>
+          <v-tooltip
+            v-if="!item.isPrepairationNeeded"
+            open-on-hover
+            nudge-left="80"
+            bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                icon
+                color="lightPrimary"
+                v-on="on">
+                <v-icon
+                  v-model="item.isPrepairationNeeded"
+                  color="black"
+                  :size="getIconSize"
+                  v-if="!item.isPrepairationNeeded">
+                  mdi-card-bulleted-off-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>
+              Ohne Vorbereitungen
+            </span>
+          </v-tooltip>
+
+          <v-divider
+            v-if="item.executionTimeRating"
+            :class="verticalMargin"
+            vertical
+          />
+          <v-tooltip
+            nudge-left="80"
+            v-if="item.executionTimeRating > 0"
+            open-on-hover
+            bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                :x-small="isMobil"
+                depressed
+                color="lightPrimary"
+                v-on="on">
+                <v-rating
+                  v-model="item.executionTimeRating"
+                  emptyIcon="mdi-clock"
+                  fullIcon="mdi-clock"
+                  color="black"
+                  background-color="grey"
+                  dense
+                  length="3"
+                  :size="ratingSize"
+                  readonly/>
+              </v-btn>
+            </template>
+            <span>
+              {{ getExecutionTimeRatingTooltip(item.executionTimeRating)}}
+            </span>
+          </v-tooltip>
+
+          <v-tooltip
+            v-if="item.executionTimeRating === 0"
+            open-on-hover
+            bottom
+            nudge-left="80"
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                icon
+                v-on="on"
+              >
+                <v-icon
+                  :size="getIconSize"
+                  color="black"
+                >
+                  mdi-table-large
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>Großprojekt</span>
+          </v-tooltip>
+          <v-spacer />
+          <v-divider
+            :class="verticalMargin"
+            vertical
+          />
+          <div class="caption ma-1">
+            {{ formatDate(item.createdAt) + '\n' + item.createdBy }}
+          </div>
+      </v-card-actions>
+    </v-card>
   </div>
   <!-- </v-slide-y-transition> -->
   <v-snackbar
@@ -475,7 +492,7 @@
   >
     {{ 'Du hast diese Heimabend-Idee bereits bewertet' }}
   </v-snackbar>
-<v-progress-circular
+    <v-progress-circular
       v-show="loading && !isDetailsView"
       indeterminate
       size="40"
@@ -516,7 +533,16 @@ export default {
       return this.isMobil ? 'headerIsMobile' : 'headerIsDesktop';
     },
     getDescriptionClass() {
-      return !this.isDetailsView ? 'giveMeEllipsis' : '';
+      let string = '';
+      if (!this.isDetailsView) {
+        string = string.concat('giveMeEllipsis');
+      }
+      if (!this.isMobil) {
+        string = string.concat(' mx-10');
+      } else {
+        string = string.concat(' mx-2');
+      }
+      return string;
     },
     onLikedClicked(item) {
       const eventId = item.id;
@@ -527,7 +553,7 @@ export default {
       }
     },
     getLikeColor(item) {
-      return this.isAlreadyVoted(item) ? 'red lighten-1' : 'darkgray';
+      return this.isAlreadyVoted(item) ? 'red lighten-1' : 'red darken-2';
     },
     getLikeIcon(item) {
       return this.isAlreadyVoted(item) ? 'mdi-heart' : 'mdi-heart-outline';
@@ -698,10 +724,16 @@ export default {
       'isAuthenticated',
     ]),
     ratingSize() {
-      return !this.isMobil ? 20 : 16;
+      return !this.isMobil ? 22 : 18;
     },
     getIconSize() {
-      return !this.isMobil ? 20 : 16;
+      return !this.isMobil ? 22 : 18;
+    },
+    getLikeIconSize() {
+      return !this.isMobil ? 28 : 28;
+    },
+    getLikeButtonText() {
+      return !this.isMobil ? 'Weitere Informationen' : 'Informationen';
     },
     paddingleftLebelIcons() {
       return !this.isMobil ? 'pl-2' : 'pl-1';
@@ -710,7 +742,7 @@ export default {
       return !this.isMobil ? '30' : '18';
     },
     isMobil() {
-      return this.$vuetify.breakpoint.smAndDown;
+      return this.$vuetify.breakpoint.mdAndDown;
     },
   },
 };

@@ -105,30 +105,11 @@ export default {
       createdByEmail: '',
       isActive: false,
     },
-    levelFilter: [0, 1, 2],
   }),
 
   computed: {
     isMobil() {
-      return this.$vuetify.breakpoint.smAndDown;
-    },
-    getOrange() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(0);
-      }
-      return false;
-    },
-    getBlue() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(1);
-      }
-      return false;
-    },
-    getRed() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(2);
-      }
-      return false;
+      return this.$vuetify.breakpoint.mdAndDown;
     },
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;

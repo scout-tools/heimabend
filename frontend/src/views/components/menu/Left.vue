@@ -149,7 +149,7 @@
         <v-divider/> -->
           <v-list-item link bottom :to="{ name: 'aboutProject' }">
             <v-list-item-icon>
-              <v-icon color="purple">
+              <v-icon color="orange lighten-2">
                 mdi-emoticon-happy-outline
               </v-icon>
             </v-list-item-icon>
@@ -241,7 +241,7 @@ export default {
       },
     },
     isMobil() {
-      return this.$vuetify.breakpoint.smAndDown;
+      return this.$vuetify.breakpoint.mdAndDown;
     },
   },
   created() {

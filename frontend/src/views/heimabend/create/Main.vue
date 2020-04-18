@@ -155,11 +155,9 @@ export default {
   methods: {
     nextStep() {
       this.currentStep += 1;
-      this.showSuccess = true;
     },
     prevStep() {
       this.currentStep -= 1;
-      this.showSuccess = true;
     },
 
     finish() {

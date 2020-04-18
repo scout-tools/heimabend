@@ -62,7 +62,7 @@ export default {
       return this.$store.getters.tags;
     },
     isMobil() {
-      return this.$vuetify.breakpoint.smAndDown;
+      return this.$vuetify.breakpoint.mdAndDown;
     },
     getFilterTags() {
       this.filterTags = this.$store.getters.filterTags; // eslint-disable-line

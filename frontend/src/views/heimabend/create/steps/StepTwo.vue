@@ -97,12 +97,11 @@ export default {
       isPossibleDigital: false,
       isPossibleAlone: false,
     },
-    levelFilter: [0, 1, 2],
   }),
 
   computed: {
     isMobil() {
-      return this.$vuetify.breakpoint.smAndDown;
+      return this.$vuetify.breakpoint.mdAndDown;
     },
     isCreate() {
       return !this.$route.params.id;

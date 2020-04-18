@@ -38,6 +38,7 @@
       </social-sharing>
     </v-row>
     </v-container>
+    <span v-if="!isMobil" class="bg"/>
   </div>
 </div>
 </template>
@@ -58,7 +59,7 @@ export default {
       return 'Hallo';
     },
     isMobil() {
-      return this.$vuetify.breakpoint.smAndDown;
+      return this.$vuetify.breakpoint.mdAndDown;
     },
     id() {
       return this.$route.params.id;
@@ -82,7 +83,7 @@ export default {
 
   methods: {
     getUrl() {
-      return `https://inspirator.dpbm.de/#/heimabend/${this.id}/`;
+      return `https://inspirator.dpbm.de/heimabend/${this.id}/`;
     },
     getDescription() {
       return 'Schau dir mal den Heimabend an.';
@@ -195,4 +196,16 @@ export default {
   margin: 2px;
   padding: 2px;
 }
+
+.bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url( './../back-2.jpg') no-repeat center center;
+    background-size: 2000px 1300px;
+    background-attachment: fixed;
+    z-index: -1;
+  }
 </style>

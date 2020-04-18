@@ -199,31 +199,12 @@ export default {
       isLvlTwo: true,
       isLvlThree: true,
     },
-    levelFilter: [0, 1, 2],
     valid: true,
   }),
 
   computed: {
     isMobil() {
-      return this.$vuetify.breakpoint.smAndDown;
-    },
-    getOrange() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(0);
-      }
-      return false;
-    },
-    getBlue() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(1);
-      }
-      return false;
-    },
-    getRed() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(2);
-      }
-      return false;
+      return this.$vuetify.breakpoint.mdAndDown;
     },
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
@@ -320,16 +301,6 @@ export default {
       if (!this.$refs.form1.validate()
         || this.getCustomText !== 'Ok') {
         return false;
-      }
-      this.levelFilter = [];
-      if (this.data.isLvlOne) {
-        this.levelFilter.push(0);
-      }
-      if (this.data.isLvlTwo) {
-        this.levelFilter.push(1);
-      }
-      if (this.data.isLvlThree) {
-        this.levelFilter.push(2);
       }
       this.e6 = 2;
       return true;

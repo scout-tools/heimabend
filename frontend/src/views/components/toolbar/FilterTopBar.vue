@@ -1,238 +1,117 @@
 <template>
   <v-toolbar
     class="top-toolbar"
-    dense
     fixed
     :extension-height="extensionHeightNumber"
-    :extended="isExtended && isMobil">
-  <v-spacer/>
+    :extended="isExtended && isMobil"
+  >
+    <v-spacer/>
     <template>
-      <v-spacer v-if="$vuetify.breakpoint.mdAndUp"></v-spacer>
-        <v-btn-toggle
-          v-model="toggle_exclusive"
-          multiple
-          group
-          dense
-        >
-          <v-tooltip
-            v-if="isMobil"
-            nudge-left="80"
-            bottom>
-            <template v-slot:activator="{ on }">
-              <v-btn
-                @click="onExpandClick()"
-                dense
-                class="pa-0"
-                v-on="on"
-                text
-              >
-                <v-icon>
-                  mdi-tune
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>
-              Mehr Filter
-            </span>
-          </v-tooltip>
-        </v-btn-toggle>
-        <v-btn-toggle
-          v-model="toggle_exclusive"
-          multiple
-          group
-          dense
-        >
-
-          <v-tooltip
-            bottom
-            nudge-left="80"
+        <v-tooltip
+          v-if="isMobil"
+          nudge-left="80"
+          bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              @click="onExpandClick()"
+              dense
+              fab
+              small
+              class="pa-0"
+              v-on="on"
+              text
             >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                @click="onIsPossibleDigital()"
-                v-on="on"
-                text
-                :class="isPossibleDigitalButtonActive"
-              >
-                <v-icon
-                  :color="isPossibleDigital ? 'red darken-2' : 'grey'"
+              <v-icon
+              v-if="!isExtended"
                 >
-                  mdi-robot
-                </v-icon>
-                <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
-                  Digital
-                </span>
-              </v-btn>
-            </template>
-            <span>
-              Zeigt Heimabende an die mit deiner Sippe digital durchgeführt werden können.
-            </span>
-          </v-tooltip>
-
-
-          <!-- Drinnen -->
-          <v-tooltip
-            nudge-left="80"
-            bottom
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                @click="onIsPossibleAlone()"
-                v-on="on"
-                text
-                :class="isPossibleAloneButtonActive"
-              >
-                <v-icon
-                  :color="isPossibleAlone ? 'black' : 'grey'"
+                mdi-chevron-down
+              </v-icon>
+              <v-icon
+              v-if="isExtended"
                 >
-                  mdi-account-cowboy-hat
-                </v-icon>
-                <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
-                  Alleine
-                </span>
-              </v-btn>
-            </template>
-            <span>
-              Zeigt Heimabende an die alleine durchführbar sind
-            </span>
-          </v-tooltip>
+                mdi-chevron-up
+              </v-icon>
+            </v-btn>
+          </template>
+          <span>
+            Mehr Filter
+          </span>
+        </v-tooltip>
+      <v-divider class="mx-0" vertical/>
+        <filter-button
+          :customIcon="'mdi-robot'"
+          :customColor="'red'"
+          :customText="'Digital'"
+          :customTooltip="'Zeigt Ideen an die mit deiner Sippe digitaldurchgeführt werden können.'"
+          :customTrigger="isPossibleDigital"
+          :customVariable="'isPossibleDigital'"
+          :customMutation="'setPossibleDigital'"
+        />
+      <v-divider class="mx-0" vertical/>
+        <filter-button
+          :customIcon="'mdi-account-cowboy-hat'"
+          :customColor="'black'"
+          :customText="'Alleine'"
+          :customTooltip="'Zeigt Heimabende an die alleine durchführbar sind'"
+          :customTrigger="isPossibleAlone"
+          :customVariable="'isPossibleAlone'"
+          :customMutation="'setPossibleAlone'"
+        />
+      <v-divider class="mx-0" vertical/>
+        <filter-button
+          :customIcon="'mdi-card-bulleted-off-outline'"
+          :customColor="'black'"
+          :customText="'Arbeit.'"
+          :customTooltip="'Zeigt nur Heimabende an die keine Vorbereitung benötigen'"
+          :customTrigger="isPrepairationNeeded"
+          :customVariable="'isPrepairationNeeded'"
+          :customMutation="'setIsPreperationNeeded'"
+        />
+      <v-divider class="mx-0" vertical/>
+        <filter-button
+          :customIcon="'mdi-currency-usd-off'"
+          :customColor="'red'"
+          :customText="'Kosten'"
+          :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
+          :customTrigger="withoutCosts"
+          :customVariable="'withoutCosts'"
+          :customMutation="'setWithoutCosts'"
+        />
 
-          <!-- Draußen -->
+      <v-divider class="mx-0" vertical/>
+        <filter-button
+          :customIcon="'wolf'"
+          :customText="'WÖ'"
+          :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
+          :customTrigger="isLvlOne"
+          :customVariable="'isLvlOne'"
+          :customMutation="'setIsLvlOne'"
+        />
+      <v-divider class="mx-0" vertical/>
+        <filter-button
+          :customIcon="'scout'"
+          :customText="'Pfadi'"
+          :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
+          :customTrigger="isLvlTwo"
+          :customVariable="'isLvlTwo'"
+          :customMutation="'setIsLvlTwo'"
+        />
+      <v-divider class="mx-0" vertical/>
+        <filter-button
+          :customIcon="'rover'"
+          :customText="'Rover'"
+          :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
+          :customTrigger="isLvlThree"
+          :customVariable="'isLvlThree'"
+          :customMutation="'setIsLvlThree'"
+        />
+      <v-divider class="mx-0" vertical/>
+      <v-btn icon @click="onClickRestore" v-if="!isFilterDefault">
+        <v-icon>
+          mdi-restore
+        </v-icon>
 
-
-          <!-- Ohne Vorbereitung -->
-          <v-tooltip
-            nudge-left="80"
-            bottom
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                @click="onIsPrepairationNeeded()"
-                v-on="on"
-                text
-                tile
-                dense
-                :class="isIsPrepairationNeededButtonActive"
-              >
-                <v-icon
-                  :color="isPrepairationNeeded ? 'black' : 'grey'"
-                >
-                  mdi-card-bulleted-off-outline
-                </v-icon>
-                <span v-if="$vuetify.breakpoint.mdAndUp" class="mx-1">
-                  Ohne Vorbe.
-                </span>
-              </v-btn>
-            </template>
-            <span>
-              Zeigt nur Heimabende an die keine Vorbereitung benötigen
-            </span>
-          </v-tooltip>
-
-          <!-- Ohne Kosten -->
-          <v-tooltip
-            nudge-left="80"
-            bottom
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                @click="onWithoutCosts()"
-                v-on="on"
-                text
-                tile
-                dense
-                :class="isWithoutCostsButtonActive"
-              >
-                <v-icon
-                :color="withoutCosts ? 'red darken-2' : 'grey'"
-                >
-                  mdi-currency-usd-off
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>
-              Zeigt Heimabende an für die keine Kosten entstehen.
-            </span>
-          </v-tooltip>
-       </v-btn-toggle>
-
-      <v-divider v-if="$vuetify.breakpoint.mdAndUp" class="mx-2" vertical/>
-
-        <v-btn-toggle
-          v-model="levelFilter"
-          @change="onChangeLevelFilter"
-          multiple
-          mandatory
-          group
-          dense
-        >
-          <!-- orange -->
-          <v-tooltip
-            bottom
-            nudge-left="80"
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                v-on="on"
-              >
-                <v-img
-                  :src="require('@/assets/wolfskopf.png')"
-                  max-width="28"
-                />
-              </v-btn>
-            </template>
-            <span>
-              Dieser Heimabend ist für Wölflinge geeignet
-            </span>
-          </v-tooltip>
-
-          <!-- blue -->
-          <v-tooltip
-            bottom
-            nudge-left="80"
-            >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                v-on="on"
-              >
-                <v-img
-                  :src="require('../../../assets/knot_blue.png')"
-                  max-width="28"
-                ></v-img>
-              </v-btn>
-            </template>
-            <span>
-              Dieser Heimabend ist für Sipplinge geeignet
-            </span>
-          </v-tooltip>
-
-          <!-- red -->
-          <v-tooltip
-            nudge-left="80"
-            bottom
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                v-on="on"
-              >
-                <v-img
-                  :src="require('../../../assets/knot_red.png')"
-                  max-width="28"
-                ></v-img>
-              </v-btn>
-            </template>
-            <span>
-              Dieser Heimabend ist für Rover geeignet
-            </span>
-          </v-tooltip>
-        </v-btn-toggle>
-        <div class="mr-12"></div>
-      <!-- <v-divider v-if="$vuetify.breakpoint.mdAndUp" class="mx-2" vertical/>
-      <Sorter
-        v-if="$vuetify.breakpoint.mdAndUp"
-        style="max-width: 250px"
-      /> -->
-
+      </v-btn>
     </template>
   <template
         #extension
@@ -268,43 +147,25 @@
 </template>
 
 <script>
-import Sorter from '@/views/components/dropdown/Sorter.vue'; //eslint-disable-line
+import { mapGetters } from 'vuex';
+
+import FilterButton from '@/views/components/button/FilterButton.vue'; //eslint-disable-line
 
 export default {
   components: {
-    // Sorter,
+    FilterButton,
   },
   data() {
     return {
-      levelFilter: [0, 1, 2],
       isExtended: false,
-      filterTags: [],
     };
   },
   methods: {
+    onClickRestore() {
+      this.$store.commit('clearFilters');
+    },
     onExpandClick() {
       this.isExtended = !this.isExtended;
-    },
-    onChangeLevelFilter() {
-      this.$store.commit('setLevelFilter', this.levelFilter);
-    },
-    onIsPossibleInside() {
-      this.$store.commit('tooglePossibleInside');
-    },
-    onIsPossibleOutside() {
-      this.$store.commit('tooglePossibleOutside');
-    },
-    onIsPossibleDigital() {
-      this.$store.commit('tooglePossibleDigital');
-    },
-    onIsPossibleAlone() {
-      this.$store.commit('tooglePossibleAlone');
-    },
-    onIsPrepairationNeeded() {
-      this.$store.commit('toogleIsPreperationNeeded');
-    },
-    onWithoutCosts() {
-      this.$store.commit('toogleWithoutCosts');
     },
     onChange() {
       this.$emit('onTagFilterChanged', this.filterTags);
@@ -315,109 +176,39 @@ export default {
       this.$emit('onTagFilterChanged', this.filterTags);
       this.$store.commit('changeFilterTags', []);
     },
-    onClickTags() {
-      this.$router.push({ name: 'tags' });
-    },
   },
   computed: {
+    ...mapGetters([
+      'isPossibleInside',
+      'isPossibleOutside',
+      'isPossibleAlone',
+      'isPossibleDigital',
+      'isPrepairationNeeded',
+      'isActive',
+      'withoutCosts',
+      'searchInput',
+      'sorter',
+      'isLvlOne',
+      'isLvlTwo',
+      'isLvlThree',
+      'filterTags',
+      'tags',
+      'isAuthenticated',
+      'heimabendCounter',
+    ]),
     extensionHeightNumber() {
       return this.isMobil ? '350px' : '50px';
     },
-    getOrange() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(0);
-      }
-      return false;
-    },
-    getBlue() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(1);
-      }
-      return false;
-    },
-    getRed() {
-      if (this.levelFilter) {
-        return this.levelFilter.includes(2);
-      }
-      return false;
-    },
-    isPossibleInside() {
-      return this.$store.getters.isPossibleInside;
-    },
-    isPossibleOutside() {
-      return this.$store.getters.isPossibleOutside;
-    },
-    isPossibleDigital() {
-      return this.$store.getters.isPossibleDigital;
-    },
-    isPossibleAlone() {
-      return this.$store.getters.isPossibleAlone;
-    },
-    isPrepairationNeeded() {
-      return this.$store.getters.isPrepairationNeeded;
-    },
-    withoutCosts() {
-      return this.$store.getters.withoutCosts;
-    },
-    toggle_exclusive: {
-      get() {
-        const output = [];
-        if (this.isPossibleDigital) {
-          output.push(0);
-        }
-        if (this.isPossibleAlone) {
-          output.push(1);
-        }
-        if (this.isPrepairationNeeded) {
-          output.push(2);
-        }
-        if (this.withoutCosts) {
-          output.push(3);
-        }
-        return output;
-      },
-      set() {
-        return false;
-      },
-    },
-    // isPossibleInsideButtonActive() {
-    //   if (!this.isPossibleInside) {
-    //     return 'btn-disabled';
-    //   }
-    //   return '';
-    // },
-    // isPossibleOutsideButtonActive() {
-    //   if (!this.isPossibleOutside) {
-    //     return 'btn-disabled';
-    //   }
-    //   return '';
-    // },
-    isPossibleDigitalButtonActive() {
-      if (!this.isPossibleDigital) {
-        return 'btn-disabled';
-      }
-      return '';
-    },
-    isPossibleAloneButtonActive() {
-      if (!this.isPossibleAlone) {
-        return 'btn-disabled';
-      }
-      return '';
-    },
-    isIsPrepairationNeededButtonActive() {
-      if (!this.isPrepairationNeeded) {
-        return 'btn-disabled';
-      }
-      return '';
-    },
-    isWithoutCostsButtonActive() {
-      if (!this.withoutCosts) {
-        return 'btn-disabled';
-      }
-      return '';
-    },
-    isAuthenticated() {
-      return this.$store.getters.isAuthenticated;
+    isFilterDefault() {
+      return this.isPossibleAlone === false
+        && this.isPossibleDigital === false
+        && this.isPrepairationNeeded === false
+        && this.withoutCosts === false
+        && this.searchInput === ''
+        && this.filterTags.length < 1
+        && this.isLvlOne === false
+        && this.isLvlTwo === false
+        && this.isLvlThree === false;
     },
     isIsActive: {
       get() {
@@ -427,11 +218,8 @@ export default {
         return false;
       },
     },
-    tags() {
-      return this.$store.getters.tags;
-    },
     isMobil() {
-      return this.$vuetify.breakpoint.smAndDown;
+      return this.$vuetify.breakpoint.mdAndDown;
     },
     getFilterTags() {
       this.filterTags = this.$store.getters.filterTags; // eslint-disable-line
@@ -442,24 +230,12 @@ export default {
 </script>
 
 <style scoped>
-.v-btn:not(.v-btn--text):not(.v-btn--outlined).v-btn--active:before {
-    opacity: 0.4;
-    color: rgb(40, 158, 40)
-}
-.v-btn--active:before {
-    opacity: 0.4;
-    color: rgb(40, 158, 40)
-}
 
 .v-btn {
   padding-left: 6px !important;
   padding-right: 6px !important;
 }
 
-.theme--light.v-btn--active:hover::before,
-.theme--light.v-btn--active::before {
-    opacity: 0.3;
-}
 .right-menu-margin {
   margin-right: 240px;
 }

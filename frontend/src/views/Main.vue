@@ -33,13 +33,19 @@
         :dense="isMobil"
         @input="onChangeSearchInput()"
       />
-      <v-spacer />
 
+      <v-spacer/>
 
+      <img
+        v-if="isMobil"
+        src="https://dpbm.de/wp/wp-content/uploads/2019/02/mosaikWhite.svg"
+        class="mr-2"
+        height="50"
+        alt="Bundesabzeichen vom Deutschen Pfadfinderbund Mosaik"
+      />
     </v-app-bar>
 
     <menu-left
-      v-if="!apiIsDown"
       ref="mainMenuLeft"
     />
 
@@ -49,15 +55,14 @@
       id="lateral"
     >
       <topbar
-        v-if="isMainPage && !apiIsDown"
+        v-if="isMainPage"
         ref="topFilterToolbar"
       />
       <sub-pages-top-bar
-        v-if="!isMainPage && !apiIsDown"
+        v-if="!isMainPage"
       />
       <template>
         <router-view
-          v-if="!apiIsDown"
           class="content"
           :class="getMargin"
         />
@@ -110,7 +115,7 @@ export default {
       'searchInput',
     ]),
     isMobil() {
-      return this.$vuetify.breakpoint.smAndDown;
+      return this.$vuetify.breakpoint.mdAndDown;
     },
     getLabel() {
       const counter = this.$store.getters.heimabendCounter;

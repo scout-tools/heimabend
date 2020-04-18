@@ -22,7 +22,14 @@
       color="primary"
       indeterminate
     />
-  <span v-if="!isMobil" class="bg"/>
+    <!-- <v-btn
+      class="ma-10"
+      v-if="count > items.length"
+      @click="onClickLoadMore()"
+    >
+      Mehr laden
+    </v-btn> -->
+    <span v-if="!isMobil" class="bg"/>
   </div>
 </div>
 </template>
@@ -54,20 +61,19 @@ export default {
       'withoutCosts',
       'searchInput',
       'sorter',
-      'levelFilter',
+      'isLvlOne',
+      'isLvlTwo',
+      'isLvlThree',
       'filterTags',
       'tags',
       'isAuthenticated',
       'heimabendCounter',
     ]),
     isMobil() {
-      return this.$vuetify.breakpoint.smAndDown;
+      return this.$vuetify.breakpoint.mdAndDown;
     },
     axiosParams() {
       const params = new URLSearchParams();
-      const isLvlOne = this.levelFilter.includes(0);
-      const isLvlTwo = this.levelFilter.includes(1);
-      const isLvlThree = this.levelFilter.includes(2);
       // if (this.isPossibleOutside) {
       //   params.append('isPossibleOutside', this.isPossibleOutside);
       // }
@@ -81,19 +87,19 @@ export default {
         params.append('isPossibleDigital', this.isPossibleDigital);
       }
       if (this.isPrepairationNeeded) {
-        params.append('isPrepairationNeeded', this.isPrepairationNeeded);
+        params.append('isPrepairationNeeded', !this.isPrepairationNeeded);
       }
       if (this.withoutCosts) {
         params.append('withoutCosts', this.withoutCosts);
       }
-      if (!isLvlOne) {
-        params.append('isLvlOne', isLvlOne);
+      if (this.isLvlOne) {
+        params.append('isLvlOne', this.isLvlOne);
       }
-      if (!isLvlTwo) {
-        params.append('isLvlTwo', isLvlTwo);
+      if (this.isLvlTwo) {
+        params.append('isLvlTwo', this.isLvlTwo);
       }
-      if (!isLvlThree) {
-        params.append('isLvlThree', isLvlThree);
+      if (this.isLvlThree) {
+        params.append('isLvlThree', this.isLvlThree);
       }
       if (this.searchInput && this.searchInput !== '') {
         params.append('search', this.searchInput);
@@ -114,6 +120,10 @@ export default {
   },
 
   methods: {
+    // onClickLoadMore() {
+    //   this.isLoadingMore = false;
+    //   this.loadMore();
+    // },
     loadMore() {
       const stillRunning = this.isLoadingMore;
       this.isLoadingMore = true;
@@ -128,6 +138,10 @@ export default {
         .then((res) => {
           this.items = this.items.concat(res.data.results);
           this.nextPath = res.data.next;
+          this.loading = false;
+          this.isLoadingMore = false;
+        })
+        .catch(() => {
           this.loading = false;
           this.isLoadingMore = false;
         });
@@ -148,12 +162,14 @@ export default {
         .then((res) => {
           this.items = res.data.results;
           this.nextPath = res.data.next;
-
-          this.$store.commit('setHeimabendCounter', res.data.count);
+          this.count = res.data.count;
+          this.$store.commit('setHeimabendCounter', this.count);
           this.loading = false;
+          this.isLoadingMore = false;
         })
         .catch(() => {
           this.loading = false;
+          this.isLoadingMore = false;
         });
     },
 
@@ -184,55 +200,6 @@ export default {
       }
       return true;
     },
-    getItems(items, size, page) {
-      const {
-        // isPossibleInside,
-        // isPossibleOutside,
-        isPossibleAlone,
-        isPossibleDigital,
-        isPrepairationNeeded,
-        isActive,
-        withoutCosts,
-        sorter,
-        searchInput,
-        levelFilter, // eslint-disable-line
-      } = this.$store.getters;
-      if (items && items.filter) {
-        let returnArray = items
-          .filter(item => item.description.toLowerCase().includes(searchInput.toLowerCase())
-            || item.title.toLowerCase().includes(searchInput.toLowerCase())
-            || item.material.toLowerCase().includes(searchInput.toLowerCase()))
-          .filter(item => this.getFilterTags !== '13213' && this.isTagMatchToEvent(item))
-          .filter(item => (!isPossibleAlone || isPossibleAlone === item.isPossibleAlone))
-          .filter(item => (!isPossibleDigital || isPossibleDigital === item.isPossibleDigital))
-          .filter((item) => {
-            const allowOne = levelFilter.includes(0);
-            const allowTwo = levelFilter.includes(1);
-            const allowThree = levelFilter.includes(2);
-            const allow = (allowOne && allowOne === item.isLvlOne)
-              || (allowTwo && allowTwo === item.isLvlTwo)
-              || (allowThree && allowThree === item.isLvlThree);
-            return allow;
-          })
-          .filter(item => !isPrepairationNeeded || item.isPrepairationNeeded === false)
-          .filter(item => isActive === item.isActive)
-          .filter(item => !withoutCosts || item.costsRating === 0);
-        if (sorter === 'alpha' && returnArray && returnArray.length) {
-          returnArray = this._.orderBy(returnArray, ['title'], ['asc']);
-        }
-        if (sorter === 'newest' && returnArray && returnArray.length) {
-          returnArray = this._.orderBy(returnArray, ['createdAt'], ['desc']);
-        }
-        if (sorter === 'random' && returnArray && returnArray.length) {
-          returnArray = this._.shuffle(returnArray);
-        }
-        if (sorter === 'rating' && returnArray && returnArray.length) {
-          returnArray = this._.orderBy(returnArray, ['like_score'], ['desc']);
-        }
-        return returnArray.slice(size, page);
-      }
-      return [];
-    },
   },
 
   created() {
@@ -244,6 +211,8 @@ export default {
     items: {},
     loading: true,
     nextPath: null,
+    isLoadingMore: false,
+    count: 0,
   }),
 };
 </script>
