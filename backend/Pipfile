@@ -13,6 +13,7 @@ djangorestframework-simplejwt = "*"
 drf-api-tracking = "*"
 six = "*"
 pymysql = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.7"

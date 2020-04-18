@@ -32,15 +32,15 @@ class Event(models.Model):
             MinLengthValidator(5),
             MaxLengthValidator(40)])
     description = models.CharField(
-        max_length=5000,
+        max_length=5500,
         default='',
         validators=[
             MinLengthValidator(75),
-            MaxLengthValidator(5000)])
+            MaxLengthValidator(5500)])
     isPossibleOutside = models.BooleanField(default=1)
     isPossibleInside = models.BooleanField(default=1)
     tags = models.ManyToManyField(Tag, default='')
-    material = models.CharField(max_length=500, default='', blank=True)
+    material = models.CharField(max_length=1000, default='', blank=True)
     costsRating = models.SmallIntegerField(
         default=1, validators=[
             MinValueValidator(0), MaxValueValidator(3)])
