@@ -55,7 +55,7 @@ def getmedian():
 
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
-    like_score = serializers.SerializerMethodField()
+    # like_score = serializers.SerializerMethodField()
 
     class Meta:
         model = Event
@@ -83,7 +83,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             'updatedAt',
             'like_score')
 
-    def get_like_score(self, obj):
+    """def get_like_score(self, obj):
         # median = getmedian()
         score_id = 'like_score_' + str(obj.id)
         likescore = cache.get(score_id)
@@ -105,7 +105,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             else:
                 likescore = 0
             cache.set(score_id, likescore, timeout=13 * 60 * 60)
-        return likescore
+        return likescore"""
 
 
 class MessageSerializer(serializers.HyperlinkedModelSerializer):
