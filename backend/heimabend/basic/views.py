@@ -35,9 +35,9 @@ class EventFilter(FilterSet):
                                            to_field_name='id',
                                            queryset=Tag.objects.all(),
                                            lookup_expr='exact', )
-    isLvlOne = BooleanFilter(field_name='isLvlOne', lookup_expr='iexact')
-    isLvlTwo = BooleanFilter(field_name='isLvlTwo', lookup_expr='iexact')
-    isLvlThree = BooleanFilter(field_name='isLvlThree', lookup_expr='iexact')
+    isLvlOne = BooleanFilter(field_name='isLvlOne')
+    isLvlTwo = BooleanFilter(field_name='isLvlTwo')
+    isLvlThree = BooleanFilter(field_name='isLvlThree')
 
     class Meta:
         model = Event
