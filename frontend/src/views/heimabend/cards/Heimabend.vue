@@ -252,7 +252,7 @@
         v-if="item.isPossibleDigital"
       />
 
-      <v-card-actions px-0 class="lightPrimary no-padding">
+      <v-card-actions px-0 class="lightPrimary pa-0">
         <v-tooltip
           open-on-hover
           bottom
@@ -279,7 +279,7 @@
         <v-divider
           :class="verticalMargin"
           vertical
-          v-if="item.isPossibleAlone"/>
+          v-if="item.isPossibleAlone && item.isPossibleDigital"/>
         <v-tooltip
           open-on-hover
           nudge-left="80"
@@ -303,7 +303,7 @@
         </v-tooltip>
 
         <v-divider
-          v-if="item.costsRating > 0"
+          v-if="item.isPossibleAlone || item.isPossibleDigital"
           :class="verticalMargin"
           vertical
         />
@@ -621,7 +621,7 @@ export default {
       return this.$vuetify.breakpoint.mdAndUp ? 'headline font-weight-medium' : 'title';
     },
     getMaxWidth() {
-      return this.isDetailsView ? '1000' : '800';
+      return this.isDetailsView ? '9000' : '800';
     },
     verticalMargin() {
       return !this.$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-0';
@@ -724,13 +724,13 @@ export default {
       'isAuthenticated',
     ]),
     ratingSize() {
-      return !this.isMobil ? 22 : 18;
+      return !this.isMobil ? 24 : 18;
     },
     getIconSize() {
-      return !this.isMobil ? 22 : 18;
+      return !this.isMobil ? 24 : 18;
     },
     getLikeIconSize() {
-      return !this.isMobil ? 28 : 28;
+      return !this.isMobil ? 30 : 28;
     },
     getLikeButtonText() {
       return !this.isMobil ? 'Weitere Informationen' : 'Informationen';
@@ -778,10 +778,5 @@ export default {
     font-size: 3.5rem !important;
     letter-spacing: 0.4em;
     color: rgba(255, 255, 255, 0.692);
-  }
-
-  .no-padding{
-    padding-top: 0px !important;
-    padding-bottom: 0px !important;
   }
 </style>

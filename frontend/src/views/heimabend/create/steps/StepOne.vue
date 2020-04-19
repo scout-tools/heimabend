@@ -45,15 +45,16 @@
             @onInit="onInit()"
             :init="{
               height: 500,
-              menubar: false,
+              language: 'de',
+              menubar: 'edit insert view format tools table',
               plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount'
+                'advlist autolink link image preview',
+                'searchreplace visualblocks code emoticons',
+                'table paste code wordcount image code',
               ],
               toolbar:
                 'formatselect | bold italic underline | forecolor | \
-                bullist numlist | removeformat | undo redo'
+                bullist numlist | removeformat | undo redo | emoticons | image'
             }"
             />
             <div class="v-text-field__details" v-if="getCustomText !== 'Ok'">

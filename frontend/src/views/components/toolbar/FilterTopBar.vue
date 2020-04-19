@@ -14,10 +14,7 @@
           <template v-slot:activator="{ on }">
             <v-btn
               @click="onExpandClick()"
-              dense
               fab
-              small
-              class="pa-0"
               v-on="on"
               text
             >
@@ -77,7 +74,49 @@
           :customVariable="'withoutCosts'"
           :customMutation="'setWithoutCosts'"
         />
-
+      <v-divider v-if="!isMobil" class="mx-0" vertical/>
+        <filter-button
+          v-if="!isMobil"
+          :customIcon="'wolf'"
+          :customText="'WÖ'"
+          :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
+          :customTrigger="isLvlOne"
+          :customVariable="'isLvlOne'"
+          :customMutation="'setIsLvlOne'"
+        />
+      <v-divider v-if="!isMobil" class="mx-0" vertical/>
+        <filter-button
+          v-if="!isMobil"
+          :customIcon="'scout'"
+          :customText="'Pfadi'"
+          :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
+          :customTrigger="isLvlTwo"
+          :customVariable="'isLvlTwo'"
+          :customMutation="'setIsLvlTwo'"
+        />
+      <v-divider v-if="!isMobil" class="mx-0" vertical/>
+        <filter-button
+          v-if="!isMobil"
+          :customIcon="'rover'"
+          :customText="'Rover'"
+          :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
+          :customTrigger="isLvlThree"
+          :customVariable="'isLvlThree'"
+          :customMutation="'setIsLvlThree'"
+        />
+      <v-divider class="mx-0" vertical/>
+      <v-btn icon @click="onClickRestore" v-if="!isFilterDefault">
+        <v-icon>
+          mdi-restore
+        </v-icon>
+      </v-btn>
+    </template>
+  <template
+        #extension
+        v-if="isExtended && isMobil"
+      >
+    <v-container class="pa-0" style="margin: 0px; width: 100%">
+      <v-row v-if="isExtended && isMobil">
       <v-divider class="mx-0" vertical/>
         <filter-button
           :customIcon="'wolf'"
@@ -106,19 +145,7 @@
           :customMutation="'setIsLvlThree'"
         />
       <v-divider class="mx-0" vertical/>
-      <v-btn icon @click="onClickRestore" v-if="!isFilterDefault">
-        <v-icon>
-          mdi-restore
-        </v-icon>
-
-      </v-btn>
-    </template>
-  <template
-        #extension
-        v-if="isExtended && isMobil"
-      >
-    <v-container class="pa-0" style="margin: 0px; width: 100%">
-
+      </v-row>
       <v-layout wrap>
         <div class="pa-0">
           <v-chip-group

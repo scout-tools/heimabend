@@ -132,17 +132,15 @@
             </v-list-item-content>
           </v-list-item>
         <v-divider/>
-          <!-- <v-list-item link bottom>
+          <!-- <v-list-item link bottom :to="{ name: 'faq' }">
             <v-list-item-icon>
               <v-icon color="green">
                 mdi-frequently-asked-questions
               </v-icon>
             </v-list-item-icon>
-            <v-list-item-content
-              @click="onClickFaqItem()"
-            >
+            <v-list-item-content>
               <v-list-item-title>
-                FAQ
+                Fragen/Antworten
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -155,7 +153,7 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>
-                Über das Projekt
+                Unsere Idee
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>

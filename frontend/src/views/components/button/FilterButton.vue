@@ -89,7 +89,7 @@ export default {
       type: String,
     },
     customTrigger: {
-      type: Object,
+      type: Boolean,
     },
     customVariable: {
       type: String,

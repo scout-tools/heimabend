@@ -6,7 +6,7 @@
       lg7
     >
     <div class="display-3">
-      Über das Projekt
+      Unsere Idee
     </div>
       <v-card class="ma-10 pa-10">
         <div class="pa-3 display-1">

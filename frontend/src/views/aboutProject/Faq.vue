@@ -1,28 +1,30 @@
 <template>
-  <v-expansion-panels>
-    <v-expansion-panel
-      v-for="(faq,i) in faqs"
-      :key="i">
-      <v-expansion-panel-header>
-        {{faq.question}}
-      </v-expansion-panel-header>
-      <v-expansion-panel-content>
-        <v-btn icon>
-          <v-icon>
-            mdi-pencil-outline
-          </v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>
-            mdi-delete
-          </v-icon>
-        </v-btn>
-        <br>
-        <br>
-          {{faq.answer}}
-      </v-expansion-panel-content>
-    </v-expansion-panel>
-  </v-expansion-panels>
+<v-container>
+  <v-row justify="center">
+    <v-flex
+      ma-3
+      lg7
+    >
+    <div class="display-2 ma-5">
+      Fragen/Antworten
+    </div>
+    <v-expansion-panels>
+      <v-expansion-panel
+        v-for="(faq,i) in faqs"
+        :key="i">
+        <v-expansion-panel-header>
+          <span class="title"> {{ faq.question }}</span>
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <p class="text-left">
+            {{faq.answer}}
+          </p>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
+    </v-flex>
+  </v-row>
+</v-container>
 </template>
 
 <script>
@@ -30,6 +32,7 @@ import axios from 'axios';
 
 export default {
   data: () => ({
+    API_URL: process.env.VUE_APP_API,
     faqs: [
       {
         question: 'Was sollten wir hier eintragen?',

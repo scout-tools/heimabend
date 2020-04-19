@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Message from '../views/message/Main.vue';
 import Heimabend from '../views/heimabend/Main.vue';
 import AboutProject from '../views/aboutProject/Main.vue';
+import Faq from '../views/aboutProject/Faq.vue';
 import Impressum from '../views/impressum/Main.vue';
 import Tags from '../views/tags/Main.vue';
 import HeimabendCreate from '../views/heimabend/create/Main.vue';
@@ -28,6 +29,11 @@ const routes = [
     path: '/about',
     name: 'aboutProject',
     component: AboutProject,
+  },
+  {
+    path: '/faq',
+    name: 'faq',
+    component: Faq,
   },
   {
     path: '/impressum',
