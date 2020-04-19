@@ -621,7 +621,7 @@ export default {
       return this.$vuetify.breakpoint.mdAndUp ? 'headline font-weight-medium' : 'title';
     },
     getMaxWidth() {
-      return this.isDetailsView ? '9000' : '800';
+      return this.isDetailsView ? '900' : '800';
     },
     verticalMargin() {
       return !this.$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-0';

@@ -48,7 +48,7 @@
               language: 'de',
               menubar: 'edit insert view format tools table',
               plugins: [
-                'advlist autolink link image preview',
+                'advlist autolink lists link image preview',
                 'searchreplace visualblocks code emoticons',
                 'table paste code wordcount image code',
               ],

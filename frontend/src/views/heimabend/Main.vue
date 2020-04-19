@@ -101,6 +101,9 @@ export default {
       if (this.isLvlThree) {
         params.append('isLvlThree', this.isLvlThree);
       }
+      if (this.isLvlThree) {
+        params.append('isLvlThree', this.isLvlThree);
+      }
       if (this.searchInput && this.searchInput !== '') {
         params.append('search', this.searchInput);
       }
@@ -111,6 +114,8 @@ export default {
       }
       if (this.isAuthenticated) {
         params.append('isActive', this.isActive);
+      } else {
+        params.append('isActive', true);
       }
       params.append('sorter', this.sorter);
       params.append('page', 1);
