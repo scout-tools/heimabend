@@ -49,12 +49,12 @@
               menubar: 'edit insert view format tools table',
               plugins: [
                 'advlist autolink lists link image preview',
-                'searchreplace visualblocks code emoticons',
+                'searchreplace visualblocks code',
                 'table paste code wordcount image code',
               ],
               toolbar:
                 'formatselect | bold italic underline | forecolor | \
-                bullist numlist | removeformat | undo redo | emoticons | image'
+                bullist numlist | removeformat | undo redo | image'
             }"
             />
             <div class="v-text-field__details" v-if="getCustomText !== 'Ok'">
@@ -125,8 +125,8 @@ export default {
       if (value && value.length <= 75) {
         return 'Die Beschreibung ist zu kurz.';
       }
-      if (value && value.length >= 2500) {
-        return 'Beschreibung ist zu lang. Sie darf maximal 2000 Zeichen besitzen.';
+      if (value && value.length >= 4000) {
+        return 'Beschreibung ist zu lang. Sie darf maximal 3500 Zeichen besitzen.';
       }
       return 'Ok';
     },

@@ -47,7 +47,7 @@
                 <v-textarea
                   outlined
                   label="Beschreibung"
-                  :counter="2500"
+                  :counter="1000"
                   auto-grow
                   :rules="rules.description"
                   v-model="data.description"

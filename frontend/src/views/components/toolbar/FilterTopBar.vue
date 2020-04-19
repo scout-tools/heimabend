@@ -156,7 +156,7 @@
           >
             <v-chip
               filter
-              small
+              x-small
               v-for="(tag, index) in tags"
               :value="tag.id"
               :key="index"

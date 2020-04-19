@@ -84,7 +84,7 @@ export default {
     name: { required, minLength: minLength(3), maxLength: maxLength(20) },
     email: { email },
     topic: { required },
-    messageBody: { required, minLength: minLength(10), maxLength: maxLength(2500) },
+    messageBody: { required, minLength: minLength(10), maxLength: maxLength(5000) },
   },
 
   data: () => ({

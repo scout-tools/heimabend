@@ -221,19 +221,6 @@ export default {
     isUpdate() {
       return !!this.$route.params.id;
     },
-    getCustomText() {
-      const value = this.data.description;
-      if (!value) {
-        return 'Beschreibung ist erforderlich';
-      }
-      if (value && value.length <= 75) {
-        return 'Name must be more than 75 characters';
-      }
-      if (value && value.length >= 2500) {
-        return 'Beschreibung ist zu lang';
-      }
-      return 'Ok';
-    },
     isLargeProject() {
       return this.data.executionTimeRating === 0;
     },
