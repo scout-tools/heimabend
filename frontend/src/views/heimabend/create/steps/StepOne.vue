@@ -46,6 +46,7 @@
             :init="{
               height: 500,
               language: 'de',
+              image_advtab: true,
               menubar: 'edit insert view format tools table',
               plugins: [
                 'advlist autolink lists link image preview',

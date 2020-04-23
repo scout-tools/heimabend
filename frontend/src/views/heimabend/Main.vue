@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 <template>
 <div>
   <div class="col-sm-12">
@@ -48,6 +49,26 @@ export default {
   watch: {
     axiosParams() {
       this.refresh();
+    },
+    isLvlOne() {
+      // eslint-disable-next-line no-undef
+      _paq.push(['trackEvent', 'FilterChanged', 'isLvlOne']);
+    },
+    isLvlTwo() {
+      // eslint-disable-next-line no-undef
+      _paq.push(['trackEvent', 'FilterChanged', 'isLvlTwo']);
+    },
+    isLvlThree() {
+      // eslint-disable-next-line no-undef
+      _paq.push(['trackEvent', 'FilterChanged', 'isLvlThree']);
+    },
+    isPrepairationNeeded() {
+      // eslint-disable-next-line no-undef
+      _paq.push(['trackEvent', 'FilterChanged', 'isPrepairationNeeded']);
+    },
+    withoutCosts() {
+      // eslint-disable-next-line no-undef
+      _paq.push(['trackEvent', 'FilterChanged', 'withoutCosts']);
     },
   },
   computed: {
@@ -145,6 +166,7 @@ export default {
           this.nextPath = res.data.next;
           this.loading = false;
           this.isLoadingMore = false;
+          this.trackItems(res.data.results);
         })
         .catch(() => {
           this.loading = false;
@@ -171,6 +193,8 @@ export default {
           this.$store.commit('setHeimabendCounter', this.count);
           this.loading = false;
           this.isLoadingMore = false;
+          // eslint-disable-next-line no-undef
+          this.trackItems(res.data.results);
         })
         .catch(() => {
           this.loading = false;
@@ -181,7 +205,12 @@ export default {
     onUpdateClick(item) {
       this.$emit('onUpdateClick', item);
     },
-
+    trackItems(items) {
+      items.forEach((item) => {
+        // eslint-disable-next-line no-undef
+        _paq.push(['trackContentImpression', item.title, item.id]);
+      });
+    },
     convertUrlToId(url) {
       if (url && typeof url === 'string') {
         const idStringArray = url.split('/');

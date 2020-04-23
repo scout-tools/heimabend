@@ -74,9 +74,9 @@
       v-if="apiIsDown"
     />
     </v-content>
-    <!-- <pricacy-banner
+    <pricacy-banner
       v-if="!acceptedPrivacy"
-    /> -->
+    />
     <v-snackbar
       v-model="showError"
       color="error"
@@ -92,10 +92,10 @@
 import axios from 'axios';
 import { mapGetters } from 'vuex';
 
+import PricacyBanner from './components/banner/Privacy.vue';
 import MenuLeft from './components/menu/Left.vue';
 import MenuRight from './components/menu/Right.vue';
 import ApiDownBanner from './components/banner/ApiDown.vue';
-// import PricacyBanner from '@/views/components/banner/Privacy.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
 import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
 import Fab from './components/fab/Standard.vue';
@@ -108,7 +108,7 @@ export default {
     SubPagesTopBar,
     ApiDownBanner,
     Fab,
-    // PricacyBanner,
+    PricacyBanner,
   },
   computed: {
     ...mapGetters([
@@ -128,8 +128,7 @@ export default {
       return this.$store.getters.tags;
     },
     isMainPage() {
-      return this.currentRouteName === 'overview'
-        || this.currentRouteName === 'overview-id';
+      return this.currentRouteName === 'overview';
     },
     currentRouteName() {
       return this.$route.name;
@@ -145,6 +144,9 @@ export default {
     searchInput(value) {
       if (value === '') {
         this.currentSearchInput = value;
+      } else {
+        // eslint-disable-next-line no-undef
+        _paq.push(['trackSiteSearch', value, false, false]);
       }
     },
   },

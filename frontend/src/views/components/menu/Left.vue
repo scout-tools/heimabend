@@ -189,35 +189,11 @@ export default {
     isDrawer: false,
   }),
   methods: {
-    onClickTags() {
-      this.$router.replace({ name: 'tags' });
-    },
-    onClickHeimabendItem() {
-      this.$router.replace({ name: 'overview' });
-    },
-    onClickImpressumItem() {
-      this.$router.replace({ name: 'impressum' });
-    },
-    onClickAboutProjectItem() {
-      this.$router.replace({ name: 'aboutProject' });
-    },
-    onClickCreateMessage() {
-      this.$router.replace({ name: 'message' });
-    },
-    onClickFaqItem() {
-      this.$router.replace({ name: 'faq' });
-    },
     onClickLogin() {
       this.$refs.login.show();
     },
     onClickLogout() {
       this.$refs.login.onLogoutClick();
-    },
-    onClickMessage() {
-      this.$router.replace({ name: 'messageOverview' });
-    },
-    onClickRanking() {
-      this.$router.replace({ name: 'ranking-overview' });
     },
     onToggleIsActive() {
       this.$store.commit('toggleIsActive');

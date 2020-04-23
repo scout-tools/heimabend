@@ -121,7 +121,27 @@
             Creative Commons Namensnennung-Nicht kommerziell 4.0 International Lizenz
           </a>.
           </div>
-  </div>
+        </div>
+      </v-card>
+      <v-card class="ma-10 pa-10">
+          <h2 class="py-5">
+            Cookies widerrufen
+          </h2>
+          <p class="font-weight-medium">
+            Sie haben die Möglichkeit zu verhindern, dass von Ihnen hier getätigte
+            Aktionen analysiert und verknüpft werden. Dies wird Ihre Privatsphäre
+            schützen, aber wird auch den Besitzer daran hindern, aus Ihren Aktionen
+            zu lernen und die Bedienbarkeit für Sie und andere Benutzer zu verbessern.
+          </p>
+
+          <v-switch v-model="isAgree" :label="getLabel"></v-switch>
+          <p class="font-weight-medium">
+
+          </p>
+          <p class="font-weight-medium">
+
+          </p>
+
       </v-card>
     </v-flex>
   </v-row>
@@ -135,9 +155,22 @@ export default {
   data: () => ({
     dialog: false,
     data: [],
+    isAgree: true,
   }),
 
+  mounted() {
+    const me = this;
+    setTimeout(() => { me.getAgreeMent(); }, 300);
+  },
+
   methods: {
+    getAgreeMent() {
+      const me = this;
+      // eslint-disable-next-line no-undef
+      _paq.push([function () {
+        me.isAgree = !this.isUserOptedOut();
+      }]);
+    },
     show() {
       this.dialog = true;
     },
@@ -147,6 +180,25 @@ export default {
     },
     onClickHeimabendItem() {
       this.$router.push({ name: 'message' });
+    },
+  },
+  computed: {
+    getLabel() {
+      if (this.isAgree) {
+        return 'Dein Besuch dieser Webseite wird aktuell erfasst. Diesen Schalter abwählen wenn dein Nutzerverhalten nicht mehr aufgezeichnet werden soll.';
+      }
+      return 'Dein Besuch dieser Webseite wird aktuell nicht erfasst. Diesen Schalter aktivieren wenn du uns erlauben willst dein Nutzerverhalten zu erfassen';
+    },
+  },
+  watch: {
+    isAgree(value) {
+      if (value) {
+        // eslint-disable-next-line no-undef
+        _paq.push(['forgetUserOptOut']);
+      } else {
+        // eslint-disable-next-line no-undef
+        _paq.push(['optUserOut']);
+      }
     },
   },
 };

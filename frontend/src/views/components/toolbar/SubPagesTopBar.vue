@@ -4,11 +4,16 @@
     flat
     dense
     fixed>
-    <v-btn icon @click="onBackClick()">
-      <v-icon>mdi-close</v-icon>
-    </v-btn>
+    <router-link
+      :to="{ name: 'overview'}"
+      tag="v-btn"
+    >
+      <v-btn text icon>
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+    </router-link>
     <v-toolbar-title>
-      {{ currentRouteName }}
+      Zurück zur Übersicht
     </v-toolbar-title>
     <v-spacer></v-spacer>
   </v-toolbar>
@@ -17,30 +22,8 @@
 </template>
 
 <script>
-
 export default {
-  methods: {
-    onBackClick() {
-      if (this.$route.name === 'heimabendDetails') {
-        this.$router.replace({ name: 'overview-id', params: this.$route.params.id });
-      } else {
-        this.$router.push({ path: '/' });
-      }
-    },
-  },
 
-  computed: {
-    currentRouteName() {
-      const route = this.$route.name;
-      if (route === 'heimabendUpdate') {
-        return 'Heimabend Bearbeiten';
-      }
-      if (route === 'heimabendCreate') {
-        return 'Neue Heimabend-Idee erstellen';
-      }
-      return 'Zurück zur Übersicht';
-    },
-  },
 };
 </script>
 

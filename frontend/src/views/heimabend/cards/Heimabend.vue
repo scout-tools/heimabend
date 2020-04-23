@@ -137,7 +137,7 @@
       <v-card-text>
         <div>
           <p
-            class="text-left subtitle-1 font-weight-light test-color-text"
+            class="text-left subtitle-1 test-color-text"
             :class="getDescriptionClass()"
             v-html="item.description">
           </p>
@@ -152,15 +152,21 @@
                   nudge-left="80"
                   bottom>
                   <template v-slot:activator="{ on }">
+                   <router-link
+                      :to="{ name: 'heimabendDetails',
+                      params: { id: item.id } }"
+                      tag="v-btn"
+                    >
                     <v-btn
-                      @click="onDetailsClick(item)"
                       depressed
+                      @click="onDetailsClick(item)"
                       outlined
                       class="test-color-text"
                       block
                       v-on="on">
                       {{ getLikeButtonText }}
                     </v-btn>
+                    </router-link>
                   </template>
                   <span class="mx-1">
                     Hier gelangst du zur Detailierten Heimabendansicht mit vielen
@@ -204,7 +210,7 @@
 
         <div
           v-if="item.material !== ''"
-          class="text-left font-italic font-weight-light ml-10">
+          class="text-left font-italic ml-10">
           <ul>
             <li
               v-for="(item, index4) in getMaterialArray(item.material)"
@@ -215,7 +221,7 @@
         </div>
         <div
           v-else
-          class="text-left font-weight-light"
+          class="text-left"
         >
           <ul>
             <li>
@@ -441,7 +447,7 @@
             :class="verticalMargin"
             vertical
           />
-          <div class="caption ma-1">
+          <div class="body-2 ma-2">
             {{ formatDate(item.createdAt) + '\n' + item.createdBy }}
           </div>
       </v-card-actions>
@@ -570,6 +576,8 @@ export default {
         .then(() => {
           store.commit('setLiked', eventId);
           this.showSuccessLiked = true;
+          // eslint-disable-next-line no-undef
+          _paq.push(['trackEvent', 'like', eventId]);
         })
         .catch((error) => {
           this.responseObj = error;
@@ -674,8 +682,9 @@ export default {
     onUpdateClick(params) {
       this.$router.push({ name: 'heimabendUpdate', params });
     },
-    onDetailsClick(params) {
-      this.$router.push({ name: 'heimabendDetails', params });
+    onDetailsClick(item) {
+      // eslint-disable-next-line no-undef
+      _paq.push(['trackContentInteraction', 'clicked', item.title, item.id]);
     },
     formatDate(date) {
       const dateObj = new Date(date);
@@ -733,7 +742,7 @@ export default {
       return !this.isMobil ? 30 : 28;
     },
     getLikeButtonText() {
-      return !this.isMobil ? 'Weitere Informationen' : 'Informationen';
+      return !this.isMobil ? 'Mehr Details' : 'Mehr';
     },
     paddingleftLebelIcons() {
       return !this.isMobil ? 'pl-2' : 'pl-1';

@@ -69,7 +69,7 @@ export default {
       return this.$store.getters.filterTags;
     },
     isOverviewRoute() {
-      return this.$route.name === 'overview' || this.$route.name === 'overview-id';
+      return this.$route.name === 'overview';
     },
   },
   methods: {
@@ -84,9 +84,6 @@ export default {
       this.filterTags = [];
       this.$emit('onTagFilterChanged', this.filterTags);
       this.$store.commit('changeFilterTags', []);
-    },
-    onClickTags() {
-      this.$router.push({ name: 'tags' });
     },
   },
   watch: {

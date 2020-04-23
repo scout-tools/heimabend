@@ -9,25 +9,35 @@
       class="main"
     >
       <template v-slot:activator>
-        <v-btn
-          color="green darken-1"
-          dark
-          fab>
-          <v-icon v-if="fab">mdi-close</v-icon>
-          <v-icon v-else>mdi-plus</v-icon>
-        </v-btn>
+        <router-link
+          :to="{ name: 'overview'}"
+          tag="v-btn"
+        >
+          <v-btn
+            color="green darken-1"
+            dark
+            fab>
+            <v-icon v-if="fab">mdi-close</v-icon>
+            <v-icon v-else>mdi-plus</v-icon>
+          </v-btn>
+        </router-link>
       </template>
       <v-tooltip bottom nudge-left="80">
         <template v-slot:activator="{ on }">
-          <v-btn
-            @click="onNewEventClick"
-            fab
-            dark
-            color="blue"
-            v-on="on"
+          <router-link
+            :to="{ name: 'heimabendCreate'}"
+            tag="v-btn"
           >
-            <v-icon>mdi-calendar-heart</v-icon>
-          </v-btn>
+            <v-btn
+              @click="onNewEventClick"
+              fab
+              dark
+              color="blue"
+              v-on="on"
+            >
+              <v-icon>mdi-calendar-heart</v-icon>
+            </v-btn>
+          </router-link>
         </template>
        <span class="subtitle-1">
           Hiermit kannst du eine neue Heimabendidee hinzufügen.
@@ -35,15 +45,20 @@
       </v-tooltip>
       <v-tooltip bottom nudge-left="80">
         <template v-slot:activator="{ on }">
-          <v-btn
-            @click="onNewMessageClick"
-            fab
-            dark
-            color="orange"
-            v-on="on"
+          <router-link
+            :to="{ name: 'message'}"
+            tag="v-btn"
           >
-            <v-icon>mdi-message-text</v-icon>
-          </v-btn>
+            <v-btn
+              @click="onNewMessageClick"
+              fab
+              dark
+              color="orange"
+              v-on="on"
+            >
+              <v-icon>mdi-message-text</v-icon>
+            </v-btn>
+          </router-link>
         </template>
         <span class="subtitle-1">
           Hiermit kannst du uns eine Nachricht senden.
@@ -59,10 +74,12 @@ export default {
   }),
   methods: {
     onNewEventClick() {
-      this.$router.push({ name: 'heimabendCreate' });
+      // eslint-disable-next-line no-undef
+      _paq.push(['trackEvent', 'create', 'heimabendCreate']);
     },
     onNewMessageClick() {
-      this.$router.push({ name: 'message' });
+      // eslint-disable-next-line no-undef
+      _paq.push(['trackEvent', 'create', 'message']);
     },
   },
 };

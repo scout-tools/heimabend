@@ -55,9 +55,6 @@ export default {
     HeimabendCard,
   },
   computed: {
-    getText() {
-      return 'Hallo';
-    },
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
