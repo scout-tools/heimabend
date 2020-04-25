@@ -14,7 +14,6 @@
             </h2>
 
           <p class="font-weight-medium">
-            David Miron <br>
             Deutscher Pfadfinderbund Mosaik <br>
             Neue Maastrichter Str. 5-7 <br>
             50672 Köln <br>
@@ -43,7 +42,6 @@
           </h2>
 
           <p class="font-weight-medium">
-            David Miron <br>
             Deutscher Pfadfinderbund Mosaik <br>
             Neue Maastrichter Str. 5-7 <br>
             50672 Köln <br>
