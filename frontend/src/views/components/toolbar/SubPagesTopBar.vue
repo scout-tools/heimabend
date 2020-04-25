@@ -6,7 +6,7 @@
     fixed>
     <router-link
       :to="{ name: 'overview'}"
-      tag="v-btn"
+      class="no-underline"
     >
       <v-btn text icon>
         <v-icon>mdi-close</v-icon>

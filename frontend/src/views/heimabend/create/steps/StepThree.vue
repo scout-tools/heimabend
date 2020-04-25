@@ -19,7 +19,7 @@
       item-text="name"
       deletable-chips
       chips
-      label="Wähle aus der Liste Themen aus."
+      label="Wähle aus der Liste bis zu 5 Themen aus."
       no-data-text="Wähle aus der Liste Themen aus."
       multiple
       outlined

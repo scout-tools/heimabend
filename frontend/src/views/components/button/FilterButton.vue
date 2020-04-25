@@ -114,6 +114,10 @@ export default {
   watch: {
     isActiveState(value) {
       this.$store.commit(this.customMutation, value);
+      if (value) {
+        // eslint-disable-next-line no-undef
+        _paq.push(['trackEvent', 'ActivateFilter', this.customVariable]);
+      }
     },
     customTrigger() {
       this.updateState();

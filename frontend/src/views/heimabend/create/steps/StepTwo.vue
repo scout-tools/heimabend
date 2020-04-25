@@ -46,7 +46,7 @@
         <v-switch
           v-model="data.isPrepairationNeeded"
           color="secondary"
-          label="Benötigt diese Heimabend-Idee benötigt Zeit zur Vorbereitung?">
+          label="Benötigt diese Heimabend-Idee Zeit zur Vorbereitung?">
         </v-switch>
         <v-switch
           v-model="data.isPossibleDigital"

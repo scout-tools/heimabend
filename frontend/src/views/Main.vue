@@ -31,7 +31,7 @@
         prepend-inner-icon="mdi-magnify"
         clearable
         :dense="isMobil"
-        @input="onChangeSearchInput()"
+        @keydown.enter="onChangeSearchInput()"
       />
 
       <v-spacer/>
@@ -142,7 +142,7 @@ export default {
   },
   watch: {
     searchInput(value) {
-      if (value === '') {
+      if (value === '' || !value) {
         this.currentSearchInput = value;
       } else {
         // eslint-disable-next-line no-undef
@@ -151,6 +151,7 @@ export default {
     },
   },
   methods: {
+    // eslint-disable-next-line no-unused-vars
     onChangeSearchInput() {
       this.$store.commit('setSearchInput', this.currentSearchInput);
     },

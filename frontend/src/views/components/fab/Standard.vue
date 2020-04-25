@@ -11,7 +11,7 @@
       <template v-slot:activator>
         <router-link
           :to="{ name: 'overview'}"
-          tag="v-btn"
+          class="no-underline"
         >
           <v-btn
             color="green darken-1"
@@ -26,7 +26,7 @@
         <template v-slot:activator="{ on }">
           <router-link
             :to="{ name: 'heimabendCreate'}"
-            tag="v-btn"
+            class="no-underline"
           >
             <v-btn
               @click="onNewEventClick"
@@ -47,7 +47,7 @@
         <template v-slot:activator="{ on }">
           <router-link
             :to="{ name: 'message'}"
-            tag="v-btn"
+            class="no-underline"
           >
             <v-btn
               @click="onNewMessageClick"
@@ -97,5 +97,9 @@ export default {
 
 .main {
  z-index: 100000000000;
+}
+
+.no-underline {
+    text-decoration: none !important;
 }
 </style>

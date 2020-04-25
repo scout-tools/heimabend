@@ -25,6 +25,7 @@
                     light
                     v-model="filterTags"
                     @change="onChange()"
+                    @click="onClick()"
                   >
                     <v-chip
                       filter
@@ -53,6 +54,7 @@ export default {
   data: () => ({
     items: [],
     filterTags: [],
+    oldFilterLength: 0,
   }),
   components: {
     Login,
@@ -73,12 +75,22 @@ export default {
     },
   },
   methods: {
+    onClick() {
+      this.oldFilterLength = this.filterTags.length;
+    },
     onLoginClick() {
       this.$refs.login.show();
     },
+    // eslint-disable-next-line no-unused-vars
     onChange() {
       this.$emit('onTagFilterChanged', this.filterTags);
       this.$store.commit('changeFilterTags', this.filterTags);
+
+      if (this.oldFilterLength < this.filterTags.length) {
+        const id = this.filterTags[this.filterTags.length - 1];
+        // eslint-disable-next-line no-undef
+        _paq.push(['trackEvent', 'tagChanged', id]);
+      }
     },
     resetTags() {
       this.filterTags = [];

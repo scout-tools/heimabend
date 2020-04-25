@@ -219,7 +219,7 @@ export default {
     },
   },
   created() {
-    this.isDrawer = !this.isMobil;
+    this.isDrawer = false;
   },
 };
 </script>

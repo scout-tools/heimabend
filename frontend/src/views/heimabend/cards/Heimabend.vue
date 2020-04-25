@@ -15,7 +15,6 @@
     <v-card
       :max-width="getMaxWidth()"
       elevation=30
-      hover
       data-aos="zoom-in"
       data-aos-duration="800"
       data-aos-delay="0"
@@ -155,7 +154,7 @@
                    <router-link
                       :to="{ name: 'heimabendDetails',
                       params: { id: item.id } }"
-                      tag="v-btn"
+                      class="no-underline"
                     >
                     <v-btn
                       depressed

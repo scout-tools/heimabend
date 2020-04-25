@@ -48,27 +48,8 @@ export default {
   },
   watch: {
     axiosParams() {
+      this.isFirstEventsLoaded = false;
       this.refresh();
-    },
-    isLvlOne() {
-      // eslint-disable-next-line no-undef
-      _paq.push(['trackEvent', 'FilterChanged', 'isLvlOne']);
-    },
-    isLvlTwo() {
-      // eslint-disable-next-line no-undef
-      _paq.push(['trackEvent', 'FilterChanged', 'isLvlTwo']);
-    },
-    isLvlThree() {
-      // eslint-disable-next-line no-undef
-      _paq.push(['trackEvent', 'FilterChanged', 'isLvlThree']);
-    },
-    isPrepairationNeeded() {
-      // eslint-disable-next-line no-undef
-      _paq.push(['trackEvent', 'FilterChanged', 'isPrepairationNeeded']);
-    },
-    withoutCosts() {
-      // eslint-disable-next-line no-undef
-      _paq.push(['trackEvent', 'FilterChanged', 'withoutCosts']);
     },
   },
   computed: {
@@ -140,7 +121,6 @@ export default {
       }
       params.append('sorter', this.sorter);
       params.append('page', 1);
-      params.append('ts', Date.now());
       return params;
     },
   },
@@ -176,13 +156,17 @@ export default {
 
     refresh() {
       this.items = [];
-      this.getAllEventItems();
+      if (this.saveFilterLastFilter.toString() !== this.axiosParams.toString()) {
+        this.getAllEventItems();
+        this.saveFilterLastFilter = this.axiosParams;
+      }
     },
 
     getAllEventItems() {
       const path = `${this.API_URL}basic/event/`;
       this.loading = true;
 
+      this.isFirstEventsLoaded = true;
       axios.get(path, {
         params: this.axiosParams,
       })
@@ -237,7 +221,7 @@ export default {
   },
 
   created() {
-    this.getAllEventItems();
+    this.refresh();
   },
 
   data: () => ({
@@ -247,6 +231,7 @@ export default {
     nextPath: null,
     isLoadingMore: false,
     count: 0,
+    saveFilterLastFilter: false,
   }),
 };
 </script>

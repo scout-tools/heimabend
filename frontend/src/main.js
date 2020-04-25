@@ -58,7 +58,7 @@ Vue.use(VueLodash,
 Vue.use(VueMatomo, {
   // Configure your matomo server and site by providing
   host: 'https://matomo.hratuga.de/matomo/',
-  siteId: process.env.TRACKING_ID,
+  siteId: 1,
 
   // Changes the default .js and .php endpoint's filename
   // Default: 'matomo'
