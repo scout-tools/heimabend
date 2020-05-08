@@ -49,7 +49,7 @@ class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
         tag_id = 'tag_category' + str(obj.id)
         tag_count = cache.get(tag_id)
         if tag_count is None:
-            tag_count = Tag.objects.filter(category__id=obj.id).distinct().count()
+            tag_count = Tag.objects.filter(category_id__id=obj.id).distinct().count()
             cache.set(tag_id, tag_count, timeout=24 * 60 * 60)
         return tag_count
 
