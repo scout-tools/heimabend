@@ -15,8 +15,8 @@ class TagCategory(models.Model):
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=100, blank=True)
     order_id = models.IntegerField(blank=False, unique=True)
-    isVisible = models.BooleanField(default=True)
-    isHeader = models.BooleanField(default=False)
+    is_visible = models.BooleanField(default=True)
+    is_header = models.BooleanField(default=False)
 
 
 class Tag(models.Model):
@@ -29,7 +29,7 @@ class Tag(models.Model):
     description = models.CharField(max_length=100, blank=True)
     color = models.CharField(max_length=7)
     category = models.ManyToManyField(TagCategory, blank=False)
-    isVisible = models.BooleanField(default=True)
+    is_visible = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
