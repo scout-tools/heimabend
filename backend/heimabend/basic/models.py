@@ -6,6 +6,18 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models import Sum
 
 
+class TagCategory(models.Model):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    name = models.CharField(max_length=20)
+    description = models.CharField(max_length=100, blank=True)
+    order_id = models.IntegerField(blank=False, unique=True)
+    isVisible = models.BooleanField(default=True)
+
+
 class Tag(models.Model):
     id = models.AutoField(
         auto_created=True,
@@ -15,6 +27,8 @@ class Tag(models.Model):
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=100, blank=True)
     color = models.CharField(max_length=7)
+    category = models.ManyToManyField(TagCategory, blank=False)
+    isVisible = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -95,7 +109,6 @@ class Like(models.Model):
     like_created = models.DateTimeField(auto_now_add=True, editable=False)
 
     def save(self, *args, **kwargs):
-
         super(Like, self).save(*args, **kwargs)
         if self.id:
             query = Like.objects.filter(eventId=self.eventId).all().aggregate(sum=Sum('opinionTypeId'))
