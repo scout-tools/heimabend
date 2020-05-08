@@ -37,7 +37,6 @@
       <v-spacer/>
 
       <img
-        v-if="isMobil"
         src="https://dpbm.de/wp/wp-content/uploads/2019/02/mosaikWhite.svg"
         class="mr-2"
         height="50"
@@ -48,8 +47,6 @@
     <menu-left
       ref="mainMenuLeft"
     />
-
-    <menu-right/>
 
     <v-content
       id="lateral"
@@ -94,7 +91,6 @@ import { mapGetters } from 'vuex';
 
 import PricacyBanner from './components/banner/Privacy.vue';
 import MenuLeft from './components/menu/Left.vue';
-import MenuRight from './components/menu/Right.vue';
 import ApiDownBanner from './components/banner/ApiDown.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
 import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
@@ -103,7 +99,6 @@ import Fab from './components/fab/Standard.vue';
 export default {
   components: {
     MenuLeft,
-    MenuRight,
     Topbar,
     SubPagesTopBar,
     ApiDownBanner,
@@ -122,7 +117,7 @@ export default {
       return `Suche in ${counter} Heimabenden ...`;
     },
     getMargin() {
-      return this.isMobil ? 'ma-1' : 'ma-5';
+      return this.isMobil ? 'ma-1' : 'ma-0';
     },
     tags() {
       return this.$store.getters.tags;
@@ -197,12 +192,16 @@ export default {
 
   .content {
     flex: 1;
+    min-height: "100vh" !important;
   }
   .v-btn-toggle--group > .v-btn.v-btn {
     margin: 2px !important;
   }
   .hand-cursor {
     cursor: pointer
+  }
+  .info-cursor {
+    cursor: help !important;
   }
   .theme--light.v-application {
     background: transparent !important;

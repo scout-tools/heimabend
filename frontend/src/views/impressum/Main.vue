@@ -107,7 +107,7 @@
           </p>
           <a
             rel="license"
-            href="http://creativecommons.org/licenses/by-nc/4.0/">
+            href="https://creativecommons.org/licenses/by-nc/4.0/deed.de">
             <img
               alt="Creative Commons Lizenzvertrag"
               style="border-width:0"
@@ -115,7 +115,7 @@
           </a>
           <br />
             Dieses Werk ist lizenziert unter einer
-          <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+          <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.de">
             Creative Commons Namensnennung-Nicht kommerziell 4.0 International Lizenz
           </a>.
           </div>

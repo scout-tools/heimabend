@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 <template>
 <div>
-  <div class="col-sm-12">
+  <div>
     <heimabend-card
       ref="eventCards"
       v-if="items.length"
@@ -11,13 +11,31 @@
       :loading="loading"
       :isMobil="isMobil"
     />
-    <v-btn
-      class="ma-10"
+    <v-container
       v-if="!items.length && !loading"
-      @click="onResetClick()"
     >
-      Alle Filter zurücksetzen
-    </v-btn>
+      <v-row justify="center">
+      <v-card
+        color="primary"
+        class="mx-auto ma-2 pa-3 test-color whiteText"
+        elevation=30
+      >
+        Deine Suche führte leider zu keinem Treffer.
+        Wir würden uns freuen, wenn du uns hilfst neue Ideen hinzuzufügen.
+      </v-card>
+      </v-row>
+      <v-row
+        justify="center"
+        class="pa-5"
+      >
+        <v-btn
+          color="secondary"
+          @click="onResetClick()"
+        >
+          Alle Filter zurücksetzen
+        </v-btn>
+      </v-row>
+    </v-container>
     <v-progress-circular
       v-if="loading"
       color="primary"
@@ -155,7 +173,6 @@ export default {
     },
 
     refresh() {
-      this.items = [];
       if (this.saveFilterLastFilter.toString() !== this.axiosParams.toString()) {
         this.getAllEventItems();
         this.saveFilterLastFilter = this.axiosParams;
@@ -237,6 +254,13 @@ export default {
 </script>
 
 <style scoped>
+
+  .test-color {
+    background-color: rgba(255, 254, 254, 0.952) !important;
+  }
+  .whiteText {
+    color: white !important;
+  }
 .bg {
     width: 100%;
     height: 100%;

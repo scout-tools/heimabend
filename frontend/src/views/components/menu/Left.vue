@@ -87,8 +87,8 @@
       <template v-slot:append>
         <v-list bottom>
       <v-subheader>Über Uns</v-subheader>
-      <v-divider v-if="isMobil"/>
-          <v-list-item link bottom v-if="!isAuthenticated && isMobil">
+      <v-divider/>
+          <v-list-item link bottom v-if="!isAuthenticated">
             <v-list-item-icon>
               <v-icon >
                 mdi-login
@@ -132,7 +132,7 @@
             </v-list-item-content>
           </v-list-item>
         <v-divider/>
-          <!-- <v-list-item link bottom :to="{ name: 'faq' }">
+          <v-list-item link bottom :to="{ name: 'faq' }">
             <v-list-item-icon>
               <v-icon color="green">
                 mdi-frequently-asked-questions
@@ -140,11 +140,11 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>
-                Fragen/Antworten
+                Fragen / Antworten
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-        <v-divider/> -->
+        <v-divider/>
           <v-list-item link bottom :to="{ name: 'aboutProject' }">
             <v-list-item-icon>
               <v-icon color="orange lighten-2">
@@ -165,7 +165,7 @@
               </v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>Impressum/Datenschutz</v-list-item-title>
+              <v-list-item-title>Impressum / Datenschutz</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>

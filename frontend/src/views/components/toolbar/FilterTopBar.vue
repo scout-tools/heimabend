@@ -105,7 +105,7 @@
           :customMutation="'setIsLvlThree'"
         />
       <v-divider class="mx-0" vertical/>
-      <v-btn icon @click="onClickRestore" v-if="!isFilterDefault">
+      <v-btn icon ml-1 @click="onClickRestore" :disabled="isFilterDefault">
         <v-icon>
           mdi-restore
         </v-icon>

@@ -1,5 +1,7 @@
 <template>
-<div>
+<v-container class="max-width-class" ma-0 pa-0>
+  <v-row no-gutters >
+  <v-col :cols="getMainCols" >
   <h2
     class="deinHeimabendSpan"
     :class="yourHeimabendSpan()">
@@ -12,13 +14,14 @@
     infinite-scroll-distance="900"
     infinite-scroll-throttle-delay="1000"
   >
+      <!-- data-aos="zoom-in"
+      data-aos-duration="800"
+      data-aos-delay="0"
+      data-aos-anchor-placement="top-bottom" -->
     <v-card
       :max-width="getMaxWidth()"
       elevation=30
-      data-aos="zoom-in"
-      data-aos-duration="800"
-      data-aos-delay="0"
-      data-aos-anchor-placement="top-bottom"
+
       class="mx-auto ma-3 mb-10 test-color"
       :style="{ transitionDelay: delay }"
       v-bind:id="`eventcard-${item.id}`"
@@ -29,12 +32,14 @@
         class="primary px-0"
         :class="paddingleftLebelIcons"
       >
+      <keep-alive>
         <v-img
           class="ml-1"
           :src="require('@/assets/wolfskopf.png')"
           v-if="item.isLvlOne && isDetailsView"
           :max-width="maxWidthKnots"
         />
+      </keep-alive>
         <v-img
           class="ml-1"
           :src="require('../../../assets/knot_blue.png')"
@@ -68,7 +73,7 @@
             bottom>
             <template v-slot:activator="{ on }">
               <v-btn
-                class="ma-2"
+                class="ma-2 info-cursor"
                 v-on="on"
                 icon>
                 <v-icon color="red">
@@ -111,7 +116,7 @@
             bottom>
             <template v-slot:activator="{ on }">
               <v-btn
-                class="px-2"
+                class="px-2 info-cursor"
                 :x-small="isMobil"
                 depressed
                 color="primary"
@@ -241,7 +246,7 @@
         <template v-slot:activator="{ on }">
         <v-chip
           v-on="on"
-          class="ma-2"
+          class="ma-2 info-cursor"
           :color="getTagColorById(tag)"
         >
           {{ getTagNameById(tag) }}
@@ -267,6 +272,7 @@
             <v-btn
               icon
               :small="isMobil"
+              class="info-cursor"
               v-on="on">
               <v-icon
                 :size="getIconSize"
@@ -294,6 +300,7 @@
             <v-btn
               :small="isMobil"
               icon
+              class="info-cursor"
               v-on="on">
               <v-icon
                 :size="getIconSize"
@@ -322,6 +329,7 @@
                 :x-small="isMobil"
                 depressed
                 color="lightPrimary"
+                class="info-cursor"
                 v-on="on">
                 <v-rating
                   v-model="item.costsRating"
@@ -348,6 +356,7 @@
             <template v-slot:activator="{ on }">
               <v-btn
                 icon
+                class="info-cursor"
                 v-on="on">
                 <v-icon
                   :size="getIconSize"
@@ -371,6 +380,7 @@
             <template v-slot:activator="{ on }">
               <v-btn
                 icon
+                class="info-cursor"
                 color="lightPrimary"
                 v-on="on">
                 <v-icon
@@ -402,6 +412,7 @@
                 :x-small="isMobil"
                 depressed
                 color="lightPrimary"
+                class="info-cursor"
                 v-on="on">
                 <v-rating
                   v-model="item.executionTimeRating"
@@ -430,6 +441,7 @@
               <v-btn
                 icon
                 v-on="on"
+                class="info-cursor"
               >
                 <v-icon
                   :size="getIconSize"
@@ -503,7 +515,21 @@
       size="40"
       color="white"
     ></v-progress-circular>
-</div>
+    <Fab/>
+  </v-col>
+  <v-col
+    v-if="!isMobil && !isDetailsView"
+    cols="2"
+    class="negativ-top-margin"
+  >
+    <menu-right
+      pa-5
+      class="fixed menu-right" style="padding-top: 110px; padding-left: 5px; padding-right: 5px;"
+    />
+  </v-col>
+  </v-row>
+</v-container>
+
 </template>
 
 <script>
@@ -511,6 +537,10 @@ import axios from 'axios';
 
 import store from '@/store'; // eslint-disable-line
 import { mapGetters } from 'vuex';
+// eslint-disable-next-line import/no-unresolved
+import MenuRight from '@/views/components/menu/Right.vue';
+// eslint-disable-next-line import/no-unresolved
+import Fab from '@/views/components/fab/Standard.vue';
 // eslint-disable-next-line import/no-unresolved
 import DeleteModal from '../dialogs/DeleteModal.vue';
 
@@ -529,6 +559,8 @@ export default {
   },
   components: {
     DeleteModal,
+    MenuRight,
+    Fab,
   },
   methods: {
     loadMore() {
@@ -752,6 +784,9 @@ export default {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
+    getMainCols() {
+      return !this.isMobil && !this.isDetailsView ? 10 : 12;
+    },
   },
 };
 </script>
@@ -787,4 +822,17 @@ export default {
     letter-spacing: 0.4em;
     color: rgba(255, 255, 255, 0.692);
   }
+  .max-width-class {
+    max-width: 100% !important;
+    height: 100% !important;
+  }
+.fixed {
+  position: fixed;
+}
+.menu-right {
+  height: 100vh !important;
+}
+.negativ-top-margin {
+  margin-top: -100px !important;
+}
 </style>

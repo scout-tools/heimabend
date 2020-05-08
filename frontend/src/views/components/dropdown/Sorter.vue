@@ -71,7 +71,6 @@ export default {
           icon: 'mdi-sort-descending',
         },
       ],
-      toggle_multiple: [1, 2, 3],
     };
   },
 };

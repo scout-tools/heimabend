@@ -15,6 +15,7 @@
             dense
             text
             depressed
+            @click="onToggleButton()"
             class="mx-0 px-0"
           >
             <v-icon
@@ -129,6 +130,9 @@ export default {
     },
     updateState() {
       this.isActiveState = this.$store.getters[this.customVariable];
+    },
+    onToggleButton() {
+      this.isActiveState = !this.isActiveState;
     },
   },
   mounted() {
