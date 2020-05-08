@@ -13,31 +13,34 @@
     />
     <v-container class="mx-auto ma-5">
       <v-row justify="center">
-    <social-sharing
-      :url="getUrl()"
-      title="Heimabend Inspirator"
-      :description="getDescription()"
-      quote="Der Inspirator ist eine Seite für Pfadfinder Heimabende."
-      hashtags="pfadfinder, heimabend, Gruppenstude"
-      v-cloak
-      inline-template>
-        <div class="container">
-            <network network="email" id="email">
-              <font-awesome-icon :icon="['fas', 'at']" />
-            </network>
-            <network network="facebook" id="facebook">
-              <font-awesome-icon :icon="['fab', 'facebook']" />
-            </network>
-            <network network="whatsapp" id="whatsapp">
-              <font-awesome-icon :icon="['fab', 'whatsapp']" />
-            </network>
-            <network network="telegram" id="telegram">
-              <font-awesome-icon :icon="['fab', 'telegram']" />
-            </network>
-        </div>
-      </social-sharing>
-    </v-row>
-    </v-container>
+        <p :class="textColor">Diesen Heimabend versenden mit: </p>
+      </v-row>
+      <v-row justify="center">
+        <social-sharing
+          :url="getUrl()"
+          title="Heimabend Inspirator"
+          :description="getDescription()"
+          quote="Der Inspirator ist eine Seite für Pfadfinder Heimabende."
+          hashtags="pfadfinder, heimabend, Gruppenstude"
+          v-cloak
+          inline-template>
+            <div class="container">
+                <network network="email" id="email">
+                  <font-awesome-icon :icon="['fas', 'at']" />
+                </network>
+                <network network="facebook" id="facebook">
+                  <font-awesome-icon :icon="['fab', 'facebook']" />
+                </network>
+                <network network="whatsapp" id="whatsapp">
+                  <font-awesome-icon :icon="['fab', 'whatsapp']" />
+                </network>
+                <network network="telegram" id="telegram">
+                  <font-awesome-icon :icon="['fab', 'telegram']" />
+                </network>
+            </div>
+          </social-sharing>
+        </v-row>
+      </v-container>
     <span v-if="!isMobil" class="bg"/>
   </div>
 </div>
@@ -55,8 +58,8 @@ export default {
     HeimabendCard,
   },
   computed: {
-    getText() {
-      return 'Hallo';
+    textColor() {
+      return !this.isMobil ? 'white-text' : '';
     },
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -163,10 +166,10 @@ export default {
   cursor: pointer;
   margin: 10px;
   padding: 5px;
-  color: lightgray;
-  background-color: rgba(0, 0, 0, 0.774);
+  color: white;
+  background-color: rgb(0, 0, 0);
   font-size: 32px;
-  border: lightgray ;
+  color: white;
   border-style: solid;
   border-width: 2px;
 }
@@ -196,7 +199,9 @@ export default {
   margin: 2px;
   padding: 2px;
 }
+</style>
 
+<style scoped>
 .bg {
     width: 100%;
     height: 100%;
@@ -207,5 +212,8 @@ export default {
     background-size: 2000px 1300px;
     background-attachment: fixed;
     z-index: -1;
+  }
+  .white-text {
+    color: white;
   }
 </style>

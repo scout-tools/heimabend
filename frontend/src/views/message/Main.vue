@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-flex ma-3 lg7>
+      <v-flex mb-10 lg7>
         <div :class="divClass">
           Kontakt
         </div>
@@ -43,7 +43,7 @@
               :error-messages="messageBodyErrors"
               @change="$v.messageBody.$touch()"
               @blur="$v.messageBody.$touch()"
-              hint="Hier keine Nachricht eintippen."></v-textarea>
+              hint="Hier deine Nachricht eintippen."></v-textarea>
 
             <v-btn class="mr-4" @click="submit">Absenden</v-btn>
           </form>
@@ -115,7 +115,7 @@ export default {
     },
     divClass() {
       if (!this.isMobil) {
-        return 'display-3 ma-10';
+        return 'display-3 mb-10';
       }
       return 'display-1 ma-2';
     },

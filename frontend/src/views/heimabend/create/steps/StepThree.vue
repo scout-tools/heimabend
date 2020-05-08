@@ -1,12 +1,12 @@
 <template>
-        <v-form
-        ref="form3"
-        v-model="valid"
-      >
+  <v-form
+    ref="form3"
+    v-model="valid"
+  >
 <v-container>
   <v-row class="mt-6 ml-4">
     <span class="subtitle-1">
-      Wähle so viele Themen aus, wie du deiner Heimabend-Idee passen.
+      Wähle so viele Themen aus, wie zu deiner Heimabend-Idee passen.
     </span>
   </v-row>
   <v-row class="ma-6">
@@ -19,7 +19,7 @@
       item-text="name"
       deletable-chips
       chips
-      label="Wähle aus der Liste Themen aus."
+      label="Wähle aus der Liste bis zu 5 Themen aus."
       no-data-text="Wähle aus der Liste Themen aus."
       multiple
       outlined

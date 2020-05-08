@@ -15,6 +15,7 @@
             dense
             text
             depressed
+            @click="onToggleButton()"
             class="mx-0 px-0"
           >
             <v-icon
@@ -114,6 +115,10 @@ export default {
   watch: {
     isActiveState(value) {
       this.$store.commit(this.customMutation, value);
+      if (value) {
+        // eslint-disable-next-line no-undef
+        _paq.push(['trackEvent', 'ActivateFilter', this.customVariable]);
+      }
     },
     customTrigger() {
       this.updateState();
@@ -125,6 +130,9 @@ export default {
     },
     updateState() {
       this.isActiveState = this.$store.getters[this.customVariable];
+    },
+    onToggleButton() {
+      this.isActiveState = !this.isActiveState;
     },
   },
   mounted() {

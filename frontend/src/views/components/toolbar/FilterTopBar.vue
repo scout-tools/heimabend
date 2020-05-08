@@ -58,7 +58,7 @@
         <filter-button
           :customIcon="'mdi-card-bulleted-off-outline'"
           :customColor="'black'"
-          :customText="'Arbeit.'"
+          :customText="'Easy'"
           :customTooltip="'Zeigt nur Heimabende an die keine Vorbereitung benötigen'"
           :customTrigger="isPrepairationNeeded"
           :customVariable="'isPrepairationNeeded'"
@@ -68,7 +68,7 @@
         <filter-button
           :customIcon="'mdi-currency-usd-off'"
           :customColor="'red'"
-          :customText="'Kosten'"
+          :customText="'Umsonst'"
           :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
           :customTrigger="withoutCosts"
           :customVariable="'withoutCosts'"
@@ -105,7 +105,7 @@
           :customMutation="'setIsLvlThree'"
         />
       <v-divider class="mx-0" vertical/>
-      <v-btn icon @click="onClickRestore" v-if="!isFilterDefault">
+      <v-btn icon ml-1 @click="onClickRestore" :disabled="isFilterDefault">
         <v-icon>
           mdi-restore
         </v-icon>
@@ -117,7 +117,7 @@
       >
     <v-container class="pa-0" style="margin: 0px; width: 100%">
       <v-row v-if="isExtended && isMobil">
-      <v-divider class="mx-0" vertical/>
+      <v-divider class="second-row-spacer"  vertical/>
         <filter-button
           :customIcon="'wolf'"
           :customText="'WÖ'"
@@ -195,13 +195,11 @@ export default {
       this.isExtended = !this.isExtended;
     },
     onChange() {
-      this.$emit('onTagFilterChanged', this.filterTags);
       this.$store.commit('changeFilterTags', this.filterTags);
     },
-    resetTags() {
-      this.filterTags = [];
-      this.$emit('onTagFilterChanged', this.filterTags);
-      this.$store.commit('changeFilterTags', []);
+  },
+  watch: {
+    getFilterTags() {
     },
   },
   computed: {
@@ -218,7 +216,6 @@ export default {
       'isLvlOne',
       'isLvlTwo',
       'isLvlThree',
-      'filterTags',
       'tags',
       'isAuthenticated',
       'heimabendCounter',
@@ -268,5 +265,8 @@ export default {
 }
 span {
   font-size: 12px !important;
+}
+.second-row-spacer {
+    margin-left: 69px;
 }
 </style>

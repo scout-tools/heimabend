@@ -20,12 +20,6 @@ const routes = [
     component: Heimabend,
   },
   {
-    path: '/:id',
-    name: 'overview-id',
-    component: Heimabend,
-    props: true,
-  },
-  {
     path: '/about',
     name: 'aboutProject',
     component: AboutProject,

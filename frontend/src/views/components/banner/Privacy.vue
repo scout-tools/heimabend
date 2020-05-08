@@ -5,14 +5,19 @@
       :hide-overlay="isHideOverlay"
       :persistent="isPersistent"
     >
-      <v-sheet class="text-center" height="200px">
+      <v-sheet
+        color="lightPrimary"
+        class="text-center pa-3"
+        height="160px"
+      >
         <v-btn
-          class="mt-6"
+          class="mt-3"
           color="error"
           @click="onButtonClick()"
         >Zustimmen</v-btn>
-        <div class="py-3">Diese Seite verwendet Cookies und nutzt sie
-          um das Nutzerverhalten besser zu verstehen und die Seite zu verbessern.</div>
+        <div class="py-3">Wir nutzen Cookies um
+          um dein Nutzerverhalten besser zu verstehen und die Seite zu verbessern.
+        </div>
       </v-sheet>
     </v-bottom-sheet>
   </div>

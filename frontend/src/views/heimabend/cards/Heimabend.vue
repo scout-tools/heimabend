@@ -1,5 +1,7 @@
 <template>
-<div>
+<v-container class="max-width-class" ma-0 pa-0>
+  <v-row no-gutters >
+  <v-col :cols="getMainCols" >
   <h2
     class="deinHeimabendSpan"
     :class="yourHeimabendSpan()">
@@ -12,14 +14,14 @@
     infinite-scroll-distance="900"
     infinite-scroll-throttle-delay="1000"
   >
+      <!-- data-aos="zoom-in"
+      data-aos-duration="800"
+      data-aos-delay="0"
+      data-aos-anchor-placement="top-bottom" -->
     <v-card
       :max-width="getMaxWidth()"
       elevation=30
-      hover
-      data-aos="zoom-in"
-      data-aos-duration="800"
-      data-aos-delay="0"
-      data-aos-anchor-placement="top-bottom"
+
       class="mx-auto ma-3 mb-10 test-color"
       :style="{ transitionDelay: delay }"
       v-bind:id="`eventcard-${item.id}`"
@@ -30,12 +32,14 @@
         class="primary px-0"
         :class="paddingleftLebelIcons"
       >
+      <keep-alive>
         <v-img
           class="ml-1"
           :src="require('@/assets/wolfskopf.png')"
           v-if="item.isLvlOne && isDetailsView"
           :max-width="maxWidthKnots"
         />
+      </keep-alive>
         <v-img
           class="ml-1"
           :src="require('../../../assets/knot_blue.png')"
@@ -69,7 +73,7 @@
             bottom>
             <template v-slot:activator="{ on }">
               <v-btn
-                class="ma-2"
+                class="ma-2 info-cursor"
                 v-on="on"
                 icon>
                 <v-icon color="red">
@@ -112,7 +116,7 @@
             bottom>
             <template v-slot:activator="{ on }">
               <v-btn
-                class="px-2"
+                class="px-2 info-cursor"
                 :x-small="isMobil"
                 depressed
                 color="primary"
@@ -137,7 +141,7 @@
       <v-card-text>
         <div>
           <p
-            class="text-left subtitle-1 font-weight-light test-color-text"
+            class="text-left subtitle-1 test-color-text"
             :class="getDescriptionClass()"
             v-html="item.description">
           </p>
@@ -152,15 +156,21 @@
                   nudge-left="80"
                   bottom>
                   <template v-slot:activator="{ on }">
+                   <router-link
+                      :to="{ name: 'heimabendDetails',
+                      params: { id: item.id } }"
+                      class="no-underline"
+                    >
                     <v-btn
-                      @click="onDetailsClick(item)"
                       depressed
+                      @click="onDetailsClick(item)"
                       outlined
                       class="test-color-text"
                       block
                       v-on="on">
                       {{ getLikeButtonText }}
                     </v-btn>
+                    </router-link>
                   </template>
                   <span class="mx-1">
                     Hier gelangst du zur Detailierten Heimabendansicht mit vielen
@@ -204,7 +214,7 @@
 
         <div
           v-if="item.material !== ''"
-          class="text-left font-italic font-weight-light ml-10">
+          class="text-left font-italic ml-10">
           <ul>
             <li
               v-for="(item, index4) in getMaterialArray(item.material)"
@@ -215,7 +225,7 @@
         </div>
         <div
           v-else
-          class="text-left font-weight-light"
+          class="text-left"
         >
           <ul>
             <li>
@@ -236,7 +246,7 @@
         <template v-slot:activator="{ on }">
         <v-chip
           v-on="on"
-          class="ma-2"
+          class="ma-2 info-cursor"
           :color="getTagColorById(tag)"
         >
           {{ getTagNameById(tag) }}
@@ -262,6 +272,7 @@
             <v-btn
               icon
               :small="isMobil"
+              class="info-cursor"
               v-on="on">
               <v-icon
                 :size="getIconSize"
@@ -289,6 +300,7 @@
             <v-btn
               :small="isMobil"
               icon
+              class="info-cursor"
               v-on="on">
               <v-icon
                 :size="getIconSize"
@@ -317,6 +329,7 @@
                 :x-small="isMobil"
                 depressed
                 color="lightPrimary"
+                class="info-cursor"
                 v-on="on">
                 <v-rating
                   v-model="item.costsRating"
@@ -343,6 +356,7 @@
             <template v-slot:activator="{ on }">
               <v-btn
                 icon
+                class="info-cursor"
                 v-on="on">
                 <v-icon
                   :size="getIconSize"
@@ -366,6 +380,7 @@
             <template v-slot:activator="{ on }">
               <v-btn
                 icon
+                class="info-cursor"
                 color="lightPrimary"
                 v-on="on">
                 <v-icon
@@ -397,6 +412,7 @@
                 :x-small="isMobil"
                 depressed
                 color="lightPrimary"
+                class="info-cursor"
                 v-on="on">
                 <v-rating
                   v-model="item.executionTimeRating"
@@ -425,6 +441,7 @@
               <v-btn
                 icon
                 v-on="on"
+                class="info-cursor"
               >
                 <v-icon
                   :size="getIconSize"
@@ -441,7 +458,7 @@
             :class="verticalMargin"
             vertical
           />
-          <div class="caption ma-1">
+          <div class="body-2 ma-2">
             {{ formatDate(item.createdAt) + '\n' + item.createdBy }}
           </div>
       </v-card-actions>
@@ -498,7 +515,21 @@
       size="40"
       color="white"
     ></v-progress-circular>
-</div>
+    <Fab/>
+  </v-col>
+  <v-col
+    v-if="!isMobil && !isDetailsView"
+    cols="2"
+    class="negativ-top-margin"
+  >
+    <menu-right
+      pa-5
+      class="fixed menu-right" style="padding-top: 110px; padding-left: 5px; padding-right: 5px;"
+    />
+  </v-col>
+  </v-row>
+</v-container>
+
 </template>
 
 <script>
@@ -506,6 +537,10 @@ import axios from 'axios';
 
 import store from '@/store'; // eslint-disable-line
 import { mapGetters } from 'vuex';
+// eslint-disable-next-line import/no-unresolved
+import MenuRight from '@/views/components/menu/Right.vue';
+// eslint-disable-next-line import/no-unresolved
+import Fab from '@/views/components/fab/Standard.vue';
 // eslint-disable-next-line import/no-unresolved
 import DeleteModal from '../dialogs/DeleteModal.vue';
 
@@ -524,6 +559,8 @@ export default {
   },
   components: {
     DeleteModal,
+    MenuRight,
+    Fab,
   },
   methods: {
     loadMore() {
@@ -570,6 +607,8 @@ export default {
         .then(() => {
           store.commit('setLiked', eventId);
           this.showSuccessLiked = true;
+          // eslint-disable-next-line no-undef
+          _paq.push(['trackEvent', 'like', eventId]);
         })
         .catch((error) => {
           this.responseObj = error;
@@ -674,8 +713,9 @@ export default {
     onUpdateClick(params) {
       this.$router.push({ name: 'heimabendUpdate', params });
     },
-    onDetailsClick(params) {
-      this.$router.push({ name: 'heimabendDetails', params });
+    onDetailsClick(item) {
+      // eslint-disable-next-line no-undef
+      _paq.push(['trackContentInteraction', 'clicked', item.title, item.id]);
     },
     formatDate(date) {
       const dateObj = new Date(date);
@@ -733,7 +773,7 @@ export default {
       return !this.isMobil ? 30 : 28;
     },
     getLikeButtonText() {
-      return !this.isMobil ? 'Weitere Informationen' : 'Informationen';
+      return !this.isMobil ? 'Mehr Details' : 'Mehr';
     },
     paddingleftLebelIcons() {
       return !this.isMobil ? 'pl-2' : 'pl-1';
@@ -743,6 +783,9 @@ export default {
     },
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
+    },
+    getMainCols() {
+      return !this.isMobil && !this.isDetailsView ? 10 : 12;
     },
   },
 };
@@ -779,4 +822,17 @@ export default {
     letter-spacing: 0.4em;
     color: rgba(255, 255, 255, 0.692);
   }
+  .max-width-class {
+    max-width: 100% !important;
+    height: 100% !important;
+  }
+.fixed {
+  position: fixed;
+}
+.menu-right {
+  height: 100vh !important;
+}
+.negativ-top-margin {
+  margin-top: -100px !important;
+}
 </style>

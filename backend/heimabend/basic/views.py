@@ -21,7 +21,7 @@ class TagCategory(LoggingMixin, viewsets.ModelViewSet):
 
 
 class EventPagination(pagination.PageNumberPagination):
-    page_size = 5  # the no. of company objects you want to send in one go
+    page_size = 3  # the no. of company objects you want to send in one go
 
 
 class EventFilter(FilterSet):

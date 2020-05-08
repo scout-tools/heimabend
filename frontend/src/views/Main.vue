@@ -31,13 +31,12 @@
         prepend-inner-icon="mdi-magnify"
         clearable
         :dense="isMobil"
-        @input="onChangeSearchInput()"
+        @keydown.enter="onChangeSearchInput()"
       />
 
       <v-spacer/>
 
       <img
-        v-if="isMobil"
         src="https://dpbm.de/wp/wp-content/uploads/2019/02/mosaikWhite.svg"
         class="mr-2"
         height="50"
@@ -48,8 +47,6 @@
     <menu-left
       ref="mainMenuLeft"
     />
-
-    <menu-right/>
 
     <v-content
       id="lateral"
@@ -74,9 +71,9 @@
       v-if="apiIsDown"
     />
     </v-content>
-    <!-- <pricacy-banner
+    <pricacy-banner
       v-if="!acceptedPrivacy"
-    /> -->
+    />
     <v-snackbar
       v-model="showError"
       color="error"
@@ -92,10 +89,9 @@
 import axios from 'axios';
 import { mapGetters } from 'vuex';
 
+import PricacyBanner from './components/banner/Privacy.vue';
 import MenuLeft from './components/menu/Left.vue';
-import MenuRight from './components/menu/Right.vue';
 import ApiDownBanner from './components/banner/ApiDown.vue';
-// import PricacyBanner from '@/views/components/banner/Privacy.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
 import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
 import Fab from './components/fab/Standard.vue';
@@ -103,12 +99,11 @@ import Fab from './components/fab/Standard.vue';
 export default {
   components: {
     MenuLeft,
-    MenuRight,
     Topbar,
     SubPagesTopBar,
     ApiDownBanner,
     Fab,
-    // PricacyBanner,
+    PricacyBanner,
   },
   computed: {
     ...mapGetters([
@@ -122,14 +117,13 @@ export default {
       return `Suche in ${counter} Heimabenden ...`;
     },
     getMargin() {
-      return this.isMobil ? 'ma-1' : 'ma-5';
+      return this.isMobil ? 'ma-1' : 'ma-0';
     },
     tags() {
       return this.$store.getters.tags;
     },
     isMainPage() {
-      return this.currentRouteName === 'overview'
-        || this.currentRouteName === 'overview-id';
+      return this.currentRouteName === 'overview';
     },
     currentRouteName() {
       return this.$route.name;
@@ -143,12 +137,16 @@ export default {
   },
   watch: {
     searchInput(value) {
-      if (value === '') {
+      if (value === '' || !value) {
         this.currentSearchInput = value;
+      } else {
+        // eslint-disable-next-line no-undef
+        _paq.push(['trackSiteSearch', value, false, false]);
       }
     },
   },
   methods: {
+    // eslint-disable-next-line no-unused-vars
     onChangeSearchInput() {
       this.$store.commit('setSearchInput', this.currentSearchInput);
     },
@@ -194,12 +192,16 @@ export default {
 
   .content {
     flex: 1;
+    min-height: "100vh" !important;
   }
   .v-btn-toggle--group > .v-btn.v-btn {
     margin: 2px !important;
   }
   .hand-cursor {
     cursor: pointer
+  }
+  .info-cursor {
+    cursor: help !important;
   }
   .theme--light.v-application {
     background: transparent !important;
