@@ -1,7 +1,7 @@
 # serializers.py
 import timeit
 from rest_framework import serializers
-from .models import Tag, Event, Message, Like
+from .models import Tag, Event, Message, Like, TagCategory
 from django.db.models import Sum, Count
 from django.core.cache import cache
 from django.views.decorators.cache import cache_control
@@ -26,6 +26,19 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
             tag_count = Event.objects.filter(tags__id=obj.id).distinct().count()
             cache.set(tag_id, tag_count, timeout=24 * 60 * 60)
         return tag_count
+
+
+class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = TagCategory
+        fields = (
+            'id',
+            'name',
+            'description',
+            'order_id',
+            'is_visible',
+            'is_header'
+        )
 
 
 class LikeSerializer(serializers.HyperlinkedModelSerializer):

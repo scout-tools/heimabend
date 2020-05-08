@@ -2,7 +2,8 @@
 from rest_framework import pagination, viewsets, mixins, generics, filters
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework_tracking.mixins import LoggingMixin
-from .serializers import TagSerializer, EventSerializer, MessageSerializer, LikeSerializer, HighscoreSerializer
+from .serializers import TagSerializer, EventSerializer, MessageSerializer, LikeSerializer, HighscoreSerializer, \
+    TagCategorySerializer
 from .models import Tag, Event, Message, Like, TagCategory
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import FilterSet, BooleanFilter, OrderingFilter, ModelMultipleChoiceFilter, NumberFilter
@@ -14,10 +15,10 @@ class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
     serializer_class = TagSerializer
 
 
-class TagCategory(LoggingMixin, viewsets.ModelViewSet):
+class TagCategoryViewSet(LoggingMixin, viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = TagCategory.objects.all().order_by('name')
-    serializer_class = TagSerializer
+    serializer_class = TagCategorySerializer
 
 
 class EventPagination(pagination.PageNumberPagination):

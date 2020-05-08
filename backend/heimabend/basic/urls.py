@@ -9,7 +9,7 @@ router.register(r'event', views.EventViewSet)
 router.register(r'message', views.MessageViewSet)
 router.register(r'like', views.LikeViewSet)
 router.register(r'highscore', views.HighscoreView)
-router.register(r'tag-category', views.TagCategory)
+router.register(r'tag-category', views.TagCategoryViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
