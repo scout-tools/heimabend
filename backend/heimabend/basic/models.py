@@ -16,6 +16,7 @@ class TagCategory(models.Model):
     description = models.CharField(max_length=100, blank=True)
     order_id = models.IntegerField(blank=False, unique=True)
     isVisible = models.BooleanField(default=True)
+    isHeader = models.BooleanField(default=False)
 
 
 class Tag(models.Model):
