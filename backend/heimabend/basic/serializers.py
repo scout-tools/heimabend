@@ -17,7 +17,9 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
             'name',
             'tag_count',
             'description',
-            'color')
+            'color',
+            'category',
+            'is_visible')
 
     def get_tag_count(self, obj):
         tag_id = 'tag_' + str(obj.id)
@@ -29,6 +31,8 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
+    tag_category_count = serializers.SerializerMethodField()
+
     class Meta:
         model = TagCategory
         fields = (
@@ -36,9 +40,18 @@ class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
             'name',
             'description',
             'order_id',
+            'tag_category_count',
             'is_visible',
-            'is_header'
+            'is_header',
         )
+
+    def get_tag_category_count(self, obj):
+        tag_id = 'tag_category' + str(obj.id)
+        tag_count = cache.get(tag_id)
+        if tag_count is None:
+            tag_count = Tag.objects.filter(category__id=obj.id).distinct().count()
+            cache.set(tag_id, tag_count, timeout=24 * 60 * 60)
+        return tag_count
 
 
 class LikeSerializer(serializers.HyperlinkedModelSerializer):

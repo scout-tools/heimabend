@@ -28,7 +28,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=100, blank=True)
     color = models.CharField(max_length=7)
-    category = models.ManyToManyField(TagCategory, blank=False)
+    category_id = models.ManyToManyField(TagCategory, blank=False)
     is_visible = models.BooleanField(default=True)
 
     def __str__(self):

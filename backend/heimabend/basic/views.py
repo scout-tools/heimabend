@@ -17,7 +17,7 @@ class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 class TagCategoryViewSet(LoggingMixin, viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = TagCategory.objects.all().order_by('name')
+    queryset = TagCategory.objects.all()
     serializer_class = TagCategorySerializer
 
 
