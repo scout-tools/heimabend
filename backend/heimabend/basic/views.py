@@ -3,11 +3,11 @@ from rest_framework import pagination, viewsets, mixins, generics, filters
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework_tracking.mixins import LoggingMixin
 from .serializers import TagSerializer, EventSerializer, MessageSerializer, LikeSerializer, HighscoreSerializer, \
-    TagCategorySerializer
+    TagCategorySerializer, StatisticSerializer
 from .models import Tag, Event, Message, Like, TagCategory
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import FilterSet, BooleanFilter, OrderingFilter, ModelMultipleChoiceFilter, NumberFilter
-
+from django.db.models.functions import ExtractWeek, ExtractYear
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
@@ -73,10 +73,11 @@ class EventFilter(FilterSet):
 class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    pagination_class = EventPagination
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     filterset_class = EventFilter
+    ordering = ['-createdAt']
     search_fields = ['title', 'description', 'material']
+    pagination_class = EventPagination
 
 
 class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -92,3 +93,8 @@ class LikeViewSet(LoggingMixin, mixins.CreateModelMixin, viewsets.ViewSetMixin, 
 class HighscoreView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
     queryset = Event.objects.values('createdBy').distinct()
     serializer_class = HighscoreSerializer
+
+
+class StatisticView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
+    queryset = Event.objects.values(week=ExtractWeek('createdAt')).values('week').distinct()
+    serializer_class = StatisticSerializer

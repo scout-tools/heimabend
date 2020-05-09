@@ -4,7 +4,6 @@ from rest_framework import serializers
 from .models import Tag, Event, Message, Like, TagCategory
 from django.db.models import Sum, Count
 from django.core.cache import cache
-from django.views.decorators.cache import cache_control
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
@@ -160,3 +159,22 @@ class HighscoreSerializer(serializers.HyperlinkedModelSerializer):
     def get_highscore(self, obj):
         score = Event.objects.filter(createdBy=obj['createdBy']).count()
         return score
+
+
+class StatisticSerializer(serializers.HyperlinkedModelSerializer):
+    score = serializers.SerializerMethodField()
+    week = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Event
+        fields = (
+            'score',
+            'week'
+        )
+
+    def get_score(self, obj):
+        score = Event.objects.filter(createdAt__week__exact=obj['week']).count()
+        return score
+
+    def get_week(self, obj):
+        return obj['week']
