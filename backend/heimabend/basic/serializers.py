@@ -18,7 +18,7 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
             'tag_count',
             'description',
             'color',
-            'category_id',
+            'category',
             'is_visible')
 
     def get_tag_count(self, obj):
