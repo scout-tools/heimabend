@@ -164,6 +164,7 @@ class HighscoreSerializer(serializers.HyperlinkedModelSerializer):
 
 class StatisticSerializer(serializers.HyperlinkedModelSerializer):
     score = serializers.SerializerMethodField()
+    score_cumulative = serializers.SerializerMethodField()
     week = serializers.SerializerMethodField()
     year = serializers.SerializerMethodField()
 
@@ -171,11 +172,17 @@ class StatisticSerializer(serializers.HyperlinkedModelSerializer):
         model = Event
         fields = (
             'score',
+            'score_cumulative',
             'week',
             'year'
         )
 
     def get_score(self, obj):
+        print(obj)
+        score = Event.objects.filter(createdAt__year__exact=obj['year'], createdAt__week__exact=obj['week']).count()
+        return score
+
+    def get_score_cumulative(self, obj):
         print(obj)
         score = Event.objects.filter(createdAt__year__lte=obj['year'], createdAt__week__lte=obj['week']).count()
         return score
