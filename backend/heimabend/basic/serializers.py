@@ -154,7 +154,6 @@ class HighscoreSerializer(serializers.HyperlinkedModelSerializer):
         fields = (
             'createdBy',
             'highscore',
-            'year'
         )
 
     def get_highscore(self, obj):
