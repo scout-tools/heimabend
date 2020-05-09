@@ -9,6 +9,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import FilterSet, BooleanFilter, OrderingFilter, ModelMultipleChoiceFilter, NumberFilter
 from django.db.models.functions import ExtractWeek, ExtractYear
 
+
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Tag.objects.all().order_by('name')
@@ -96,5 +97,6 @@ class HighscoreView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, 
 
 
 class StatisticView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
-    queryset = Event.objects.values(week=ExtractWeek('createdAt')).values('week').distinct()
+    queryset = Event.objects.values(week=ExtractWeek('createdAt')).annotate(year=ExtractYear('createdAt')).values(
+        'week', 'year').distinct()
     serializer_class = StatisticSerializer

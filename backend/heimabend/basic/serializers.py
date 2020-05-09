@@ -154,6 +154,7 @@ class HighscoreSerializer(serializers.HyperlinkedModelSerializer):
         fields = (
             'createdBy',
             'highscore',
+            'year'
         )
 
     def get_highscore(self, obj):
@@ -164,17 +165,23 @@ class HighscoreSerializer(serializers.HyperlinkedModelSerializer):
 class StatisticSerializer(serializers.HyperlinkedModelSerializer):
     score = serializers.SerializerMethodField()
     week = serializers.SerializerMethodField()
+    year = serializers.SerializerMethodField()
 
     class Meta:
         model = Event
         fields = (
             'score',
-            'week'
+            'week',
+            'year'
         )
 
     def get_score(self, obj):
+        print(obj)
         score = Event.objects.filter(createdAt__week__exact=obj['week']).count()
         return score
 
     def get_week(self, obj):
         return obj['week']
+
+    def get_year(self, obj):
+        return obj['year']
