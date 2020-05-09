@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 frontend/dist
+db.sqlite3
 
 # local env files
 frontend/.env
