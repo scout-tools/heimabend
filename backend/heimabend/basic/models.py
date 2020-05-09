@@ -14,7 +14,7 @@ class TagCategory(models.Model):
         verbose_name='ID')
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=100, blank=True)
-    ordered_by = models.IntegerField(blank=False, unique=True)
+    ordered_id = models.IntegerField(blank=False, unique=True)
     is_visible = models.BooleanField(default=True)
     is_header = models.BooleanField(default=False)
 
@@ -28,7 +28,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=100, blank=True)
     color = models.CharField(max_length=7)
-    category = models.ForeignKey(TagCategory, on_delete=models.PROTECT, default='')
+    category = models.ForeignKey(TagCategory, on_delete=models.PROTECT, blank=True, null=True)
     is_visible = models.BooleanField(default=True)
 
     def __str__(self):

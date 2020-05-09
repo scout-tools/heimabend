@@ -39,7 +39,7 @@ class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
             'id',
             'name',
             'description',
-            'order_id',
+            'ordered_id',
             # 'tag_category_count',
             'is_visible',
             'is_header',
