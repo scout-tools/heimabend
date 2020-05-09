@@ -177,7 +177,7 @@ class StatisticSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_score(self, obj):
         print(obj)
-        score = Event.objects.filter(createdAt__week__exact=obj['week']).count()
+        score = Event.objects.filter(createdAt__year__lte=obj['year'], createdAt__week__lte=obj['week']).count()
         return score
 
     def get_week(self, obj):

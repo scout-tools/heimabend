@@ -98,5 +98,5 @@ class HighscoreView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, 
 
 class StatisticView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
     queryset = Event.objects.values(week=ExtractWeek('createdAt')).annotate(year=ExtractYear('createdAt')).values(
-        'week', 'year').distinct()
+        'week', 'year').distinct().order_by('year', 'week')
     serializer_class = StatisticSerializer
