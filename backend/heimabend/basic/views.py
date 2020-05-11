@@ -14,12 +14,16 @@ class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Tag.objects.all().order_by('name')
     serializer_class = TagSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ('is_visible',)
 
 
 class TagCategoryViewSet(LoggingMixin, viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = TagCategory.objects.all()
     serializer_class = TagCategorySerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_fields = ('is_visible',)
 
 
 class EventPagination(pagination.PageNumberPagination):
@@ -32,7 +36,7 @@ class EventFilter(FilterSet):
     isPossibleDigital = BooleanFilter(field_name='isPossibleDigital')
     isPossibleAlone = BooleanFilter(field_name='isPossibleAlone')
     isPrepairationNeeded = BooleanFilter(field_name='isPrepairationNeeded')
-    isActive = BooleanFilter(field_name='isActive')
+    isActive = BooleanFilter(field_name='isActive', method='get_isActive')
     withoutCosts = BooleanFilter(method='get_CostRating', field_name='costsRating')
     sorter = OrderingFilter(fields=(
         ('-createdAt', 'newest'),
@@ -70,15 +74,26 @@ class EventFilter(FilterSet):
             return queryset.filter(costsRating=0)
         return queryset
 
+    def get_isActive(self, queryset, field_name, value):
+        if not value:
+            if self.request.user.is_authenticated:
+                queryset.filter(isActive=value)
+        return queryset.filter(isActive=True)
+
 
 class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    filter_backends = (DjangoFilterBackend, filters.SearchFilter)
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filterset_class = EventFilter
     ordering = ['-createdAt']
     search_fields = ['title', 'description', 'material']
     pagination_class = EventPagination
+
+    def get_queryset(self):
+        print(self.request.user)
+        if not self.request.user.is_authenticated:
+            return self.queryset.filter(isActive=True).order_by('-createdAt')
 
 
 class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -98,5 +113,5 @@ class HighscoreView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, 
 
 class StatisticView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
     queryset = Event.objects.values(week=ExtractWeek('createdAt')).annotate(year=ExtractYear('createdAt')).values(
-        'week', 'year').distinct()
+        'week', 'year').distinct().order_by('year', 'week')
     serializer_class = StatisticSerializer
