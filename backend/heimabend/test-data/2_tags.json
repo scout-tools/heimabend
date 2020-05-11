@@ -1,0 +1,32 @@
+[
+  {
+    "model": "basic.tag",
+    "pk": 1,
+    "fields": {"name":"Schnitzen", "description":"", "color":"#C0FF97", "is_visible":1, "category_id":1}
+  },
+  {
+    "model": "basic.tag",
+    "pk": 2,
+    "fields": {"id":2, "name":"Backen", "description":"", "color":"#FFBBBB", "is_visible":0, "category_id":1}
+  },
+  {
+    "model": "basic.tag",
+    "pk": 3,
+    "fields": {"id":4, "name":"Unsere Erde", "description":"", "color":"#BBEBFF", "is_visible":1, "category_id":2}
+  },
+  {
+    "model": "basic.tag",
+    "pk": 4,
+    "fields": {"id":7, "name":"Pfa. Geschichte", "description":"", "color":"#A3FEBA", "is_visible":1, "category_id":2}
+  },
+  {
+    "model": "basic.tag",
+    "pk": 5,
+    "fields": {"id":10, "name":"Feuer machen", "description":"", "color":"#F1F1B1", "is_visible":1, "category_id":3}
+  },
+  {
+    "model": "basic.tag",
+    "pk": 6,
+    "fields": {"id":11, "name":"Versprechen", "description":"", "color":"#DEB19E", "is_visible":1, "category_id":3}
+  }
+]

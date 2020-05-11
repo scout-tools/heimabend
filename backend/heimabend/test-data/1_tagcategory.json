@@ -1,0 +1,17 @@
+[
+  {
+    "model": "basic.tagcategory",
+    "pk": 1,
+    "fields": {"id":1, "name":"Jahreszeit", "description":"Beinhaltet die 4 Jahreszeiten", "ordered_id":2, "is_visible":1, "is_header":1}
+  },
+  {
+    "model": "basic.tagcategory",
+    "pk": 2,
+    "fields": {"id":2, "name":"Ort", "description":"", "ordered_id":1, "is_visible":1, "is_header":1}
+  },
+  {
+    "model": "basic.tagcategory",
+    "pk": 3,
+    "fields": {"id":3, "name":"Stufe", "description":"", "ordered_id":3, "is_visible":1, "is_header":1}
+  }
+]
