@@ -1,5 +1,4 @@
 # serializers.py
-import timeit
 from rest_framework import serializers
 from .models import Tag, Event, Message, Like, TagCategory
 from django.db.models import Sum, Count
@@ -30,7 +29,8 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
-    # tag_category_count = serializers.SerializerMethodField()
+    tag_category_count = serializers.SerializerMethodField()
+
 
     class Meta:
         model = TagCategory
@@ -39,19 +39,20 @@ class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
             'name',
             'description',
             'ordered_id',
-            # 'tag_category_count',
+            'tag_category_count',
             'is_visible',
             'is_header',
         )
 
-    """def get_tag_category_count(self, obj):
+
+    def get_tag_category_count(self, obj):
         print(obj)
         tag_id = 'tag_category' + str(obj.id)
         tag_count = cache.get(tag_id)
         if tag_count is None:
             tag_count = Tag.objects.filter(category_id=obj.id).distinct().count()
             cache.set(tag_id, tag_count, timeout=24 * 60 * 60)
-        return tag_count"""
+        return tag_count
 
 
 class LikeSerializer(serializers.HyperlinkedModelSerializer):
@@ -96,7 +97,6 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             'costsRating',
             'executionTimeRating',
             'isPrepairationNeeded',
-            'isActive',
             'isLvlOne',
             'isLvlTwo',
             'isLvlThree',
