@@ -77,9 +77,7 @@ class EventFilter(FilterSet):
     def get_isActive(self, queryset, field_name, value):
         if not value:
             if self.request.user.is_authenticated:
-                print(field_name)
-                print(value)
-                queryset.filter(isActive=value)
+                return queryset.filter(isActive=value)
         return queryset.filter(isActive=True)
 
 
@@ -94,7 +92,7 @@ class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
 
     def get_queryset(self):
         if not self.request.user.is_authenticated:
-            return self.queryset.filter(isActive=True).order_by('-createdAt')
+            return self.queryset.filter(isActive=True)
 
 
 class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):
