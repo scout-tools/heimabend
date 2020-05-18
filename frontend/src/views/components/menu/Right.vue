@@ -3,6 +3,19 @@
       tile
       color="primary"
     >
+    <!-- <div
+      v-for="category in getSideBarTagCategories"
+      :key="category.id"
+    >
+        <div dark class="mt-7">
+        <span  dark class="subtitle-1 whiteText">
+          {{ category.name }}
+        </span>
+        <v-icon small class="whiteText">
+          {{ getIcon(category.name) }}
+        </v-icon>
+      <v-divider class="my-1" dark/>
+        </div> -->
       <v-chip-group
         multiple
         column
@@ -22,10 +35,12 @@
           {{ tag.name }}
         </v-chip>
       </v-chip-group>
+    <!-- </div>  filterTagByCategory(category.id) -->
   </v-sheet>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 // eslint-disable-next-line import/no-unresolved
 
 export default {
@@ -35,21 +50,41 @@ export default {
     oldFilterLength: 0,
   }),
   computed: {
-    tags() {
-      return this.$store.getters.tags;
-    },
+    ...mapGetters([
+      'tags',
+      'tagCategory',
+    ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
+    },
+    getSideBarTagCategories() {
+      if (this.tagCategory) {
+        return this.tagCategory.filter(item => item.is_header === false);
+      }
+      return [];
     },
     getFilterTags() {
       this.filterTags = this.$store.getters.filterTags; // eslint-disable-line
       return this.$store.getters.filterTags;
     },
-    isOverviewRoute() {
-      return this.$route.name === 'overview';
-    },
   },
   methods: {
+    filterTagByCategory(categoryId) {
+      return this.tags.filter(item => item.category === `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`);
+    },
+    getIcon(name) {
+      switch (name) {
+        case 'Herz (Gemüt)':
+          return 'mdi-heart';
+        case 'Hand (Körper)':
+          return 'mdi-hand';
+        case 'Kopf (Verstand)':
+          return 'mdi-head';
+        default:
+          break;
+      }
+      return '';
+    },
     onClick() {
       this.oldFilterLength = this.filterTags.length;
     },
@@ -58,7 +93,6 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     onChange() {
-      this.$emit('onTagFilterChanged', this.filterTags);
       this.$store.commit('changeFilterTags', this.filterTags);
 
       if (this.oldFilterLength < this.filterTags.length) {
@@ -69,7 +103,6 @@ export default {
     },
     resetTags() {
       this.filterTags = [];
-      this.$emit('onTagFilterChanged', this.filterTags);
       this.$store.commit('changeFilterTags', []);
     },
   },

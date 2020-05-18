@@ -1,107 +1,36 @@
 <template>
-    <v-tooltip
-      nudge-left="80"
-      bottom
+  <v-container class="ma-0 pa-0" fluid>
+    <v-select
+      v-model="selectedFilter"
+      :items="filterTagByCategory(category.id)"
+      :label="category.name"
+      item-value="id"
+      item-text="name"
+      multiple
+      dense
+      hide-details
+      single-line
+      outlined
+      @change="onFilterChanged"
     >
-      <template
-        v-slot:activator="{ on }"
-      >
-        <div
-          class="d-flex flex-column"
-          :class="getDivClass()"
-          >
-          <v-btn
-            v-on="on"
-            dense
-            text
-            depressed
-            @click="onToggleButton()"
-            class="mx-0 px-0"
-          >
-            <v-icon
-              v-if="customIcon !== 'wolf' && customIcon !== 'scout' && customIcon !== 'rover'"
-              dense
-              :color="isActiveState ?
-                customColor + ' darken-2' : 'grey'"
-            >
-              {{ customIcon }}
-            </v-icon>
-
-            <v-img
-              v-if="customIcon == 'wolf'"
-              class="ma-0 pa-0"
-              :src="require('@/assets/wolfskopf.png')"
-              max-width="28"
-            />
-
-            <v-img
-              v-if="customIcon == 'scout'"
-              class="ma-0 pa-0"
-              :src="require('@/assets/knot_blue.png')"
-              max-width="28"
-            />
-
-            <v-img
-              v-if="customIcon == 'rover'"
-              class="ma-0 pa-0"
-              :src="require('@/assets/knot_red.png')"
-              max-width="28"
-            />
-
-            <span
-              class="subtitle-2 mx-1"
-              :class="getColotClass"
-              v-if="!isMobil"
-            >
-              {{ customText }}
-            </span>
-          </v-btn>
-          <v-row justify="center">
-            <v-switch
-              color="secondary"
-              v-model="isActiveState"
-              class="ma-0 pa-0"
-              hide-details
-              dense
-              indeterminate
-            >
-            </v-switch>
-          </v-row>
-        </div>
-      </template>
-      <span>
-        {{ customTooltip }}
-      </span>
-    </v-tooltip>
+    </v-select>
+  </v-container>
 </template>
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   props: {
-    customIcon: {
-      type: String,
-    },
-    customColor: {
-      type: String,
-    },
-    customText: {
-      type: String,
-    },
-    customTooltip: {
-      type: String,
-    },
-    customTrigger: {
-      type: Boolean,
-    },
-    customVariable: {
-      type: String,
-    },
-    customMutation: {
-      type: String,
+    category: {
+      type: Object,
     },
   },
   data() {
     return {
+      selectedFilter: [],
+      lastFilter: [],
       isActiveState: false,
+      value: [],
     };
   },
   computed: {
@@ -111,20 +40,16 @@ export default {
     getColotClass() {
       return this.isActiveState ? 'customer-color-activ' : 'customer-color-inactive';
     },
-  },
-  watch: {
-    isActiveState(value) {
-      this.$store.commit(this.customMutation, value);
-      if (value) {
-        // eslint-disable-next-line no-undef
-        _paq.push(['trackEvent', 'ActivateFilter', this.customVariable]);
-      }
-    },
-    customTrigger() {
-      this.updateState();
-    },
+    ...mapGetters([
+      'tags',
+      'tagCategory',
+      'mandatoryFilter',
+    ]),
   },
   methods: {
+    filterTagByCategory(categoryId) {
+      return this.tags.filter(item => item.category === `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`);
+    },
     getDivClass() {
       return !this.isMobil ? 'mx-2' : 'mx-0';
     },
@@ -133,6 +58,27 @@ export default {
     },
     onToggleButton() {
       this.isActiveState = !this.isActiveState;
+    },
+    // eslint-disable-next-line no-unused-vars
+    onFilterChanged(newValue) {
+      if (newValue) {
+        if (newValue.length > this.lastFilter.length) {
+          const difference = newValue.filter(x => !this.lastFilter.includes(x));
+          const oldFilter = this.mandatoryFilter;
+          oldFilter.push(difference[0]);
+          this.$store.commit('changeMandatoryFilter', oldFilter);
+        } else {
+          // const oldFilter = this.mandatoryFilter;
+          const categoryItems = this.filterTagByCategory(this.category.id);
+          const difference = categoryItems.filter(x => this.lastFilter.includes(x.id))[0].id;
+          const oldFilter = this.mandatoryFilter;
+          const index = oldFilter.indexOf(difference);
+          oldFilter.splice(index, 1);
+          this.$store.commit('changeMandatoryFilter', oldFilter);
+          debugger;
+        }
+      }
+      this.lastFilter = newValue;
     },
   },
   mounted() {
@@ -143,7 +89,7 @@ export default {
 
 <style scoped>
 .customer-color-activ {
-  color: black !important;
+  color: rgba(0, 0, 0, 0.568) !important;
 }
 .customer-color-inactive {
   color: gray !important;

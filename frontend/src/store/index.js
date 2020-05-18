@@ -22,8 +22,10 @@ export default new Vuex.Store({
     isLvlTwo: false,
     isLvlThree: false,
     filterTags: [],
+    mandatoryFilter: {},
     heimabendCounter: 0,
     tags: [],
+    tagCategory: null,
     searchInput: '',
     apiIsDown: false,
     acceptedPrivacy: false,
@@ -50,6 +52,9 @@ export default new Vuex.Store({
     },
     tags(state) {
       return state.tags;
+    },
+    tagCategory(state) {
+      return state.tagCategory;
     },
     tagById(state, id) {
       return state.tags.find(tag => tag.id === id);
@@ -84,6 +89,9 @@ export default new Vuex.Store({
     filterTags(state) {
       return state.filterTags;
     },
+    mandatoryFilter(state) {
+      return state.mandatoryFilter;
+    },
     heimabendCounter(state) {
       return state.heimabendCounter;
     },
@@ -107,11 +115,17 @@ export default new Vuex.Store({
     setTags(state, newTags) {
       state.tags = newTags;
     },
+    setTagCategory(state, newValue) {
+      state.tagCategory = newValue;
+    },
     setSearchInput(state, newSearchInput) {
       state.searchInput = newSearchInput;
     },
     changeFilterTags(state, newTags) {
       state.filterTags = newTags;
+    },
+    changeMandatoryFilter(state, newTags) {
+      state.mandatoryFilter = newTags;
     },
     setPossibleInside(state, value) {
       state.isPossibleInside = value;
@@ -166,6 +180,7 @@ export default new Vuex.Store({
       state.withoutCosts = false;
       state.isActive = true;
       state.filterTags = [];
+      state.mandatoryFilter = [];
     },
     clearAccessToken(state) {
       state.accessToken = null;
@@ -190,6 +205,7 @@ export default new Vuex.Store({
     },
     resetFilters({ commit }) {
       commit('enableIsActive');
+      commit('changeMandatoryFilter', []);
       commit('changeFilterTags', []);
       commit('setSearchInput', '');
     },

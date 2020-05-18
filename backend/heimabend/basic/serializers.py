@@ -46,7 +46,6 @@ class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
 
 
     def get_tag_category_count(self, obj):
-        print(obj)
         tag_id = 'tag_category' + str(obj.id)
         tag_count = cache.get(tag_id)
         if tag_count is None:
@@ -107,6 +106,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             'updatedBy',
             'createdAt',
             'updatedAt',
+            'isActive',
             'like_score')
 
     """def get_like_score(self, obj):
@@ -177,12 +177,10 @@ class StatisticSerializer(serializers.HyperlinkedModelSerializer):
         )
 
     def get_score(self, obj):
-        print(obj)
         score = Event.objects.filter(createdAt__year__exact=obj['year'], createdAt__week__exact=obj['week']).count()
         return score
 
     def get_score_cumulative(self, obj):
-        print(obj)
         score = Event.objects.filter(createdAt__year__lte=obj['year'], createdAt__week__lte=obj['week']).count()
         return score
 

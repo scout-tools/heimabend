@@ -1,6 +1,5 @@
 <template>
   <v-toolbar
-    class="top-toolbar"
     fixed
     :extension-height="extensionHeightNumber"
     :extended="isExtended && isMobil"
@@ -34,82 +33,36 @@
             Mehr Filter
           </span>
         </v-tooltip>
-      <v-divider class="mx-0" vertical/>
-        <filter-button
-          :customIcon="'mdi-robot'"
-          :customColor="'red'"
-          :customText="'Digital'"
-          :customTooltip="'Zeigt Ideen an die mit deiner Sippe digitaldurchgeführt werden können.'"
-          :customTrigger="isPossibleDigital"
-          :customVariable="'isPossibleDigital'"
-          :customMutation="'setPossibleDigital'"
-        />
-      <v-divider class="mx-0" vertical/>
-        <filter-button
-          :customIcon="'mdi-account-cowboy-hat'"
-          :customColor="'black'"
-          :customText="'Alleine'"
-          :customTooltip="'Zeigt Heimabende an die alleine durchführbar sind'"
-          :customTrigger="isPossibleAlone"
-          :customVariable="'isPossibleAlone'"
-          :customMutation="'setPossibleAlone'"
-        />
-      <v-divider class="mx-0" vertical/>
-        <filter-button
-          :customIcon="'mdi-card-bulleted-off-outline'"
-          :customColor="'black'"
-          :customText="'Easy'"
-          :customTooltip="'Zeigt nur Heimabende an die keine Vorbereitung benötigen'"
-          :customTrigger="isPrepairationNeeded"
-          :customVariable="'isPrepairationNeeded'"
-          :customMutation="'setIsPreperationNeeded'"
-        />
-      <v-divider class="mx-0" vertical/>
-        <filter-button
-          :customIcon="'mdi-currency-usd-off'"
-          :customColor="'red'"
-          :customText="'Umsonst'"
-          :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
-          :customTrigger="withoutCosts"
-          :customVariable="'withoutCosts'"
-          :customMutation="'setWithoutCosts'"
-        />
-      <v-divider v-if="!isMobil" class="mx-0" vertical/>
-        <filter-button
-          v-if="!isMobil"
-          :customIcon="'wolf'"
-          :customText="'WÖ'"
-          :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
-          :customTrigger="isLvlOne"
-          :customVariable="'isLvlOne'"
-          :customMutation="'setIsLvlOne'"
-        />
-      <v-divider v-if="!isMobil" class="mx-0" vertical/>
-        <filter-button
-          v-if="!isMobil"
-          :customIcon="'scout'"
-          :customText="'Pfadi'"
-          :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
-          :customTrigger="isLvlTwo"
-          :customVariable="'isLvlTwo'"
-          :customMutation="'setIsLvlTwo'"
-        />
-      <v-divider v-if="!isMobil" class="mx-0" vertical/>
-        <filter-button
-          v-if="!isMobil"
-          :customIcon="'rover'"
-          :customText="'Rover'"
-          :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
-          :customTrigger="isLvlThree"
-          :customVariable="'isLvlThree'"
-          :customMutation="'setIsLvlThree'"
-        />
-      <v-divider class="mx-0" vertical/>
-      <v-btn icon ml-1 @click="onClickRestore" :disabled="isFilterDefault">
-        <v-icon>
-          mdi-restore
-        </v-icon>
-      </v-btn>
+
+        <v-container fluid class="mx-5 pa-0" >
+          <v-row
+            align="center"
+            class="ma-0 pa-0"
+              justify="center">
+              <v-col
+                v-for="category in getTopBarTagCategories"
+                :key="category.id"
+                cols="1.5">
+                <filter-button
+                  :category="category"
+                />
+              </v-col>
+              <v-col cols="1.5">
+                <sorter/>
+              </v-col>
+              <v-col cols="1.5">
+              <v-btn icon ml-1 @click="onClickRestore" :disabled="isFilterDefault">
+                <v-icon>
+                  mdi-restore
+                </v-icon>
+              </v-btn>
+            </v-col>
+              <v-col cols="1.5" v-if="!isMobil">
+              </v-col>
+          </v-row>
+        </v-container>
+
+
     </template>
   <template
         #extension
@@ -117,7 +70,7 @@
       >
     <v-container class="pa-0" style="margin: 0px; width: 100%">
       <v-row v-if="isExtended && isMobil">
-      <v-divider class="second-row-spacer"  vertical/>
+      <v-col cols="2">
         <filter-button
           :customIcon="'wolf'"
           :customText="'WÖ'"
@@ -126,7 +79,8 @@
           :customVariable="'isLvlOne'"
           :customMutation="'setIsLvlOne'"
         />
-      <v-divider class="mx-0" vertical/>
+      </v-col>
+      <v-col cols="2">
         <filter-button
           :customIcon="'scout'"
           :customText="'Pfadi'"
@@ -135,7 +89,8 @@
           :customVariable="'isLvlTwo'"
           :customMutation="'setIsLvlTwo'"
         />
-      <v-divider class="mx-0" vertical/>
+      </v-col>
+      <v-col cols="2">
         <filter-button
           :customIcon="'rover'"
           :customText="'Rover'"
@@ -144,7 +99,12 @@
           :customVariable="'isLvlThree'"
           :customMutation="'setIsLvlThree'"
         />
-      <v-divider class="mx-0" vertical/>
+      </v-col>
+      <v-col cols="2">
+        <div>
+          <v-spacer/>
+        </div>
+      </v-col>
       </v-row>
       <v-layout wrap>
         <div class="pa-0">
@@ -167,9 +127,7 @@
         </div>
       </v-layout>
     </v-container>
-
       </template>
-  <v-spacer class="right-menu-margin"/>
   </v-toolbar>
 </template>
 
@@ -177,10 +135,12 @@
 import { mapGetters } from 'vuex';
 
 import FilterButton from '@/views/components/button/FilterButton.vue'; //eslint-disable-line
+import Sorter from '@/views/components/dropdown/Sorter.vue'; //eslint-disable-line
 
 export default {
   components: {
     FilterButton,
+    Sorter,
   },
   data() {
     return {
@@ -217,9 +177,16 @@ export default {
       'isLvlTwo',
       'isLvlThree',
       'tags',
+      'tagCategory',
       'isAuthenticated',
       'heimabendCounter',
     ]),
+    getTopBarTagCategories() {
+      if (this.tagCategory) {
+        return this.tagCategory.filter(item => item.is_header);
+      }
+      return [];
+    },
     extensionHeightNumber() {
       return this.isMobil ? '350px' : '50px';
     },
@@ -254,19 +221,7 @@ export default {
 </script>
 
 <style scoped>
-
-.v-btn {
-  padding-left: 6px !important;
-  padding-right: 6px !important;
-}
-
-.right-menu-margin {
-  margin-right: 240px;
-}
 span {
   font-size: 12px !important;
-}
-.second-row-spacer {
-    margin-left: 69px;
 }
 </style>

@@ -43,7 +43,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="12">
+              <v-col cols="6">
                 <v-textarea
                   outlined
                   label="Beschreibung"
@@ -54,21 +54,46 @@
                   required
                 ></v-textarea>
               </v-col>
+              <v-col cols="6">
+                <v-color-picker
+                  label="Farbe"
+                  :hide-canvas="hideCanvas"
+                  :hide-inputs="hideInputs"
+                  :hide-mode-switch="hideModeSwitch"
+                  :show-swatches="showSwatches"
+                  class="mx-auto"
+                  :rules="rules.color"
+                  v-model="data.color"
+                ></v-color-picker>
+              </v-col>
             </v-row>
             <v-row>
-                <v-col cols="12">
-                  <v-color-picker
-                    label="Farbe"
-                    :hide-canvas="hideCanvas"
-                    :hide-inputs="hideInputs"
-                    :hide-mode-switch="hideModeSwitch"
-                    :show-swatches="showSwatches"
-                    class="mx-auto"
-                    :rules="rules.color"
-                    v-model="data.color"
-                  ></v-color-picker>
-                </v-col>
-              </v-row>
+              <v-col cols="6">
+                <v-select
+                  :items="tagCategory"
+                  return-object
+                  hide-details
+                  item-value="id"
+                  item-text="name"
+                  outlined
+                  v-model="data.categoryId"
+                  :rules="rules.categoryId"
+                  label="Tag Kategory"
+                  required
+                />
+              </v-col>
+             <v-col cols="6">
+                <v-switch
+                  label="Sichtbar?"
+                  color="secondary"
+                  v-model="data.is_visible"
+                  hide-details
+                  dense
+                  indeterminate
+                >
+                </v-switch>
+              </v-col>
+            </v-row>
             </v-container>
           </v-form>
         </v-card-text>
@@ -97,7 +122,7 @@
 import axios from 'axios';
 
 export default {
-  props: ['tags'],
+  props: ['item'],
 
 
   data: () => ({
@@ -126,17 +151,30 @@ export default {
       color: [
         v => (v.length <= 7) || 'Name must be less than 200 characters',
       ],
+      categoryId: [
+        v => !!v || 'Kategorie ist erforderlich',
+      ],
     },
     data: {
       name: 'Rucksack packen',
       description: '',
-      color: '#ffffff',
+      category: 3,
     },
     isCreate: true,
     isUpdate: false,
   }),
 
   computed: {
+    tags() {
+      return this.$store.getters.tags;
+    },
+    tagCategory() {
+      return this.$store.getters.tagCategory;
+    },
+    parsedCategory() {
+      const link = this.data.category;
+      return this.convertUrlToId(link);
+    },
   },
 
   methods: {
@@ -149,6 +187,8 @@ export default {
           name: this.data.name,
           description: this.data.description,
           color: this.data.color.hex,
+          category: this.getTagCategoryString(this.data.categoryId.id),
+          is_visible: this.data.is_visible,
         })
           .then(() => {
             this.dialog = false;
@@ -163,6 +203,8 @@ export default {
           name: this.data.name,
           description: this.data.description,
           color: this.data.color,
+          category: this.getTagCategoryString(this.data.categoryId.id),
+          is_visible: this.data.is_visible,
         })
           .then(() => {
             this.dialog = false;
@@ -173,6 +215,9 @@ export default {
             this.showError = true;
           });
       }
+    },
+    getTagCategoryString(id) {
+      return `${process.env.VUE_APP_API}basic/tag-category/${id}/`;
     },
     onDeleteClick() {
       axios.delekte(`${this.API_URL}basic/tag/${this.data.id}/`)
@@ -187,8 +232,8 @@ export default {
     },
     getUrlTagList(tagList) {
       const ary = [];
-      tagList.forEach((tag) => {
-        ary.push(`${process.env.VUE_APP_API}basic/tag/${tag}/`);
+      tagList.forEach((item) => {
+        ary.push(`${process.env.VUE_APP_API}basic/tag/${item}/`);
       });
       return ary;
     },

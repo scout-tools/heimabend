@@ -37,9 +37,7 @@
             </v-card>
           </v-row>
       <v-subheader v-if="!isAuthenticated">Sortierung</v-subheader>
-      <v-divider v-if="!isAuthenticated"></v-divider>
 
-      <Sorter class="mx-3"/>
       <v-divider/>
       <v-spacer dark class="my-6"/>
     <v-subheader>Daten</v-subheader>
@@ -176,12 +174,10 @@
 </template>
 
 <script>
-import Sorter from '@/views/components/dropdown/Sorter.vue'; //eslint-disable-line
 import Login from '@/views/components/dialogs/Login.vue'; //eslint-disable-line
 
 export default {
   components: {
-    Sorter,
     Login,
   },
   data: () => ({

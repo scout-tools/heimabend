@@ -763,6 +763,12 @@ export default {
       'liked',
       'isAuthenticated',
     ]),
+    isMainPage() {
+      return this.currentRouteName === 'overview';
+    },
+    currentRouteName() {
+      return this.$route.name;
+    },
     ratingSize() {
       return !this.isMobil ? 24 : 18;
     },

@@ -6,6 +6,7 @@ import AboutProject from '../views/aboutProject/Main.vue';
 import Faq from '../views/aboutProject/Faq.vue';
 import Impressum from '../views/impressum/Main.vue';
 import Tags from '../views/tags/Main.vue';
+import TagCategory from '../views/tags/tagCategory/Main.vue';
 import HeimabendCreate from '../views/heimabend/create/Main.vue';
 import MessageOverview from '../views/message/Overview.vue';
 import HeimabendDetails from '../views/heimabend/details/Main.vue';
@@ -48,6 +49,11 @@ const routes = [
     path: '/tags',
     name: 'tags',
     component: Tags,
+  },
+  {
+    path: '/tagCategory',
+    name: 'tagCategory',
+    component: TagCategory,
   },
   {
     path: '/heimabend/create/',

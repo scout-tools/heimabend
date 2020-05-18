@@ -108,6 +108,7 @@ export default {
   computed: {
     ...mapGetters([
       'searchInput',
+      'tags',
     ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -118,9 +119,6 @@ export default {
     },
     getMargin() {
       return this.isMobil ? 'ma-1' : 'ma-0';
-    },
-    tags() {
-      return this.$store.getters.tags;
     },
     isMainPage() {
       return this.currentRouteName === 'overview';
@@ -163,12 +161,27 @@ export default {
           this.showError = true;
         });
     },
+    getTagCategory() {
+      const path = `${this.API_URL}basic/tag-category/`;
+      axios.get(path)
+        .then((res) => {
+          this.$store.commit('setTagCategory', res.data);
+        })
+        .catch(() => {
+          this.showError = true;
+        });
+    },
     onHeaderClick() {
       this.$router.push({ name: 'overview' });
+    },
+    remove(item) {
+      this.chips.splice(this.chips.indexOf(item), 1);
+      this.chips = [...this.chips];
     },
   },
   mounted() {
     this.getTags();
+    this.getTagCategory();
     this.$store.dispatch('resetFilters');
   },
   data: () => ({
@@ -178,6 +191,7 @@ export default {
     iconFab: 'mdi-plus',
     showError: false,
     currentSearchInput: '',
+    chips: [],
   }),
 };
 

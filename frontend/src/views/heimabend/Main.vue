@@ -69,60 +69,28 @@ export default {
       this.isFirstEventsLoaded = false;
       this.refresh();
     },
+    getFilterTags() {
+    },
   },
   computed: {
     ...mapGetters([
-      'isPossibleInside',
-      'isPossibleOutside',
-      'isPossibleAlone',
-      'isPossibleDigital',
-      'isPrepairationNeeded',
-      'isActive',
-      'withoutCosts',
       'searchInput',
       'sorter',
-      'isLvlOne',
-      'isLvlTwo',
-      'isLvlThree',
       'filterTags',
       'tags',
       'isAuthenticated',
       'heimabendCounter',
+      'mandatoryFilter',
     ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
     axiosParams() {
       const params = new URLSearchParams();
-      // if (this.isPossibleOutside) {
-      //   params.append('isPossibleOutside', this.isPossibleOutside);
-      // }
-      // if (this.isPossibleInside) {
-      //   params.append('isPossibleInside', this.isPossibleInside);
-      // }
-      if (this.isPossibleAlone) {
-        params.append('isPossibleAlone', this.isPossibleAlone);
-      }
-      if (this.isPossibleDigital) {
-        params.append('isPossibleDigital', this.isPossibleDigital);
-      }
-      if (this.isPrepairationNeeded) {
-        params.append('isPrepairationNeeded', !this.isPrepairationNeeded);
-      }
-      if (this.withoutCosts) {
-        params.append('withoutCosts', this.withoutCosts);
-      }
-      if (this.isLvlOne) {
-        params.append('isLvlOne', this.isLvlOne);
-      }
-      if (this.isLvlTwo) {
-        params.append('isLvlTwo', this.isLvlTwo);
-      }
-      if (this.isLvlThree) {
-        params.append('isLvlThree', this.isLvlThree);
-      }
-      if (this.isLvlThree) {
-        params.append('isLvlThree', this.isLvlThree);
+      if (this.mandatoryFilter && this.mandatoryFilter.length) {
+        this.mandatoryFilter.forEach((filterTag) => {
+          params.append('filterTags', filterTag);
+        });
       }
       if (this.searchInput && this.searchInput !== '') {
         params.append('search', this.searchInput);
@@ -134,8 +102,6 @@ export default {
       }
       if (this.isAuthenticated) {
         params.append('isActive', this.isActive);
-      } else {
-        params.append('isActive', true);
       }
       params.append('sorter', this.sorter);
       params.append('page', 1);
