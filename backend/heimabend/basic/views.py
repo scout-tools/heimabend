@@ -1,13 +1,14 @@
 # views.py
+from django.db.models.functions import ExtractWeek, ExtractYear
+from django_filters import FilterSet, BooleanFilter, OrderingFilter, ModelMultipleChoiceFilter
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import pagination, viewsets, mixins, generics, filters
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework_tracking.mixins import LoggingMixin
+
+from .models import Tag, Event, Message, Like, TagCategory
 from .serializers import TagSerializer, EventSerializer, MessageSerializer, LikeSerializer, HighscoreSerializer, \
     TagCategorySerializer, StatisticSerializer
-from .models import Tag, Event, Message, Like, TagCategory
-from django_filters.rest_framework import DjangoFilterBackend
-from django_filters import FilterSet, BooleanFilter, OrderingFilter, ModelMultipleChoiceFilter, NumberFilter
-from django.db.models.functions import ExtractWeek, ExtractYear
 
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -48,7 +49,7 @@ class EventFilter(FilterSet):
     filterTags = ModelMultipleChoiceFilter(field_name='tags__id',
                                            to_field_name='id',
                                            queryset=Tag.objects.all(),
-                                           lookup_expr='exact', )
+                                           method='get_tags')
     isLvlOne = BooleanFilter(field_name='isLvlOne')
     isLvlTwo = BooleanFilter(field_name='isLvlTwo')
     isLvlThree = BooleanFilter(field_name='isLvlThree')
@@ -79,6 +80,19 @@ class EventFilter(FilterSet):
             if self.request.user.is_authenticated:
                 return queryset.filter(isActive=value)
         return queryset.filter(isActive=True)
+
+    def get_tags(self, queryset, field_name, value):
+        tags_category = dict()
+
+        for val in value:
+            tags_category.setdefault(str(val.category.id), []).append(val.id)
+
+        # print(tags_category)
+
+        for filter_elements in tags_category:
+            querset = queryset.filter(tags__category__in=tags_category[filter_elements])
+
+        return queryset
 
 
 class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
