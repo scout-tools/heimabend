@@ -87,10 +87,10 @@ class EventFilter(FilterSet):
         for val in value:
             tags_category.setdefault(str(val.category.id), []).append(val.id)
 
-        # print(tags_category)
+        print(tags_category)
 
         for filter_elements in tags_category:
-            querset = queryset.filter(tags__category__in=tags_category[filter_elements])
+            queryset = queryset.filter(tags__category__in=tags_category[filter_elements])
 
         return queryset
 
