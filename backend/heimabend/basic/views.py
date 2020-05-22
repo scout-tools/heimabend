@@ -1,13 +1,17 @@
 # views.py
-from rest_framework import pagination, viewsets, mixins, generics, filters
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-from rest_framework_tracking.mixins import LoggingMixin
-from .serializers import TagSerializer, EventSerializer, MessageSerializer, LikeSerializer, HighscoreSerializer, \
-    TagCategorySerializer, StatisticSerializer
-from .models import Tag, Event, Message, Like, TagCategory
-from django_filters.rest_framework import DjangoFilterBackend
-from django_filters import FilterSet, BooleanFilter, OrderingFilter, ModelMultipleChoiceFilter, NumberFilter
+import json
+
 from django.db.models.functions import ExtractWeek, ExtractYear
+from django.http import HttpResponse
+from django_filters import FilterSet, BooleanFilter, OrderingFilter, ModelMultipleChoiceFilter
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import pagination, viewsets, mixins, generics, filters
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework_tracking.mixins import LoggingMixin
+
+from .models import Tag, Event, Message, Like, TagCategory, EventImages
+from .serializers import TagSerializer, EventSerializer, MessageSerializer, LikeSerializer, HighscoreSerializer, \
+    TagCategorySerializer, StatisticSerializer, EventImageSerializer
 
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -93,6 +97,17 @@ class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
     def get_queryset(self):
         if not self.request.user.is_authenticated:
             return self.queryset.filter(isActive=True)
+
+
+class ImageViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = EventImages.objects.all()
+    serializer_class = EventImageSerializer
+
+    def post(self, request, *args, **kwargs):
+        file = request.data['file']
+        name = request.data['name']
+        image = EventImages.objects.create(image=file, name=name)
+        return HttpResponse(json.dumps({'message': "Uploaded"}), status=200)
 
 
 class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):

@@ -1,8 +1,14 @@
 # serializers.py
-from rest_framework import serializers
-from .models import Tag, Event, Message, Like, TagCategory
-from django.db.models import Sum, Count
 from django.core.cache import cache
+from django.db.models import Sum
+from rest_framework import serializers
+from .models import Tag, Event, Message, Like, TagCategory, EventImages
+
+
+class EventImageSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = EventImages
+        fields = ('name', 'image')
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
@@ -31,7 +37,6 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
 class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
     tag_category_count = serializers.SerializerMethodField()
 
-
     class Meta:
         model = TagCategory
         fields = (
@@ -43,7 +48,6 @@ class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
             'is_visible',
             'is_header',
         )
-
 
     def get_tag_category_count(self, obj):
         tag_id = 'tag_category' + str(obj.id)

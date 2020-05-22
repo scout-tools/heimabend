@@ -1,9 +1,8 @@
 # models.py
-from django.db import models
-from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator, MinLengthValidator, MaxLengthValidator
-from django.utils.translation import gettext_lazy as _
+from django.db import models
 from django.db.models import Sum
+from django.utils.translation import gettext_lazy as _
 
 
 class TagCategory(models.Model):
@@ -132,3 +131,12 @@ class Like(models.Model):
             event = Event.objects.filter(id=self.eventId.id).first()
             event.like_score = likescore
             event.save()
+
+
+def nameFile(instance, filename):
+    return '/'.join(['images', str(instance.name), filename])
+
+
+class EventImages(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to=nameFile, blank=True, null=True)
