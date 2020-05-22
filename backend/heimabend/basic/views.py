@@ -28,7 +28,7 @@ class TagCategoryViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 
 class EventPagination(pagination.PageNumberPagination):
-    page_size = 3  # the no. of company objects you want to send in one go
+    page_size = 5  # the no. of company objects you want to send in one go
 
 
 class EventFilter(FilterSet):
@@ -87,10 +87,8 @@ class EventFilter(FilterSet):
         for val in value:
             tags_category.setdefault(str(val.category.id), []).append(val.id)
 
-        print(tags_category)
-
         for filter_elements in tags_category:
-            queryset = queryset.filter(tags__category__in=tags_category[filter_elements])
+            queryset = queryset.filter(tags__id__in=tags_category[filter_elements])
 
         return queryset
 
