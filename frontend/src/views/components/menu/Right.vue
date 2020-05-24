@@ -28,7 +28,7 @@
           filter
           light
           small
-          v-for="(tag, index) in tags"
+          v-for="(tag, index) in getSideBarTags"
           :value="tag.id"
           :key="index"
           :color="tag.color">
@@ -57,9 +57,11 @@ export default {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
-    getSideBarTagCategories() {
-      if (this.tagCategory) {
-        return this.tagCategory.filter(item => item.is_header === false);
+    getSideBarTags() {
+      if (this.tags && this.tagCategory) {
+        const sideBarTagCategories = this.tagCategory.filter(item => item.is_header === false);
+        const sideBarTags = this.filterTagByCategory(sideBarTagCategories[0].id);
+        return sideBarTags;
       }
       return [];
     },

@@ -75,7 +75,6 @@ export default {
           const index = oldFilter.indexOf(difference);
           oldFilter.splice(index, 1);
           this.$store.commit('changeMandatoryFilter', oldFilter);
-          debugger;
         }
       }
       this.lastFilter = newValue;
