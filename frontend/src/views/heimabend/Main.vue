@@ -124,7 +124,7 @@ export default {
     },
 
     async getMoreItems() {
-      axios.get(this.nextPath)
+      axios.get(this.nextPath.replace(/^http:\/\//i, 'https://')) //
         .then((res) => {
           this.items = this.items.concat(res.data.results);
           this.nextPath = res.data.next;
