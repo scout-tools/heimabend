@@ -14,6 +14,7 @@ drf-api-tracking = "*"
 six = "*"
 pymysql = "*"
 django-filter = "*"
+Pillow = "*" 
 
 [requires]
 python_version = "3.7"
