@@ -1,134 +1,95 @@
 <template>
   <v-toolbar
+    v-if="!isExtended"
     fixed
-    :extension-height="extensionHeightNumber"
-    :extended="isExtended && isMobil"
   >
-    <v-spacer/>
     <template>
-        <v-tooltip
-          v-if="isMobil"
-          nudge-left="80"
-          bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              @click="onExpandClick()"
-              fab
-              v-on="on"
-              text
-            >
-              <v-icon
-              v-if="!isExtended"
-                >
-                mdi-chevron-down
-              </v-icon>
-              <v-icon
-              v-if="isExtended"
-                >
-                mdi-chevron-up
+      <h4 v-if="isMobil">
+        Filter verwalten
+      </h4>
+      <v-spacer/>
+      <v-btn v-if="isMobil" icon ml-1 @click="onClickRestore" :disabled="isFilterDefault">
+        <v-icon>
+          mdi-filter-remove
+        </v-icon>
+      </v-btn>
+      <v-tooltip
+        v-if="isMobil"
+        nudge-left="80"
+        bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            @click="onExpandClick()"
+            fab
+            v-on="on"
+            text
+          >
+            <v-icon>
+              mdi-filter-menu
+            </v-icon>
+          </v-btn>
+        </template>
+        <span>
+          Mehr Filter
+        </span>
+      </v-tooltip>
+
+      <v-container fluid class="mx-5 pa-0" v-if="!isMobil">
+        <v-row
+          align="center"
+          class="ma-0 pa-0"
+            justify="center">
+            <v-col
+              v-for="category in getTopBarTagCategories"
+              :key="category.id"
+              cols="1.5">
+              <filter-button
+                :category="category"
+              />
+            </v-col>
+            <v-col cols="1.5">
+              <sorter/>
+            </v-col>
+            <v-col cols="1.5">
+            <v-btn icon ml-1 @click="onClickRestore" :disabled="isFilterDefault">
+              <v-icon>
+                mdi-filter-remove
               </v-icon>
             </v-btn>
-          </template>
-          <span>
-            Mehr Filter
-          </span>
-        </v-tooltip>
-
-        <v-container fluid class="mx-5 pa-0" >
-          <v-row
-            align="center"
-            class="ma-0 pa-0"
-              justify="center">
-              <v-col
-                v-for="category in getTopBarTagCategories"
-                :key="category.id"
-                cols="1.5">
-                <filter-button
-                  :category="category"
-                />
-              </v-col>
-              <v-col cols="1.5">
-                <sorter/>
-              </v-col>
-              <v-col cols="1.5">
-              <v-btn icon ml-1 @click="onClickRestore" :disabled="isFilterDefault">
-                <v-icon>
-                  mdi-restore
-                </v-icon>
-              </v-btn>
+          </v-col>
+            <v-col cols="1.5" v-if="!isMobil">
             </v-col>
-              <v-col cols="1.5" v-if="!isMobil">
-              </v-col>
-          </v-row>
-        </v-container>
+        </v-row>
+      </v-container>
 
 
     </template>
-  <template
-        #extension
-        v-if="isExtended && isMobil"
-      >
-    <v-container class="pa-0" style="margin: 0px; width: 100%">
-      <v-row v-if="isExtended && isMobil">
-      <v-col cols="2">
-        <filter-button
-          :customIcon="'wolf'"
-          :customText="'WÖ'"
-          :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
-          :customTrigger="isLvlOne"
-          :customVariable="'isLvlOne'"
-          :customMutation="'setIsLvlOne'"
-        />
-      </v-col>
-      <v-col cols="2">
-        <filter-button
-          :customIcon="'scout'"
-          :customText="'Pfadi'"
-          :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
-          :customTrigger="isLvlTwo"
-          :customVariable="'isLvlTwo'"
-          :customMutation="'setIsLvlTwo'"
-        />
-      </v-col>
-      <v-col cols="2">
-        <filter-button
-          :customIcon="'rover'"
-          :customText="'Rover'"
-          :customTooltip="'Zeigt Heimabende an für die keine Kosten entstehen.'"
-          :customTrigger="isLvlThree"
-          :customVariable="'isLvlThree'"
-          :customMutation="'setIsLvlThree'"
-        />
-      </v-col>
-      <v-col cols="2">
-        <div>
-          <v-spacer/>
-        </div>
-      </v-col>
-      </v-row>
-      <v-layout wrap>
-        <div class="pa-0">
-          <v-chip-group
-            multiple
-            :column="isMobil"
-            v-model="filterTags"
-            @change="onChange()"
-          >
-            <v-chip
-              filter
-              x-small
-              v-for="(tag, index) in tags"
-              :value="tag.id"
-              :key="index"
-              :color="tag.color">
-              {{ tag.name }}
-            </v-chip>
-          </v-chip-group>
-        </div>
-      </v-layout>
-    </v-container>
-      </template>
   </v-toolbar>
+  <v-navigation-drawer absolute temporary v-model="isExtended" width="100%" right v-else>
+    <v-app-bar hide-on-scroll>
+      <v-icon @click="onExpandClick">mdi-arrow-left</v-icon>
+      <v-spacer/>
+      <v-btn icon ml-1 @click="onClickRestore" :disabled="isFilterDefault">
+        <v-icon>
+          mdi-filter-remove
+        </v-icon>
+      </v-btn>
+    </v-app-bar>
+    <v-container fluid class="mx-5 pa-0">
+      <v-row
+        v-for="category in getTopBarTagCategories"
+        :key="category.id"
+        class="ml-1 mr-10 my-5">
+        <filter-button
+          :category="category"
+        />
+      </v-row>
+      <v-row class="ml-1 mr-10 my-5">
+        <sorter/>
+      </v-row>
+    </v-container>
+    <v-btn @click="onExpandClick">Close</v-btn>
+ </v-navigation-drawer>
 </template>
 
 <script>
