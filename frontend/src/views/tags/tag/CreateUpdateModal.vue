@@ -203,7 +203,7 @@ export default {
           name: this.data.name,
           description: this.data.description,
           color: this.data.color,
-          category: this.getTagCategoryString(this.data.categoryId.id),
+          category: this.getTagCategoryString(this.data.categoryId),
           is_visible: this.data.is_visible,
         })
           .then(() => {

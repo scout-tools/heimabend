@@ -7,8 +7,17 @@
       <h4 v-if="isMobil">
         Filter verwalten
       </h4>
+      <active-filter v-if="isMobil"/>
+
       <v-spacer/>
-      <v-btn v-if="isMobil" icon ml-1 @click="onClickRestore" :disabled="isFilterDefault">
+
+      <v-btn
+        v-if="isMobil"
+        icon
+        ml-1
+        @click="onClickRestore"
+        :disabled="isFilterDefault"
+      >
         <v-icon>
           mdi-filter-remove
         </v-icon>
@@ -51,7 +60,11 @@
               <sorter/>
             </v-col>
             <v-col cols="1.5">
-            <v-btn icon ml-1 @click="onClickRestore" :disabled="isFilterDefault">
+            <v-btn
+              icon
+              ml-1
+              @click="onClickRestore"
+              :disabled="isFilterDefault">
               <v-icon>
                 mdi-filter-remove
               </v-icon>
@@ -68,6 +81,7 @@
   <v-navigation-drawer absolute temporary v-model="isExtended" width="100%" right v-else>
     <v-app-bar hide-on-scroll>
       <v-icon @click="onExpandClick">mdi-arrow-left</v-icon>
+        <active-filter v-if="isMobil"/>
       <v-spacer/>
       <v-btn icon ml-1 @click="onClickRestore" :disabled="isFilterDefault">
         <v-icon>
@@ -88,7 +102,7 @@
         <sorter/>
       </v-row>
     </v-container>
-    <v-btn @click="onExpandClick">Close</v-btn>
+    <v-btn @click="onExpandClick">Schließen</v-btn>
  </v-navigation-drawer>
 </template>
 
@@ -96,11 +110,13 @@
 import { mapGetters } from 'vuex';
 
 import FilterButton from '@/views/components/button/FilterButton.vue'; //eslint-disable-line
+import ActiveFilter from '@/views/components/button/ActiveFilter.vue'; //eslint-disable-line
 import Sorter from '@/views/components/dropdown/Sorter.vue'; //eslint-disable-line
 
 export default {
   components: {
     FilterButton,
+    ActiveFilter,
     Sorter,
   },
   data() {
@@ -117,6 +133,9 @@ export default {
     },
     onChange() {
       this.$store.commit('changeFilterTags', this.filterTags);
+    },
+    onCloseChip(value) {
+      this.$store.commit('removeOneFilter', value);
     },
   },
   watch: {
@@ -141,6 +160,7 @@ export default {
       'tagCategory',
       'isAuthenticated',
       'heimabendCounter',
+      'mandatoryFilter',
     ]),
     getTopBarTagCategories() {
       if (this.tagCategory) {
@@ -152,15 +172,7 @@ export default {
       return this.isMobil ? '350px' : '50px';
     },
     isFilterDefault() {
-      return this.isPossibleAlone === false
-        && this.isPossibleDigital === false
-        && this.isPrepairationNeeded === false
-        && this.withoutCosts === false
-        && this.searchInput === ''
-        && this.filterTags.length < 1
-        && this.isLvlOne === false
-        && this.isLvlTwo === false
-        && this.isLvlThree === false;
+      return false;
     },
     isIsActive: {
       get() {

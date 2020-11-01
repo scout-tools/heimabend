@@ -37,7 +37,7 @@ export default {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
-    getColotClass() {
+    getColorClass() {
       return this.isActiveState ? 'customer-color-activ' : 'customer-color-inactive';
     },
     ...mapGetters([
@@ -45,6 +45,13 @@ export default {
       'tagCategory',
       'mandatoryFilter',
     ]),
+  },
+  watch: {
+    mandatoryFilter(value) {
+      if (value && !value.length) {
+        this.selectedFilter = [];
+      }
+    },
   },
   methods: {
     filterTagByCategory(categoryId) {

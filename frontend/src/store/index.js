@@ -127,6 +127,21 @@ export default new Vuex.Store({
     changeMandatoryFilter(state, newTags) {
       state.mandatoryFilter = newTags;
     },
+    removeOneFilter(state, itemToRemove) {
+      const tempArray = state.mandatoryFilter;
+      const index1 = tempArray.indexOf(itemToRemove);
+      if (index1 !== -1) {
+        tempArray.splice(index1, 1);
+      }
+      state.mandatoryFilter = tempArray;
+
+      const tempArray2 = state.filterTags;
+      const index2 = tempArray2.indexOf(itemToRemove);
+      if (index2 !== -1) {
+        tempArray2.splice(index2, 1);
+      }
+      state.filterTags = tempArray2;
+    },
     setPossibleInside(state, value) {
       state.isPossibleInside = value;
     },

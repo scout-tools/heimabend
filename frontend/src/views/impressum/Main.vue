@@ -165,9 +165,9 @@ export default {
     getAgreeMent() {
       const me = this;
       // eslint-disable-next-line no-undef
-      _paq.push([function () {
+      _paq.push(() => {
         me.isAgree = !this.isUserOptedOut();
-      }]);
+      });
     },
     show() {
       this.dialog = true;

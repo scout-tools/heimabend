@@ -11,16 +11,6 @@
       v-if="!apiIsDown"
       @click="toogleDrawer()"
     />
-      <h1
-        class="title hand-cursor ml-3 mr-5"
-        v-if="!isMobil"
-        @click="onHeaderClick()"
-      >
-        Heimabend&nbsp;
-        <span class="font-weight-light">
-          Inspirator
-        </span>
-      </h1>
 
       <v-text-field
         class="px-3"
@@ -58,6 +48,11 @@
       <sub-pages-top-bar
         v-if="!isMainPage"
       />
+
+      <filter-top-sub-bar
+        v-if="isMainPage && !isMobil"
+      />
+
       <template>
         <router-view
           class="content"
@@ -94,6 +89,7 @@ import MenuLeft from './components/menu/Left.vue';
 import ApiDownBanner from './components/banner/ApiDown.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
 import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
+import FilterTopSubBar from './components/toolbar/FilterSubBar.vue';
 import Fab from './components/fab/Standard.vue';
 
 export default {
@@ -104,6 +100,7 @@ export default {
     ApiDownBanner,
     Fab,
     PricacyBanner,
+    FilterTopSubBar,
   },
   computed: {
     ...mapGetters([

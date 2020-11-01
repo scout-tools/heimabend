@@ -192,7 +192,7 @@ export default {
       }
     },
     onDeleteClick() {
-      axios.delekte(`${this.API_URL}basic/tag-category/${this.data.id}/`)
+      axios.delete(`${this.API_URL}basic/tag-category/${this.data.id}/`)
         .then(() => {
           this.dialog = false;
           this.$emit('dialogClose');

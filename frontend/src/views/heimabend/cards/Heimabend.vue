@@ -839,6 +839,6 @@ export default {
   height: 100vh !important;
 }
 .negativ-top-margin {
-  margin-top: -100px !important;
+  margin-top: -150px !important;
 }
 </style>
