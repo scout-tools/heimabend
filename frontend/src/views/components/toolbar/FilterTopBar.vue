@@ -79,7 +79,7 @@
   </v-toolbar>
   <v-navigation-drawer absolute temporary v-model="isExtended" width="100%" right v-else>
     <v-app-bar hide-on-scroll>
-      <v-icon @click="onExpandClick">mdi-arrow-left</v-icon>
+      <v-icon @click="onExpandClick" class="mr-1">mdi-arrow-left</v-icon>
         <active-filter v-if="isMobil"/>
       <v-spacer/>
       <v-btn icon ml-1 @click="onClickRestore" color="black" :disabled="isFilterDefault">

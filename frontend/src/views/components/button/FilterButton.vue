@@ -48,9 +48,8 @@ export default {
   },
   watch: {
     mandatoryFilter(value) {
-      if (value && !value.length) {
-        this.selectedFilter = [];
-      }
+      this.lastFilter = value;
+      this.selectedFilter = value;
     },
   },
   methods: {
@@ -73,6 +72,7 @@ export default {
           const difference = newValue.filter(x => !this.lastFilter.includes(x));
           const oldFilter = this.mandatoryFilter;
           oldFilter.push(difference[0]);
+          console.log('changeIF');
           this.$store.commit('changeMandatoryFilter', oldFilter);
         } else {
           // const oldFilter = this.mandatoryFilter;
@@ -81,10 +81,14 @@ export default {
           const oldFilter = this.mandatoryFilter;
           const index = oldFilter.indexOf(difference);
           oldFilter.splice(index, 1);
+          console.log('changeELSE');
           this.$store.commit('changeMandatoryFilter', oldFilter);
         }
       }
       this.lastFilter = newValue;
+      if (newValue && !newValue.length) {
+        this.selectedFilter = [];
+      }
     },
   },
   mounted() {
