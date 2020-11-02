@@ -16,6 +16,7 @@
         icon
         ml-1
         @click="onClickRestore"
+        color="black"
         :disabled="isFilterDefault"
       >
         <v-icon>
@@ -64,6 +65,7 @@
               icon
               ml-1
               @click="onClickRestore"
+              color="black"
               :disabled="isFilterDefault">
               <v-icon>
                 mdi-filter-remove
@@ -83,7 +85,7 @@
       <v-icon @click="onExpandClick">mdi-arrow-left</v-icon>
         <active-filter v-if="isMobil"/>
       <v-spacer/>
-      <v-btn icon ml-1 @click="onClickRestore" :disabled="isFilterDefault">
+      <v-btn icon ml-1 @click="onClickRestore" color="black" :disabled="isFilterDefault">
         <v-icon>
           mdi-filter-remove
         </v-icon>
@@ -164,6 +166,9 @@ export default {
     ]),
     getTopBarTagCategories() {
       if (this.tagCategory) {
+        if (this.isMobil) {
+          return this.tagCategory;
+        }
         return this.tagCategory.filter(item => item.is_header);
       }
       return [];
@@ -172,7 +177,7 @@ export default {
       return this.isMobil ? '350px' : '50px';
     },
     isFilterDefault() {
-      return false;
+      return !(this.mandatoryFilter && this.mandatoryFilter.length);
     },
     isIsActive: {
       get() {
