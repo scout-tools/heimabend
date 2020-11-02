@@ -109,6 +109,7 @@ export default {
     },
     loading: true,
     valid: true,
+    n: 0,
   }),
 
   computed: {

@@ -33,30 +33,10 @@
       </span>
     </v-row>
         <v-sheet class="pa-8">
-          <v-switch
-          v-model="data.isPossibleInside"
-          color="secondary"
-          label="Ist diese Heimabend-Idee drinnen (in einem Haus) durchführbar?">
-        </v-switch>
-        <v-switch
-          v-model="data.isPossibleOutside"
-          color="secondary"
-          label="Ist diese Heimabend-Idee draußen (im z.B. Garten oder Wald) durchführbar?">
-        </v-switch>
         <v-switch
           v-model="data.isPrepairationNeeded"
           color="secondary"
           label="Benötigt diese Heimabend-Idee Zeit zur Vorbereitung?">
-        </v-switch>
-        <v-switch
-          v-model="data.isPossibleDigital"
-          color="secondary"
-          label="Ist diese Heimabend-Idee online mit deiner Gruppe durchführbar?">
-        </v-switch>
-        <v-switch
-          v-model="data.isPossibleAlone"
-          color="secondary"
-          label="Ist diese Heimabend-Idee alleine durchführbar?">
         </v-switch>
         </v-sheet>
     </v-row>
@@ -86,16 +66,12 @@ export default {
 
   data: () => ({
     API_URL: process.env.VUE_APP_API,
-    e6: 1,
+    n: 0,
     dialog: false,
     valid: true,
     data: {
       materialArray: [],
-      isPossibleInside: true,
-      isPossibleOutside: true,
       isPrepairationNeeded: false,
-      isPossibleDigital: false,
-      isPossibleAlone: false,
     },
   }),
 
@@ -135,11 +111,7 @@ export default {
     getData() {
       return {
         material: this.data.materialArray,
-        isPossibleInside: this.data.isPossibleInside,
-        isPossibleOutside: this.data.isPossibleOutside,
         isPrepairationNeeded: this.data.isPrepairationNeeded,
-        isPossibleDigital: this.data.isPossibleDigital,
-        isPossibleAlone: this.data.isPossibleAlone,
       };
     },
   },

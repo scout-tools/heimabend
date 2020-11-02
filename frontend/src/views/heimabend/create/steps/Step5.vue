@@ -1,6 +1,6 @@
 <template>
         <v-form
-        ref="form4"
+        ref="form5"
         v-model="valid"
       >
   <v-container>
@@ -78,7 +78,7 @@ export default {
 
   data: () => ({
     API_URL: process.env.VUE_APP_API,
-    e6: 1,
+    n: 0,
     dialog: false,
     valid: true,
     showError: false,
@@ -159,7 +159,7 @@ export default {
     },
 
     finish() {
-      if (!this.$refs.form4.validate()) {
+      if (!this.$refs.form5.validate()) {
         return;
       }
       this.$emit('finish');
