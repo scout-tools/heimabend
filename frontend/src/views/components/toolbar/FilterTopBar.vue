@@ -4,9 +4,6 @@
     fixed
   >
     <template>
-      <h4 v-if="isMobil">
-        Filter verwalten
-      </h4>
       <active-filter v-if="isMobil"/>
 
       <v-spacer/>
@@ -104,7 +101,6 @@
         <sorter/>
       </v-row>
     </v-container>
-    <v-btn @click="onExpandClick">Schließen</v-btn>
  </v-navigation-drawer>
 </template>
 
