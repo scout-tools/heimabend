@@ -173,7 +173,7 @@ export default {
       return this.isMobil ? '350px' : '50px';
     },
     isFilterDefault() {
-      return !(this.mandatoryFilter && this.mandatoryFilter.length);
+      return !((this.mandatoryFilter && this.mandatoryFilter.length) || this.getFilterTags.length);
     },
     isIsActive: {
       get() {
