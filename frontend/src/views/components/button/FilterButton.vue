@@ -48,9 +48,8 @@ export default {
   },
   watch: {
     mandatoryFilter(value) {
-      if (value && !value.length) {
-        this.selectedFilter = [];
-      }
+      this.lastFilter = value;
+      this.selectedFilter = value;
     },
   },
   methods: {
