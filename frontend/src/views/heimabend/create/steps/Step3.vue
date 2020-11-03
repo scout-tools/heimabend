@@ -12,7 +12,7 @@
   <v-row class="ma-6">
     <v-select
       v-model="data.tags"
-      :items="filterTagByCategory(9)"
+      :items="getSideBarTags"
       item-value="id"
       :rules="rules.tags"
       item-text="name"
@@ -140,6 +140,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   data: () => ({
     rules: {
@@ -159,6 +161,10 @@ export default {
   }),
 
   computed: {
+    ...mapGetters([
+      'tags',
+      'tagCategory',
+    ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
@@ -192,6 +198,14 @@ export default {
     getClassForTextContentSteps() {
       return this.isMobil ? 'mx-0 px-1' : '';
     },
+    getSideBarTags() {
+      if (this.tags && this.tagCategory) {
+        const sideBarTagCategories = this.tagCategory.filter(item => item.is_header === false);
+        const sideBarTags = this.filterTagByCategory(sideBarTagCategories[0].id);
+        return sideBarTags;
+      }
+      return [];
+    },
   },
 
   mounted() {
@@ -211,6 +225,7 @@ export default {
 
 
   methods: {
+
     filterTagByCategory(categoryId) {
       return this.tags.filter(item => item.category === `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`);
     },
