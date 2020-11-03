@@ -5,9 +5,7 @@
   >
     <template>
       <active-filter v-if="isMobil"/>
-
       <v-spacer/>
-
       <v-btn
         v-if="isMobil"
         icon
@@ -20,6 +18,7 @@
           mdi-filter-remove
         </v-icon>
       </v-btn>
+
       <v-tooltip
         v-if="isMobil"
         nudge-left="80"
@@ -41,7 +40,7 @@
         </span>
       </v-tooltip>
 
-      <v-container fluid class="mx-5 pa-0" v-if="!isMobil">
+      <v-container fluid v-if="!isMobil">
         <v-row
           align="center"
           class="ma-0 pa-0"
@@ -49,28 +48,13 @@
             <v-col
               v-for="category in getTopBarTagCategories"
               :key="category.id"
-              cols="1.5">
+              cols="2">
               <filter-button
                 :category="category"
               />
             </v-col>
-            <v-col cols="1.5">
-              <sorter/>
-            </v-col>
-            <v-col cols="1.5">
-            <v-btn
-              icon
-              ml-1
-              @click="onClickRestore"
-              color="black"
-              :disabled="isFilterDefault">
-              <v-icon>
-                mdi-filter-remove
-              </v-icon>
-            </v-btn>
-          </v-col>
-            <v-col cols="1.5" v-if="!isMobil">
-            </v-col>
+
+            <v-col cols="2" v-if="!isMobil"></v-col>
         </v-row>
       </v-container>
 

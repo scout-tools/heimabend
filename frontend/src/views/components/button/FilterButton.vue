@@ -3,7 +3,7 @@
     <v-select
       v-model="selectedFilter"
       :items="filterTagByCategory(category.id)"
-      :label="category.name"
+      :label="`Wähle ${category.name}`"
       item-value="id"
       item-text="name"
       multiple
@@ -13,6 +13,17 @@
       outlined
       @change="onFilterChanged"
     >
+      <template v-slot:selection="{ item, index }">
+        <v-chip v-if="index === 0" :color="item.color" small>
+          <span>{{ item.name }}</span>
+        </v-chip>
+        <span
+          v-if="index === 1"
+          class="grey--text caption"
+        >
+          (+ ...)
+        </span>
+      </template>
     </v-select>
   </v-container>
 </template>

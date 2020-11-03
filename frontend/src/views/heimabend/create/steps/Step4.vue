@@ -17,7 +17,7 @@
             item-value="id"
             item-text="name"
             chips
-            :rules="rules.tags"
+            :rules="getRulesByCategory(category)"
             deletable-chips
             multiple
             dense
@@ -25,6 +25,17 @@
             single-line
             outlined
           >
+            <template v-slot:selection="{ item, index }">
+              <v-chip v-if="index < 3" :color="item.color" small>
+                <span>{{ item.name }}</span>
+              </v-chip>
+              <span
+                v-if="index === 3"
+                class="grey--text caption"
+              >
+                (+ ...)
+              </span>
+            </template>
           </v-select>
         </v-container>
       </v-row>
@@ -55,7 +66,7 @@ export default {
   data: () => ({
     rules: {
       tags: [
-        v => (v && v.length > 0) || 'Mindestens ein Thema ist erforderlich',
+        v => (v && v.length > 5) || 'Mindestens ein Thema ist erforderlich',
       ],
     },
     data: {
@@ -108,6 +119,12 @@ export default {
 
 
   methods: {
+    getRulesByCategory(category) {
+      if (category.name !== 'Spezial') {
+        return this.rules.tags;
+      }
+      return [];
+    },
     filterTagByCategory(categoryId) {
       return this.tags.filter(item => item.category === `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`);
     },

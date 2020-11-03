@@ -181,7 +181,7 @@ export default {
       const dataStep5 = this.$refs.step5.getData();
       if (this.isCreate) {
         axios.post(`${this.API_URL}basic/event/`, {
-          title: dataStep1.title,
+          title: dataStep2.title,
           description: dataStep1.description,
           tags: this.getUrlTagList(dataStep3.tags.concat(dataStep4.selectedMandatoryFilter)),
           material: this.convertMaterialArray(dataStep2.material),
@@ -202,7 +202,7 @@ export default {
       } else if (this.isUpdate) {
         axios.put(`${this.API_URL}basic/event/${this.getId}/`, {
           id: this.data.id,
-          title: dataStep1.title,
+          title: dataStep2.title,
           description: dataStep1.description,
           tags: this.getUrlTagList(dataStep3.tags.concat(dataStep4.selectedMandatoryFilter)),
           material: this.convertMaterialArray(dataStep2.material),

@@ -4,6 +4,24 @@
     v-model="valid"
   >
   <v-container>
+    <v-row class="mt-6 ml-2">
+      <span class="subtitle-1">
+        Gib eine passende Überschrift für deine Heimabend-Idee ein.
+      </span>
+    </v-row>
+    <v-row class="ma-4">
+      <v-text-field
+        outlined
+        autofocus
+        :counter="40"
+        :rules="rules.title"
+        label="Überschrift"
+        v-model="data.title"
+        required>
+      </v-text-field>
+    </v-row>
+
+    <v-divider class="my-2"/>
     <v-row class="mt-6 ml-4">
       <span class="subtitle-1">
         Füge hier alle Materialien hinzu. Bestätige jedes Objekt mit "Enter".
@@ -70,8 +88,16 @@ export default {
     dialog: false,
     valid: true,
     data: {
+      title: '',
       materialArray: [],
       isPrepairationNeeded: false,
+    },
+    rules: {
+      title: [
+        v => !!v || 'Überschrift ist erforderlich.',
+        v => (v && v.length >= 10) || 'Die Überschrift ist zu kurz.',
+        v => (v && v.length <= 40) || 'Die Überschtift ist zu lang.',
+      ],
     },
   }),
 
@@ -110,6 +136,7 @@ export default {
     },
     getData() {
       return {
+        title: this.data.title,
         material: this.data.materialArray,
         isPrepairationNeeded: this.data.isPrepairationNeeded,
       };

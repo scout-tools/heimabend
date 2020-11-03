@@ -4,7 +4,6 @@
   <div>
     <heimabend-card
       ref="eventCards"
-      v-if="items.length"
       @refresh="refresh()"
       @loadMore="loadMore()"
       :items="items"

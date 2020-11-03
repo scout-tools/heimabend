@@ -22,7 +22,19 @@
       no-data-text="Wähle aus der Liste Themen aus."
       multiple
       outlined
-    ></v-select>
+    >
+      <template v-slot:selection="{ item, index }">
+        <v-chip v-if="index < 3" :color="item.color" small>
+          <span>{{ item.name }}</span>
+        </v-chip>
+        <span
+          v-if="index === 3"
+          class="grey--text caption"
+        >
+          (+ ...)
+        </span>
+      </template>
+    </v-select>
   </v-row>
   <v-divider class="my-2"/>
   <v-row class="mt-6 ml-4">
