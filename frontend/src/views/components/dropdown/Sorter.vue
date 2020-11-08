@@ -53,22 +53,22 @@ export default {
     return {
       items: [
         {
-          id: 'newest',
+          id: '-createdAt',
           text: 'Neuste Zuerst',
           icon: 'mdi-timer',
         },
         {
-          id: 'rating',
+          id: '-like_score',
           text: 'Beste Bewertung',
           icon: 'mdi-star-face',
         },
+        // {
+        //   id: 'random',
+        //   text: 'Zufällige Sortierung',
+        //   icon: 'mdi-dice-multiple-outline',
+        // },
         {
-          id: 'random',
-          text: 'Zufällige Sortierung',
-          icon: 'mdi-dice-multiple-outline',
-        },
-        {
-          id: 'alpha',
+          id: 'title',
           text: 'Titel A-Z',
           icon: 'mdi-sort-descending',
         },

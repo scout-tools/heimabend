@@ -17,7 +17,7 @@ export default new Vuex.Store({
     isPrepairationNeeded: false,
     withoutCosts: false,
     isActive: true,
-    sorter: 'random',
+    sorter: '-createdAt',
     isLvlOne: false,
     isLvlTwo: false,
     isLvlThree: false,

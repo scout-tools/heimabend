@@ -5,10 +5,10 @@
       ma-3
       lg7
     >
-    <div class="display-3">
+    <div class="display-2">
       Unsere Idee
     </div>
-      <v-card class="ma-10 pa-10">
+      <v-card class="ma-4 pa-4">
         <div class="pa-3 display-1">
           <u>
             Warum?
@@ -38,7 +38,7 @@
 
       </v-card>
 
-      <v-card class="ma-10 pa-10">
+      <v-card class="ma-4 pa-4">
         <div class="pa-3 display-1">
           <u>
             Die Idee
@@ -69,7 +69,7 @@
 
       </v-card>
 
-      <v-card class="ma-10 pa-10">
+      <v-card class="ma-4 pa-4">
         <div class="pa-3 display-1">
           <u>
             Kann ich mitmachen?
@@ -88,7 +88,7 @@
         </div>
       </v-card>
 
-      <v-card class="ma-10 pa-10">
+      <v-card class="ma-4 pa-4">
         <div class="pa-3 display-1">
           <u>
             Kontakt
@@ -128,7 +128,7 @@
 
       </v-card>
 
-      <v-card class="ma-10 pa-10">
+      <v-card class="ma-4 pa-4">
         <div class="pa-3 display-1">
           <u>
             Open Source

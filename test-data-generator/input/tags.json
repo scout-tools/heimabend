@@ -1,0 +1,407 @@
+[
+    {
+        "id": 9,
+        "name": "1. Hilfe",
+        "tag_count": 4,
+        "description": "",
+        "color": "#FFCFA4",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 49,
+        "name": "Alleine",
+        "tag_count": 0,
+        "description": "",
+        "color": "#F1CE8D",
+        "category": "https://api.myhagemann.de/basic/tag-category/5/",
+        "is_visible": true
+    },
+    {
+        "id": 2,
+        "name": "Backen",
+        "tag_count": 8,
+        "description": "",
+        "color": "#FFBBBB",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 34,
+        "name": "Basteln",
+        "tag_count": 30,
+        "description": "",
+        "color": "#7FA8D1",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 24,
+        "name": "Baum",
+        "tag_count": 8,
+        "description": "",
+        "color": "#D5AAFF",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 40,
+        "name": "Bewegung",
+        "tag_count": 8,
+        "description": "",
+        "color": "#F7DF4C",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 47,
+        "name": "Draußen",
+        "tag_count": 0,
+        "description": "",
+        "color": "#7EA7C9",
+        "category": "https://api.myhagemann.de/basic/tag-category/2/",
+        "is_visible": true
+    },
+    {
+        "id": 46,
+        "name": "Drinnen",
+        "tag_count": 1,
+        "description": "",
+        "color": "#B7DA7E",
+        "category": "https://api.myhagemann.de/basic/tag-category/2/",
+        "is_visible": true
+    },
+    {
+        "id": 10,
+        "name": "Feuer machen",
+        "tag_count": 5,
+        "description": "",
+        "color": "#F1F1B1",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 38,
+        "name": "Forschen",
+        "tag_count": 15,
+        "description": "",
+        "color": "#E27D79",
+        "category": "https://api.myhagemann.de/basic/tag-category/4/",
+        "is_visible": true
+    },
+    {
+        "id": 44,
+        "name": "Frühling",
+        "tag_count": 2,
+        "description": "Dieser Heimabend ist nur im Frühling durchführbar",
+        "color": "#65B65F",
+        "category": "https://api.myhagemann.de/basic/tag-category/1/",
+        "is_visible": false
+    },
+    {
+        "id": 35,
+        "name": "Geschichten",
+        "tag_count": 7,
+        "description": "",
+        "color": "#E7AE56",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 23,
+        "name": "Haik",
+        "tag_count": 13,
+        "description": "",
+        "color": "#E994AB",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 30,
+        "name": "Handwerkliches",
+        "tag_count": 26,
+        "description": "Alles was mit den Händen und Werkzeug herstellt wird.",
+        "color": "#64C0CF",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 43,
+        "name": "Herbst",
+        "tag_count": 5,
+        "description": "Dieser Heimabend ist nur im Herbst durchführbar.",
+        "color": "#DF9252",
+        "category": "https://api.myhagemann.de/basic/tag-category/1/",
+        "is_visible": false
+    },
+    {
+        "id": 58,
+        "name": "Karneval",
+        "tag_count": 1,
+        "description": "",
+        "color": "#DE80A9",
+        "category": "https://api.myhagemann.de/basic/tag-category/5/",
+        "is_visible": true
+    },
+    {
+        "id": 12,
+        "name": "Karte Kompass",
+        "tag_count": 9,
+        "description": "",
+        "color": "#F4CAD6",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 13,
+        "name": "Kim-Spiele",
+        "tag_count": 6,
+        "description": "",
+        "color": "#C6C6FF",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 16,
+        "name": "Knoten",
+        "tag_count": 3,
+        "description": "",
+        "color": "#B4D1B6",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 41,
+        "name": "Kreatives",
+        "tag_count": 16,
+        "description": "",
+        "color": "#9AF3B9",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 17,
+        "name": "Küche",
+        "tag_count": 10,
+        "description": "",
+        "color": "#B5FFFC",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 54,
+        "name": "Mit Abstand",
+        "tag_count": 0,
+        "description": "",
+        "color": "#946FDE",
+        "category": "https://api.myhagemann.de/basic/tag-category/5/",
+        "is_visible": true
+    },
+    {
+        "id": 20,
+        "name": "Musisches",
+        "tag_count": 6,
+        "description": "",
+        "color": "#FFC895",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 32,
+        "name": "Nachhaltigkeit",
+        "tag_count": 14,
+        "description": "",
+        "color": "#9DCF90",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 55,
+        "name": "Ostern",
+        "tag_count": 1,
+        "description": "",
+        "color": "#80BBE0",
+        "category": "https://api.myhagemann.de/basic/tag-category/5/",
+        "is_visible": true
+    },
+    {
+        "id": 7,
+        "name": "Pfa. Geschichte",
+        "tag_count": 6,
+        "description": "",
+        "color": "#A3FEBA",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 51,
+        "name": "Pfadfinder",
+        "tag_count": 0,
+        "description": "",
+        "color": "#88ADE0",
+        "category": "https://api.myhagemann.de/basic/tag-category/3/",
+        "is_visible": true
+    },
+    {
+        "id": 37,
+        "name": "Pflanzen",
+        "tag_count": 9,
+        "description": "",
+        "color": "#5ECE65",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 52,
+        "name": "Rover",
+        "tag_count": 1,
+        "description": "",
+        "color": "#DC8484",
+        "category": "https://api.myhagemann.de/basic/tag-category/3/",
+        "is_visible": true
+    },
+    {
+        "id": 1,
+        "name": "Schnitzen",
+        "tag_count": 4,
+        "description": "",
+        "color": "#C0FF97",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 19,
+        "name": "Schwarzzelte",
+        "tag_count": 4,
+        "description": "",
+        "color": "#DDCEFF",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 42,
+        "name": "Sommer",
+        "tag_count": 1,
+        "description": "Dieser Heimabend ist im Sommer durchführbar.",
+        "color": "#FFC100",
+        "category": "https://api.myhagemann.de/basic/tag-category/1/",
+        "is_visible": true
+    },
+    {
+        "id": 31,
+        "name": "Spiele",
+        "tag_count": 29,
+        "description": "Alles zum Thema Spielen",
+        "color": "#B0E462",
+        "category": "https://api.myhagemann.de/basic/tag-category/4/",
+        "is_visible": true
+    },
+    {
+        "id": 29,
+        "name": "Sternenkunde",
+        "tag_count": 5,
+        "description": "Alles was mit Planeten und Sternen zu tun hat.",
+        "color": "#EED071",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 15,
+        "name": "Symbolik",
+        "tag_count": 5,
+        "description": "",
+        "color": "#DCEDEA",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 8,
+        "name": "Unser Bund",
+        "tag_count": 6,
+        "description": "",
+        "color": "#FFFFB5",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 4,
+        "name": "Unsere Erde",
+        "tag_count": 6,
+        "description": "",
+        "color": "#BBEBFF",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 36,
+        "name": "Unsere Sippe",
+        "tag_count": 14,
+        "description": "",
+        "color": "#F0E275",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 11,
+        "name": "Versprechen",
+        "tag_count": 3,
+        "description": "",
+        "color": "#DEB19E",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 48,
+        "name": "Videokonferenz",
+        "tag_count": 0,
+        "description": "",
+        "color": "#87C879",
+        "category": "https://api.myhagemann.de/basic/tag-category/5/",
+        "is_visible": true
+    },
+    {
+        "id": 33,
+        "name": "Wasser",
+        "tag_count": 4,
+        "description": "",
+        "color": "#98A6FF",
+        "category": "https://api.myhagemann.de/basic/tag-category/9/",
+        "is_visible": true
+    },
+    {
+        "id": 56,
+        "name": "Weihnachten",
+        "tag_count": 0,
+        "description": "",
+        "color": "#E58383",
+        "category": "https://api.myhagemann.de/basic/tag-category/5/",
+        "is_visible": true
+    },
+    {
+        "id": 45,
+        "name": "Winter",
+        "tag_count": 0,
+        "description": "Dieser Heimabend ist nur Winter durchführbar",
+        "color": "#5374DB",
+        "category": "https://api.myhagemann.de/basic/tag-category/1/",
+        "is_visible": true
+    },
+    {
+        "id": 53,
+        "name": "Wissen",
+        "tag_count": 0,
+        "description": "",
+        "color": "#9FF7DB",
+        "category": "https://api.myhagemann.de/basic/tag-category/4/",
+        "is_visible": true
+    },
+    {
+        "id": 50,
+        "name": "Wölflinge",
+        "tag_count": 1,
+        "description": "",
+        "color": "#F1F790",
+        "category": "https://api.myhagemann.de/basic/tag-category/3/",
+        "is_visible": true
+    }
+]

@@ -5,7 +5,7 @@
       ma-3
       lg7
     >
-    <div class="display-3 mb-10">
+    <div class="display-2 mb-4">
       Fragen/Antworten
     </div>
     <v-expansion-panels>
@@ -17,7 +17,7 @@
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <p
-            class="text-left subtitle-1 pa-5"
+            class="text-left subtitle-1 pa-3"
             v-html="faq.answer">
           </p>
         </v-expansion-panel-content>

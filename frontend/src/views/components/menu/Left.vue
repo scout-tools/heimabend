@@ -36,10 +36,6 @@
               </v-list-item>
             </v-card>
           </v-row>
-      <v-subheader v-if="!isAuthenticated">Sortierung</v-subheader>
-
-      <v-divider/>
-      <v-spacer dark class="my-6"/>
     <v-subheader>Daten</v-subheader>
       <v-divider></v-divider>
           <v-list-item link bottom :to="{ name: 'ranking-overview' }">

@@ -2,11 +2,11 @@
 <v-container>
   <v-row justify="center">
     <v-flex ma-3 lg7>
-      <div class="display-3">
+      <div class="display-2">
         Impressum / Datenschutz
       </div>
 
-      <v-card class="ma-10 pa-10">
+      <v-card class="ma-4 pa-4">
         <div>
           <div class="ma-12">
             <h2 class="py-5">
@@ -138,7 +138,7 @@
           </div>
         </div>
       </v-card>
-      <v-card class="ma-10 pa-10">
+      <v-card class="ma-4 pa-4">
           <h2 class="py-5">
             Cookies widerrufen
           </h2>

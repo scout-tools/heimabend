@@ -7,17 +7,7 @@
     :class="yourHeimabendSpan()">
     dein Heimabend.
   </h2>
-  <div
-    v-infinite-scroll="loadMore"
-    spinner="spiral"
-    infinite-scroll-disabled="loading"
-    infinite-scroll-distance="900"
-    infinite-scroll-throttle-delay="1000"
-  >
-      <!-- data-aos="zoom-in"
-      data-aos-duration="800"
-      data-aos-delay="0"
-      data-aos-anchor-placement="top-bottom" -->
+  <div>
     <v-card
       :max-width="getMaxWidth()"
       elevation=30
@@ -563,6 +553,16 @@ export default {
     Fab,
   },
   methods: {
+
+    scroll() {
+      window.onscroll = () => {
+        const bottomOfWindow = document.documentElement.scrollTop
+          + window.innerHeight + 1000 > document.documentElement.offsetHeight;
+        if (bottomOfWindow) {
+          this.loadMore();
+        }
+      };
+    },
     loadMore() {
       this.$emit('loadMore');
     },
@@ -756,6 +756,7 @@ export default {
   },
   mounted() {
     this.scrollToId();
+    this.scroll();
   },
   computed: {
     ...mapGetters([
@@ -803,7 +804,7 @@ export default {
     max-height: 500px;
   }
   .test-color {
-    background-color: rgba(255, 254, 254, 0.952) !important;
+    background-color: rgba(121, 121, 121, 0.068) !important;
   }
   .test-color-text {
     color: rgba(0, 0, 0, 0.829)
@@ -826,7 +827,6 @@ export default {
   .headerIsDesktop {
     font-size: 3.5rem !important;
     letter-spacing: 0.4em;
-    color: rgba(255, 255, 255, 0.692);
   }
   .max-width-class {
     max-width: 100% !important;

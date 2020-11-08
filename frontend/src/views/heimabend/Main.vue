@@ -102,7 +102,7 @@ export default {
       if (this.isAuthenticated) {
         params.append('isActive', this.isActive);
       }
-      params.append('sorter', this.sorter);
+      params.append('ordering', this.sorter);
       params.append('page', 1);
       return params;
     },
@@ -208,7 +208,7 @@ export default {
 
   data: () => ({
     API_URL: process.env.VUE_APP_API,
-    items: {},
+    items: [],
     loading: true,
     nextPath: null,
     isLoadingMore: false,
@@ -223,18 +223,7 @@ export default {
   .test-color {
     background-color: rgba(255, 254, 254, 0.952) !important;
   }
-  .whiteText {
+    .whiteText {
     color: white !important;
-  }
-.bg {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: url( 'back-2.jpg') no-repeat center center;
-    background-size: 2000px 1300px;
-    background-attachment: fixed;
-    z-index: -1;
   }
 </style>

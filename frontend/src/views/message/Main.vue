@@ -109,13 +109,13 @@ export default {
   computed: {
     cardClass() {
       if (!this.isMobil) {
-        return 'ma-10 pa-10';
+        return 'ma-4 pa-4';
       }
       return 'ma-2 pa-2';
     },
     divClass() {
       if (!this.isMobil) {
-        return 'display-3 mb-10';
+        return 'display-2 mb-4';
       }
       return 'display-1 ma-2';
     },

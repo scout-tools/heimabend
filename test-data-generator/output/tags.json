@@ -1,0 +1,497 @@
+[
+    {
+        "model": "basic.tag",
+        "pk": 1,
+        "fields": {
+            "id": 9,
+            "name": "1. Hilfe",
+            "description": "",
+            "color": "#FFCFA4",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 2,
+        "fields": {
+            "id": 49,
+            "name": "Alleine",
+            "description": "",
+            "color": "#F1CE8D",
+            "category_id": 5
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 3,
+        "fields": {
+            "id": 2,
+            "name": "Backen",
+            "description": "",
+            "color": "#FFBBBB",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 4,
+        "fields": {
+            "id": 34,
+            "name": "Basteln",
+            "description": "",
+            "color": "#7FA8D1",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 5,
+        "fields": {
+            "id": 24,
+            "name": "Baum",
+            "description": "",
+            "color": "#D5AAFF",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 6,
+        "fields": {
+            "id": 40,
+            "name": "Bewegung",
+            "description": "",
+            "color": "#F7DF4C",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 7,
+        "fields": {
+            "id": 47,
+            "name": "Drau\u00dfen",
+            "description": "",
+            "color": "#7EA7C9",
+            "category_id": 2
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 8,
+        "fields": {
+            "id": 46,
+            "name": "Drinnen",
+            "description": "",
+            "color": "#B7DA7E",
+            "category_id": 2
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 9,
+        "fields": {
+            "id": 10,
+            "name": "Feuer machen",
+            "description": "",
+            "color": "#F1F1B1",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 10,
+        "fields": {
+            "id": 38,
+            "name": "Forschen",
+            "description": "",
+            "color": "#E27D79",
+            "category_id": 4
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 11,
+        "fields": {
+            "id": 44,
+            "name": "Fr\u00fchling",
+            "description": "Dieser Heimabend ist nur im Fr\u00fchling durchf\u00fchrbar",
+            "color": "#65B65F",
+            "category_id": 1
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 12,
+        "fields": {
+            "id": 35,
+            "name": "Geschichten",
+            "description": "",
+            "color": "#E7AE56",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 13,
+        "fields": {
+            "id": 23,
+            "name": "Haik",
+            "description": "",
+            "color": "#E994AB",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 14,
+        "fields": {
+            "id": 30,
+            "name": "Handwerkliches",
+            "description": "Alles was mit den H\u00e4nden und Werkzeug herstellt wird.",
+            "color": "#64C0CF",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 15,
+        "fields": {
+            "id": 43,
+            "name": "Herbst",
+            "description": "Dieser Heimabend ist nur im Herbst durchf\u00fchrbar.",
+            "color": "#DF9252",
+            "category_id": 1
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 16,
+        "fields": {
+            "id": 58,
+            "name": "Karneval",
+            "description": "",
+            "color": "#DE80A9",
+            "category_id": 5
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 17,
+        "fields": {
+            "id": 12,
+            "name": "Karte Kompass",
+            "description": "",
+            "color": "#F4CAD6",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 18,
+        "fields": {
+            "id": 13,
+            "name": "Kim-Spiele",
+            "description": "",
+            "color": "#C6C6FF",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 19,
+        "fields": {
+            "id": 16,
+            "name": "Knoten",
+            "description": "",
+            "color": "#B4D1B6",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 20,
+        "fields": {
+            "id": 41,
+            "name": "Kreatives",
+            "description": "",
+            "color": "#9AF3B9",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 21,
+        "fields": {
+            "id": 17,
+            "name": "K\u00fcche",
+            "description": "",
+            "color": "#B5FFFC",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 22,
+        "fields": {
+            "id": 54,
+            "name": "Mit Abstand",
+            "description": "",
+            "color": "#946FDE",
+            "category_id": 5
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 23,
+        "fields": {
+            "id": 20,
+            "name": "Musisches",
+            "description": "",
+            "color": "#FFC895",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 24,
+        "fields": {
+            "id": 32,
+            "name": "Nachhaltigkeit",
+            "description": "",
+            "color": "#9DCF90",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 25,
+        "fields": {
+            "id": 55,
+            "name": "Ostern",
+            "description": "",
+            "color": "#80BBE0",
+            "category_id": 5
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 26,
+        "fields": {
+            "id": 7,
+            "name": "Pfa. Geschichte",
+            "description": "",
+            "color": "#A3FEBA",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 27,
+        "fields": {
+            "id": 51,
+            "name": "Pfadfinder",
+            "description": "",
+            "color": "#88ADE0",
+            "category_id": 3
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 28,
+        "fields": {
+            "id": 37,
+            "name": "Pflanzen",
+            "description": "",
+            "color": "#5ECE65",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 29,
+        "fields": {
+            "id": 52,
+            "name": "Rover",
+            "description": "",
+            "color": "#DC8484",
+            "category_id": 3
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 30,
+        "fields": {
+            "id": 1,
+            "name": "Schnitzen",
+            "description": "",
+            "color": "#C0FF97",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 31,
+        "fields": {
+            "id": 19,
+            "name": "Schwarzzelte",
+            "description": "",
+            "color": "#DDCEFF",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 32,
+        "fields": {
+            "id": 42,
+            "name": "Sommer",
+            "description": "Dieser Heimabend ist im Sommer durchf\u00fchrbar.",
+            "color": "#FFC100",
+            "category_id": 1
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 33,
+        "fields": {
+            "id": 31,
+            "name": "Spiele",
+            "description": "Alles zum Thema Spielen",
+            "color": "#B0E462",
+            "category_id": 4
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 34,
+        "fields": {
+            "id": 29,
+            "name": "Sternenkunde",
+            "description": "Alles was mit Planeten und Sternen zu tun hat.",
+            "color": "#EED071",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 35,
+        "fields": {
+            "id": 15,
+            "name": "Symbolik",
+            "description": "",
+            "color": "#DCEDEA",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 36,
+        "fields": {
+            "id": 8,
+            "name": "Unser Bund",
+            "description": "",
+            "color": "#FFFFB5",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 37,
+        "fields": {
+            "id": 4,
+            "name": "Unsere Erde",
+            "description": "",
+            "color": "#BBEBFF",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 38,
+        "fields": {
+            "id": 36,
+            "name": "Unsere Sippe",
+            "description": "",
+            "color": "#F0E275",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 39,
+        "fields": {
+            "id": 11,
+            "name": "Versprechen",
+            "description": "",
+            "color": "#DEB19E",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 40,
+        "fields": {
+            "id": 48,
+            "name": "Videokonferenz",
+            "description": "",
+            "color": "#87C879",
+            "category_id": 5
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 41,
+        "fields": {
+            "id": 33,
+            "name": "Wasser",
+            "description": "",
+            "color": "#98A6FF",
+            "category_id": 9
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 42,
+        "fields": {
+            "id": 56,
+            "name": "Weihnachten",
+            "description": "",
+            "color": "#E58383",
+            "category_id": 5
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 43,
+        "fields": {
+            "id": 45,
+            "name": "Winter",
+            "description": "Dieser Heimabend ist nur Winter durchf\u00fchrbar",
+            "color": "#5374DB",
+            "category_id": 1
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 44,
+        "fields": {
+            "id": 53,
+            "name": "Wissen",
+            "description": "",
+            "color": "#9FF7DB",
+            "category_id": 4
+        }
+    },
+    {
+        "model": "basic.tag",
+        "pk": 45,
+        "fields": {
+            "id": 50,
+            "name": "W\u00f6lflinge",
+            "description": "",
+            "color": "#F1F790",
+            "category_id": 3
+        }
+    }
+]

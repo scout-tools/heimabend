@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueLodash from 'vue-lodash';
 import lodash from 'lodash';
-// import VueMeta from 'vue-meta';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faAt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -9,8 +8,6 @@ import {
   faWhatsapp, faTelegram, faPinterest, faFacebook,
 } from '@fortawesome/free-brands-svg-icons';
 import VueGoogleCharts from 'vue-google-charts';
-// import VueFullPage from 'vue-fullpage.js';
-import infiniteScroll from 'vue-infinite-scroll';
 import VueMatomo from 'vue-matomo';
 
 import AOS from 'aos';
@@ -45,7 +42,6 @@ new Vue({
 }).$mount('#app');
 
 
-Vue.use(infiniteScroll);
 Vue.use(SocialSharing);
 Vue.use(VueGoogleCharts);
 Vue.use(VueLodash,

@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "name": "Jahreszeit",
+        "description": "Beinhaltet die 4 Jahreszeiten",
+        "ordered_id": 2,
+        "tag_category_count": 4,
+        "is_visible": true,
+        "is_header": true
+    },
+    {
+        "id": 2,
+        "name": "Ort",
+        "description": "",
+        "ordered_id": 1,
+        "tag_category_count": 2,
+        "is_visible": true,
+        "is_header": true
+    },
+    {
+        "id": 3,
+        "name": "Stufe",
+        "description": "",
+        "ordered_id": 3,
+        "tag_category_count": 4,
+        "is_visible": true,
+        "is_header": true
+    },
+    {
+        "id": 4,
+        "name": "Typ",
+        "description": "",
+        "ordered_id": 4,
+        "tag_category_count": 3,
+        "is_visible": true,
+        "is_header": true
+    },
+    {
+        "id": 5,
+        "name": "Saison/Zusätze",
+        "description": "",
+        "ordered_id": 5,
+        "tag_category_count": 7,
+        "is_visible": true,
+        "is_header": true
+    },
+    {
+        "id": 9,
+        "name": "Probenordnung",
+        "description": "",
+        "ordered_id": 99,
+        "tag_category_count": 27,
+        "is_visible": true,
+        "is_header": false
+    }
+]

@@ -27,8 +27,7 @@
         Füge hier alle Materialien hinzu. Bestätige jedes Objekt mit "Enter".
       </span>
     </v-row>
-    <v-row>
-      <v-col class="pa-10" cols="12">
+    <v-row class="ma-4">
         <v-combobox
           outlined
           autofocus
@@ -38,25 +37,6 @@
           required
           chips
         ></v-combobox>
-      </v-col>
-    </v-row>
-
-    <v-divider class="my-2"/>
-
-    <v-row no-gutters>
-
-    <v-row class="mt-6 ml-4">
-      <span class="subtitle-1">
-        Beantworte jede Frage für deinen Heimabend.
-      </span>
-    </v-row>
-        <v-sheet class="pa-8">
-        <v-switch
-          v-model="data.isPrepairationNeeded"
-          color="secondary"
-          label="Benötigt diese Heimabend-Idee Zeit zur Vorbereitung?">
-        </v-switch>
-        </v-sheet>
     </v-row>
 
     <v-row class="ma-3" justify="center">

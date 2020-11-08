@@ -22,7 +22,7 @@
             </v-icon>
           </v-btn>
         </v-col>
-        <v-col cols="2" class="pr-5">
+        <v-col cols="2" class="pr-5 pl-2">
           <sorter/>
         </v-col>
         <v-col cols="2" v-if="!isMobil"></v-col>

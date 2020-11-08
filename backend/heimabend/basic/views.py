@@ -39,12 +39,6 @@ class EventFilter(FilterSet):
     isPrepairationNeeded = BooleanFilter(field_name='isPrepairationNeeded')
     isActive = BooleanFilter(field_name='isActive', method='get_isActive')
     withoutCosts = BooleanFilter(method='get_CostRating', field_name='costsRating')
-    sorter = OrderingFilter(fields=(
-        ('-createdAt', 'newest'),
-        ('?', 'random'),
-        ('title', 'alpha'),
-        ('-like_score', 'rating'),
-    ))
 
     filterTags = ModelMultipleChoiceFilter(field_name='tags__id',
                                            to_field_name='id',
@@ -63,7 +57,6 @@ class EventFilter(FilterSet):
                   'isPrepairationNeeded',
                   'isActive',
                   'withoutCosts',
-                  'sorter',
                   'filterTags',
                   'isLvlOne',
                   'isLvlTwo',
@@ -99,6 +92,7 @@ class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filterset_class = EventFilter
     ordering = ['-createdAt']
+    ordering_fields = ['-createdAt', 'title', '-like_score']
     search_fields = ['title', 'description', 'material']
     pagination_class = EventPagination
 

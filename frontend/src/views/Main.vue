@@ -38,7 +38,7 @@
       ref="mainMenuLeft"
     />
 
-    <v-content
+    <v-main
       id="lateral"
     >
       <topbar
@@ -65,7 +65,7 @@
     <api-down-banner
       v-if="apiIsDown"
     />
-    </v-content>
+    </v-main>
     <pricacy-banner
       v-if="!acceptedPrivacy"
     />

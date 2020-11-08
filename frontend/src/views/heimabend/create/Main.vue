@@ -73,6 +73,16 @@
           <step-five
             ref="step5"
             @prevStep="prevStep()"
+            @nextStep="nextStep()"
+          />
+        </v-stepper-content>
+
+        <v-stepper-content
+          step="6"
+        >
+          <step-six
+            ref="step6"
+            @prevStep="prevStep()"
             @finish="finish()"
           />
         </v-stepper-content>
@@ -110,6 +120,7 @@ import StepTwo from './steps/Step2.vue';
 import StepThree from './steps/Step3.vue';
 import StepFour from './steps/Step4.vue';
 import StepFive from './steps/Step5.vue';
+import StepSix from './steps/Step6.vue';
 
 
 export default {
@@ -119,20 +130,22 @@ export default {
     StepThree,
     StepFour,
     StepFive,
+    StepSix,
   },
   data() {
     return {
       API_URL: process.env.VUE_APP_API,
       currentStep: 1,
-      steps: 5,
+      steps: 6,
       showError: false,
       showSuccess: false,
       timeout: 7000,
       headerStep: [
-        'Beschreibung',
-        'Eigenschaften',
-        'Themenauswahl',
-        'Pflichtthemen',
+        'Hauptext',
+        'Weitere Texte',
+        'Werte',
+        'Proben',
+        'Kategorien',
         'Abschluss',
       ],
       data: [],
@@ -179,18 +192,19 @@ export default {
       const dataStep3 = this.$refs.step3.getData();
       const dataStep4 = this.$refs.step4.getData();
       const dataStep5 = this.$refs.step5.getData();
+      const dataStep6 = this.$refs.step6.getData();
       if (this.isCreate) {
         axios.post(`${this.API_URL}basic/event/`, {
           title: dataStep2.title,
           description: dataStep1.description,
-          tags: this.getUrlTagList(dataStep3.tags.concat(dataStep4.selectedMandatoryFilter)),
+          tags: this.getUrlTagList(dataStep4.tags.concat(dataStep5.selectedMandatoryFilter)),
           material: this.convertMaterialArray(dataStep2.material),
           costsRating: dataStep3.costsRating,
           executionTimeRating: dataStep3.executionTimeRating,
-          isPrepairationNeeded: dataStep2.isPrepairationNeeded,
-          isActive: dataStep5.isActive,
-          createdBy: dataStep5.createdBy,
-          createdByEmail: dataStep5.createdByEmail,
+          isPrepairationNeeded: dataStep3.isPrepairationNeeded,
+          isActive: dataStep6.isActive,
+          createdBy: dataStep6.createdBy,
+          createdByEmail: dataStep6.createdByEmail,
         })
           .then(() => {
             this.$router.replace({ name: 'overview' });
@@ -204,14 +218,14 @@ export default {
           id: this.data.id,
           title: dataStep2.title,
           description: dataStep1.description,
-          tags: this.getUrlTagList(dataStep3.tags.concat(dataStep4.selectedMandatoryFilter)),
+          tags: this.getUrlTagList(dataStep4.tags.concat(dataStep5.selectedMandatoryFilter)),
           material: this.convertMaterialArray(dataStep2.material),
           costsRating: dataStep3.costsRating,
           executionTimeRating: dataStep3.executionTimeRating,
-          isPrepairationNeeded: dataStep2.isPrepairationNeeded,
-          isActive: dataStep4.isActive,
-          createdBy: dataStep4.createdBy,
-          createdByEmail: dataStep4.createdByEmail,
+          isPrepairationNeeded: dataStep3.isPrepairationNeeded,
+          isActive: dataStep6.isActive,
+          createdBy: dataStep6.createdBy,
+          createdByEmail: dataStep6.createdByEmail,
         })
           .then(() => {
             this.$router.push({ name: 'overview' });

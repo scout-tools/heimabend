@@ -4,6 +4,12 @@
         v-model="valid"
       >
   <v-container>
+    <v-row  class="mt-6 ml-2 text-left">
+      <span class="subtitle-1">
+        Bitte fasse im ersten Absatz deine Idee zusammmen und beschreibe
+        danach deine Idee ausführlicher. <br>
+      </span>
+    </v-row>
     <v-row>
       <v-col cols="12">
         <editor
@@ -46,8 +52,6 @@
     </v-row>
     <v-row  class="mt-6 ml-2 text-left">
       <span class="subtitle-2">
-        Bitte fasse im ersten Absatz deine Idee zusammmen und beschreibe
-        danach deine Idee ausführlicher. <br>
         Nutze am besten die Möglichkeit einzelne Punkte fett oder kursiv
         hervorzuheben und Arbeitsschritte mit Aufzählungszeichen zu versehen,
         um deine Idee übersichtlich zu gliedern und ansprechender darzustellen.
