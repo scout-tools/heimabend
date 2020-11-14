@@ -74,9 +74,9 @@
             </span>
           </v-tooltip>
 
-        <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
+        <v-divider v-if="isAuthenticated" vertical/>
         <v-btn
-          class="ma-1 ml-0"
+          class="ma-1"
           text
           icon
           color="red lighten-3"
@@ -85,9 +85,9 @@
           <v-icon>mdi-delete-outline</v-icon>
         </v-btn>
 
-          <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
+          <v-divider v-if="isAuthenticated" vertical/>
           <v-btn
-            class="ma-1 ml-0"
+            class="ma-1"
             text
             icon
             color="lightPrimary"
@@ -95,8 +95,6 @@
             @click="onUpdateClick(item)">
             <v-icon>mdi-pencil-outline</v-icon>
           </v-btn>
-
-          <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
           <v-tooltip
             v-if="!isMobil && !isAuthenticated && item.like_score > 0"
             nudge-left="80"
@@ -141,7 +139,6 @@
               </v-col>
               <v-col cols="8">
                 <v-tooltip
-                  nudge-left="80"
                   bottom>
                   <template v-slot:activator="{ on }">
                    <router-link
@@ -150,12 +147,14 @@
                       class="no-underline"
                     >
                     <v-btn
-                      depressed
                       @click="onDetailsClick(item)"
-                      outlined
-                      class="test-color-text"
+                      elevation="2"
+                      color="#EEEEEE"
                       block
                       v-on="on">
+                      <v-icon left>
+                        mdi-page-next-outline
+                      </v-icon>
                       {{ getLikeButtonText }}
                     </v-btn>
                     </router-link>

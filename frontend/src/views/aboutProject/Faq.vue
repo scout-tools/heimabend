@@ -5,9 +5,10 @@
       ma-3
       lg7
     >
-    <div class="display-2 mb-4">
-      Fragen/Antworten
-    </div>
+      <div class="display-1 ma-10 text-uppercase" >
+        Fragen + Antworten
+      </div>
+      <v-divider/>
     <v-expansion-panels>
       <v-expansion-panel
         v-for="(faq,i) in faqs"

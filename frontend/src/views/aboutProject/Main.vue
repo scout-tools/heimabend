@@ -5,10 +5,11 @@
       ma-3
       lg7
     >
-    <div class="display-2">
-      Unsere Idee
-    </div>
-      <v-card class="ma-4 pa-4">
+      <div class="display-1 ma-10 text-uppercase" >
+          Unsere Idee
+      </div>
+      <v-divider/>
+      <v-sheet class="ma-4 pa-4">
         <div class="pa-3 display-1">
           <u>
             Warum?
@@ -36,9 +37,9 @@
           </li>
         </div>
 
-      </v-card>
+      </v-sheet>
 
-      <v-card class="ma-4 pa-4">
+      <v-sheet class="ma-4 pa-4">
         <div class="pa-3 display-1">
           <u>
             Die Idee
@@ -67,9 +68,9 @@
           euch selbst kreativ zu verwirklichen.
         </div>
 
-      </v-card>
+      </v-sheet>
 
-      <v-card class="ma-4 pa-4">
+      <v-sheet class="ma-4 pa-4">
         <div class="pa-3 display-1">
           <u>
             Kann ich mitmachen?
@@ -86,9 +87,9 @@
         <div class="ma-5 subtitle-1 text-left">
           Euer Team hinter dem Heimabend-Inspirator
         </div>
-      </v-card>
+      </v-sheet>
 
-      <v-card class="ma-4 pa-4">
+      <v-sheet class="ma-4 pa-4">
         <div class="pa-3 display-1">
           <u>
             Kontakt
@@ -126,9 +127,9 @@
           <i>Aus Spam-Schutz ist diese E-Mail-Adresse nicht zum Anklicken.</i>
         </div>
 
-      </v-card>
+      </v-sheet>
 
-      <v-card class="ma-4 pa-4">
+      <v-sheet class="ma-4 pa-4">
         <div class="pa-3 display-1">
           <u>
             Open Source
@@ -152,7 +153,7 @@
             Wenn du Fragen hast, dann kannst du uns gerne kontaktieren.
           </li>
         </div>
-      </v-card>
+      </v-sheet>
     </v-flex>
   </v-row>
 </v-container>

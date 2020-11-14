@@ -1,12 +1,12 @@
 <template>
 <v-container>
   <v-row justify="center">
-    <v-flex ma-3 lg7>
-      <div class="display-2">
-        Impressum / Datenschutz
+    <v-flex class="ma-3 lg7">
+      <div class="display-1 ma-10 text-uppercase" >
+        Impressum + Datenschutz
       </div>
-
-      <v-card class="ma-4 pa-4">
+      <v-divider/>
+      <v-sheet class="ma-4 pa-4">
         <div>
           <div class="ma-12">
             <h2 class="py-5">
@@ -137,8 +137,8 @@
           </a>.
           </div>
         </div>
-      </v-card>
-      <v-card class="ma-4 pa-4">
+      </v-sheet>
+      <v-sheet class="ma-4 pa-4">
           <h2 class="py-5">
             Cookies widerrufen
           </h2>
@@ -157,7 +157,7 @@
 
           </p>
 
-      </v-card>
+      </v-sheet>
     </v-flex>
   </v-row>
 </v-container>

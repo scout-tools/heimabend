@@ -215,6 +215,6 @@ export default {
     cursor: help !important;
   }
   .theme--light.v-application {
-    background: transparent !important;
+    background: #f4f4f434 !important;
   }
 </style>

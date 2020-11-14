@@ -80,6 +80,7 @@ export default {
       'isAuthenticated',
       'heimabendCounter',
       'mandatoryFilter',
+      'isActive',
     ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -99,6 +100,7 @@ export default {
           params.append('filterTags', filterTag);
         });
       }
+      debugger;
       if (this.isAuthenticated) {
         params.append('isActive', this.isActive);
       }

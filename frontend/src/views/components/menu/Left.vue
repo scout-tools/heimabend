@@ -7,7 +7,7 @@
     >
       <v-list>
           <v-row align="center">
-             <v-card
+             <v-sheet
               v-if="isAuthenticated"
               width="270"
               class="mx-auto"
@@ -34,7 +34,7 @@
                 </v-row>
                 </v-container>
               </v-list-item>
-            </v-card>
+            </v-sheet>
           </v-row>
     <v-subheader>Daten</v-subheader>
       <v-divider></v-divider>
