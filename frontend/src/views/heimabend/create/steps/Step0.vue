@@ -22,7 +22,6 @@
     </v-row>
 
     <v-divider class="my-2"/>
-    
 
     <v-row class="ma-3" justify="center">
       <v-btn
