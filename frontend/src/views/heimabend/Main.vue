@@ -104,6 +104,7 @@ export default {
       }
       params.append('ordering', this.sorter);
       params.append('page', 1);
+      params.append('timestamp', new Date().getTime());
       return params;
     },
   },

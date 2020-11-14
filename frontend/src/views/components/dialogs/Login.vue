@@ -55,16 +55,17 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
-  </v-row>
     <v-snackbar
       v-model="showError"
       color="error"
       y='top'
       :timeout="timeout"
     >
-      {{ 'Du hast eine falsche Kombination von Benutzername und Passwort eingegeben' }}
+      {{ responseObj }}
     </v-snackbar>
+    </v-dialog>
+  </v-row>
+
     <v-snackbar
       v-model="showSuccess"
       color="success"
@@ -117,7 +118,7 @@ export default {
           this.onSuccessfulLogin();
         })
         .catch((error) => {
-          this.responseObj = error;
+          this.responseObj = error.response.data.detail;
           this.showError = true;
         });
     },

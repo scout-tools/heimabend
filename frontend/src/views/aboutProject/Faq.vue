@@ -82,7 +82,7 @@ export default {
 
   methods: {
     getFaqs() {
-      const path = `${this.API_URL}basic/faq/`;
+      const path = `${this.API_URL}basic/faq/?&timestamp=${new Date().getTime()}`;
       axios.get(path)
         .then((res) => {
           this.faqs = res.data;

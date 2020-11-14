@@ -143,7 +143,7 @@ export default {
 
   data: () => ({
     API_URL: process.env.VUE_APP_API,
-    item: {},
+    item: [],
     loading: true,
   }),
 };

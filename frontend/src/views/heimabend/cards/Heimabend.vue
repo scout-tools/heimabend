@@ -22,24 +22,22 @@
         class="primary px-0"
         :class="paddingleftLebelIcons"
       >
-      <keep-alive>
         <v-img
           class="ml-1"
           :src="require('@/assets/wolfskopf.png')"
-          v-if="item.isLvlOne && isDetailsView"
+          v-if="getIsLvlOne(item) && isDetailsView"
           :max-width="maxWidthKnots"
         />
-      </keep-alive>
         <v-img
           class="ml-1"
           :src="require('../../../assets/knot_blue.png')"
-          v-if="item.isLvlTwo && isDetailsView"
+          v-if="getIsLvlTwo(item) && isDetailsView"
           :max-width="maxWidthKnots"
         />
         <v-img
           class="ml-1"
           :src="require('../../../assets/knot_red.png')"
-          v-if="item.isLvlThree && isDetailsView"
+          v-if="getIsLvlThree(item) && isDetailsView"
           :max-width="maxWidthKnots"
         />
 
@@ -553,7 +551,6 @@ export default {
     Fab,
   },
   methods: {
-
     scroll() {
       window.onscroll = () => {
         const bottomOfWindow = document.documentElement.scrollTop
@@ -737,6 +734,18 @@ export default {
     getId() {
       return this.$route.params.id;
     },
+    getIsLvlOne(item) {
+      const lvlOneId = this.tags.filter(tag => tag.name === 'Wölflinge')[0].id;
+      return !!item.tags.filter(tag => tag.includes(lvlOneId)).length;
+    },
+    getIsLvlTwo(item) {
+      const lvlTwoId = this.tags.filter(tag => tag.name === 'Pfadfinder')[0].id;
+      return !!item.tags.filter(tag => tag.includes(lvlTwoId)).length;
+    },
+    getIsLvlThree(item) {
+      const lvlThreeId = this.tags.filter(tag => tag.name === 'Rover')[0].id;
+      return !!item.tags.filter(tag => tag.includes(lvlThreeId)).length;
+    },
   },
   data() {
     return {
@@ -786,7 +795,7 @@ export default {
       return !this.isMobil ? 'pl-2' : 'pl-1';
     },
     maxWidthKnots() {
-      return !this.isMobil ? '30' : '18';
+      return !this.isMobil ? '18' : '14';
     },
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;

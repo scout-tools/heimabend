@@ -60,12 +60,19 @@
       </span>
     </v-row>
     <v-row class="ma-3" justify="center">
-    <v-btn
-      color="primary"
-      @click="nextStep(n)"
-    >
-      Weiter
-    </v-btn>
+      <v-btn
+        class="mr-5"
+        @click="prevStep()"
+      >
+        Zurück
+      </v-btn>
+
+      <v-btn
+        color="primary"
+        @click="nextStep(n)"
+      >
+        Weiter
+      </v-btn>
     </v-row>
   </v-container>
         </v-form>
@@ -120,6 +127,9 @@ export default {
   },
 
   methods: {
+    prevStep() {
+      this.$emit('prevStep');
+    },
     nextStep() {
       if (!this.$refs.form1.validate() || this.getCustomText !== 'Ok') {
         return;

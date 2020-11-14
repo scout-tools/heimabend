@@ -141,7 +141,7 @@ export default {
       return url;
     },
     getNewItems() {
-      const path = `${this.API_URL}basic/tag/`;
+      const path = `${this.API_URL}basic/tag?&timestamp=${new Date().getTime()}`;
       axios.get(path)
         .then((res) => {
           this.items = res.data;

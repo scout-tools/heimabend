@@ -1,34 +1,30 @@
 <template>
   <v-form
-    ref="form2"
+    ref="form0"
     v-model="valid"
   >
   <v-container>
-    <v-row class="mt-6 ml-4">
+    <v-row class="mt-6 ml-2">
       <span class="subtitle-1">
-        Füge hier alle Materialien hinzu. Bestätige jedes Objekt mit "Enter".
+        Gib eine passende Überschrift für deine Heimabend-Idee ein.
       </span>
     </v-row>
     <v-row class="ma-4">
-        <v-combobox
-          outlined
-          autofocus
-          v-model="data.materialArray"
-          label="Material Liste"
-          multiple
-          required
-          chips
-        ></v-combobox>
+      <v-text-field
+        outlined
+        autofocus
+        :counter="40"
+        :rules="rules.title"
+        label="Überschrift"
+        v-model="data.title"
+        required>
+      </v-text-field>
     </v-row>
 
-    <v-row class="ma-3" justify="center">
-      <v-btn
-        class="mr-5"
-        @click="prevStep()"
-      >
-        Zurück
-      </v-btn>
+    <v-divider class="my-2"/>
+    
 
+    <v-row class="ma-3" justify="center">
       <v-btn
         color="primary"
         @click="nextStep(n)"
@@ -91,7 +87,7 @@ export default {
       this.$emit('prevStep');
     },
     nextStep() {
-      if (!this.$refs.form2.validate()) {
+      if (!this.$refs.form0.validate()) {
         return;
       }
       this.$emit('nextStep');

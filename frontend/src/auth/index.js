@@ -18,13 +18,15 @@ export default {
       store.commit('apiIsDown', false);
       return response;
     }, (error) => {
-      if (error.response === undefined) {
+      if (error && error.response === undefined) {
         store.commit('apiIsDown', true);
       }
 
       if (error.response.status === 401) {
-        store.commit('clearTokens');
-        window.location.href = '/';
+        if (error.response.data.detail !== 'No active account found with the given credentials') {
+          store.commit('clearTokens');
+          window.location.href = '/';
+        }
       }
       return Promise.reject(error);
     });

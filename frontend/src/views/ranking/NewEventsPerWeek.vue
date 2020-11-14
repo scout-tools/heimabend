@@ -98,7 +98,7 @@ export default {
       this.items2 = array2;
     },
     getData() {
-      const path = `${this.API_URL}basic/statistic/`;
+      const path = `${this.API_URL}basic/statistic?&timestamp=${new Date().getTime()}`;
       this.loading = true;
       axios.get(path)
         .then((res) => {

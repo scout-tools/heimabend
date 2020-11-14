@@ -149,7 +149,7 @@ export default {
       this.$refs.mainMenuLeft.toggleDrawer();
     },
     getTags() {
-      const path = `${this.API_URL}basic/tag/`;
+      const path = `${this.API_URL}basic/tag/?&timestamp=${new Date().getTime()}`;
       axios.get(path)
         .then((res) => {
           this.$store.commit('setTags', res.data);
@@ -159,7 +159,7 @@ export default {
         });
     },
     getTagCategory() {
-      const path = `${this.API_URL}basic/tag-category/`;
+      const path = `${this.API_URL}basic/tag-category/?&timestamp=${new Date().getTime()}`;
       axios.get(path)
         .then((res) => {
           this.$store.commit('setTagCategory', res.data);

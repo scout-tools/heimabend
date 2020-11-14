@@ -62,7 +62,7 @@
       </v-btn>
 
       <v-btn
-        color="primary"
+        color="secondary"
         @click="finish()"
       >
         Absenden

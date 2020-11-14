@@ -28,11 +28,21 @@
 
       <v-stepper-items>
         <v-stepper-content
+          step="0"
+        >
+          <step-zero
+            ref="step0"
+            :data="data"
+            @nextStep="nextStep()"
+          />
+        </v-stepper-content>
+        <v-stepper-content
           step="1"
         >
           <step-one
             ref="step1"
             :data="data"
+            @prevStep="prevStep()"
             @nextStep="nextStep()"
           />
         </v-stepper-content>
@@ -115,6 +125,7 @@
 <script>
 import axios from 'axios';
 
+import StepZero from './steps/Step0.vue';
 import StepOne from './steps/Step1.vue';
 import StepTwo from './steps/Step2.vue';
 import StepThree from './steps/Step3.vue';
@@ -125,6 +136,7 @@ import StepSix from './steps/Step6.vue';
 
 export default {
   components: {
+    StepZero,
     StepOne,
     StepTwo,
     StepThree,
@@ -135,14 +147,15 @@ export default {
   data() {
     return {
       API_URL: process.env.VUE_APP_API,
-      currentStep: 1,
+      currentStep: 0,
       steps: 6,
       showError: false,
       showSuccess: false,
       timeout: 7000,
       headerStep: [
+        'Titel',
         'Hauptext',
-        'Weitere Texte',
+        'Material',
         'Werte',
         'Proben',
         'Kategorien',
@@ -187,6 +200,7 @@ export default {
     },
 
     finish() {
+      const dataStep0 = this.$refs.step0.getData();
       const dataStep1 = this.$refs.step1.getData();
       const dataStep2 = this.$refs.step2.getData();
       const dataStep3 = this.$refs.step3.getData();
@@ -195,7 +209,7 @@ export default {
       const dataStep6 = this.$refs.step6.getData();
       if (this.isCreate) {
         axios.post(`${this.API_URL}basic/event/`, {
-          title: dataStep2.title,
+          title: dataStep0.title,
           description: dataStep1.description,
           tags: this.getUrlTagList(dataStep4.tags.concat(dataStep5.selectedMandatoryFilter)),
           material: this.convertMaterialArray(dataStep2.material),
