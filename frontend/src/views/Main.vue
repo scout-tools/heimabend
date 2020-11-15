@@ -112,7 +112,7 @@ export default {
     },
     getLabel() {
       const counter = this.$store.getters.heimabendCounter;
-      return `Suche in ${counter} Heimabenden ...`;
+      return `Suche in ${counter} Heimabendideen`;
     },
     getMargin() {
       return this.isMobil ? 'ma-1' : 'ma-0';

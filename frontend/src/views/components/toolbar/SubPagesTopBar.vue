@@ -9,7 +9,7 @@
       class="no-underline"
     >
       <v-btn text large icon>
-        <v-icon>mdi-arrow-left</v-icon>
+        <v-icon>mdi-close</v-icon>
       </v-btn>
     </router-link>
     <v-toolbar-title>

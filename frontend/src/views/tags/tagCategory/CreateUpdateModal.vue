@@ -86,6 +86,26 @@
                   />
                 </v-col>
               </v-row>
+              <v-row>
+                <v-col cols="6">
+                  <v-switch
+                    label="In der Heimabend Übersicht Sichtbar?"
+                    color="secondary"
+                    v-model="data.is_event_overview"
+                    hide-details
+                    indeterminate
+                  />
+                </v-col>
+                <v-col cols="6">
+                  <v-switch
+                    label="Pflicht?"
+                    color="secondary"
+                    v-model="data.is_mandatory"
+                    hide-details
+                    indeterminate
+                  />
+                </v-col>
+              </v-row>
             </v-container>
           </v-form>
         </v-card-text>
@@ -164,6 +184,8 @@ export default {
           ordered_id: this.data.ordered_id,
           is_visible: this.data.is_visible,
           is_header: this.data.is_header,
+          is_mandatory: this.data.is_mandatory,
+          is_event_overview: this.data.is_event_overview,
         })
           .then(() => {
             this.dialog = false;
@@ -180,6 +202,8 @@ export default {
           ordered_id: this.data.ordered_id,
           is_visible: this.data.is_visible,
           is_header: this.data.is_header,
+          is_mandatory: this.data.is_mandatory,
+          is_event_overview: this.data.is_event_overview,
         })
           .then(() => {
             this.dialog = false;

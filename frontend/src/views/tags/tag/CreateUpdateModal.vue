@@ -69,6 +69,17 @@
             </v-row>
             <v-row>
               <v-col cols="6">
+                <v-text-field
+                  outlined
+                  label="Reihenfolge"
+                  :rules="rules.ordered_id"
+                  v-model="data.ordered_id"
+                  required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            <v-row>
+              <v-col cols="6">
                 <v-select
                   :items="tagCategory"
                   return-object
@@ -159,6 +170,7 @@ export default {
       name: 'Rucksack packen',
       description: '',
       category: 3,
+      ordered_id: null,
     },
     isCreate: true,
     isUpdate: false,
@@ -189,6 +201,7 @@ export default {
           color: this.data.color.hex,
           category: this.getTagCategoryString(this.data.categoryId.id),
           is_visible: this.data.is_visible,
+          ordered_id: this.data.ordered_id,
         })
           .then(() => {
             this.dialog = false;
@@ -205,6 +218,7 @@ export default {
           color: this.data.color,
           category: this.getTagCategoryString(this.data.categoryId),
           is_visible: this.data.is_visible,
+          ordered_id: this.data.ordered_id,
         })
           .then(() => {
             this.dialog = false;
@@ -216,8 +230,14 @@ export default {
           });
       }
     },
-    getTagCategoryString(id) {
-      return `${process.env.VUE_APP_API}basic/tag-category/${id}/`;
+    getTagCategoryString(input) {
+      let categoryId = 1;
+      if (typeof input === 'object' && input !== null) {
+        categoryId = input.id;
+      } else {
+        categoryId = input;
+      }
+      return `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`;
     },
     onDeleteClick() {
       axios.delekte(`${this.API_URL}basic/tag/${this.data.id}/`)

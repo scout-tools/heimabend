@@ -28,21 +28,11 @@
 
       <v-stepper-items>
         <v-stepper-content
-          step="0"
-        >
-          <step-zero
-            ref="step0"
-            :data="data"
-            @nextStep="nextStep()"
-          />
-        </v-stepper-content>
-        <v-stepper-content
           step="1"
         >
           <step-one
             ref="step1"
             :data="data"
-            @prevStep="prevStep()"
             @nextStep="nextStep()"
           />
         </v-stepper-content>
@@ -52,6 +42,7 @@
         >
           <step-two
             ref="step2"
+            :data="data"
             @prevStep="prevStep()"
             @nextStep="nextStep()"
           />
@@ -62,6 +53,7 @@
         >
           <step-three
             ref="step3"
+            :data="data"
             @prevStep="prevStep()"
             @nextStep="nextStep()"
           />
@@ -72,6 +64,7 @@
         >
           <step-four
             ref="step4"
+            :data="data"
             @prevStep="prevStep()"
             @nextStep="nextStep()"
           />
@@ -82,6 +75,7 @@
         >
           <step-five
             ref="step5"
+            :data="data"
             @prevStep="prevStep()"
             @nextStep="nextStep()"
           />
@@ -91,7 +85,19 @@
           step="6"
         >
           <step-six
+            :data="data"
             ref="step6"
+            @prevStep="prevStep()"
+            @nextStep="nextStep()"
+          />
+        </v-stepper-content>
+
+        <v-stepper-content
+          step="7"
+        >
+          <step-seven
+            :data="data"
+            ref="step7"
             @prevStep="prevStep()"
             @finish="finish()"
           />
@@ -125,30 +131,30 @@
 <script>
 import axios from 'axios';
 
-import StepZero from './steps/Step0.vue';
 import StepOne from './steps/Step1.vue';
 import StepTwo from './steps/Step2.vue';
 import StepThree from './steps/Step3.vue';
 import StepFour from './steps/Step4.vue';
 import StepFive from './steps/Step5.vue';
 import StepSix from './steps/Step6.vue';
+import StepSeven from './steps/Step7.vue';
 
 
 export default {
   components: {
-    StepZero,
     StepOne,
     StepTwo,
     StepThree,
     StepFour,
     StepFive,
     StepSix,
+    StepSeven,
   },
   data() {
     return {
       API_URL: process.env.VUE_APP_API,
-      currentStep: 0,
-      steps: 6,
+      currentStep: 1,
+      steps: 7,
       showError: false,
       showSuccess: false,
       timeout: 7000,
@@ -156,8 +162,8 @@ export default {
         'Titel',
         'Hauptext',
         'Material',
-        'Werte',
-        'Proben',
+        'Zahlen',
+        'Thema',
         'Kategorien',
         'Abschluss',
       ],
@@ -200,25 +206,25 @@ export default {
     },
 
     finish() {
-      const dataStep0 = this.$refs.step0.getData();
       const dataStep1 = this.$refs.step1.getData();
       const dataStep2 = this.$refs.step2.getData();
       const dataStep3 = this.$refs.step3.getData();
       const dataStep4 = this.$refs.step4.getData();
       const dataStep5 = this.$refs.step5.getData();
       const dataStep6 = this.$refs.step6.getData();
+      const dataStep7 = this.$refs.step7.getData();
       if (this.isCreate) {
         axios.post(`${this.API_URL}basic/event/`, {
-          title: dataStep0.title,
-          description: dataStep1.description,
-          tags: this.getUrlTagList(dataStep4.tags.concat(dataStep5.selectedMandatoryFilter)),
-          material: this.convertMaterialArray(dataStep2.material),
-          costsRating: dataStep3.costsRating,
-          executionTimeRating: dataStep3.executionTimeRating,
-          isPrepairationNeeded: dataStep3.isPrepairationNeeded,
-          isActive: dataStep6.isActive,
-          createdBy: dataStep6.createdBy,
-          createdByEmail: dataStep6.createdByEmail,
+          title: dataStep1.title,
+          description: dataStep2.description,
+          tags: this.getUrlTagList(dataStep5.tags.concat(dataStep6.selectedMandatoryFilter)),
+          material: this.convertMaterialArray(dataStep3.material),
+          costsRating: dataStep4.costsRating,
+          executionTimeRating: dataStep4.executionTimeRating,
+          isPrepairationNeeded: dataStep4.isPrepairationNeeded,
+          isActive: dataStep7.isActive,
+          createdBy: dataStep7.createdBy,
+          createdByEmail: dataStep7.createdByEmail,
         })
           .then(() => {
             this.$router.replace({ name: 'overview' });
@@ -230,16 +236,16 @@ export default {
       } else if (this.isUpdate) {
         axios.put(`${this.API_URL}basic/event/${this.getId}/`, {
           id: this.data.id,
-          title: dataStep2.title,
-          description: dataStep1.description,
-          tags: this.getUrlTagList(dataStep4.tags.concat(dataStep5.selectedMandatoryFilter)),
-          material: this.convertMaterialArray(dataStep2.material),
-          costsRating: dataStep3.costsRating,
-          executionTimeRating: dataStep3.executionTimeRating,
-          isPrepairationNeeded: dataStep3.isPrepairationNeeded,
-          isActive: dataStep6.isActive,
-          createdBy: dataStep6.createdBy,
-          createdByEmail: dataStep6.createdByEmail,
+          title: dataStep3.title,
+          description: dataStep2.description,
+          tags: this.getUrlTagList(dataStep5.tags.concat(dataStep6.selectedMandatoryFilter)),
+          material: this.convertMaterialArray(dataStep3.material),
+          costsRating: dataStep4.costsRating,
+          executionTimeRating: dataStep5.executionTimeRating,
+          isPrepairationNeeded: dataStep6.isPrepairationNeeded,
+          isActive: dataStep7.isActive,
+          createdBy: dataStep7.createdBy,
+          createdByEmail: dataStep7.createdByEmail,
         })
           .then(() => {
             this.$router.push({ name: 'overview' });

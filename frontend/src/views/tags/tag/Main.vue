@@ -97,9 +97,8 @@ export default {
     timeout: 3000,
     headers: [
       { text: 'Name', value: 'name' },
-      { text: 'Beschreibung', value: 'description' },
       { text: 'Farbe', value: 'color' },
-      // { text: 'Wie oft verwendet?', value: 'tag_count' },
+      { text: 'Reigenfolge', value: 'ordered_id' },
       { text: 'Kategorie', value: 'categoryId' },
       { text: 'Sichtbar?', value: 'is_visible' },
       { text: 'Aktion', value: 'action', sortable: false },

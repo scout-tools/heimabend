@@ -100,7 +100,6 @@ export default {
           params.append('filterTags', filterTag);
         });
       }
-      debugger;
       if (this.isAuthenticated) {
         params.append('isActive', this.isActive);
       }
@@ -126,7 +125,7 @@ export default {
     },
 
     async getMoreItems() {
-      axios.get(this.nextPath.replace(/^http:\/\//i, 'https://')) //
+      axios.get(this.nextPath.replace(/^https:\/\//i, 'http://')) //
         .then((res) => {
           this.items = this.items.concat(res.data.results);
           this.nextPath = res.data.next;

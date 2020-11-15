@@ -1,58 +1,48 @@
 <template>
-        <v-form
-        ref="form6"
-        v-model="valid"
-      >
-  <v-container>
-    <v-row class="mt-6 ml-2">
-      <span class="subtitle-1">
-        Die Heimabend-Idee wird unter deinem Namen veröffentlicht.
-        Nutze dafür gerne deinen Fahrtennamen.
-      </span>
+  <v-form
+    ref="form6"
+    v-model="valid"
+  >
+    <v-container fluid class="mx-5 pa-0">
+      <v-row
+        v-for="(category, n) in getTopBarTagCategories"
+        :key="category.id"
+        class="ml-1 mr-10 my-5">
+        <span class="subtitle-1 pa-1" style="text-align: left;">
+          {{ texts[n] }}
+        </span>
+        <v-container class="ma-0 pa-0" fluid>
+          <v-select
+            v-model="data.tags"
+            no-data-text="Wähle aus der Liste Themen aus."
+            :items="filterTagByCategory(category.id)"
+            :label="category.name"
+            item-value="id"
+            item-text="name"
+            chips
+            :rules="getRulesByCategory(category)"
+            deletable-chips
+            multiple
+            dense
+            single-line
+            outlined
+            required
+          >
+            <template v-slot:selection="{ item, index }">
+              <v-chip v-if="index < 3" :color="item.color" small>
+                <span>{{ item.name }}</span>
+              </v-chip>
+              <span
+                v-if="index === 3"
+                class="grey--text caption"
+              >
+                (+ ...)
+              </span>
+            </template>
+          </v-select>
+        </v-container>
     </v-row>
-    <v-row class="ma-3">
-      <v-text-field
-        outlined
-        label="Dein Pfadfindername"
-        v-model="data.createdBy"
-        :rules="rules.createdBy"
-        required>
-      </v-text-field>
-    </v-row>
-    <v-row class="mt-6 ml-2">
-      <span class="subtitle-1">
-        Diese E-Mail Adresse ist nur für das Redaktions-Team bei evtuellen Rückfragen sichtbar.
-      </span>
-    </v-row>
-    <v-row class="ma-3">
-      <v-text-field
-        outlined
-        label="Deine E-Mail Adresse"
-        v-model="data.createdByEmail"
-      >
-      </v-text-field>
-    </v-row>
-    <v-row v-if="isAuthenticated" class="ma-3">
-      <v-switch
-        v-model="data.isActive"
-        color="secondary"
-        label="Dieser Heimabend ist öffentlich sichtbar.">
-      </v-switch>
-    </v-row>
-    <v-row class="ma-3">
-      <v-checkbox
-        color="green"
-        v-model="agreeBox"
-        :rules="[v => !!v || 'Nur mit der Einverständniserklärung kannst du Ideen einreichen']"
-        label="Ich möchte, dass diese Heimabend-Idee, nach einer inhaltlichen Prüfung,
-          veröffentlicht
-          wird und ich bin damit einverstanden, dass diese Heimabend-Idee später verändert,
-          gekürzt oder ergänzt werden könnte. Dabei habe ich weder Textbausteine noch Bilder
-          unrechtmäßigmäßig verwendet oder kopiert."
-        required
-      >
-      </v-checkbox>
-    </v-row>
+
     <v-row class="ma-3" justify="center">
       <v-btn
         class="mr-5"
@@ -62,60 +52,44 @@
       </v-btn>
 
       <v-btn
-        color="secondary"
-        @click="finish()"
+        color="primary"
+        @click="nextStep()"
       >
-        Absenden
+        Weiter
       </v-btn>
     </v-row>
-  </v-container>
+    </v-container>
   </v-form>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
 
   data: () => ({
-    API_URL: process.env.VUE_APP_API,
-    n: 0,
-    dialog: false,
-    valid: true,
-    showError: false,
-    showSuccess: false,
-    timeout: 3000,
-    responseObj: null,
-    agreeBox: false,
-    isEditorValid: true,
     rules: {
-      title: [
-        v => !!v || 'Titel ist erforderlich',
-        v => (v && v.length >= 10) || 'Der Titel braucht mehr als 10 Zeichen',
-        v => (v && v.length <= 40) || 'Der Titel darf nicht mehr als 40 Zeichen haben',
-      ],
       tags: [
-        v => (v && v.length > 0) || 'Mindestens ein Thema ist erforderlich',
-      ],
-      createdBy: [
-        v => (v && v.length >= 3) || 'Der Name braucht mindestens drei Zeichen',
+        v => (v && v.length >= 4 && false) || 'Ist zwingend erforderlich',
       ],
     },
     data: {
-      createdBy: null,
-      createdByEmail: '',
-      isActive: false,
+      selectedFilter: [],
     },
+    valid: true,
+    n: 0,
+    texts: [
+      'Pflicht: In welchen Jahreszeiten kann dein Heimabend durchgeführt werden?',
+      'Pflicht: An welchen Orten kann dein Heimabend stattfinden?',
+      'Pflicht: Für welche Stufen ist dein Heimabend geeignet?',
+      'Pflicht: Was ist dein Heimabend für ein Typ?',
+      'Hast du eine besonderes Thema?',
+    ],
   }),
 
   computed: {
-    isMobil() {
-      return this.$vuetify.breakpoint.mdAndDown;
-    },
-    isAuthenticated() {
-      return this.$store.getters.isAuthenticated;
-    },
-    currentUsername() {
-      return this.$store.getters.getUsername;
+    tags() {
+      return this.$store.getters.tags;
     },
     isCreate() {
       return !this.$route.params.id;
@@ -123,30 +97,33 @@ export default {
     isUpdate() {
       return !!this.$route.params.id;
     },
-    isLargeProject() {
-      return this.data.executionTimeRating === 0;
-    },
-    largeProjectButtomColor() {
-      return this.isLargeProject ? 'limegreen' : 'lightgrey';
-    },
-    largeProjectIconColor() {
-      return this.isLargeProject ? 'black' : 'grey';
-    },
-    isWithoutCosts() {
-      return this.data.costsRating === 0;
-    },
-    withoutCostsButtomColor() {
-      return this.isWithoutCosts ? 'limegreen' : 'lightgrey';
-    },
-    withoutCostsIconColor() {
-      return this.isWithoutCosts ? 'red darken-2' : 'grey';
-    },
     getClassForTextContentSteps() {
       return this.isMobil ? 'mx-0 px-1' : '';
     },
+    ...mapGetters([
+      'tags',
+      'tagCategory',
+      'mandatoryFilter',
+    ]),
+    getTopBarTagCategories() {
+      if (this.tagCategory) {
+        return this.tagCategory
+          .filter(item => item.is_header);
+      }
+      return [];
+    },
   },
+
+  mounted() {
+    if (this.$route.params.id) {
+      this.data = this.$route.params;
+      if (this.data.tags && this.data.tags.length) {
+        this.data.tags = this.setIntTags(this.data.tags);
+      }
+    }
+  },
+
   created() {
-    this.agreeBox = !!this.$store.getters.isAuthenticated;
     if (this.$route.params.id) {
       this.data = this.$route.params;
     }
@@ -154,23 +131,79 @@ export default {
 
 
   methods: {
+    getMandatoryBarTagCategories() {
+      if (this.tagCategory) {
+        return this.tagCategory
+          .filter(item => item.is_mandatory);
+      }
+      return [];
+    },
+    getCategoryIdByTagId(categoryId) {
+      if (this.categoryId) {
+        return this.tags.filter(tag => tag.id === categoryId)[0];
+      }
+      return [];
+    },
+    getRulesByCategory(category) {
+      let returnValue = [];
+      if (!category.is_mandatory) {
+        return returnValue;
+      }
+
+      if (this.data && this.data.tags) {
+        this.tagCategory.filter(item => !!item.is_mandatory).forEach((item) => {
+          console.log(category.name);
+          const activeTags = this.tags.filter(tag => this.data.tags.includes(tag.id));
+          const activeTags2 = activeTags.filter(tag => this.convertUrlToId(tag.category) === item.id); // eslint-disable-line
+          debugger;
+          if (activeTags2 && activeTags2.length) {
+              if (this.convertUrlToId(activeTags2[0].category) !== category.id) { // eslint-disable-line
+              returnValue = [];
+            }
+          } else {
+            returnValue = this.rules.tags;
+          }
+        });
+      }
+      console.log(returnValue);
+      return returnValue;
+    },
+    filterTagByCategory(categoryId) {
+      return this.tags.filter(item => item.category === `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`);
+    },
+    convertUrlToId(url) {
+      if (url && typeof url === 'string') {
+        const idStringArray = url.split('/');
+        const id = idStringArray[idStringArray.length - 2];
+
+        return parseInt(id, 10);
+      }
+      return url;
+    },
+    setIntTags(urlTags) {
+      const tagList = [];
+      urlTags.forEach((tag) => {
+        tagList.push(this.convertUrlToId(tag));
+      });
+      return tagList;
+    },
     prevStep() {
       this.$emit('prevStep');
     },
-
-    finish() {
+    nextStep() {
       if (!this.$refs.form6.validate()) {
         return;
       }
-      this.$emit('finish');
+      this.$emit('nextStep');
     },
     getData() {
       return {
-        createdBy: this.data.createdBy,
-        createdByEmail: this.data.createdByEmail,
-        isActive: this.data.isActive,
+        selectedMandatoryFilter: this.data.tags,
       };
     },
   },
 };
 </script>
+
+<style scoped>
+</style>

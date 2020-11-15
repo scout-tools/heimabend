@@ -172,7 +172,7 @@
           "name": "Karneval",
           "description": "",
           "color": "#DE80A9",
-          "category_id": 5
+          "category_id": 1
       }
   },
   {
@@ -271,7 +271,7 @@
           "name": "Ostern",
           "description": "",
           "color": "#80BBE0",
-          "category_id": 5
+          "category_id": 1
       }
   },
   {
@@ -458,7 +458,7 @@
           "name": "Weihnachten",
           "description": "",
           "color": "#E58383",
-          "category_id": 5
+          "category_id": 1
       }
   },
   {

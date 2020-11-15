@@ -140,7 +140,7 @@
         "tag_count": 1,
         "description": "",
         "color": "#DE80A9",
-        "category": "https://api.myhagemann.de/basic/tag-category/5/",
+        "category": "https://api.myhagemann.de/basic/tag-category/1/",
         "is_visible": true
     },
     {
@@ -221,7 +221,7 @@
         "tag_count": 1,
         "description": "",
         "color": "#80BBE0",
-        "category": "https://api.myhagemann.de/basic/tag-category/5/",
+        "category": "https://api.myhagemann.de/basic/tag-category/1/",
         "is_visible": true
     },
     {
@@ -374,7 +374,7 @@
         "tag_count": 0,
         "description": "",
         "color": "#E58383",
-        "category": "https://api.myhagemann.de/basic/tag-category/5/",
+        "category": "https://api.myhagemann.de/basic/tag-category/1/",
         "is_visible": true
     },
     {
