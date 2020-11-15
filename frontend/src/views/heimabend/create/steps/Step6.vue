@@ -70,11 +70,11 @@ export default {
   data: () => ({
     rules: {
       tags: [
-        v => (v && v.length >= 4 && false) || 'Ist zwingend erforderlich',
+        v => (v && v.length >= 4 && false) || 'Wähle bitte mindestens einen Tag aus.',
       ],
     },
     data: {
-      selectedFilter: [],
+      tags: [],
     },
     valid: true,
     n: 0,
@@ -145,27 +145,18 @@ export default {
       return [];
     },
     getRulesByCategory(category) {
-      let returnValue = [];
+      let returnValue = this.rules.tags;
       if (!category.is_mandatory) {
-        return returnValue;
+        return [];
       }
 
       if (this.data && this.data.tags) {
-        this.tagCategory.filter(item => !!item.is_mandatory).forEach((item) => {
-          console.log(category.name);
-          const activeTags = this.tags.filter(tag => this.data.tags.includes(tag.id));
-          const activeTags2 = activeTags.filter(tag => this.convertUrlToId(tag.category) === item.id); // eslint-disable-line
-          debugger;
-          if (activeTags2 && activeTags2.length) {
-              if (this.convertUrlToId(activeTags2[0].category) !== category.id) { // eslint-disable-line
-              returnValue = [];
-            }
-          } else {
-            returnValue = this.rules.tags;
-          }
-        });
+        const activeTags = this.tags.filter(tag => this.data.tags.includes(tag.id));
+        const containsCategoryId = activeTags.filter(tag => this.convertUrlToId(tag.category) === category.id); // eslint-disable-line
+        if (containsCategoryId.length) {
+          returnValue = [];
+        }
       }
-      console.log(returnValue);
       return returnValue;
     },
     filterTagByCategory(categoryId) {

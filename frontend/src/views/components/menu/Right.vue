@@ -16,6 +16,9 @@
         </v-icon>
       <v-divider class="my-1" dark/>
         </div> -->
+      <span dark class="subtitle-1 whiteText">
+          {{ 'Themenauswahl' }}
+        </span>
       <v-chip-group
         multiple
         column

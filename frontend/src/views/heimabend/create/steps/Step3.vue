@@ -50,16 +50,7 @@ export default {
     dialog: false,
     valid: true,
     data: {
-      title: '',
       materialArray: [],
-      isPrepairationNeeded: false,
-    },
-    rules: {
-      title: [
-        v => !!v || 'Überschrift ist erforderlich.',
-        v => (v && v.length >= 10) || 'Die Überschrift ist zu kurz.',
-        v => (v && v.length <= 40) || 'Die Überschtift ist zu lang.',
-      ],
     },
   }),
 
