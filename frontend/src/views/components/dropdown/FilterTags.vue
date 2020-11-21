@@ -48,9 +48,6 @@ export default {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
-    getColorClass() {
-      return this.isActiveState ? 'customer-color-activ' : 'customer-color-inactive';
-    },
     ...mapGetters([
       'tags',
       'tagCategory',
@@ -102,12 +99,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.customer-color-activ {
-  color: rgba(0, 0, 0, 0.568) !important;
-}
-.customer-color-inactive {
-  color: gray !important;
-}
-</style>

@@ -28,9 +28,6 @@ export default {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
-    getColorClass() {
-      return this.isActiveState ? 'customer-color-activ' : 'customer-color-inactive';
-    },
     ...mapGetters([
       'tags',
       'tagCategory',
@@ -47,7 +44,3 @@ export default {
   },
 };
 </script>
-
-<style>
-
-</style>
