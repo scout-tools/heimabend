@@ -52,9 +52,15 @@
     </v-row>
     <v-row  class="mt-6 ml-2 text-left">
       <span class="subtitle-2">
-        Nutze am besten die Möglichkeit einzelne Punkte fett oder kursiv
-        hervorzuheben und Arbeitsschritte mit Aufzählungszeichen zu versehen,
-        um deine Idee übersichtlich zu gliedern und ansprechender darzustellen.
+        Damit die Idee übersichtlicher dargestellt wird möchten wir
+        dich bitten, deinen Beschreibungstext gedanklich in zwei
+        Abschnitte zu gliedern: Im ersten Abschnitt fass bitte deine
+        Heimabend-Idee kurz zusammen und im zweiten Abschnitt kannst
+        du genauer beschreiben, worum es sich handelt. <br>
+        <br>
+          <i>Beachte: In dem nächsten Schritt hast du die Möglichkeit
+          deine Materialliste zu erstellen, sodass du dein Material
+          nicht im Beschreibungstext auflisten musst</i>
         <br>
         Viel Spaß dabei!
       </span>

@@ -225,10 +225,10 @@
       <v-container>
         <v-tooltip
           v-for="(tag, index2) in getEventTags(item.tags)"
-          :key="index2"
-          slot="append"
-          bottom
-          nudge-left="80"
+            :key="index2"
+            slot="append"
+            bottom
+            nudge-left="80"
         >
         <template v-slot:activator="{ on }">
         <v-chip
@@ -270,7 +270,7 @@
             </v-btn>
           </template>
           <span>
-            Dieser Heimabend ist mit deiner Sippe digital durchführbar
+            Diese Idee ist mit deiner Sippe digital durchführbar
           </span>
         </v-tooltip>
 
@@ -297,7 +297,7 @@
             </v-btn>
           </template>
           <span>
-            Dieser Heimabend ist alleine durchführbar
+            Diese Idee ist alleine durchführbar
           </span>
         </v-tooltip>
 
@@ -458,7 +458,7 @@
     y='top'
     :timeout="timeout"
   >
-    {{ 'Fehler beim Speichern des Heimabends' }}
+    {{ 'Fehler beim Speichern der Heimabend-Idee' }}
   </v-snackbar>
   <v-snackbar
     v-model="showSuccess"
@@ -466,7 +466,7 @@
     y='top'
     :timeout="timeout"
   >
-    {{ 'Der Heimabend wurde erfolgreich gelöscht' }}
+    {{ 'Diese Heimabend-Idee wurde erfolgreich gelöscht' }}
   </v-snackbar>
   <DeleteModal
     ref="deleteTagModal"
@@ -578,13 +578,12 @@ export default {
       return containsCategoryId;
     },
     filterTagByCategory(tags, categoryId) {
-      return this.tags.filter(item => item.category === `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`);
+      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
     },
     convertUrlToId(url) {
       if (url && typeof url === 'string') {
         const idStringArray = url.split('/');
         const id = idStringArray[idStringArray.length - 2];
-
         return parseInt(id, 10);
       }
       return url;
@@ -662,13 +661,13 @@ export default {
     getLikeScoreTooltip(score) {
       switch (score) {
         case 0:
-          return 'Dieser Heimabend hat sich Inspirator-Stern verdient';
+          return 'Diese Idee hat sich Inspirator-Stern verdient';
         case 1:
-          return 'Dieser Heimabend hat sich einen Inspirator-Stern verdient';
+          return 'Diese Idee hat sich einen Inspirator-Stern verdient';
         case 2:
-          return 'Dieser Heimabend hat sich zwei Inspirator-Sterne verdient';
+          return 'Diese Idee hat sich zwei Inspirator-Sterne verdient';
         case 3:
-          return 'Dieser Heimabend hat sich drei Inspirator-Sterne verdient';
+          return 'Diese Idee hat sich drei Inspirator-Sterne verdient';
         default:
           return 'Fehler';
       }

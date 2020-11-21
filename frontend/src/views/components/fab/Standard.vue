@@ -40,7 +40,7 @@
           </router-link>
         </template>
        <span class="subtitle-1">
-          Hiermit kannst du eine neue Heimabendidee hinzufügen.
+          Hiermit kannst du eine neue Heimabend-Idee hinzufügen.
         </span>
       </v-tooltip>
       <v-tooltip bottom nudge-left="80">

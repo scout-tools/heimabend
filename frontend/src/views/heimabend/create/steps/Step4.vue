@@ -9,7 +9,8 @@
 
     <v-row class="mt-6 ml-4">
       <span class="subtitle-1">
-        Beantworte jede Frage für deinen Heimabend.
+        Bitte beantworte jede einzelne Frage
+        passend zu deiner Heimabend-Idee
       </span>
     </v-row>        <v-switch
           v-model="data.isPrepairationNeeded"
@@ -71,7 +72,7 @@
 
   <v-row class="mt-6 ml-4">
     <span class="subtitle-1">
-      Wieviel Durchführungszeit ist erforderlich?
+      Wie lange dauert die Durchführung deiner Programmidee?“
     </span>
   </v-row>
   <v-row>
@@ -223,7 +224,7 @@ export default {
   methods: {
 
     filterTagByCategory(categoryId) {
-      return this.tags.filter(item => item.category === `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`);
+      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
     },
     onResetPriceClick() {
       this.data.costsRating = 0;

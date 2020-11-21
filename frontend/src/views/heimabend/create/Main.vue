@@ -114,17 +114,6 @@
     >
       {{ 'Fehler beim Speichern des Heimabends' }}
     </v-snackbar>
-    <v-snackbar
-      v-model="showSuccess"
-      color="success"
-      y='top'
-      :timeout="timeout"
-    >
-      {{
-        'Vielen Dank für deinen Beitrag zum Heimabend Inspirator! ' +
-        'Deine Heimabenidee wurde erfolgreich gespeichert und wartet ' +
-        'darauf, von uns freigeschaltet zu werden.' }}
-    </v-snackbar>
   </v-container>
 </template>
 
@@ -160,10 +149,10 @@ export default {
       timeout: 7000,
       headerStep: [
         'Titel',
-        'Hauptext',
-        'Material',
-        'Zahlen',
-        'Thema',
+        'Beschreibung',
+        'Materialien',
+        'Fakten',
+        'Themen',
         'Kategorien',
         'Abschluss',
       ],
@@ -227,8 +216,7 @@ export default {
           createdByEmail: dataStep7.createdByEmail,
         })
           .then(() => {
-            this.$router.replace({ name: 'overview' });
-            this.showSuccess = true;
+            this.$router.push({ name: 'overview', params: { showSuccess: true } });
           })
           .catch(() => {
             this.showError = true;

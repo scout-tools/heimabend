@@ -31,7 +31,7 @@
           filter
           light
           small
-          v-for="(tag, index) in getSideBarTags"
+          v-for="(tag, index) in getSideBarTags()"
           :value="tag.id"
           :key="index"
           :color="tag.color">
@@ -60,14 +60,6 @@ export default {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
-    getSideBarTags() {
-      if (this.tags && this.tagCategory) {
-        const sideBarTagCategories = this.tagCategory.filter(item => item.is_header === false);
-        const sideBarTags = this.filterTagByCategory(sideBarTagCategories[0].id);
-        return sideBarTags;
-      }
-      return [];
-    },
     getFilterTags() {
       this.filterTags = this.$store.getters.filterTags; // eslint-disable-line
       return this.$store.getters.filterTags;
@@ -75,7 +67,24 @@ export default {
   },
   methods: {
     filterTagByCategory(categoryId) {
-      return this.tags.filter(item => item.category === `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`);
+      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
+    },
+    convertUrlToId(url) {
+      if (url && typeof url === 'string') {
+        const idStringArray = url.split('/');
+        const id = idStringArray[idStringArray.length - 2];
+
+        return parseInt(id, 10);
+      }
+      return url;
+    },
+    getSideBarTags() {
+      if (this.tags && this.tagCategory) {
+        const sideBarTagCategories = this.tagCategory.filter(item => item.is_header === false);
+        const sideBarTags = this.filterTagByCategory(sideBarTagCategories[0].id);
+        return sideBarTags;
+      }
+      return [];
     },
     getIcon(name) {
       switch (name) {

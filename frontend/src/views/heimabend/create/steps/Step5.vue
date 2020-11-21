@@ -6,7 +6,10 @@
 <v-container>
   <v-row class="mt-6 ml-4">
     <span class="subtitle-1">
-      Wähle so viele thematische Kategorien aus, wie zu deiner Heimabend-Idee passen.
+      Wähle so viele thematische Kategorien aus, wie zu deiner Heimabend-Idee passen. <br>
+      <br>
+      Wenn du noch eine Kategorie hinzufügen möchtest, kannst du dich
+      gerne mit dem Kontaktformular direkt an uns wenden.
     </span>
   </v-row>
   <v-row class="ma-6">
@@ -145,7 +148,7 @@ export default {
   methods: {
 
     filterTagByCategory(categoryId) {
-      return this.tags.filter(item => item.category === `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`);
+      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
     },
     onResetPriceClick() {
       this.data.costsRating = 0;

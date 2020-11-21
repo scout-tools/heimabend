@@ -79,11 +79,11 @@ export default {
     valid: true,
     n: 0,
     texts: [
-      'Pflicht: In welchen Jahreszeiten kann dein Heimabend durchgeführt werden?',
-      'Pflicht: An welchen Orten kann dein Heimabend stattfinden?',
-      'Pflicht: Für welche Stufen ist dein Heimabend geeignet?',
-      'Pflicht: Was ist dein Heimabend für ein Typ?',
-      'Hast du eine besonderes Thema?',
+      'Pflichtfeld: In welchen (Jahres-)Zeiten kann deine Idee durchgeführt werden?',
+      'Pflichtfeld: An welchen Orten kann deine Idee stattfinden?',
+      'Pflichtfeld: Für welche Stufen ist deine Idee geeignet?',
+      'Pflichtfeld: Um welche Art von Heimabend-Ideen handelt es sich?',
+      'Lässt sich deine Heimabend-Idee einem speziellen Thema zuordnen?',
     ],
   }),
 
@@ -160,7 +160,7 @@ export default {
       return returnValue;
     },
     filterTagByCategory(categoryId) {
-      return this.tags.filter(item => item.category === `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`);
+      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
     },
     convertUrlToId(url) {
       if (url && typeof url === 'string') {

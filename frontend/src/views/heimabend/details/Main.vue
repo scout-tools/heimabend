@@ -89,7 +89,7 @@ export default {
       return `https://inspirator.dpbm.de/heimabend/${this.id}/`;
     },
     getDescription() {
-      return 'Schau dir mal den Heimabend an.';
+      return 'Schau dir mal diese Heimabend-Idee an.';
     },
     refresh() {
       this.item = [];

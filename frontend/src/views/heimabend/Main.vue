@@ -40,6 +40,29 @@
       color="primary"
       indeterminate
     />
+    <v-snackbar
+      v-model="showSuccess"
+      color="success"
+      top
+      :timeout="timeout"
+    >
+      Vielen Dank für deine Heimabend-Idee! <br>
+      <br>
+      Wir freuen unsüber deinen Beitrag zum Inspirator. <br>
+      Das Team wird sich deiner Idee zeitnah widmen und sie veröffentlichen. <br>
+      Bei Rückfragen dazu melden wir uns über die von dir angegebene
+      E-Mail-Adresse bei dir.  <br>
+      Wenn du Fragen an uns hast, nutze gerne das Kontaktformular. <br>
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          text
+          v-bind="attrs"
+          @click="showSuccess = false"
+        >
+          Schließen
+        </v-btn>
+      </template>
+    </v-snackbar>
     <!-- <v-btn
       class="ma-10"
       v-if="count > items.length"
@@ -108,13 +131,12 @@ export default {
       params.append('timestamp', new Date().getTime());
       return params;
     },
+    showSuccess() {
+      return !!this.$route.params.showSuccess;
+    },
   },
 
   methods: {
-    // onClickLoadMore() {
-    //   this.isLoadingMore = false;
-    //   this.loadMore();
-    // },
     loadMore() {
       const stillRunning = this.isLoadingMore;
       this.isLoadingMore = true;
@@ -215,6 +237,7 @@ export default {
     nextPath: null,
     isLoadingMore: false,
     count: 0,
+    timeout: 13000,
     saveFilterLastFilter: false,
   }),
 };

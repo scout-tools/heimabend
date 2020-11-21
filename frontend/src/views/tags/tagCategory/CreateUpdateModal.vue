@@ -78,7 +78,7 @@
                 </v-col>
                 <v-col cols="6">
                   <v-switch
-                    label="Kopfzeile?"
+                    label="In Filter-Kopfzeile?"
                     color="secondary"
                     v-model="data.is_header"
                     hide-details
@@ -89,7 +89,7 @@
               <v-row>
                 <v-col cols="6">
                   <v-switch
-                    label="In der Heimabend Übersicht Sichtbar?"
+                    label="Tag Sichtbar in Heimabend-Übersicht?"
                     color="secondary"
                     v-model="data.is_event_overview"
                     hide-details
@@ -98,7 +98,7 @@
                 </v-col>
                 <v-col cols="6">
                   <v-switch
-                    label="Pflicht?"
+                    label="Pflicht bei der Anlage?"
                     color="secondary"
                     v-model="data.is_mandatory"
                     hide-details

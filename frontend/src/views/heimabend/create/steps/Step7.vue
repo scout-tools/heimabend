@@ -21,7 +21,8 @@
     </v-row>
     <v-row class="mt-6 ml-2">
       <span class="subtitle-1">
-        Diese E-Mail Adresse ist nur für das Redaktions-Team bei evtuellen Rückfragen sichtbar.
+        Diese E-Mail Adresse ist nur für das Redaktions-Team bei
+        evtuellen Rückfragen zu deiner Heimabend-Idee sichtbar.
       </span>
     </v-row>
     <v-row class="ma-3">

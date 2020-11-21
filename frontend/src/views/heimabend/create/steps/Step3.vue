@@ -6,7 +6,10 @@
   <v-container>
     <v-row class="mt-6 ml-4">
       <span class="subtitle-1">
-        Füge hier alle Materialien hinzu. Bestätige jedes einzelne Objekt mit "Enter".
+        Sammle hier bitte alles an Material, was für die
+        Vorbereitung und Durchführung deiner Idee benötigt
+        wird. Die einzelnen Objekte kannst du jeweils mit
+        „Enter“ bestätigen.“
       </span>
     </v-row>
     <v-row class="ma-4">

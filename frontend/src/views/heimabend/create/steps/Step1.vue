@@ -5,8 +5,18 @@
   >
   <v-container>
     <v-row class="mt-6 ml-2">
+      <span class="text-left subtitle-1">
+        Willkommen bei der <b> Heimabenderstellung </b>. <br>
+        <br>
+        Viele Pfadfinder freuen sich
+        schon auf deine Inspiration. Im folgenden führen wir dich durch 7 kleine
+        Schritte. Viel Spaß!
+      </span>
+    </v-row>
+    <v-divider class="text-left ma-5"/>
+    <v-row class="mt-6 ml-2">
       <span class="subtitle-1">
-        Gib eine passende Überschrift für deine Heimabend-Idee ein.
+        Gib deiner Heimabend-Idee eine passende Überschrift.
       </span>
     </v-row>
     <v-row class="ma-4">
