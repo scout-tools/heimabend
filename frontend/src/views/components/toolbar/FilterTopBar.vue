@@ -49,7 +49,7 @@
               v-for="category in getTopBarTagCategories"
               :key="category.id"
               cols="2">
-              <filter-button
+              <filter-tags
                 :category="category"
               />
             </v-col>
@@ -77,7 +77,7 @@
         v-for="category in getTopBarTagCategories"
         :key="category.id"
         class="ml-1 mr-10 my-5">
-        <filter-button
+        <filter-tags
           :category="category"
         />
       </v-row>
@@ -91,13 +91,13 @@
 <script>
 import { mapGetters } from 'vuex';
 
-import FilterButton from '@/views/components/button/FilterButton.vue'; //eslint-disable-line
+import FilterTags from '@/views/components/dropdown/FilterTags.vue'; //eslint-disable-line
 import ActiveFilter from '@/views/components/button/ActiveFilter.vue'; //eslint-disable-line
 import Sorter from '@/views/components/dropdown/Sorter.vue'; //eslint-disable-line
 
 export default {
   components: {
-    FilterButton,
+    FilterTags,
     ActiveFilter,
     Sorter,
   },
