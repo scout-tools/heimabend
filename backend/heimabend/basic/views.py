@@ -13,8 +13,7 @@ from .serializers import TagSerializer, EventSerializer, MessageSerializer, Like
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Tag.objects.all()
-    ordering = ['ordered_id', 'name']
+    queryset = Tag.objects.all().order_by('ordered_id', 'name')
     serializer_class = TagSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ('is_visible',)
@@ -22,8 +21,7 @@ class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 class TagCategoryViewSet(LoggingMixin, viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = TagCategory.objects.all()
-    ordering = ['ordered_id', 'name']
+    queryset = TagCategory.objects.all().order_by('ordered_id', 'name')
     serializer_class = TagCategorySerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ('is_visible',)
