@@ -572,8 +572,11 @@ export default {
       }
       return [];
     },
+    convertUrlArray(ary) {
+      return ary.map(e => this.convertUrlToId(e));
+    },
     getEventTags(tagArray) {
-      const tagsObject = this.tags.filter(item => tagArray.includes(`${process.env.VUE_APP_API}basic/tag/${item.id}/`));
+      const tagsObject = this.tags.filter(item => this.convertUrlArray(tagArray).includes(item.id));
       const containsCategoryId = tagsObject.filter(tag => [2,4,5,9].includes(this.convertUrlToId(tag.category))); // eslint-disable-line
       return containsCategoryId;
     },
