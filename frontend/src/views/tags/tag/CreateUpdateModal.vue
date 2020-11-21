@@ -154,13 +154,13 @@ export default {
     rules: {
       name: [
         v => !!v || 'Titel ist erforderlich',
-        v => (v && v.length >= 2) || 'Name must be more than 10 characters',
-        v => (v && v.length <= 15) || 'Name must be less than 40 characters',
+        v => (v && v.length >= 3) || 'Muss mehr als 3 Zeichen haben.',
+        v => (v && v.length <= 20) || 'Muss weniger als 21 Zeichen haben',
       ],
       description: [
       ],
       color: [
-        v => (v.length <= 7) || 'Name must be less than 200 characters',
+        v => (v.length === 7) || 'Sieben Zeichen',
       ],
       categoryId: [
         v => !!v || 'Kategorie ist erforderlich',
