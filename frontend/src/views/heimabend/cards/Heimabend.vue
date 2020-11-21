@@ -224,7 +224,7 @@
 
       <v-container>
         <v-tooltip
-          v-for="(tag, index2) in item.tags"
+          v-for="(tag, index2) in getEventTags(item.tags)"
           :key="index2"
           slot="append"
           bottom
@@ -234,13 +234,13 @@
         <v-chip
           v-on="on"
           class="ma-2 info-cursor"
-          :color="getTagColorById(tag)"
+          :color="getTagColorById(tag.id)"
         >
-          {{ getTagNameById(tag) }}
+          {{ getTagNameById(tag.id) }}
         </v-chip>
         </template>
         <span>
-          {{ getDescriptionNameById(tag) }}
+          {{ getDescriptionNameById(tag.id) }}
         </span>
         </v-tooltip>
       </v-container>
@@ -564,6 +564,30 @@ export default {
     },
     yourHeimabendSpan() {
       return this.isMobil ? 'headerIsMobile' : 'headerIsDesktop';
+    },
+    getMandatoryBarTagCategories() {
+      if (this.tagCategory) {
+        return this.tagCategory
+          .filter(item => item.is_event_overview);
+      }
+      return [];
+    },
+    getEventTags(tagArray) {
+      const tagsObject = this.tags.filter(item => tagArray.includes(`${process.env.VUE_APP_API}basic/tag/${item.id}/`));
+      const containsCategoryId = tagsObject.filter(tag => [2,4,5,9].includes(this.convertUrlToId(tag.category))); // eslint-disable-line
+      return containsCategoryId;
+    },
+    filterTagByCategory(tags, categoryId) {
+      return this.tags.filter(item => item.category === `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`);
+    },
+    convertUrlToId(url) {
+      if (url && typeof url === 'string') {
+        const idStringArray = url.split('/');
+        const id = idStringArray[idStringArray.length - 2];
+
+        return parseInt(id, 10);
+      }
+      return url;
     },
     getDescriptionClass() {
       let string = '';
