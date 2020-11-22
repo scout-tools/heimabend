@@ -223,26 +223,8 @@
       </div>
 
       <v-container>
-        <v-tooltip
-          v-for="(tag, index2) in getEventTags(item.tags)"
-            :key="index2"
-            slot="append"
-            bottom
-            nudge-left="80"
-        >
-        <template v-slot:activator="{ on }">
-        <v-chip
-          v-on="on"
-          class="ma-2 info-cursor"
-          :color="getTagColorById(tag.id)"
-        >
-          {{ getTagNameById(tag.id) }}
-        </v-chip>
-        </template>
-        <span>
-          {{ getDescriptionNameById(tag.id) }}
-        </span>
-        </v-tooltip>
+        <v-chip-tooltip v-for="(tag, index2) in getEventTags(item.tags)" :key="index2"
+                        :tag="tag" margin="ma-2" cursor="info-cursor"/>
       </v-container>
 
       <v-divider
@@ -529,6 +511,8 @@ import MenuRight from '@/views/components/menu/Right.vue';
 // eslint-disable-next-line import/no-unresolved
 import Fab from '@/views/components/fab/Standard.vue';
 // eslint-disable-next-line import/no-unresolved
+import VChipTooltip from '@/views/components/chip/ChipTooltip.vue';
+// eslint-disable-next-line import/no-unresolved
 import DeleteModal from '../dialogs/DeleteModal.vue';
 
 
@@ -548,6 +532,7 @@ export default {
     DeleteModal,
     MenuRight,
     Fab,
+    VChipTooltip,
   },
   methods: {
     scroll() {
@@ -686,51 +671,6 @@ export default {
     },
     verticalMargin() {
       return !this.$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-0';
-    },
-    getDescriptionNameById(idString) {
-      let id;
-      if (idString && typeof idString === 'string') {
-        const idStringArray = idString.split('/');
-        id = idStringArray[idStringArray.length - 2];
-      } else {
-        id = idString;
-      }
-      const returnTag = this.tags.find(tag => tag.id === parseInt(id, 10));
-      if (returnTag && returnTag.description) {
-        return returnTag.description;
-      }
-      if (returnTag && returnTag.name) {
-        return returnTag.name;
-      }
-      return 'Keine Beschreibung vorhanden';
-    },
-    getTagNameById(idString) {
-      let id;
-      if (idString && typeof idString === 'string') {
-        const idStringArray = idString.split('/');
-        id = idStringArray[idStringArray.length - 2];
-      } else {
-        id = idString;
-      }
-      const returnTag = this.tags.find(tag => tag.id === parseInt(id, 10));
-      if (returnTag && returnTag.name) {
-        return returnTag.name;
-      }
-      return false;
-    },
-    getTagColorById(idString) {
-      let id;
-      if (idString && typeof idString === 'string') {
-        const idStringArray = idString.split('/');
-        id = idStringArray[idStringArray.length - 2];
-      } else {
-        id = idString;
-      }
-      const returnTag = this.tags.find(tag => tag.id === parseInt(id, 10));
-      if (returnTag && returnTag.color) {
-        return returnTag.color;
-      }
-      return 'gray';
     },
     onUpdateClick(params) {
       this.$router.push({ name: 'heimabendUpdate', params });

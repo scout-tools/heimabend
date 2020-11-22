@@ -3,20 +3,7 @@
       tile
       color="primary"
     >
-    <!-- <div
-      v-for="category in getSideBarTagCategories"
-      :key="category.id"
-    >
-        <div dark class="mt-7">
-        <span  dark class="subtitle-1 whiteText">
-          {{ category.name }}
-        </span>
-        <v-icon small class="whiteText">
-          {{ getIcon(category.name) }}
-        </v-icon>
-      <v-divider class="my-1" dark/>
-        </div> -->
-      <span dark class="subtitle-1 whiteText">
+      <span class="subtitle-1 whiteText">
           {{ 'Themenauswahl' }}
         </span>
       <v-chip-group
@@ -27,26 +14,20 @@
         @change="onChange()"
         @click="onClick()"
       >
-        <v-chip
-          filter
-          light
-          small
-          v-for="(tag, index) in getSideBarTags()"
-          :value="tag.id"
-          :key="index"
-          :color="tag.color">
-          {{ tag.name }}
-        </v-chip>
+        <v-chip-tooltip v-for="(tag, index) in getSideBarTags()" :key="index"
+                        :tag="tag" small filter/>
       </v-chip-group>
-    <!-- </div>  filterTagByCategory(category.id) -->
   </v-sheet>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-// eslint-disable-next-line import/no-unresolved
+import VChipTooltip from '@/views/components/chip/ChipTooltip.vue';
 
 export default {
+  components: {
+    VChipTooltip,
+  },
   data: () => ({
     items: [],
     filterTags: [],
