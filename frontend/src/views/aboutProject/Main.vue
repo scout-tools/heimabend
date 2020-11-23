@@ -11,9 +11,7 @@
       <v-divider/>
       <v-sheet class="ma-4 pa-4">
         <div class="pa-3 display-1">
-          <u>
             Warum?
-          </u>
         </div>
 
         <div class="ma-3 subtitle-1 text-left">
@@ -41,9 +39,7 @@
 
       <v-sheet class="ma-4 pa-4">
         <div class="pa-3 display-1">
-          <u>
             Die Idee
-          </u>
         </div>
         <div class="ma-5 subtitle-1 text-left">
           Wir haben diese Plattform geschaffen, um die kostbaren Erfahrungsschätze aus unserem
@@ -72,9 +68,7 @@
 
       <v-sheet class="ma-4 pa-4">
         <div class="pa-3 display-1">
-          <u>
-            Kann ich mitmachen?
-          </u>
+          Kann ich mitmachen?
         </div>
 
         <div class="ma-5 subtitle-1 text-left">

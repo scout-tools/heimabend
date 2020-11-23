@@ -177,7 +177,8 @@ export default {
       this.chips = [...this.chips];
     },
     onScroll() {
-      this.$store.commit('setPageScrolled', true);
+      const isOnTop = window.scrollY > 20;
+      this.$store.commit('setPageScrolled', isOnTop);
     },
   },
   mounted() {

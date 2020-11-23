@@ -79,7 +79,7 @@
   >
     <template v-slot:activator>
       <v-btn
-        color="blue lighten-4"
+        color="secondary"
         fab
         @click="scrollToTop">
         <v-icon> mdi-chevron-up</v-icon>

@@ -14,7 +14,7 @@
         v-for="(faq,i) in faqs"
         :key="i">
         <v-expansion-panel-header>
-          <span class="title"> {{ faq.question }}</span>
+          <span class="title ma-3"> {{ faq.question }}</span>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <p

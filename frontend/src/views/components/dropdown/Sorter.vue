@@ -5,7 +5,6 @@
     label="Filter"
     return-object
     hide-details
-    outlined
     dense
     item-value="id"
     single-line

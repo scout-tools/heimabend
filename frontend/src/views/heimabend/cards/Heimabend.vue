@@ -493,7 +493,7 @@
   >
     <menu-right
       pa-5
-      class="fixed menu-right" style="padding-top: 110px; padding-left: 5px; padding-right: 5px;"
+      class="fixed menu-right" style="padding-top: 50px; padding-left: 5px; padding-right: 5px;"
     />
   </v-col>
   </v-row>
@@ -754,7 +754,7 @@ export default {
       return !this.isMobil ? 30 : 28;
     },
     getLikeButtonText() {
-      return !this.isMobil ? 'Mehr Details' : 'Mehr';
+      return !this.isMobil ? 'Mehr Details zum zur Idee' : 'Mehr';
     },
     paddingleftLebelIcons() {
       return !this.isMobil ? 'pl-2' : 'pl-1';

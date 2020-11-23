@@ -5,7 +5,7 @@
     >
       <span class="subtitle-1 whiteText">
           {{ 'Themenauswahl' }}
-        </span>
+      </span>
       <v-chip-group
         multiple
         column
