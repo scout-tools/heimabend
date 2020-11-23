@@ -25,13 +25,14 @@
       />
 
       <v-spacer/>
-
+      <router-link to="/">
       <img
         src="https://dpbm.de/wp/wp-content/uploads/2019/02/mosaikWhite.svg"
         class="mr-2"
         height="50"
         alt="Bundesabzeichen vom Deutschen Pfadfinderbund Mosaik"
       />
+      </router-link>
     </v-app-bar>
 
     <menu-left
