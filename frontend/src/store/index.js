@@ -30,6 +30,7 @@ export default new Vuex.Store({
     apiIsDown: false,
     acceptedPrivacy: false,
     liked: [],
+    pageScrolled: false,
   },
   getters: {
     isLvlOne(state) {
@@ -100,6 +101,9 @@ export default new Vuex.Store({
     },
     apiIsDown(state) {
       return state.apiIsDown;
+    },
+    isPageScrolled(state) {
+      return state.pageScrolled;
     },
   },
   mutations: {
@@ -211,6 +215,9 @@ export default new Vuex.Store({
     },
     setLiked(state, id) {
       state.liked.push(id);
+    },
+    setPageScrolled(state, isScrolled) {
+      state.pageScrolled = isScrolled;
     },
   },
   actions: {

@@ -57,6 +57,7 @@
         <router-view
           class="content"
           :class="getMargin"
+          v-scroll="onScroll"
         />
       <Fab
         v-if="isMainPage && !apiIsDown"
@@ -175,6 +176,9 @@ export default {
       this.chips.splice(this.chips.indexOf(item), 1);
       this.chips = [...this.chips];
     },
+    onScroll() {
+      this.$store.commit('setPageScrolled', true);
+    },
   },
   mounted() {
     this.getTags();
@@ -183,7 +187,6 @@ export default {
   },
   data: () => ({
     API_URL: process.env.VUE_APP_API,
-    fab: false,
     colorFab: 'green',
     iconFab: 'mdi-plus',
     showError: false,
