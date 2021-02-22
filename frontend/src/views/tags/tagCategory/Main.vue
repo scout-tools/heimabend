@@ -86,10 +86,11 @@ export default {
     timeout: 3000,
     headers: [
       { text: 'Name', value: 'name' },
-      { text: 'Beschreibung', value: 'description' },
       { text: 'Reigenfolge', value: 'ordered_id' },
       { text: 'Sichtbar?', value: 'is_visible' },
       { text: 'Kopfzeile?', value: 'is_header' },
+      { text: 'Pflicht?', value: 'is_mandatory' },
+      { text: 'Übersicht?', value: 'is_event_overview' },
       { text: 'Aktion', value: 'action', sortable: false },
     ],
     API_URL: process.env.VUE_APP_API,
@@ -115,7 +116,7 @@ export default {
 
   methods: {
     getNewItems() {
-      const path = `${this.API_URL}basic/tag-category/`;
+      const path = `${this.API_URL}basic/tag-category?&timestamp=${new Date().getTime()}`;
       axios.get(path)
         .then((res) => {
           this.items = res.data;

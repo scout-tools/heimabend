@@ -1,17 +1,19 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-flex mb-10 lg7>
-        <div :class="divClass">
-          Kontakt
-        </div>
-        <v-card :class="cardClass">
+      <v-flex ma-3 lg7>
+      <div class="display-1 ma-10 text-uppercase" >
+        Nachricht an das Team
+      </div>
+
+        <v-divider/>
+
+        <v-sheet :class="cardClass">
           <form>
             <v-text-field
               v-model="name"
               :error-messages="nameErrors"
               :counter="10"
-              solo
               label="Dein Name"
               required
               @input="$v.name.$touch()"
@@ -19,7 +21,6 @@
             ></v-text-field>
             <v-text-field
               v-model="email"
-              solo
               :error-messages="emailErrors"
               label="Deine E-Mail Adresse"
               @input="$v.email.$touch()"
@@ -28,7 +29,6 @@
             <v-select
               v-model="topic"
               :items="items"
-              solo
               :error-messages="topicErrors"
               label="Art der Nachricht"
               required
@@ -38,16 +38,21 @@
             <v-textarea
               v-model="messageBody"
               label="Nachricht"
-              solo
               required
               :error-messages="messageBodyErrors"
               @change="$v.messageBody.$touch()"
               @blur="$v.messageBody.$touch()"
               hint="Hier deine Nachricht eintippen."></v-textarea>
 
-            <v-btn class="mr-4" @click="submit">Absenden</v-btn>
+            <v-btn
+              class="mr-4"
+              color="primary"
+              @click="submit"
+            >
+              Absenden
+            </v-btn>
           </form>
-        </v-card>
+        </v-sheet>
       </v-flex>
     </v-row>
     <v-snackbar
@@ -109,13 +114,13 @@ export default {
   computed: {
     cardClass() {
       if (!this.isMobil) {
-        return 'ma-10 pa-10';
+        return 'ma-4 pa-4';
       }
       return 'ma-2 pa-2';
     },
     divClass() {
       if (!this.isMobil) {
-        return 'display-3 mb-10';
+        return 'display-2 mb-4';
       }
       return 'display-1 ma-2';
     },

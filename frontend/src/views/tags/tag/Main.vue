@@ -97,9 +97,8 @@ export default {
     timeout: 3000,
     headers: [
       { text: 'Name', value: 'name' },
-      { text: 'Beschreibung', value: 'description' },
       { text: 'Farbe', value: 'color' },
-      // { text: 'Wie oft verwendet?', value: 'tag_count' },
+      { text: 'Reigenfolge', value: 'ordered_id' },
       { text: 'Kategorie', value: 'categoryId' },
       { text: 'Sichtbar?', value: 'is_visible' },
       { text: 'Aktion', value: 'action', sortable: false },
@@ -141,7 +140,7 @@ export default {
       return url;
     },
     getNewItems() {
-      const path = `${this.API_URL}basic/tag/`;
+      const path = `${this.API_URL}basic/tag?&timestamp=${new Date().getTime()}`;
       axios.get(path)
         .then((res) => {
           this.items = res.data;

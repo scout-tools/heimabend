@@ -7,17 +7,7 @@
     :class="yourHeimabendSpan()">
     dein Heimabend.
   </h2>
-  <div
-    v-infinite-scroll="loadMore"
-    spinner="spiral"
-    infinite-scroll-disabled="loading"
-    infinite-scroll-distance="900"
-    infinite-scroll-throttle-delay="1000"
-  >
-      <!-- data-aos="zoom-in"
-      data-aos-duration="800"
-      data-aos-delay="0"
-      data-aos-anchor-placement="top-bottom" -->
+  <div>
     <v-card
       :max-width="getMaxWidth()"
       elevation=30
@@ -32,24 +22,22 @@
         class="primary px-0"
         :class="paddingleftLebelIcons"
       >
-      <keep-alive>
         <v-img
           class="ml-1"
           :src="require('@/assets/wolfskopf.png')"
-          v-if="item.isLvlOne && isDetailsView"
+          v-if="getIsLvlOne(item) && isDetailsView"
           :max-width="maxWidthKnots"
         />
-      </keep-alive>
         <v-img
           class="ml-1"
           :src="require('../../../assets/knot_blue.png')"
-          v-if="item.isLvlTwo && isDetailsView"
+          v-if="getIsLvlTwo(item) && isDetailsView"
           :max-width="maxWidthKnots"
         />
         <v-img
           class="ml-1"
           :src="require('../../../assets/knot_red.png')"
-          v-if="item.isLvlThree && isDetailsView"
+          v-if="getIsLvlThree(item) && isDetailsView"
           :max-width="maxWidthKnots"
         />
 
@@ -86,9 +74,9 @@
             </span>
           </v-tooltip>
 
-        <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
+        <v-divider v-if="isAuthenticated" vertical/>
         <v-btn
-          class="ma-1 ml-0"
+          class="ma-1"
           text
           icon
           color="red lighten-3"
@@ -97,9 +85,9 @@
           <v-icon>mdi-delete-outline</v-icon>
         </v-btn>
 
-          <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
+          <v-divider v-if="isAuthenticated" vertical/>
           <v-btn
-            class="ma-1 ml-0"
+            class="ma-1"
             text
             icon
             color="lightPrimary"
@@ -107,8 +95,6 @@
             @click="onUpdateClick(item)">
             <v-icon>mdi-pencil-outline</v-icon>
           </v-btn>
-
-          <v-divider class="mx-2 ml-2" v-if="isAuthenticated" vertical/>
           <v-tooltip
             v-if="!isMobil && !isAuthenticated && item.like_score > 0"
             nudge-left="80"
@@ -153,7 +139,6 @@
               </v-col>
               <v-col cols="8">
                 <v-tooltip
-                  nudge-left="80"
                   bottom>
                   <template v-slot:activator="{ on }">
                    <router-link
@@ -162,12 +147,14 @@
                       class="no-underline"
                     >
                     <v-btn
-                      depressed
                       @click="onDetailsClick(item)"
-                      outlined
-                      class="test-color-text"
+                      elevation="2"
+                      color="#EEEEEE"
                       block
                       v-on="on">
+                      <v-icon left>
+                        mdi-page-next-outline
+                      </v-icon>
                       {{ getLikeButtonText }}
                     </v-btn>
                     </router-link>
@@ -236,26 +223,8 @@
       </div>
 
       <v-container>
-        <v-tooltip
-          v-for="(tag, index2) in item.tags"
-          :key="index2"
-          slot="append"
-          bottom
-          nudge-left="80"
-        >
-        <template v-slot:activator="{ on }">
-        <v-chip
-          v-on="on"
-          class="ma-2 info-cursor"
-          :color="getTagColorById(tag)"
-        >
-          {{ getTagNameById(tag) }}
-        </v-chip>
-        </template>
-        <span>
-          {{ getDescriptionNameById(tag) }}
-        </span>
-        </v-tooltip>
+        <v-chip-tooltip v-for="(tag, index2) in getEventTags(item.tags)" :key="index2"
+                        :tag="tag" margin="ma-2" cursor="info-cursor"/>
       </v-container>
 
       <v-divider
@@ -283,7 +252,7 @@
             </v-btn>
           </template>
           <span>
-            Dieser Heimabend ist mit deiner Sippe digital durchführbar
+            Diese Idee ist mit deiner Sippe digital durchführbar
           </span>
         </v-tooltip>
 
@@ -310,7 +279,7 @@
             </v-btn>
           </template>
           <span>
-            Dieser Heimabend ist alleine durchführbar
+            Diese Idee ist alleine durchführbar
           </span>
         </v-tooltip>
 
@@ -471,7 +440,7 @@
     y='top'
     :timeout="timeout"
   >
-    {{ 'Fehler beim Speichern des Heimabends' }}
+    {{ 'Fehler beim Speichern der Heimabend-Idee' }}
   </v-snackbar>
   <v-snackbar
     v-model="showSuccess"
@@ -479,7 +448,7 @@
     y='top'
     :timeout="timeout"
   >
-    {{ 'Der Heimabend wurde erfolgreich gelöscht' }}
+    {{ 'Diese Heimabend-Idee wurde erfolgreich gelöscht' }}
   </v-snackbar>
   <DeleteModal
     ref="deleteTagModal"
@@ -524,7 +493,7 @@
   >
     <menu-right
       pa-5
-      class="fixed menu-right" style="padding-top: 110px; padding-left: 5px; padding-right: 5px;"
+      class="fixed menu-right" style="padding-top: 50px; padding-left: 5px; padding-right: 5px;"
     />
   </v-col>
   </v-row>
@@ -541,6 +510,8 @@ import { mapGetters } from 'vuex';
 import MenuRight from '@/views/components/menu/Right.vue';
 // eslint-disable-next-line import/no-unresolved
 import Fab from '@/views/components/fab/Standard.vue';
+// eslint-disable-next-line import/no-unresolved
+import VChipTooltip from '@/views/components/chip/ChipTooltip.vue';
 // eslint-disable-next-line import/no-unresolved
 import DeleteModal from '../dialogs/DeleteModal.vue';
 
@@ -561,13 +532,49 @@ export default {
     DeleteModal,
     MenuRight,
     Fab,
+    VChipTooltip,
   },
   methods: {
+    scroll() {
+      window.onscroll = () => {
+        const bottomOfWindow = document.documentElement.scrollTop
+          + window.innerHeight + 1000 > document.documentElement.offsetHeight;
+        if (bottomOfWindow) {
+          this.loadMore();
+        }
+      };
+    },
     loadMore() {
       this.$emit('loadMore');
     },
     yourHeimabendSpan() {
       return this.isMobil ? 'headerIsMobile' : 'headerIsDesktop';
+    },
+    getMandatoryBarTagCategories() {
+      if (this.tagCategory) {
+        return this.tagCategory
+          .filter(item => item.is_event_overview);
+      }
+      return [];
+    },
+    convertUrlArray(ary) {
+      return ary.map(e => this.convertUrlToId(e));
+    },
+    getEventTags(tagArray) {
+      const tagsObject = this.tags.filter(item => this.convertUrlArray(tagArray).includes(item.id));
+      const containsCategoryId = tagsObject.filter(tag => [2,4,5,9].includes(this.convertUrlToId(tag.category))); // eslint-disable-line
+      return containsCategoryId;
+    },
+    filterTagByCategory(tags, categoryId) {
+      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
+    },
+    convertUrlToId(url) {
+      if (url && typeof url === 'string') {
+        const idStringArray = url.split('/');
+        const id = idStringArray[idStringArray.length - 2];
+        return parseInt(id, 10);
+      }
+      return url;
     },
     getDescriptionClass() {
       let string = '';
@@ -642,13 +649,13 @@ export default {
     getLikeScoreTooltip(score) {
       switch (score) {
         case 0:
-          return 'Dieser Heimabend hat sich Inspirator-Stern verdient';
+          return 'Diese Idee hat sich Inspirator-Stern verdient';
         case 1:
-          return 'Dieser Heimabend hat sich einen Inspirator-Stern verdient';
+          return 'Diese Idee hat sich einen Inspirator-Stern verdient';
         case 2:
-          return 'Dieser Heimabend hat sich zwei Inspirator-Sterne verdient';
+          return 'Diese Idee hat sich zwei Inspirator-Sterne verdient';
         case 3:
-          return 'Dieser Heimabend hat sich drei Inspirator-Sterne verdient';
+          return 'Diese Idee hat sich drei Inspirator-Sterne verdient';
         default:
           return 'Fehler';
       }
@@ -664,51 +671,6 @@ export default {
     },
     verticalMargin() {
       return !this.$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-0';
-    },
-    getDescriptionNameById(idString) {
-      let id;
-      if (idString && typeof idString === 'string') {
-        const idStringArray = idString.split('/');
-        id = idStringArray[idStringArray.length - 2];
-      } else {
-        id = idString;
-      }
-      const returnTag = this.tags.find(tag => tag.id === parseInt(id, 10));
-      if (returnTag && returnTag.description) {
-        return returnTag.description;
-      }
-      if (returnTag && returnTag.name) {
-        return returnTag.name;
-      }
-      return 'Keine Beschreibung vorhanden';
-    },
-    getTagNameById(idString) {
-      let id;
-      if (idString && typeof idString === 'string') {
-        const idStringArray = idString.split('/');
-        id = idStringArray[idStringArray.length - 2];
-      } else {
-        id = idString;
-      }
-      const returnTag = this.tags.find(tag => tag.id === parseInt(id, 10));
-      if (returnTag && returnTag.name) {
-        return returnTag.name;
-      }
-      return false;
-    },
-    getTagColorById(idString) {
-      let id;
-      if (idString && typeof idString === 'string') {
-        const idStringArray = idString.split('/');
-        id = idStringArray[idStringArray.length - 2];
-      } else {
-        id = idString;
-      }
-      const returnTag = this.tags.find(tag => tag.id === parseInt(id, 10));
-      if (returnTag && returnTag.color) {
-        return returnTag.color;
-      }
-      return 'gray';
     },
     onUpdateClick(params) {
       this.$router.push({ name: 'heimabendUpdate', params });
@@ -737,6 +699,18 @@ export default {
     getId() {
       return this.$route.params.id;
     },
+    getIsLvlOne(item) {
+      const lvlOneId = this.tags.filter(tag => tag.name === 'Wölflinge')[0].id;
+      return !!item.tags.filter(tag => tag.includes(lvlOneId)).length;
+    },
+    getIsLvlTwo(item) {
+      const lvlTwoId = this.tags.filter(tag => tag.name === 'Pfadfinder')[0].id;
+      return !!item.tags.filter(tag => tag.includes(lvlTwoId)).length;
+    },
+    getIsLvlThree(item) {
+      const lvlThreeId = this.tags.filter(tag => tag.name === 'Rover')[0].id;
+      return !!item.tags.filter(tag => tag.includes(lvlThreeId)).length;
+    },
   },
   data() {
     return {
@@ -756,6 +730,7 @@ export default {
   },
   mounted() {
     this.scrollToId();
+    this.scroll();
   },
   computed: {
     ...mapGetters([
@@ -779,13 +754,13 @@ export default {
       return !this.isMobil ? 30 : 28;
     },
     getLikeButtonText() {
-      return !this.isMobil ? 'Mehr Details' : 'Mehr';
+      return !this.isMobil ? 'Mehr Details zum zur Idee' : 'Mehr';
     },
     paddingleftLebelIcons() {
       return !this.isMobil ? 'pl-2' : 'pl-1';
     },
     maxWidthKnots() {
-      return !this.isMobil ? '30' : '18';
+      return !this.isMobil ? '18' : '14';
     },
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -803,7 +778,7 @@ export default {
     max-height: 500px;
   }
   .test-color {
-    background-color: rgba(255, 254, 254, 0.952) !important;
+    background-color: rgba(121, 121, 121, 0.068) !important;
   }
   .test-color-text {
     color: rgba(0, 0, 0, 0.829)
@@ -826,7 +801,6 @@ export default {
   .headerIsDesktop {
     font-size: 3.5rem !important;
     letter-spacing: 0.4em;
-    color: rgba(255, 255, 255, 0.692);
   }
   .max-width-class {
     max-width: 100% !important;
@@ -839,6 +813,6 @@ export default {
   height: 100vh !important;
 }
 .negativ-top-margin {
-  margin-top: -100px !important;
+  margin-top: -150px !important;
 }
 </style>

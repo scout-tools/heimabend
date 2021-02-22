@@ -42,6 +42,7 @@
         >
           <step-two
             ref="step2"
+            :data="data"
             @prevStep="prevStep()"
             @nextStep="nextStep()"
           />
@@ -52,6 +53,7 @@
         >
           <step-three
             ref="step3"
+            :data="data"
             @prevStep="prevStep()"
             @nextStep="nextStep()"
           />
@@ -62,6 +64,40 @@
         >
           <step-four
             ref="step4"
+            :data="data"
+            @prevStep="prevStep()"
+            @nextStep="nextStep()"
+          />
+        </v-stepper-content>
+
+        <v-stepper-content
+          step="5"
+        >
+          <step-five
+            ref="step5"
+            :data="data"
+            @prevStep="prevStep()"
+            @nextStep="nextStep()"
+          />
+        </v-stepper-content>
+
+        <v-stepper-content
+          step="6"
+        >
+          <step-six
+            :data="data"
+            ref="step6"
+            @prevStep="prevStep()"
+            @nextStep="nextStep()"
+          />
+        </v-stepper-content>
+
+        <v-stepper-content
+          step="7"
+        >
+          <step-seven
+            :data="data"
+            ref="step7"
             @prevStep="prevStep()"
             @finish="finish()"
           />
@@ -78,27 +114,19 @@
     >
       {{ 'Fehler beim Speichern des Heimabends' }}
     </v-snackbar>
-    <v-snackbar
-      v-model="showSuccess"
-      color="success"
-      y='top'
-      :timeout="timeout"
-    >
-      {{
-        'Vielen Dank für deinen Beitrag zum Heimabend Inspirator! ' +
-        'Deine Heimabenidee wurde erfolgreich gespeichert und wartet ' +
-        'darauf, von uns freigeschaltet zu werden.' }}
-    </v-snackbar>
   </v-container>
 </template>
 
 <script>
 import axios from 'axios';
 
-import StepFour from './steps/StepFour.vue';
-import StepOne from './steps/StepOne.vue';
-import StepTwo from './steps/StepTwo.vue';
-import StepThree from './steps/StepThree.vue';
+import StepOne from './steps/Step1.vue';
+import StepTwo from './steps/Step2.vue';
+import StepThree from './steps/Step3.vue';
+import StepFour from './steps/Step4.vue';
+import StepFive from './steps/Step5.vue';
+import StepSix from './steps/Step6.vue';
+import StepSeven from './steps/Step7.vue';
 
 
 export default {
@@ -107,19 +135,25 @@ export default {
     StepTwo,
     StepThree,
     StepFour,
+    StepFive,
+    StepSix,
+    StepSeven,
   },
   data() {
     return {
       API_URL: process.env.VUE_APP_API,
       currentStep: 1,
-      steps: 4,
+      steps: 7,
       showError: false,
       showSuccess: false,
       timeout: 7000,
       headerStep: [
+        'Titel',
         'Beschreibung',
-        'Eigenschaften',
-        'Themenauswahl',
+        'Materialien',
+        'Fakten',
+        'Themen',
+        'Kategorien',
         'Abschluss',
       ],
       data: [],
@@ -165,29 +199,24 @@ export default {
       const dataStep2 = this.$refs.step2.getData();
       const dataStep3 = this.$refs.step3.getData();
       const dataStep4 = this.$refs.step4.getData();
+      const dataStep5 = this.$refs.step5.getData();
+      const dataStep6 = this.$refs.step6.getData();
+      const dataStep7 = this.$refs.step7.getData();
       if (this.isCreate) {
         axios.post(`${this.API_URL}basic/event/`, {
           title: dataStep1.title,
-          description: dataStep1.description,
-          isPossibleOutside: dataStep2.isPossibleOutside,
-          isPossibleInside: dataStep2.isPossibleInside,
-          isPossibleDigital: dataStep2.isPossibleDigital,
-          isPossibleAlone: dataStep2.isPossibleAlone,
-          tags: this.getUrlTagList(dataStep3.tags),
-          material: this.convertMaterialArray(dataStep2.material),
-          costsRating: dataStep3.costsRating,
-          executionTimeRating: dataStep3.executionTimeRating,
-          isPrepairationNeeded: dataStep2.isPrepairationNeeded,
-          isActive: dataStep4.isActive,
-          isLvlOne: dataStep3.isLvlOne,
-          isLvlTwo: dataStep3.isLvlTwo,
-          isLvlThree: dataStep3.isLvlThree,
-          createdBy: dataStep4.createdBy,
-          createdByEmail: dataStep4.createdByEmail,
+          description: dataStep2.description,
+          tags: this.getUrlTagList(dataStep5.tags.concat(dataStep6.selectedMandatoryFilter)),
+          material: this.convertMaterialArray(dataStep3.material),
+          costsRating: dataStep4.costsRating,
+          executionTimeRating: dataStep4.executionTimeRating,
+          isPrepairationNeeded: dataStep4.isPrepairationNeeded,
+          isActive: dataStep7.isActive,
+          createdBy: dataStep7.createdBy,
+          createdByEmail: dataStep7.createdByEmail,
         })
           .then(() => {
-            this.$router.replace({ name: 'overview' });
-            this.showSuccess = true;
+            this.$router.push({ name: 'overview', params: { showSuccess: true } });
           })
           .catch(() => {
             this.showError = true;
@@ -195,23 +224,16 @@ export default {
       } else if (this.isUpdate) {
         axios.put(`${this.API_URL}basic/event/${this.getId}/`, {
           id: this.data.id,
-          title: dataStep1.title,
-          description: dataStep1.description,
-          isPossibleOutside: dataStep2.isPossibleOutside,
-          isPossibleInside: dataStep2.isPossibleInside,
-          isPossibleDigital: dataStep2.isPossibleDigital,
-          isPossibleAlone: dataStep2.isPossibleAlone,
-          tags: this.getUrlTagList(dataStep3.tags),
-          material: this.convertMaterialArray(dataStep2.material),
-          costsRating: dataStep3.costsRating,
-          executionTimeRating: dataStep3.executionTimeRating,
-          isPrepairationNeeded: dataStep2.isPrepairationNeeded,
-          isActive: dataStep4.isActive,
-          isLvlOne: dataStep3.isLvlOne,
-          isLvlTwo: dataStep3.isLvlTwo,
-          isLvlThree: dataStep3.isLvlThree,
-          createdBy: dataStep4.createdBy,
-          createdByEmail: dataStep4.createdByEmail,
+          title: dataStep3.title,
+          description: dataStep2.description,
+          tags: this.getUrlTagList(dataStep5.tags.concat(dataStep6.selectedMandatoryFilter)),
+          material: this.convertMaterialArray(dataStep3.material),
+          costsRating: dataStep4.costsRating,
+          executionTimeRating: dataStep5.executionTimeRating,
+          isPrepairationNeeded: dataStep6.isPrepairationNeeded,
+          isActive: dataStep7.isActive,
+          createdBy: dataStep7.createdBy,
+          createdByEmail: dataStep7.createdByEmail,
         })
           .then(() => {
             this.$router.push({ name: 'overview' });

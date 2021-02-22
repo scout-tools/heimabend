@@ -4,7 +4,6 @@
   <div>
     <heimabend-card
       ref="eventCards"
-      v-if="items.length"
       @refresh="refresh()"
       @loadMore="loadMore()"
       :items="items"
@@ -41,6 +40,29 @@
       color="primary"
       indeterminate
     />
+    <v-snackbar
+      v-model="showSuccess"
+      color="success"
+      top
+      :timeout="timeout"
+    >
+      Vielen Dank für deine Heimabend-Idee! <br>
+      <br>
+      Wir freuen unsüber deinen Beitrag zum Inspirator. <br>
+      Das Team wird sich deiner Idee zeitnah widmen und sie veröffentlichen. <br>
+      Bei Rückfragen dazu melden wir uns über die von dir angegebene
+      E-Mail-Adresse bei dir.  <br>
+      Wenn du Fragen an uns hast, nutze gerne das Kontaktformular. <br>
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          text
+          v-bind="attrs"
+          @click="showSuccess = false"
+        >
+          Schließen
+        </v-btn>
+      </template>
+    </v-snackbar>
     <!-- <v-btn
       class="ma-10"
       v-if="count > items.length"
@@ -81,6 +103,7 @@ export default {
       'isAuthenticated',
       'heimabendCounter',
       'mandatoryFilter',
+      'isActive',
     ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -103,17 +126,17 @@ export default {
       if (this.isAuthenticated) {
         params.append('isActive', this.isActive);
       }
-      params.append('sorter', this.sorter);
+      params.append('ordering', this.sorter);
       params.append('page', 1);
+      params.append('timestamp', new Date().getTime());
       return params;
+    },
+    showSuccess() {
+      return !!this.$route.params.showSuccess;
     },
   },
 
   methods: {
-    // onClickLoadMore() {
-    //   this.isLoadingMore = false;
-    //   this.loadMore();
-    // },
     loadMore() {
       const stillRunning = this.isLoadingMore;
       this.isLoadingMore = true;
@@ -124,7 +147,7 @@ export default {
     },
 
     async getMoreItems() {
-      axios.get(this.nextPath)
+      axios.get(this.nextPath.replace(/^http:\/\//i, 'https://')) //
         .then((res) => {
           this.items = this.items.concat(res.data.results);
           this.nextPath = res.data.next;
@@ -209,11 +232,12 @@ export default {
 
   data: () => ({
     API_URL: process.env.VUE_APP_API,
-    items: {},
+    items: [],
     loading: true,
     nextPath: null,
     isLoadingMore: false,
     count: 0,
+    timeout: 13000,
     saveFilterLastFilter: false,
   }),
 };
@@ -224,18 +248,7 @@ export default {
   .test-color {
     background-color: rgba(255, 254, 254, 0.952) !important;
   }
-  .whiteText {
+    .whiteText {
     color: white !important;
-  }
-.bg {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: url( 'back-2.jpg') no-repeat center center;
-    background-size: 2000px 1300px;
-    background-attachment: fixed;
-    z-index: -1;
   }
 </style>

@@ -1,6 +1,16 @@
 `pipenv shell`
 
+`install -r requirements.txt`
+
 `python manage.py loaddata test-data/*.json`
+
+`python manage.py runserver 8080`
+
+`pipenv install`
+
+`python manage.py createsuperuser`
+
+
 # nginx config: /etc/nginx/nginx.conf
 
     user benutzername; #benutzername muss dem eigenem benutzernamen entsprechen

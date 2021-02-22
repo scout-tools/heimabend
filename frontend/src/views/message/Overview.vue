@@ -74,7 +74,7 @@ export default {
 
   methods: {
     getMessages() {
-      const path = `${this.API_URL}basic/message/`;
+      const path = `${this.API_URL}basic/message?&timestamp=${new Date().getTime()}`;
       axios.get(path)
         .then((res) => {
           this.showSuccess = true;

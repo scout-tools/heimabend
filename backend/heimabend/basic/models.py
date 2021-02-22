@@ -16,6 +16,8 @@ class TagCategory(models.Model):
     ordered_id = models.IntegerField(blank=False, unique=True)
     is_visible = models.BooleanField(default=True)
     is_header = models.BooleanField(default=False)
+    is_mandatory = models.BooleanField(default=False)
+    is_event_overview = models.BooleanField(default=True)
 
 
 class Tag(models.Model):
@@ -29,6 +31,7 @@ class Tag(models.Model):
     color = models.CharField(max_length=7)
     category = models.ForeignKey(TagCategory, on_delete=models.PROTECT, blank=True, null=True)
     is_visible = models.BooleanField(default=True)
+    ordered_id = models.IntegerField(blank=False, unique=False, null=True)
 
     def __str__(self):
         return self.name

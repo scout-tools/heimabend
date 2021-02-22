@@ -6,10 +6,10 @@
       max-width="290"
     >
       <v-card>
-        <v-card-title class="headline">Heimabend löschen</v-card-title>
+        <v-card-title class="headline">Heimabend-Idee löschen</v-card-title>
 
         <v-card-text>
-          Willst du diesen Heimabend echt löschen?
+          Willst du diese Idee echt löschen?
         </v-card-text>
 
         <v-card-actions>
@@ -48,7 +48,7 @@
       y='top'
       :timeout="timeout"
     >
-      {{ 'Der Heimabend wurde erfolgreich gelöscht' }}
+      {{ 'Diese Idee wurde erfolgreich gelöscht' }}
     </v-snackbar>
 </div>
 </template>

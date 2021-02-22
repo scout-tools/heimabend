@@ -1,30 +1,24 @@
 <template>
   <v-form
-    ref="form3"
+    ref="form4"
     v-model="valid"
   >
 <v-container>
-  <v-row class="mt-6 ml-4">
-    <span class="subtitle-1">
-      Wähle so viele Themen aus, wie zu deiner Heimabend-Idee passen.
-    </span>
-  </v-row>
-  <v-row class="ma-6">
-    <v-select
-      v-model="data.tags"
-      :items="tags"
-      item-value="id"
-      item-color="color"
-      :rules="rules.tags"
-      item-text="name"
-      deletable-chips
-      chips
-      label="Wähle aus der Liste bis zu 5 Themen aus."
-      no-data-text="Wähle aus der Liste Themen aus."
-      multiple
-      outlined
-    ></v-select>
-  </v-row>
+
+    <v-row no-gutters>
+
+    <v-row class="mt-6 ml-4">
+      <span class="subtitle-1">
+        Bitte beantworte jede einzelne Frage
+        passend zu deiner Heimabend-Idee
+      </span>
+    </v-row>        <v-switch
+          v-model="data.isPrepairationNeeded"
+          color="secondary"
+          label="Benötigt diese Heimabend-Idee Zeit zur Vorbereitung?">
+        </v-switch>
+    </v-row>
+
   <v-divider class="my-2"/>
   <v-row class="mt-6 ml-4">
     <span class="subtitle-1">
@@ -74,9 +68,11 @@
     </v-switch>
   </v-row>
 
+  <v-divider class="my-2"/>
+
   <v-row class="mt-6 ml-4">
     <span class="subtitle-1">
-      Wieviel Durchführungszeit ist erforderlich?
+      Wie lange dauert die Durchführung deiner Programmidee?“
     </span>
   </v-row>
   <v-row>
@@ -121,50 +117,6 @@
     </v-switch>
     </v-row>
     <v-divider class="my-2"/>
-    <v-row class="mt-6 ml-4">
-      <span class="subtitle-1">
-        Für welche Stufe ist die Heimabend-Idee geeignet?
-      </span>
-    </v-row>
-    <v-row class="mx-6">
-      <v-switch
-      color="secondary"
-      v-model="data.isLvlOne"
-      label="Geeignet für die Wölflingsstufe (7 bis 10 Jahren).">
-      </v-switch>
-        <v-img
-          v-if="!isMobil"
-          class="ma-4"
-          :src="require('@/assets/wolfskopf.png')"
-          max-width="40"
-        />
-    </v-row>
-    <v-row class="mx-6">
-      <v-switch
-      color="secondary"
-      v-model="data.isLvlTwo"
-      label="Geeignet für die Pfadfinderstufe (11 bis 14 Jahren).">
-      </v-switch>
-        <v-img
-          v-if="!isMobil"
-          class="ma-4"
-          :src="require('@/assets/knot_blue.png')"
-          max-width="40"
-        ></v-img>
-    </v-row>
-    <v-row class="mx-6">
-      <v-switch
-      color="secondary"
-      v-model="data.isLvlThree"
-      label="Geeignet für die Roverstufe (ab 15 Jahren).">
-      </v-switch>
-        <v-img
-          v-if="!isMobil"
-          class="ma-4"
-          :src="require('@/assets/knot_red.png')"
-          max-width="40"
-        ></v-img>
-    </v-row>
     <v-row class="ma-3" justify="center">
       <v-btn
         class="mr-5"
@@ -185,6 +137,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   data: () => ({
     rules: {
@@ -200,17 +154,16 @@ export default {
       isLvlThree: true,
     },
     valid: true,
+    n: 0,
   }),
 
   computed: {
+    ...mapGetters([
+      'tags',
+      'tagCategory',
+    ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
-    },
-    isAuthenticated() {
-      return this.$store.getters.isAuthenticated;
-    },
-    currentUsername() {
-      return this.$store.getters.getUsername;
     },
     tags() {
       return this.$store.getters.tags;
@@ -242,6 +195,14 @@ export default {
     getClassForTextContentSteps() {
       return this.isMobil ? 'mx-0 px-1' : '';
     },
+    getSideBarTags() {
+      if (this.tags && this.tagCategory) {
+        const sideBarTagCategories = this.tagCategory.filter(item => item.is_header === false);
+        const sideBarTags = this.filterTagByCategory(sideBarTagCategories[0].id);
+        return sideBarTags;
+      }
+      return [];
+    },
   },
 
   mounted() {
@@ -254,7 +215,6 @@ export default {
   },
 
   created() {
-    this.agreeBox = !!this.$store.getters.isAuthenticated;
     if (this.$route.params.id) {
       this.data = this.$route.params;
     }
@@ -262,6 +222,10 @@ export default {
 
 
   methods: {
+
+    filterTagByCategory(categoryId) {
+      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
+    },
     onResetPriceClick() {
       this.data.costsRating = 0;
     },
@@ -284,28 +248,17 @@ export default {
       });
       return tagList;
     },
-    onNextClick() {
-      if (!this.$refs.form1.validate()
-        || this.getCustomText !== 'Ok') {
-        return false;
-      }
-      this.e6 = 2;
-      return true;
-    },
     prevStep() {
       this.$emit('prevStep');
     },
     nextStep() {
-      if (!this.$refs.form3.validate()) {
+      if (!this.$refs.form4.validate()) {
         return;
       }
       this.$emit('nextStep');
     },
     getData() {
       return {
-        isLvlOne: this.data.isLvlOne,
-        isLvlTwo: this.data.isLvlTwo,
-        isLvlThree: this.data.isLvlThree,
         tags: this.data.tags,
         costsRating: this.data.costsRating,
         executionTimeRating: this.data.executionTimeRating,
@@ -314,21 +267,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.v-btn:not(.v-btn--text):not(.v-btn--outlined).v-btn--active:before {
-    opacity: 0.4;
-    color: rgb(40, 158, 40)
-}
-.customerRequired {
-  text-align: left;
-}
-
-.limegreen {
-    background-color: rgb(40, 158, 40) !important;
-}
-
-.v-btn:before {
-    background-color: transparent !important;
-}
-</style>

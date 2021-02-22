@@ -5,19 +5,20 @@
       ma-3
       lg7
     >
-    <div class="display-3 mb-10">
-      Fragen/Antworten
-    </div>
+      <div class="display-1 ma-10 text-uppercase" >
+        Fragen + Antworten
+      </div>
+      <v-divider/>
     <v-expansion-panels>
       <v-expansion-panel
         v-for="(faq,i) in faqs"
         :key="i">
         <v-expansion-panel-header>
-          <span class="title"> {{ faq.question }}</span>
+          <span class="title ma-3"> {{ faq.question }}</span>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <p
-            class="text-left subtitle-1 pa-5"
+            class="text-left subtitle-1 pa-3"
             v-html="faq.answer">
           </p>
         </v-expansion-panel-content>
@@ -82,7 +83,7 @@ export default {
 
   methods: {
     getFaqs() {
-      const path = `${this.API_URL}basic/faq/`;
+      const path = `${this.API_URL}basic/faq/?&timestamp=${new Date().getTime()}`;
       axios.get(path)
         .then((res) => {
           this.faqs = res.data;

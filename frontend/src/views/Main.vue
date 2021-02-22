@@ -11,16 +11,6 @@
       v-if="!apiIsDown"
       @click="toogleDrawer()"
     />
-      <h1
-        class="title hand-cursor ml-3 mr-5"
-        v-if="!isMobil"
-        @click="onHeaderClick()"
-      >
-        Heimabend&nbsp;
-        <span class="font-weight-light">
-          Inspirator
-        </span>
-      </h1>
 
       <v-text-field
         class="px-3"
@@ -35,20 +25,21 @@
       />
 
       <v-spacer/>
-
+      <router-link to="/">
       <img
         src="https://dpbm.de/wp/wp-content/uploads/2019/02/mosaikWhite.svg"
         class="mr-2"
         height="50"
         alt="Bundesabzeichen vom Deutschen Pfadfinderbund Mosaik"
       />
+      </router-link>
     </v-app-bar>
 
     <menu-left
       ref="mainMenuLeft"
     />
 
-    <v-content
+    <v-main
       id="lateral"
     >
       <topbar
@@ -58,10 +49,16 @@
       <sub-pages-top-bar
         v-if="!isMainPage"
       />
+
+      <filter-top-sub-bar
+        v-if="isMainPage && !isMobil"
+      />
+
       <template>
         <router-view
           class="content"
           :class="getMargin"
+          v-scroll="onScroll"
         />
       <Fab
         v-if="isMainPage && !apiIsDown"
@@ -70,7 +67,7 @@
     <api-down-banner
       v-if="apiIsDown"
     />
-    </v-content>
+    </v-main>
     <pricacy-banner
       v-if="!acceptedPrivacy"
     />
@@ -94,6 +91,7 @@ import MenuLeft from './components/menu/Left.vue';
 import ApiDownBanner from './components/banner/ApiDown.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
 import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
+import FilterTopSubBar from './components/toolbar/FilterSubBar.vue';
 import Fab from './components/fab/Standard.vue';
 
 export default {
@@ -104,6 +102,7 @@ export default {
     ApiDownBanner,
     Fab,
     PricacyBanner,
+    FilterTopSubBar,
   },
   computed: {
     ...mapGetters([
@@ -115,7 +114,7 @@ export default {
     },
     getLabel() {
       const counter = this.$store.getters.heimabendCounter;
-      return `Suche in ${counter} Heimabenden ...`;
+      return `Suche in ${counter} Heimabendideen`;
     },
     getMargin() {
       return this.isMobil ? 'ma-1' : 'ma-0';
@@ -152,7 +151,7 @@ export default {
       this.$refs.mainMenuLeft.toggleDrawer();
     },
     getTags() {
-      const path = `${this.API_URL}basic/tag/`;
+      const path = `${this.API_URL}basic/tag/?&timestamp=${new Date().getTime()}`;
       axios.get(path)
         .then((res) => {
           this.$store.commit('setTags', res.data);
@@ -162,7 +161,7 @@ export default {
         });
     },
     getTagCategory() {
-      const path = `${this.API_URL}basic/tag-category/`;
+      const path = `${this.API_URL}basic/tag-category/?&timestamp=${new Date().getTime()}`;
       axios.get(path)
         .then((res) => {
           this.$store.commit('setTagCategory', res.data);
@@ -178,6 +177,10 @@ export default {
       this.chips.splice(this.chips.indexOf(item), 1);
       this.chips = [...this.chips];
     },
+    onScroll() {
+      const isOnTop = window.scrollY > 20;
+      this.$store.commit('setPageScrolled', isOnTop);
+    },
   },
   mounted() {
     this.getTags();
@@ -186,7 +189,6 @@ export default {
   },
   data: () => ({
     API_URL: process.env.VUE_APP_API,
-    fab: false,
     colorFab: 'green',
     iconFab: 'mdi-plus',
     showError: false,
@@ -218,6 +220,6 @@ export default {
     cursor: help !important;
   }
   .theme--light.v-application {
-    background: transparent !important;
+    background: #f4f4f434 !important;
   }
 </style>

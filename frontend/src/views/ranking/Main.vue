@@ -7,7 +7,7 @@
      centered>
       <v-tabs-slider/>
       <v-tab>Inspiratoren</v-tab>
-      <v-tab>Heimabend</v-tab>
+      <v-tab>Heimabend-Idee</v-tab>
       <!-- <v-tab>Meist aufgerufen</v-tab> -->
       <!-- <v-tab disabled>Bescuher</v-tab> -->
 

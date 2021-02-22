@@ -78,9 +78,29 @@
                 </v-col>
                 <v-col cols="6">
                   <v-switch
-                    label="Kopfzeile?"
+                    label="In Filter-Kopfzeile?"
                     color="secondary"
                     v-model="data.is_header"
+                    hide-details
+                    indeterminate
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="6">
+                  <v-switch
+                    label="Tag Sichtbar in Heimabend-Übersicht?"
+                    color="secondary"
+                    v-model="data.is_event_overview"
+                    hide-details
+                    indeterminate
+                  />
+                </v-col>
+                <v-col cols="6">
+                  <v-switch
+                    label="Pflicht bei der Anlage?"
+                    color="secondary"
+                    v-model="data.is_mandatory"
                     hide-details
                     indeterminate
                   />
@@ -164,6 +184,8 @@ export default {
           ordered_id: this.data.ordered_id,
           is_visible: this.data.is_visible,
           is_header: this.data.is_header,
+          is_mandatory: this.data.is_mandatory,
+          is_event_overview: this.data.is_event_overview,
         })
           .then(() => {
             this.dialog = false;
@@ -180,6 +202,8 @@ export default {
           ordered_id: this.data.ordered_id,
           is_visible: this.data.is_visible,
           is_header: this.data.is_header,
+          is_mandatory: this.data.is_mandatory,
+          is_event_overview: this.data.is_event_overview,
         })
           .then(() => {
             this.dialog = false;
@@ -192,7 +216,7 @@ export default {
       }
     },
     onDeleteClick() {
-      axios.delekte(`${this.API_URL}basic/tag-category/${this.data.id}/`)
+      axios.delete(`${this.API_URL}basic/tag-category/${this.data.id}/`)
         .then(() => {
           this.dialog = false;
           this.$emit('dialogClose');

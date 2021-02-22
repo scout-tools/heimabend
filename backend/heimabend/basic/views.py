@@ -16,7 +16,7 @@ from .serializers import TagSerializer, EventSerializer, MessageSerializer, Like
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Tag.objects.all().order_by('name')
+    queryset = Tag.objects.all().order_by('ordered_id', 'name')
     serializer_class = TagSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ('is_visible',)
@@ -24,14 +24,14 @@ class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 class TagCategoryViewSet(LoggingMixin, viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = TagCategory.objects.all()
+    queryset = TagCategory.objects.all().order_by('ordered_id', 'name')
     serializer_class = TagCategorySerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ('is_visible',)
 
 
 class EventPagination(pagination.PageNumberPagination):
-    page_size = 3  # the no. of company objects you want to send in one go
+    page_size = 5  # the no. of company objects you want to send in one go
 
 
 class EventFilter(FilterSet):
@@ -42,17 +42,11 @@ class EventFilter(FilterSet):
     isPrepairationNeeded = BooleanFilter(field_name='isPrepairationNeeded')
     isActive = BooleanFilter(field_name='isActive', method='get_isActive')
     withoutCosts = BooleanFilter(method='get_CostRating', field_name='costsRating')
-    sorter = OrderingFilter(fields=(
-        ('-createdAt', 'newest'),
-        ('?', 'random'),
-        ('title', 'alpha'),
-        ('-like_score', 'rating'),
-    ))
 
     filterTags = ModelMultipleChoiceFilter(field_name='tags__id',
                                            to_field_name='id',
                                            queryset=Tag.objects.all(),
-                                           lookup_expr='exact', )
+                                           method='get_tags')
     isLvlOne = BooleanFilter(field_name='isLvlOne')
     isLvlTwo = BooleanFilter(field_name='isLvlTwo')
     isLvlThree = BooleanFilter(field_name='isLvlThree')
@@ -66,7 +60,6 @@ class EventFilter(FilterSet):
                   'isPrepairationNeeded',
                   'isActive',
                   'withoutCosts',
-                  'sorter',
                   'filterTags',
                   'isLvlOne',
                   'isLvlTwo',
@@ -84,6 +77,17 @@ class EventFilter(FilterSet):
                 return queryset.filter(isActive=value)
         return queryset.filter(isActive=True)
 
+    def get_tags(self, queryset, field_name, value):
+        tags_category = dict()
+
+        for val in value:
+            tags_category.setdefault(str(val.category.id), []).append(val.id)
+
+        for filter_elements in tags_category:
+            queryset = queryset.filter(tags__id__in=tags_category[filter_elements]).distinct()
+
+        return queryset
+
 
 class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = Event.objects.all()
@@ -91,6 +95,7 @@ class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filterset_class = EventFilter
     ordering = ['-createdAt']
+    ordering_fields = ['-createdAt', 'title', '-like_score']
     search_fields = ['title', 'description', 'material']
     pagination_class = EventPagination
 

@@ -1,6 +1,6 @@
 <template>
         <v-form
-        ref="form4"
+        ref="form7"
         v-model="valid"
       >
   <v-container>
@@ -21,7 +21,8 @@
     </v-row>
     <v-row class="mt-6 ml-2">
       <span class="subtitle-1">
-        Diese E-Mail Adresse ist nur für das Redaktions-Team bei evtuellen Rückfragen sichtbar.
+        Diese E-Mail Adresse ist nur für das Redaktions-Team bei
+        evtuellen Rückfragen zu deiner Heimabend-Idee sichtbar.
       </span>
     </v-row>
     <v-row class="ma-3">
@@ -62,7 +63,7 @@
       </v-btn>
 
       <v-btn
-        color="primary"
+        color="secondary"
         @click="finish()"
       >
         Absenden
@@ -78,7 +79,7 @@ export default {
 
   data: () => ({
     API_URL: process.env.VUE_APP_API,
-    e6: 1,
+    n: 0,
     dialog: false,
     valid: true,
     showError: false,
@@ -159,7 +160,7 @@ export default {
     },
 
     finish() {
-      if (!this.$refs.form4.validate()) {
+      if (!this.$refs.form7.validate()) {
         return;
       }
       this.$emit('finish');

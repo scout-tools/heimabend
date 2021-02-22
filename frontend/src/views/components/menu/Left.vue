@@ -7,7 +7,7 @@
     >
       <v-list>
           <v-row align="center">
-             <v-card
+             <v-sheet
               v-if="isAuthenticated"
               width="270"
               class="mx-auto"
@@ -34,12 +34,8 @@
                 </v-row>
                 </v-container>
               </v-list-item>
-            </v-card>
+            </v-sheet>
           </v-row>
-      <v-subheader v-if="!isAuthenticated">Sortierung</v-subheader>
-
-      <v-divider/>
-      <v-spacer dark class="my-6"/>
     <v-subheader>Daten</v-subheader>
       <v-divider></v-divider>
           <v-list-item link bottom :to="{ name: 'ranking-overview' }">

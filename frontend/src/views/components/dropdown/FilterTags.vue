@@ -3,7 +3,7 @@
     <v-select
       v-model="selectedFilter"
       :items="filterTagByCategory(category.id)"
-      :label="category.name"
+      :label="`Wähle ${category.name}`"
       item-value="id"
       item-text="name"
       multiple
@@ -13,6 +13,17 @@
       outlined
       @change="onFilterChanged"
     >
+      <template v-slot:selection="{ item, index }">
+        <v-chip v-if="index === 0" :color="item.color" small>
+          <span>{{ item.name }}</span>
+        </v-chip>
+        <span
+          v-if="index === 1"
+          class="grey--text caption"
+        >
+          (+ ...)
+        </span>
+      </template>
     </v-select>
   </v-container>
 </template>
@@ -37,18 +48,30 @@ export default {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
-    getColotClass() {
-      return this.isActiveState ? 'customer-color-activ' : 'customer-color-inactive';
-    },
     ...mapGetters([
       'tags',
       'tagCategory',
       'mandatoryFilter',
     ]),
   },
+  watch: {
+    mandatoryFilter(value) {
+      this.lastFilter = value;
+      this.selectedFilter = value;
+    },
+  },
   methods: {
     filterTagByCategory(categoryId) {
-      return this.tags.filter(item => item.category === `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`);
+      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
+    },
+    convertUrlToId(url) {
+      if (url && typeof url === 'string') {
+        const idStringArray = url.split('/');
+        const id = idStringArray[idStringArray.length - 2];
+
+        return parseInt(id, 10);
+      }
+      return url;
     },
     getDivClass() {
       return !this.isMobil ? 'mx-2' : 'mx-0';
@@ -75,7 +98,6 @@ export default {
           const index = oldFilter.indexOf(difference);
           oldFilter.splice(index, 1);
           this.$store.commit('changeMandatoryFilter', oldFilter);
-          debugger;
         }
       }
       this.lastFilter = newValue;
@@ -86,12 +108,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.customer-color-activ {
-  color: rgba(0, 0, 0, 0.568) !important;
-}
-.customer-color-inactive {
-  color: gray !important;
-}
-</style>

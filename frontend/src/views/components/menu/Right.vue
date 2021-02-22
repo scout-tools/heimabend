@@ -3,19 +3,9 @@
       tile
       color="primary"
     >
-    <!-- <div
-      v-for="category in getSideBarTagCategories"
-      :key="category.id"
-    >
-        <div dark class="mt-7">
-        <span  dark class="subtitle-1 whiteText">
-          {{ category.name }}
-        </span>
-        <v-icon small class="whiteText">
-          {{ getIcon(category.name) }}
-        </v-icon>
-      <v-divider class="my-1" dark/>
-        </div> -->
+      <span class="subtitle-1 whiteText">
+          {{ 'Themenauswahl' }}
+      </span>
       <v-chip-group
         multiple
         column
@@ -24,26 +14,20 @@
         @change="onChange()"
         @click="onClick()"
       >
-        <v-chip
-          filter
-          light
-          small
-          v-for="(tag, index) in tags"
-          :value="tag.id"
-          :key="index"
-          :color="tag.color">
-          {{ tag.name }}
-        </v-chip>
+        <v-chip-tooltip v-for="(tag, index) in getSideBarTags()" :key="index"
+                        :tag="tag" small filter/>
       </v-chip-group>
-    <!-- </div>  filterTagByCategory(category.id) -->
   </v-sheet>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-// eslint-disable-next-line import/no-unresolved
+import VChipTooltip from '@/views/components/chip/ChipTooltip.vue';
 
 export default {
+  components: {
+    VChipTooltip,
+  },
   data: () => ({
     items: [],
     filterTags: [],
@@ -57,12 +41,6 @@ export default {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
-    getSideBarTagCategories() {
-      if (this.tagCategory) {
-        return this.tagCategory.filter(item => item.is_header === false);
-      }
-      return [];
-    },
     getFilterTags() {
       this.filterTags = this.$store.getters.filterTags; // eslint-disable-line
       return this.$store.getters.filterTags;
@@ -70,7 +48,24 @@ export default {
   },
   methods: {
     filterTagByCategory(categoryId) {
-      return this.tags.filter(item => item.category === `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`);
+      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
+    },
+    convertUrlToId(url) {
+      if (url && typeof url === 'string') {
+        const idStringArray = url.split('/');
+        const id = idStringArray[idStringArray.length - 2];
+
+        return parseInt(id, 10);
+      }
+      return url;
+    },
+    getSideBarTags() {
+      if (this.tags && this.tagCategory) {
+        const sideBarTagCategories = this.tagCategory.filter(item => item.is_header === false);
+        const sideBarTags = this.filterTagByCategory(sideBarTagCategories[0].id);
+        return sideBarTags;
+      }
+      return [];
     },
     getIcon(name) {
       switch (name) {

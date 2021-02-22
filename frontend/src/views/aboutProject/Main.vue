@@ -5,14 +5,13 @@
       ma-3
       lg7
     >
-    <div class="display-3">
-      Unsere Idee
-    </div>
-      <v-card class="ma-10 pa-10">
+      <div class="display-1 ma-10 text-uppercase" >
+          Unsere Idee
+      </div>
+      <v-divider/>
+      <v-sheet class="ma-4 pa-4">
         <div class="pa-3 display-1">
-          <u>
             Warum?
-          </u>
         </div>
 
         <div class="ma-3 subtitle-1 text-left">
@@ -36,13 +35,11 @@
           </li>
         </div>
 
-      </v-card>
+      </v-sheet>
 
-      <v-card class="ma-10 pa-10">
+      <v-sheet class="ma-4 pa-4">
         <div class="pa-3 display-1">
-          <u>
             Die Idee
-          </u>
         </div>
         <div class="ma-5 subtitle-1 text-left">
           Wir haben diese Plattform geschaffen, um die kostbaren Erfahrungsschätze aus unserem
@@ -67,13 +64,11 @@
           euch selbst kreativ zu verwirklichen.
         </div>
 
-      </v-card>
+      </v-sheet>
 
-      <v-card class="ma-10 pa-10">
+      <v-sheet class="ma-4 pa-4">
         <div class="pa-3 display-1">
-          <u>
-            Kann ich mitmachen?
-          </u>
+          Kann ich mitmachen?
         </div>
 
         <div class="ma-5 subtitle-1 text-left">
@@ -86,9 +81,9 @@
         <div class="ma-5 subtitle-1 text-left">
           Euer Team hinter dem Heimabend-Inspirator
         </div>
-      </v-card>
+      </v-sheet>
 
-      <v-card class="ma-10 pa-10">
+      <v-sheet class="ma-4 pa-4">
         <div class="pa-3 display-1">
           <u>
             Kontakt
@@ -126,9 +121,9 @@
           <i>Aus Spam-Schutz ist diese E-Mail-Adresse nicht zum Anklicken.</i>
         </div>
 
-      </v-card>
+      </v-sheet>
 
-      <v-card class="ma-10 pa-10">
+      <v-sheet class="ma-4 pa-4">
         <div class="pa-3 display-1">
           <u>
             Open Source
@@ -152,7 +147,7 @@
             Wenn du Fragen hast, dann kannst du uns gerne kontaktieren.
           </li>
         </div>
-      </v-card>
+      </v-sheet>
     </v-flex>
   </v-row>
 </v-container>
