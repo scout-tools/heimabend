@@ -166,6 +166,7 @@ export default {
         this.getAllEventItems();
         this.saveFilterLastFilter = this.axiosParams;
       }
+      this.$store.commit('setIsScoringMode', false);
     },
 
     getAllEventItems() {
@@ -227,6 +228,10 @@ export default {
   },
 
   created() {
+    this.refresh();
+  },
+
+  mounted() {
     this.refresh();
   },
 

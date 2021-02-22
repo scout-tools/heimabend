@@ -5,7 +5,7 @@
   <h2
     class="deinHeimabendSpan"
     :class="yourHeimabendSpan()">
-    dein Heimabend.
+    {{ getHeaderText }}
   </h2>
   <div>
     <v-card
@@ -484,7 +484,7 @@
       size="40"
       color="white"
     ></v-progress-circular>
-    <Fab/>
+    <fab v-if="!isScoringMode"/>
   </v-col>
   <v-col
     v-if="!isMobil && !isDetailsView"
@@ -737,6 +737,7 @@ export default {
       'tags',
       'liked',
       'isAuthenticated',
+      'isScoringMode',
     ]),
     isMainPage() {
       return this.currentRouteName === 'overview';
@@ -752,6 +753,9 @@ export default {
     },
     getLikeIconSize() {
       return !this.isMobil ? 30 : 28;
+    },
+    getHeaderText() {
+      return !this.isScoringMode ? 'dein Heimabend' : 'Inspiriend?';
     },
     getLikeButtonText() {
       return !this.isMobil ? 'Mehr Details zum zur Idee' : 'Mehr';
@@ -788,8 +792,8 @@ export default {
   }
   .deinHeimabendSpan {
     font-family: "Special Elite", sans-serif !important;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 
   .headerIsMobile {
@@ -813,6 +817,6 @@ export default {
   height: 100vh !important;
 }
 .negativ-top-margin {
-  margin-top: -150px !important;
+  margin-top: -220px !important;
 }
 </style>

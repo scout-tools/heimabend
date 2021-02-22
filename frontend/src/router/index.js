@@ -11,6 +11,8 @@ import HeimabendCreate from '../views/heimabend/create/Main.vue';
 import MessageOverview from '../views/message/Overview.vue';
 import HeimabendDetails from '../views/heimabend/details/Main.vue';
 import RankingOverview from '../views/ranking/Main.vue';
+import ScoringStart from '../views/scoring/Main.vue';
+import ScoringTest from '../views/scoring/Test.vue';
 
 Vue.use(VueRouter);
 
@@ -76,7 +78,16 @@ const routes = [
     path: '/ranking',
     name: 'ranking-overview',
     component: RankingOverview,
-
+  },
+  {
+    path: '/scoring/start',
+    name: 'scoring-start',
+    component: ScoringStart,
+  },
+  {
+    path: '/scoring/test',
+    name: 'scoring-test',
+    component: ScoringTest,
   },
 ];
 
