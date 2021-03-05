@@ -117,9 +117,6 @@ export default {
   mounted() {
     if (this.$route.params.id) {
       this.data = this.$route.params;
-      if (this.data.tags && this.data.tags.length) {
-        this.data.tags = this.setIntTags(this.data.tags);
-      }
     }
   },
 
@@ -152,7 +149,7 @@ export default {
 
       if (this.data && this.data.tags) {
         const activeTags = this.tags.filter(tag => this.data.tags.includes(tag.id));
-        const containsCategoryId = activeTags.filter(tag => this.convertUrlToId(tag.category) === category.id); // eslint-disable-line
+        const containsCategoryId = activeTags.filter(tag => tag.category === category.id); // eslint-disable-line
         if (containsCategoryId.length) {
           returnValue = [];
         }
@@ -160,23 +157,7 @@ export default {
       return returnValue;
     },
     filterTagByCategory(categoryId) {
-      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
-    },
-    convertUrlToId(url) {
-      if (url && typeof url === 'string') {
-        const idStringArray = url.split('/');
-        const id = idStringArray[idStringArray.length - 2];
-
-        return parseInt(id, 10);
-      }
-      return url;
-    },
-    setIntTags(urlTags) {
-      const tagList = [];
-      urlTags.forEach((tag) => {
-        tagList.push(this.convertUrlToId(tag));
-      });
-      return tagList;
+      return this.tags.filter(item => item.category) === categoryId;
     },
     prevStep() {
       this.$emit('prevStep');

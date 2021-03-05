@@ -190,22 +190,13 @@ export default {
         _paq.push(['trackContentImpression', item.title, item.id]);
       });
     },
-    convertUrlToId(url) {
-      if (url && typeof url === 'string') {
-        const idStringArray = url.split('/');
-        const id = idStringArray[idStringArray.length - 2];
-
-        return parseInt(id, 10);
-      }
-      return url;
-    },
     onResetClick() {
       this.$store.commit('clearFilters');
     },
     isTagMatchToEvent(item) {
       const eventTagArray = [];
       item.tags.forEach((tag) => {
-        eventTagArray.push(this.convertUrlToId(tag)); // eslint-disable-line
+        eventTagArray.push(tag); // eslint-disable-line
       });
       if (this.filterTags && this.filterTags.length) {
         const matches = eventTagArray.filter(element => this.filterTags.includes(element));

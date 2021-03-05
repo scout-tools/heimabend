@@ -558,23 +558,15 @@ export default {
       return [];
     },
     convertUrlArray(ary) {
-      return ary.map(e => this.convertUrlToId(e));
+      return ary.map(e => e);
     },
     getEventTags(tagArray) {
-      const tagsObject = this.tags.filter(item => this.convertUrlArray(tagArray).includes(item.id));
-      const containsCategoryId = tagsObject.filter(tag => [2,4,5,9].includes(this.convertUrlToId(tag.category))); // eslint-disable-line
+      const tagsObject = this.tags.filter(item => tagArray.includes(item.id));
+      const containsCategoryId = tagsObject.filter(tag => [2,4,5,9].includes(tag.category)); // eslint-disable-line
       return containsCategoryId;
     },
     filterTagByCategory(tags, categoryId) {
-      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
-    },
-    convertUrlToId(url) {
-      if (url && typeof url === 'string') {
-        const idStringArray = url.split('/');
-        const id = idStringArray[idStringArray.length - 2];
-        return parseInt(id, 10);
-      }
-      return url;
+      return this.tags.filter(item => item.category === categoryId);
     },
     getDescriptionClass() {
       let string = '';

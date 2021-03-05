@@ -111,23 +111,13 @@ export default {
     onUpdateClick(item) {
       this.$emit('onUpdateClick', item);
     },
-
-    convertUrlToId(url) {
-      if (url && typeof url === 'string') {
-        const idStringArray = url.split('/');
-        const id = idStringArray[idStringArray.length - 2];
-
-        return parseInt(id, 10);
-      }
-      return url;
-    },
     onResetClick() {
       this.$store.commit('clearFilters');
     },
     isTagMatchToEvent(item) {
       const eventTagArray = [];
       item.tags.forEach((tag) => {
-        eventTagArray.push(this.convertUrlToId(tag)); // eslint-disable-line
+        eventTagArray.push(tag); // eslint-disable-line
       });
       if (this.getFilterTags && this.getFilterTags.length) {
         const matches = eventTagArray.filter(element => this.getFilterTags.includes(element));

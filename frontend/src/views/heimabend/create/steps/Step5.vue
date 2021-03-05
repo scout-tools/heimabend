@@ -132,9 +132,6 @@ export default {
   mounted() {
     if (this.$route.params.id) {
       this.data = this.$route.params;
-      if (this.data.tags && this.data.tags.length) {
-        this.data.tags = this.setIntTags(this.data.tags);
-      }
     }
   },
 
@@ -148,29 +145,13 @@ export default {
   methods: {
 
     filterTagByCategory(categoryId) {
-      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
+      return this.tags.filter(item => item.category) === categoryId;
     },
     onResetPriceClick() {
       this.data.costsRating = 0;
     },
     onLargeProjectClick() {
       this.data.executionTimeRating = 0;
-    },
-    convertUrlToId(url) {
-      if (url && typeof url === 'string') {
-        const idStringArray = url.split('/');
-        const id = idStringArray[idStringArray.length - 2];
-
-        return parseInt(id, 10);
-      }
-      return url;
-    },
-    setIntTags(urlTags) {
-      const tagList = [];
-      urlTags.forEach((tag) => {
-        tagList.push(this.convertUrlToId(tag));
-      });
-      return tagList;
     },
     prevStep() {
       this.$emit('prevStep');

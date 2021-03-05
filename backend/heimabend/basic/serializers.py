@@ -5,7 +5,7 @@ from rest_framework.serializers import Serializer, FileField
 from django.core.cache import cache
 
 
-class TagSerializer(serializers.HyperlinkedModelSerializer):
+class TagSerializer(serializers.ModelSerializer):
     tag_count = serializers.SerializerMethodField()
 
     class Meta:
@@ -30,7 +30,7 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
         return tag_count
 
 
-class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
+class TagCategorySerializer(serializers.ModelSerializer):
     tag_category_count = serializers.SerializerMethodField()
 
 
@@ -58,7 +58,7 @@ class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
         return tag_count
 
 
-class LikeSerializer(serializers.HyperlinkedModelSerializer):
+class LikeSerializer(serializers.ModelSerializer):
     current_median = serializers.SerializerMethodField()
 
     class Meta:
@@ -122,7 +122,7 @@ class EventSerializer(serializers.ModelSerializer):
             'like_score')
 
 
-class MessageSerializer(serializers.HyperlinkedModelSerializer):
+class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = (
@@ -134,7 +134,7 @@ class MessageSerializer(serializers.HyperlinkedModelSerializer):
             'createdAt')
 
 
-class HighscoreSerializer(serializers.HyperlinkedModelSerializer):
+class HighscoreSerializer(serializers.ModelSerializer):
     highscore = serializers.SerializerMethodField()
 
     class Meta:
@@ -149,7 +149,7 @@ class HighscoreSerializer(serializers.HyperlinkedModelSerializer):
         return score
 
 
-class StatisticSerializer(serializers.HyperlinkedModelSerializer):
+class StatisticSerializer(serializers.ModelSerializer):
     score = serializers.SerializerMethodField()
     score_cumulative = serializers.SerializerMethodField()
     week = serializers.SerializerMethodField()

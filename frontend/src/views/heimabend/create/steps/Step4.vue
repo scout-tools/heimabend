@@ -111,9 +111,6 @@ export default {
   mounted() {
     if (this.$route.params.id) {
       this.data = this.$route.params;
-      if (this.data.tags && this.data.tags.length) {
-        this.data.tags = this.setIntTags(this.data.tags);
-      }
     }
   },
 
