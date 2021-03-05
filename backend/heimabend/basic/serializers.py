@@ -1,6 +1,7 @@
 # serializers.py
 from rest_framework import serializers
-from .models import Tag, Event, Message, Like, TagCategory, Image, Material
+from .models import Tag, Event, Message, Like, TagCategory, Image, Material, \
+    ExperimentItem, Experiment
 from rest_framework.serializers import Serializer, FileField
 from django.core.cache import cache
 
@@ -25,14 +26,14 @@ class TagSerializer(serializers.ModelSerializer):
         tag_id = 'tag_' + str(obj.id)
         tag_count = cache.get(tag_id)
         if tag_count is None:
-            tag_count = Event.objects.filter(tags__id=obj.id).distinct().count()
+            tag_count = Event.objects.filter(
+                tags__id=obj.id).distinct().count()
             cache.set(tag_id, tag_count, timeout=24 * 60 * 60)
         return tag_count
 
 
 class TagCategorySerializer(serializers.ModelSerializer):
     tag_category_count = serializers.SerializerMethodField()
-
 
     class Meta:
         model = TagCategory
@@ -48,12 +49,12 @@ class TagCategorySerializer(serializers.ModelSerializer):
             'is_event_overview'
         )
 
-
     def get_tag_category_count(self, obj):
         tag_id = 'tag_category' + str(obj.id)
         tag_count = cache.get(tag_id)
         if tag_count is None:
-            tag_count = Tag.objects.filter(category_id=obj.id).distinct().count()
+            tag_count = Tag.objects.filter(
+                category_id=obj.id).distinct().count()
             cache.set(tag_id, tag_count, timeout=24 * 60 * 60)
         return tag_count
 
@@ -78,7 +79,8 @@ class LikeSerializer(serializers.ModelSerializer):
 def getmedian():
     median = cache.get('median')
     if median is None:
-        query = Like.objects.values("eventId__id").annotate(sum=Sum('opinionTypeId')).order_by('sum')
+        query = Like.objects.values("eventId__id").annotate(
+            sum=Sum('opinionTypeId')).order_by('sum')
         median = query[int(query.count() / 2)]['sum']
         cache.set('median', median, timeout=12 * 60 * 60)
     return median
@@ -165,11 +167,15 @@ class StatisticSerializer(serializers.ModelSerializer):
         )
 
     def get_score(self, obj):
-        score = Event.objects.filter(createdAt__year__exact=obj['year'], createdAt__week__exact=obj['week']).count()
+        score = Event.objects.filter(
+            createdAt__year__exact=obj['year'],
+            createdAt__week__exact=obj['week']).count()
         return score
 
     def get_score_cumulative(self, obj):
-        score = Event.objects.filter(createdAt__year__lte=obj['year'], createdAt__week__lte=obj['week']).count()
+        score = Event.objects.filter(
+            createdAt__year__lte=obj['year'],
+            createdAt__week__lte=obj['week']).count()
         return score
 
     def get_week(self, obj):
@@ -191,3 +197,17 @@ class MaterialSerializer(serializers.ModelSerializer):
     class Meta():
         model = Material
         fields = ('id', 'name', 'description')
+
+
+class ExperimentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Experiment
+        fields = '__all__'
+
+
+class ExperimentItemSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ExperimentItem
+        fields = '__all__'

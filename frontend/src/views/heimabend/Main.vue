@@ -167,6 +167,7 @@ export default {
         params: this.axiosParams,
       })
         .then((res) => {
+          debugger;
           this.items = res.data.results;
           this.nextPath = res.data.next;
           this.count = res.data.count;
@@ -212,6 +213,7 @@ export default {
   },
 
   mounted() {
+    this.$store.commit('setIsScoringMode', false);
     this.refresh();
   },
 

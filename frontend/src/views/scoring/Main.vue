@@ -1,13 +1,12 @@
 <template>
-
   <v-form>
-    <v-container>
+    <v-container fluid>
       <v-row align="center" justify="center">
         <v-col cols="12">
-          <h1> Füttere Inspi mit Daten</h1>
+          <h1>Füttere Inspi mit Daten</h1>
           <p>
-            Beantworte folgende Fragen und helfe Inspi klüger
-            zu werden. inspi freut sich über deine Meinung.
+            Beantworte folgende Fragen und helfe Inspi klüger zu werden. inspi
+            freut sich über deine Meinung.
           </p>
         </v-col>
       </v-row>
@@ -15,7 +14,7 @@
         <v-col cols="12">
           <p class="text-center">Wie alt bist du?</p>
         </v-col>
-        <v-btn-toggle color="primary"  v-model="toggle_exclusive" mandatory>
+        <v-btn-toggle color="primary" v-model="data.age_level" mandatory>
           <v-btn> - </v-btn>
           <v-btn> 7-10 </v-btn>
           <v-btn> 10-13 </v-btn>
@@ -31,7 +30,7 @@
         <v-col cols="12">
           <p class="text-center">In einer Gruppe Aktiv?</p>
         </v-col>
-        <v-btn-toggle color="primary" v-model="toggle_exclusive" mandatory>
+        <v-btn-toggle color="primary" v-model="data.group_type" mandatory>
           <v-btn> - </v-btn>
           <v-btn> Meute </v-btn>
           <v-btn> Sippe </v-btn>
@@ -45,7 +44,7 @@
         <v-col cols="12">
           <p class="text-center">Bist du Gruppenführer_in?</p>
         </v-col>
-        <v-btn-toggle color="primary" v-model="toggle_exclusive" mandatory>
+        <v-btn-toggle color="primary" v-model="data.group_leader" mandatory>
           <v-btn> - </v-btn>
           <v-btn> Ja </v-btn>
           <v-btn> Nein </v-btn>
@@ -54,17 +53,12 @@
       <v-divider class="my-5"></v-divider>
       <v-row align="center" justify="center">
         <v-col cols="12">
-        <router-link
-          :to="{ name: 'scoring-test'}"
-          class="no-underline"
-        >
-          <v-btn
-            color="primary"
-          >
-            <v-icon left>mdi-flash</v-icon>
-            Loslegen!
-          </v-btn>
-        </router-link>
+          <router-link :to="{ name: 'scoring-test' }" class="no-underline">
+            <v-btn color="primary" @click="createExperiment">
+              <v-icon left>mdi-flash</v-icon>
+              Loslegen!
+            </v-btn>
+          </router-link>
         </v-col>
       </v-row>
     </v-container>
@@ -72,12 +66,12 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   props: [],
 
-  components: {
-  },
+  components: {},
 
   data: () => ({
     API_URL: process.env.VUE_APP_API,
@@ -85,14 +79,38 @@ export default {
     loading: true,
     show: true,
     trans: 'slide-right',
+    data: {
+      age_level: 0,
+      group_type: 0,
+      group_leader: 0,
+    },
   }),
 
   mounted() {
-    this.getEvent();
     this.$store.commit('setIsScoringMode', true);
   },
 
   methods: {
+    createExperiment() {
+      axios
+        .post(`${this.API_URL}basic/experiment/`, {
+          age_level: this.data.age_level,
+          group_type: this.data.group_type,
+          group_leader: this.data.group_leader,
+        })
+        .then((response) => {
+          this.$router.push({
+            name: 'scoring-test',
+            params: {
+              id: response.data.id,
+            },
+          });
+        })
+        .catch(() => {
+          this.showError = true;
+          console.log('Fehler');
+        });
+    },
   },
 };
 </script>

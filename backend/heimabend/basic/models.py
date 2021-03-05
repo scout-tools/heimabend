@@ -1,7 +1,8 @@
 # models.py
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator, MinValueValidator, MinLengthValidator, MaxLengthValidator
+from django.core.validators import MaxValueValidator, \
+    MinValueValidator, MinLengthValidator, MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
 from django.db.models import Sum
 from stdimage import StdImageField, JPEGField
@@ -28,6 +29,12 @@ class TagCategory(TimeStampMixin):
     is_header = models.BooleanField(default=False)
     is_mandatory = models.BooleanField(default=False)
     is_event_overview = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class Material(TimeStampMixin):
@@ -62,6 +69,9 @@ class Tag(TimeStampMixin):
 
     def __str__(self):
         return self.name
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class Event(TimeStampMixin):
@@ -109,6 +119,9 @@ class Event(TimeStampMixin):
     def __str__(self):
         return self.title
 
+    def __repr__(self):
+        return self.__str__()
+
 
 class Message(TimeStampMixin):
     id = models.AutoField(
@@ -124,6 +137,9 @@ class Message(TimeStampMixin):
 
     def __str__(self):
         return self.name
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class Like(TimeStampMixin):
@@ -180,3 +196,47 @@ class Image(TimeStampMixin):
 
     def __str__(self):
         return '{} ({})'.format(self.description, self.image)
+
+    def __repr__(self):
+        return self.__str__()
+
+
+class Experiment(TimeStampMixin):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    age_level = models.IntegerField(blank=False, unique=False, null=True)
+    group_type = models.IntegerField(blank=False, unique=False, null=True)
+    group_leader = models.IntegerField(blank=False, unique=False, null=True)
+
+    def __str__(self):
+        return '{} {} {} {}'.format(
+            self.id,
+            self.age_level,
+            self.group_type,
+            self.group_leader)
+
+    def __repr__(self):
+        return self.__str__()
+
+
+class ExperimentItem(TimeStampMixin):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    event_id = models.ForeignKey(Event, on_delete=models.CASCADE)
+    experiment_id = models.ForeignKey(Experiment, on_delete=models.CASCADE)
+    score = models.IntegerField(blank=False, unique=False, null=True)
+
+    def __str__(self):
+        return '{} {} {}'.format(
+            self.event_id,
+            self.experiment_id,
+            self.score)
+
+    def __repr__(self):
+        return self.__str__()

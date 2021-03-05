@@ -691,17 +691,14 @@ export default {
     getId() {
       return this.$route.params.id;
     },
-    getIsLvlOne(item) {
-      const lvlId = this.tags.filter(tag => tag.name === 'Wölflinge')[0].id;
-      return !!item.tags.filter(tag => tag === lvlId).length;
+    getIsLvlOne() {
+      return false;
     },
-    getIsLvlTwo(item) {
-      const lvlId = this.tags.filter(tag => tag.name === 'Pfadfinder')[0].id;
-      return !!item.tags.filter(tag => tag === lvlId).length;
+    getIsLvlTwo() {
+      return false;
     },
-    getIsLvlThree(item) {
-      const lvlId = this.tags.filter(tag => tag.name === 'Rover')[0].id;
-      return !!item.tags.filter(tag => tag === lvlId).length;
+    getIsLvlThree() {
+      return false;
     },
   },
   data() {

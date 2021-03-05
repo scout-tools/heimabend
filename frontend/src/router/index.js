@@ -85,7 +85,7 @@ const routes = [
     component: ScoringStart,
   },
   {
-    path: '/scoring/test',
+    path: '/scoring/test/:id',
     name: 'scoring-test',
     component: ScoringTest,
   },

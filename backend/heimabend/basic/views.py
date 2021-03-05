@@ -1,15 +1,19 @@
 # views.py
 from django.db.models.functions import ExtractWeek, ExtractYear
-from django_filters import FilterSet, BooleanFilter, OrderingFilter, ModelMultipleChoiceFilter
+from django_filters import FilterSet, BooleanFilter, OrderingFilter, \
+    ModelMultipleChoiceFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import pagination, viewsets, mixins, generics, filters
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework_tracking.mixins import LoggingMixin
 from rest_framework.parsers import MultiPartParser, FormParser
 
-from .models import Tag, Event, Message, Like, TagCategory, Image, Material
-from .serializers import TagSerializer, EventSerializer, MessageSerializer, LikeSerializer, HighscoreSerializer, \
-    TagCategorySerializer, StatisticSerializer, ImageSerializer, MaterialSerializer
+from .models import Tag, Event, Message, Like, TagCategory, Image, \
+     Material, ExperimentItem, Experiment
+from .serializers import TagSerializer, EventSerializer, MessageSerializer, \
+    LikeSerializer, HighscoreSerializer, \
+    TagCategorySerializer, StatisticSerializer, ImageSerializer, \
+    MaterialSerializer, ExperimentItemSerializer, ExperimentSerializer
 
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -157,11 +161,28 @@ class ImageView(LoggingMixin, viewsets.ModelViewSet, generics.GenericAPIView):
         file_serializer = ImageSerializer(data=request.data)
         if file_serializer.is_valid():
             file_serializer.save()
-            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+            return Response(file_serializer.data,
+                            status=status.HTTP_201_CREATED)
         else:
-            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(file_serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
 
 
 class MaterialViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = Material.objects.all()
     serializer_class = MaterialSerializer
+
+
+class ExperimentViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = Experiment.objects.all()
+    serializer_class = ExperimentSerializer
+
+
+class ExperimentItemViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = ExperimentItem.objects.all()
+    serializer_class = ExperimentItemSerializer
+
+
+class RandomEventViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = Event.objects.order_by("?")[:1]
+    serializer_class = EventSerializer
