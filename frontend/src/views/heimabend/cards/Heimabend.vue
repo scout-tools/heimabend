@@ -700,14 +700,16 @@ export default {
       return this.$route.params.id;
     },
     getIsLvlOne(item) {
-      console.log(item);
-      return false;
+      const lvlId = this.tags.filter(tag => tag.name === 'Wölflinge')[0].id;
+      return !!item.tags.filter(tag => tag === lvlId).length;
     },
-    getIsLvlTwo() {
-      return false;
+    getIsLvlTwo(item) {
+      const lvlId = this.tags.filter(tag => tag.name === 'Pfadfinder')[0].id;
+      return !!item.tags.filter(tag => tag === lvlId).length;
     },
-    getIsLvlThree() {
-      return false;
+    getIsLvlThree(item) {
+      const lvlId = this.tags.filter(tag => tag.name === 'Rover')[0].id;
+      return !!item.tags.filter(tag => tag === lvlId).length;
     },
   },
   data() {
