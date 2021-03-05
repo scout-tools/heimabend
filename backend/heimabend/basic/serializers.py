@@ -2,6 +2,7 @@
 from rest_framework import serializers
 from .models import Tag, Event, Message, Like, TagCategory, Image, Material
 from rest_framework.serializers import Serializer, FileField
+from django.core.cache import cache
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
