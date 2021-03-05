@@ -1,11 +1,11 @@
 # serializers.py
 from rest_framework import serializers
-from .models import Tag, Event, Message, Like, TagCategory
-from django.db.models import Sum, Count
+from .models import Tag, Event, Message, Like, TagCategory, Image, Material
+from rest_framework.serializers import Serializer, FileField
 from django.core.cache import cache
 
 
-class TagSerializer(serializers.HyperlinkedModelSerializer):
+class TagSerializer(serializers.ModelSerializer):
     tag_count = serializers.SerializerMethodField()
 
     class Meta:
@@ -30,7 +30,7 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
         return tag_count
 
 
-class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
+class TagCategorySerializer(serializers.ModelSerializer):
     tag_category_count = serializers.SerializerMethodField()
 
 
@@ -58,7 +58,7 @@ class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
         return tag_count
 
 
-class LikeSerializer(serializers.HyperlinkedModelSerializer):
+class LikeSerializer(serializers.ModelSerializer):
     current_median = serializers.SerializerMethodField()
 
     class Meta:
@@ -84,8 +84,14 @@ def getmedian():
     return median
 
 
-class EventSerializer(serializers.HyperlinkedModelSerializer):
-    # like_score = serializers.SerializerMethodField()
+class EventSerializer(serializers.ModelSerializer):
+
+    material_list = serializers.SlugRelatedField(
+        many=True,
+        read_only=False,
+        queryset=Material.objects.all(),
+        slug_field='name'
+    )
 
     class Meta:
         model = Event
@@ -97,6 +103,8 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             'isPossibleInside',
             'tags',
             'material',
+            'material_list',
+            'imageLink',
             'costsRating',
             'executionTimeRating',
             'isPrepairationNeeded',
@@ -113,32 +121,8 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             'isActive',
             'like_score')
 
-    """def get_like_score(self, obj):
-        # median = getmedian()
-        score_id = 'like_score_' + str(obj.id)
-        likescore = cache.get(score_id)
-        if likescore is None:
-            query = Like.objects.filter(eventId=obj.id).all().aggregate(sum=Sum('opinionTypeId'))
-            likes = query['sum']
 
-            if likes is None:
-                likes = 0
-
-            if likes < 3:
-                likescore = 0
-            elif likes < 10:
-                likescore = 1
-            elif likes < 20:
-                likescore = 2
-            elif likes == 30:
-                likescore = 3
-            else:
-                likescore = 0
-            cache.set(score_id, likescore, timeout=13 * 60 * 60)
-        return likescore"""
-
-
-class MessageSerializer(serializers.HyperlinkedModelSerializer):
+class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = (
@@ -150,7 +134,7 @@ class MessageSerializer(serializers.HyperlinkedModelSerializer):
             'createdAt')
 
 
-class HighscoreSerializer(serializers.HyperlinkedModelSerializer):
+class HighscoreSerializer(serializers.ModelSerializer):
     highscore = serializers.SerializerMethodField()
 
     class Meta:
@@ -165,7 +149,7 @@ class HighscoreSerializer(serializers.HyperlinkedModelSerializer):
         return score
 
 
-class StatisticSerializer(serializers.HyperlinkedModelSerializer):
+class StatisticSerializer(serializers.ModelSerializer):
     score = serializers.SerializerMethodField()
     score_cumulative = serializers.SerializerMethodField()
     week = serializers.SerializerMethodField()
@@ -193,3 +177,17 @@ class StatisticSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_year(self, obj):
         return obj['year']
+
+
+class ImageSerializer(serializers.ModelSerializer):
+
+    class Meta():
+        model = Image
+        fields = ('image', 'description', 'uploaded_at')
+
+
+class MaterialSerializer(serializers.ModelSerializer):
+
+    class Meta():
+        model = Material
+        fields = ('id', 'name', 'description')

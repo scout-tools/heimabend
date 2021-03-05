@@ -226,13 +226,6 @@ export default {
           this.showError = true;
         });
     },
-    getUrlTagList(tagList) {
-      const ary = [];
-      tagList.forEach((tag) => {
-        ary.push(`${process.env.VUE_APP_API}basic/tag-category/${tag}/`);
-      });
-      return ary;
-    },
     show(item) {
       this.dialog = true;
       if (item) {

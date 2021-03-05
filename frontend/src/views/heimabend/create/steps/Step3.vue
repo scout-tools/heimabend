@@ -72,15 +72,11 @@ export default {
   created() {
     if (this.$route.params.id) {
       this.data = this.$route.params;
-      this.convertMaterialString(this.data.material);
     }
   },
 
 
   methods: {
-    convertMaterialString(array) {
-      this.data.materialArray = array.split(',');
-    },
     prevStep() {
       this.$emit('prevStep');
     },

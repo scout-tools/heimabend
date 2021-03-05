@@ -185,7 +185,7 @@ export default {
     },
     parsedCategory() {
       const link = this.data.category;
-      return this.convertUrlToId(link);
+      return link;
     },
   },
 
@@ -249,13 +249,6 @@ export default {
         .catch(() => {
           this.showError = true;
         });
-    },
-    getUrlTagList(tagList) {
-      const ary = [];
-      tagList.forEach((item) => {
-        ary.push(`${process.env.VUE_APP_API}basic/tag/${item}/`);
-      });
-      return ary;
     },
     show(item) {
       this.dialog = true;
