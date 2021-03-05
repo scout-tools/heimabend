@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 <template>
 <div>
-  <div>
     <heimabend-card
       ref="eventCards"
       @refresh="refresh()"
@@ -53,15 +52,6 @@
       Bei Rückfragen dazu melden wir uns über die von dir angegebene
       E-Mail-Adresse bei dir.  <br>
       Wenn du Fragen an uns hast, nutze gerne das Kontaktformular. <br>
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          text
-          v-bind="attrs"
-          @click="showSuccess = false"
-        >
-          Schließen
-        </v-btn>
-      </template>
     </v-snackbar>
     <!-- <v-btn
       class="ma-10"
@@ -72,7 +62,6 @@
     </v-btn> -->
     <span v-if="!isMobil" class="bg"/>
   </div>
-</div>
 </template>
 
 

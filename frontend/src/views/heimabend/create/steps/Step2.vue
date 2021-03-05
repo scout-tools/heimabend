@@ -119,7 +119,7 @@ export default {
       if (value && value.length <= 75) {
         return 'Die Beschreibung ist zu kurz.';
       }
-      if (value && value.length >= 4000) {
+      if (value && value.length >= 8000) {
         return 'Beschreibung ist zu lang. Sie darf maximal 3500 Zeichen besitzen.';
       }
       return 'Ok';

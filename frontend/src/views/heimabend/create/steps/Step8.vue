@@ -36,7 +36,7 @@
     <v-row v-if="isAuthenticated" class="ma-3">
       <v-switch
         v-model="data.isActive"
-        color="secondary"
+        color="primary"
         label="Dieser Heimabend ist öffentlich sichtbar.">
       </v-switch>
     </v-row>
@@ -63,7 +63,7 @@
       </v-btn>
 
       <v-btn
-        color="secondary"
+        color="primary"
         @click="finish()"
       >
         Absenden
@@ -102,7 +102,9 @@ export default {
       ],
     },
     data: {
-      tags: [47, 46, 44, 43, 42, 45, 51, 50],
+      createdBy: null,
+      createdByEmail: '',
+      isActive: false,
     },
   }),
 
