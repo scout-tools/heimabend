@@ -3,6 +3,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator, MinLeng
 from django.db import models
 from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
+from stdimage import StdImageField, JPEGField
+import uuid
 
 
 class TagCategory(models.Model):
@@ -70,6 +72,7 @@ class Event(models.Model):
     isPossibleDigital = models.BooleanField(default=0)
     isPossibleAlone = models.BooleanField(default=0)
     isLvlThree = models.BooleanField(default=0)
+    imageLink = models.CharField(max_length=120, blank=True)
     createdBy = models.CharField(max_length=60, blank=True)
     createdByEmail = models.CharField(max_length=60, blank=True)
     updatedBy = models.CharField(max_length=60, null=True, blank=True)
@@ -137,9 +140,22 @@ class Like(models.Model):
 
 
 def nameFile(instance, filename):
-    return '/'.join(['images', str(instance.name), filename])
+    print(instance)
+    # return 'images/' + str(uuid.uuid1()) + '.default.jpeg'
+    return 'images/' + str(uuid.uuid1()) + '.jpeg'
 
 
 class EventImages(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to=nameFile, blank=True, null=True)
+    image = models.ImageField(upload_to='users/', blank=True)
+
+
+class Image(models.Model):
+    image = StdImageField(upload_to=nameFile, blank=True, variations={
+        'default': (600, 400),
+    }, delete_orphans=True)
+    description = models.CharField(max_length=255)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '{} ({})'.format(self.description, self.image)

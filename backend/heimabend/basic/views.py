@@ -5,13 +5,15 @@ from django.db.models.functions import ExtractWeek, ExtractYear
 from django.http import HttpResponse
 from django_filters import FilterSet, BooleanFilter, OrderingFilter, ModelMultipleChoiceFilter
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import pagination, viewsets, mixins, generics, filters
+from rest_framework import pagination, viewsets, mixins, generics, filters, status
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework_tracking.mixins import LoggingMixin
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
 
-from .models import Tag, Event, Message, Like, TagCategory, EventImages
+from .models import Tag, Event, Message, Like, TagCategory, Image, EventImages
 from .serializers import TagSerializer, EventSerializer, MessageSerializer, LikeSerializer, HighscoreSerializer, \
-    TagCategorySerializer, StatisticSerializer, EventImageSerializer
+    TagCategorySerializer, StatisticSerializer, ImageSerializer, EventImageSerializer
 
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -41,7 +43,8 @@ class EventFilter(FilterSet):
     isPossibleAlone = BooleanFilter(field_name='isPossibleAlone')
     isPrepairationNeeded = BooleanFilter(field_name='isPrepairationNeeded')
     isActive = BooleanFilter(field_name='isActive', method='get_isActive')
-    withoutCosts = BooleanFilter(method='get_CostRating', field_name='costsRating')
+    withoutCosts = BooleanFilter(
+        method='get_CostRating', field_name='costsRating')
 
     filterTags = ModelMultipleChoiceFilter(field_name='tags__id',
                                            to_field_name='id',
@@ -84,7 +87,8 @@ class EventFilter(FilterSet):
             tags_category.setdefault(str(val.category.id), []).append(val.id)
 
         for filter_elements in tags_category:
-            queryset = queryset.filter(tags__id__in=tags_category[filter_elements]).distinct()
+            queryset = queryset.filter(
+                tags__id__in=tags_category[filter_elements]).distinct()
 
         return queryset
 
@@ -92,7 +96,8 @@ class EventFilter(FilterSet):
 class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filter_backends = (DjangoFilterBackend,
+                       filters.SearchFilter, filters.OrderingFilter)
     filterset_class = EventFilter
     ordering = ['-createdAt']
     ordering_fields = ['-createdAt', 'title', '-like_score']
@@ -134,3 +139,18 @@ class StatisticView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, 
     queryset = Event.objects.values(week=ExtractWeek('createdAt')).annotate(year=ExtractYear('createdAt')).values(
         'week', 'year').distinct().order_by('year', 'week')
     serializer_class = StatisticSerializer
+
+
+class ImageView(LoggingMixin, viewsets.ModelViewSet, generics.GenericAPIView):
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+
+    parser_classes = (MultiPartParser, FormParser)
+
+    def post(self, request, *args, **kwargs):
+        file_serializer = ImageSerializer(data=request.data)
+        if file_serializer.is_valid():
+            file_serializer.save()
+            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

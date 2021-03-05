@@ -2,7 +2,8 @@
 from django.core.cache import cache
 from django.db.models import Sum
 from rest_framework import serializers
-from .models import Tag, Event, Message, Like, TagCategory, EventImages
+from .models import Tag, Event, Message, Like, TagCategory, EventImages, Image
+from rest_framework.serializers import Serializer, FileField
 
 
 class EventImageSerializer(serializers.HyperlinkedModelSerializer):
@@ -31,7 +32,8 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
         tag_id = 'tag_' + str(obj.id)
         tag_count = cache.get(tag_id)
         if tag_count is None:
-            tag_count = Event.objects.filter(tags__id=obj.id).distinct().count()
+            tag_count = Event.objects.filter(
+                tags__id=obj.id).distinct().count()
             cache.set(tag_id, tag_count, timeout=24 * 60 * 60)
         return tag_count
 
@@ -57,7 +59,8 @@ class TagCategorySerializer(serializers.HyperlinkedModelSerializer):
         tag_id = 'tag_category' + str(obj.id)
         tag_count = cache.get(tag_id)
         if tag_count is None:
-            tag_count = Tag.objects.filter(category_id=obj.id).distinct().count()
+            tag_count = Tag.objects.filter(
+                category_id=obj.id).distinct().count()
             cache.set(tag_id, tag_count, timeout=24 * 60 * 60)
         return tag_count
 
@@ -82,7 +85,8 @@ class LikeSerializer(serializers.HyperlinkedModelSerializer):
 def getmedian():
     median = cache.get('median')
     if median is None:
-        query = Like.objects.values("eventId__id").annotate(sum=Sum('opinionTypeId')).order_by('sum')
+        query = Like.objects.values("eventId__id").annotate(
+            sum=Sum('opinionTypeId')).order_by('sum')
         median = query[int(query.count() / 2)]['sum']
         cache.set('median', median, timeout=12 * 60 * 60)
     return median
@@ -101,6 +105,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
             'isPossibleInside',
             'tags',
             'material',
+            'imageLink',
             'costsRating',
             'executionTimeRating',
             'isPrepairationNeeded',
@@ -185,11 +190,13 @@ class StatisticSerializer(serializers.HyperlinkedModelSerializer):
         )
 
     def get_score(self, obj):
-        score = Event.objects.filter(createdAt__year__exact=obj['year'], createdAt__week__exact=obj['week']).count()
+        score = Event.objects.filter(
+            createdAt__year__exact=obj['year'], createdAt__week__exact=obj['week']).count()
         return score
 
     def get_score_cumulative(self, obj):
-        score = Event.objects.filter(createdAt__year__lte=obj['year'], createdAt__week__lte=obj['week']).count()
+        score = Event.objects.filter(
+            createdAt__year__lte=obj['year'], createdAt__week__lte=obj['week']).count()
         return score
 
     def get_week(self, obj):
@@ -197,3 +204,10 @@ class StatisticSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_year(self, obj):
         return obj['year']
+
+
+class ImageSerializer(serializers.ModelSerializer):
+
+    class Meta():
+        model = Image
+        fields = ('image', 'description', 'uploaded_at')

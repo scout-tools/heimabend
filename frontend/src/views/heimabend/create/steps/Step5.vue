@@ -1,45 +1,121 @@
 <template>
   <v-form
-    ref="form5"
+    ref="form4"
     v-model="valid"
   >
 <v-container>
+
+    <v-row no-gutters>
+
+    <v-row class="mt-6 ml-4">
+      <span class="subtitle-1">
+        Bitte beantworte jede einzelne Frage
+        passend zu deiner Heimabend-Idee
+      </span>
+    </v-row>        <v-switch
+          v-model="data.isPrepairationNeeded"
+          color="secondary"
+          label="Benötigt diese Heimabend-Idee Zeit zur Vorbereitung?">
+        </v-switch>
+    </v-row>
+
+  <v-divider class="my-2"/>
   <v-row class="mt-6 ml-4">
     <span class="subtitle-1">
-      Wähle so viele thematische Kategorien aus, wie zu deiner Heimabend-Idee passen. <br>
-      <br>
-      Wenn du noch eine Kategorie hinzufügen möchtest, kannst du dich
-      gerne mit dem Kontaktformular direkt an uns wenden.
+      Welche Kosten entstehen bei der Durchführung dieser Heimabend-Idee?
     </span>
   </v-row>
-  <v-row class="ma-6">
-    <v-select
-      v-model="data.tags"
-      :items="getSideBarTags"
-      item-value="id"
-      :rules="rules.tags"
-      item-text="name"
-      deletable-chips
-      chips
-      dense
-      no-data-text="Wähle aus der Liste Probenordnung aus."
-      multiple
-      outlined
+
+  <v-row>
+    <v-tooltip
+      nudge-left="80"
+      open-on-hover
+      bottom
     >
-      <template v-slot:selection="{ item, index }">
-        <v-chip v-if="index < 3" :color="item.color" small>
-          <span>{{ item.name }}</span>
-        </v-chip>
-        <span
-          v-if="index === 3"
-          class="grey--text caption"
+      <template v-slot:activator="{ on }">
+        <v-btn
+          v-on="on"
+          text
         >
-          (+ ...)
-        </span>
+          <v-rating
+            v-model="data.costsRating"
+            emptyIcon="mdi-currency-usd"
+            fullIcon="mdi-currency-usd"
+            color="orange"
+            background-color="grey"
+            min="0"
+            length="3"
+          ></v-rating>
+        </v-btn>
       </template>
-    </v-select>
+      <span>
+        <p class="text-left">
+        Stufe 1: 0,00€ - 0,50€ pro Person <br>
+        Stufe 2: 1€ - 2€ pro Person <br>
+        Stufe 3: mehr als 2€ pro Person <br>
+        </p>
+      </span>
+    </v-tooltip>
+    <v-switch
+      color="secondary"
+      v-model="isWithoutCosts"
+      small
+      label="Keine Kosten"
+      class="ma-2"
+      @click="onResetPriceClick()"
+    >
+      Ohne Kosten
+    </v-switch>
   </v-row>
 
+  <v-divider class="my-2"/>
+
+  <v-row class="mt-6 ml-4">
+    <span class="subtitle-1">
+      Wie lange dauert die Durchführung deiner Programmidee?“
+    </span>
+  </v-row>
+  <v-row>
+    <v-tooltip
+      nudge-left="80"
+      open-on-hover
+      bottom
+    >
+      <template v-slot:activator="{ on }">
+        <v-btn
+          v-on="on"
+          text
+        >
+        <v-rating
+          v-model="data.executionTimeRating"
+          emptyIcon="mdi-clock"
+          fullIcon="mdi-clock"
+          color="black"
+          background-color="grey"
+          min="0"
+          length="3"
+        ></v-rating>
+          </v-btn>
+        </template>
+        <span>
+          <p class="text-left">
+          Stufe 1: bis 30 min <br>
+          Stufe 2: 30 min - 60 min<br>
+          Stufe 3: mehr als 60 min<br>
+          </p>
+        </span>
+      </v-tooltip>
+    <v-switch
+      color="secondary"
+      v-model="isLargeProject"
+      small
+      label="Handelt es sich um ein Großprojekt?"
+      class="ma-2"
+      @click="onLargeProjectClick()"
+    >
+      Ohne Kosten
+    </v-switch>
+    </v-row>
     <v-divider class="my-2"/>
     <v-row class="ma-3" justify="center">
       <v-btn
@@ -176,7 +252,7 @@ export default {
       this.$emit('prevStep');
     },
     nextStep() {
-      if (!this.$refs.form5.validate()) {
+      if (!this.$refs.form4.validate()) {
         return;
       }
       this.$emit('nextStep');

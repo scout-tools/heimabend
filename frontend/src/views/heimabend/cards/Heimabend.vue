@@ -122,8 +122,12 @@
             </span>
           </v-tooltip>
       </v-list-item>
-
-      <v-divider/>
+              <v-img
+          v-if="getImageLink(item)"
+          max-height="250"
+          aspect-ratio="2"
+          :src="getImageLink(item)"
+        ></v-img>
       <v-card-text>
         <div>
           <p
@@ -546,6 +550,12 @@ export default {
     },
     loadMore() {
       this.$emit('loadMore');
+    },
+    getImageLink(item) {
+      if (item.imageLink !== '') {
+        return item.imageLink;
+      }
+      return null;
     },
     yourHeimabendSpan() {
       return this.isMobil ? 'headerIsMobile' : 'headerIsDesktop';

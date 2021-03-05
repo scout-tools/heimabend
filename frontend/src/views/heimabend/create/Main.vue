@@ -1,12 +1,8 @@
 <template>
 <v-container>
   <v-row justify="center">
-    <v-flex
-      ma-3
-      lg7
-    >
     <v-stepper
-      alt-labels
+      vertical
       v-model="currentStep"
     >
       <v-stepper-header>
@@ -99,12 +95,22 @@
             :data="data"
             ref="step7"
             @prevStep="prevStep()"
+            @nextStep="nextStep()"
+          />
+        </v-stepper-content>
+
+        <v-stepper-content
+          step="8"
+        >
+          <step-eight
+            :data="data"
+            ref="step8"
+            @prevStep="prevStep()"
             @finish="finish()"
           />
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
-    </v-flex>
   </v-row>
     <v-snackbar
       v-model="showError"
@@ -127,6 +133,7 @@ import StepFour from './steps/Step4.vue';
 import StepFive from './steps/Step5.vue';
 import StepSix from './steps/Step6.vue';
 import StepSeven from './steps/Step7.vue';
+import StepEight from './steps/Step8.vue';
 
 
 export default {
@@ -138,6 +145,7 @@ export default {
     StepFive,
     StepSix,
     StepSeven,
+    StepEight,
   },
   data() {
     return {
@@ -150,6 +158,7 @@ export default {
       headerStep: [
         'Titel',
         'Beschreibung',
+        'Bild',
         'Materialien',
         'Fakten',
         'Themen',
@@ -202,18 +211,22 @@ export default {
       const dataStep5 = this.$refs.step5.getData();
       const dataStep6 = this.$refs.step6.getData();
       const dataStep7 = this.$refs.step7.getData();
+      const dataStep8 = this.$refs.step8.getData();
+
+      // const dataStep8 = this.$refs.step8.getData();
       if (this.isCreate) {
         axios.post(`${this.API_URL}basic/event/`, {
           title: dataStep1.title,
           description: dataStep2.description,
-          tags: this.getUrlTagList(dataStep5.tags.concat(dataStep6.selectedMandatoryFilter)),
-          material: this.convertMaterialArray(dataStep3.material),
-          costsRating: dataStep4.costsRating,
-          executionTimeRating: dataStep4.executionTimeRating,
-          isPrepairationNeeded: dataStep4.isPrepairationNeeded,
-          isActive: dataStep7.isActive,
-          createdBy: dataStep7.createdBy,
-          createdByEmail: dataStep7.createdByEmail,
+          tags: this.getUrlTagList(dataStep6.tags.concat(dataStep7.selectedMandatoryFilter)),
+          material: this.convertMaterialArray(dataStep4.material),
+          costsRating: dataStep5.costsRating,
+          executionTimeRating: dataStep5.executionTimeRating,
+          isPrepairationNeeded: dataStep5.isPrepairationNeeded,
+          isActive: dataStep8.isActive,
+          imageLink: dataStep3.imageLink,
+          createdBy: dataStep8.createdBy,
+          createdByEmail: dataStep8.createdByEmail,
         })
           .then(() => {
             this.$router.push({ name: 'overview', params: { showSuccess: true } });
@@ -224,16 +237,17 @@ export default {
       } else if (this.isUpdate) {
         axios.put(`${this.API_URL}basic/event/${this.getId}/`, {
           id: this.data.id,
-          title: dataStep3.title,
+          title: dataStep1.title,
           description: dataStep2.description,
-          tags: this.getUrlTagList(dataStep5.tags.concat(dataStep6.selectedMandatoryFilter)),
-          material: this.convertMaterialArray(dataStep3.material),
-          costsRating: dataStep4.costsRating,
+          tags: this.getUrlTagList(dataStep6.tags.concat(dataStep7.selectedMandatoryFilter)),
+          material: this.convertMaterialArray(dataStep4.material),
+          costsRating: dataStep5.costsRating,
           executionTimeRating: dataStep5.executionTimeRating,
-          isPrepairationNeeded: dataStep6.isPrepairationNeeded,
-          isActive: dataStep7.isActive,
-          createdBy: dataStep7.createdBy,
-          createdByEmail: dataStep7.createdByEmail,
+          isPrepairationNeeded: dataStep5.isPrepairationNeeded,
+          isActive: dataStep8.isActive,
+          imageLink: dataStep3.imageLink,
+          createdBy: dataStep8.createdBy,
+          createdByEmail: dataStep8.createdByEmail,
         })
           .then(() => {
             this.$router.push({ name: 'overview' });
