@@ -11,9 +11,9 @@ from rest_framework_tracking.mixins import LoggingMixin
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 
-from .models import Tag, Event, Message, Like, TagCategory, Image, EventImages
+from .models import Tag, Event, Message, Like, TagCategory, Image
 from .serializers import TagSerializer, EventSerializer, MessageSerializer, LikeSerializer, HighscoreSerializer, \
-    TagCategorySerializer, StatisticSerializer, ImageSerializer, EventImageSerializer
+    TagCategorySerializer, StatisticSerializer, ImageSerializer
 
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -107,17 +107,6 @@ class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
     def get_queryset(self):
         if not self.request.user.is_authenticated:
             return self.queryset.filter(isActive=True)
-
-
-class ImageViewSet(LoggingMixin, viewsets.ModelViewSet):
-    queryset = EventImages.objects.all()
-    serializer_class = EventImageSerializer
-
-    def post(self, request, *args, **kwargs):
-        file = request.data['file']
-        name = request.data['name']
-        image = EventImages.objects.create(image=file, name=name)
-        return HttpResponse(json.dumps({'message': "Uploaded"}), status=200)
 
 
 class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):
