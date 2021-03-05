@@ -140,14 +140,7 @@ class Like(models.Model):
 
 
 def nameFile(instance, filename):
-    print(instance)
-    # return 'images/' + str(uuid.uuid1()) + '.default.jpeg'
     return 'images/' + str(uuid.uuid1()) + '.jpeg'
-
-
-class EventImages(models.Model):
-    name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='users/', blank=True)
 
 
 class Image(models.Model):

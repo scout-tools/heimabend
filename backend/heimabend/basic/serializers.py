@@ -2,14 +2,8 @@
 from django.core.cache import cache
 from django.db.models import Sum
 from rest_framework import serializers
-from .models import Tag, Event, Message, Like, TagCategory, EventImages, Image
+from .models import Tag, Event, Message, Like, TagCategory, Image
 from rest_framework.serializers import Serializer, FileField
-
-
-class EventImageSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = EventImages
-        fields = ('name', 'image')
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
