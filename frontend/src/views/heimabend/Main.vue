@@ -155,6 +155,7 @@ export default {
         this.getAllEventItems();
         this.saveFilterLastFilter = this.axiosParams;
       }
+      this.$store.commit('setIsScoringMode', false);
     },
 
     getAllEventItems() {
@@ -166,6 +167,7 @@ export default {
         params: this.axiosParams,
       })
         .then((res) => {
+          debugger;
           this.items = res.data.results;
           this.nextPath = res.data.next;
           this.count = res.data.count;
@@ -207,6 +209,11 @@ export default {
   },
 
   created() {
+    this.refresh();
+  },
+
+  mounted() {
+    this.$store.commit('setIsScoringMode', false);
     this.refresh();
   },
 

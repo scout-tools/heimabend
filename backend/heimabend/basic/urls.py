@@ -16,6 +16,9 @@ router.register(r'highscore', views.HighscoreView)
 router.register(r'tag-category', views.TagCategoryViewSet)
 router.register(r'statistic', views.StatisticView)
 router.register(r'material', views.MaterialViewSet)
+router.register(r'experiment', views.ExperimentViewSet)
+router.register(r'experiment-item', views.ExperimentItemViewSet)
+router.register(r'random-event', views.RandomEventViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

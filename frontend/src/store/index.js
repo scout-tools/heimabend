@@ -31,6 +31,7 @@ export default new Vuex.Store({
     acceptedPrivacy: false,
     liked: [],
     pageScrolled: false,
+    isScoringMode: false,
   },
   getters: {
     isLvlOne(state) {
@@ -104,6 +105,9 @@ export default new Vuex.Store({
     },
     isPageScrolled(state) {
       return state.pageScrolled;
+    },
+    isScoringMode(state) {
+      return state.isScoringMode;
     },
   },
   mutations: {
@@ -218,6 +222,9 @@ export default new Vuex.Store({
     },
     setPageScrolled(state, isScrolled) {
       state.pageScrolled = isScrolled;
+    },
+    setIsScoringMode(state, isScoringMode) {
+      state.isScoringMode = isScoringMode;
     },
   },
   actions: {

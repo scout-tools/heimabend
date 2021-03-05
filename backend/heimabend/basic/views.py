@@ -12,11 +12,12 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework_tracking.mixins import LoggingMixin
 from rest_framework.parsers import MultiPartParser, FormParser
 
-from .models import Tag, Event, Message, Like, TagCategory, Image, Material
+from .models import Tag, Event, Message, Like, TagCategory, Image, \
+     Material, ExperimentItem, Experiment
 from .serializers import TagSerializer, EventSerializer, MessageSerializer, \
     LikeSerializer, HighscoreSerializer, \
-    TagCategorySerializer, StatisticSerializer, \
-    ImageSerializer, MaterialSerializer
+    TagCategorySerializer, StatisticSerializer, ImageSerializer, \
+    MaterialSerializer, ExperimentItemSerializer, ExperimentSerializer
 
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -174,3 +175,18 @@ class ImageView(LoggingMixin, viewsets.ModelViewSet, generics.GenericAPIView):
 class MaterialViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = Material.objects.all()
     serializer_class = MaterialSerializer
+
+
+class ExperimentViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = Experiment.objects.all()
+    serializer_class = ExperimentSerializer
+
+
+class ExperimentItemViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = ExperimentItem.objects.all()
+    serializer_class = ExperimentItemSerializer
+
+
+class RandomEventViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = Event.objects.order_by("?")[:1]
+    serializer_class = EventSerializer

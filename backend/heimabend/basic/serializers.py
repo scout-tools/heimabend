@@ -1,6 +1,7 @@
 # serializers.py
 from rest_framework import serializers
-from .models import Tag, Event, Message, Like, TagCategory, Image, Material
+from .models import Tag, Event, Message, Like, TagCategory, Image, Material, \
+    ExperimentItem, Experiment
 from rest_framework.serializers import Serializer, FileField
 from django.core.cache import cache
 from django.db.models import Sum
@@ -197,3 +198,17 @@ class MaterialSerializer(serializers.ModelSerializer):
     class Meta():
         model = Material
         fields = ('id', 'name', 'description')
+
+
+class ExperimentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Experiment
+        fields = '__all__'
+
+
+class ExperimentItemSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ExperimentItem
+        fields = '__all__'
