@@ -11,6 +11,7 @@ from rest_framework import pagination, viewsets, mixins, generics, \
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework_tracking.mixins import LoggingMixin
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
 
 from .models import Tag, Event, Message, Like, TagCategory, Image, \
      Material, ExperimentItem, Experiment
