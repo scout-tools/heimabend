@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 <template>
 <div>
-  <div>
     <heimabend-card
       ref="eventCards"
       @refresh="refresh()"
@@ -53,15 +52,6 @@
       Bei Rückfragen dazu melden wir uns über die von dir angegebene
       E-Mail-Adresse bei dir.  <br>
       Wenn du Fragen an uns hast, nutze gerne das Kontaktformular. <br>
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          text
-          v-bind="attrs"
-          @click="showSuccess = false"
-        >
-          Schließen
-        </v-btn>
-      </template>
     </v-snackbar>
     <!-- <v-btn
       class="ma-10"
@@ -72,7 +62,6 @@
     </v-btn> -->
     <span v-if="!isMobil" class="bg"/>
   </div>
-</div>
 </template>
 
 
@@ -202,22 +191,13 @@ export default {
         _paq.push(['trackContentImpression', item.title, item.id]);
       });
     },
-    convertUrlToId(url) {
-      if (url && typeof url === 'string') {
-        const idStringArray = url.split('/');
-        const id = idStringArray[idStringArray.length - 2];
-
-        return parseInt(id, 10);
-      }
-      return url;
-    },
     onResetClick() {
       this.$store.commit('clearFilters');
     },
     isTagMatchToEvent(item) {
       const eventTagArray = [];
       item.tags.forEach((tag) => {
-        eventTagArray.push(this.convertUrlToId(tag)); // eslint-disable-line
+        eventTagArray.push(tag); // eslint-disable-line
       });
       if (this.filterTags && this.filterTags.length) {
         const matches = eventTagArray.filter(element => this.filterTags.includes(element));

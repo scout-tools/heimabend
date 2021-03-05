@@ -123,22 +123,13 @@ export default {
       // eslint-disable-next-line arrow-parens
       this.items.forEach(element => {
         // eslint-disable-next-line no-param-reassign
-        element.categoryId = this.convertUrlToId(element.category);
+        element.categoryId = element.category;
       });
       return this.items;
     },
   },
 
   methods: {
-    convertUrlToId(url) {
-      if (url && typeof url === 'string') {
-        const idStringArray = url.split('/');
-        const id = idStringArray[idStringArray.length - 2];
-
-        return parseInt(id, 10);
-      }
-      return url;
-    },
     getNewItems() {
       const path = `${this.API_URL}basic/tag?&timestamp=${new Date().getTime()}`;
       axios.get(path)

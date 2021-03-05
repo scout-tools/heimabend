@@ -11,6 +11,7 @@ router.register(r'like', views.LikeViewSet)
 router.register(r'highscore', views.HighscoreView)
 router.register(r'tag-category', views.TagCategoryViewSet)
 router.register(r'statistic', views.StatisticView)
+router.register(r'material', views.MaterialViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
