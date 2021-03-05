@@ -144,6 +144,7 @@ export default {
       headerStep: [
         'Titel',
         'Beschreibung',
+        'Bild',
         'Materialien',
         'Fakten',
         'Themen',

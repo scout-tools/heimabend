@@ -1,48 +1,46 @@
 <template>
   <v-form
-    ref="form6"
+    ref="form5"
     v-model="valid"
   >
-    <v-container fluid class="mx-5 pa-0">
-      <v-row
-        v-for="(category, n) in getTopBarTagCategories"
-        :key="category.id"
-        class="ml-1 mr-10 my-5">
-        <span class="subtitle-1 pa-1" style="text-align: left;">
-          {{ texts[n] }}
+<v-container>
+  <v-row class="mt-6 ml-4">
+    <span class="subtitle-1">
+      Wähle so viele thematische Kategorien aus, wie zu deiner Heimabend-Idee passen. <br>
+      <br>
+      Wenn du noch eine Kategorie hinzufügen möchtest, kannst du dich
+      gerne mit dem Kontaktformular direkt an uns wenden.
+    </span>
+  </v-row>
+  <v-row class="ma-6">
+    <v-select
+      v-model="data.tags"
+      :items="getSideBarTags"
+      item-value="id"
+      :rules="rules.tags"
+      item-text="name"
+      deletable-chips
+      chips
+      dense
+      no-data-text="Wähle aus der Liste Probenordnung aus."
+      multiple
+      outlined
+    >
+      <template v-slot:selection="{ item, index }">
+        <v-chip v-if="index < 3" :color="item.color" small>
+          <span>{{ item.name }}</span>
+        </v-chip>
+        <span
+          v-if="index === 3"
+          class="grey--text caption"
+        >
+          (+ ...)
         </span>
-        <v-container class="ma-0 pa-0" fluid>
-          <v-select
-            v-model="data.tags"
-            no-data-text="Wähle aus der Liste Themen aus."
-            :items="filterTagByCategory(category.id)"
-            :label="category.name"
-            item-value="id"
-            item-text="name"
-            chips
-            :rules="getRulesByCategory(category)"
-            deletable-chips
-            multiple
-            dense
-            single-line
-            outlined
-            required
-          >
-            <template v-slot:selection="{ item, index }">
-              <v-chip v-if="index < 3" :color="item.color" small>
-                <span>{{ item.name }}</span>
-              </v-chip>
-              <span
-                v-if="index === 3"
-                class="grey--text caption"
-              >
-                (+ ...)
-              </span>
-            </template>
-          </v-select>
-        </v-container>
-    </v-row>
+      </template>
+    </v-select>
+  </v-row>
 
+    <v-divider class="my-2"/>
     <v-row class="ma-3" justify="center">
       <v-btn
         class="mr-5"
@@ -58,36 +56,39 @@
         Weiter
       </v-btn>
     </v-row>
-    </v-container>
-  </v-form>
+</v-container>
+        </v-form>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 
 export default {
-
   data: () => ({
     rules: {
       tags: [
-        v => (v && v.length >= 4 && false) || 'Wähle bitte mindestens einen Tag aus.',
+        v => (v && v.length > 0) || 'Mindestens ein Thema ist erforderlich',
       ],
     },
     data: {
-      tags: [],
+      executionTimeRating: 1,
+      costsRating: 1,
+      isLvlOne: true,
+      isLvlTwo: true,
+      isLvlThree: true,
     },
     valid: true,
     n: 0,
-    texts: [
-      'Pflichtfeld: In welchen (Jahres-)Zeiten kann deine Idee durchgeführt werden?',
-      'Pflichtfeld: An welchen Orten kann deine Idee stattfinden?',
-      'Pflichtfeld: Für welche Stufen ist deine Idee geeignet?',
-      'Pflichtfeld: Um welche Art von Heimabend-Ideen handelt es sich?',
-      'Lässt sich deine Heimabend-Idee einem speziellen Thema zuordnen?',
-    ],
   }),
 
   computed: {
+    ...mapGetters([
+      'tags',
+      'tagCategory',
+    ]),
+    isMobil() {
+      return this.$vuetify.breakpoint.mdAndDown;
+    },
     tags() {
       return this.$store.getters.tags;
     },
@@ -97,18 +98,32 @@ export default {
     isUpdate() {
       return !!this.$route.params.id;
     },
+    isLargeProject() {
+      return this.data.executionTimeRating === 0;
+    },
+    largeProjectButtomColor() {
+      return this.isLargeProject ? 'limegreen' : 'lightgrey';
+    },
+    largeProjectIconColor() {
+      return this.isLargeProject ? 'black' : 'grey';
+    },
+    isWithoutCosts() {
+      return this.data.costsRating === 0;
+    },
+    withoutCostsButtomColor() {
+      return this.isWithoutCosts ? 'limegreen' : 'lightgrey';
+    },
+    withoutCostsIconColor() {
+      return this.isWithoutCosts ? 'red darken-2' : 'grey';
+    },
     getClassForTextContentSteps() {
       return this.isMobil ? 'mx-0 px-1' : '';
     },
-    ...mapGetters([
-      'tags',
-      'tagCategory',
-      'mandatoryFilter',
-    ]),
-    getTopBarTagCategories() {
-      if (this.tagCategory) {
-        return this.tagCategory
-          .filter(item => item.is_header);
+    getSideBarTags() {
+      if (this.tags && this.tagCategory) {
+        const sideBarTagCategories = this.tagCategory.filter(item => item.is_header === false);
+        const sideBarTags = this.filterTagByCategory(sideBarTagCategories[0].id);
+        return sideBarTags;
       }
       return [];
     },
@@ -128,34 +143,6 @@ export default {
 
 
   methods: {
-    getMandatoryBarTagCategories() {
-      if (this.tagCategory) {
-        return this.tagCategory
-          .filter(item => item.is_mandatory);
-      }
-      return [];
-    },
-    getCategoryIdByTagId(categoryId) {
-      if (this.categoryId) {
-        return this.tags.filter(tag => tag.id === categoryId)[0];
-      }
-      return [];
-    },
-    getRulesByCategory(category) {
-      let returnValue = this.rules.tags;
-      if (!category.is_mandatory) {
-        return [];
-      }
-
-      if (this.data && this.data.tags) {
-        const activeTags = this.tags.filter(tag => this.data.tags.includes(tag.id));
-        const containsCategoryId = activeTags.filter(tag => tag.category === category.id); // eslint-disable-line
-        if (containsCategoryId.length) {
-          returnValue = [];
-        }
-      }
-      return returnValue;
-    },
     filterTagByCategory(categoryId) {
       return this.tags.filter(item => item.category) === categoryId;
     },
@@ -163,19 +150,18 @@ export default {
       this.$emit('prevStep');
     },
     nextStep() {
-      if (!this.$refs.form6.validate()) {
+      if (!this.$refs.form5.validate()) {
         return;
       }
       this.$emit('nextStep');
     },
     getData() {
       return {
-        selectedMandatoryFilter: this.data.tags,
+        tags: this.data.tags,
+        costsRating: this.data.costsRating,
+        executionTimeRating: this.data.executionTimeRating,
       };
     },
   },
 };
 </script>
-
-<style scoped>
-</style>

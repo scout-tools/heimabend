@@ -1,4 +1,8 @@
 # myapi/urls.py
+from django.conf import settings
+from django.conf.urls.static import static
+from django.conf.urls import url
+
 from django.urls import include, path
 from rest_framework import routers
 from . import views
@@ -17,4 +21,5 @@ router.register(r'material', views.MaterialViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('basic/', include(router.urls)),
+    url(r'^upload/$', views.ImageView.as_view({'get': 'list'}), name='file-upload'),
 ]

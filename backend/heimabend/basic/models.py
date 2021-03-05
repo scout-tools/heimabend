@@ -1,10 +1,10 @@
 # models.py
-from django.db import models
-from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator, MinLengthValidator, MaxLengthValidator
-from django.utils.translation import gettext_lazy as _
+from django.db import models
 from django.db.models import Sum
+from django.utils.translation import gettext_lazy as _
 from stdimage import StdImageField, JPEGField
+import uuid
 
 
 class TimeStampMixin(models.Model):

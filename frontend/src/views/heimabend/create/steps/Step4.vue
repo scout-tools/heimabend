@@ -43,33 +43,23 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 
 export default {
+
   data: () => ({
-    rules: {
-      tags: [
-        v => (v && v.length > 0) || 'Mindestens ein Thema ist erforderlich',
-      ],
-    },
+    API_URL: process.env.VUE_APP_API,
+    n: 0,
+    dialog: false,
+    valid: true,
     data: {
       materialArray: [],
       material_list: [],
     },
-    valid: true,
-    n: 0,
   }),
 
   computed: {
-    ...mapGetters([
-      'tags',
-      'tagCategory',
-    ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
-    },
-    tags() {
-      return this.$store.getters.tags;
     },
     isCreate() {
       return !this.$route.params.id;
@@ -117,6 +107,7 @@ export default {
   created() {
     if (this.$route.params.id) {
       this.data = this.$route.params;
+      this.convertMaterialString(this.data.material);
     }
   },
 
