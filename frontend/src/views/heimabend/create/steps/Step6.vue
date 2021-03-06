@@ -119,6 +119,13 @@ export default {
     getClassForTextContentSteps() {
       return this.isMobil ? 'mx-0 px-1' : '';
     },
+    getTopBarTagCategories() {
+      if (this.tagCategory) {
+        return this.tagCategory
+          .filter(item => item.is_header);
+      }
+      return [];
+    },
     getSideBarTags() {
       if (this.tags && this.tagCategory) {
         const sideBarTagCategories = this.tagCategory.filter(item => item.is_header === false);
@@ -127,6 +134,7 @@ export default {
       }
       return [];
     },
+
   },
 
   mounted() {
@@ -144,7 +152,7 @@ export default {
 
   methods: {
     filterTagByCategory(categoryId) {
-      return this.tags.filter(item => item.category) === categoryId;
+      return this.tags.filter(item => item.category === categoryId);
     },
     prevStep() {
       this.$emit('prevStep');
@@ -158,9 +166,35 @@ export default {
     getData() {
       return {
         tags: this.data.tags,
-        costsRating: this.data.costsRating,
-        executionTimeRating: this.data.executionTimeRating,
       };
+    },
+    getMandatoryBarTagCategories() {
+      if (this.tagCategory) {
+        return this.tagCategory
+          .filter(item => item.is_mandatory);
+      }
+      return [];
+    },
+    getCategoryIdByTagId(categoryId) {
+      if (this.categoryId) {
+        return this.tags.filter(tag => tag.id === categoryId)[0];
+      }
+      return [];
+    },
+    getRulesByCategory(category) {
+      let returnValue = this.rules.tags;
+      if (!category.is_mandatory) {
+        return [];
+      }
+
+      if (this.data && this.data.tags) {
+        const activeTags = this.tags.filter(tag => this.data.tags.includes(tag.id));
+        const containsCategoryId = activeTags.filter(tag => tag.category === category.id); // eslint-disable-line
+        if (containsCategoryId.length) {
+          returnValue = [];
+        }
+      }
+      return returnValue;
     },
   },
 };

@@ -112,6 +112,11 @@ export default {
   },
 
   methods: {
+    convertMaterialString(array) {
+      if (array) {
+        this.data.materialArray = array.split(',');
+      }
+    },
     remove(item) {
       this.data.material_list.splice(this.data.material_list.indexOf(item), 1);
       this.data.material_list = [...this.data.material_list];

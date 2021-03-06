@@ -221,7 +221,7 @@ export default {
   methods: {
 
     filterTagByCategory(categoryId) {
-      return this.tags.filter(item => item.category) === categoryId;
+      return this.tags.filter(item => item.category === categoryId);
     },
     onResetPriceClick() {
       this.data.costsRating = 0;

@@ -167,7 +167,6 @@ export default {
         params: this.axiosParams,
       })
         .then((res) => {
-          debugger;
           this.items = res.data.results;
           this.nextPath = res.data.next;
           this.count = res.data.count;

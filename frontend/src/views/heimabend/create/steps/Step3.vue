@@ -85,11 +85,6 @@ export default {
   },
 
   methods: {
-    convertMaterialString(array) {
-      if (array) {
-        this.data.materialArray = array.split(',');
-      }
-    },
     prevStep() {
       this.$emit('prevStep');
     },
