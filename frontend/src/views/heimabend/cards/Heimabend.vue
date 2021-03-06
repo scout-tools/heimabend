@@ -2,11 +2,20 @@
 <v-container class="max-width-class" ma-0 pa-0>
   <v-row no-gutters >
   <v-col :cols="getMainCols" >
-  <h2
-    class="deinHeimabendSpan"
-    :class="yourHeimabendSpan()">
-    {{ getHeaderText }}
-  </h2>
+    <v-row>
+      <v-spacer class="ml-8"/>
+      <h2
+        class="deinHeimabendSpan"
+        :class="yourHeimabendSpan()">
+        {{ getHeaderText }}
+      </h2>
+      <v-spacer/>
+          <router-link v-if="isScoringMode" :to="{ name: 'overview' }" class="no-underline mr-4">
+            <v-btn icon large color="primary">
+              <v-icon>mdi-close-circle</v-icon>
+            </v-btn>
+          </router-link>
+    </v-row>
   <div>
     <v-card
       :max-width="getMaxWidth()"
