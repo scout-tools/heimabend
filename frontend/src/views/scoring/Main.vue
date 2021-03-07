@@ -121,10 +121,6 @@ export default {
               id: response.data.id,
             },
           });
-        })
-        .catch(() => {
-          this.showError = true;
-          console.log('Fehler');
         });
     },
   },
