@@ -56,8 +56,6 @@ export default {
     valid: true,
     data: {
       title: '',
-      materialArray: [],
-      isPrepairationNeeded: false,
     },
     rules: {
       title: [

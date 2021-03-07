@@ -2,11 +2,20 @@
 <v-container class="max-width-class" ma-0 pa-0>
   <v-row no-gutters >
   <v-col :cols="getMainCols" >
-  <h2
-    class="deinHeimabendSpan"
-    :class="yourHeimabendSpan()">
-    dein Heimabend.
-  </h2>
+    <v-row>
+      <v-spacer class="ml-8"/>
+      <h2
+        class="deinHeimabendSpan"
+        :class="yourHeimabendSpan()">
+        {{ getHeaderText }}
+      </h2>
+      <v-spacer/>
+          <router-link v-if="isScoringMode" :to="{ name: 'overview' }" class="no-underline mr-4">
+            <v-btn icon large color="primary">
+              <v-icon>mdi-close-circle</v-icon>
+            </v-btn>
+          </router-link>
+    </v-row>
   <div>
     <v-card
       :max-width="getMaxWidth()"
@@ -122,8 +131,12 @@
             </span>
           </v-tooltip>
       </v-list-item>
-
-      <v-divider/>
+              <v-img
+          v-if="getImageLink(item)"
+          max-height="250"
+          aspect-ratio="2"
+          :src="getImageLink(item)"
+        ></v-img>
       <v-card-text>
         <div>
           <p
@@ -484,7 +497,7 @@
       size="40"
       color="white"
     ></v-progress-circular>
-    <Fab/>
+    <fab v-if="!isScoringMode"/>
   </v-col>
   <v-col
     v-if="!isMobil && !isDetailsView"
@@ -547,6 +560,12 @@ export default {
     loadMore() {
       this.$emit('loadMore');
     },
+    getImageLink(item) {
+      if (item.imageLink !== '') {
+        return item.imageLink;
+      }
+      return null;
+    },
     yourHeimabendSpan() {
       return this.isMobil ? 'headerIsMobile' : 'headerIsDesktop';
     },
@@ -558,23 +577,15 @@ export default {
       return [];
     },
     convertUrlArray(ary) {
-      return ary.map(e => this.convertUrlToId(e));
+      return ary.map(e => e);
     },
     getEventTags(tagArray) {
-      const tagsObject = this.tags.filter(item => this.convertUrlArray(tagArray).includes(item.id));
-      const containsCategoryId = tagsObject.filter(tag => [2,4,5,9].includes(this.convertUrlToId(tag.category))); // eslint-disable-line
+      const tagsObject = this.tags.filter(item => tagArray.includes(item.id));
+      const containsCategoryId = tagsObject.filter(tag => [2,4,5,9].includes(tag.category)); // eslint-disable-line
       return containsCategoryId;
     },
     filterTagByCategory(tags, categoryId) {
-      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
-    },
-    convertUrlToId(url) {
-      if (url && typeof url === 'string') {
-        const idStringArray = url.split('/');
-        const id = idStringArray[idStringArray.length - 2];
-        return parseInt(id, 10);
-      }
-      return url;
+      return this.tags.filter(item => item.category === categoryId);
     },
     getDescriptionClass() {
       let string = '';
@@ -699,17 +710,14 @@ export default {
     getId() {
       return this.$route.params.id;
     },
-    getIsLvlOne(item) {
-      const lvlOneId = this.tags.filter(tag => tag.name === 'Wölflinge')[0].id;
-      return !!item.tags.filter(tag => tag.includes(lvlOneId)).length;
+    getIsLvlOne() {
+      return false;
     },
-    getIsLvlTwo(item) {
-      const lvlTwoId = this.tags.filter(tag => tag.name === 'Pfadfinder')[0].id;
-      return !!item.tags.filter(tag => tag.includes(lvlTwoId)).length;
+    getIsLvlTwo() {
+      return false;
     },
-    getIsLvlThree(item) {
-      const lvlThreeId = this.tags.filter(tag => tag.name === 'Rover')[0].id;
-      return !!item.tags.filter(tag => tag.includes(lvlThreeId)).length;
+    getIsLvlThree() {
+      return false;
     },
   },
   data() {
@@ -737,6 +745,7 @@ export default {
       'tags',
       'liked',
       'isAuthenticated',
+      'isScoringMode',
     ]),
     isMainPage() {
       return this.currentRouteName === 'overview';
@@ -752,6 +761,9 @@ export default {
     },
     getLikeIconSize() {
       return !this.isMobil ? 30 : 28;
+    },
+    getHeaderText() {
+      return !this.isScoringMode ? 'dein Heimabend' : 'Inspiriend?';
     },
     getLikeButtonText() {
       return !this.isMobil ? 'Mehr Details zum zur Idee' : 'Mehr';
@@ -788,8 +800,8 @@ export default {
   }
   .deinHeimabendSpan {
     font-family: "Special Elite", sans-serif !important;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 
   .headerIsMobile {
@@ -813,6 +825,6 @@ export default {
   height: 100vh !important;
 }
 .negativ-top-margin {
-  margin-top: -150px !important;
+  margin-top: -220px !important;
 }
 </style>

@@ -1,4 +1,8 @@
 # myapi/urls.py
+from django.conf import settings
+from django.conf.urls.static import static
+from django.conf.urls import url
+
 from django.urls import include, path
 from rest_framework import routers
 from . import views
@@ -11,9 +15,14 @@ router.register(r'like', views.LikeViewSet)
 router.register(r'highscore', views.HighscoreView)
 router.register(r'tag-category', views.TagCategoryViewSet)
 router.register(r'statistic', views.StatisticView)
+router.register(r'material', views.MaterialViewSet)
+router.register(r'experiment', views.ExperimentViewSet)
+router.register(r'experiment-item', views.ExperimentItemViewSet)
+router.register(r'random-event', views.RandomEventViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('basic/', include(router.urls)),
+    url(r'^upload/$', views.ImageView.as_view({'get': 'list'}), name='file-upload'),
 ]

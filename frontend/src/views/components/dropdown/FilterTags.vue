@@ -62,16 +62,7 @@ export default {
   },
   methods: {
     filterTagByCategory(categoryId) {
-      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
-    },
-    convertUrlToId(url) {
-      if (url && typeof url === 'string') {
-        const idStringArray = url.split('/');
-        const id = idStringArray[idStringArray.length - 2];
-
-        return parseInt(id, 10);
-      }
-      return url;
+      return this.tags.filter(item => item.category === categoryId);
     },
     getDivClass() {
       return !this.isMobil ? 'mx-2' : 'mx-0';

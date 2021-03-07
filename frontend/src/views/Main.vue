@@ -6,9 +6,10 @@
       clipped-left
       color="#1a4b7e"
       dark
+      v-if="!isScoringMode"
     >
     <v-app-bar-nav-icon
-      v-if="!apiIsDown"
+      v-if="!apiIsDown && !isScoringMode"
       @click="toogleDrawer()"
     />
 
@@ -22,47 +23,54 @@
         clearable
         :dense="isMobil"
         @keydown.enter="onChangeSearchInput()"
+        v-if="!isScoringMode"
       />
 
       <v-spacer/>
-      <router-link to="/">
+      <!-- <router-link to="/">
       <img
-        src="https://dpbm.de/wp/wp-content/uploads/2019/02/mosaikWhite.svg"
+        src="https://dpbm.de/wp/wp-content/uploads/2019/02/mosaikBlue.svg"
         class="mr-2"
         height="50"
         alt="Bundesabzeichen vom Deutschen Pfadfinderbund Mosaik"
       />
-      </router-link>
+      </router-link> -->
     </v-app-bar>
 
     <menu-left
       ref="mainMenuLeft"
+      v-if="!isScoringMode"
     />
 
     <v-main
       id="lateral"
     >
       <topbar
-        v-if="isMainPage"
+        v-if="isMainPage && !isScoringMode"
         ref="topFilterToolbar"
       />
       <sub-pages-top-bar
-        v-if="!isMainPage"
+        v-if="!isMainPage && !isScoringMode"
       />
 
       <filter-top-sub-bar
-        v-if="isMainPage && !isMobil"
+        v-if="isMainPage && !isMobil && !isScoringMode"
       />
 
       <template>
+        <v-container fluid fill-height>
+            <v-row align="center"
+      justify="center">
         <router-view
           class="content"
           :class="getMargin"
           v-scroll="onScroll"
         />
-      <Fab
-        v-if="isMainPage && !apiIsDown"
+      <fab
+        v-show="isMainPage && !apiIsDown && !isScoringMode && false"
       />
+            </v-row>
+        </v-container>
       </template>
     <api-down-banner
       v-if="apiIsDown"
@@ -108,6 +116,7 @@ export default {
     ...mapGetters([
       'searchInput',
       'tags',
+      'isScoringMode',
     ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -117,7 +126,7 @@ export default {
       return `Suche in ${counter} Heimabendideen`;
     },
     getMargin() {
-      return this.isMobil ? 'ma-1' : 'ma-0';
+      return this.isMobil ? 'ma-2' : 'ma-2';
     },
     isMainPage() {
       return this.currentRouteName === 'overview';
