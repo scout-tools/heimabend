@@ -1,18 +1,10 @@
 <template>
-<div>
   <v-app id="keep">
-    <v-app-bar
-      app
-      clipped-left
-      color="#1a4b7e"
-      dark
-      v-if="!isScoringMode"
-    >
-    <v-app-bar-nav-icon
-      v-if="!apiIsDown && !isScoringMode"
-      @click="toogleDrawer()"
-    />
-
+    <v-app-bar app clipped-left color="#1a4b7e" dark v-if="!isScoringMode">
+      <v-app-bar-nav-icon
+        v-if="!apiIsDown && !isScoringMode"
+        @click="toogleDrawer()"
+      />
       <v-text-field
         class="px-3"
         v-model="currentSearchInput"
@@ -26,7 +18,7 @@
         v-if="!isScoringMode"
       />
 
-      <v-spacer/>
+      <v-spacer />
       <!-- <router-link to="/">
       <img
         src="https://dpbm.de/wp/wp-content/uploads/2019/02/mosaikBlue.svg"
@@ -37,57 +29,26 @@
       </router-link> -->
     </v-app-bar>
 
-    <menu-left
-      ref="mainMenuLeft"
-      v-if="!isScoringMode"
-    />
+    <menu-left ref="mainMenuLeft" v-if="!isScoringMode" />
 
-    <v-main
-      id="lateral"
-    >
-      <topbar
-        v-if="isMainPage && !isScoringMode"
-        ref="topFilterToolbar"
-      />
-      <sub-pages-top-bar
-        v-if="!isMainPage && !isScoringMode"
-      />
+    <v-main id="lateral">
+      <topbar v-if="isMainPage && !isScoringMode" ref="topFilterToolbar" />
+      <sub-pages-top-bar v-if="!isMainPage && !isScoringMode" />
 
-      <filter-top-sub-bar
-        v-if="isMainPage && !isMobil && !isScoringMode"
-      />
-
+      <filter-top-sub-bar v-if="isMainPage && !isMobil && !isScoringMode" />
       <template>
-        <v-container fluid fill-height>
-            <v-row align="center"
-      justify="center">
-        <router-view
-          class="content"
-          :class="getMargin"
-          v-scroll="onScroll"
-        />
-      <fab
-        v-show="isMainPage && !apiIsDown && !isScoringMode && false"
-      />
-            </v-row>
+        <v-container fluid mx-auto>
+          <router-view class="content" :class="getMargin" v-scroll="onScroll" />
+          <fab v-show="isMainPage && !apiIsDown && !isScoringMode && false" />
         </v-container>
       </template>
-    <api-down-banner
-      v-if="apiIsDown"
-    />
+      <api-down-banner v-if="apiIsDown" />
     </v-main>
-    <pricacy-banner
-      v-if="!acceptedPrivacy"
-    />
-    <v-snackbar
-      v-model="showError"
-      color="error"
-      y='top'
-    >
+    <pricacy-banner v-if="!acceptedPrivacy" />
+    <v-snackbar v-model="showError" color="error" y="top">
       {{ 'Es ist ein Fehler aufgetreten' }}
     </v-snackbar>
   </v-app>
-</div>
 </template>
 
 <script>
@@ -113,11 +74,7 @@ export default {
     FilterTopSubBar,
   },
   computed: {
-    ...mapGetters([
-      'searchInput',
-      'tags',
-      'isScoringMode',
-    ]),
+    ...mapGetters(['searchInput', 'tags', 'isScoringMode']),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
@@ -160,8 +117,11 @@ export default {
       this.$refs.mainMenuLeft.toggleDrawer();
     },
     getTags() {
-      const path = `${this.API_URL}basic/tag/?&timestamp=${new Date().getTime()}`;
-      axios.get(path)
+      const path = `${
+        this.API_URL
+      }basic/tag/?&timestamp=${new Date().getTime()}`;
+      axios
+        .get(path)
         .then((res) => {
           this.$store.commit('setTags', res.data);
         })
@@ -170,8 +130,11 @@ export default {
         });
     },
     getTagCategory() {
-      const path = `${this.API_URL}basic/tag-category/?&timestamp=${new Date().getTime()}`;
-      axios.get(path)
+      const path = `${
+        this.API_URL
+      }basic/tag-category/?&timestamp=${new Date().getTime()}`;
+      axios
+        .get(path)
         .then((res) => {
           this.$store.commit('setTagCategory', res.data);
         })
@@ -205,30 +168,29 @@ export default {
     chips: [],
   }),
 };
-
 </script>
 
 <style>
-  #lateral .v-btn--example {
-    bottom: 0;
-    position: absolute;
-    margin: 0 0 16px 16px;
-  }
+#lateral .v-btn--example {
+  bottom: 0;
+  position: absolute;
+  margin: 0 0 16px 16px;
+}
 
-  .content {
-    flex: 1;
-    min-height: "100vh" !important;
-  }
-  .v-btn-toggle--group > .v-btn.v-btn {
-    margin: 2px !important;
-  }
-  .hand-cursor {
-    cursor: pointer
-  }
-  .info-cursor {
-    cursor: help !important;
-  }
-  .theme--light.v-application {
-    background: #f4f4f434 !important;
-  }
+.content {
+  flex: 1;
+  min-height: '100vh' !important;
+}
+.v-btn-toggle--group > .v-btn.v-btn {
+  margin: 2px !important;
+}
+.hand-cursor {
+  cursor: pointer;
+}
+.info-cursor {
+  cursor: help !important;
+}
+.theme--light.v-application {
+  background: #f4f4f434 !important;
+}
 </style>

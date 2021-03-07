@@ -1,147 +1,39 @@
 <template>
-<v-container class="max-width-class" ma-0 pa-0>
-  <v-row no-gutters >
-    <v-col :cols="getMainCols" >
-      <v-row>
-        <!-- <v-btn fab outlined small color="primary">
-          <v-icon>mdi-help</v-icon>
-        </v-btn> -->
-
-        <v-spacer class="ml-8"/>
-
-        <h2
-          class="deinHeimabendSpan"
-          :class="yourHeimabendSpan()">
-          {{ getHeaderText }}
-        </h2>
-
-        <v-spacer/>
-        <router-link v-if="isScoringMode" :to="{ name: 'overview' }" class="no-underline mr-4">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-              <v-btn fab small outlined color="primary" v-bind="attrs" v-on="on">
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-            </template>
-          <span>Zurück zum Inspirator</span>
-        </v-tooltip>
-        </router-link>
-      </v-row>
-    <div>
+  <v-container class="max-width-class" ma-0 pa-0>
+    <v-row no-gutters>
+      <v-col :cols="getMainCols">
+          <v-spacer class="ml-8"/>
+          <h2
+            class="deinHeimabendSpan"
+            :class="yourHeimabendSpan()">
+            {{ getHeaderText }}
+          </h2>
+          <v-spacer/>
+          <router-link v-if="isScoringMode" :to="{ name: 'overview' }" class="no-underline mr-4">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                  <v-btn fab small outlined color="primary" v-bind="attrs" v-on="on">
+                    <v-icon>mdi-close</v-icon>
+                  </v-btn>
+                </template>
+              <span>Zurück zum Inspirator</span>
+            </v-tooltip>
+          </router-link>
     <v-card
       :max-width="getMaxWidth()"
       elevation=30
-
       class="mx-auto ma-3 mb-10 test-color"
       :style="{ transitionDelay: delay }"
       v-bind:id="`eventcard-${item.id}`"
       v-for="(item, index) in items"
       :key="index"
     >
-      <v-list-item
-        class="primary px-0"
-        :class="paddingleftLebelIcons"
-      >
-        <v-img
-          class="ml-1"
-          :src="require('@/assets/wolfskopf.png')"
-          v-if="getIsLvlOne(item) && isDetailsView"
-          :max-width="maxWidthKnots"
-        />
-        <v-img
-          class="ml-1"
-          :src="require('../../../assets/knot_blue.png')"
-          v-if="getIsLvlTwo(item) && isDetailsView"
-          :max-width="maxWidthKnots"
-        />
-        <v-img
-          class="ml-1"
-          :src="require('../../../assets/knot_red.png')"
-          v-if="getIsLvlThree(item) && isDetailsView"
-          :max-width="maxWidthKnots"
-        />
+        <v-card-title
+          class="whiteText justify-center text-center primary"
+          :class="titleClass()">
+          {{ item.title }}
+        </v-card-title>
 
-        <v-divider
-          v-if="isDetailsView"
-          class="mx-2"
-          vertical
-        />
-
-        <v-list-item-content>
-          <v-list-item-title
-            class="whiteText"
-            :class="titleClass()">
-              {{ item.title }}
-          </v-list-item-title>
-        </v-list-item-content>
-        <v-divider class="mx-2 ml-12" v-if="!item.isActive && isAuthenticated" vertical/>
-          <v-tooltip
-            nudge-left="80"
-            v-if="!item.isActive && isAuthenticated"
-            bottom>
-            <template v-slot:activator="{ on }">
-              <v-btn
-                class="ma-2 info-cursor"
-                v-on="on"
-                icon>
-                <v-icon color="red">
-                  mdi-eye-off-outline
-                </v-icon>
-              </v-btn>
-            </template>
-            <span class="mx-1">
-              Nicht Öffentlich
-            </span>
-          </v-tooltip>
-
-        <v-divider v-if="isAuthenticated" vertical/>
-        <v-btn
-          class="ma-1"
-          text
-          icon
-          color="red lighten-3"
-          v-if="isAuthenticated"
-          @click="onDeleteClick(item)">
-          <v-icon>mdi-delete-outline</v-icon>
-        </v-btn>
-
-          <v-divider v-if="isAuthenticated" vertical/>
-          <v-btn
-            class="ma-1"
-            text
-            icon
-            color="lightPrimary"
-            v-if="isAuthenticated"
-            @click="onUpdateClick(item)">
-            <v-icon>mdi-pencil-outline</v-icon>
-          </v-btn>
-          <v-tooltip
-            v-if="!isMobil && !isAuthenticated && item.like_score > 0"
-            nudge-left="80"
-            open-on-hover
-            bottom>
-            <template v-slot:activator="{ on }">
-              <v-btn
-                class="px-2 info-cursor"
-                :x-small="isMobil"
-                depressed
-                color="primary"
-                v-on="on">
-                <v-icon
-                  v-for="i in item.like_score"
-                  color="#F6D300"
-                  :key="i"
-                  :size="30"
-                  readonly>
-                  mdi-star-face
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>
-              {{ getLikeScoreTooltip(item.like_score)}}
-            </span>
-          </v-tooltip>
-      </v-list-item>
               <v-img
           v-if="getImageLink(item)"
           max-height="250"
@@ -254,6 +146,74 @@
       <v-divider
         v-if="item.isPossibleDigital"
       />
+
+ <v-divider class="mx-2 ml-12" v-if="!item.isActive && isAuthenticated" vertical/>
+          <v-tooltip
+            nudge-left="80"
+            v-if="!item.isActive && isAuthenticated"
+            bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                class="ma-2 info-cursor"
+                v-on="on"
+                icon>
+                <v-icon color="red">
+                  mdi-eye-off-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span class="mx-1">
+              Nicht Öffentlich
+            </span>
+          </v-tooltip>
+
+        <v-divider v-if="isAuthenticated" vertical/>
+        <v-btn
+          class="ma-1"
+          text
+          icon
+          color="red lighten-3"
+          v-if="isAuthenticated"
+          @click="onDeleteClick(item)">
+          <v-icon>mdi-delete-outline</v-icon>
+        </v-btn>
+
+          <v-divider v-if="isAuthenticated" vertical/>
+          <v-btn
+            class="ma-1"
+            text
+            icon
+            color="lightPrimary"
+            v-if="isAuthenticated"
+            @click="onUpdateClick(item)">
+            <v-icon>mdi-pencil-outline</v-icon>
+          </v-btn>
+          <v-tooltip
+            v-if="!isMobil && !isAuthenticated && item.like_score > 0"
+            nudge-left="80"
+            open-on-hover
+            bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                class="px-2 info-cursor"
+                :x-small="isMobil"
+                depressed
+                color="primary"
+                v-on="on">
+                <v-icon
+                  v-for="i in item.like_score"
+                  color="#F6D300"
+                  :key="i"
+                  :size="30"
+                  readonly>
+                  mdi-star-face
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>
+              {{ getLikeScoreTooltip(item.like_score)}}
+            </span>
+          </v-tooltip>
 
       <v-card-actions px-0 class="lightPrimary pa-0">
         <v-tooltip
@@ -454,10 +414,9 @@
           <div class="body-2 ma-2">
             {{ formatDate(item.createdAt) + '\n' + item.createdBy }}
           </div>
+
       </v-card-actions>
     </v-card>
-  </div>
-  <!-- </v-slide-y-transition> -->
   <v-snackbar
     v-model="showError"
     color="error"
@@ -474,7 +433,7 @@
   >
     {{ 'Diese Heimabend-Idee wurde erfolgreich gelöscht' }}
   </v-snackbar>
-  <DeleteModal
+  <delete-modal
     ref="deleteTagModal"
     @refresh="onRefreshHeimabende"
   />
@@ -509,19 +468,19 @@
       color="white"
     ></v-progress-circular>
     <fab v-if="!isScoringMode"/>
-  </v-col>
-  <v-col
-    v-if="!isMobil && !isDetailsView"
-    cols="2"
-    class="negativ-top-margin"
-  >
-    <menu-right
-      pa-5
-      class="fixed menu-right" style="padding-top: 50px; padding-left: 5px; padding-right: 5px;"
-    />
-  </v-col>
-  </v-row>
-</v-container>
+    </v-col>
+    <v-col
+      v-if="!isMobil && !isDetailsView"
+      cols="2"
+      class="negativ-top-margin"
+    >
+      <menu-right
+        pa-5
+        class="fixed menu-right" style="padding-top: 50px; padding-left: 5px; padding-right: 5px;"
+      />
+    </v-col>
+    </v-row>
+  </v-container>
 
 </template>
 
@@ -836,6 +795,6 @@ export default {
   height: 100vh !important;
 }
 .negativ-top-margin {
-  margin-top: -220px !important;
+  margin-top: -130px !important;
 }
 </style>

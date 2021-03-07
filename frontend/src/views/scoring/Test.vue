@@ -1,12 +1,12 @@
 <template>
-  <v-container>
+<v-container fluid>
     <transition :name="trans">
       <heimabend-card
         v-touch="{
           left: () => trigger('slide-left'),
           right: () => trigger('slide-right'),
         }"
-        class="card"
+        class="mb-10"
         :items="items"
         :isDetailsView="true"
         v-show="show"
