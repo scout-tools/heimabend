@@ -13,33 +13,66 @@
       />
     </transition>
     <v-bottom-navigation grow fixed v-model="value">
-      <v-btn large :disabled="loading" @click="trigger('slide-left')">
+
+    <v-tooltip top open-delay=1000>
+      <template v-slot:activator="{ on, attrs }">
+      <v-btn large :disabled="loading" @click="trigger('slide-left')"
+          v-bind="attrs"
+          v-on="on"
+        >
         <span>doof</span>
         <v-icon large color="red">
           mdi-thumb-down
         </v-icon>
       </v-btn>
+      </template>
+      <span>Ich mag den Heimabend nicht.</span>
+    </v-tooltip>
 
-      <v-btn large :disabled="loading" @click="trigger('slide-down')">
+    <v-tooltip top open-delay=1000>
+      <template v-slot:activator="{ on, attrs }">
+      <v-btn large :disabled="loading" @click="trigger('slide-down')"
+          v-bind="attrs"
+          v-on="on"
+        >
         <span>unklar</span>
         <v-icon large color="grey">
           mdi-emoticon-confused
         </v-icon>
       </v-btn>
+      </template>
+      <span>Ich verstehe den Heimabend nicht.</span>
+    </v-tooltip>
 
-      <v-btn large :disabled="loading" @click="trigger('slide-up')">
+    <v-tooltip top open-delay=1000>
+      <template v-slot:activator="{ on, attrs }">
+      <v-btn large :disabled="loading" @click="trigger('slide-up')"
+          v-bind="attrs"
+          v-on="on"
+        >
         <span>MEGA</span>
         <v-icon large color="orange">
           mdi-medal
         </v-icon>
       </v-btn>
+      </template>
+      <span>Ich finde diesen Heimabend mega mega gut.</span>
+    </v-tooltip>
 
-      <v-btn :disabled="loading" @click="trigger('slide-right')">
+    <v-tooltip top open-delay=1000>
+      <template v-slot:activator="{ on, attrs }">
+      <v-btn large :disabled="loading" @click="trigger('slide-right')"
+          v-bind="attrs"
+          v-on="on"
+        >
         <span>cool</span>
         <v-icon large color="green">
           mdi-thumb-up
         </v-icon>
       </v-btn>
+      </template>
+      <span>Ich mag den Heimabend.</span>
+    </v-tooltip>
     </v-bottom-navigation>
   </v-container>
 </template>

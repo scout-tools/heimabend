@@ -1,22 +1,33 @@
 <template>
 <v-container class="max-width-class" ma-0 pa-0>
   <v-row no-gutters >
-  <v-col :cols="getMainCols" >
-    <v-row>
-      <v-spacer class="ml-8"/>
-      <h2
-        class="deinHeimabendSpan"
-        :class="yourHeimabendSpan()">
-        {{ getHeaderText }}
-      </h2>
-      <v-spacer/>
-          <router-link v-if="isScoringMode" :to="{ name: 'overview' }" class="no-underline mr-4">
-            <v-btn icon large color="primary">
-              <v-icon>mdi-close-circle</v-icon>
-            </v-btn>
-          </router-link>
-    </v-row>
-  <div>
+    <v-col :cols="getMainCols" >
+      <v-row>
+        <!-- <v-btn fab outlined small color="primary">
+          <v-icon>mdi-help</v-icon>
+        </v-btn> -->
+
+        <v-spacer class="ml-8"/>
+
+        <h2
+          class="deinHeimabendSpan"
+          :class="yourHeimabendSpan()">
+          {{ getHeaderText }}
+        </h2>
+
+        <v-spacer/>
+        <router-link v-if="isScoringMode" :to="{ name: 'overview' }" class="no-underline mr-4">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+              <v-btn fab small outlined color="primary" v-bind="attrs" v-on="on">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </template>
+          <span>Zurück zum Inspirator</span>
+        </v-tooltip>
+        </router-link>
+      </v-row>
+    <div>
     <v-card
       :max-width="getMaxWidth()"
       elevation=30

@@ -107,14 +107,16 @@ export default {
   created() {
     if (this.$route.params.id) {
       this.data = this.$route.params;
-      this.convertMaterialString(this.data.material);
+      if (this.data.material_list && this.data.material_list.length === 0) {
+        this.convertMaterialString(this.data.material);
+      }
     }
   },
 
   methods: {
     convertMaterialString(array) {
-      if (array) {
-        this.data.materialArray = array.split(',');
+      if (array && array.length) {
+        this.data.material_list = array.split(',');
       }
     },
     remove(item) {

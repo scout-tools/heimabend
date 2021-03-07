@@ -14,9 +14,12 @@
             Helfe mir bitte statt zu werden.<br />
             <br />
             Damit ich dir passendsten Inspirationen bieten kann, brauche ich
-            Futter. Füttere sie mit so vielen Ideen und Einschätzungen von dir
+            <b>Futter</b>. <br>
+            Füttere mich mit so vielen Ideen und Meinungen von dir
             wie möglich, damit ich allen Pfadfindern die besten Inspirationen
             bieten kann.<br />
+            <br>
+            Ich danke dir.
           </p>
         </v-col>
       </v-row>
@@ -33,7 +36,7 @@
         </v-btn-toggle>
       </v-row>
 
-      <v-divider class="my-5"></v-divider>
+      <v-divider inset class="my-5"></v-divider>
 
       <v-row align="center" justify="center">
         <v-col cols="12">
@@ -45,7 +48,7 @@
         </v-btn-toggle>
       </v-row>
 
-      <v-divider class="my-5"></v-divider>
+      <v-divider inset class="my-5"></v-divider>
 
       <v-row align="center" justify="center" v-if="data.group_leader === 0">
         <v-col cols="12">
@@ -68,7 +71,7 @@
           <v-btn> Roverrunde </v-btn>
         </v-btn-toggle>
       </v-row>
-      <v-divider class="my-5"></v-divider>
+      <v-divider inset class="my-5"></v-divider>
       <v-row align="center" justify="center">
         <v-col cols="12">
           <v-btn color="primary" @click="createExperiment">

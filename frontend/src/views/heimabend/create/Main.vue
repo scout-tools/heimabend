@@ -1,7 +1,7 @@
 <template>
   <v-container>
       <v-row justify="center">
-    <v-card class="mx-auto top-margin">
+    <v-card class="mx-auto top-margin" max-width="800px">
         <v-stepper vertical v-model="currentStep">
           <v-stepper-step :complete="currentStep > 1" :step="1">
             {{ headerStep[0] }}
