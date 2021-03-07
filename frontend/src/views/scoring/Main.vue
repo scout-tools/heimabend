@@ -2,17 +2,30 @@
   <v-form>
     <v-container fluid>
       <v-row align="center" justify="center">
+          <h1>Ich bin Inspi</h1>
+      </v-row>
+      <v-row align="center" justify="center">
+        <v-img
+          :src="require('@/assets/inspi.png')"
+          max-width="200"
+        />
+      </v-row>
+      <v-row align="center" justify="center">
         <v-col cols="12">
-          <h1>Füttere Inspi mit Daten</h1>
           <p>
-            Beantworte folgende Fragen und helfe Inspi klüger zu werden. inspi
-            freut sich über deine Meinung.
+            <b>Deine Meinung</b> ist meine Leibspeise. <br>
+            Helfe mir bitte statt zu werden.<br>
+            <br>
+            Damit ich dir passendsten Inspirationen bieten kann,
+            brauche ich Futter. Füttere sie mit so vielen Ideen und 
+            Einschätzungen von dir wie möglich, damit ich allen 
+            Pfadfindern die besten Inspirationen bieten kann.<br>
           </p>
         </v-col>
       </v-row>
       <v-row align="center" justify="center">
         <v-col cols="12">
-          <p class="text-center">Wie alt bist du?</p>
+          <p class="text-center"> <b>Wie alt bist du?</b></p>
         </v-col>
         <v-btn-toggle color="primary" v-model="data.age_level" mandatory>
           <v-btn> - </v-btn>
@@ -28,7 +41,20 @@
 
       <v-row align="center" justify="center">
         <v-col cols="12">
-          <p class="text-center">In einer Gruppe Aktiv?</p>
+          <p class="text-center"><b>Bist du Gruppenführer_in?</b></p>
+        </v-col>
+        <v-btn-toggle color="primary" v-model="data.group_leader" mandatory>
+          <v-btn> Nein </v-btn>
+          <v-btn> Ja </v-btn>
+
+        </v-btn-toggle>
+      </v-row>
+
+      <v-divider class="my-5"></v-divider>
+
+      <v-row align="center" justify="center" v-if="data.group_leader === 0">
+        <v-col cols="12">
+          <p class="text-center">In welcher Gruppe Aktiv?</p>
         </v-col>
         <v-btn-toggle color="primary" v-model="data.group_type" mandatory>
           <v-btn> - </v-btn>
@@ -37,28 +63,23 @@
           <v-btn> Roverrunde </v-btn>
         </v-btn-toggle>
       </v-row>
-
-      <v-divider class="my-5"></v-divider>
-
-      <v-row align="center" justify="center">
+      <v-row align="center" justify="center" v-if="data.group_leader === 1">
         <v-col cols="12">
-          <p class="text-center">Bist du Gruppenführer_in?</p>
+          <p class="text-center">Wo Gruppenführer?</p>
         </v-col>
-        <v-btn-toggle color="primary" v-model="data.group_leader" mandatory>
-          <v-btn> - </v-btn>
-          <v-btn> Ja </v-btn>
-          <v-btn> Nein </v-btn>
+        <v-btn-toggle color="primary" v-model="data.group_type" mandatory>
+          <v-btn> Meute </v-btn>
+          <v-btn> Sippe </v-btn>
+          <v-btn> Roverrunde </v-btn>
         </v-btn-toggle>
       </v-row>
       <v-divider class="my-5"></v-divider>
       <v-row align="center" justify="center">
         <v-col cols="12">
-          <router-link :to="{ name: 'scoring-test' }" class="no-underline">
             <v-btn color="primary" @click="createExperiment">
               <v-icon left>mdi-flash</v-icon>
               Loslegen!
             </v-btn>
-          </router-link>
         </v-col>
       </v-row>
     </v-container>

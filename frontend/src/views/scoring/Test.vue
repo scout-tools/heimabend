@@ -13,33 +13,29 @@
       />
     </transition>
     <v-bottom-navigation grow fixed v-model="value">
-      <v-btn large @click="trigger('slide-left')">
+      <v-btn large :disabled="loading" @click="trigger('slide-left')">
         <span>doof</span>
-
         <v-icon large color="red">
           mdi-thumb-down
         </v-icon>
       </v-btn>
 
-      <v-btn large @click="trigger('slide-down')">
+      <v-btn large :disabled="loading" @click="trigger('slide-down')">
         <span>unklar</span>
-
-        <v-icon large color="red">
+        <v-icon large color="grey">
           mdi-emoticon-confused
         </v-icon>
       </v-btn>
 
-      <v-btn large @click="trigger('slide-up')">
+      <v-btn large :disabled="loading" @click="trigger('slide-up')">
         <span>MEGA</span>
-
         <v-icon large color="orange">
           mdi-medal
         </v-icon>
       </v-btn>
 
-      <v-btn @click="trigger('slide-right')">
+      <v-btn :disabled="loading" @click="trigger('slide-right')">
         <span>cool</span>
-
         <v-icon large color="green">
           mdi-thumb-up
         </v-icon>
@@ -117,7 +113,7 @@ export default {
       Promise.all([
         this.getRandomEvent(),
         this.postExperimentItem(decision),
-        new Promise(resolve => setTimeout(resolve, 800)),
+        new Promise(resolve => setTimeout(resolve, 1000)),
       ]).then((values) => {
         [this.items] = values;
         this.loading = false;
@@ -159,25 +155,25 @@ export default {
 
 <style scoped>
 .slide-right-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-right-leave-to {
   transform: translateX(500px);
 }
 .slide-left-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-left-leave-to {
   transform: translateX(-500px);
 }
 .slide-up-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-up-leave-to {
   transform: translateY(-500px);
 }
 .slide-down-leave-active {
-  transition: all 0.8s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 .slide-down-leave-to {
   transform: scale(0.3)
