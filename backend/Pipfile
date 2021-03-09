@@ -16,6 +16,8 @@ pymysql = "==0.10.1"
 django-filter = "==2.4.0"
 Pillow = "==8.0.1" 
 uwsgi = "*"
+django-stdimage = "*"
+python-memcached = "*"
 
 [requires]
 python_version = "3.8"

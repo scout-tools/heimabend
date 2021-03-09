@@ -9,16 +9,6 @@
             {{ getHeaderText }}
           </h2>
           <v-spacer/>
-          <router-link v-if="isScoringMode" :to="{ name: 'overview' }" class="no-underline mr-4">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                  <v-btn fab small outlined color="primary" v-bind="attrs" v-on="on">
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
-                </template>
-              <span>Zurück zum Inspirator</span>
-            </v-tooltip>
-          </router-link>
     <v-card
       :max-width="getMaxWidth()"
       elevation=30
