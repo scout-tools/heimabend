@@ -86,7 +86,7 @@
             v-bind="attrs"
             v-on="on"
           >
-            <span>doof</span>
+            <span>Doof</span>
             <v-icon large color="red"> mdi-thumb-down </v-icon>
           </v-btn>
         </template>
@@ -102,7 +102,7 @@
             v-bind="attrs"
             v-on="on"
           >
-            <span>unklar</span>
+            <span>Unklar</span>
             <v-icon large color="grey"> mdi-emoticon-confused </v-icon>
           </v-btn>
         </template>
@@ -134,7 +134,7 @@
             v-bind="attrs"
             v-on="on"
           >
-            <span>cool</span>
+            <span>Cool</span>
             <v-icon large color="green"> mdi-thumb-up </v-icon>
           </v-btn>
         </template>
