@@ -1,6 +1,8 @@
 <template>
   <v-container class="wrap" fluid>
     <v-img class="wrap2" :src="require('@/assets/inspi.png')" max-width="200" />
+    <div class="cloud0"></div>
+    <div class="cloud00"></div>
     <div class="cloud1"></div>
     <div class="cloud2"></div>
     <div class="cloud3"></div>
@@ -133,6 +135,36 @@ $debri-delay: 0.5s;
     left: 175%;
   }
 }
+.cloud0 {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  top: 30px;
+  left: -150px;
+  border-radius: 100%;
+  box-shadow: 37px 40px 1px rgba(255, 255, 255, 1),
+    20px 45px 1px rgba(255, 255, 255, 1),
+    6px 40px 1px rgba(255, 255, 255, 1),
+    20px 35px 1px rgba(255, 255, 255, 1),
+    35px 35px 1px rgba(255, 255, 255, 1);
+  animation: cloud 12s linear infinite;
+  z-index: 0;
+}
+.cloud00 {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  top: 220px;
+  left: -350px;
+  border-radius: 100%;
+  box-shadow: 37px 40px 1px rgba(255, 255, 255, 1),
+    20px 45px 1px rgba(255, 255, 255, 1),
+    8px 40px 1px rgba(255, 255, 255, 1),
+    23px 35px 1px rgba(255, 255, 255, 1),
+    30px 35px 1px rgba(255, 255, 255, 1);
+  animation: cloud 14s linear infinite;
+  z-index: 0;
+}
 .cloud1 {
   position: absolute;
   height: 30px;
@@ -184,14 +216,14 @@ $debri-delay: 0.5s;
   height: 100px;
   width: 100px;
   top: 300px;
-  left: -20px;
+  left: -1000px;
   border-radius: 100%;
   box-shadow: 150px 200px 2px rgba(255, 255, 255, 0.95),
     75px 205px 1px rgba(255, 255, 255, 0.95),
     10px 200px 1px rgba(255, 255, 255, 0.95),
     45px 150px 1px rgba(255, 255, 255, 0.95),
     120px 150px 1px rgba(255, 255, 255, 0.95);
-  animation: cloud2 6s 1s linear infinite;
+  animation: cloud2 4s 1s linear infinite;
   z-index: 1;
 }
 
@@ -207,7 +239,7 @@ $debri-delay: 0.5s;
     10px 200px 1px rgba(255, 255, 255, 0.95),
     45px 150px 1px rgba(255, 255, 255, 0.95),
     120px 150px 1px rgba(255, 255, 255, 0.95);
-  animation: cloud2 9s 1s linear infinite;
+  animation: cloud2 5s 1s linear infinite;
   z-index: 1;
 }
 .cloud6 {
@@ -222,7 +254,7 @@ $debri-delay: 0.5s;
     10px 200px 1px rgba(255, 255, 255, 0.95),
     45px 150px 1px rgba(255, 255, 255, 0.95),
     120px 150px 1px rgba(255, 255, 255, 0.95);
-  animation: cloud2 9s 1s linear infinite;
+  animation: cloud2 7s 1s linear infinite;
   z-index: 1;
 }
 
