@@ -24,13 +24,15 @@
         <h1>Hallo, ich bin Inspi.</h1>
       </v-row>
       <v-row align="center" justify="center">
+      <router-link :to="{ name: 'inspi-easter-egg' }">
         <v-img :src="require('@/assets/inspi.png')" max-width="200" />
+      </router-link>
       </v-row>
       <v-row align="center" justify="center">
         <v-col cols="12">
           <p>
             <b>Dein Meinung</b> ist meine Leibspeise. <br />
-            Helfe mir bitte statt zu werden.<br />
+            Hilf mir bitte satt zu werden.<br />
             <br />
             Damit ich dir und allen anderen Pfadfinder passende Inspirationen
             bieten kann, brauche ich
@@ -104,9 +106,25 @@
               </v-expansion-panel-header>
               <v-expansion-panel-content>
                 <p>
-                  Bitte gebe zu jedem Heimabend den ich dir zeige, dein Meinung
+                  Bitte gib zu jedem Heimabend den ich dir zeige dein Meinung
                   ab. Du hast folgene Auswahlmöglichkeiten
                 </p>
+
+                <v-list-item three-line>
+                  <v-list-item-icon>
+                  <v-icon large color="orange"> mdi-medal </v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title><b>MEGA</b></v-list-item-title>
+                    <v-list-item-subtitle>
+                      Ich finde diesen Heimabend mega gut und will
+                    </v-list-item-subtitle>
+                    <v-list-item-subtitle>
+                      ihm am liebsten sofort machen.
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+
                 <v-list-item three-line>
                   <v-list-item-icon>
                   <v-icon large color="green"> mdi-thumb-up </v-icon>
@@ -121,20 +139,7 @@
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
-                <v-list-item three-line>
-                  <v-list-item-icon>
-                  <v-icon large color="orange"> mdi-medal </v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-list-item-title><b>MEGA</b></v-list-item-title>
-                    <v-list-item-subtitle>
-                      Ich finde diesen Heimabend
-                    </v-list-item-subtitle>
-                    <v-list-item-subtitle>
-                      mega mega gut.
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
+
                 <v-list-item three-line>
                   <v-list-item-icon>
                   <v-icon large color="grey"> mdi-emoticon-confused </v-icon>
@@ -149,6 +154,7 @@
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
+
                 <v-list-item three-line>
                   <v-list-item-icon>
                   <v-icon large color="red"> mdi-thumb-down </v-icon>
@@ -156,10 +162,10 @@
                   <v-list-item-content>
                     <v-list-item-title><b>Doof</b></v-list-item-title>
                     <v-list-item-subtitle>
-                      Ich mag den Heimabend nicht oder finde
+                      Ich mag den Heimabend nicht oder mag
                     </v-list-item-subtitle>
                     <v-list-item-subtitle>
-                      ihn unzureichend erklärt.
+                      die Idee nicht.
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
@@ -172,7 +178,7 @@
       <v-divider inset class="my-5"></v-divider>
 
       <v-row align="center" justify="center">
-        Hallo deine Daten behandele ich natürlich anonym.
+        Deine Daten behandele ich natürlich anonym.
       </v-row>
       <v-divider inset class="my-5"></v-divider>
       <v-row align="center" justify="center">

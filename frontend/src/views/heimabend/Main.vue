@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 <template>
-  <v-container fluid>
+  <div>
     <heimabend-card
       ref="eventCards"
       @refresh="refresh()"
@@ -45,7 +45,7 @@
       Mehr laden
     </v-btn> -->
     <span v-if="!isMobil" class="bg" />
-  </v-container>
+  </div>
 </template>
 
 

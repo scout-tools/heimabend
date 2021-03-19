@@ -19,14 +19,14 @@
       />
 
       <v-spacer />
-      <!-- <router-link to="/">
+      <router-link to="/">
       <img
-        src="https://dpbm.de/wp/wp-content/uploads/2019/02/mosaikBlue.svg"
+        :src="require('@/assets/inspi.png')"
         class="mr-2"
-        height="50"
+        height="70"
         alt="Bundesabzeichen vom Deutschen Pfadfinderbund Mosaik"
       />
-      </router-link> -->
+      </router-link>
     </v-app-bar>
 
     <menu-left ref="mainMenuLeft" v-if="!isScoringMode" />
@@ -36,12 +36,7 @@
       <sub-pages-top-bar v-if="!isMainPage && !isScoringMode" />
 
       <filter-top-sub-bar v-if="isMainPage && !isMobil && !isScoringMode" />
-      <template>
-        <v-container fluid mx-auto>
           <router-view class="content" :class="getMargin" v-scroll="onScroll" />
-          <fab v-show="isMainPage && !apiIsDown && !isScoringMode && false" />
-        </v-container>
-      </template>
       <api-down-banner v-if="apiIsDown" />
     </v-main>
     <pricacy-banner v-if="!acceptedPrivacy" />
@@ -61,7 +56,6 @@ import ApiDownBanner from './components/banner/ApiDown.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
 import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
 import FilterTopSubBar from './components/toolbar/FilterSubBar.vue';
-import Fab from './components/fab/Standard.vue';
 
 export default {
   components: {
@@ -69,7 +63,6 @@ export default {
     Topbar,
     SubPagesTopBar,
     ApiDownBanner,
-    Fab,
     PricacyBanner,
     FilterTopSubBar,
   },
@@ -83,7 +76,7 @@ export default {
       return `Suche in ${counter} Heimabendideen`;
     },
     getMargin() {
-      return this.isMobil ? 'ma-2' : 'ma-2';
+      return this.isMobil ? 'ma-1' : 'ma-2';
     },
     isMainPage() {
       return this.currentRouteName === 'overview';
@@ -171,18 +164,9 @@ export default {
 </script>
 
 <style>
-#lateral .v-btn--example {
-  bottom: 0;
-  position: absolute;
-  margin: 0 0 16px 16px;
-}
-
 .content {
   flex: 1;
   min-height: '100vh' !important;
-}
-.v-btn-toggle--group > .v-btn.v-btn {
-  margin: 2px !important;
 }
 .hand-cursor {
   cursor: pointer;

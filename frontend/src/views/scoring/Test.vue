@@ -114,22 +114,6 @@
           <v-btn
             large
             :disabled="loading"
-            @click="trigger('slide-up')"
-            v-bind="attrs"
-            v-on="on"
-          >
-            <span>MEGA</span>
-            <v-icon large color="orange"> mdi-medal </v-icon>
-          </v-btn>
-        </template>
-        <span>Ich finde diesen Heimabend mega mega gut.</span>
-      </v-tooltip>
-
-      <v-tooltip top open-delay="1000">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            large
-            :disabled="loading"
             @click="trigger('slide-right')"
             v-bind="attrs"
             v-on="on"
@@ -139,6 +123,22 @@
           </v-btn>
         </template>
         <span>Ich mag den Heimabend.</span>
+      </v-tooltip>
+
+      <v-tooltip top open-delay="1000">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            large
+            :disabled="loading"
+            @click="trigger('slide-up')"
+            v-bind="attrs"
+            v-on="on"
+          >
+            <span>MEGA</span>
+            <v-icon large color="orange"> mdi-medal </v-icon>
+          </v-btn>
+        </template>
+        <span>Ich finde diesen Heimabend mega mega gut.</span>
       </v-tooltip>
     </v-bottom-navigation>
   </v-container>
@@ -174,10 +174,10 @@ export default {
   },
   computed: {
     getCount() {
-      return Math.min(this.count * 4, 100);
+      return Math.min(this.count * 10, 100);
     },
     isFinished() {
-      return this.getCount >= 100;
+      return this.getCount >= 99;
     },
     experimentId() {
       return this.$route.params.id;
@@ -265,25 +265,25 @@ export default {
 
 <style scoped>
 .slide-right-leave-active {
-  transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.7s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-right-leave-to {
   transform: translateX(500px);
 }
 .slide-left-leave-active {
-  transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.7s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-left-leave-to {
   transform: translateX(-500px);
 }
 .slide-up-leave-active {
-  transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.7s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-up-leave-to {
   transform: translateY(-500px);
 }
 .slide-down-leave-active {
-  transition: all 1s ease-in-out;
+  transition: all 0.7s ease-in-out;
 }
 .slide-down-leave-to {
   transform: scale(0.3);
