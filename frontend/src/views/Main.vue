@@ -36,7 +36,7 @@
       <sub-pages-top-bar v-if="!isMainPage && !isScoringMode" />
 
       <filter-top-sub-bar v-if="isMainPage && !isMobil && !isScoringMode" />
-          <router-view class="content" :class="getMargin" v-scroll="onScroll" />
+          <router-view class="content" v-scroll="onScroll" />
       <api-down-banner v-if="apiIsDown" />
     </v-main>
     <pricacy-banner v-if="!acceptedPrivacy" />

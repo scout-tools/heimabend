@@ -115,9 +115,9 @@
                   <v-icon large color="orange"> mdi-medal </v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
-                    <v-list-item-title><b>MEGA</b></v-list-item-title>
+                    <v-list-item-title><b>Sehr Gut</b></v-list-item-title>
                     <v-list-item-subtitle>
-                      Ich finde diesen Heimabend mega gut und will
+                      Ich finde diesen Heimabend sehr gut und will
                     </v-list-item-subtitle>
                     <v-list-item-subtitle>
                       ihm am liebsten sofort machen.
@@ -130,9 +130,9 @@
                   <v-icon large color="green"> mdi-thumb-up </v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
-                    <v-list-item-title><b>Cool</b></v-list-item-title>
+                    <v-list-item-title><b>Gut</b></v-list-item-title>
                     <v-list-item-subtitle>
-                      Ich finde den Heimabend cool und würde ihn
+                      Ich finde den Heimabend gut und würde ihn
                     </v-list-item-subtitle>
                     <v-list-item-subtitle>
                       so mit meiner Gruppe durchführen.
@@ -162,10 +162,10 @@
                   <v-list-item-content>
                     <v-list-item-title><b>Doof</b></v-list-item-title>
                     <v-list-item-subtitle>
-                      Ich mag den Heimabend nicht oder mag
+                      Ich finde die Heimabend Beschreibung doof
                     </v-list-item-subtitle>
                     <v-list-item-subtitle>
-                      die Idee nicht.
+                      oder finde mag die Beschreibung nicht.
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>

@@ -1,10 +1,12 @@
 <template>
-<v-container class="fullscreen fluid pa-0">
-  <div class="wrap">
-      <v-img class="wrap2" :src="require('@/assets/inspi.png')" max-width="200" />
+  <v-container class="wrap" fluid>
+    <v-img class="wrap2" :src="require('@/assets/inspi.png')" max-width="200" />
     <div class="cloud1"></div>
     <div class="cloud2"></div>
     <div class="cloud3"></div>
+    <div class="cloud4"></div>
+    <div class="cloud5"></div>
+    <div class="cloud6"></div>
 
     <div class="debri1"></div>
     <div class="debri2"></div>
@@ -12,8 +14,7 @@
     <div class="debri4"></div>
     <div class="debri5"></div>
     <div class="debri6"></div>
-  </div>
-</v-container>
+  </v-container>
 </template>
 
 <script>
@@ -21,13 +22,11 @@ export default {};
 </script>
 
 <style scoped>
-.fullscreen {
-  height: 105vh !important;
-  width: 105vh !important;
-  background-color: rgb(8, 125, 241) !important;
-}
 .wrap {
   position: relative;
+  background-color: rgb(8, 125, 241) !important;
+  margin: 0px !important;
+  height: 100vh !important;
 }
 /* THE BEE   THE BEE   THE BEE   THE BEE    */
 @keyframes dodging1 {
@@ -47,108 +46,6 @@ export default {};
   left: 20%;
   margin-top: 100px;
   animation: dodging1 1s ease-in-out infinite;
-}
-/* THE BEE   THE BEE   THE BEE   THE BEE    */
-/* BODY BODY BODY BODY  */
-.body {
-  position: absolute;
-  top: 250px;
-  left: 250px;
-  height: 85px;
-  width: 75px;
-  border-radius: 100%;
-  background-color: #ffb733;
-  box-shadow: 20px 0 0 #000, 40px -3px 0 #ffb733, 60px -7px 0 #000,
-    80px -11px 0 #ffb733;
-}
-/* BODY BODY BODY BODY  */
-/* WINGS WINGS WINGS WINGS */
-@keyframes flutter2 {
-  0% {
-    transform: rotate(80deg);
-  }
-  50% {
-    transform: rotate(100deg);
-  }
-}
-@keyframes flutter1 {
-  0% {
-    transform: rotate(20deg);
-  }
-  50% {
-    transform: rotate(40deg);
-  }
-}
-.wing1 {
-  position: absolute;
-  height: 55px;
-  width: 55px;
-  top: 210px;
-  left: 280px;
-  transform: rotate(20deg);
-  transform-origin: bottom right;
-  border-top-right-radius: 100%;
-  border-bottom-left-radius: 100%;
-  border-top-left-radius: 10px;
-  background-color: #ddd;
-  z-index: -1;
-  filter: blur(1px);
-  animation: flutter1 0.01s linear reverse infinite;
-}
-.wing2 {
-  position: absolute;
-  height: 55px;
-  width: 55px;
-  top: 205px;
-  left: 290px;
-  transform: rotate(80deg);
-  transform-origin: bottom right;
-  border-top-right-radius: 100%;
-  border-bottom-left-radius: 100%;
-  border-top-left-radius: 10px;
-  background-color: #ddd;
-  z-index: 1;
-  filter: blur(1px);
-  animation: flutter2 0.01s linear infinite;
-}
-/* WINGS WINGS WINGS WINGS */
-/* STINGER STINGER STINGER STINGER  */
-
-.stinger {
-  position: absolute;
-  height: 55px;
-  width: 55px;
-  top: 255px;
-  left: 355px;
-  transform: rotate(320deg);
-  border-top-right-radius: 50%;
-  border-bottom-left-radius: 100%;
-  border-top-left-radius: 10px;
-  background-color: #000;
-  z-index: -1;
-}
-
-/* STINGER STINGER STINGER STINGER  */
-/* EYES EYES EYES EYES  */
-.eyes {
-  position: absolute;
-  height: 25px;
-  width: 25px;
-  top: 260px;
-  left: 250px;
-  background-color: #eee;
-  box-shadow: 20px 0 0 #eee;
-  border-radius: 100%;
-  .pupil {
-    position: absolute;
-    height: 4px;
-    width: 4px;
-    top: 13px;
-    left: 2px;
-    background-color: #000;
-    border-radius: 100%;
-    box-shadow: 20px 0 0 #000;
-  }
 }
 /* EYES EYES EYES EYES  */
 /* DEBRIS DEBRIS DEBRIS DEBRIS  */
@@ -279,6 +176,53 @@ $debri-delay: 0.5s;
     45px 150px 1px rgba(255, 255, 255, 0.95),
     120px 150px 1px rgba(255, 255, 255, 0.95);
   animation: cloud2 2.8s 1s linear infinite;
+  z-index: 1;
+}
+
+.cloud4 {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  top: 300px;
+  left: -20px;
+  border-radius: 100%;
+  box-shadow: 150px 200px 2px rgba(255, 255, 255, 0.95),
+    75px 205px 1px rgba(255, 255, 255, 0.95),
+    10px 200px 1px rgba(255, 255, 255, 0.95),
+    45px 150px 1px rgba(255, 255, 255, 0.95),
+    120px 150px 1px rgba(255, 255, 255, 0.95);
+  animation: cloud2 6s 1s linear infinite;
+  z-index: 1;
+}
+
+.cloud5 {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  top: 50px;
+  left: -700px;
+  border-radius: 100%;
+  box-shadow: 150px 200px 2px rgba(255, 255, 255, 0.95),
+    75px 205px 1px rgba(255, 255, 255, 0.95),
+    10px 200px 1px rgba(255, 255, 255, 0.95),
+    45px 150px 1px rgba(255, 255, 255, 0.95),
+    120px 150px 1px rgba(255, 255, 255, 0.95);
+  animation: cloud2 9s 1s linear infinite;
+  z-index: 1;
+}
+.cloud6 {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  top: 50px;
+  left: -950px;
+  border-radius: 100%;
+  box-shadow: 150px 200px 2px rgba(255, 255, 255, 0.95),
+    75px 205px 1px rgba(255, 255, 255, 0.95),
+    10px 200px 1px rgba(255, 255, 255, 0.95),
+    45px 150px 1px rgba(255, 255, 255, 0.95),
+    120px 150px 1px rgba(255, 255, 255, 0.95);
+  animation: cloud2 9s 1s linear infinite;
   z-index: 1;
 }
 

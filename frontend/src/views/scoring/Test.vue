@@ -90,7 +90,7 @@
             <v-icon large color="red"> mdi-thumb-down </v-icon>
           </v-btn>
         </template>
-        <span>Ich mag den Heimabend nicht.</span>
+        <span>Der Heimabend ist doof beschrieben</span>
       </v-tooltip>
 
       <v-tooltip top open-delay="1000">
@@ -106,7 +106,7 @@
             <v-icon large color="grey"> mdi-emoticon-confused </v-icon>
           </v-btn>
         </template>
-        <span>Ich verstehe den Heimabend nicht.</span>
+        <span>Ich verstehe die Beschreibung nicht.</span>
       </v-tooltip>
 
       <v-tooltip top open-delay="1000">
@@ -118,11 +118,11 @@
             v-bind="attrs"
             v-on="on"
           >
-            <span>Cool</span>
+            <span>Gut</span>
             <v-icon large color="green"> mdi-thumb-up </v-icon>
           </v-btn>
         </template>
-        <span>Ich mag den Heimabend.</span>
+        <span>Gut beschrieben</span>
       </v-tooltip>
 
       <v-tooltip top open-delay="1000">
@@ -134,11 +134,11 @@
             v-bind="attrs"
             v-on="on"
           >
-            <span>MEGA</span>
+            <span>Sehr Gut</span>
             <v-icon large color="orange"> mdi-medal </v-icon>
           </v-btn>
         </template>
-        <span>Ich finde diesen Heimabend mega mega gut.</span>
+        <span>Ich finde diesen Heimabend mega mega gut beschrieben.</span>
       </v-tooltip>
     </v-bottom-navigation>
   </v-container>

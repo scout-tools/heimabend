@@ -694,7 +694,7 @@ export default {
       return !this.isMobil ? 30 : 28;
     },
     getHeaderText() {
-      return !this.isScoringMode ? 'dein Heimabend' : 'Inspiriend?';
+      return !this.isScoringMode ? 'dein Heimabend' : 'Gut beschrieben?';
     },
     getLikeButtonText() {
       return !this.isMobil ? 'Mehr Details zum zur Idee' : 'Mehr';
