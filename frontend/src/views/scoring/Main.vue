@@ -31,10 +31,10 @@
       <v-row align="center" justify="center">
         <v-col cols="12">
           <p>
-            <b>Dein Meinung</b> ist meine Leibspeise. <br />
+            <b>Deine Meinung</b> ist meine Leibspeise. <br />
             Hilf mir bitte satt zu werden.<br />
             <br />
-            Damit ich dir und allen anderen Pfadfinder passende Inspirationen
+            Damit ich dir und allen anderen Pfadfindern passende Inspirationen
             bieten kann, brauche ich
             <b>gutes Futter</b>. <br />
             Füttere mich mit so vielen Ideen und Meinungen von dir wie möglich.
@@ -60,7 +60,7 @@
 
       <v-row align="center" justify="center">
         <v-col cols="12">
-          <p class="text-center"><b>Bist du Gruppenführer_in?</b></p>
+          <p class="text-center"><b>Bist du aktuell Gruppenführer_in?</b></p>
         </v-col>
         <v-btn-toggle color="primary" v-model="data.group_leader" mandatory>
           <v-btn> Nein </v-btn>
@@ -72,7 +72,7 @@
 
       <v-row align="center" justify="center" v-if="data.group_leader === 0">
         <v-col cols="12">
-          <p class="text-center">In welcher Gruppe Aktiv?</p>
+          <p class="text-center"><b>In welcher Gruppe bist du derzeit aktiv?</b></p>
         </v-col>
         <v-btn-toggle color="primary" v-model="data.group_type" mandatory>
           <v-btn> - </v-btn>
@@ -98,15 +98,12 @@
         <v-flex ma-3 xs10 sm7 md4>
           <v-expansion-panels flat>
             <v-expansion-panel>
-              <v-expansion-panel-header disable-icon-rotate>
-                Wie genau kannst du mich füttern? (Klicke hier)
-                <template v-slot:actions>
-                  <v-icon color="success"> mdi-help-circle-outline </v-icon>
-                </template>
+              <v-expansion-panel-header color="#FBFBFB">
+                <b>Wie genau kannst du mich füttern?</b>
               </v-expansion-panel-header>
-              <v-expansion-panel-content>
+              <v-expansion-panel-content color="#FBFBFB">
                 <p>
-                  Bitte gib zu jedem Heimabend den ich dir zeige dein Meinung
+                  Bitte gib zu jedem Heimabend, den ich dir zeige, deine Meinung
                   ab. Du hast folgene Auswahlmöglichkeiten
                 </p>
 
@@ -120,7 +117,7 @@
                       Ich finde diesen Heimabend sehr gut und will
                     </v-list-item-subtitle>
                     <v-list-item-subtitle>
-                      ihm am liebsten sofort machen.
+                      ihn am liebsten sofort machen.
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
@@ -165,7 +162,7 @@
                       Ich finde die Heimabend Beschreibung doof
                     </v-list-item-subtitle>
                     <v-list-item-subtitle>
-                      oder finde mag die Beschreibung nicht.
+                      oder mag die Beschreibung nicht.
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
@@ -178,7 +175,8 @@
       <v-divider inset class="my-5"></v-divider>
 
       <v-row align="center" justify="center">
-        Deine Daten behandele ich natürlich anonym.
+        P.S. Deine Meinung und vor allen Dingen deine Daten
+        bleiben natürlich vollkommen anonym.
       </v-row>
       <v-divider inset class="my-5"></v-divider>
       <v-row align="center" justify="center">

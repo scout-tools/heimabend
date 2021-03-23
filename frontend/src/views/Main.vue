@@ -20,12 +20,15 @@
 
       <v-spacer />
       <router-link to="/">
-      <img
-        :src="require('@/assets/inspi.png')"
-        class="mr-2"
-        height="70"
-        alt="Bundesabzeichen vom Deutschen Pfadfinderbund Mosaik"
-      />
+        <img
+          :src="require('@/assets/inspi.png')"
+          class="mr-2"
+          height="70"
+          alt="Bundesabzeichen vom Deutschen Pfadfinderbund Mosaik"
+        />
+        <div id="hideMe" class="box sb1 fade-in">
+          Hallo, Ich bin Inspi. <br>Willkommen auf meiner Seite.
+        </div>
       </router-link>
     </v-app-bar>
 
@@ -36,7 +39,7 @@
       <sub-pages-top-bar v-if="!isMainPage && !isScoringMode" />
 
       <filter-top-sub-bar v-if="isMainPage && !isMobil && !isScoringMode" />
-          <router-view class="content" v-scroll="onScroll" />
+      <router-view class="content" v-scroll="onScroll" />
       <api-down-banner v-if="apiIsDown" />
     </v-main>
     <pricacy-banner v-if="!acceptedPrivacy" />
@@ -176,5 +179,78 @@ export default {
 }
 .theme--light.v-application {
   background: #f4f4f434 !important;
+}
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.box {
+  width: 300px;
+  margin: 50px auto;
+  background: #A6BF98;
+  padding: 20px;
+  text-align: center;
+  font-weight: 900;
+  color: #fff;
+  font-family: arial;
+  position: absolute;
+  z-index: 10;
+  right: 100px;
+  top: 0px;
+  border-radius: 0.4em;
+}
+
+.sb1:before {
+  content: '';
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid #A6BF98;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #A6BF98;
+  border-bottom: 10px solid transparent;
+  right: -19px;
+  top: 6px;
+}
+
+
+#hideMe {
+  -webkit-animation: cssAnimation 7s forwards;
+  animation: cssAnimation 7s forwards;
+}
+@keyframes cssAnimation {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes cssAnimation {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 </style>
