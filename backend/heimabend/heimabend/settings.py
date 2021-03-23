@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [
     '83.169.2.26',
     '127.0.0.1',
     'localhost',
+    'w3c7p51b99.execute-api.eu-central-1.amazonaws.com'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
