@@ -4,7 +4,7 @@
 
 `python manage.py loaddata test-data/*.json`
 
-`python manage.py runserver 8080`
+`python manage.py runserver 8000`
 
 `pipenv install`
 

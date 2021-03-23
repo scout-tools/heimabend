@@ -58,19 +58,6 @@ export default {
       }
       return [];
     },
-    getIcon(name) {
-      switch (name) {
-        case 'Herz (Gemüt)':
-          return 'mdi-heart';
-        case 'Hand (Körper)':
-          return 'mdi-hand';
-        case 'Kopf (Verstand)':
-          return 'mdi-head';
-        default:
-          break;
-      }
-      return '';
-    },
     onClick() {
       this.oldFilterLength = this.filterTags.length;
     },
