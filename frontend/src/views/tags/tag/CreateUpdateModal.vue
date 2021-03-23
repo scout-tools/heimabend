@@ -185,7 +185,7 @@ export default {
     },
     parsedCategory() {
       const link = this.data.category;
-      return this.convertUrlToId(link);
+      return link;
     },
   },
 
@@ -199,7 +199,7 @@ export default {
           name: this.data.name,
           description: this.data.description,
           color: this.data.color.hex,
-          category: this.getTagCategoryString(this.data.categoryId.id),
+          category: this.data.categoryId.id,
           is_visible: this.data.is_visible,
           ordered_id: this.data.ordered_id,
         })
@@ -216,7 +216,7 @@ export default {
           name: this.data.name,
           description: this.data.description,
           color: this.data.color,
-          category: this.getTagCategoryString(this.data.categoryId),
+          category: this.data.categoryId,
           is_visible: this.data.is_visible,
           ordered_id: this.data.ordered_id,
         })
@@ -230,15 +230,6 @@ export default {
           });
       }
     },
-    getTagCategoryString(input) {
-      let categoryId = 1;
-      if (typeof input === 'object' && input !== null) {
-        categoryId = input.id;
-      } else {
-        categoryId = input;
-      }
-      return `${process.env.VUE_APP_API}basic/tag-category/${categoryId}/`;
-    },
     onDeleteClick() {
       axios.delekte(`${this.API_URL}basic/tag/${this.data.id}/`)
         .then(() => {
@@ -249,13 +240,6 @@ export default {
         .catch(() => {
           this.showError = true;
         });
-    },
-    getUrlTagList(tagList) {
-      const ary = [];
-      tagList.forEach((item) => {
-        ary.push(`${process.env.VUE_APP_API}basic/tag/${item}/`);
-      });
-      return ary;
     },
     show(item) {
       this.dialog = true;
@@ -281,10 +265,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.v-btn:not(.v-btn--text):not(.v-btn--outlined).v-btn--active:before {
-    opacity: 0.4;
-    color: rgb(40, 158, 40)
-}
-</style>

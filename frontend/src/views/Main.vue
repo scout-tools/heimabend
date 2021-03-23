@@ -1,17 +1,10 @@
 <template>
-<div>
   <v-app id="keep">
-    <v-app-bar
-      app
-      clipped-left
-      color="#1a4b7e"
-      dark
-    >
-    <v-app-bar-nav-icon
-      v-if="!apiIsDown"
-      @click="toogleDrawer()"
-    />
-
+    <v-app-bar app clipped-left color="#1a4b7e" dark v-if="!isScoringMode">
+      <v-app-bar-nav-icon
+        v-if="!apiIsDown && !isScoringMode"
+        @click="toogleDrawer()"
+      />
       <v-text-field
         class="px-3"
         v-model="currentSearchInput"
@@ -22,64 +15,35 @@
         clearable
         :dense="isMobil"
         @keydown.enter="onChangeSearchInput()"
+        v-if="!isScoringMode"
       />
 
-      <v-spacer/>
+      <v-spacer />
       <router-link to="/">
       <img
-        src="https://dpbm.de/wp/wp-content/uploads/2019/02/mosaikWhite.svg"
+        :src="require('@/assets/inspi.png')"
         class="mr-2"
-        height="50"
+        height="70"
         alt="Bundesabzeichen vom Deutschen Pfadfinderbund Mosaik"
       />
       </router-link>
     </v-app-bar>
 
-    <menu-left
-      ref="mainMenuLeft"
-    />
+    <menu-left ref="mainMenuLeft" v-if="!isScoringMode" />
 
-    <v-main
-      id="lateral"
-    >
-      <topbar
-        v-if="isMainPage"
-        ref="topFilterToolbar"
-      />
-      <sub-pages-top-bar
-        v-if="!isMainPage"
-      />
+    <v-main id="lateral">
+      <topbar v-if="isMainPage && !isScoringMode" ref="topFilterToolbar" />
+      <sub-pages-top-bar v-if="!isMainPage && !isScoringMode" />
 
-      <filter-top-sub-bar
-        v-if="isMainPage && !isMobil"
-      />
-
-      <template>
-        <router-view
-          class="content"
-          :class="getMargin"
-          v-scroll="onScroll"
-        />
-      <Fab
-        v-if="isMainPage && !apiIsDown"
-      />
-      </template>
-    <api-down-banner
-      v-if="apiIsDown"
-    />
+      <filter-top-sub-bar v-if="isMainPage && !isMobil && !isScoringMode" />
+          <router-view class="content" v-scroll="onScroll" />
+      <api-down-banner v-if="apiIsDown" />
     </v-main>
-    <pricacy-banner
-      v-if="!acceptedPrivacy"
-    />
-    <v-snackbar
-      v-model="showError"
-      color="error"
-      y='top'
-    >
+    <pricacy-banner v-if="!acceptedPrivacy" />
+    <v-snackbar v-model="showError" color="error" y="top">
       {{ 'Es ist ein Fehler aufgetreten' }}
     </v-snackbar>
   </v-app>
-</div>
 </template>
 
 <script>
@@ -92,7 +56,6 @@ import ApiDownBanner from './components/banner/ApiDown.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
 import SubPagesTopBar from './components/toolbar/SubPagesTopBar.vue';
 import FilterTopSubBar from './components/toolbar/FilterSubBar.vue';
-import Fab from './components/fab/Standard.vue';
 
 export default {
   components: {
@@ -100,15 +63,11 @@ export default {
     Topbar,
     SubPagesTopBar,
     ApiDownBanner,
-    Fab,
     PricacyBanner,
     FilterTopSubBar,
   },
   computed: {
-    ...mapGetters([
-      'searchInput',
-      'tags',
-    ]),
+    ...mapGetters(['searchInput', 'tags', 'isScoringMode']),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
@@ -117,7 +76,7 @@ export default {
       return `Suche in ${counter} Heimabendideen`;
     },
     getMargin() {
-      return this.isMobil ? 'ma-1' : 'ma-0';
+      return this.isMobil ? 'ma-1' : 'ma-2';
     },
     isMainPage() {
       return this.currentRouteName === 'overview';
@@ -151,8 +110,11 @@ export default {
       this.$refs.mainMenuLeft.toggleDrawer();
     },
     getTags() {
-      const path = `${this.API_URL}basic/tag/?&timestamp=${new Date().getTime()}`;
-      axios.get(path)
+      const path = `${
+        this.API_URL
+      }basic/tag/?&timestamp=${new Date().getTime()}`;
+      axios
+        .get(path)
         .then((res) => {
           this.$store.commit('setTags', res.data);
         })
@@ -161,8 +123,11 @@ export default {
         });
     },
     getTagCategory() {
-      const path = `${this.API_URL}basic/tag-category/?&timestamp=${new Date().getTime()}`;
-      axios.get(path)
+      const path = `${
+        this.API_URL
+      }basic/tag-category/?&timestamp=${new Date().getTime()}`;
+      axios
+        .get(path)
         .then((res) => {
           this.$store.commit('setTagCategory', res.data);
         })
@@ -196,30 +161,20 @@ export default {
     chips: [],
   }),
 };
-
 </script>
 
 <style>
-  #lateral .v-btn--example {
-    bottom: 0;
-    position: absolute;
-    margin: 0 0 16px 16px;
-  }
-
-  .content {
-    flex: 1;
-    min-height: "100vh" !important;
-  }
-  .v-btn-toggle--group > .v-btn.v-btn {
-    margin: 2px !important;
-  }
-  .hand-cursor {
-    cursor: pointer
-  }
-  .info-cursor {
-    cursor: help !important;
-  }
-  .theme--light.v-application {
-    background: #f4f4f434 !important;
-  }
+.content {
+  flex: 1;
+  min-height: '100vh' !important;
+}
+.hand-cursor {
+  cursor: pointer;
+}
+.info-cursor {
+  cursor: help !important;
+}
+.theme--light.v-application {
+  background: #f4f4f434 !important;
+}
 </style>

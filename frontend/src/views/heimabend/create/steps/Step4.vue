@@ -1,172 +1,65 @@
 <template>
-  <v-form
-    ref="form4"
-    v-model="valid"
-  >
-<v-container>
-
-    <v-row no-gutters>
-
-    <v-row class="mt-6 ml-4">
-      <span class="subtitle-1">
-        Bitte beantworte jede einzelne Frage
-        passend zu deiner Heimabend-Idee
-      </span>
-    </v-row>        <v-switch
-          v-model="data.isPrepairationNeeded"
-          color="secondary"
-          label="Benötigt diese Heimabend-Idee Zeit zur Vorbereitung?">
-        </v-switch>
-    </v-row>
-
-  <v-divider class="my-2"/>
-  <v-row class="mt-6 ml-4">
-    <span class="subtitle-1">
-      Welche Kosten entstehen bei der Durchführung dieser Heimabend-Idee?
-    </span>
-  </v-row>
-
-  <v-row>
-    <v-tooltip
-      nudge-left="80"
-      open-on-hover
-      bottom
-    >
-      <template v-slot:activator="{ on }">
-        <v-btn
-          v-on="on"
-          text
-        >
-          <v-rating
-            v-model="data.costsRating"
-            emptyIcon="mdi-currency-usd"
-            fullIcon="mdi-currency-usd"
-            color="orange"
-            background-color="grey"
-            min="0"
-            length="3"
-          ></v-rating>
-        </v-btn>
-      </template>
-      <span>
-        <p class="text-left">
-        Stufe 1: 0,00€ - 0,50€ pro Person <br>
-        Stufe 2: 1€ - 2€ pro Person <br>
-        Stufe 3: mehr als 2€ pro Person <br>
-        </p>
-      </span>
-    </v-tooltip>
-    <v-switch
-      color="secondary"
-      v-model="isWithoutCosts"
-      small
-      label="Keine Kosten"
-      class="ma-2"
-      @click="onResetPriceClick()"
-    >
-      Ohne Kosten
-    </v-switch>
-  </v-row>
-
-  <v-divider class="my-2"/>
-
-  <v-row class="mt-6 ml-4">
-    <span class="subtitle-1">
-      Wie lange dauert die Durchführung deiner Programmidee?“
-    </span>
-  </v-row>
-  <v-row>
-    <v-tooltip
-      nudge-left="80"
-      open-on-hover
-      bottom
-    >
-      <template v-slot:activator="{ on }">
-        <v-btn
-          v-on="on"
-          text
-        >
-        <v-rating
-          v-model="data.executionTimeRating"
-          emptyIcon="mdi-clock"
-          fullIcon="mdi-clock"
-          color="black"
-          background-color="grey"
-          min="0"
-          length="3"
-        ></v-rating>
-          </v-btn>
-        </template>
-        <span>
-          <p class="text-left">
-          Stufe 1: bis 30 min <br>
-          Stufe 2: 30 min - 60 min<br>
-          Stufe 3: mehr als 60 min<br>
-          </p>
+  <v-form ref="form4" v-model="valid">
+    <v-container>
+      <v-row class="mt-6 ml-4">
+        <span class="subtitle-1">
+          Sammle hier bitte alles an Material, was für die Vorbereitung und
+          Durchführung deiner Idee benötigt wird. Die einzelnen Objekte kannst
+          du jeweils mit „Enter“ bestätigen.“
         </span>
-      </v-tooltip>
-    <v-switch
-      color="secondary"
-      v-model="isLargeProject"
-      small
-      label="Handelt es sich um ein Großprojekt?"
-      class="ma-2"
-      @click="onLargeProjectClick()"
-    >
-      Ohne Kosten
-    </v-switch>
-    </v-row>
-    <v-divider class="my-2"/>
-    <v-row class="ma-3" justify="center">
-      <v-btn
-        class="mr-5"
-        @click="prevStep()"
-      >
-        Zurück
-      </v-btn>
+      </v-row>
+      <v-row class="ma-4">
+        <v-combobox
+          outlined
+          autofocus
+          v-model="data.material_list"
+          label="Material Liste"
+          multiple
+          chips
+          prepend-icon="mdi-archive"
+        >
+          <template v-slot:selection="{ attrs, item, select, selected }">
+            <v-chip
+              v-bind="attrs"
+              :input-value="selected"
+              close
+              @click="select"
+              @click:close="remove(item)"
+            >
+              <strong>{{ item }}</strong
+              >&nbsp;
+            </v-chip>
+          </template>
+        </v-combobox>
+      </v-row>
 
-      <v-btn
-        color="primary"
-        @click="nextStep()"
-      >
-        Weiter
-      </v-btn>
-    </v-row>
-</v-container>
-        </v-form>
+      <v-row class="ma-3" justify="center">
+        <v-btn class="mr-5" @click="prevStep()"> Zurück </v-btn>
+
+        <v-btn color="primary" @click="nextStep(n)"> Weiter </v-btn>
+      </v-row>
+    </v-container>
+  </v-form>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 
 export default {
+
   data: () => ({
-    rules: {
-      tags: [
-        v => (v && v.length > 0) || 'Mindestens ein Thema ist erforderlich',
-      ],
-    },
-    data: {
-      executionTimeRating: 1,
-      costsRating: 1,
-      isLvlOne: true,
-      isLvlTwo: true,
-      isLvlThree: true,
-    },
-    valid: true,
+    API_URL: process.env.VUE_APP_API,
     n: 0,
+    dialog: false,
+    valid: true,
+    data: {
+      materialArray: [],
+      material_list: [],
+    },
   }),
 
   computed: {
-    ...mapGetters([
-      'tags',
-      'tagCategory',
-    ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
-    },
-    tags() {
-      return this.$store.getters.tags;
     },
     isCreate() {
       return !this.$route.params.id;
@@ -208,45 +101,27 @@ export default {
   mounted() {
     if (this.$route.params.id) {
       this.data = this.$route.params;
-      if (this.data.tags && this.data.tags.length) {
-        this.data.tags = this.setIntTags(this.data.tags);
-      }
     }
   },
 
   created() {
     if (this.$route.params.id) {
       this.data = this.$route.params;
+      if (this.data.material_list && this.data.material_list.length === 0) {
+        this.convertMaterialString(this.data.material);
+      }
     }
   },
 
-
   methods: {
-
-    filterTagByCategory(categoryId) {
-      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
-    },
-    onResetPriceClick() {
-      this.data.costsRating = 0;
-    },
-    onLargeProjectClick() {
-      this.data.executionTimeRating = 0;
-    },
-    convertUrlToId(url) {
-      if (url && typeof url === 'string') {
-        const idStringArray = url.split('/');
-        const id = idStringArray[idStringArray.length - 2];
-
-        return parseInt(id, 10);
+    convertMaterialString(array) {
+      if (array && array.length) {
+        this.data.material_list = array.split(',');
       }
-      return url;
     },
-    setIntTags(urlTags) {
-      const tagList = [];
-      urlTags.forEach((tag) => {
-        tagList.push(this.convertUrlToId(tag));
-      });
-      return tagList;
+    remove(item) {
+      this.data.material_list.splice(this.data.material_list.indexOf(item), 1);
+      this.data.material_list = [...this.data.material_list];
     },
     prevStep() {
       this.$emit('prevStep');
@@ -259,9 +134,7 @@ export default {
     },
     getData() {
       return {
-        tags: this.data.tags,
-        costsRating: this.data.costsRating,
-        executionTimeRating: this.data.executionTimeRating,
+        material_list: this.data.material_list,
       };
     },
   },

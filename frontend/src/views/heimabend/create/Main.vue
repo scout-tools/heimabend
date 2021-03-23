@@ -1,117 +1,110 @@
 <template>
-<v-container>
-  <v-row justify="center">
-    <v-flex
-      ma-3
-      lg7
-    >
-    <v-stepper
-      alt-labels
-      v-model="currentStep"
-    >
-      <v-stepper-header>
-        <template v-for="n in steps">
-          <v-stepper-step
-            :key="`${n}-step`"
-            :complete="currentStep > n"
-            :step="n"
-          >
-            {{ headerStep[n-1] }}
+  <v-container>
+      <v-row justify="center">
+    <v-card class="mx-auto top-margin" max-width="800px">
+        <v-stepper vertical v-model="currentStep">
+          <v-stepper-step :complete="currentStep > 1" :step="1">
+            {{ headerStep[0] }}
           </v-stepper-step>
 
-          <v-divider
-            v-if="n !== steps"
-            :key="n"
-          ></v-divider>
-        </template>
-      </v-stepper-header>
+          <v-stepper-content step="1">
+            <step-one ref="step1" :data="data" @nextStep="nextStep()" />
+          </v-stepper-content>
 
-      <v-stepper-items>
-        <v-stepper-content
-          step="1"
-        >
-          <step-one
-            ref="step1"
-            :data="data"
-            @nextStep="nextStep()"
-          />
-        </v-stepper-content>
+          <v-stepper-step :complete="currentStep > 2" :step="2">
+            {{ headerStep[1] }}
+          </v-stepper-step>
 
-        <v-stepper-content
-          step="2"
-        >
-          <step-two
-            ref="step2"
-            :data="data"
-            @prevStep="prevStep()"
-            @nextStep="nextStep()"
-          />
-        </v-stepper-content>
+          <v-stepper-content step="2">
+            <step-two
+              ref="step2"
+              :data="data"
+              @prevStep="prevStep()"
+              @nextStep="nextStep()"
+            />
+          </v-stepper-content>
 
-        <v-stepper-content
-          step="3"
-        >
-          <step-three
-            ref="step3"
-            :data="data"
-            @prevStep="prevStep()"
-            @nextStep="nextStep()"
-          />
-        </v-stepper-content>
+          <v-stepper-step :complete="currentStep > 3" :step="3">
+            {{ headerStep[2] }}
+          </v-stepper-step>
 
-        <v-stepper-content
-          step="4"
-        >
-          <step-four
-            ref="step4"
-            :data="data"
-            @prevStep="prevStep()"
-            @nextStep="nextStep()"
-          />
-        </v-stepper-content>
+          <v-stepper-content step="3">
+            <step-three
+              ref="step3"
+              :data="data"
+              @prevStep="prevStep()"
+              @nextStep="nextStep()"
+            />
+          </v-stepper-content>
 
-        <v-stepper-content
-          step="5"
-        >
-          <step-five
-            ref="step5"
-            :data="data"
-            @prevStep="prevStep()"
-            @nextStep="nextStep()"
-          />
-        </v-stepper-content>
+          <v-stepper-step :complete="currentStep > 4" :step="4">
+            {{ headerStep[3] }}
+          </v-stepper-step>
 
-        <v-stepper-content
-          step="6"
-        >
-          <step-six
-            :data="data"
-            ref="step6"
-            @prevStep="prevStep()"
-            @nextStep="nextStep()"
-          />
-        </v-stepper-content>
+          <v-stepper-content step="4">
+            <step-four
+              ref="step4"
+              :data="data"
+              @prevStep="prevStep()"
+              @nextStep="nextStep()"
+            />
+          </v-stepper-content>
 
-        <v-stepper-content
-          step="7"
-        >
-          <step-seven
-            :data="data"
-            ref="step7"
-            @prevStep="prevStep()"
-            @finish="finish()"
-          />
-        </v-stepper-content>
-      </v-stepper-items>
-    </v-stepper>
-    </v-flex>
-  </v-row>
-    <v-snackbar
-      v-model="showError"
-      color="error"
-      y='top'
-      :timeout="timeout"
-    >
+          <v-stepper-step :complete="currentStep > 5" :step="5">
+            {{ headerStep[4] }}
+          </v-stepper-step>
+
+          <v-stepper-content step="5">
+            <step-five
+              ref="step5"
+              :data="data"
+              @prevStep="prevStep()"
+              @nextStep="nextStep()"
+            />
+          </v-stepper-content>
+
+          <v-stepper-step :complete="currentStep > 6" :step="6">
+            {{ headerStep[5] }}
+          </v-stepper-step>
+
+          <v-stepper-content step="6">
+            <step-six
+              :data="data"
+              ref="step6"
+              @prevStep="prevStep()"
+              @nextStep="nextStep()"
+            />
+          </v-stepper-content>
+
+          <v-stepper-step :complete="currentStep > 7" :step="7">
+            {{ headerStep[6] }}
+          </v-stepper-step>
+
+          <v-stepper-content step="7">
+            <step-seven
+              :data="data"
+              ref="step7"
+              @prevStep="prevStep()"
+              @nextStep="nextStep()"
+            />
+          </v-stepper-content>
+
+          <v-stepper-step :complete="currentStep > 8" :step="8">
+            {{ headerStep[7] }}
+          </v-stepper-step>
+
+          <v-stepper-content step="8">
+            <step-eight
+              :data="data"
+              ref="step8"
+              @prevStep="prevStep()"
+              @finish="finish()"
+            />
+          </v-stepper-content>
+        </v-stepper>
+    </v-card>
+      </v-row>
+    <v-snackbar v-model="showError" color="error" y="top" :timeout="timeout">
       {{ 'Fehler beim Speichern des Heimabends' }}
     </v-snackbar>
   </v-container>
@@ -127,7 +120,7 @@ import StepFour from './steps/Step4.vue';
 import StepFive from './steps/Step5.vue';
 import StepSix from './steps/Step6.vue';
 import StepSeven from './steps/Step7.vue';
-
+import StepEight from './steps/Step8.vue';
 
 export default {
   components: {
@@ -138,6 +131,7 @@ export default {
     StepFive,
     StepSix,
     StepSeven,
+    StepEight,
   },
   data() {
     return {
@@ -150,6 +144,7 @@ export default {
       headerStep: [
         'Titel',
         'Beschreibung',
+        'Bild',
         'Materialien',
         'Fakten',
         'Themen',
@@ -202,39 +197,49 @@ export default {
       const dataStep5 = this.$refs.step5.getData();
       const dataStep6 = this.$refs.step6.getData();
       const dataStep7 = this.$refs.step7.getData();
+      const dataStep8 = this.$refs.step8.getData();
       if (this.isCreate) {
-        axios.post(`${this.API_URL}basic/event/`, {
-          title: dataStep1.title,
-          description: dataStep2.description,
-          tags: this.getUrlTagList(dataStep5.tags.concat(dataStep6.selectedMandatoryFilter)),
-          material: this.convertMaterialArray(dataStep3.material),
-          costsRating: dataStep4.costsRating,
-          executionTimeRating: dataStep4.executionTimeRating,
-          isPrepairationNeeded: dataStep4.isPrepairationNeeded,
-          isActive: dataStep7.isActive,
-          createdBy: dataStep7.createdBy,
-          createdByEmail: dataStep7.createdByEmail,
-        })
+        axios
+          .post(`${this.API_URL}basic/event/`, {
+            title: dataStep1.title,
+            description: dataStep2.description,
+            tags: dataStep6.tags.concat(dataStep7.selectedMandatoryFilter),
+            material: this.convertMaterialArrayString(dataStep4.material_list),
+            material_list: dataStep4.material_list,
+            costsRating: dataStep5.costsRating,
+            executionTimeRating: dataStep5.executionTimeRating,
+            isPrepairationNeeded: dataStep5.isPrepairationNeeded,
+            isActive: dataStep8.isActive,
+            imageLink: dataStep3.imageLink,
+            createdBy: dataStep8.createdBy,
+            createdByEmail: dataStep8.createdByEmail,
+          })
           .then(() => {
-            this.$router.push({ name: 'overview', params: { showSuccess: true } });
+            this.$router.push({
+              name: 'overview',
+              params: { showSuccess: true },
+            });
           })
           .catch(() => {
             this.showError = true;
           });
       } else if (this.isUpdate) {
-        axios.put(`${this.API_URL}basic/event/${this.getId}/`, {
-          id: this.data.id,
-          title: dataStep3.title,
-          description: dataStep2.description,
-          tags: this.getUrlTagList(dataStep5.tags.concat(dataStep6.selectedMandatoryFilter)),
-          material: this.convertMaterialArray(dataStep3.material),
-          costsRating: dataStep4.costsRating,
-          executionTimeRating: dataStep5.executionTimeRating,
-          isPrepairationNeeded: dataStep6.isPrepairationNeeded,
-          isActive: dataStep7.isActive,
-          createdBy: dataStep7.createdBy,
-          createdByEmail: dataStep7.createdByEmail,
-        })
+        axios
+          .put(`${this.API_URL}basic/event/${this.getId}/`, {
+            id: this.data.id,
+            title: dataStep1.title,
+            description: dataStep2.description,
+            tags: dataStep6.tags.concat(dataStep7.selectedMandatoryFilter),
+            material: this.convertMaterialArrayString(dataStep4.material_list),
+            material_list: dataStep4.material_list,
+            costsRating: dataStep5.costsRating,
+            executionTimeRating: dataStep5.executionTimeRating,
+            isPrepairationNeeded: dataStep5.isPrepairationNeeded,
+            isActive: dataStep8.isActive,
+            imageLink: dataStep3.imageLink,
+            createdBy: dataStep8.createdBy,
+            createdByEmail: dataStep8.createdByEmail,
+          })
           .then(() => {
             this.$router.push({ name: 'overview' });
             this.$emit('dialogClose');
@@ -245,18 +250,11 @@ export default {
           });
       }
     },
-    getUrlTagList(tagList) {
-      if (tagList) {
-        const ary = [];
-        tagList.forEach((tag) => {
-          ary.push(`${process.env.VUE_APP_API}basic/tag/${tag}/`);
-        });
-        return ary;
+    convertMaterialArrayString(material) {
+      if (material && material.length) {
+        return material.join(',');
       }
-      return [];
-    },
-    convertMaterialArray(material) {
-      return material.join(',');
+      return '';
     },
   },
 };

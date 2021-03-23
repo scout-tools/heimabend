@@ -48,16 +48,7 @@ export default {
   },
   methods: {
     filterTagByCategory(categoryId) {
-      return this.tags.filter(item => this.convertUrlToId(item.category) === categoryId);
-    },
-    convertUrlToId(url) {
-      if (url && typeof url === 'string') {
-        const idStringArray = url.split('/');
-        const id = idStringArray[idStringArray.length - 2];
-
-        return parseInt(id, 10);
-      }
-      return url;
+      return this.tags.filter(item => item.category === categoryId);
     },
     getSideBarTags() {
       if (this.tags && this.tagCategory) {
@@ -66,19 +57,6 @@ export default {
         return sideBarTags;
       }
       return [];
-    },
-    getIcon(name) {
-      switch (name) {
-        case 'Herz (Gemüt)':
-          return 'mdi-heart';
-        case 'Hand (Körper)':
-          return 'mdi-hand';
-        case 'Kopf (Verstand)':
-          return 'mdi-head';
-        default:
-          break;
-      }
-      return '';
     },
     onClick() {
       this.oldFilterLength = this.filterTags.length;

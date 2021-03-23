@@ -49,6 +49,19 @@
             </v-list-item-content>
           </v-list-item>
 
+      <v-divider></v-divider>
+
+          <v-list-item link bottom :to="{ name: 'scoring-start' }">
+            <v-list-item-icon>
+              <v-icon color="red">
+                mdi-bee
+              </v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>Füttere Inspi</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
           <v-divider v-if="isAuthenticated"/>
 
           <v-list-item v-if="isAuthenticated" link bottom :to="{ name: 'tags' }">

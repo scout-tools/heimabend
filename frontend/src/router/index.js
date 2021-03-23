@@ -11,6 +11,9 @@ import HeimabendCreate from '../views/heimabend/create/Main.vue';
 import MessageOverview from '../views/message/Overview.vue';
 import HeimabendDetails from '../views/heimabend/details/Main.vue';
 import RankingOverview from '../views/ranking/Main.vue';
+import ScoringStart from '../views/scoring/Main.vue';
+import ScoringTest from '../views/scoring/Test.vue';
+import EasterEgg from '../views/inspi/easterEgg/Main.vue';
 
 Vue.use(VueRouter);
 
@@ -64,7 +67,6 @@ const routes = [
     path: '/heimabend/update/:id',
     name: 'heimabendUpdate',
     component: HeimabendCreate,
-
   },
   {
     path: '/heimabend/:id',
@@ -76,7 +78,21 @@ const routes = [
     path: '/ranking',
     name: 'ranking-overview',
     component: RankingOverview,
-
+  },
+  {
+    path: '/scoring/start',
+    name: 'scoring-start',
+    component: ScoringStart,
+  },
+  {
+    path: '/scoring/test/:id',
+    name: 'scoring-test',
+    component: ScoringTest,
+  },
+  {
+    path: '/inspi/easter-egg',
+    name: 'inspi-easter-egg',
+    component: EasterEgg,
   },
 ];
 
@@ -84,6 +100,9 @@ const router = new VueRouter({
   mode: 'history', // add fallback route to prod server
   base: process.env.BASE_URL,
   routes,
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
 });
 
 export default router;
