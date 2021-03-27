@@ -189,5 +189,5 @@ class ExperimentItemViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 
 class RandomEventViewSet(LoggingMixin, viewsets.ModelViewSet):
-    queryset = Event.objects.filter(isActive=True).order_by("?")[:1]
+    queryset = Event.objects.filter(isActive=True).order_by("?")[:10]
     serializer_class = EventSerializer

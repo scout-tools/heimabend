@@ -169,7 +169,7 @@
             <v-icon>mdi-pencil-outline</v-icon>
           </v-btn>
           <v-tooltip
-            v-if="!isMobil && !isAuthenticated && item.like_score > 0"
+            v-if="!isMobil && !isAuthenticated && item.like_score === 10"
             nudge-left="80"
             open-on-hover
             bottom
@@ -697,7 +697,7 @@ export default {
       return !this.isScoringMode ? 'dein Heimabend' : 'Gut beschrieben?';
     },
     getLikeButtonText() {
-      return !this.isMobil ? 'Mehr Details zum zur Idee' : 'Mehr';
+      return !this.isMobil ? 'Mehr Details zur Idee' : 'Mehr';
     },
     paddingleftLebelIcons() {
       return !this.isMobil ? 'pl-2' : 'pl-1';

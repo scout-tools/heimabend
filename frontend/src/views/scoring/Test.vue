@@ -31,12 +31,8 @@
     <v-row v-if="!isFinished">
       <transition :name="trans">
         <heimabend-card
-          v-touch="{
-            left: () => trigger('slide-left'),
-            right: () => trigger('slide-right'),
-          }"
           class="mb-10"
-          :items="items"
+          :items="currenElement"
           :isDetailsView="true"
           v-show="show"
         />
@@ -79,66 +75,39 @@
     <v-bottom-navigation grow fixed v-model="value">
       <v-tooltip top open-delay="1000">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            large
-            :disabled="loading"
-            @click="trigger('slide-left')"
-            v-bind="attrs"
-            v-on="on"
-          >
-            <span>Doof</span>
-            <v-icon large color="red"> mdi-thumb-down </v-icon>
-          </v-btn>
-        </template>
-        <span>Der Heimabend ist doof beschrieben</span>
-      </v-tooltip>
-
-      <v-tooltip top open-delay="1000">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            large
-            :disabled="loading"
-            @click="trigger('slide-down')"
-            v-bind="attrs"
-            v-on="on"
-          >
+          <v-btn large @click="onClickComplain()" v-bind="attrs" v-on="on">
             <span>Unklar</span>
-            <v-icon large color="grey"> mdi-emoticon-confused </v-icon>
+            <v-icon large color="red"> mdi-emoticon-confused </v-icon>
           </v-btn>
         </template>
         <span>Ich verstehe die Beschreibung nicht.</span>
       </v-tooltip>
+      <v-rating
+        :x-large="!$vuetify.breakpoint.smAndDown"
+        color="warning"
+        background-color="warning"
+        empty-icon="mdi-star-outline"
+        full-icon="mdi-star"
+        half-icon="mdi-star-half-full"
+        hover
+        length="5"
+        v-model="score"
+      ></v-rating>
 
       <v-tooltip top open-delay="1000">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             large
-            :disabled="loading"
-            @click="trigger('slide-right')"
+            @click="onClickSendDecison()"
             v-bind="attrs"
             v-on="on"
+            :disabled="score==0"
           >
-            <span>Gut</span>
-            <v-icon large color="green"> mdi-thumb-up </v-icon>
+            <span>{{ valueName }}</span>
+            <v-icon large color="green"> mdi-send </v-icon>
           </v-btn>
         </template>
-        <span>Gut beschrieben</span>
-      </v-tooltip>
-
-      <v-tooltip top open-delay="1000">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            large
-            :disabled="loading"
-            @click="trigger('slide-up')"
-            v-bind="attrs"
-            v-on="on"
-          >
-            <span>Sehr Gut</span>
-            <v-icon large color="orange"> mdi-medal </v-icon>
-          </v-btn>
-        </template>
-        <span>Ich finde diesen Heimabend mega mega gut beschrieben.</span>
+        <span>Ich verstehe die Beschreibung nicht.</span>
       </v-tooltip>
     </v-bottom-navigation>
   </v-container>
@@ -164,6 +133,7 @@ export default {
     trans: 'slide-right',
     count: 0,
     value: 0,
+    score: 0,
     decision: 1,
     isLoading: true,
   }),
@@ -184,6 +154,33 @@ export default {
     },
     eventId() {
       return this.items[0].id;
+    },
+    currenElement() {
+      return [this.items[0]];
+    },
+    valueName() {
+      let scoreName = '-';
+      switch (this.score) {
+        case 1:
+          scoreName = 'Sehr Doof';
+          break;
+        case 2:
+          scoreName = 'Doof';
+          break;
+        case 3:
+          scoreName = 'Neutral';
+          break;
+        case 4:
+          scoreName = 'Cool';
+          break;
+        case 5:
+          scoreName = 'Sehr Cool';
+          break;
+        default:
+          scoreName = 'Auswählen';
+          break;
+      }
+      return scoreName;
     },
   },
   methods: {
@@ -217,47 +214,31 @@ export default {
           this.loading = false;
         });
     },
+    onClickSendDecison() {
+      this.trans = 'slide-right';
+      this.saveDecision(this.score);
+    },
+    onClickComplain() {
+      this.trans = 'slide-down';
+      this.saveDecision(0);
+    },
     saveDecision(decision) {
+      this.show = false;
       this.loading = true;
       Promise.all([
-        this.getRandomEvent(),
         this.postExperimentItem(decision),
-        new Promise(resolve => setTimeout(resolve, 1000)),
+        new Promise(resolve => setTimeout(resolve, 700)),
       ])
-        .then((values) => {
-          [this.items] = values;
+        .then(() => {
+          this.items.shift();
           this.loading = false;
           this.show = true;
+          this.count = this.count + 1;
+          this.score = 0;
         })
         .catch(() => {
           this.loading = false;
         });
-    },
-    trigger(name) {
-      let decision = -1;
-      this.trans = name;
-
-      switch (name) {
-        case 'slide-up':
-          decision = 3;
-          break;
-        case 'slide-left':
-          decision = 1;
-          break;
-        case 'slide-right':
-          decision = 2;
-          break;
-        case 'slide-down':
-          decision = 4;
-          break;
-        default:
-          decision = 0;
-          break;
-      }
-      this.show = false;
-      this.count = this.count + 1;
-
-      this.saveDecision(decision);
     },
   },
 };

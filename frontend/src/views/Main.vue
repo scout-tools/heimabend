@@ -26,7 +26,7 @@
           height="70"
           alt="Bundesabzeichen vom Deutschen Pfadfinderbund Mosaik"
         />
-        <div id="hideMe" class="box sb1 fade-in">
+        <div id="hideMe" class="box sb1 fade-in" v-if="firstVisit && $route.name == 'overview'">
           Hallo, Ich bin Inspi. <br>Willkommen auf meiner Seite.
         </div>
       </router-link>
@@ -146,6 +146,7 @@ export default {
       this.chips = [...this.chips];
     },
     onScroll() {
+      this.firstVisit = false;
       const isOnTop = window.scrollY > 20;
       this.$store.commit('setPageScrolled', isOnTop);
     },
@@ -162,6 +163,7 @@ export default {
     showError: false,
     currentSearchInput: '',
     chips: [],
+    firstVisit: true,
   }),
 };
 </script>

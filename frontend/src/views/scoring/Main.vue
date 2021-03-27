@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form class="ma-4">
     <v-container fluid>
       <v-row>
         <router-link :to="{ name: 'overview' }" class="no-underline mr-4">
@@ -108,61 +108,82 @@
                 </p>
 
                 <v-list-item three-line>
-                  <v-list-item-icon>
-                  <v-icon large color="orange"> mdi-medal </v-icon>
-                  </v-list-item-icon>
                   <v-list-item-content>
-                    <v-list-item-title><b>Sehr Gut</b></v-list-item-title>
+                    <v-list-item-title>
+                      <v-rating
+                        color="warning"
+                        background-color="warning"
+                        empty-icon="mdi-star-outline"
+                        full-icon="mdi-star"
+                        half-icon="mdi-star-half-full"
+                        length="5"
+                        value=5>
+                      </v-rating>
+                    </v-list-item-title>
                     <v-list-item-subtitle>
-                      Ich finde diesen Heimabend sehr gut und will
+                      Der Heimabend ist
                     </v-list-item-subtitle>
                     <v-list-item-subtitle>
-                      ihn am liebsten sofort machen.
+                      sehr gut beschrieben.
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
 
                 <v-list-item three-line>
-                  <v-list-item-icon>
-                  <v-icon large color="green"> mdi-thumb-up </v-icon>
-                  </v-list-item-icon>
                   <v-list-item-content>
-                    <v-list-item-title><b>Gut</b></v-list-item-title>
+                    <v-list-item-title>
+                      <v-rating
+                        color="warning"
+                        background-color="warning"
+                        empty-icon="mdi-star-outline"
+                        full-icon="mdi-star"
+                        half-icon="mdi-star-half-full"
+                        length="5"
+                        value=3>
+                      </v-rating>
+                    </v-list-item-title>
                     <v-list-item-subtitle>
-                      Ich finde den Heimabend gut und würde ihn
+                      Der Heimabend ist
                     </v-list-item-subtitle>
                     <v-list-item-subtitle>
-                      so mit meiner Gruppe durchführen.
+                      mittelmäßig beschrieben.
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
 
                 <v-list-item three-line>
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      <v-rating
+                        color="warning"
+                        background-color="warning"
+                        empty-icon="mdi-star-outline"
+                        full-icon="mdi-star"
+                        half-icon="mdi-star-half-full"
+                        length="5"
+                        value=1>
+                      </v-rating>
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                      Der Heimabend
+                    </v-list-item-subtitle>
+                    <v-list-item-subtitle>
+                      ist sehr schlecht beschrieben.
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-divider></v-divider>
+                <v-list-item three-line>
                   <v-list-item-icon>
-                  <v-icon large color="grey"> mdi-emoticon-confused </v-icon>
+                  <v-icon large color="red"> mdi-emoticon-confused </v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
                     <v-list-item-title><b>Unklar</b></v-list-item-title>
                     <v-list-item-subtitle>
-                      Ich verstehe den Heimabend nicht und
+                      Der Heimabend
                     </v-list-item-subtitle>
                     <v-list-item-subtitle>
-                      kann ihn so nicht durchführen.
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-
-                <v-list-item three-line>
-                  <v-list-item-icon>
-                  <v-icon large color="red"> mdi-thumb-down </v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-list-item-title><b>Doof</b></v-list-item-title>
-                    <v-list-item-subtitle>
-                      Ich finde die Heimabend Beschreibung doof
-                    </v-list-item-subtitle>
-                    <v-list-item-subtitle>
-                      oder mag die Beschreibung nicht.
+                      ist unverständlich.
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
