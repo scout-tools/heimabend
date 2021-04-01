@@ -10,6 +10,20 @@
 
 `python manage.py createsuperuser`
 
+--------
+
+`virtualenv venv`
+
+---------
+
+`source venv/bin/activate`
+
+`cd heimabend`
+
+`pip install -r requirements.txt`
+
+
+
 
 # nginx config: /etc/nginx/nginx.conf
 

@@ -67,7 +67,12 @@ export default {
     FilterTopSubBar,
   },
   computed: {
-    ...mapGetters(['searchInput', 'tags', 'isScoringMode']),
+    ...mapGetters([
+      'searchInput',
+      'tags',
+      'isScoringMode',
+      'apiIsDown',
+    ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
@@ -83,9 +88,6 @@ export default {
     },
     currentRouteName() {
       return this.$route.name;
-    },
-    apiIsDown() {
-      return !!this.$store.getters.apiIsDown;
     },
     acceptedPrivacy() {
       return !!this.$store.getters.acceptedPrivacy;

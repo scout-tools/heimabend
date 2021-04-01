@@ -10,17 +10,10 @@ export default new Vuex.Store({
     accessToken: null,
     refreshToken: null,
     currentUser: null,
-    isPossibleInside: true,
-    isPossibleOutside: false,
-    isPossibleDigital: false,
-    isPossibleAlone: false,
     isPrepairationNeeded: false,
     withoutCosts: false,
     isActive: true,
     sorter: '-createdAt',
-    isLvlOne: false,
-    isLvlTwo: false,
-    isLvlThree: false,
     filterTags: [],
     mandatoryFilter: {},
     heimabendCounter: 0,
@@ -32,17 +25,11 @@ export default new Vuex.Store({
     liked: [],
     pageScrolled: false,
     isScoringMode: false,
+    heimabendItems: [],
+    scollPosition: 0,
+    nextPath: '',
   },
   getters: {
-    isLvlOne(state) {
-      return state.isLvlOne;
-    },
-    isLvlTwo(state) {
-      return state.isLvlTwo;
-    },
-    isLvlThree(state) {
-      return state.isLvlThree;
-    },
     isAuthenticated(state) {
       return !!state.accessToken;
     },
@@ -60,18 +47,6 @@ export default new Vuex.Store({
     },
     tagById(state, id) {
       return state.tags.find(tag => tag.id === id);
-    },
-    isPossibleInside(state) {
-      return !!state.isPossibleInside;
-    },
-    isPossibleOutside(state) {
-      return !!state.isPossibleOutside;
-    },
-    isPossibleAlone(state) {
-      return !!state.isPossibleAlone;
-    },
-    isPossibleDigital(state) {
-      return !!state.isPossibleDigital;
     },
     isPrepairationNeeded(state) {
       return !!state.isPrepairationNeeded;
@@ -108,6 +83,15 @@ export default new Vuex.Store({
     },
     isScoringMode(state) {
       return state.isScoringMode;
+    },
+    heimabendItems(state) {
+      return state.heimabendItems;
+    },
+    scollPosition(state) {
+      return state.scollPosition;
+    },
+    nextPath(state) {
+      return state.nextPath;
     },
   },
   mutations: {
@@ -150,18 +134,6 @@ export default new Vuex.Store({
       }
       state.filterTags = tempArray2;
     },
-    setPossibleInside(state, value) {
-      state.isPossibleInside = value;
-    },
-    setPossibleOutside(state, value) {
-      state.isPossibleOutside = value;
-    },
-    setPossibleAlone(state, value) {
-      state.isPossibleAlone = value;
-    },
-    setPossibleDigital(state, value) {
-      state.isPossibleDigital = value;
-    },
     setIsPreperationNeeded(state, value) {
       state.isPrepairationNeeded = value;
     },
@@ -177,27 +149,14 @@ export default new Vuex.Store({
     setHeimabendCounter(state, payload) {
       state.heimabendCounter = payload;
     },
-    setIsLvlOne(state, value) {
-      state.isLvlOne = value;
-    },
-    setIsLvlTwo(state, value) {
-      state.isLvlTwo = value;
-    },
-    setIsLvlThree(state, value) {
-      state.isLvlThree = value;
+    setScollPosition(state, payload) {
+      state.scollPosition = payload;
     },
     setTokens(state, access, refresh) {
       state.accessToken = access;
       state.refreshToken = refresh;
     },
     clearFilters(state) {
-      state.isPossibleInside = true;
-      state.isPossibleOutside = true;
-      state.isPossibleDigital = false;
-      state.isPossibleAlone = false;
-      state.isLvlOne = false;
-      state.isLvlTwo = false;
-      state.isLvlThree = false;
       state.searchInput = '';
       state.isPrepairationNeeded = false;
       state.withoutCosts = false;
@@ -226,6 +185,15 @@ export default new Vuex.Store({
     setIsScoringMode(state, isScoringMode) {
       state.isScoringMode = isScoringMode;
     },
+    extendHeimabendItems(state, newHeimabendItems) {
+      state.heimabendItems = state.heimabendItems.concat(newHeimabendItems);
+    },
+    resetHeimabendItems(state) {
+      state.heimabendItems = [];
+    },
+    setNextPath(state, payload) {
+      state.nextPath = payload;
+    },
   },
   actions: {
     logout({ commit }) {
@@ -239,5 +207,5 @@ export default new Vuex.Store({
       commit('setSearchInput', '');
     },
   },
-  plugins: [createPersistedState()],
+  // plugins: [createPersistedState()],
 });

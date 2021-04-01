@@ -1,7 +1,7 @@
 <template>
   <v-container>
-      <v-row justify="center">
-    <v-card class="mx-auto top-margin" max-width="800px">
+    <v-row justify="center">
+      <v-card class="mx-auto top-margin" max-width="800px">
         <v-stepper vertical v-model="currentStep">
           <v-stepper-step :complete="currentStep > 1" :step="1">
             {{ headerStep[0] }}
@@ -102,8 +102,8 @@
             />
           </v-stepper-content>
         </v-stepper>
-    </v-card>
-      </v-row>
+      </v-card>
+    </v-row>
     <v-snackbar v-model="showError" color="error" y="top" :timeout="timeout">
       {{ 'Fehler beim Speichern des Heimabends' }}
     </v-snackbar>

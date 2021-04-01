@@ -149,9 +149,6 @@ export default {
     data: {
       executionTimeRating: 1,
       costsRating: 1,
-      isLvlOne: true,
-      isLvlTwo: true,
-      isLvlThree: true,
     },
     valid: true,
     n: 0,
@@ -165,9 +162,6 @@ export default {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
-    tags() {
-      return this.$store.getters.tags;
-    },
     isCreate() {
       return !this.$route.params.id;
     },
@@ -177,31 +171,8 @@ export default {
     isLargeProject() {
       return this.data.executionTimeRating === 0;
     },
-    largeProjectButtomColor() {
-      return this.isLargeProject ? 'limegreen' : 'lightgrey';
-    },
-    largeProjectIconColor() {
-      return this.isLargeProject ? 'black' : 'grey';
-    },
     isWithoutCosts() {
       return this.data.costsRating === 0;
-    },
-    withoutCostsButtomColor() {
-      return this.isWithoutCosts ? 'limegreen' : 'lightgrey';
-    },
-    withoutCostsIconColor() {
-      return this.isWithoutCosts ? 'red darken-2' : 'grey';
-    },
-    getClassForTextContentSteps() {
-      return this.isMobil ? 'mx-0 px-1' : '';
-    },
-    getSideBarTags() {
-      if (this.tags && this.tagCategory) {
-        const sideBarTagCategories = this.tagCategory.filter(item => item.is_header === false);
-        const sideBarTags = this.filterTagByCategory(sideBarTagCategories[0].id);
-        return sideBarTags;
-      }
-      return [];
     },
   },
 

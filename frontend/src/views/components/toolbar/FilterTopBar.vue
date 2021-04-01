@@ -126,18 +126,11 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'isPossibleInside',
-      'isPossibleOutside',
-      'isPossibleAlone',
-      'isPossibleDigital',
       'isPrepairationNeeded',
       'isActive',
       'withoutCosts',
       'searchInput',
       'sorter',
-      'isLvlOne',
-      'isLvlTwo',
-      'isLvlThree',
       'tags',
       'tagCategory',
       'isAuthenticated',

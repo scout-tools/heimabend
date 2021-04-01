@@ -5,11 +5,11 @@
       ref="eventCards"
       @refresh="refresh()"
       @loadMore="loadMore()"
-      :items="items"
+      :items="heimabendItems"
       :loading="loading"
       :isMobil="isMobil"
     />
-    <v-container v-if="!items.length && !loading">
+    <v-container v-if="!heimabendItems.length && !loading">
       <v-row justify="center">
         <v-card
           color="primary"
@@ -39,8 +39,7 @@
     </v-snackbar>
     <!-- <v-btn
       class="ma-10"
-      v-if="count > items.length"
-      @click="onClickLoadMore()"
+      @click="loadMore()"
     >
       Mehr laden
     </v-btn> -->
@@ -62,9 +61,9 @@ export default {
   watch: {
     axiosParams() {
       this.isFirstEventsLoaded = false;
+      this.$store.commit('resetHeimabendItems');
       this.refresh();
     },
-    getFilterTags() {},
   },
   computed: {
     ...mapGetters([
@@ -76,6 +75,9 @@ export default {
       'heimabendCounter',
       'mandatoryFilter',
       'isActive',
+      'heimabendItems',
+      'scollPosition',
+      'nextPath',
     ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -112,8 +114,7 @@ export default {
     loadMore() {
       const stillRunning = this.isLoadingMore;
       this.isLoadingMore = true;
-
-      if (!stillRunning && this.nextPath !== null) {
+      if (!stillRunning) {
         this.getMoreItems(this.axiosParams);
       }
     },
@@ -122,8 +123,8 @@ export default {
       axios
         .get(this.nextPath.replace(/^http:\/\//i, 'https://')) //
         .then((res) => {
-          this.items = this.items.concat(res.data.results);
-          this.nextPath = res.data.next;
+          this.$store.commit('extendHeimabendItems', res.data.results);
+          this.$store.commit('setNextPath', res.data.next);
           this.loading = false;
           this.isLoadingMore = false;
           this.trackItems(res.data.results);
@@ -154,14 +155,14 @@ export default {
           params: this.axiosParams,
         })
         .then((res) => {
-          this.items = res.data.results;
-          this.nextPath = res.data.next;
+          this.$store.commit('extendHeimabendItems', res.data.results);
+          this.$store.commit('setNextPath', res.data.next);
           this.count = res.data.count;
           this.$store.commit('setHeimabendCounter', this.count);
           this.loading = false;
           this.isLoadingMore = false;
           // eslint-disable-next-line no-undef
-          this.trackItems(res.data.results);
+          this.callTrackItems(res.data.results);
         })
         .catch(() => {
           this.loading = false;
@@ -172,44 +173,33 @@ export default {
     onUpdateClick(item) {
       this.$emit('onUpdateClick', item);
     },
-    trackItems(items) {
+    callTrackItems(items) {
       items.forEach((item) => {
         // eslint-disable-next-line no-undef
         _paq.push(['trackContentImpression', item.title, item.id]);
       });
     },
     onResetClick() {
-      this.$store.commit('clearFilters');
+      this.resetAllFilter();
     },
-    isTagMatchToEvent(item) {
-      const eventTagArray = [];
-      item.tags.forEach((tag) => {
-        eventTagArray.push(tag); // eslint-disable-line
-      });
-      if (this.filterTags && this.filterTags.length) {
-        const matches = eventTagArray.filter((element) => // eslint-disable-line
-          this.filterTags.includes(element) // eslint-disable-line
-        ); // eslint-disable-line
-        return !!matches.length;
-      }
-      return true;
+    resetAllFilter() {
+      this.$store.commit('clearFilters');
     },
   },
 
   created() {
-    this.refresh();
+    setTimeout(() => {
+      window.scrollTo(0, this.scollPosition);
+    }, 500);
   },
 
   mounted() {
     this.$store.commit('setIsScoringMode', false);
-    this.refresh();
   },
 
   data: () => ({
     API_URL: process.env.VUE_APP_API,
-    items: [],
     loading: true,
-    nextPath: null,
     isLoadingMore: false,
     count: 0,
     timeout: 13000,

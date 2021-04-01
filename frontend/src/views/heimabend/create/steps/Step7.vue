@@ -88,17 +88,11 @@ export default {
   }),
 
   computed: {
-    tags() {
-      return this.$store.getters.tags;
-    },
     isCreate() {
       return !this.$route.params.id;
     },
     isUpdate() {
       return !!this.$route.params.id;
-    },
-    getClassForTextContentSteps() {
-      return this.isMobil ? 'mx-0 px-1' : '';
     },
     ...mapGetters([
       'tags',
