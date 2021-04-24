@@ -177,9 +177,6 @@ export default {
   }),
 
   computed: {
-    tags() {
-      return this.$store.getters.tags;
-    },
     tagCategory() {
       return this.$store.getters.tagCategory;
     },

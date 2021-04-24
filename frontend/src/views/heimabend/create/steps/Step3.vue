@@ -121,10 +121,8 @@ export default {
       if (this.showCropper) {
         this.saveImage();
       }
-
       this.$emit('nextStep');
     },
-
     saveImage() {
       const me = this;
       const { canvas } = this.$refs.cropper.getResult();

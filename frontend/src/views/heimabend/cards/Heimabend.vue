@@ -694,11 +694,11 @@ export default {
       return !this.$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-0';
     },
     onUpdateClick(params) {
+      store.commit('setScollPosition', window.scrollY);
       this.$router.push({ name: 'heimabendUpdate', params });
     },
-    onDetailsClick(item) {
-      // eslint-disable-next-line no-undef
-      _paq.push(['trackContentInteraction', 'clicked', item.title, item.id]);
+    onDetailsClick() {
+      store.commit('setScollPosition', window.scrollY);
     },
     formatDate(date) {
       const dateObj = new Date(date);
@@ -721,15 +721,6 @@ export default {
     },
     getId() {
       return this.$route.params.id;
-    },
-    getIsLvlOne() {
-      return false;
-    },
-    getIsLvlTwo() {
-      return false;
-    },
-    getIsLvlThree() {
-      return false;
     },
   },
   data() {

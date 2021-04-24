@@ -70,6 +70,10 @@ export default {
         v => (v && v.length > 0) || 'Mindestens ein Thema ist erforderlich',
       ],
     },
+    data: {
+      executionTimeRating: 1,
+      costsRating: 1,
+    },
     valid: true,
     n: 0,
   }),
@@ -92,27 +96,6 @@ export default {
     },
     isUpdate() {
       return !!this.$route.params.id;
-    },
-    isLargeProject() {
-      return this.data.executionTimeRating === 0;
-    },
-    largeProjectButtomColor() {
-      return this.isLargeProject ? 'limegreen' : 'lightgrey';
-    },
-    largeProjectIconColor() {
-      return this.isLargeProject ? 'black' : 'grey';
-    },
-    isWithoutCosts() {
-      return this.data.costsRating === 0;
-    },
-    withoutCostsButtomColor() {
-      return this.isWithoutCosts ? 'limegreen' : 'lightgrey';
-    },
-    withoutCostsIconColor() {
-      return this.isWithoutCosts ? 'red darken-2' : 'grey';
-    },
-    getClassForTextContentSteps() {
-      return this.isMobil ? 'mx-0 px-1' : '';
     },
     getTopBarTagCategories() {
       if (this.tagCategory) {

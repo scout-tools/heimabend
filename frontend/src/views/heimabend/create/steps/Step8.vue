@@ -105,39 +105,13 @@ export default {
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     },
-    currentUsername() {
-      return this.$store.getters.getUsername;
-    },
-    isCreate() {
-      return !this.$route.params.id;
-    },
-    isUpdate() {
-      return !!this.$route.params.id;
-    },
-    isLargeProject() {
-      return this.data.executionTimeRating === 0;
-    },
-    largeProjectButtomColor() {
-      return this.isLargeProject ? 'limegreen' : 'lightgrey';
-    },
-    largeProjectIconColor() {
-      return this.isLargeProject ? 'black' : 'grey';
-    },
-    isWithoutCosts() {
-      return this.data.costsRating === 0;
-    },
-    withoutCostsButtomColor() {
-      return this.isWithoutCosts ? 'limegreen' : 'lightgrey';
-    },
-    withoutCostsIconColor() {
-      return this.isWithoutCosts ? 'red darken-2' : 'grey';
-    },
-    getClassForTextContentSteps() {
-      return this.isMobil ? 'mx-0 px-1' : '';
-    },
   },
-
-
+  created() {
+    this.agreeBox = !!this.$store.getters.isAuthenticated;
+    if (this.$route.params.id) {
+      this.data = this.$route.params;
+    }
+  },
   methods: {
     prevStep() {
       this.$emit('prevStep');

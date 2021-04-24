@@ -64,6 +64,15 @@ import CreatingSlider from '@/components/slider/CreatingSlider.vue';
 
 export default {
   data: () => ({
+    rules: {
+      tags: [
+        v => (v && v.length > 0) || 'Mindestens ein Thema ist erforderlich',
+      ],
+    },
+    data: {
+      executionTimeRating: 1,
+      costsRating: 1,
+    },
     valid: true,
     n: 0,
     difficultlevel: 0,
@@ -85,6 +94,18 @@ export default {
     isUpdate() {
       return !!this.$route.params.id;
     },
+    isLargeProject() {
+      return this.data.executionTimeRating === 0;
+    },
+    isWithoutCosts() {
+      return this.data.costsRating === 0;
+    },
+  },
+
+  mounted() {
+    if (this.$route.params.id) {
+      this.data = this.$route.params;
+    }
   },
 
   methods: {

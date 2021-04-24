@@ -69,20 +69,7 @@ export default {
     getItem() {
       return this.item;
     },
-    isAuthenticated() {
-      return this.$store.getters.isAuthenticated;
-    },
-    getFilterTags() {
-      return this.$store.getters.filterTags;
-    },
-    tags() {
-      return this.$store.getters.tags;
-    },
-    test() {
-      return 'outer-margin';
-    },
   },
-
   methods: {
     getUrl() {
       return `https://inspirator.dpbm.de/heimabend/${this.id}/`;
@@ -107,7 +94,6 @@ export default {
           this.loading = false;
         });
     },
-
     onUpdateClick(item) {
       this.$emit('onUpdateClick', item);
     },
@@ -134,7 +120,6 @@ export default {
     this.$store.commit('setIsSubPage', true);
     this.$store.commit('setDrawer', false);
   },
-
   data: () => ({
     API_URL: process.env.VUE_APP_API,
     item: [],

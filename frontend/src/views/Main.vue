@@ -119,9 +119,6 @@ export default {
     currentRouteName() {
       return this.$route.name;
     },
-    apiIsDown() {
-      return !!this.$store.getters.apiIsDown;
-    },
     acceptedPrivacy() {
       return !!this.$store.getters.acceptedPrivacy;
     },
