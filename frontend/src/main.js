@@ -12,12 +12,13 @@ import VueMatomo from 'vue-matomo';
 import moment from 'moment';
 import AOS from 'aos';
 import Vuelidate from 'vuelidate';
+import VTooltip from 'v-tooltip';
+
 import App from './App.vue';
 import router from './router';
 import auth from './auth';
 import store from './store';
 import vuetify from './plugins/vuetify';
-import VTooltip from 'v-tooltip';
 import 'aos/dist/aos.css';
 
 

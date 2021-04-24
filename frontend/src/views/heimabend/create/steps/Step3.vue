@@ -139,7 +139,6 @@ export default {
 
           this.postUpload(formData).then((response) => {
             me.data.id = response.data.id;
-            debugger;
           });
         }, 'image/jpeg');
       }

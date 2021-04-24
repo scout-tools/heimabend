@@ -202,6 +202,10 @@ export default {
         tags: [47, 46, 44, 43, 42, 45, 51, 50],
         createdBy: null,
         createdByEmail: '',
+        isOpenSource: true,
+        privacyConsent: true,
+        photographerName: 'Robert',
+        imageDescription: 'Robert',
       };
     }
   },

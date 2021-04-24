@@ -182,7 +182,6 @@ export default {
         event: this.eventId,
         experiment: this.experimentId,
         score: decision,
-        jh
       });
     },
     getFirstEvent() {

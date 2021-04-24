@@ -115,12 +115,6 @@ export default {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
-    watch: {
-      searchText(value) {
-        console.log(value);
-        debugger;
-      },
-    },
   },
 };
 </script>

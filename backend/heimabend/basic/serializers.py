@@ -132,8 +132,7 @@ class EventSerializer(serializers.ModelSerializer):
     def get_header_image(self, obj):
         if obj.header_image:
             image_obj = Image.objects.filter(id=obj.header_image.id).first()
-            image_str = image_obj.image.name
-            image_field = image_str.split("/")[1]
+            image_field = image_obj.image.name
             image_id = image_field.split(".")[0]
             return image_id
 
