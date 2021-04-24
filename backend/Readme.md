@@ -4,10 +4,7 @@
 # activate venv
 `source venv/bin/activate`
 
-Mac, Linux: ( `pipenv install` )
-             `pipenv shell`
-
-# install
+# install locally
 `pip install -r requirements.txt`
 
 `python manage.py makemigrations`
@@ -29,4 +26,9 @@ Windows: `python manage.py add_fixtures test-data`
 
 # PostGres for MacOS
 `brew install postgresql`
+
+
+# install aws
+`get zappa_settings.json from Hagi or Robert`
+`zappa update dev (or prod)`
 
