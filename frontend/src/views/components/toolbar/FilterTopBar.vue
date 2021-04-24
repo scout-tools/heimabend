@@ -2,6 +2,7 @@
   <v-toolbar
     v-if="!isExtended"
     fixed
+    flat
   >
     <template>
       <active-filter v-if="isMobil"/>
@@ -43,12 +44,11 @@
       <v-container fluid v-if="!isMobil">
         <v-row
           align="center"
-          class="ma-0 pa-0"
             justify="center">
             <v-col
               v-for="category in getTopBarTagCategories"
               :key="category.id"
-              cols="2">
+              cols="1.4">
               <filter-tags
                 :category="category"
               />
@@ -81,9 +81,6 @@
           :category="category"
         />
       </v-row>
-      <v-row class="ml-1 mr-10 my-5">
-        <sorter/>
-      </v-row>
     </v-container>
  </v-navigation-drawer>
 </template>
@@ -93,13 +90,11 @@ import { mapGetters } from 'vuex';
 
 import FilterTags from '@/views/components/dropdown/FilterTags.vue'; //eslint-disable-line
 import ActiveFilter from '@/views/components/button/ActiveFilter.vue'; //eslint-disable-line
-import Sorter from '@/views/components/dropdown/Sorter.vue'; //eslint-disable-line
 
 export default {
   components: {
     FilterTags,
     ActiveFilter,
-    Sorter,
   },
   data() {
     return {
@@ -131,10 +126,8 @@ export default {
       'isPossibleAlone',
       'isPossibleDigital',
       'isPrepairationNeeded',
-      'isActive',
       'withoutCosts',
       'searchInput',
-      'sorter',
       'isLvlOne',
       'isLvlTwo',
       'isLvlThree',
@@ -149,7 +142,7 @@ export default {
         if (this.isMobil) {
           return this.tagCategory;
         }
-        return this.tagCategory.filter(item => item.is_header);
+        return this.tagCategory.filter(item => item.isHeader);
       }
       return [];
     },
@@ -158,14 +151,6 @@ export default {
     },
     isFilterDefault() {
       return !((this.mandatoryFilter && this.mandatoryFilter.length) || this.getFilterTags.length);
-    },
-    isIsActive: {
-      get() {
-        return this.$store.getters.isActive;
-      },
-      set() {
-        return false;
-      },
     },
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;

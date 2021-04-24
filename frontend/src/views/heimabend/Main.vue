@@ -11,17 +11,20 @@
     />
     <v-container v-if="!items.length && !loading">
       <v-row justify="center">
-        <v-card
-          color="primary"
-          class="mx-auto ma-2 pa-3 test-color whiteText"
-          elevation="30"
-        >
-          Deine Suche führte leider zu keinem Treffer. Wir würden uns freuen,
-          wenn du uns hilfst neue Ideen hinzuzufügen.
-        </v-card>
       </v-row>
+      <v-row justify="center">
+        <v-img
+          :src="require('@/assets/inspi/inspi_confused.png')"
+          max-width="200"
+          class="mt-4"
+        />
+      </v-row>
+
       <v-row justify="center" class="pa-5">
         <v-btn color="secondary" @click="onResetClick()">
+          <v-icon left>
+            mdi-filter-remove
+          </v-icon>
           Alle Filter zurücksetzen
         </v-btn>
       </v-row>
@@ -69,13 +72,11 @@ export default {
   computed: {
     ...mapGetters([
       'searchInput',
-      'sorter',
       'filterTags',
       'tags',
       'isAuthenticated',
       'heimabendCounter',
       'mandatoryFilter',
-      'isActive',
     ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -95,10 +96,6 @@ export default {
           params.append('filterTags', filterTag);
         });
       }
-      if (this.isAuthenticated) {
-        params.append('isActive', this.isActive);
-      }
-      params.append('ordering', this.sorter);
       params.append('page', 1);
       params.append('timestamp', new Date().getTime());
       return params;
@@ -119,8 +116,12 @@ export default {
     },
 
     async getMoreItems() {
+      let path = this.nextPath;
+      if (process.env.VUE_APP_API !== 'http://localhost:8000/') {
+        path = this.nextPath.replace(/^http:\/\//i, 'https://');
+      }
       axios
-        .get(this.nextPath.replace(/^http:\/\//i, 'https://')) //
+        .get(path)
         .then((res) => {
           this.items = this.items.concat(res.data.results);
           this.nextPath = res.data.next;
@@ -187,8 +188,10 @@ export default {
         eventTagArray.push(tag); // eslint-disable-line
       });
       if (this.filterTags && this.filterTags.length) {
-        const matches = eventTagArray.filter((element) => // eslint-disable-line
-          this.filterTags.includes(element) // eslint-disable-line
+        const matches = eventTagArray.filter(
+          ( // eslint-disable-line
+            element // eslint-disable-line
+          ) => this.filterTags.includes(element) // eslint-disable-line
         ); // eslint-disable-line
         return !!matches.length;
       }

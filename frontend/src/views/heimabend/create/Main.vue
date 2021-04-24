@@ -1,7 +1,7 @@
 <template>
-  <v-container>
-      <v-row justify="center">
-    <v-card class="mx-auto top-margin" max-width="800px">
+  <v-container fluid>
+    <v-row justify="center">
+      <v-card class="mx-auto top-margin" max-width="800px">
         <v-stepper vertical v-model="currentStep">
           <v-stepper-step :complete="currentStep > 1" :step="1">
             {{ headerStep[0] }}
@@ -102,8 +102,8 @@
             />
           </v-stepper-content>
         </v-stepper>
-    </v-card>
-      </v-row>
+      </v-card>
+    </v-row>
     <v-snackbar v-model="showError" color="error" y="top" :timeout="timeout">
       {{ 'Fehler beim Speichern des Heimabends' }}
     </v-snackbar>
@@ -180,7 +180,31 @@ export default {
       }
     },
   },
-
+  created() {
+    this.$store.commit('setHeaderString', 'Neuer Heimabend');
+    this.$store.commit('setIsSubPage', true);
+    this.$store.commit('setDrawer', false);
+    if (this.getId) {
+      axios
+        .get(`${this.API_URL}basic/event/${this.getId}/`)
+        .then((response) => {
+          this.data = response.data;
+        });
+    } else {
+      this.data = {
+        title: '',
+        description: '',
+        imageData: null,
+        imageLink: null,
+        materialItems: [],
+        executionTimeRating: 1,
+        costsRating: 1,
+        tags: [47, 46, 44, 43, 42, 45, 51, 50],
+        createdBy: null,
+        createdByEmail: '',
+      };
+    }
+  },
   methods: {
     nextStep() {
       this.currentStep += 1;
@@ -188,7 +212,6 @@ export default {
     prevStep() {
       this.currentStep -= 1;
     },
-
     finish() {
       const dataStep1 = this.$refs.step1.getData();
       const dataStep2 = this.$refs.step2.getData();
@@ -204,13 +227,12 @@ export default {
             title: dataStep1.title,
             description: dataStep2.description,
             tags: dataStep6.tags.concat(dataStep7.selectedMandatoryFilter),
-            material: this.convertMaterialArrayString(dataStep4.material_list),
-            material_list: dataStep4.material_list,
+            materialItems: [],
             costsRating: dataStep5.costsRating,
             executionTimeRating: dataStep5.executionTimeRating,
             isPrepairationNeeded: dataStep5.isPrepairationNeeded,
-            isActive: dataStep8.isActive,
-            imageLink: dataStep3.imageLink,
+            isActive: false,
+            headerImage: dataStep3.imageId,
             createdBy: dataStep8.createdBy,
             createdByEmail: dataStep8.createdByEmail,
           })
@@ -230,12 +252,11 @@ export default {
             title: dataStep1.title,
             description: dataStep2.description,
             tags: dataStep6.tags.concat(dataStep7.selectedMandatoryFilter),
-            material: this.convertMaterialArrayString(dataStep4.material_list),
-            material_list: dataStep4.material_list,
+            materialItems: dataStep4.materialItems,
             costsRating: dataStep5.costsRating,
             executionTimeRating: dataStep5.executionTimeRating,
             isPrepairationNeeded: dataStep5.isPrepairationNeeded,
-            isActive: dataStep8.isActive,
+            isActive: false,
             imageLink: dataStep3.imageLink,
             createdBy: dataStep8.createdBy,
             createdByEmail: dataStep8.createdByEmail,

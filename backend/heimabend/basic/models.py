@@ -1,3 +1,6 @@
+import uuid
+from datetime import datetime
+
 # models.py
 from django.db import models
 from django.contrib.auth.models import User
@@ -7,12 +10,14 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 from stdimage import StdImageField, JPEGField
-import uuid
 
 
 class TimeStampMixin(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True, editable=False, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+    created_by = models.CharField(max_length=20, blank=True, null=True)
+    updated_by = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -26,7 +31,8 @@ class TagCategory(TimeStampMixin):
         verbose_name='ID')
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=100, blank=True)
-    ordered_id = models.IntegerField(blank=False, unique=True)
+    sorting = models.IntegerField(blank=False, unique=True)
+    icon = models.CharField(max_length=20, blank=True, null=True)
     is_visible = models.BooleanField(default=True)
     is_header = models.BooleanField(default=False)
     is_mandatory = models.BooleanField(default=False)
@@ -39,7 +45,7 @@ class TagCategory(TimeStampMixin):
         return self.__str__()
 
 
-class Material(TimeStampMixin):
+class MaterialName(TimeStampMixin):
     id = models.AutoField(
         auto_created=True,
         primary_key=True,
@@ -55,6 +61,40 @@ class Material(TimeStampMixin):
         return self.__str__()
 
 
+class MaterialUnit(TimeStampMixin):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    name = models.CharField(max_length=30)
+    description = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.__str__()
+
+
+class MaterialItem(TimeStampMixin):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    quantity = models.IntegerField(default=0)
+    number_of_participants = models.IntegerField(default=0, blank=True)
+    material_name = models.ForeignKey(MaterialName, on_delete=models.PROTECT)
+    material_unit = models.ForeignKey(MaterialUnit, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.material_name
+
+    def __repr__(self):
+        return self.__str__()
+
+
 class Tag(TimeStampMixin):
     id = models.AutoField(
         auto_created=True,
@@ -64,13 +104,41 @@ class Tag(TimeStampMixin):
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=100, blank=True)
     color = models.CharField(max_length=7)
+    icon = models.CharField(max_length=20, blank=True, null=True)
     category = models.ForeignKey(
         TagCategory, on_delete=models.PROTECT, blank=True, null=True)
     is_visible = models.BooleanField(default=True)
-    ordered_id = models.IntegerField(blank=False, unique=False, null=True)
+    sorting = models.IntegerField(blank=False, unique=False, null=True)
 
     def __str__(self):
         return self.name
+
+    def __repr__(self):
+        return self.__str__()
+
+
+def nameFile(instance, filename):
+    return 'images/' + str(uuid.uuid1()) + '.jpeg'
+
+
+class Image(TimeStampMixin):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    image = StdImageField(upload_to=nameFile, blank=True, variations={
+        'default': (600, 400)
+    }, delete_orphans=True)
+    description = models.CharField(max_length=255)
+    is_open_source = models.BooleanField(default=False)
+    privacy_consent = models.BooleanField(default=False)
+    photographer_name = models.CharField(
+        max_length=100, default='', blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '{} ({})'.format(self.description, self.image)
 
     def __repr__(self):
         return self.__str__()
@@ -93,33 +161,46 @@ class Event(TimeStampMixin):
         validators=[
             MinLengthValidator(75),
             MaxLengthValidator(8000)])
-    isPossibleOutside = models.BooleanField(default=1)
-    isPossibleInside = models.BooleanField(default=1)
+    description_detail = models.CharField(
+        max_length=1,
+        default='')
     tags = models.ManyToManyField(Tag, default='')
-    material = models.CharField(max_length=1000, default='', blank=True)
-    material_list = models.ManyToManyField(Material, blank=True)
-    costsRating = models.SmallIntegerField(
+    material_items = models.ManyToManyField(MaterialItem, blank=True)
+    costs_rating = models.SmallIntegerField(
         default=1, validators=[
-            MinValueValidator(0), MaxValueValidator(3)])
-    executionTimeRating = models.SmallIntegerField(
-        default=1, validators=[MinValueValidator(0), MaxValueValidator(3)])
-    isPrepairationNeeded = models.BooleanField(default=1)
-    isActive = models.BooleanField(default=0)
-    isLvlOne = models.BooleanField(default=1)
-    isLvlTwo = models.BooleanField(default=0)
-    isPossibleDigital = models.BooleanField(default=0)
-    isPossibleAlone = models.BooleanField(default=0)
-    isLvlThree = models.BooleanField(default=0)
-    imageLink = models.CharField(max_length=120, blank=True, null=True)
-    createdBy = models.CharField(max_length=60, blank=True)
-    createdByEmail = models.CharField(max_length=60, blank=True)
-    updatedBy = models.CharField(max_length=60, null=True, blank=True)
-    createdAt = models.DateTimeField(auto_now_add=True, editable=False)
-    updatedAt = models.DateTimeField(null=True, blank=True)
+            MinValueValidator(0), MaxValueValidator(5)])
+    execution_time = models.SmallIntegerField(
+        default=1, validators=[MinValueValidator(0), MaxValueValidator(5)])
+    prepairation_time = models.SmallIntegerField(
+        default=1, validators=[MinValueValidator(0), MaxValueValidator(5)])
+    difficulty = models.SmallIntegerField(
+        default=1, validators=[MinValueValidator(0), MaxValueValidator(5)])
+    is_active = models.BooleanField(default=0)
+    header_image = models.ForeignKey(
+        Image, on_delete=models.PROTECT, blank=True, null=True)
+    created_by_email = models.CharField(max_length=60, blank=True)
     like_score = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
+
+    def __repr__(self):
+        return self.__str__()
+
+
+class MessageType(TimeStampMixin):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    name = models.CharField(max_length=30)
+    is_public = models.BooleanField(default=False)
+    is_comment = models.BooleanField(default=False)
+    description = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return self.name
 
     def __repr__(self):
         return self.__str__()
@@ -131,11 +212,13 @@ class Message(TimeStampMixin):
         primary_key=True,
         serialize=False,
         verbose_name='ID')
-    name = models.CharField(max_length=50)
-    email = models.CharField(max_length=60)
-    topic = models.CharField(max_length=40)
-    messageBody = models.CharField(max_length=1000)
-    createdAt = models.DateTimeField(auto_now_add=True, editable=False)
+    created_by_email = models.CharField(max_length=60, blank=True, null=True)
+    message_type = models.ForeignKey(MessageType, on_delete=models.CASCADE, blank=True, null=True)
+    message_body = models.CharField(max_length=1000)
+    event = models.ForeignKey(
+        Event, on_delete=models.CASCADE, blank=True, null=True)
+    is_public = models.BooleanField(default=False)
+    is_processed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -154,16 +237,16 @@ class Like(TimeStampMixin):
         primary_key=True,
         serialize=False,
         verbose_name='ID')
-    eventId = models.ForeignKey(Event, on_delete=models.CASCADE)
-    opinionTypeId = models.IntegerField(
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    opinion_type_id = models.IntegerField(
         choices=OptionType.choices, default=OptionType.LIKE)
     like_created = models.DateTimeField(auto_now_add=True, editable=False)
 
     def save(self, *args, **kwargs):
         super(Like, self).save(*args, **kwargs)
         if self.id:
-            query = Like.objects.filter(eventId=self.eventId).all(
-            ).aggregate(sum=Sum('opinionTypeId'))
+            query = Like.objects.filter(event=self.event).all(
+            ).aggregate(sum=Sum('opinion_type_id'))
             likes = query['sum']
 
             if likes is None:
@@ -180,27 +263,9 @@ class Like(TimeStampMixin):
             else:
                 likescore = 0
 
-            event = Event.objects.filter(id=self.eventId.id).first()
+            event = Event.objects.filter(id=self.event.id).first()
             event.like_score = likescore
             event.save()
-
-
-def nameFile(instance, filename):
-    return 'images/' + str(uuid.uuid1()) + '.jpeg'
-
-
-class Image(TimeStampMixin):
-    image = StdImageField(upload_to=nameFile, blank=True, variations={
-        'default': (600, 400),
-    }, delete_orphans=True)
-    description = models.CharField(max_length=255)
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return '{} ({})'.format(self.description, self.image)
-
-    def __repr__(self):
-        return self.__str__()
 
 
 class Experiment(TimeStampMixin):
@@ -230,15 +295,50 @@ class ExperimentItem(TimeStampMixin):
         primary_key=True,
         serialize=False,
         verbose_name='ID')
-    event_id = models.ForeignKey(Event, on_delete=models.CASCADE)
-    experiment_id = models.ForeignKey(Experiment, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
     score = models.IntegerField(blank=False, unique=False, null=True)
 
     def __str__(self):
         return '{} {} {}'.format(
-            self.event_id,
-            self.experiment_id,
+            self.event,
+            self.experiment,
             self.score)
+
+    def __repr__(self):
+        return self.__str__()
+
+
+class Faq(TimeStampMixin):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    question = models.CharField(max_length=1000, blank=True, null=True)
+    answer = models.CharField(max_length=2000, blank=True, null=True)
+    is_public = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.question
+
+    def __repr__(self):
+        return self.__str__()
+
+
+class FaqRating(TimeStampMixin):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    faq = models.ForeignKey(Faq, on_delete=models.CASCADE)
+    useful_score = models.SmallIntegerField(
+        default=1, validators=[
+            MinValueValidator(0), MaxValueValidator(5)])
+
+    def __str__(self):
+        return self.faq
 
     def __repr__(self):
         return self.__str__()

@@ -3,13 +3,13 @@
   <v-row justify="center">
     <v-dialog
       v-model="dialog"
-      max-width="290"
+      max-width="400"
     >
       <v-card>
         <v-card-title class="headline">Heimabend-Idee löschen</v-card-title>
 
         <v-card-text>
-          Willst du diese Idee echt löschen?
+          {{ getText() }}
         </v-card-text>
 
         <v-card-actions>
@@ -87,6 +87,9 @@ export default {
 
     cancel() {
       this.dialog = false;
+    },
+    getText() {
+      return `Willst du Idee "${this.data.title}" löschen?`;
     },
   },
 };

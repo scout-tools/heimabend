@@ -1,0 +1,86 @@
+[
+  {
+    "model": "basic.tagcategory",
+    "pk": 1,
+    "fields": {
+      "id": 1,
+      "name": "Jahreszeit",
+      "description": "Beinhaltet die 4 Jahreszeiten",
+      "sorting": 2,
+      "is_visible": true,
+      "is_header": true
+    }
+  },
+  {
+    "model": "basic.tagcategory",
+    "pk": 2,
+    "fields": {
+      "id": 2,
+      "name": "Ort",
+      "description": "",
+      "sorting": 1,
+      "is_visible": true,
+      "is_header": true
+    }
+  },
+  {
+    "model": "basic.tagcategory",
+    "pk": 3,
+    "fields": {
+      "id": 3,
+      "name": "Stufe",
+      "description": "",
+      "sorting": 3,
+      "is_visible": true,
+      "is_header": true
+    }
+  },
+  {
+    "model": "basic.tagcategory",
+    "pk": 4,
+    "fields": {
+      "id": 4,
+      "name": "Typ",
+      "description": "",
+      "sorting": 4,
+      "is_visible": true,
+      "is_header": true
+    }
+  },
+  {
+    "model": "basic.tagcategory",
+    "pk": 5,
+    "fields": {
+      "id": 5,
+      "name": "Zusätze",
+      "description": "",
+      "sorting": 5,
+      "is_visible": true,
+      "is_header": true
+    }
+  },
+  {
+    "model": "basic.tagcategory",
+    "pk": 6,
+    "fields": {
+      "id": 9,
+      "name": "Probenordnung",
+      "description": "",
+      "sorting": 99,
+      "is_visible": true,
+      "is_header": false
+    }
+  },
+  {
+    "model": "basic.tagcategory",
+    "pk": 7,
+    "fields": {
+      "id": 7,
+      "name": "Admin",
+      "description": "",
+      "sorting": 66,
+      "is_visible": false,
+      "is_header": true
+    }
+  }
+]

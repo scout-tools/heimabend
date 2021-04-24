@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueLodash from 'vue-lodash';
+
 import lodash from 'lodash';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faAt } from '@fortawesome/free-solid-svg-icons';
@@ -7,18 +8,21 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import {
   faWhatsapp, faTelegram, faPinterest, faFacebook,
 } from '@fortawesome/free-brands-svg-icons';
-import VueGoogleCharts from 'vue-google-charts';
 import VueMatomo from 'vue-matomo';
-
+import moment from 'moment';
 import AOS from 'aos';
+import Vuelidate from 'vuelidate';
 import App from './App.vue';
 import router from './router';
 import auth from './auth';
 import store from './store';
 import vuetify from './plugins/vuetify';
+import VTooltip from 'v-tooltip';
 import 'aos/dist/aos.css';
 
+
 const SocialSharing = require('vue-social-sharing');
+const VueMoment = require('vue-moment');
 
 library.add(faWhatsapp);
 library.add(faTelegram);
@@ -31,6 +35,8 @@ Vue.config.productionTip = false;
 
 auth.interceptorsSetup(store, router);
 
+Vue.prototype.moment = moment;
+
 new Vue({
   router,
   store,
@@ -42,8 +48,10 @@ new Vue({
 }).$mount('#app');
 
 
+Vue.use(VTooltip);
+Vue.use(Vuelidate);
+Vue.use(VueMoment);
 Vue.use(SocialSharing);
-Vue.use(VueGoogleCharts);
 Vue.use(VueLodash,
   {
     name: 'custom',
@@ -86,7 +94,7 @@ Vue.use(VueMatomo, {
 
   // Run Matomo without cookies
   // Default: false
-  disableCookies: false,
+  disableCookies: true,
 
   // Enable the heartbeat timer (https://developer.matomo.org/guides/tracking-javascript-guide#accurately-measure-the-time-spent-on-each-page)
   // Default: false

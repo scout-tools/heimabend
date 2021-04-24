@@ -1,16 +1,18 @@
 <template>
-  <v-container class="ma-0 pa-0" fluid>
+  <v-container class="ma-0 pr-0" fluid>
     <v-select
       v-model="selectedFilter"
-      :items="filterTagByCategory(category.id)"
-      :label="`Wähle ${category.name}`"
+      :items="filterTagByCategory"
+      :label="`${category.name}`"
       item-value="id"
       item-text="name"
       multiple
       dense
       hide-details
       single-line
-      outlined
+      solo-inverted
+      :prepend-inner-icon="category.icon"
+      color="green"
       @change="onFilterChanged"
     >
       <template v-slot:selection="{ item, index }">
@@ -53,6 +55,9 @@ export default {
       'tagCategory',
       'mandatoryFilter',
     ]),
+    filterTagByCategory() {
+      return this.tags.filter(item => item.category === this.category.id);
+    },
   },
   watch: {
     mandatoryFilter(value) {
@@ -61,17 +66,11 @@ export default {
     },
   },
   methods: {
-    filterTagByCategory(categoryId) {
-      return this.tags.filter(item => item.category === categoryId);
-    },
     getDivClass() {
       return !this.isMobil ? 'mx-2' : 'mx-0';
     },
     updateState() {
       this.isActiveState = this.$store.getters[this.customVariable];
-    },
-    onToggleButton() {
-      this.isActiveState = !this.isActiveState;
     },
     // eslint-disable-next-line no-unused-vars
     onFilterChanged(newValue) {

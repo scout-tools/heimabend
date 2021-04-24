@@ -3,8 +3,9 @@
     ref="form1"
     v-model="valid"
   >
-  <v-container>
+  <v-container fluid>
     <v-row class="mt-6 ml-2">
+      <v-col cols="8">
       <span class="text-left subtitle-1">
         Willkommen bei der <b> Heimabenderstellung </b>. <br>
         <br>
@@ -12,6 +13,10 @@
         schon auf deine Inspiration. Im folgenden führen wir dich durch 7 kleine
         Schritte. Viel Spaß!
       </span>
+      </v-col>
+      <v-col cols="4">
+        <v-img :src="require('@/assets/inspi/inspi_happy.png')" max-width="80" />
+      </v-col>
     </v-row>
     <v-divider class="text-left ma-5"/>
     <v-row class="mt-6 ml-2">
@@ -21,7 +26,7 @@
     </v-row>
     <v-row class="ma-4">
       <v-text-field
-        outlined
+        prepend-icon="mdi-card-text"
         autofocus
         :counter="40"
         :rules="rules.title"
@@ -54,9 +59,6 @@ export default {
     n: 0,
     dialog: false,
     valid: true,
-    data: {
-      title: '',
-    },
     rules: {
       title: [
         v => !!v || 'Überschrift ist erforderlich.',
@@ -65,7 +67,9 @@ export default {
       ],
     },
   }),
-
+  props: {
+    data: Object,
+  },
   computed: {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -76,12 +80,6 @@ export default {
     isUpdate() {
       return !!this.$route.params.id;
     },
-  },
-
-  created() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-    }
   },
 
 

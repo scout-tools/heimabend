@@ -1,7 +1,9 @@
 # serializers.py
 from rest_framework import serializers
-from .models import Tag, Event, Message, Like, TagCategory, Image, Material, \
-    ExperimentItem, Experiment
+from .models import Tag, Event, Message, Like, TagCategory, Image, MaterialItem, \
+    ExperimentItem, Experiment, MaterialUnit, MaterialName, MessageType, \
+    Faq, FaqRating
+from rest_framework_tracking.models import APIRequestLog
 from rest_framework.serializers import Serializer, FileField
 from django.core.cache import cache
 from django.db.models import Sum
@@ -18,9 +20,10 @@ class TagSerializer(serializers.ModelSerializer):
             'tag_count',
             'description',
             'color',
+            'icon',
             'category',
             'is_visible',
-            'ordered_id'
+            'sorting'
         )
 
     def get_tag_count(self, obj):
@@ -42,7 +45,8 @@ class TagCategorySerializer(serializers.ModelSerializer):
             'id',
             'name',
             'description',
-            'ordered_id',
+            'sorting',
+            'icon',
             'tag_category_count',
             'is_visible',
             'is_header',
@@ -66,8 +70,8 @@ class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
         fields = (
-            'eventId',
-            'opinionTypeId',
+            'event',
+            'opinion_type_id',
             'like_created',
             'current_median'
         )
@@ -80,8 +84,8 @@ class LikeSerializer(serializers.ModelSerializer):
 def getmedian():
     median = cache.get('median')
     if median is None:
-        query = Like.objects.values("eventId__id").annotate(
-            sum=Sum('opinionTypeId')).order_by('sum')
+        query = Like.objects.values("event__id").annotate(
+            sum=Sum('opinion_type_id')).order_by('sum')
         median = query[int(query.count() / 2)]['sum']
         cache.set('median', median, timeout=12 * 60 * 60)
     return median
@@ -89,10 +93,13 @@ def getmedian():
 
 class EventSerializer(serializers.ModelSerializer):
 
-    material_list = serializers.SlugRelatedField(
+    view_count = serializers.SerializerMethodField()
+    header_image = serializers.SerializerMethodField()
+
+    material_items = serializers.SlugRelatedField(
         many=True,
         read_only=False,
-        queryset=Material.objects.all(),
+        queryset=MaterialItem.objects.all(),
         slug_field='name'
     )
 
@@ -102,39 +109,41 @@ class EventSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'description',
-            'isPossibleOutside',
-            'isPossibleInside',
             'tags',
-            'material',
-            'material_list',
-            'imageLink',
-            'costsRating',
-            'executionTimeRating',
-            'isPrepairationNeeded',
-            'isLvlOne',
-            'isLvlTwo',
-            'isLvlThree',
-            'isPossibleDigital',
-            'isPossibleAlone',
-            'createdBy',
-            'createdByEmail',
-            'updatedBy',
-            'createdAt',
-            'updatedAt',
-            'isActive',
-            'like_score')
+            'material_items',
+            'header_image',
+            'costs_rating',
+            'execution_time',
+            'prepairation_time',
+            'created_by',
+            'created_by_email',
+            'updated_by',
+            'created_at',
+            'updated_at',
+            'is_active',
+            'like_score',
+            'view_count')
+
+    def get_view_count(self, obj):
+        return APIRequestLog.objects.filter(
+            path='/basic/event/{}/'.format(obj.id)
+        ).count()
+
+    def get_header_image(self, obj):
+        if obj.header_image:
+            image_obj = Image.objects.filter(id=obj.header_image.id).first()
+            image_str = image_obj.image.name
+            image_field = image_str.split("/")[1]
+            image_id = image_field.split(".")[0]
+            return image_id
+
+        return None
 
 
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
-        fields = (
-            'id',
-            'name',
-            'email',
-            'topic',
-            'messageBody',
-            'createdAt')
+        fields = '__all__'
 
 
 class HighscoreSerializer(serializers.ModelSerializer):
@@ -143,19 +152,20 @@ class HighscoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = (
-            'createdBy',
+            'created_by',
             'highscore',
         )
 
     def get_highscore(self, obj):
-        score = Event.objects.filter(createdBy=obj['createdBy']).count()
+        print(obj)
+        score = Event.objects.filter(created_by=obj['created_by']).count()
         return score
 
 
 class StatisticSerializer(serializers.ModelSerializer):
     score = serializers.SerializerMethodField()
     score_cumulative = serializers.SerializerMethodField()
-    week = serializers.SerializerMethodField()
+    month = serializers.SerializerMethodField()
     year = serializers.SerializerMethodField()
 
     class Meta:
@@ -163,24 +173,24 @@ class StatisticSerializer(serializers.ModelSerializer):
         fields = (
             'score',
             'score_cumulative',
-            'week',
+            'month',
             'year'
         )
 
     def get_score(self, obj):
         score = Event.objects.filter(
-            createdAt__year__exact=obj['year'],
-            createdAt__week__exact=obj['week']).count()
+            created_at__year__exact=obj['year'],
+            created_at__month__exact=obj['month']).count()
         return score
 
     def get_score_cumulative(self, obj):
         score = Event.objects.filter(
-            createdAt__year__lte=obj['year'],
-            createdAt__week__lte=obj['week']).count()
+            created_at__year__lte=obj['year'],
+            created_at__month__lte=obj['month']).count()
         return score
 
-    def get_week(self, obj):
-        return obj['week']
+    def get_month(self, obj):
+        return obj['month']
 
     def get_year(self, obj):
         return obj['year']
@@ -190,14 +200,14 @@ class ImageSerializer(serializers.ModelSerializer):
 
     class Meta():
         model = Image
-        fields = ('image', 'description', 'uploaded_at')
+        fields = '__all__'
 
 
-class MaterialSerializer(serializers.ModelSerializer):
+class MaterialItemSerializer(serializers.ModelSerializer):
 
     class Meta():
-        model = Material
-        fields = ('id', 'name', 'description')
+        model = MaterialItem
+        fields = '__all__'
 
 
 class ExperimentSerializer(serializers.ModelSerializer):
@@ -211,4 +221,118 @@ class ExperimentItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ExperimentItem
+        fields = '__all__'
+
+
+class ExperimentOverviewSerializer(serializers.ModelSerializer):
+    event_counter = serializers.SerializerMethodField()
+    experiment_item = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Experiment
+        fields = (
+            'id',
+            'created_at',
+            'age_level',
+            'group_type',
+            'group_leader',
+            'event_counter',
+            'experiment_item',
+        )
+
+    def get_event_counter(self, obj):
+        return ExperimentItem.objects.filter(experiment__id=obj.id).count()
+
+    def get_experiment_item(self, obj):
+        return ExperimentItem.objects.filter(experiment__id=obj.id).values('score', 'event__title')
+
+
+class TopViewsSerializer(serializers.ModelSerializer):
+
+    view_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Event
+        fields = ('id', 'view_count', 'title', 'created_by', 'header_image')
+
+    def get_view_count(self, obj):
+        return APIRequestLog.objects.filter(
+            path='/basic/event/{}/'.format(obj.id)
+        ).count()
+
+
+class EventAdminSerializer(serializers.ModelSerializer):
+
+    view_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Event
+        fields = (
+            'id',
+            'title',
+            'tags',
+            'header_image',
+            'created_by',
+            'created_by_email',
+            'updated_by',
+            'created_at',
+            'updated_at',
+            'is_active',
+            'like_score',
+            'view_count')
+
+    def get_view_count(self, obj):
+        return APIRequestLog.objects.filter(
+            path='/basic/event/{}/'.format(obj.id)
+        ).count()
+
+
+class EventTimestampSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Event
+        fields = (
+            'id',
+            'created_at')
+
+
+class MaterialItemSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = MaterialItem
+        fields = '__all__'
+
+
+class MaterialUnitSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = MaterialUnit
+        fields = '__all__'
+
+
+class MaterialNameSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = MaterialName
+        fields = '__all__'
+
+
+class MessageTypeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = MessageType
+        fields = '__all__'
+
+
+class FaqSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Faq
+        fields = '__all__'
+
+
+class FaqRatingSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = FaqRating
         fields = '__all__'

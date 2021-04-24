@@ -2,6 +2,7 @@
     <v-sheet
       tile
       color="primary"
+      class="allow-scroll"
     >
       <span class="subtitle-1 whiteText">
           {{ 'Themenauswahl' }}
@@ -52,7 +53,7 @@ export default {
     },
     getSideBarTags() {
       if (this.tags && this.tagCategory) {
-        const sideBarTagCategories = this.tagCategory.filter(item => item.is_header === false);
+        const sideBarTagCategories = this.tagCategory.filter(item => item.id === 9);
         const sideBarTags = this.filterTagByCategory(sideBarTagCategories[0].id);
         return sideBarTags;
       }
@@ -85,3 +86,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.allow-scroll {
+  overflow-y: scroll; /* it works! */
+}
+</style>

@@ -99,14 +99,13 @@ export default {
   data: () => ({
     rules: {},
     getImageUrl: process.env.VUE_APP_API + 'basic/imageupload/', // eslint-disable-line
-    data: {
-      description: '',
-    },
     loading: true,
     valid: true,
     n: 0,
   }),
-
+  props: {
+    data: Object,
+  },
   computed: {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -129,11 +128,6 @@ export default {
     },
   },
 
-  created() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-    }
-  },
 
   methods: {
     prevStep() {
