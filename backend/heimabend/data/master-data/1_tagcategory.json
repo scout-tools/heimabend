@@ -4,11 +4,13 @@
     "pk": 1,
     "fields": {
       "id": 1,
-      "name": "Jahreszeit",
+      "name": "(Jahres-)Zeiten",
       "description": "Beinhaltet die 4 Jahreszeiten",
-      "sorting": 2,
       "is_visible": true,
-      "is_header": true
+      "is_header": true,
+      "sorting": 4,
+      "is_event_overview": 0,
+      "is_mandatory": 1
     }
   },
   {
@@ -18,9 +20,11 @@
       "id": 2,
       "name": "Ort",
       "description": "",
-      "sorting": 1,
       "is_visible": true,
-      "is_header": true
+      "is_header": true,
+      "sorting": 3,
+      "is_event_overview": 1,
+      "is_mandatory": 1
     }
   },
   {
@@ -30,9 +34,11 @@
       "id": 3,
       "name": "Stufe",
       "description": "",
-      "sorting": 3,
       "is_visible": true,
-      "is_header": true
+      "is_header": true,
+      "sorting": 2,
+      "is_event_overview": 0,
+      "is_mandatory": 1
     }
   },
   {
@@ -40,11 +46,13 @@
     "pk": 4,
     "fields": {
       "id": 4,
-      "name": "Typ",
+      "name": "Art",
       "description": "",
-      "sorting": 4,
       "is_visible": true,
-      "is_header": true
+      "is_header": true,
+      "sorting": 1,
+      "is_event_overview": 0,
+      "is_mandatory": 1
     }
   },
   {
@@ -52,11 +60,13 @@
     "pk": 5,
     "fields": {
       "id": 5,
-      "name": "Zusätze",
+      "name": "Aktuelles",
       "description": "",
-      "sorting": 5,
       "is_visible": true,
-      "is_header": true
+      "is_header": true,
+      "sorting": 5,
+      "is_event_overview": 1,
+      "is_mandatory": 0
     }
   },
   {
@@ -64,11 +74,13 @@
     "pk": 6,
     "fields": {
       "id": 9,
-      "name": "Probenordnung",
+      "name": "Themen",
       "description": "",
-      "sorting": 99,
       "is_visible": true,
-      "is_header": false
+      "is_header": false,
+      "sorting": 6,
+      "is_event_overview": 1,
+      "is_mandatory": 0
     }
   },
   {
@@ -78,9 +90,11 @@
       "id": 7,
       "name": "Admin",
       "description": "",
-      "sorting": 66,
       "is_visible": false,
-      "is_header": true
+      "is_header": true,
+      "sorting": 7,
+      "is_event_overview": 0,
+      "is_mandatory": 0
     }
   }
 ]
