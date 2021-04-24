@@ -198,14 +198,14 @@ class StatisticSerializer(serializers.ModelSerializer):
 
 class ImageSerializer(serializers.ModelSerializer):
 
-    class Meta():
+    class Meta:
         model = Image
         fields = '__all__'
 
 
 class MaterialItemSerializer(serializers.ModelSerializer):
 
-    class Meta():
+    class Meta:
         model = MaterialItem
         fields = '__all__'
 
