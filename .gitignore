@@ -24,3 +24,9 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+#python
+*.pyc
+
+#zappa
+zappa_settings.json
