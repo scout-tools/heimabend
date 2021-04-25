@@ -146,7 +146,6 @@ export default {
     loadData(eventId) {
       this.getNextEvents(eventId).then((response) => {
         this.nextEvents = response.data;
-        console.log(this.nextEvents);
       });
     },
   },
