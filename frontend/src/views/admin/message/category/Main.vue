@@ -122,7 +122,6 @@ export default {
       this.saveMessage();
     },
     saveMessage() {
-      console.log(this.data);
       axios
         .post(`${this.API_URL}basic/message/`, {
           createdBy: this.data.createdBy,
