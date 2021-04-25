@@ -2,7 +2,7 @@
 from rest_framework import serializers
 from .models import Tag, Event, Message, Like, TagCategory, Image, MaterialItem, \
     ExperimentItem, Experiment, MaterialUnit, MaterialName, MessageType, \
-    Faq, FaqRating
+    Faq, FaqRating, NextBestHeimabend
 from rest_framework_tracking.models import APIRequestLog
 from rest_framework.serializers import Serializer, FileField
 from django.core.cache import cache
@@ -335,3 +335,25 @@ class FaqRatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = FaqRating
         fields = '__all__'
+
+
+class NextBestHeimabendSerializer(serializers.ModelSerializer):
+
+    event_title = serializers.SerializerMethodField()
+
+    class Meta:
+        model = NextBestHeimabend
+        fields = (
+            'event',
+            'event_score',
+            'id',
+            'score',
+            'event_title',
+        )
+
+    def get_event_title(self, obj):
+        return Event.objects.filter(id=obj.event_score.id).values(
+            'id',
+            'title',
+            'header_image__image'
+        )

@@ -8,6 +8,27 @@
       />
       <v-progress-circular v-if="loading" color="primary" indeterminate />
     </v-row >
+
+    <v-row >
+      <v-card class="mx-auto" max-width="800" justify="center">
+        <v-card-title class="ml-2 pa-0" justify="center">Inspi empfielt außerdem:</v-card-title>
+        <v-slide-group
+          class="pa-0"
+          active-class="success"
+          show-arrows
+        >
+          <v-slide-item v-for="n in nextEvents" :key="n.id" v-slot="{ active, toggle }">
+            <v-card class="ma-4" height="120" width="250">
+              <v-card-subtitle class="whiteText justify-center text-center primary">
+                {{ n.eventTitle[0].title }}
+              </v-card-subtitle>
+              <v-img :src="getImageLink(n.eventTitle)" height="65px"></v-img>
+            </v-card>
+          </v-slide-item>
+        </v-slide-group>
+      </v-card>
+    </v-row >
+
     <v-row align="center" class="ma-5" justify="center">
       <comment-box/>
     </v-row>
@@ -46,12 +67,14 @@
 
 <script>
 import axios from 'axios';
-
+// eslint-disable-next-line
+import { serviceMixin } from '@/mixins/serviceMixin.js';
 // eslint-disable-next-line import/no-unresolved
 import HeimabendCard from '../cards/Heimabend.vue';
 import CommentBox from './CommentBox.vue';
 
 export default {
+  mixins: [serviceMixin],
   components: {
     HeimabendCard,
     CommentBox,
@@ -71,6 +94,13 @@ export default {
     },
   },
   methods: {
+    getImageLink(item) {
+      const imageId = item[0].headerImage_Image;
+      if (imageId && imageId.length) {
+        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${imageId}.default.jpeg`;
+      }
+      return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
+    },
     getUrl() {
       return `https://inspirator.dpbm.de/heimabend/${this.id}/`;
     },
@@ -113,17 +143,25 @@ export default {
       }
       return true;
     },
+    loadData(eventId) {
+      this.getNextEvents(eventId).then((response) => {
+        this.nextEvents = response.data;
+        console.log(this.nextEvents);
+      });
+    },
   },
 
   created() {
     this.getEvent();
     this.$store.commit('setIsSubPage', true);
     this.$store.commit('setDrawer', false);
+    this.loadData(this.id);
   },
   data: () => ({
     API_URL: process.env.VUE_APP_API,
     item: [],
     loading: true,
+    nextEvents: [],
   }),
 };
 </script>

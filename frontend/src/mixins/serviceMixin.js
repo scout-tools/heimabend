@@ -14,6 +14,10 @@ export const serviceMixin = { // eslint-disable-line
       const path = `${process.env.VUE_APP_API}basic/top-views/`;
       return axios.get(path);
     },
+    async getNextEvents(eventId) {
+      const path = `${process.env.VUE_APP_API}basic/next-best-heimabend?event=${eventId}`;
+      return axios.get(path);
+    },
     async getService(messageType) {
       const path = `${process.env.VUE_APP_API}basic/${messageType}/`;
       return axios.get(path);

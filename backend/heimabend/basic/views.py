@@ -16,14 +16,15 @@ from rest_framework.views import APIView
 
 from .models import Tag, Event, Message, Like, TagCategory, Image, \
     MaterialItem, ExperimentItem, Experiment, MaterialUnit, \
-    MaterialName, MessageType, Faq, FaqRating
+    MaterialName, MessageType, Faq, FaqRating, NextBestHeimabend
 from .serializers import TagSerializer, EventSerializer, MessageSerializer, \
     LikeSerializer, HighscoreSerializer, \
     TagCategorySerializer, StatisticSerializer, ImageSerializer, \
     MaterialItemSerializer, ExperimentItemSerializer, ExperimentSerializer, \
     TopViewsSerializer, EventAdminSerializer, EventTimestampSerializer, \
     MaterialUnitSerializer, MaterialNameSerializer, MessageTypeSerializer, \
-    FaqSerializer, FaqRatingSerializer, ExperimentOverviewSerializer
+    FaqSerializer, FaqRatingSerializer, ExperimentOverviewSerializer, \
+    NextBestHeimabendSerializer
 
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -260,7 +261,8 @@ class ExperimentItemViewSet(LoggingMixin, viewsets.ModelViewSet):
                     if (unclear_rate >= 0.3):
                         event = Event.objects.filter(id=event)
                         event.update(is_active=False)
-                        Event.objects.get(id=event).tags.add(Tag.objects.get(id=70))
+                        Event.objects.get(id=event).tags.add(
+                            Tag.objects.get(id=70))
 
         return super().create(request, *args, **kwargs)
 
@@ -293,3 +295,10 @@ class ChangePublishStatus(APIView):
             {"worked": True}
         ]
         return Response(status=200, data=return_data)
+
+
+class NextBestHeimabendViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = NextBestHeimabend.objects.order_by("score").all()
+    serializer_class = NextBestHeimabendSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ('event',)

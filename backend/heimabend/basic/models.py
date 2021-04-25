@@ -213,7 +213,8 @@ class Message(TimeStampMixin):
         serialize=False,
         verbose_name='ID')
     created_by_email = models.CharField(max_length=60, blank=True, null=True)
-    message_type = models.ForeignKey(MessageType, on_delete=models.CASCADE, blank=True, null=True)
+    message_type = models.ForeignKey(
+        MessageType, on_delete=models.CASCADE, blank=True, null=True)
     message_body = models.CharField(max_length=1000)
     event = models.ForeignKey(
         Event, on_delete=models.CASCADE, blank=True, null=True)
@@ -339,6 +340,26 @@ class FaqRating(TimeStampMixin):
 
     def __str__(self):
         return self.faq
+
+    def __repr__(self):
+        return self.__str__()
+
+
+class NextBestHeimabend(TimeStampMixin):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    event = models.ForeignKey(
+        Event, related_name='ref', on_delete=models.CASCADE)
+    event_score = models.ForeignKey(
+        Event, related_name='score', on_delete=models.CASCADE)
+    score = models.DecimalField(
+        max_digits=5, decimal_places=2, blank=True, null=True)
+
+    def __str__(self):
+        return '{} - {}'.format(self.event, self.event_score)
 
     def __repr__(self):
         return self.__str__()
