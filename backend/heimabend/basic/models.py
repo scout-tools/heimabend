@@ -356,7 +356,7 @@ class NextBestHeimabend(TimeStampMixin):
     event_score = models.ForeignKey(
         Event, related_name='score', on_delete=models.CASCADE)
     score = models.DecimalField(
-        max_digits=5, decimal_places=2, blank=True, null=True)
+        max_digits=10, decimal_places=8, blank=True, null=True)
 
     def __str__(self):
         return '{} - {}'.format(self.event, self.event_score)
