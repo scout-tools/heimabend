@@ -212,6 +212,7 @@ export default {
 
   mounted() {
     this.$store.commit('setIsScoringMode', false);
+    this.getAllEventItems();
   },
 
   data: () => ({

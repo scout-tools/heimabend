@@ -102,7 +102,7 @@ export default {
     Footer,
   },
   computed: {
-    ...mapGetters(['searchInput', 'tags', 'isScoringMode', 'headerString', 'isSubPage', 'isDrawer']),
+    ...mapGetters(['searchInput', 'tags', 'isScoringMode', 'headerString', 'isSubPage', 'isDrawer', 'apiIsDown']),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
