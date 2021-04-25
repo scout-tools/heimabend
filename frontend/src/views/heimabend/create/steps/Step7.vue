@@ -66,15 +66,14 @@
 import { mapGetters } from 'vuex';
 
 export default {
-
+  props: {
+    data: Object,
+  },
   data: () => ({
     rules: {
       tags: [
         v => (v && v.length >= 4 && false) || 'Wähle bitte mindestens einen Tag aus.',
       ],
-    },
-    data: {
-      tags: [47, 46, 44, 43, 42, 45, 51, 50],
     },
     valid: true,
     n: 0,
@@ -84,6 +83,7 @@ export default {
       'Pflichtfeld: Für welche Stufen ist deine Idee geeignet?',
       'Pflichtfeld: Um welche Art von Heimabend-Ideen handelt es sich?',
       'Lässt sich deine Heimabend-Idee einem speziellen Thema zuordnen?',
+      'Merkmale für den interen Gebrauch. Nur für Admins.',
     ],
   }),
 
@@ -102,33 +102,25 @@ export default {
     getTopBarTagCategories() {
       if (this.tagCategory) {
         return this.tagCategory
-          .filter(item => item.is_header);
+          .filter(item => item.isHeader);
       }
       return [];
     },
   },
 
-  mounted() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
+  watch: {
+    data() {
       if (this.data.tags && this.data.tags.length) {
         this.data.tags = this.setIntTags(this.data.tags);
       }
-    }
+    },
   },
-
-  created() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-    }
-  },
-
 
   methods: {
     getMandatoryBarTagCategories() {
       if (this.tagCategory) {
         return this.tagCategory
-          .filter(item => item.is_mandatory);
+          .filter(item => item.isMandatory);
       }
       return [];
     },
@@ -140,7 +132,7 @@ export default {
     },
     getRulesByCategory(category) {
       let returnValue = this.rules.tags;
-      if (!category.is_mandatory) {
+      if (!category.isMandatory) {
         return [];
       }
 

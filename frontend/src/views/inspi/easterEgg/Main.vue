@@ -1,6 +1,6 @@
 <template>
   <v-container class="wrap" fluid>
-    <v-img class="wrap2" :src="require('@/assets/inspi.png')" max-width="200" />
+    <v-img class="wrap2" :src="require('@/assets/inspi/inspi_flying.png')" max-width="200" />
     <div class="cloud0"></div>
     <div class="cloud00"></div>
     <div class="cloud1"></div>

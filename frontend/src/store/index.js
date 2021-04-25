@@ -4,7 +4,6 @@ import createPersistedState from 'vuex-persistedstate'; // eslint-disable-line
 
 Vue.use(Vuex);
 
-
 export default new Vuex.Store({
   state: {
     accessToken: null,
@@ -25,6 +24,10 @@ export default new Vuex.Store({
     liked: [],
     pageScrolled: false,
     isScoringMode: false,
+    headerString: 'Inspi',
+    isSubPage: false,
+    isDrawer: false,
+    messageType: [],
     heimabendItems: [],
     scollPosition: 0,
     nextPath: '',
@@ -54,14 +57,8 @@ export default new Vuex.Store({
     withoutCosts(state) {
       return !!state.withoutCosts;
     },
-    isActive(state) {
-      return !!state.isActive;
-    },
     getUsername(state) {
       return state.currentUser;
-    },
-    sorter(state) {
-      return state.sorter;
     },
     filterTags(state) {
       return state.filterTags;
@@ -84,6 +81,18 @@ export default new Vuex.Store({
     isScoringMode(state) {
       return state.isScoringMode;
     },
+    headerString(state) {
+      return state.headerString;
+    },
+    isSubPage(state) {
+      return state.isSubPage;
+    },
+    isDrawer(state) {
+      return state.isDrawer;
+    },
+    messageType(state) {
+      return state.messageType;
+    },
     heimabendItems(state) {
       return state.heimabendItems;
     },
@@ -100,9 +109,6 @@ export default new Vuex.Store({
     },
     apiIsDown(state, status) {
       state.apiIsDown = status;
-    },
-    changeSorter(state, newSorter) {
-      state.sorter = newSorter;
     },
     setTags(state, newTags) {
       state.tags = newTags;
@@ -140,12 +146,6 @@ export default new Vuex.Store({
     setWithoutCosts(state, value) {
       state.withoutCosts = value;
     },
-    toggleIsActive(state) {
-      state.isActive = !state.isActive;
-    },
-    enableIsActive(state) {
-      state.isActive = true;
-    },
     setHeimabendCounter(state, payload) {
       state.heimabendCounter = payload;
     },
@@ -160,7 +160,6 @@ export default new Vuex.Store({
       state.searchInput = '';
       state.isPrepairationNeeded = false;
       state.withoutCosts = false;
-      state.isActive = true;
       state.filterTags = [];
       state.mandatoryFilter = [];
     },
@@ -185,6 +184,21 @@ export default new Vuex.Store({
     setIsScoringMode(state, isScoringMode) {
       state.isScoringMode = isScoringMode;
     },
+    setHeaderString(state, headerString) {
+      state.headerString = headerString;
+    },
+    setIsSubPage(state, isSubPage) {
+      state.isSubPage = isSubPage;
+    },
+    setDrawer(state, isDrawer) {
+      state.isDrawer = isDrawer;
+    },
+    toogleDrawer(state) {
+      state.isDrawer = !state.isDrawer;
+    },
+    setMessageType(state, messageType) {
+      state.messageType = messageType;
+    },
     extendHeimabendItems(state, newHeimabendItems) {
       state.heimabendItems = state.heimabendItems.concat(newHeimabendItems);
     },
@@ -201,7 +215,6 @@ export default new Vuex.Store({
       commit('setCurrentUser', null);
     },
     resetFilters({ commit }) {
-      commit('enableIsActive');
       commit('changeMandatoryFilter', []);
       commit('changeFilterTags', []);
       commit('setSearchInput', '');

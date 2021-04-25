@@ -6,7 +6,7 @@
     fixed>
     <v-container fluid>
       <v-row>
-        <v-col cols="7" class="py-4 text-left">
+        <v-col cols="9" class="text-left">
           <active-filter/>
         </v-col>
 
@@ -22,9 +22,6 @@
             </v-icon>
           </v-btn>
         </v-col>
-        <v-col cols="2" class="pr-5 pl-2">
-          <sorter/>
-        </v-col>
         <v-col cols="2" v-if="!isMobil"></v-col>
       </v-row>
     </v-container>
@@ -36,12 +33,10 @@
 <script>
 import { mapGetters } from 'vuex';
 import ActiveFilter from '@/views/components/button/ActiveFilter.vue'; //eslint-disable-line
-import Sorter from '@/views/components/dropdown/Sorter.vue'; //eslint-disable-line
 
 export default {
   components: {
     ActiveFilter,
-    Sorter,
   },
 
   methods: {

@@ -12,7 +12,7 @@
         <v-combobox
           outlined
           autofocus
-          v-model="data.material_list"
+          v-model="data.materialList"
           label="Material Liste"
           multiple
           chips
@@ -51,12 +51,10 @@ export default {
     n: 0,
     dialog: false,
     valid: true,
-    data: {
-      materialArray: [],
-      material_list: [],
-    },
   }),
-
+  props: {
+    data: Object,
+  },
   computed: {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -67,32 +65,54 @@ export default {
     isUpdate() {
       return !!this.$route.params.id;
     },
+    isLargeProject() {
+      return this.data.executionTimeRating === 0;
+    },
+    largeProjectButtomColor() {
+      return this.isLargeProject ? 'limegreen' : 'lightgrey';
+    },
+    largeProjectIconColor() {
+      return this.isLargeProject ? 'black' : 'grey';
+    },
+    isWithoutCosts() {
+      return this.data.costsRating === 0;
+    },
+    withoutCostsButtomColor() {
+      return this.isWithoutCosts ? 'limegreen' : 'lightgrey';
+    },
+    withoutCostsIconColor() {
+      return this.isWithoutCosts ? 'red darken-2' : 'grey';
+    },
+    getClassForTextContentSteps() {
+      return this.isMobil ? 'mx-0 px-1' : '';
+    },
+    getSideBarTags() {
+      if (this.tags && this.tagCategory) {
+        const sideBarTagCategories = this.tagCategory.filter(item => item.item === 9);
+        const sideBarTags = this.filterTagByCategory(sideBarTagCategories[0].id);
+        return sideBarTags;
+      }
+      return [];
+    },
   },
 
-  mounted() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-    }
-  },
-
-  created() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-      if (this.data.material_list && this.data.material_list.length === 0) {
+  watch: {
+    data() {
+      if (this.data.materialList && this.data.materialList.length === 0) {
         this.convertMaterialString(this.data.material);
       }
-    }
+    },
   },
 
   methods: {
     convertMaterialString(array) {
       if (array && array.length) {
-        this.data.material_list = array.split(',');
+        this.data.materialList = array.split(',');
       }
     },
     remove(item) {
-      this.data.material_list.splice(this.data.material_list.indexOf(item), 1);
-      this.data.material_list = [...this.data.material_list];
+      this.data.materialList.splice(this.data.materialList.indexOf(item), 1);
+      this.data.materialList = [...this.data.materialList];
     },
     prevStep() {
       this.$emit('prevStep');
@@ -105,7 +125,7 @@ export default {
     },
     getData() {
       return {
-        material_list: this.data.material_list,
+        materialList: this.data.materialList,
       };
     },
   },

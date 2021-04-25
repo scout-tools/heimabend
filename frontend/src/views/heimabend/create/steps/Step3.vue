@@ -1,6 +1,6 @@
 <template>
   <v-form ref="form3">
-    <v-container>
+    <v-container fluid class="ma-3">
       <v-row class="mt-6 ml-4">
         <span class="subtitle-1">
           Hier kannst du ein Titelbild für deinen Heimabend einfügen.
@@ -35,6 +35,42 @@
           >
           </v-img>
       </v-row>
+      <v-row>
+        <v-text-field
+          v-model="data.id"
+          hint="This field uses counter prop"
+          label="Foto-ID"
+          disabled
+        ></v-text-field>
+      </v-row>
+      <v-row>
+        <v-text-field
+          v-model="data.imageDescription"
+          label="Bild Beschreibung"
+        ></v-text-field>
+      </v-row>
+      <v-row>
+        <v-text-field
+          v-model="data.photographerName"
+          label="Fotograf_in"
+        ></v-text-field>
+      </v-row>
+      <v-row>
+        <v-checkbox
+          v-model="data.privacyConsent"
+          color="red"
+          label="Datenschutz"
+          required
+        ></v-checkbox>
+      </v-row>
+      <v-row>
+        <v-checkbox
+          v-model="data.isOpenSource"
+          color="red"
+          label="Bildrechte"
+          required
+        ></v-checkbox>
+      </v-row>
       <v-row class="ma-3" justify="center">
         <v-btn class="mr-5" @click="prevStep()"> Zurück </v-btn>
 
@@ -61,12 +97,10 @@ export default {
     cropImg: '',
     visibleComponent: 'cropperjs',
     showCropper: false,
-    data: {
-      imageData: null,
-      imageLink: null,
-    },
   }),
-
+  props: {
+    data: Object,
+  },
   computed: {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -77,11 +111,6 @@ export default {
     isUpdate() {
       return !!this.$route.params.id;
     },
-  },
-  created() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-    }
   },
 
   methods: {
@@ -101,12 +130,13 @@ export default {
         const formData = new FormData();
         canvas.toBlob((blob) => {
           formData.append('image', blob, 'userpic.jpeg');
-          formData.append('description', '123');
+          formData.append('is_open_source', me.data.isOpenSource);
+          formData.append('privacy_consent', me.data.privacyConsent);
+          formData.append('photographer_name', me.data.photographerName);
+          formData.append('description', me.data.imageDescription);
 
           this.postUpload(formData).then((response) => {
-            me.data.imageLink = `${process.env.VUE_APP_API.slice(0, -1)}${
-              response.data.image
-            }`;
+            me.data.id = response.data.id;
           });
         }, 'image/jpeg');
       }
@@ -120,7 +150,7 @@ export default {
     },
     getData() {
       return {
-        imageLink: this.data.imageLink,
+        imageId: this.data.id,
       };
     },
     flipX() {

@@ -1,19 +1,19 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Message from '../views/message/Main.vue';
-import Heimabend from '../views/heimabend/Main.vue';
-import AboutProject from '../views/aboutProject/Main.vue';
-import Faq from '../views/aboutProject/Faq.vue';
-import Impressum from '../views/impressum/Main.vue';
-import Tags from '../views/tags/Main.vue';
-import TagCategory from '../views/tags/tagCategory/Main.vue';
-import HeimabendCreate from '../views/heimabend/create/Main.vue';
-import MessageOverview from '../views/message/Overview.vue';
-import HeimabendDetails from '../views/heimabend/details/Main.vue';
-import RankingOverview from '../views/ranking/Main.vue';
-import ScoringStart from '../views/scoring/Main.vue';
-import ScoringTest from '../views/scoring/Test.vue';
-import EasterEgg from '../views/inspi/easterEgg/Main.vue';
+import Inspirations from '@/views/inspi/inspirations/Main.vue';
+
+import Message from '@/views/footer/message/Main.vue';
+import Heimabend from '@/views/heimabend/Main.vue';
+import AboutProject from '@/views/footer/aboutProject/Main.vue';
+import Faq from '@/views/footer/aboutProject/Faq.vue';
+import Impressum from '@/views/footer/impressum/Main.vue';
+import HeimabendCreate from '@/views/heimabend/create/Main.vue';
+import HeimabendDetails from '@/views/heimabend/details/Main.vue';
+import RankingOverview from '@/views/inspi/ranking/Main.vue';
+import ScoringStart from '@/views/inspi/scoring/Main.vue';
+import ScoringTest from '@/views/inspi/scoring/Test.vue';
+import EasterEgg from '@/views/inspi/easterEgg/Main.vue';
+import Admin from '@/views/admin/Main.vue';
 
 Vue.use(VueRouter);
 
@@ -39,24 +39,14 @@ const routes = [
     component: Impressum,
   },
   {
+    path: '/datenschutz',
+    name: 'datenschutz',
+    component: Impressum,
+  },
+  {
     path: '/message',
     name: 'message',
     component: Message,
-  },
-  {
-    path: '/meassage/overview',
-    name: 'messageOverview',
-    component: MessageOverview,
-  },
-  {
-    path: '/tags',
-    name: 'tags',
-    component: Tags,
-  },
-  {
-    path: '/tagCategory',
-    name: 'tagCategory',
-    component: TagCategory,
   },
   {
     path: '/heimabend/create/',
@@ -93,6 +83,16 @@ const routes = [
     path: '/inspi/easter-egg',
     name: 'inspi-easter-egg',
     component: EasterEgg,
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: Admin,
+  },
+  {
+    path: '/inspirations',
+    name: 'inspirations',
+    component: Inspirations,
   },
 ];
 

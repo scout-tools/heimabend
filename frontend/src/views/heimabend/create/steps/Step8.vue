@@ -33,13 +33,6 @@
       >
       </v-text-field>
     </v-row>
-    <v-row v-if="isAuthenticated" class="ma-3">
-      <v-switch
-        v-model="data.isActive"
-        color="primary"
-        label="Dieser Heimabend ist öffentlich sichtbar.">
-      </v-switch>
-    </v-row>
     <v-row class="ma-3">
       <v-checkbox
         color="green"
@@ -101,13 +94,10 @@ export default {
         v => (v && v.length >= 3) || 'Der Name braucht mindestens drei Zeichen',
       ],
     },
-    data: {
-      createdBy: null,
-      createdByEmail: '',
-      isActive: false,
-    },
   }),
-
+  props: {
+    data: Object,
+  },
   computed: {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -137,7 +127,6 @@ export default {
       return {
         createdBy: this.data.createdBy,
         createdByEmail: this.data.createdByEmail,
-        isActive: this.data.isActive,
       };
     },
   },

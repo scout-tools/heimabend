@@ -77,7 +77,9 @@ export default {
     valid: true,
     n: 0,
   }),
-
+  props: {
+    data: Object,
+  },
   computed: {
     ...mapGetters([
       'tags',
@@ -98,13 +100,13 @@ export default {
     getTopBarTagCategories() {
       if (this.tagCategory) {
         return this.tagCategory
-          .filter(item => item.is_header);
+          .filter(item => item.isHeader);
       }
       return [];
     },
     getSideBarTags() {
       if (this.tags && this.tagCategory) {
-        const sideBarTagCategories = this.tagCategory.filter(item => item.is_header === false);
+        const sideBarTagCategories = this.tagCategory.filter(item => item.id === 9);
         const sideBarTags = this.filterTagByCategory(sideBarTagCategories[0].id);
         return sideBarTags;
       }
@@ -112,19 +114,6 @@ export default {
     },
 
   },
-
-  mounted() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-    }
-  },
-
-  created() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-    }
-  },
-
 
   methods: {
     filterTagByCategory(categoryId) {
@@ -147,7 +136,7 @@ export default {
     getMandatoryBarTagCategories() {
       if (this.tagCategory) {
         return this.tagCategory
-          .filter(item => item.is_mandatory);
+          .filter(item => item.isMandatory);
       }
       return [];
     },
@@ -159,7 +148,7 @@ export default {
     },
     getRulesByCategory(category) {
       let returnValue = this.rules.tags;
-      if (!category.is_mandatory) {
+      if (!category.isMandatory) {
         return [];
       }
 

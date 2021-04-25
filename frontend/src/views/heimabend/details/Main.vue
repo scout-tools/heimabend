@@ -1,49 +1,46 @@
 <template>
-<div>
-  <div class="col-sm-12">
-    <heimabend-card
-      @refresh="refresh()"
-      :items="getItem"
-      :isDetailsView="true"
-    />
-    <v-progress-circular
-      v-if="loading"
-      color="primary"
-      indeterminate
-    />
-    <v-container class="mx-auto ma-5">
-      <v-row justify="center">
-        <p :class="textColor">Diesen Heimabend versenden mit: </p>
-      </v-row>
-      <v-row justify="center">
-        <social-sharing
-          :url="getUrl()"
-          title="Heimabend Inspirator"
-          :description="getDescription()"
-          quote="Der Inspirator ist eine Seite für Pfadfinder Heimabende."
-          hashtags="pfadfinder, heimabend, Gruppenstude"
-          v-cloak
-          inline-template>
-            <div class="container">
-                <network network="email" id="email">
-                  <font-awesome-icon :icon="['fas', 'at']" />
-                </network>
-                <network network="facebook" id="facebook">
-                  <font-awesome-icon :icon="['fab', 'facebook']" />
-                </network>
-                <network network="whatsapp" id="whatsapp">
-                  <font-awesome-icon :icon="['fab', 'whatsapp']" />
-                </network>
-                <network network="telegram" id="telegram">
-                  <font-awesome-icon :icon="['fab', 'telegram']" />
-                </network>
-            </div>
-          </social-sharing>
-        </v-row>
-      </v-container>
-    <span v-if="!isMobil" class="bg"/>
-  </div>
-</div>
+  <v-container fluid class="ma-5">
+    <v-row align="center" justify="center">
+      <heimabend-card
+        @refresh="refresh()"
+        :items="getItem"
+        :isDetailsView="true"
+      />
+      <v-progress-circular v-if="loading" color="primary" indeterminate />
+    </v-row >
+    <v-row align="center" class="ma-5" justify="center">
+      <comment-box/>
+    </v-row>
+    <v-row justify="center">
+      <p :class="textColor">Diesen Heimabend versenden mit:</p>
+    </v-row>
+    <v-row justify="center">
+      <social-sharing
+        :url="getUrl()"
+        title="Heimabend Inspirator"
+        :description="getDescription()"
+        quote="Der Inspirator ist eine Seite für Pfadfinder Heimabende."
+        hashtags="pfadfinder, heimabend, Gruppenstude"
+        v-cloak
+        inline-template
+      >
+        <div class="container">
+          <network network="email" id="email">
+            <font-awesome-icon :icon="['fas', 'at']" />
+          </network>
+          <network network="facebook" id="facebook">
+            <font-awesome-icon :icon="['fab', 'facebook']" />
+          </network>
+          <network network="whatsapp" id="whatsapp">
+            <font-awesome-icon :icon="['fab', 'whatsapp']" />
+          </network>
+          <network network="telegram" id="telegram">
+            <font-awesome-icon :icon="['fab', 'telegram']" />
+          </network>
+        </div>
+      </social-sharing>
+    </v-row>
+  </v-container>
 </template>
 
 
@@ -52,10 +49,12 @@ import axios from 'axios';
 
 // eslint-disable-next-line import/no-unresolved
 import HeimabendCard from '../cards/Heimabend.vue';
+import CommentBox from './CommentBox.vue';
 
 export default {
   components: {
     HeimabendCard,
+    CommentBox,
   },
   computed: {
     textColor() {
@@ -85,7 +84,8 @@ export default {
     getEvent() {
       const path = `${this.API_URL}basic/event/${this.id}/`;
       this.loading = true;
-      axios.get(path)
+      axios
+        .get(path)
         .then((res) => {
           this.item = [res.data];
           this.loading = false;
@@ -100,10 +100,25 @@ export default {
     onResetClick() {
       this.$store.commit('clearFilters');
     },
+    isTagMatchToEvent(item) {
+      const eventTagArray = [];
+      item.tags.forEach((tag) => {
+        eventTagArray.push(tag); // eslint-disable-line
+      });
+      if (this.getFilterTags && this.getFilterTags.length) {
+        const matches = eventTagArray.filter((element) => // eslint-disable-line
+          this.getFilterTags.includes(element) // eslint-disable-line
+        ); // eslint-disable-line
+        return !!matches.length;
+      }
+      return true;
+    },
   },
 
   created() {
     this.getEvent();
+    this.$store.commit('setIsSubPage', true);
+    this.$store.commit('setDrawer', false);
   },
   data: () => ({
     API_URL: process.env.VUE_APP_API,
@@ -114,12 +129,12 @@ export default {
 </script>
 
 <style>
-#facebook{
+#facebook {
   cursor: pointer;
   margin: 10px;
   padding: 5px;
   color: white;
-  background-color: rgba(10, 151, 245, 0.829);;
+  background-color: rgba(10, 151, 245, 0.829);
   font-size: 32px;
   border: white;
   border-style: solid;
@@ -141,8 +156,8 @@ export default {
   cursor: pointer;
   margin: 10px;
   padding: 5px;
-  color: white;;
-  background-color: rgba(5, 173, 89, 0.856);;
+  color: white;
+  background-color: rgba(5, 173, 89, 0.856);
   font-size: 32px;
   border: white;
   border-style: solid;
