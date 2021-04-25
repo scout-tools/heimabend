@@ -188,14 +188,14 @@ class StatisticSerializer(serializers.ModelSerializer):
 
 class ImageSerializer(serializers.ModelSerializer):
 
-    class Meta():
+    class Meta:
         model = Image
         fields = ('image', 'description', 'uploaded_at')
 
 
 class MaterialSerializer(serializers.ModelSerializer):
 
-    class Meta():
+    class Meta:
         model = Material
         fields = ('id', 'name', 'description')
 
