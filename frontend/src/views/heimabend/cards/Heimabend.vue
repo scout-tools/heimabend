@@ -586,7 +586,7 @@ export default {
     },
     getImageLink(item) {
       if (item.headerImage) {
-        return `${process.env.VUE_APP_API}media/images/${item.headerImage}.default.jpeg`;
+        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${item.headerImage}.default.jpeg`;
       }
       return null;
     },
