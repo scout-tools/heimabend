@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 <template>
-  <div>
+  <v-container fluid>
+    <v-row v-if="!loading">
     <heimabend-card
       ref="eventCards"
       @refresh="refresh()"
@@ -10,8 +11,6 @@
       :isMobil="isMobil"
     />
     <v-container v-if="!heimabendItems.length && !loading">
-      <v-row justify="center">
-      </v-row>
       <v-row justify="center">
         <v-img
           :src="require('@/assets/inspi/inspi_confused.png')"
@@ -29,7 +28,6 @@
         </v-btn>
       </v-row>
     </v-container>
-    <v-progress-circular v-if="loading" color="primary" indeterminate />
     <v-snackbar v-model="showSuccess" color="success" top :timeout="timeout">
       Vielen Dank für deine Heimabend-Idee! <br />
       <br />
@@ -40,14 +38,23 @@
       E-Mail-Adresse bei dir. <br />
       Wenn du Fragen an uns hast, nutze gerne das Kontaktformular. <br />
     </v-snackbar>
-    <!-- <v-btn
-      class="ma-10"
-      @click="loadMore()"
-    >
-      Mehr laden
-    </v-btn> -->
-    <span v-if="!isMobil" class="bg" />
-  </div>
+    </v-row>
+    <v-row class="mt-10" align="center" justify="center" v-else>
+      <v-card flat >
+        <div class="text-center ma-5">
+          <p> Lade Daten ...</p>
+          <v-progress-circular
+            :size="80"
+            :width="10"
+            class="ma-5"
+            color="primary"
+            indeterminate
+          ></v-progress-circular>
+          <p> Bitte hab etwas Geduld.</p>
+        </div>
+      </v-card>
+    </v-row>
+  </v-container>
 </template>
 
 
@@ -165,6 +172,9 @@ export default {
           this.isLoadingMore = false;
           // eslint-disable-next-line no-undef
           this.callTrackItems(res.data.results);
+          this.getTags();
+          this.getTagCategory();
+          this.getMessageType();
         })
         .catch(() => {
           this.loading = false;
@@ -201,6 +211,45 @@ export default {
     },
     resetAllFilter() {
       this.$store.commit('clearFilters');
+    },
+    getTags() {
+      const path = `${
+        this.API_URL
+      }basic/tag/?&timestamp=${new Date().getTime()}`;
+      axios
+        .get(path)
+        .then((res) => {
+          this.$store.commit('setTags', res.data);
+        })
+        .catch(() => {
+          this.showError = true;
+        });
+    },
+    getTagCategory() {
+      const path = `${
+        this.API_URL
+      }basic/tag-category/?&timestamp=${new Date().getTime()}`;
+      axios
+        .get(path)
+        .then((res) => {
+          this.$store.commit('setTagCategory', res.data);
+        })
+        .catch(() => {
+          this.showError = true;
+        });
+    },
+    getMessageType() {
+      const path = `${
+        this.API_URL
+      }basic/message-type/?&timestamp=${new Date().getTime()}`;
+      axios
+        .get(path)
+        .then((res) => {
+          this.$store.commit('setMessageType', res.data);
+        })
+        .catch(() => {
+          this.showError = true;
+        });
     },
   },
 

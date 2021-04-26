@@ -10,6 +10,7 @@
       "is_header": true,
       "sorting": 4,
       "is_event_overview": 0,
+      "icon": "mdi-weather-pouring",
       "is_mandatory": 1
     }
   },
@@ -24,6 +25,7 @@
       "is_header": true,
       "sorting": 3,
       "is_event_overview": 1,
+      "icon": "mdi-home",
       "is_mandatory": 1
     }
   },
@@ -38,6 +40,7 @@
       "is_header": true,
       "sorting": 2,
       "is_event_overview": 0,
+      "icon": "mdi-account-group",
       "is_mandatory": 1
     }
   },
@@ -52,6 +55,7 @@
       "is_header": true,
       "sorting": 1,
       "is_event_overview": 0,
+      "icon": "mdi-format-list-text",
       "is_mandatory": 1
     }
   },
@@ -66,6 +70,7 @@
       "is_header": true,
       "sorting": 5,
       "is_event_overview": 1,
+      "icon": "mdi-newspaper",
       "is_mandatory": 0
     }
   },
@@ -80,6 +85,7 @@
       "is_header": false,
       "sorting": 6,
       "is_event_overview": 1,
+      "icon": "mdi-soccer",
       "is_mandatory": 0
     }
   },
@@ -94,6 +100,7 @@
       "is_header": true,
       "sorting": 7,
       "is_event_overview": 0,
+      "icon": "mdi-key-variant",
       "is_mandatory": 0
     }
   }

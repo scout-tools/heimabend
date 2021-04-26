@@ -10,14 +10,12 @@ from django.db.models import Sum
 
 
 class TagSerializer(serializers.ModelSerializer):
-    tag_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Tag
         fields = (
             'id',
             'name',
-            'tag_count',
             'description',
             'color',
             'icon',
@@ -26,18 +24,8 @@ class TagSerializer(serializers.ModelSerializer):
             'sorting'
         )
 
-    def get_tag_count(self, obj):
-        tag_id = 'tag_' + str(obj.id)
-        tag_count = cache.get(tag_id)
-        if tag_count is None:
-            tag_count = Event.objects.filter(
-                tags__id=obj.id).distinct().count()
-            cache.set(tag_id, tag_count, timeout=24 * 60 * 60)
-        return tag_count
-
 
 class TagCategorySerializer(serializers.ModelSerializer):
-    tag_category_count = serializers.SerializerMethodField()
 
     class Meta:
         model = TagCategory
@@ -47,21 +35,11 @@ class TagCategorySerializer(serializers.ModelSerializer):
             'description',
             'sorting',
             'icon',
-            'tag_category_count',
             'is_visible',
             'is_header',
             'is_mandatory',
             'is_event_overview'
         )
-
-    def get_tag_category_count(self, obj):
-        tag_id = 'tag_category' + str(obj.id)
-        tag_count = cache.get(tag_id)
-        if tag_count is None:
-            tag_count = Tag.objects.filter(
-                category_id=obj.id).distinct().count()
-            cache.set(tag_id, tag_count, timeout=24 * 60 * 60)
-        return tag_count
 
 
 class LikeSerializer(serializers.ModelSerializer):

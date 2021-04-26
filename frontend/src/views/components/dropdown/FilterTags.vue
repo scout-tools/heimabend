@@ -12,7 +12,6 @@
       single-line
       solo-inverted
       :prepend-inner-icon="category.icon"
-      color="green"
       @change="onFilterChanged"
     >
       <template v-slot:selection="{ item, index }">

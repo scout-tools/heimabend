@@ -24,15 +24,16 @@
         </v-tooltip>
       </router-link>
       <h1
-        v-if="!isScoringMode && !isSubPage && !isMobil"
+        v-if="!isScoringMode && !isSubPage"
         class="title hand-cursor ml-3 mr-5"
         @click="onHeaderClick()"
       >
-      <span class="font-weight-thin">
+      <span v-if="!isMobil" class="font-weight-thin">
         Heimabend&nbsp;
       </span>
         <span class="font-weight-light">
-          <b class="font-weight-black">Inspi</b>rator
+          <b class="font-weight-black">Inspi</b>
+          <span v-if="!isMobil">rator</span>
         </span>
       </h1>
       <v-text-field
@@ -83,7 +84,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { mapGetters } from 'vuex';
 
 import Footer from '@/components/navigation/Footer.vue';
@@ -151,45 +151,6 @@ export default {
         this.$store.commit('toogleDrawer');
       }
     },
-    getTags() {
-      const path = `${
-        this.API_URL
-      }basic/tag/?&timestamp=${new Date().getTime()}`;
-      axios
-        .get(path)
-        .then((res) => {
-          this.$store.commit('setTags', res.data);
-        })
-        .catch(() => {
-          this.showError = true;
-        });
-    },
-    getTagCategory() {
-      const path = `${
-        this.API_URL
-      }basic/tag-category/?&timestamp=${new Date().getTime()}`;
-      axios
-        .get(path)
-        .then((res) => {
-          this.$store.commit('setTagCategory', res.data);
-        })
-        .catch(() => {
-          this.showError = true;
-        });
-    },
-    getMessageType() {
-      const path = `${
-        this.API_URL
-      }basic/message-type/?&timestamp=${new Date().getTime()}`;
-      axios
-        .get(path)
-        .then((res) => {
-          this.$store.commit('setMessageType', res.data);
-        })
-        .catch(() => {
-          this.showError = true;
-        });
-    },
     onHeaderClick() {
       this.$router.push({ name: 'overview' });
     },
@@ -204,9 +165,6 @@ export default {
     },
   },
   created() {
-    this.getTags();
-    this.getTagCategory();
-    this.getMessageType();
     this.$store.dispatch('resetFilters');
   },
   data: () => ({
