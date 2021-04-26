@@ -117,7 +117,7 @@ class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
     filterset_class = EventFilter
     ordering = ['-created_at']
     ordering_fields = ['-created_at', 'title', '-like_score']
-    search_fields = ['title', 'description', 'material']
+    search_fields = ['title', 'description']
     pagination_class = EventPagination
 
     def get_queryset(self):
