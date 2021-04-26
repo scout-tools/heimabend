@@ -1,11 +1,11 @@
 <template>
-  <v-expansion-panels style="maxwidth: 700px">
+  <v-expansion-panels>
     <v-expansion-panel>
-      <v-expansion-panel-header align="center" justify="center">
+      <v-expansion-panel-header color="#F6F6F6" align="center" justify="center">
         Kommentar oder Vorschlag schreiben
       </v-expansion-panel-header>
-      <v-expansion-panel-content>
-        <message-form v-model="data" />
+      <v-expansion-panel-content color="#F6F6F6">
+        <message-form v-model="data"  color="#F6F6F6"/>
         <v-btn class="mr-4" color="primary" @click="submit"> Absenden </v-btn>
       </v-expansion-panel-content>
     </v-expansion-panel>
@@ -33,6 +33,9 @@ export default {
   }),
 
   methods: {
+    getMaxWidth() {
+      return '900';
+    },
     submit() {
       this.saveMessage();
     },
@@ -62,3 +65,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.v-expansion-panel {
+    max-width: 900px;
+}
+</style>

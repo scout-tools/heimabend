@@ -1,25 +1,34 @@
 <template>
-  <v-container fluid class="ma-5">
-    <v-row align="center" justify="center">
-      <heimabend-card
-        @refresh="refresh()"
-        :items="getItem"
-        :isDetailsView="true"
-      />
-      <v-progress-circular v-if="loading" color="primary" indeterminate />
-    </v-row >
+  <v-container fluid class="ma-5" :max-width="getMaxWidth()">
+    <v-row :max-width="getMaxWidth()">
+      <v-card color="#F6F6F6"
+        class="mx-auto" justify="center" :max-width="getMaxWidth()">
+        <v-card-title class="ml-2 mt-2 pa-0" justify="center">
+        <img
+          :src="require('@/assets/inspi/inspi_flying.png')"
+          class="mr-2"
+          height="50"
+          alt="Bild von Inspi"
+        />
+          Meine Empfehlungen:
 
-    <v-row >
-      <v-card class="mx-auto" max-width="800" justify="center">
-        <v-card-title class="ml-2 pa-0" justify="center">Inspi empfielt außerdem:</v-card-title>
-        <v-slide-group
-          class="pa-0"
-          active-class="success"
-          show-arrows
+        </v-card-title
         >
-          <v-slide-item v-for="n in nextEvents" :key="n.id" v-slot="{ active, toggle }">
-            <v-card class="ma-4" height="120" width="250">
-              <v-card-subtitle class="whiteText justify-center text-center primary">
+        <v-slide-group class="pa-0" active-class="success" show-arrows>
+          <v-slide-item
+            v-for="n in nextEvents"
+            :key="n.id"
+            v-slot="{ active, toggle }"
+          >
+            <v-card
+              class="ma-4"
+              height="120"
+              width="250"
+              @click="openViewNewTab(n.eventTitle[0].id)"
+            >
+              <v-card-subtitle
+                class="whiteText justify-center text-center primary"
+              >
                 {{ n.eventTitle[0].title }}
               </v-card-subtitle>
               <v-img :src="getImageLink(n.eventTitle)" height="65px"></v-img>
@@ -27,10 +36,18 @@
           </v-slide-item>
         </v-slide-group>
       </v-card>
-    </v-row >
+    </v-row>
+    <v-row align="center" justify="center" :max-width="getMaxWidth()">
+      <heimabend-card
+        @refresh="refresh()"
+        :items="getItem"
+        :isDetailsView="true"
+      />
+      <v-progress-circular v-if="loading" color="primary" indeterminate />
+    </v-row>
 
-    <v-row align="center" class="ma-5" justify="center">
-      <comment-box/>
+    <v-row align="center" class="ma-5" justify="center" :max-width="getMaxWidth()">
+      <comment-box color="#F6F6F6" :max-width="getMaxWidth()"/>
     </v-row>
     <v-row justify="center">
       <p :class="textColor">Diesen Heimabend versenden mit:</p>
@@ -94,6 +111,9 @@ export default {
     },
   },
   methods: {
+    getMaxWidth() {
+      return '900';
+    },
     getImageLink(item) {
       const imageId = item[0].headerImage_Image;
       if (imageId && imageId.length) {
@@ -110,6 +130,13 @@ export default {
     refresh() {
       this.item = [];
       this.getEvent();
+    },
+    openViewNewTab(id) {
+      const routeData = this.$router.resolve({
+        name: 'heimabendDetails',
+        params: { id },
+      });
+      window.open(routeData.href, '_blank').focus();
     },
     getEvent() {
       const path = `${this.API_URL}basic/event/${this.id}/`;
@@ -136,8 +163,10 @@ export default {
         eventTagArray.push(tag); // eslint-disable-line
       });
       if (this.getFilterTags && this.getFilterTags.length) {
-        const matches = eventTagArray.filter((element) => // eslint-disable-line
-          this.getFilterTags.includes(element) // eslint-disable-line
+        const matches = eventTagArray.filter(
+          ( // eslint-disable-line
+            element // eslint-disable-line
+          ) => this.getFilterTags.includes(element) // eslint-disable-line
         ); // eslint-disable-line
         return !!matches.length;
       }

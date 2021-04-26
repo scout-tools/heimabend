@@ -3,13 +3,12 @@
     <v-row no-gutters>
       <v-col :cols="getMainCols">
         <v-spacer class="ml-8" />
-        <h2 class="deinHeimabendSpan" :class="yourHeimabendSpan()">
+        <h2 class="deinHeimabendSpan" v-if="!isDetailsView" :class="yourHeimabendSpan()">
           {{ getHeaderText(items) }}
         </h2>
         <v-spacer />
         <v-card
           :max-width="getMaxWidth()"
-          elevation="30"
           class="mx-auto ma-3 mb-10 test-color"
           :style="{ transitionDelay: delay }"
           v-for="(item, index) in items"

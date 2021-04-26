@@ -140,8 +140,9 @@ export default {
     refresh() {
       if (
         this.saveFilterLastFilter.toString() !== this.axiosParams.toString()
+        && !this.isFirstEventsLoaded
       ) {
-        this.getAllEventItems();
+        this.getMoreItems();
         this.saveFilterLastFilter = this.axiosParams;
       }
       this.$store.commit('setIsScoringMode', false);
@@ -150,7 +151,6 @@ export default {
     getAllEventItems() {
       const path = `${this.API_URL}basic/event/`;
       this.loading = true;
-
       this.isFirstEventsLoaded = true;
       axios
         .get(path, {
@@ -212,7 +212,9 @@ export default {
 
   mounted() {
     this.$store.commit('setIsScoringMode', false);
-    this.getAllEventItems();
+    if (!this.nextPath) {
+      this.getAllEventItems();
+    }
   },
 
   data: () => ({
