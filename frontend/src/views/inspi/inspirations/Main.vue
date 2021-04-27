@@ -13,7 +13,7 @@
           <v-card-subtitle class="whiteText justify-center text-center primary">
             {{ n.title }}
           </v-card-subtitle>
-          <v-img :src="n.imageLink" height="70px"></v-img>
+          <v-img :src="getImageLink(n)" height="70px"></v-img>
         </v-card>
       </v-slide-item>
     </v-slide-group>
@@ -34,7 +34,7 @@
           <v-card-subtitle class="whiteText justify-center text-center primary">
             {{ n.title }}
           </v-card-subtitle>
-          <v-img :src="n.imageLink" height="70px"></v-img>
+          <v-img :src="getImageLink(n)" height="70px"></v-img>
         </v-card>
       </v-slide-item>
     </v-slide-group>
@@ -55,7 +55,7 @@
           <v-card-subtitle class="whiteText justify-center text-center primary">
             {{ n.title }}
           </v-card-subtitle>
-          <v-img :src="n.imageLink" height="70px"></v-img>
+          <v-img :src="getImageLink(n)" height="70px"></v-img>
         </v-card>
       </v-slide-item>
     </v-slide-group>
@@ -76,7 +76,7 @@
           <v-card-subtitle class="whiteText justify-center text-center primary">
             {{ n.title }}
           </v-card-subtitle>
-          <v-img :src="n.imageLink" height="70px"></v-img>
+          <v-img :src="getImageLink(n)" height="70px"></v-img>
         </v-card>
       </v-slide-item>
     </v-slide-group>
@@ -95,6 +95,12 @@ export default {
     data: [],
   }),
   methods: {
+    getImageLink(item) {
+      if (item.headerImage) {
+        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${item.headerImage}.default.jpeg`;
+      }
+      return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
+    },
     loadData() {
       this.getTopViews().then((response) => {
         this.data = response.data;

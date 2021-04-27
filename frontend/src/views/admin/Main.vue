@@ -59,6 +59,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 import Overview from './overview/Main.vue';
 import Heimabend from './heimabend/Main.vue';
 import Tags from './tags/Main.vue';
@@ -79,10 +81,26 @@ export default {
       selected: null,
     };
   },
+  methods: {
+    getMessageType() {
+      const path = `${
+        this.API_URL
+      }basic/message-type/?&timestamp=${new Date().getTime()}`;
+      axios
+        .get(path)
+        .then((res) => {
+          this.$store.commit('setMessageType', res.data);
+        })
+        .catch(() => {
+          this.showError = true;
+        });
+    },
+  },
   created() {
     this.$store.commit('setHeaderString', 'Admin');
     this.$store.commit('setIsSubPage', true);
     this.$store.commit('setDrawer', false);
+    this.getMessageType();
   },
 };
 </script>

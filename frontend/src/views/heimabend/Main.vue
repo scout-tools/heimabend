@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 <template>
   <v-container fluid>
-    <v-row v-if="!loading">
+    <v-row v-if="!loading || heimabendItems.length">
     <heimabend-card
       ref="eventCards"
       @refresh="refresh()"
@@ -173,8 +173,6 @@ export default {
           // eslint-disable-next-line no-undef
           this.callTrackItems(res.data.results);
           this.getTags();
-          this.getTagCategory();
-          this.getMessageType();
         })
         .catch(() => {
           this.loading = false;
@@ -220,6 +218,7 @@ export default {
         .get(path)
         .then((res) => {
           this.$store.commit('setTags', res.data);
+          this.getTagCategory();
         })
         .catch(() => {
           this.showError = true;
@@ -238,22 +237,10 @@ export default {
           this.showError = true;
         });
     },
-    getMessageType() {
-      const path = `${
-        this.API_URL
-      }basic/message-type/?&timestamp=${new Date().getTime()}`;
-      axios
-        .get(path)
-        .then((res) => {
-          this.$store.commit('setMessageType', res.data);
-        })
-        .catch(() => {
-          this.showError = true;
-        });
-    },
   },
 
   created() {
+    debugger;
     setTimeout(() => {
       window.scrollTo(0, this.scollPosition);
     }, 500);

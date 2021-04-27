@@ -1,23 +1,43 @@
    <template>
-    <v-sheet
-      tile
-      color="primary"
-      class="allow-scroll"
-    >
-      <span class="subtitle-1 whiteText">
+  <v-sheet tile color="primary" class="allow-scroll fixed">
+    <v-container fluid class="ma-3">
+      <v-row align="center" justify="center">
+        <span class="subtitle-1 whiteText">
           {{ 'Themenauswahl' }}
-      </span>
-      <v-chip-group
-        multiple
-        column
-        light
-        v-model="filterTags"
-        @change="onChange()"
-        @click="onClick()"
-      >
-        <v-chip-tooltip v-for="(tag, index) in getSideBarTags()" :key="index"
-                        :tag="tag" small filter/>
-      </v-chip-group>
+        </span>
+      </v-row>
+      <v-row align="center" justify="center" v-if="getSideBarTags.length">
+        <v-chip-group
+          multiple
+          column
+          light
+          v-model="filterTags"
+          @change="onChange()"
+          @click="onClick()"
+        >
+          <v-chip-tooltip
+            v-for="(tag, index) in getSideBarTags"
+            :key="index"
+            :tag="tag"
+            small
+            filter
+          />
+        </v-chip-group>
+      </v-row>
+      <v-row class="mt-10" align="center" justify="center" v-else>
+        <v-progress-circular
+          dark
+          :size="80"
+          :width="10"
+          class="ma-5"
+          color="white"
+          indeterminate
+        ></v-progress-circular>
+    <span class="subtitle-1 whiteText">
+      Bitte hab etwas Geduld.
+    </span>
+      </v-row>
+    </v-container>
   </v-sheet>
 </template>
 
@@ -35,21 +55,13 @@ export default {
     oldFilterLength: 0,
   }),
   computed: {
-    ...mapGetters([
-      'tags',
-      'tagCategory',
-    ]),
+    ...mapGetters(['tags', 'tagCategory']),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
     getFilterTags() {
       this.filterTags = this.$store.getters.filterTags; // eslint-disable-line
       return this.$store.getters.filterTags;
-    },
-  },
-  methods: {
-    filterTagByCategory(categoryId) {
-      return this.tags.filter(item => item.category === categoryId);
     },
     getSideBarTags() {
       if (this.tags && this.tagCategory) {
@@ -58,6 +70,11 @@ export default {
         return sideBarTags;
       }
       return [];
+    },
+  },
+  methods: {
+    filterTagByCategory(categoryId) {
+      return this.tags.filter(item => item.category === categoryId);
     },
     onClick() {
       this.oldFilterLength = this.filterTags.length;
@@ -81,8 +98,7 @@ export default {
     },
   },
   watch: {
-    getFilterTags() {
-    },
+    getFilterTags() {},
   },
 };
 </script>
@@ -90,5 +106,9 @@ export default {
 <style scoped>
 .allow-scroll {
   overflow-y: scroll; /* it works! */
+}
+
+.fixed {
+  position: fixed;
 }
 </style>

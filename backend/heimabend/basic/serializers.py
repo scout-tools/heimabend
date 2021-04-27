@@ -71,7 +71,6 @@ def getmedian():
 
 class EventSerializer(serializers.ModelSerializer):
 
-    view_count = serializers.SerializerMethodField()
     header_image = serializers.SerializerMethodField()
 
     material_items = serializers.SlugRelatedField(
@@ -99,22 +98,13 @@ class EventSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at',
             'is_active',
-            'like_score',
-            'view_count')
-
-    def get_view_count(self, obj):
-        return APIRequestLog.objects.filter(
-            path='/basic/event/{}/'.format(obj.id)
-        ).count()
+            'like_score')
 
     def get_header_image(self, obj):
-        if obj.header_image:
-            image_obj = Image.objects.filter(id=obj.header_image.id).first()
-            image_field = image_obj.image.name
-            image_id = image_field.split(".")[0]
-            return image_id
-
-        return None
+        image_id = obj.header_image
+        if image_id.image:
+            return image_id.image.name
+        return ''
 
 
 class MessageSerializer(serializers.ModelSerializer):
@@ -134,7 +124,6 @@ class HighscoreSerializer(serializers.ModelSerializer):
         )
 
     def get_highscore(self, obj):
-        print(obj)
         score = Event.objects.filter(created_by=obj['created_by']).count()
         return score
 
@@ -227,10 +216,23 @@ class ExperimentOverviewSerializer(serializers.ModelSerializer):
 class TopViewsSerializer(serializers.ModelSerializer):
 
     view_count = serializers.SerializerMethodField()
+    header_image = serializers.SerializerMethodField()
 
     class Meta:
         model = Event
-        fields = ('id', 'view_count', 'title', 'created_by', 'header_image')
+        fields = (
+            'id',
+            'view_count',
+            'title',
+            'created_by',
+            'header_image',
+        )
+
+    def get_header_image(self, obj):
+        image_id = obj.header_image
+        if image_id.image:
+            return image_id.image.name
+        return ''
 
     def get_view_count(self, obj):
         return APIRequestLog.objects.filter(
@@ -317,7 +319,7 @@ class FaqRatingSerializer(serializers.ModelSerializer):
 
 class NextBestHeimabendSerializer(serializers.ModelSerializer):
 
-    event_title = serializers.SerializerMethodField()
+    events = serializers.SerializerMethodField()
 
     class Meta:
         model = NextBestHeimabend
@@ -326,10 +328,10 @@ class NextBestHeimabendSerializer(serializers.ModelSerializer):
             'event_score',
             'id',
             'score',
-            'event_title',
+            'events',
         )
 
-    def get_event_title(self, obj):
+    def get_events(self, obj):
         return Event.objects.filter(id=obj.event_score.id).values(
             'id',
             'title',

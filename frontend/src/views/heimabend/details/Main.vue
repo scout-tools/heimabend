@@ -24,14 +24,14 @@
               class="ma-4"
               height="120"
               width="250"
-              @click="openViewNewTab(n.eventTitle[0].id)"
+              @click="openViewNewTab(n.events[0].id)"
             >
               <v-card-subtitle
                 class="whiteText justify-center text-center primary"
               >
-                {{ n.eventTitle[0].title }}
+                {{ n.events[0].title }}
               </v-card-subtitle>
-              <v-img :src="getImageLink(n.eventTitle)" height="65px"></v-img>
+              <v-img :src="getImageLink(n.events)" height="65px"></v-img>
             </v-card>
           </v-slide-item>
         </v-slide-group>
