@@ -240,7 +240,6 @@ export default {
   },
 
   created() {
-    debugger;
     setTimeout(() => {
       window.scrollTo(0, this.scollPosition);
     }, 500);
