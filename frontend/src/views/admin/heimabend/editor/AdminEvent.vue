@@ -9,8 +9,8 @@
 
               <v-list-item v-for="item in gerOrdered" :key="item.id">
                 <v-list-item-avatar>
-                  <v-icon :class="getActiveColor(item.isActive)" dark>
-                    {{ getActivIcon(item.isActive) }}
+                  <v-icon :class="getActiveColor(item.isPublic)" dark>
+                    {{ getActivIcon(item.isPublic) }}
                   </v-icon>
                 </v-list-item-avatar>
 
@@ -51,7 +51,7 @@
         </v-flex>
       </v-row>
       <delete-modal ref="deleteTagModal" @refresh="onRefresh" />
-      <is-active-modal ref="isActiveModal" @refresh="onRefresh" />
+      <IsPublicModal ref="isPublicModal" @refresh="onRefresh" />
     </v-container>
   </div>
   <div v-else>
@@ -73,7 +73,7 @@ import { mapGetters } from 'vuex';
 
 // eslint-disable-next-line import/no-unresolved
 import DeleteModal from '@/views/heimabend/dialogs/DeleteModal.vue';
-import isActiveModal from './components/dialogs/isActiveModal.vue';
+import isPublicModal from './components/dialogs/isPublicModal.vue';
 import ActionButtonMenu from './components/ActionButtonMenu.vue';
 import store from '@/store'; // eslint-disable-line
 
@@ -81,7 +81,7 @@ export default {
   components: {
     ActionButtonMenu,
     DeleteModal,
-    isActiveModal,
+    isPublicModal,
   },
   data() {
     return {
@@ -114,14 +114,14 @@ export default {
         dateObj.getMonth() + 1
       }.${dateObj.getFullYear()}`;
     },
-    getActivIcon(isActive) {
-      if (isActive) {
+    getActivIcon(isPublic) {
+      if (isPublic) {
         return 'mdi-eye-outline';
       }
       return 'mdi-eye-off-outline';
     },
-    getActiveColor(isActive) {
-      if (isActive) {
+    getActiveColor(isPublic) {
+      if (isPublic) {
         return 'green';
       }
       return 'red';
@@ -145,13 +145,13 @@ export default {
       this.$refs.deleteTagModal.show(item);
     },
     onPublishClick(item) {
-      this.$refs.isActiveModal.show(item);
+      this.$refs.isPublicModal.show(item);
     },
   },
   computed: {
     ...mapGetters(['tags']),
     gerOrdered() {
-      return this._.sortBy(this.items, ['isActive']);
+      return this._.sortBy(this.items, ['isPublic']);
     },
   },
   created() {

@@ -152,3 +152,11 @@
   </v-row>
 </v-container>
 </template>
+
+<script>
+export default {
+  created() {
+    this.$store.commit('setHeaderString', 'Unsere Idee');
+  },
+};
+</script>

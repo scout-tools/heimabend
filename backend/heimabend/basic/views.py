@@ -34,7 +34,7 @@ class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
 
     def get_queryset(self):
         if not self.request.user.is_authenticated:
-            return self.queryset.filter(is_visible=True)
+            return self.queryset.filter(is_public=True)
         else:
             return self.queryset
 
@@ -52,7 +52,7 @@ class TagCategoryViewSet(LoggingMixin, viewsets.ModelViewSet):
 
     def get_queryset(self):
         if not self.request.user.is_authenticated:
-            return self.queryset.filter(is_visible=True)
+            return self.queryset.filter(is_public=True)
         else:
             return self.queryset
 
@@ -69,7 +69,7 @@ class EventPagination(pagination.PageNumberPagination):
 
 class EventFilter(FilterSet):
     prepairation_time = BooleanFilter(field_name='prepairation_time')
-    is_active = BooleanFilter(field_name='is_active', method='get_is_active')
+    is_public = BooleanFilter(field_name='is_public', method='get_is_public')
     withoutCosts = BooleanFilter(
         method='get_cost_rating', field_name='costs_rating')
     filterTags = ModelMultipleChoiceFilter(field_name='tags__id',
@@ -80,7 +80,7 @@ class EventFilter(FilterSet):
     class Meta:
         model = Event
         fields = ['prepairation_time',
-                  'is_active',
+                  'is_public',
                   'withoutCosts',
                   'filterTags',
                   ]
@@ -90,11 +90,11 @@ class EventFilter(FilterSet):
             return queryset.filter(costs_rating=0)
         return queryset
 
-    def get_is_active(self, queryset, field_name, value):
+    def get_is_public(self, queryset, field_name, value):
         if not value:
             if self.request.user.is_authenticated:
-                return queryset.filter(is_active=value)
-        return queryset.filter(is_active=True)
+                return queryset.filter(is_public=value)
+        return queryset.filter(is_public=True)
 
     def get_tags(self, queryset, field_name, value):
         tags_category = dict()
@@ -122,30 +122,9 @@ class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
 
     def get_queryset(self):
         if not self.request.user.is_authenticated:
-            return self.queryset.filter(is_active=True)
+            return self.queryset.filter(is_public=True)
         else:
             return self.queryset
-
-    def create(self, request, *args, **kwargs):
-        # Check whether new_item exists
-        if 'material_items' in request.data:
-            material_items = request.data['material_items']
-            for new_item in material_items:
-                if not Material.objects.filter(name__exact=new_item).exists():
-                    new_material = Material.objects.create(name=new_item)
-                    new_material.save()
-
-        return super().create(request, *args, **kwargs)
-
-    def update(self, request, pk=None, partial=False):
-        if 'material_items' in request.data:
-            material_items = request.data['material_items']
-            for new_item in material_items:
-                if not Material.objects.filter(name__exact=new_item).exists():
-                    new_material = Material.objects.create(name=new_item)
-                    new_material.save()
-
-        return super().update(request, pk, partial=partial)
 
 
 class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -260,7 +239,7 @@ class ExperimentItemViewSet(LoggingMixin, viewsets.ModelViewSet):
                     unclear_rate = unclear_ratings / total_ratings
                     if (unclear_rate >= 0.3):
                         event = Event.objects.filter(id=event)
-                        event.update(is_active=False)
+                        event.update(is_public=False)
                         Event.objects.get(id=event).tags.add(
                             Tag.objects.get(id=70))
 
@@ -268,7 +247,7 @@ class ExperimentItemViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 
 class RandomEventViewSet(LoggingMixin, viewsets.ModelViewSet):
-    queryset = Event.objects.filter(is_active=True).order_by("?")[:10]
+    queryset = Event.objects.filter(is_public=True).order_by("?")[:10]
     serializer_class = EventSerializer
 
 
@@ -278,7 +257,7 @@ class AdminEventViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 
 class EventTimestampViewSet(LoggingMixin, viewsets.ModelViewSet):
-    queryset = Event.objects.filter(is_active=True)
+    queryset = Event.objects.filter(is_public=True)
     serializer_class = EventTimestampSerializer
 
 
@@ -289,7 +268,7 @@ class ChangePublishStatus(APIView):
         event_id = posted_data['event']
 
         event = Event.objects.filter(id=event_id)
-        event.update(is_active=set_active)
+        event.update(is_public=set_active)
 
         return_data = [
             {"worked": True}
@@ -302,3 +281,50 @@ class NextBestHeimabendViewSet(LoggingMixin, viewsets.ModelViewSet):
     serializer_class = NextBestHeimabendSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ('event',)
+
+
+class MaterialItems(APIView):
+    def post(self, request, *args, **kwargs):
+        posted_data = self.request.data
+        return_array = []
+        for item in posted_data:
+
+            material_name_count = MaterialName.objects.filter(
+                name=item['name']
+            ).count()
+
+            if (material_name_count == 0):
+                material_name_new = MaterialName.objects.create(
+                    name=item['name']
+                )
+                material_name_new.save()
+
+            material_name_obj = MaterialName.objects.filter(
+                name=item['name']
+            ).first()
+
+            if (item['id'] > 0):
+                material_item = MaterialItem.objects.filter(
+                    id=item['id']
+                )
+
+                material_item.update(
+                    quantity=item['quantity'],
+                    material_name_id=material_name_obj.id,
+                    material_unit_id=item['unit_id']
+                )
+                return_array.append(item['id'])
+            else:
+                new_obj = MaterialItem.objects.create(
+                    quantity=item['quantity'],
+                    material_name_id=material_name_obj.id,
+                    material_unit_id=item['unit_id']
+                )
+                new_obj.save()
+
+                return_array.append(new_obj.id)
+
+        return_data = [
+            {"material_event_ids": return_array}
+        ]
+        return Response(status=200, data=return_data)

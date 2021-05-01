@@ -1,36 +1,58 @@
 <template>
         <v-form
-        ref="form7"
+        ref="form8"
         v-model="valid"
       >
   <v-container>
-    <v-row class="mt-6 ml-2">
-      <span class="subtitle-1">
-        Die Heimabend-Idee wird unter deinem Namen veröffentlicht.
-        Nutze dafür gerne deinen Fahrtennamen.
-      </span>
-    </v-row>
     <v-row class="ma-3">
       <v-text-field
-        outlined
-        label="Dein Pfadfindername"
         v-model="data.createdBy"
+        autofocus
         :rules="rules.createdBy"
-        required>
+        label="Dein Pfadfindername"
+        prepend-icon="mdi-card-text"
+        required
+      >
+        <template slot="append">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="success" dark v-bind="attrs" v-on="on">
+                mdi-help-circle-outline
+              </v-icon>
+            </template>
+            <span>
+              {{
+                'Die Heimabend-Idee wird unter deinem Namen veröffentlicht.' +
+                'Nutze dafür gerne deinen Fahrtennamen.'
+              }}
+            </span>
+          </v-tooltip>
+        </template>
       </v-text-field>
     </v-row>
-    <v-row class="mt-6 ml-2">
-      <span class="subtitle-1">
-        Diese E-Mail Adresse ist nur für das Redaktions-Team bei
-        evtuellen Rückfragen zu deiner Heimabend-Idee sichtbar.
-      </span>
-    </v-row>
     <v-row class="ma-3">
       <v-text-field
-        outlined
-        label="Deine E-Mail Adresse"
         v-model="data.createdByEmail"
+        autofocus
+        label="Deine E-Mail Adresse"
+        prepend-icon="mdi-card-text"
+        required
       >
+        <template slot="append">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="success" dark v-bind="attrs" v-on="on">
+                mdi-help-circle-outline
+              </v-icon>
+            </template>
+            <span>
+              {{
+                'Diese E-Mail Adresse ist nur für das Redaktions-Team bei' +
+                'evtuellen Rückfragen zu deiner Heimabend-Idee sichtbar.'
+              }}
+            </span>
+          </v-tooltip>
+        </template>
       </v-text-field>
     </v-row>
     <v-row class="ma-3">
@@ -48,18 +70,18 @@
       </v-checkbox>
     </v-row>
     <v-row class="ma-3" justify="center">
+        <v-btn class="mx-1" @click="prevStep()">
+          <v-icon left> mdi-chevron-left </v-icon>
+          Zurück
+        </v-btn>
       <v-btn
-        class="mr-5"
-        @click="prevStep()"
-      >
-        Zurück
-      </v-btn>
-
-      <v-btn
-        color="primary"
+        color="success"
         @click="finish()"
       >
         Absenden
+        <v-icon right>
+          mdi-content-save-all
+        </v-icon>
       </v-btn>
     </v-row>
   </v-container>
@@ -118,7 +140,7 @@ export default {
     },
 
     finish() {
-      if (!this.$refs.form7.validate()) {
+      if (!this.$refs.form8.validate()) {
         return;
       }
       this.$emit('finish');

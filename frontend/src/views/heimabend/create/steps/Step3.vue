@@ -6,14 +6,25 @@
           Hier kannst du ein Titelbild für deinen Heimabend einfügen.
         </span>
       </v-row>
-      <v-row>
+      <v-row class="ma-4">
         <v-file-input
-          class="ma-4"
           label="Titelbild"
           show-size
           prepend-icon="mdi-image"
           @change="uploadImage"
         >
+        <template slot="append">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="success" dark v-bind="attrs" v-on="on">
+                mdi-help-circle-outline
+              </v-icon>
+            </template>
+            <span>
+              {{ 'Gib deiner Heimabend-Idee eine passende Überschrift.' }}
+            </span>
+          </v-tooltip>
+        </template>
         </v-file-input>
       </v-row>
       <v-row v-if="showCropper">
@@ -26,7 +37,7 @@
           :src="data.imageData"
         />
       </v-row>
-      <v-row v-else>
+      <v-row v-if="!showCropper && data.id">
           <v-img
             class="ma-5"
             max-height="300"
@@ -35,46 +46,121 @@
           >
           </v-img>
       </v-row>
-      <v-row>
+      <div v-if="showCropper">
+      <v-row class="ma-4">
         <v-text-field
           v-model="data.id"
+          prepend-icon="mdi-image"
           hint="This field uses counter prop"
           label="Foto-ID"
           disabled
-        ></v-text-field>
+        >
+        <template slot="append">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="success" dark v-bind="attrs" v-on="on">
+                mdi-help-circle-outline
+              </v-icon>
+            </template>
+            <span>
+              {{ 'Gib deiner Heimabend-Idee eine passende Überschrift.' }}
+            </span>
+          </v-tooltip>
+        </template>
+      </v-text-field>
       </v-row>
-      <v-row>
+      <v-row class="ma-4">
         <v-text-field
+          prepend-icon="mdi-image"
           v-model="data.imageDescription"
           label="Bild Beschreibung"
-        ></v-text-field>
+        >
+        <template slot="append">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="success" dark v-bind="attrs" v-on="on">
+                mdi-help-circle-outline
+              </v-icon>
+            </template>
+            <span>
+              {{ 'Gib deiner Heimabend-Idee eine passende Überschrift.' }}
+            </span>
+          </v-tooltip>
+        </template>
+      </v-text-field>
       </v-row>
-      <v-row>
+      <v-row class="ma-4">
         <v-text-field
+          prepend-icon="mdi-image"
           v-model="data.photographerName"
           label="Fotograf_in"
-        ></v-text-field>
+        >
+        <template slot="append">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="success" dark v-bind="attrs" v-on="on">
+                mdi-help-circle-outline
+              </v-icon>
+            </template>
+            <span>
+              {{ 'Gib deiner Heimabend-Idee eine passende Überschrift.' }}
+            </span>
+          </v-tooltip>
+        </template>
+      </v-text-field>
       </v-row>
-      <v-row>
+      <v-row class="ma-4">
         <v-checkbox
+          prepend-icon="mdi-image"
           v-model="data.privacyConsent"
-          color="red"
           label="Datenschutz"
           required
-        ></v-checkbox>
+        >
+        <template slot="append">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="success" dark v-bind="attrs" v-on="on">
+                mdi-help-circle-outline
+              </v-icon>
+            </template>
+            <span>
+              {{ 'Gib deiner Heimabend-Idee eine passende Überschrift.' }}
+            </span>
+          </v-tooltip>
+        </template>
+      </v-checkbox>
       </v-row>
-      <v-row>
+      <v-row class="ma-4">
         <v-checkbox
+          prepend-icon="mdi-image"
           v-model="data.isOpenSource"
-          color="red"
           label="Bildrechte"
           required
-        ></v-checkbox>
+        >
+        <template slot="append">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="success" dark v-bind="attrs" v-on="on">
+                mdi-help-circle-outline
+              </v-icon>
+            </template>
+            <span>
+              {{ 'Gib deiner Heimabend-Idee eine passende Überschrift.' }}
+            </span>
+          </v-tooltip>
+        </template>
+      </v-checkbox>
       </v-row>
+      </div>
       <v-row class="ma-3" justify="center">
-        <v-btn class="mr-5" @click="prevStep()"> Zurück </v-btn>
-
-        <v-btn color="primary" @click="nextStep(n)"> Weiter </v-btn>
+        <v-btn class="mx-1" @click="prevStep()">
+          <v-icon left> mdi-chevron-left </v-icon>
+          Zurück
+        </v-btn>
+        <v-btn class="mx-1" color="primary" @click="nextStep()">
+          Weiter
+          <v-icon right> mdi-chevron-right </v-icon>
+        </v-btn>
       </v-row>
     </v-container>
   </v-form>

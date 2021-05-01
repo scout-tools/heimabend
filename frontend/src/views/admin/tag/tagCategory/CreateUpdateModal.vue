@@ -10,8 +10,8 @@
           <v-btn icon dark @click="cancel()">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title v-if="isCreate">Neue Kategorie</v-toolbar-title>
-          <v-toolbar-title v-if="isUpdate">Kategorie ändern</v-toolbar-title>
+          <v-toolbar-title v-if="isCreate">Neu</v-toolbar-title>
+          <v-toolbar-title v-if="isUpdate">Änderung</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn
@@ -44,20 +44,6 @@
             </v-row>
             <v-row>
               <v-col cols="12">
-                <v-text-field
-                  outlined
-                  autofocus
-                  :counter="40"
-                  :rules="rules.icon"
-                  name="123"
-                  label="Icon"
-                  v-model="data.icon"
-                  required>
-                </v-text-field>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col cols="12">
                 <v-textarea
                   outlined
                   label="Beschreibung"
@@ -69,56 +55,14 @@
                 ></v-textarea>
               </v-col>
             </v-row>
-            <v-row>
-              <v-col cols="6">
-                <v-text-field
-                  outlined
-                  label="Reihenfolge"
-                  :rules="rules.sorting"
-                  v-model="data.sorting"
-                  required
-                  ></v-text-field>
-                </v-col>
-              </v-row>
               <v-row>
-                <v-col cols="6">
-                  <v-switch
-                    label="Sichtbar?"
-                    color="secondary"
-                    v-model="data.isVisible"
-                    hide-details
-                    indeterminate
-                  />
-                </v-col>
-                <v-col cols="6">
-                  <v-switch
-                    label="In Filter-Kopfzeile?"
-                    color="secondary"
-                    v-model="data.isHeader"
-                    hide-details
-                    indeterminate
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="6">
-                  <v-switch
-                    label="Tag Sichtbar in Heimabend-Übersicht?"
-                    color="secondary"
-                    v-model="data.isEventOverview"
-                    hide-details
-                    indeterminate
-                  />
-                </v-col>
-                <v-col cols="6">
                   <v-switch
                     label="Pflicht bei der Anlage?"
                     color="secondary"
-                    v-model="data.isMandatory"
+                    v-model="data.isPublic"
                     hide-details
                     indeterminate
                   />
-                </v-col>
               </v-row>
             </v-container>
           </v-form>
@@ -139,7 +83,7 @@
       y='top'
       :timeout="timeout"
     >
-      {{ 'Der Tag wurde erfolgreich gespeichert' }}
+      {{ 'Erfolgreich gespeichert' }}
     </v-snackbar>
   </v-row>
 </template>
@@ -197,7 +141,7 @@ export default {
           icon: this.data.icon,
           description: this.data.description,
           sorting: this.data.sorting,
-          isVisible: this.data.isVisible,
+          isPublic: this.data.isPublic,
           isHeader: this.data.isHeader,
           isMandatory: this.data.isMandatory,
           isEventOverview: this.data.isEventOverview,
@@ -216,7 +160,7 @@ export default {
           icon: this.data.icon,
           description: this.data.description,
           sorting: this.data.sorting,
-          isVisible: this.data.isVisible,
+          isPublic: this.data.isPublic,
           isHeader: this.data.isHeader,
           isMandatory: this.data.isMandatory,
           isEventOverview: this.data.isEventOverview,
@@ -253,7 +197,7 @@ export default {
         this.isUpdate = false;
         this.data = {
           isHeader: false,
-          isVisible: false,
+          isPublic: false,
         };
       }
     },

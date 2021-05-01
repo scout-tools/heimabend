@@ -3,6 +3,7 @@
     v-if="!isExtended"
     fixed
     flat
+    color="#F6F6F6"
   >
     <template>
       <active-filter v-if="isMobil"/>

@@ -3,7 +3,8 @@
   <v-toolbar
     flat
     dense
-    fixed>
+    fixed
+    color="#F6F6F6">
     <v-container fluid>
       <v-row>
         <v-col cols="9" class="text-left">

@@ -97,7 +97,7 @@ export default {
   methods: {
     getImageLink(item) {
       if (item.headerImage) {
-        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${item.headerImage}.default.jpeg`;
+        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${item.headerImage}.small.jpeg`;
       }
       return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
     },

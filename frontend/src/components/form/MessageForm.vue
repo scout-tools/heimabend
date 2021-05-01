@@ -19,8 +19,8 @@
               {{ 'Gib hier deinen Pfadfindernamen ein.' }}
             </span>
           </v-tooltip>
-        </template></v-text-field
-      >
+        </template>
+      </v-text-field>
       <v-text-field
         v-model="data.createdByEmail"
         :error-messages="createdByEmailErrors"
@@ -44,6 +44,7 @@
       >
       <v-select
         v-model="data.messageType"
+        v-if="showType"
         :items="filteredMessageType"
         item-value="id"
         item-text="name"
@@ -63,7 +64,8 @@
               {{ 'Wähle aus wie wir deine Nachricht einsortieren können.' }}
             </span>
           </v-tooltip>
-        </template></v-select
+        </template>
+      </v-select
       >
       <v-textarea
         v-model="data.messageBody"
@@ -98,7 +100,10 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { validationMixin } from 'vuelidate'; // eslint-disable-line
+// eslint-disable-next-line
+import { validationMixin } from 'vuelidate';
+// eslint-disable-next-line
+import { serviceMixin } from '@/mixins/serviceMixin.js';
 import {
   required,
   minLength,
@@ -107,7 +112,25 @@ import {
 } from 'vuelidate/lib/validators';
 
 export default {
-  mixins: [validationMixin],
+  mixins: [validationMixin, serviceMixin],
+  props: {
+    showEmail: {
+      type: Boolean,
+      default: true,
+    },
+    showName: {
+      type: Boolean,
+      default: true,
+    },
+    showType: {
+      type: Boolean,
+      default: true,
+    },
+    allowedMessageTypes: {
+      type: String,
+      default: 'all',
+    },
+  },
   data: () => ({
     data: {
       createdBy: '',
@@ -138,12 +161,24 @@ export default {
       },
     },
   },
-  props: {},
-  computed: {
+  watch: {
     filteredMessageType() {
-      return this.messageType.filter(item => item.isComment === true);
+      this.data.messageType = this.filteredMessageType[0].id; // eslint-disable-line
     },
+  },
+  computed: {
     ...mapGetters(['messageType']),
+    filteredMessageType() {
+      if (this.allowedMessageTypes === 'comment') {
+        return this.messageType.filter(item => item.isComment === true);
+      }
+      if (this.allowedMessageTypes === 'question') {
+        return this.messageType.filter(item => item.id === 5);
+      }
+
+      return this.messageType;
+    },
+
     createdByErrors() {
       const errors = [];
       if (!this.$v.data.createdBy.$dirty) return errors;
@@ -186,6 +221,9 @@ export default {
       this.$v.$touch();
       this.valid = !this.$v.$anyError;
     },
+  },
+  created() {
+    this.refreshStoreItems('message-type', 'setMessageType');
   },
 };
 </script>

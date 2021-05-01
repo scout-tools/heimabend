@@ -48,8 +48,8 @@
 
 <script>
 import axios from 'axios';
-
-import MessageForm from './components/MessageForm.vue';
+// eslint-disable-next-line
+import MessageForm from '@/components/form/MessageForm.vue';
 
 export default {
   components: { MessageForm },
@@ -92,6 +92,9 @@ export default {
           this.showError = true;
         });
     },
+  },
+  created() {
+    this.$store.commit('setHeaderString', 'Nachricht an Inspi');
   },
 };
 </script>

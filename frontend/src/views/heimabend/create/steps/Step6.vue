@@ -1,6 +1,6 @@
 <template>
   <v-form
-    ref="form5"
+    ref="form6"
     v-model="valid"
   >
 <v-container>
@@ -41,21 +41,35 @@
   </v-row>
 
     <v-divider class="my-2"/>
-    <v-row class="ma-3" justify="center">
-      <v-btn
-        class="mr-5"
-        @click="prevStep()"
-      >
-        Zurück
-      </v-btn>
-
-      <v-btn
-        color="primary"
-        @click="nextStep()"
-      >
-        Weiter
-      </v-btn>
-    </v-row>
+      <v-row class="ma-3" justify="center">
+        <v-btn class="mx-1" @click="prevStep()">
+          <v-icon left> mdi-chevron-left </v-icon>
+          Zurück
+        </v-btn>
+        <v-btn class="mx-1" color="primary" @click="nextStep()">
+          Weiter
+          <v-icon right> mdi-chevron-right </v-icon>
+        </v-btn>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                v-bind="attrs"
+                v-on="on"
+                icon
+                class="mx-1"
+                color="secondary"
+                @click="nextStep(true)"
+              >
+                <v-icon>
+                  mdi-debug-step-over
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>
+              {{ 'Schritt überspringen' }}
+            </span>
+          </v-tooltip>
+      </v-row>
 </v-container>
         </v-form>
 </template>
@@ -122,8 +136,8 @@ export default {
     prevStep() {
       this.$emit('prevStep');
     },
-    nextStep() {
-      if (!this.$refs.form5.validate()) {
+    nextStep(skip = false) {
+      if (!this.$refs.form6.validate() || !skip) {
         return;
       }
       this.$emit('nextStep');

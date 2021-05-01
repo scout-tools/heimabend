@@ -53,16 +53,16 @@ export default {
   }),
   computed: {
     buttonText() {
-      return this.data.isActive ? 'Offline nehmen' : 'Online nehmen';
+      return this.data.isPublic ? 'Offline nehmen' : 'Online nehmen';
     },
     headerText() {
-      return this.data.isActive
+      return this.data.isPublic
         ? 'Heimabend unveröffentlichen'
         : 'Heimabend veröffentlichen';
     },
     textPart() {
       return `Willst du Idee "${this.data.title}" ${
-        this.data.isActive ? 'unveröffentlichen' : 'veröffentlichen'
+        this.data.isPublic ? 'unveröffentlichen' : 'veröffentlichen'
       }?`;
     },
   },
@@ -70,7 +70,7 @@ export default {
     onDeleteClick() {
       axios
         .post(`${this.API_URL}event-publish/`, {
-          setActive: !this.data.isActive,
+          setActive: !this.data.isPublic,
           event: this.data.id,
         })
         .then(() => {

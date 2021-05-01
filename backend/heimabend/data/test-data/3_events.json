@@ -14,7 +14,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 1,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -32,7 +32,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 2,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -50,7 +50,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 3,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -68,7 +68,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 4,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -86,7 +86,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 5,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -104,7 +104,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 6,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -122,7 +122,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 8,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -140,7 +140,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 9,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -158,7 +158,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 10,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -176,7 +176,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 11,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -194,7 +194,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 12,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -212,7 +212,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 32,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -230,7 +230,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 33,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -248,7 +248,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 34,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -266,7 +266,7 @@
             "updated_at": null,
             "created_by": "Madita",
             "header_image_id": 37,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -284,7 +284,7 @@
             "updated_at": null,
             "created_by": "Madita",
             "header_image_id": 38,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -302,7 +302,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 39,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -320,7 +320,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 44,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -338,7 +338,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 45,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -356,7 +356,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 46,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -374,7 +374,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 47,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -392,7 +392,7 @@
             "updated_at": null,
             "created_by": "Sheldon",
             "header_image_id": 50,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -410,7 +410,7 @@
             "updated_at": null,
             "created_by": "Sheldon",
             "header_image_id": 51,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -428,7 +428,7 @@
             "updated_at": null,
             "created_by": "Sheldon",
             "header_image_id": 52,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -446,7 +446,7 @@
             "updated_at": null,
             "created_by": "Dorothea",
             "header_image_id": 55,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -464,7 +464,7 @@
             "updated_at": null,
             "created_by": "Dorothea",
             "header_image_id": 56,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -482,7 +482,7 @@
             "updated_at": null,
             "created_by": "Jan",
             "header_image_id": 58,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -500,7 +500,7 @@
             "updated_at": null,
             "created_by": "Dorothea",
             "header_image_id": 59,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -518,7 +518,7 @@
             "updated_at": null,
             "created_by": "Jan",
             "header_image_id": 60,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -536,7 +536,7 @@
             "updated_at": null,
             "created_by": "Dorothea",
             "header_image_id": 61,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -554,7 +554,7 @@
             "updated_at": null,
             "created_by": "Dorothea",
             "header_image_id": 62,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -572,7 +572,7 @@
             "updated_at": null,
             "created_by": "Kathi",
             "header_image_id": 63,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -590,7 +590,7 @@
             "updated_at": null,
             "created_by": "Celine",
             "header_image_id": 64,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -608,7 +608,7 @@
             "updated_at": null,
             "created_by": "Celine",
             "header_image_id": 65,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -626,7 +626,7 @@
             "updated_at": null,
             "created_by": "Dorothea",
             "header_image_id": 66,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -644,7 +644,7 @@
             "updated_at": null,
             "created_by": "Celine",
             "header_image_id": 67,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -662,7 +662,7 @@
             "updated_at": null,
             "created_by": "Resi",
             "header_image_id": 69,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -680,7 +680,7 @@
             "updated_at": null,
             "created_by": "Dorothea",
             "header_image_id": 70,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -698,7 +698,7 @@
             "updated_at": null,
             "created_by": "Resi",
             "header_image_id": 71,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -716,7 +716,7 @@
             "updated_at": null,
             "created_by": "Saskia",
             "header_image_id": 72,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -734,7 +734,7 @@
             "updated_at": null,
             "created_by": "Saskia",
             "header_image_id": 73,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -752,7 +752,7 @@
             "updated_at": null,
             "created_by": "Resi",
             "header_image_id": 74,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -770,7 +770,7 @@
             "updated_at": null,
             "created_by": "Linus",
             "header_image_id": 75,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -788,7 +788,7 @@
             "updated_at": null,
             "created_by": "Dorothea",
             "header_image_id": 76,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -806,7 +806,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 77,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -824,7 +824,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 78,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -842,7 +842,7 @@
             "updated_at": null,
             "created_by": "Sheldon",
             "header_image_id": 81,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -860,7 +860,7 @@
             "updated_at": null,
             "created_by": "Felix",
             "header_image_id": 82,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -878,7 +878,7 @@
             "updated_at": null,
             "created_by": "Sheldon",
             "header_image_id": 83,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -896,7 +896,7 @@
             "updated_at": null,
             "created_by": "Sheldon",
             "header_image_id": 84,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -914,7 +914,7 @@
             "updated_at": null,
             "created_by": "Olivia",
             "header_image_id": 85,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -932,7 +932,7 @@
             "updated_at": null,
             "created_by": "Jan",
             "header_image_id": 92,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -950,7 +950,7 @@
             "updated_at": null,
             "created_by": "Jan",
             "header_image_id": 93,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -968,7 +968,7 @@
             "updated_at": null,
             "created_by": "Jan",
             "header_image_id": 95,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -986,7 +986,7 @@
             "updated_at": null,
             "created_by": "Jan",
             "header_image_id": 96,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1004,7 +1004,7 @@
             "updated_at": null,
             "created_by": "Jan",
             "header_image_id": 97,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1022,7 +1022,7 @@
             "updated_at": null,
             "created_by": "Dorothea",
             "header_image_id": 100,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1040,7 +1040,7 @@
             "updated_at": null,
             "created_by": "Dorothea",
             "header_image_id": 102,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1058,7 +1058,7 @@
             "updated_at": null,
             "created_by": "Merle",
             "header_image_id": 104,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1076,7 +1076,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 105,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1094,7 +1094,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 106,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1112,7 +1112,7 @@
             "updated_at": null,
             "created_by": "Jan",
             "header_image_id": 110,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -1130,7 +1130,7 @@
             "updated_at": null,
             "created_by": "Jan",
             "header_image_id": 111,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1148,7 +1148,7 @@
             "updated_at": null,
             "created_by": "Jakob",
             "header_image_id": 112,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1166,7 +1166,7 @@
             "updated_at": null,
             "created_by": "Sheldon",
             "header_image_id": 113,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1184,7 +1184,7 @@
             "updated_at": null,
             "created_by": "Dorothea",
             "header_image_id": 115,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1202,7 +1202,7 @@
             "updated_at": null,
             "created_by": "Dorothea",
             "header_image_id": 117,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1220,7 +1220,7 @@
             "updated_at": null,
             "created_by": "Lukas",
             "header_image_id": 119,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1238,7 +1238,7 @@
             "updated_at": null,
             "created_by": "schlumpf",
             "header_image_id": 120,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -1256,7 +1256,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 121,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1274,7 +1274,7 @@
             "updated_at": null,
             "created_by": "Linus",
             "header_image_id": 122,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1292,7 +1292,7 @@
             "updated_at": null,
             "created_by": "Linus",
             "header_image_id": 123,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1310,7 +1310,7 @@
             "updated_at": null,
             "created_by": "Linus",
             "header_image_id": 124,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1328,7 +1328,7 @@
             "updated_at": null,
             "created_by": "Linus",
             "header_image_id": 125,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1346,7 +1346,7 @@
             "updated_at": null,
             "created_by": "Julian",
             "header_image_id": 127,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1364,7 +1364,7 @@
             "updated_at": null,
             "created_by": "Alina",
             "header_image_id": 129,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1382,7 +1382,7 @@
             "updated_at": null,
             "created_by": "Arnold",
             "header_image_id": 130,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1400,7 +1400,7 @@
             "updated_at": null,
             "created_by": "S\u00e4ge",
             "header_image_id": 131,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1418,7 +1418,7 @@
             "updated_at": null,
             "created_by": "Julian",
             "header_image_id": 132,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1436,7 +1436,7 @@
             "updated_at": null,
             "created_by": "Caroline",
             "header_image_id": 133,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1454,7 +1454,7 @@
             "updated_at": null,
             "created_by": "Caroline",
             "header_image_id": 134,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1472,7 +1472,7 @@
             "updated_at": null,
             "created_by": "Caroline",
             "header_image_id": 135,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1490,7 +1490,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 136,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1508,7 +1508,7 @@
             "updated_at": null,
             "created_by": "Leonie",
             "header_image_id": 137,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1526,7 +1526,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 138,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1544,7 +1544,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 139,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1562,7 +1562,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 140,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -1580,7 +1580,7 @@
             "updated_at": null,
             "created_by": "Daniel",
             "header_image_id": 141,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1598,7 +1598,7 @@
             "updated_at": null,
             "created_by": "Daniel",
             "header_image_id": 142,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1616,7 +1616,7 @@
             "updated_at": null,
             "created_by": "Hagi",
             "header_image_id": 143,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -1634,7 +1634,7 @@
             "updated_at": null,
             "created_by": "Daniel",
             "header_image_id": 144,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1652,7 +1652,7 @@
             "updated_at": null,
             "created_by": "Daniel",
             "header_image_id": 145,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1670,7 +1670,7 @@
             "updated_at": null,
             "created_by": "Daniel",
             "header_image_id": 146,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1688,7 +1688,7 @@
             "updated_at": null,
             "created_by": "Hagi",
             "header_image_id": 147,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1706,7 +1706,7 @@
             "updated_at": null,
             "created_by": "Kai",
             "header_image_id": 148,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1724,7 +1724,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 149,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1742,7 +1742,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 150,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1760,7 +1760,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 151,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1778,7 +1778,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 152,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1796,7 +1796,7 @@
             "updated_at": null,
             "created_by": "Hagi",
             "header_image_id": 154,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1814,7 +1814,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 155,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1832,7 +1832,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 156,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1850,7 +1850,7 @@
             "updated_at": null,
             "created_by": "Daniel",
             "header_image_id": 157,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1868,7 +1868,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 158,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1886,7 +1886,7 @@
             "updated_at": null,
             "created_by": "Daniel",
             "header_image_id": 159,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1904,7 +1904,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 161,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1922,7 +1922,7 @@
             "updated_at": null,
             "created_by": "Nadine",
             "header_image_id": 162,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1940,7 +1940,7 @@
             "updated_at": null,
             "created_by": "Nadine",
             "header_image_id": 163,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1958,7 +1958,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 164,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1976,7 +1976,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 165,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -1994,7 +1994,7 @@
             "updated_at": null,
             "created_by": "Hannah",
             "header_image_id": 173,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2012,7 +2012,7 @@
             "updated_at": null,
             "created_by": "Nadine",
             "header_image_id": 175,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2030,7 +2030,7 @@
             "updated_at": null,
             "created_by": "Nadine",
             "header_image_id": 176,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2048,7 +2048,7 @@
             "updated_at": null,
             "created_by": "Resi & sophie",
             "header_image_id": 177,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2066,7 +2066,7 @@
             "updated_at": null,
             "created_by": "Kimi",
             "header_image_id": 178,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2084,7 +2084,7 @@
             "updated_at": null,
             "created_by": "Daniel (AL)",
             "header_image_id": 179,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2102,7 +2102,7 @@
             "updated_at": null,
             "created_by": "Ajes",
             "header_image_id": 180,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2120,7 +2120,7 @@
             "updated_at": null,
             "created_by": "JoDa",
             "header_image_id": 181,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2138,7 +2138,7 @@
             "updated_at": null,
             "created_by": "Caroline",
             "header_image_id": 182,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2156,7 +2156,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 183,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2174,7 +2174,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 184,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2192,7 +2192,7 @@
             "updated_at": null,
             "created_by": "Robert",
             "header_image_id": 185,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2210,7 +2210,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 186,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2228,7 +2228,7 @@
             "updated_at": null,
             "created_by": "Jan",
             "header_image_id": 187,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2246,7 +2246,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 188,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2264,7 +2264,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 189,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2282,7 +2282,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 190,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2300,7 +2300,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 191,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2318,7 +2318,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 192,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2336,7 +2336,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 193,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2354,7 +2354,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 194,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2372,7 +2372,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 195,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2390,7 +2390,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 196,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2408,7 +2408,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 197,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2426,7 +2426,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 198,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2444,7 +2444,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 199,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2462,7 +2462,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 200,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2480,7 +2480,7 @@
             "updated_at": null,
             "created_by": "Leyan",
             "header_image_id": 201,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2498,7 +2498,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 202,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2516,7 +2516,7 @@
             "updated_at": null,
             "created_by": "sophie",
             "header_image_id": 203,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2534,7 +2534,7 @@
             "updated_at": null,
             "created_by": "sophie",
             "header_image_id": 204,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2552,7 +2552,7 @@
             "updated_at": null,
             "created_by": "sophie",
             "header_image_id": 205,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2570,7 +2570,7 @@
             "updated_at": null,
             "created_by": "sophie",
             "header_image_id": 206,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2588,7 +2588,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 207,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2606,7 +2606,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 208,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2624,7 +2624,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 209,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2642,7 +2642,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 210,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2660,7 +2660,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 211,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2678,7 +2678,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 212,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2696,7 +2696,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 213,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2714,7 +2714,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 214,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2732,7 +2732,7 @@
             "updated_at": null,
             "created_by": "Inspi",
             "header_image_id": 215,
-            "is_active": 0
+            "is_public": 0
         }
     },
     {
@@ -2750,7 +2750,7 @@
             "updated_at": null,
             "created_by": "Janny",
             "header_image_id": 216,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2768,7 +2768,7 @@
             "updated_at": null,
             "created_by": "Janny",
             "header_image_id": 217,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2786,7 +2786,7 @@
             "updated_at": null,
             "created_by": "Janny",
             "header_image_id": 218,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2804,7 +2804,7 @@
             "updated_at": null,
             "created_by": "Janny",
             "header_image_id": 219,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2822,7 +2822,7 @@
             "updated_at": null,
             "created_by": "Janny",
             "header_image_id": 220,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2840,7 +2840,7 @@
             "updated_at": null,
             "created_by": "Janny",
             "header_image_id": 221,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2858,7 +2858,7 @@
             "updated_at": null,
             "created_by": "Janny",
             "header_image_id": 222,
-            "is_active": 1
+            "is_public": 1
         }
     },
     {
@@ -2876,7 +2876,7 @@
             "updated_at": null,
             "created_by": "Janny",
             "header_image_id": 223,
-            "is_active": 1
+            "is_public": 1
         }
     }
 ]

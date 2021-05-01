@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-card>
+      <v-card class="py-5">
         <v-card-title>
           <v-text-field
             v-model="search"
@@ -15,41 +15,52 @@
             Neuer Tag
           </v-btn>
         </v-card-title>
-        <v-data-table
-          class="test-1"
-          :headers="headers"
-          :items="getItems"
-          :search="search"
-          :items-per-page="itemsPerPage"
-          disable-pagination
-          hide-default-footer
-        >
-          <template v-slot:item.color="{ item }">
-            <v-chip :color="item.color">
-              {{ item.color }}
-            </v-chip>
-          </template>
-
-          <template v-slot:item.categoryId="{ item }">
-            {{ getCategoryName(item.categoryId) }}
-          </template>
-          <template v-slot:item.isVisible="{ item }">
-            <v-simple-checkbox
-              v-model="item.isVisible"
-              disabled
-            ></v-simple-checkbox>
-          </template>
-          <template v-slot:item.action="{ item }">
-            <v-icon @click="editItem(item)"> mdi-pencil </v-icon>
-            <v-icon @click="deleteItem(item)"> mdi-delete </v-icon>
-          </template>
-        </v-data-table>
+        <v-card-text>
+          <v-data-table
+            :headers="headers"
+            :items="getItems"
+            :search="search"
+            :items-per-page="itemsPerPage"
+            disable-pagination
+            hide-default-footer
+          >
+            <template v-slot:item.isPublic="{ item }">
+              <v-simple-checkbox
+                v-model="item.isPublic"
+                disabled
+              ></v-simple-checkbox>
+            </template>
+            <template v-slot:item.isHeader="{ item }">
+              <v-simple-checkbox
+                v-model="item.isHeader"
+                disabled
+              ></v-simple-checkbox>
+            </template>
+            <template v-slot:item.isMandatory="{ item }">
+              <v-simple-checkbox
+                v-model="item.isMandatory"
+                disabled
+              ></v-simple-checkbox>
+            </template>
+            <template v-slot:item.isEventOverview="{ item }">
+              <v-simple-checkbox
+                v-model="item.isEventOverview"
+                disabled
+              ></v-simple-checkbox>
+            </template>
+            <template v-slot:item.action="{ item }">
+              <v-icon class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
+              <v-icon @click="deleteItem(item)"> mdi-delete </v-icon>
+            </template>
+          </v-data-table>
+        </v-card-text>
       </v-card>
     </v-row>
     <v-snackbar v-model="showError" color="error" y="top" :timeout="timeout">
       {{ 'Es ist ein Fehler adasdasufgetreten' }}
     </v-snackbar>
-    <create-update-modal ref="createUpdateModal" @dialogClose="onRefresh" />
+    <create-update ref="createUpdateModal" @dialogClose="onRefresh" />
+
     <delete-modal ref="deleteModal" @refresh="onRefresh" />
   </v-container>
 </template>
@@ -58,12 +69,12 @@
 import axios from 'axios';
 import { mapGetters } from 'vuex';
 
-import CreateUpdateModal from './CreateUpdateModal.vue';
+import CreateUpdate from './CreateUpdateModal.vue';
 import DeleteModal from './DeleteModal.vue';
 
 export default {
   components: {
-    CreateUpdateModal,
+    CreateUpdate,
     DeleteModal,
   },
 
@@ -73,10 +84,12 @@ export default {
     timeout: 3000,
     headers: [
       { text: 'Name', value: 'name' },
-      { text: 'Farbe', value: 'color' },
-      { text: 'Anzahl', value: 'tagCount' },
-      { text: 'Kategorie', value: 'categoryId' },
-      { text: 'Sichtbar?', value: 'isVisible' },
+      { text: 'Icon', value: 'icon' },
+      { text: 'Reihenf.', value: 'sorting' },
+      { text: 'Sichtbar', value: 'isPublic' },
+      { text: 'Kopfzeile', value: 'isHeader' },
+      { text: 'Pflicht', value: 'isMandatory' },
+      { text: 'Übersicht', value: 'isEventOverview' },
       { text: 'Aktion', value: 'action', sortable: false },
     ],
     API_URL: process.env.VUE_APP_API,
@@ -92,11 +105,6 @@ export default {
   computed: {
     ...mapGetters(['tags', 'tagCategory', 'isAuthenticated']),
     getItems() {
-      // eslint-disable-next-line arrow-parens
-      this.items.forEach((element) => {
-        // eslint-disable-next-line no-param-reassign
-        element.categoryId = element.category;
-      });
       return this.items;
     },
   },
@@ -105,20 +113,13 @@ export default {
     getNewItems() {
       const path = `${
         this.API_URL
-      }basic/tag?&timestamp=${new Date().getTime()}`;
+      }basic/tag-category?&timestamp=${new Date().getTime()}`;
       axios
         .get(path)
         .then((res) => {
           this.items = res.data;
         })
         .catch(() => {});
-    },
-    getCategoryName(categoryId) {
-      if (categoryId) {
-        return this.tagCategory.filter((item) => item.id === categoryId)[0] // eslint-disable-line
-          .name; // eslint-disable-line
-      }
-      return '-';
     },
     onNewClicked() {
       this.$refs.createUpdateModal.show();

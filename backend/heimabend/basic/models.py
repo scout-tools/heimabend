@@ -9,7 +9,7 @@ from django.core.validators import MaxValueValidator, \
 from django.utils.translation import gettext_lazy as _
 from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
-from stdimage import StdImageField, JPEGField
+from stdimage import JPEGField
 
 
 class TimeStampMixin(models.Model):
@@ -18,6 +18,7 @@ class TimeStampMixin(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
     created_by = models.CharField(max_length=20, blank=True, null=True)
     updated_by = models.CharField(max_length=20, blank=True, null=True)
+    is_public = models.BooleanField(default=False)
 
     class Meta:
         abstract = True
@@ -33,26 +34,9 @@ class TagCategory(TimeStampMixin):
     description = models.CharField(max_length=100, blank=True)
     sorting = models.IntegerField(blank=False, unique=True)
     icon = models.CharField(max_length=20, blank=True, null=True)
-    is_visible = models.BooleanField(default=True)
     is_header = models.BooleanField(default=False)
     is_mandatory = models.BooleanField(default=False)
     is_event_overview = models.BooleanField(default=True)
-
-    def __str__(self):
-        return self.name
-
-    def __repr__(self):
-        return self.__str__()
-
-
-class MaterialName(TimeStampMixin):
-    id = models.AutoField(
-        auto_created=True,
-        primary_key=True,
-        serialize=False,
-        verbose_name='ID')
-    name = models.CharField(max_length=30)
-    description = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.name
@@ -69,6 +53,24 @@ class MaterialUnit(TimeStampMixin):
         verbose_name='ID')
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.__str__()
+
+
+class MaterialName(TimeStampMixin):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    name = models.CharField(max_length=30)
+    description = models.CharField(max_length=100, blank=True)
+    unit_detaults = models.ForeignKey(
+        MaterialUnit, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.name
@@ -107,7 +109,6 @@ class Tag(TimeStampMixin):
     icon = models.CharField(max_length=20, blank=True, null=True)
     category = models.ForeignKey(
         TagCategory, on_delete=models.PROTECT, blank=True, null=True)
-    is_visible = models.BooleanField(default=True)
     sorting = models.IntegerField(blank=False, unique=False, null=True)
 
     def __str__(self):
@@ -127,8 +128,10 @@ class Image(TimeStampMixin):
         primary_key=True,
         serialize=False,
         verbose_name='ID')
-    image = StdImageField(upload_to=nameFile, blank=True, variations={
-        'default': (600, 400)
+    image = JPEGField(upload_to=nameFile, blank=True, variations={
+        'big': (800, 600),
+        'default': (400, 266),
+        'small': (200, 133)
     }, delete_orphans=True)
     description = models.CharField(max_length=255)
     is_open_source = models.BooleanField(default=False)
@@ -175,7 +178,6 @@ class Event(TimeStampMixin):
         default=1, validators=[MinValueValidator(0), MaxValueValidator(5)])
     difficulty = models.SmallIntegerField(
         default=1, validators=[MinValueValidator(0), MaxValueValidator(5)])
-    is_active = models.BooleanField(default=0)
     header_image = models.ForeignKey(
         Image, on_delete=models.PROTECT, blank=True, null=True)
     created_by_email = models.CharField(max_length=60, blank=True)
@@ -195,9 +197,10 @@ class MessageType(TimeStampMixin):
         serialize=False,
         verbose_name='ID')
     name = models.CharField(max_length=30)
-    is_public = models.BooleanField(default=False)
     is_comment = models.BooleanField(default=False)
     description = models.CharField(max_length=100, blank=True)
+    sorting = models.IntegerField(
+        blank=False, auto_created=True, unique=True, null=True)
 
     def __str__(self):
         return self.name
@@ -218,11 +221,10 @@ class Message(TimeStampMixin):
     message_body = models.CharField(max_length=1000)
     event = models.ForeignKey(
         Event, on_delete=models.CASCADE, blank=True, null=True)
-    is_public = models.BooleanField(default=False)
     is_processed = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return self.message_body
 
     def __repr__(self):
         return self.__str__()
@@ -318,7 +320,8 @@ class Faq(TimeStampMixin):
         verbose_name='ID')
     question = models.CharField(max_length=1000, blank=True, null=True)
     answer = models.CharField(max_length=2000, blank=True, null=True)
-    is_public = models.BooleanField(default=False)
+    sorting = models.IntegerField(
+        blank=False, auto_created=True, unique=True, null=True)
 
     def __str__(self):
         return self.question

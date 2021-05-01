@@ -14,6 +14,13 @@ import ScoringStart from '@/views/inspi/scoring/Main.vue';
 import ScoringTest from '@/views/inspi/scoring/Test.vue';
 import EasterEgg from '@/views/inspi/easterEgg/Main.vue';
 import Admin from '@/views/admin/Main.vue';
+import AdminOverview from '@/views/admin/overview/Main.vue';
+import AdminHeimabend from '@/views/admin/heimabend/Main.vue';
+// eslint-disable-next-line import/no-unresolved
+import AdminTag from '@/views/admin/tag/Main.vue';
+import AdminMessage from '@/views/admin/message/Main.vue';
+import AdminScore from '@/views/admin/score/Main.vue';
+import AdminMaterial from '@/views/admin/material/Main.vue';
 
 Vue.use(VueRouter);
 
@@ -88,6 +95,33 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: Admin,
+    children: [
+      {
+        path: 'overview',
+        name: 'admin-overview',
+        component: AdminOverview,
+      },
+      {
+        path: 'heimabend',
+        component: AdminHeimabend,
+      },
+      {
+        path: 'tag',
+        component: AdminTag,
+      },
+      {
+        path: 'message',
+        component: AdminMessage,
+      },
+      {
+        path: 'material',
+        component: AdminMaterial,
+      },
+      {
+        path: 'score',
+        component: AdminScore,
+      },
+    ],
   },
   {
     path: '/inspirations',

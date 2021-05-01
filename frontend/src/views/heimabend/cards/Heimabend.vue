@@ -2,8 +2,12 @@
   <v-container class="max-width-class" ma-0 pa-0>
     <v-row no-gutters>
       <v-col :cols="getMainCols">
-        <v-spacer class="ml-8" />
-        <h2 class="deinHeimabendSpan" v-if="!isDetailsView" :class="yourHeimabendSpan()">
+        <v-spacer class="mt-8" />
+        <h2
+          class="deinHeimabendSpan"
+          v-if="!isDetailsView"
+          :class="yourHeimabendSpan()"
+        >
           {{ getHeaderText(items) }}
         </h2>
         <v-spacer />
@@ -14,30 +18,7 @@
           v-for="(item, index) in items"
           :key="index"
         >
-          <!-- <v-card-title
-            class="whiteText justify-center text-center primary"
-            :class="titleClass()"
-          >
-            {{ item.title }}
-          </v-card-title> -->
-    <v-list-item
-      two-line
-      class="whiteText justify-center text-center primary"
-      :class="titleClass()"
-    >
-      <v-list-item-content>
-        <v-list-item-title
-          class="whiteText justify-center text-center primary"
-          :class="titleClass()"
-        >
-          {{item.title}}
-        </v-list-item-title>
-        <v-list-item-subtitle
-          class="whiteText justify-center text-center primary">
-          {{ getType(item) }}
-        </v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
+          <HeimabendCardHeader :item="item"/>
           <v-img
             v-if="getImageLink(item)"
             max-height="250"
@@ -82,55 +63,7 @@
                   </v-tooltip>
                 </v-col>
               </v-row>
-              <v-row justify="center" align="center">
-                <v-col cols="3">
-                  <v-rating
-                    color="warning"
-                    background-color="warning"
-                    empty-icon="mdi-star-outline"
-                    full-icon="mdi-star"
-                    half-icon="mdi-star-half-full"
-                    hover
-                    readonly
-                    length="5"
-                    size="24"
-                    v-model="rating"
-                  ></v-rating>
-                </v-col>
-                <v-col cols="2">
-                  <v-btn :disabled="isAlreadyVoted(item)" icon @click="show = !show">
-                    <v-icon dark color="green"> mdi-star-plus </v-icon>
-                  </v-btn>
-                </v-col>
-              </v-row>
-              <v-row v-if="show" justify="center" align="center">
-                  <v-container class="ma-2">
-                    <v-row v-if="show" justify="center" align="center">
-                      <p>Bitte einen Stern auswählen</p>
-                    </v-row>
-                    <v-row v-if="show" justify="center" align="center">
-                      <v-col cols="5">
-                      <v-rating
-                        color="green"
-                        background-color="green"
-                        empty-icon="mdi-star-outline"
-                        full-icon="mdi-star"
-                        half-icon="mdi-star-half-full"
-                        hover
-                        length="5"
-                        size="24"
-                        v-model="addRating"
-                      >
-                      </v-rating>
-                      </v-col>
-                      <v-col cols="1">
-                      <v-btn @click="onRatingClick(item)" icon :disabled="addRating === 0">
-                        <v-icon color="green"> mdi-send </v-icon>
-                      </v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-              </v-row>
+              <HeimabendRating v-if="false" :item="item" />
             </v-container>
           </v-card-text>
 
@@ -140,26 +73,7 @@
               <u> Material </u>
             </div>
 
-            <div
-              v-if="item.material !== ''"
-              class="text-left font-italic ml-10"
-            >
-              <ul>
-                <li
-                  v-for="(item, index4) in getMaterialArray(item.material)"
-                  :key="index4"
-                >
-                  {{ item }}
-                </li>
-              </ul>
-            </div>
-            <div v-else class="text-left">
-              <ul>
-                <li>
-                  {{ emptyMaterialText }}
-                </li>
-              </ul>
-            </div>
+            TODO
           </div>
 
           <v-container>
@@ -176,12 +90,12 @@
 
           <v-divider
             class="mx-2 ml-12"
-            v-if="!item.isActive && isAuthenticated"
+            v-if="!item.isPublic && isAuthenticated"
             vertical
           />
           <v-tooltip
             nudge-left="80"
-            v-if="!item.isActive && isAuthenticated"
+            v-if="!item.isPublic && isAuthenticated"
             bottom
           >
             <template v-slot:activator="{ on }">
@@ -215,36 +129,6 @@
           >
             <v-icon>mdi-pencil-outline</v-icon>
           </v-btn>
-          <v-tooltip
-            v-if="!isMobil && !isAuthenticated && item.likeScore === 10"
-            nudge-left="80"
-            open-on-hover
-            bottom
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                class="px-2 info-cursor"
-                :x-small="isMobil"
-                depressed
-                color="primary"
-                v-on="on"
-              >
-                <v-icon
-                  v-for="i in item.likeScore"
-                  color="#F6D300"
-                  :key="i"
-                  :size="30"
-                  readonly
-                >
-                  mdi-star-face
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>
-              {{ getLikeScoreTooltip(item.likeScore) }}
-            </span>
-          </v-tooltip>
-
           <v-card-actions px-0 class="lightPrimary pa-0">
             <v-tooltip
               open-on-hover
@@ -515,6 +399,10 @@ import { mapGetters } from 'vuex';
 // eslint-disable-next-line import/no-unresolved
 import MenuRight from '@/views/components/menu/Right.vue';
 // eslint-disable-next-line import/no-unresolved
+import HeimabendRating from '@/components/rating/heimabend/Main.vue';
+// eslint-disable-next-line import/no-unresolved
+import HeimabendCardHeader from '@/components/heimabend/CardHeader.vue';
+// eslint-disable-next-line import/no-unresolved
 import Fab from '@/views/components/fab/Standard.vue';
 // eslint-disable-next-line import/no-unresolved
 import VChipTooltip from '@/views/components/chip/ChipTooltip.vue';
@@ -541,35 +429,10 @@ export default {
     MenuRight,
     Fab,
     VChipTooltip,
+    HeimabendRating,
+    HeimabendCardHeader,
   },
   methods: {
-    getType(event) {
-      const tagsObject = this.tags.filter((item) => event.tags.includes(item.id)); // eslint-disable-line
-      const containsCategoryId = tagsObject.filter(
-        ( // eslint-disable-line
-          tag // eslint-disable-line
-        ) => [4].includes(tag.category) // eslint-disable-line
-      ); // eslint-disable-line
-      if (containsCategoryId.length) {
-        return containsCategoryId[0].name;
-      }
-      return 'kein Typ';
-    },
-    getHeaderText(items) {
-      if (!items.length) {
-        return 'Kein Treffer';
-      }
-      return !this.isScoringMode ? 'dein Heimabend' : 'Gut beschrieben?';
-    },
-    onRatingClick(item) {
-      this.show = false;
-      if (!this.isAlreadyVoted(item)) {
-        this.callEventLikeService(item.id);
-      }
-    },
-    handleRatingChange(item) {
-      this.addRating = item.index + 1;
-    },
     scroll() {
       window.onscroll = () => {
         const bottomOfWindow = // eslint-disable-line
@@ -592,15 +455,6 @@ export default {
     yourHeimabendSpan() {
       return this.isMobil ? 'headerIsMobile' : 'headerIsDesktop';
     },
-    getMandatoryBarTagCategories() {
-      if (this.tagCategory) {
-        return this.tagCategory.filter((item) => item.isEventOverview); // eslint-disable-line
-      }
-      return [];
-    },
-    convertUrlArray(ary) {
-      return ary.map((e) => e); // eslint-disable-line
-    },
     getEventTags(tagArray) {
       const tagsObject = this.tags.filter((item) => tagArray.includes(item.id)); // eslint-disable-line
       const containsCategoryId = tagsObject.filter(
@@ -609,9 +463,6 @@ export default {
         ) => [2, 4, 5, 9].includes(tag.category) // eslint-disable-line
       ); // eslint-disable-line
       return containsCategoryId;
-    },
-    filterTagByCategory(tags, categoryId) {
-      return this.tags.filter((item) => item.category === categoryId); // eslint-disable-line
     },
     getDescriptionClass() {
       let string = '';
@@ -624,21 +475,6 @@ export default {
         string = string.concat(' mx-2');
       }
       return string;
-    },
-    getLikeColor(item) {
-      return this.isAlreadyVoted(item) ? 'red lighten-1' : 'red darken-2';
-    },
-    isAlreadyVoted(event) {
-      return this.liked.includes(event.id);
-    },
-    callEventLikeService(eventId) {
-      const me = this;
-      this.eventId = eventId; // eslint-disable-line
-      store.commit('setLiked', eventId); // delete that line
-
-      this.postExperimentItem(eventId, 1, this.addRating).then(() => {
-        me.showSuccessLiked = true;
-      });
     },
     getCostsToolTip(costsRating) {
       switch (costsRating) {
@@ -681,10 +517,25 @@ export default {
     onRefreshHeimabende() {
       this.$emit('refresh');
     },
-    titleClass() {
-      return this.$vuetify.breakpoint.mdAndUp
+    titleClass(item) {
+      let styleClass = '';
+      styleClass = this.$vuetify.breakpoint.mdAndUp
         ? 'headline font-weight-medium'
         : 'title';
+      styleClass = `${styleClass} ${this.getHeaderColorClass(item.tags)}`;
+      return styleClass;
+    },
+    getHeaderColorClass(tags) {
+      let colorclass = 'color-scout';
+
+      const hasWo = tags.includes(50);
+      const hasScout = tags.includes(51);
+      if (hasWo && hasScout) {
+        colorclass = 'color-wo-scout';
+      } else if (hasWo) {
+        colorclass = 'color-wo';
+      }
+      return colorclass;
     },
     getMaxWidth() {
       return this.isDetailsView ? '900' : '800';
@@ -721,6 +572,12 @@ export default {
     getId() {
       return this.$route.params.id;
     },
+    getHeaderText(items) {
+      if (!items.length) {
+        return 'Kein Treffer';
+      }
+      return !this.isScoringMode ? 'dein Heimabend' : 'Gut beschrieben?';
+    },
   },
   data() {
     return {
@@ -747,12 +604,6 @@ export default {
   },
   computed: {
     ...mapGetters(['tags', 'liked', 'isAuthenticated', 'isScoringMode']),
-    isMainPage() {
-      return this.currentRouteName === 'overview';
-    },
-    currentRouteName() {
-      return this.$route.name;
-    },
     ratingSize() {
       return !this.isMobil ? 24 : 18;
     },
@@ -761,12 +612,6 @@ export default {
     },
     getLikeButtonText() {
       return !this.isMobil ? 'Mehr Details zur Idee' : 'Mehr';
-    },
-    paddingleftLebelIcons() {
-      return !this.isMobil ? 'pl-2' : 'pl-1';
-    },
-    maxWidthKnots() {
-      return !this.isMobil ? '18' : '14';
     },
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -794,8 +639,8 @@ export default {
 }
 .deinHeimabendSpan {
   font-family: 'Special Elite', sans-serif !important;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .headerIsMobile {

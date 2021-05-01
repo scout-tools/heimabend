@@ -14,38 +14,71 @@
         Schritte. Viel Spaß!
       </span>
       </v-col>
-      <v-col cols="4">
+      <v-col cols="4" align="center" justify="center">
         <v-img :src="require('@/assets/inspi/inspi_happy.png')" max-width="80" />
       </v-col>
     </v-row>
     <v-divider class="text-left ma-5"/>
-    <v-row class="mt-6 ml-2">
-      <span class="subtitle-1">
-        Gib deiner Heimabend-Idee eine passende Überschrift.
-      </span>
-    </v-row>
     <v-row class="ma-4">
       <v-text-field
-        prepend-icon="mdi-card-text"
+        v-model="data.title"
         autofocus
         :counter="40"
         :rules="rules.title"
         label="Überschrift"
-        v-model="data.title"
-        required>
+        prepend-icon="mdi-card-text"
+        required
+      >
+        <template slot="append">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="success" dark v-bind="attrs" v-on="on">
+                mdi-help-circle-outline
+              </v-icon>
+            </template>
+            <span>
+              {{ 'Gib deiner Heimabend-Idee eine passende Überschrift.' }}
+            </span>
+          </v-tooltip>
+        </template>
       </v-text-field>
     </v-row>
 
     <v-divider class="my-2"/>
 
-    <v-row class="ma-3" justify="center">
-      <v-btn
-        color="primary"
-        @click="nextStep(n)"
-      >
-        Weiter
-      </v-btn>
-    </v-row>
+      <v-row class="ma-3" justify="center">
+        <v-btn color="error" class="mx-1" @click="cancel()">
+      <v-icon left>
+        mdi-close
+      </v-icon>
+          Abbrechen
+        </v-btn>
+        <v-btn class="mx-1" color="primary" @click="nextStep()">
+          Weiter
+          <v-icon right>
+            mdi-chevron-right
+          </v-icon>
+        </v-btn>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                v-bind="attrs"
+                v-on="on"
+                icon
+                class="mx-1"
+                color="secondary"
+                @click="nextStep(true)"
+              >
+                <v-icon>
+                  mdi-debug-step-over
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>
+              {{ 'Schritt überspringen' }}
+            </span>
+          </v-tooltip>
+      </v-row>
   </v-container>
         </v-form>
 </template>
@@ -84,11 +117,11 @@ export default {
 
 
   methods: {
-    prevStep() {
-      this.$emit('prevStep');
+    cancel() {
+      this.$emit('cancel');
     },
-    nextStep() {
-      if (!this.$refs.form1.validate()) {
+    nextStep(skip = false) {
+      if (!this.$refs.form1.validate() && !skip) {
         return;
       }
       this.$emit('nextStep');

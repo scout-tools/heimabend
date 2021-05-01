@@ -41,7 +41,7 @@ export default {
     return {
       selectedFilter: [],
       lastFilter: [],
-      isActiveState: false,
+      isPublicState: false,
       value: [],
     };
   },
@@ -69,7 +69,7 @@ export default {
       return !this.isMobil ? 'mx-2' : 'mx-0';
     },
     updateState() {
-      this.isActiveState = this.$store.getters[this.customVariable];
+      this.isPublicState = this.$store.getters[this.customVariable];
     },
     // eslint-disable-next-line no-unused-vars
     onFilterChanged(newValue) {

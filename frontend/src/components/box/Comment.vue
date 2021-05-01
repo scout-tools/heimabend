@@ -2,10 +2,23 @@
   <v-expansion-panels>
     <v-expansion-panel>
       <v-expansion-panel-header color="#F6F6F6" align="center" justify="center">
-        Kommentar oder Vorschlag schreiben
+        <v-container>
+          <v-row align="center" justify="center">
+            <v-col cols="1">
+              <v-icon large color="blue">mdi-chat-plus</v-icon>
+            </v-col>
+            <v-col>
+              <p class="text-left title ma-3"> Eigene Frage schreiben</p>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-expansion-panel-header>
       <v-expansion-panel-content color="#F6F6F6">
-        <message-form v-model="data"  color="#F6F6F6"/>
+        <message-form
+          v-model="data"
+          :allowedMessageTypes="allowedMessageTypes"
+          :showType="showType"
+        />
         <v-btn class="mr-4" color="primary" @click="submit"> Absenden </v-btn>
       </v-expansion-panel-content>
     </v-expansion-panel>
@@ -14,9 +27,28 @@
 
 <script>
 import axios from 'axios';
-import MessageForm from '@/views/footer/message/components/MessageForm.vue';
+// eslint-disable-next-line
+import MessageForm from '@/components/form/MessageForm.vue';
 
 export default {
+  props: {
+    showEmail: {
+      type: Boolean,
+      default: true,
+    },
+    showName: {
+      type: Boolean,
+      default: true,
+    },
+    showType: {
+      type: Boolean,
+      default: true,
+    },
+    allowedMessageTypes: {
+      type: String,
+      default: 'all',
+    },
+  },
   components: {
     MessageForm,
   },
@@ -68,6 +100,6 @@ export default {
 
 <style scoped>
 .v-expansion-panel {
-    max-width: 900px;
+  max-width: 900px;
 }
 </style>

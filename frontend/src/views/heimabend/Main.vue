@@ -83,7 +83,7 @@ export default {
       'isAuthenticated',
       'heimabendCounter',
       'mandatoryFilter',
-      'isActive',
+      'isPublic',
       'heimabendItems',
       'scollPosition',
       'nextPath',
@@ -240,6 +240,7 @@ export default {
   },
 
   created() {
+    this.$store.commit('setIsSubPage', false);
     setTimeout(() => {
       window.scrollTo(0, this.scollPosition);
     }, 500);
@@ -251,7 +252,6 @@ export default {
       this.getAllEventItems();
     }
   },
-
   data: () => ({
     API_URL: process.env.VUE_APP_API,
     loading: true,

@@ -11,7 +11,7 @@ export default new Vuex.Store({
     currentUser: null,
     isPrepairationNeeded: false,
     withoutCosts: false,
-    isActive: true,
+    isPublic: true,
     sorter: '-createdAt',
     filterTags: [],
     mandatoryFilter: {},
@@ -220,5 +220,5 @@ export default new Vuex.Store({
       commit('setSearchInput', '');
     },
   },
-  // plugins: [createPersistedState()],
+  plugins: [createPersistedState()],
 });

@@ -20,7 +20,7 @@ class TagSerializer(serializers.ModelSerializer):
             'color',
             'icon',
             'category',
-            'is_visible',
+            'is_public',
             'sorting'
         )
 
@@ -35,7 +35,7 @@ class TagCategorySerializer(serializers.ModelSerializer):
             'description',
             'sorting',
             'icon',
-            'is_visible',
+            'is_public',
             'is_header',
             'is_mandatory',
             'is_event_overview'
@@ -73,13 +73,6 @@ class EventSerializer(serializers.ModelSerializer):
 
     header_image = serializers.SerializerMethodField()
 
-    material_items = serializers.SlugRelatedField(
-        many=True,
-        read_only=False,
-        queryset=MaterialItem.objects.all(),
-        slug_field='name'
-    )
-
     class Meta:
         model = Event
         fields = (
@@ -97,7 +90,7 @@ class EventSerializer(serializers.ModelSerializer):
             'updated_by',
             'created_at',
             'updated_at',
-            'is_active',
+            'is_public',
             'like_score')
 
     def get_header_image(self, obj):
@@ -210,7 +203,9 @@ class ExperimentOverviewSerializer(serializers.ModelSerializer):
         return ExperimentItem.objects.filter(experiment__id=obj.id).count()
 
     def get_experiment_item(self, obj):
-        return ExperimentItem.objects.filter(experiment__id=obj.id).values('score', 'event__title')
+        return ExperimentItem.objects.filter(
+            experiment__id=obj.id
+        ).values('score', 'event__title')
 
 
 class TopViewsSerializer(serializers.ModelSerializer):
@@ -230,8 +225,8 @@ class TopViewsSerializer(serializers.ModelSerializer):
 
     def get_header_image(self, obj):
         image_id = obj.header_image
-        if image_id.image:
-            return image_id.image.name
+        # if image_id.image:
+        #     return image_id.image.name
         return ''
 
     def get_view_count(self, obj):
@@ -256,7 +251,7 @@ class EventAdminSerializer(serializers.ModelSerializer):
             'updated_by',
             'created_at',
             'updated_at',
-            'is_active',
+            'is_public',
             'like_score',
             'view_count')
 

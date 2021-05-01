@@ -21,7 +21,7 @@
             <v-icon color="green lighten-1" big> mdi-eye-outline </v-icon>
           </v-list-item-avatar>
           <v-list-item-title>
-            {{ getPublishString(data.isActive) }}
+            {{ getPublishString(data.isPublic) }}
           </v-list-item-title>
         </v-list-item>
         <v-list-item link @click="openViewNewTab(data.id)">
@@ -54,8 +54,8 @@ export default {
   },
   data: () => ({}),
   methods: {
-    getPublishString(isActive) {
-      return isActive ? 'Zurück nehmen' : 'Veröffentlichen';
+    getPublishString(isPublic) {
+      return isPublic ? 'Zurück nehmen' : 'Veröffentlichen';
     },
     openViewNewTab(id) {
       const routeData = this.$router.resolve({

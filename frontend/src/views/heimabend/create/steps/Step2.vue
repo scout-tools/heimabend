@@ -79,9 +79,33 @@
         </span>
       </v-row>
       <v-row class="ma-3" justify="center">
-        <v-btn class="mr-5" @click="prevStep()"> Zurück </v-btn>
-
-        <v-btn color="primary" @click="nextStep(n)"> Weiter </v-btn>
+        <v-btn class="mx-1" @click="prevStep()">
+          <v-icon left> mdi-chevron-left </v-icon>
+          Zurück
+        </v-btn>
+        <v-btn class="mx-1" color="primary" @click="nextStep()">
+          Weiter
+          <v-icon right> mdi-chevron-right </v-icon>
+        </v-btn>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                v-bind="attrs"
+                v-on="on"
+                icon
+                class="mx-1"
+                color="secondary"
+                @click="nextStep(true)"
+              >
+                <v-icon>
+                  mdi-debug-step-over
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>
+              {{ 'Schritt überspringen' }}
+            </span>
+          </v-tooltip>
       </v-row>
     </v-container>
   </v-form>
@@ -128,13 +152,14 @@ export default {
     },
   },
 
-
   methods: {
     prevStep() {
       this.$emit('prevStep');
     },
-    nextStep() {
-      if (!this.$refs.form2.validate() || this.getCustomText !== 'Ok') {
+    nextStep(skip = false) {
+      if (
+        (!this.$refs.form2.validate() || this.getCustomText !== 'Ok') && !skip
+      ) {
         return;
       }
       this.$emit('nextStep');
@@ -159,8 +184,8 @@ export default {
 
         var reader = new FileReader(); // eslint-disable-line
         reader.onload = function () { // eslint-disable-line
-          var id = 'blobid' + (new Date()).getTime(); // eslint-disable-line
-          var blobCache =  tinymce.activeEditor.editorUpload.blobCache; // eslint-disable-line
+          var id = 'blobid' + new Date().getTime(); // eslint-disable-line
+          var blobCache = tinymce.activeEditor.editorUpload.blobCache; // eslint-disable-line
           var base64 = reader.result.split(',')[1]; // eslint-disable-line
           var blobInfo = blobCache.create(id, file, base64); // eslint-disable-line
           blobCache.add(blobInfo);

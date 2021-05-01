@@ -74,6 +74,7 @@ export default {
       { text: 'Name', value: 'name' },
       { text: 'isPublic', value: 'isPublic' },
       { text: 'isComment', value: 'isComment' },
+      { text: 'Sorting', value: 'sorting' },
       { text: 'Description', value: 'description' },
       { text: 'Aktion', value: 'action', sortable: false },
     ],

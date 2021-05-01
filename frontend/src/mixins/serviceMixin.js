@@ -19,7 +19,7 @@ export const serviceMixin = { // eslint-disable-line
       return axios.get(path);
     },
     async getService(messageType) {
-      const path = `${process.env.VUE_APP_API}basic/${messageType}/`;
+      const path = `${process.env.VUE_APP_API}basic/${messageType}/?&timestamp=${new Date().getTime()}`;
       return axios.get(path);
     },
     getItems(messageType) {
@@ -28,6 +28,12 @@ export const serviceMixin = { // eslint-disable-line
           this.items = res.data;
         })
         .catch(() => {});
+    },
+    refreshStoreItems(serviceName, setter) {
+      this.getService(serviceName)
+        .then((res) => {
+          this.$store.commit(setter, res.data);
+        });
     },
   },
 };

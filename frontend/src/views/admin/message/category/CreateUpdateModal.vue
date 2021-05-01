@@ -97,7 +97,7 @@
                 <v-switch
                   label="Sichtbar?"
                   color="secondary"
-                  v-model="data.isVisible"
+                  v-model="data.isPublic"
                   hide-details
                   dense
                   indeterminate
@@ -197,7 +197,7 @@ export default {
           description: this.data.description,
           color: this.data.color.hex,
           category: this.data.categoryId.id,
-          isVisible: this.data.isVisible,
+          isPublic: this.data.isPublic,
           sorting: this.data.sorting,
         })
           .then(() => {
@@ -214,7 +214,7 @@ export default {
           description: this.data.description,
           color: this.data.color,
           category: this.data.categoryId,
-          isVisible: this.data.isVisible,
+          isPublic: this.data.isPublic,
           sorting: this.data.sorting,
         })
           .then(() => {

@@ -7,7 +7,8 @@
       "name": "1. Hilfe",
       "description": "",
       "color": "#FFCFA4",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -18,7 +19,8 @@
       "name": "Alleine",
       "description": "",
       "color": "#F1CE8D",
-      "category_id": 5
+      "category_id": 5,
+      "is_public": true
     }
   },
   {
@@ -29,7 +31,8 @@
       "name": "Backen",
       "description": "",
       "color": "#FFBBBB",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -40,7 +43,8 @@
       "name": "Basteln",
       "description": "",
       "color": "#7FA8D1",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -51,7 +55,8 @@
       "name": "Baum",
       "description": "",
       "color": "#D5AAFF",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -62,7 +67,8 @@
       "name": "Bewegung",
       "description": "",
       "color": "#F7DF4C",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -73,7 +79,8 @@
       "name": "Drau\u00dfen",
       "description": "",
       "color": "#7EA7C9",
-      "category_id": 2
+      "category_id": 2,
+      "is_public": true
     }
   },
   {
@@ -84,7 +91,8 @@
       "name": "Drinnen",
       "description": "",
       "color": "#B7DA7E",
-      "category_id": 2
+      "category_id": 2,
+      "is_public": true
     }
   },
   {
@@ -95,7 +103,8 @@
       "name": "Feuer machen",
       "description": "",
       "color": "#F1F1B1",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -106,7 +115,8 @@
       "name": "Forschen",
       "description": "",
       "color": "#E27D79",
-      "category_id": 4
+      "category_id": 4,
+      "is_public": true
     }
   },
   {
@@ -117,7 +127,8 @@
       "name": "Fr\u00fchling",
       "description": "Dieser Heimabend ist nur im Fr\u00fchling durchf\u00fchrbar",
       "color": "#65B65F",
-      "category_id": 1
+      "category_id": 1,
+      "is_public": true
     }
   },
   {
@@ -128,7 +139,8 @@
       "name": "Geschichten",
       "description": "",
       "color": "#E7AE56",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -139,7 +151,8 @@
       "name": "Haik",
       "description": "",
       "color": "#E994AB",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -150,7 +163,8 @@
       "name": "Handwerkliches",
       "description": "Alles was mit den H\u00e4nden und Werkzeug herstellt wird.",
       "color": "#64C0CF",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -161,7 +175,8 @@
       "name": "Herbst",
       "description": "Dieser Heimabend ist nur im Herbst durchf\u00fchrbar.",
       "color": "#DF9252",
-      "category_id": 1
+      "category_id": 1,
+      "is_public": true
     }
   },
   {
@@ -172,7 +187,8 @@
       "name": "Karneval",
       "description": "",
       "color": "#DE80A9",
-      "category_id": 1
+      "category_id": 1,
+      "is_public": true
     }
   },
   {
@@ -183,7 +199,8 @@
       "name": "Karte Kompass",
       "description": "",
       "color": "#F4CAD6",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -194,7 +211,8 @@
       "name": "Kim-Spiele",
       "description": "",
       "color": "#C6C6FF",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -205,7 +223,8 @@
       "name": "Knoten",
       "description": "",
       "color": "#B4D1B6",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -216,7 +235,8 @@
       "name": "Kreatives",
       "description": "",
       "color": "#9AF3B9",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -227,7 +247,8 @@
       "name": "K\u00fcche",
       "description": "",
       "color": "#B5FFFC",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -238,7 +259,8 @@
       "name": "Mit Abstand",
       "description": "",
       "color": "#946FDE",
-      "category_id": 5
+      "category_id": 5,
+      "is_public": true
     }
   },
   {
@@ -249,7 +271,8 @@
       "name": "Musisches",
       "description": "",
       "color": "#FFC895",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -260,7 +283,8 @@
       "name": "Nachhaltigkeit",
       "description": "",
       "color": "#9DCF90",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -271,7 +295,8 @@
       "name": "Ostern",
       "description": "",
       "color": "#80BBE0",
-      "category_id": 1
+      "category_id": 1,
+      "is_public": true
     }
   },
   {
@@ -282,7 +307,8 @@
       "name": "Pfa. Geschichte",
       "description": "",
       "color": "#A3FEBA",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -293,7 +319,8 @@
       "name": "Pfadfinder",
       "description": "",
       "color": "#88ADE0",
-      "category_id": 3
+      "category_id": 3,
+      "is_public": true
     }
   },
   {
@@ -304,7 +331,8 @@
       "name": "Pflanzen",
       "description": "",
       "color": "#5ECE65",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -315,7 +343,8 @@
       "name": "Rover",
       "description": "",
       "color": "#DC8484",
-      "category_id": 3
+      "category_id": 3,
+      "is_public": true
     }
   },
   {
@@ -326,7 +355,8 @@
       "name": "Schnitzen",
       "description": "",
       "color": "#C0FF97",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -337,7 +367,8 @@
       "name": "Schwarzzelte",
       "description": "",
       "color": "#DDCEFF",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -348,7 +379,8 @@
       "name": "Sommer",
       "description": "Dieser Heimabend ist im Sommer durchf\u00fchrbar.",
       "color": "#FFC100",
-      "category_id": 1
+      "category_id": 1,
+      "is_public": true
     }
   },
   {
@@ -359,7 +391,8 @@
       "name": "Spiele",
       "description": "Alles zum Thema Spielen",
       "color": "#B0E462",
-      "category_id": 4
+      "category_id": 4,
+      "is_public": true
     }
   },
   {
@@ -370,7 +403,8 @@
       "name": "Sternenkunde",
       "description": "Alles was mit Planeten und Sternen zu tun hat.",
       "color": "#EED071",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -381,7 +415,8 @@
       "name": "Symbolik",
       "description": "",
       "color": "#DCEDEA",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -392,7 +427,8 @@
       "name": "Unser Bund",
       "description": "",
       "color": "#FFFFB5",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -403,7 +439,8 @@
       "name": "Unsere Erde",
       "description": "",
       "color": "#BBEBFF",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -414,7 +451,8 @@
       "name": "Unsere Sippe",
       "description": "",
       "color": "#F0E275",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -425,7 +463,8 @@
       "name": "Versprechen",
       "description": "",
       "color": "#DEB19E",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -436,7 +475,8 @@
       "name": "Videokonferenz",
       "description": "",
       "color": "#87C879",
-      "category_id": 5
+      "category_id": 5,
+      "is_public": true
     }
   },
   {
@@ -447,7 +487,8 @@
       "name": "Wasser",
       "description": "",
       "color": "#98A6FF",
-      "category_id": 9
+      "category_id": 9,
+      "is_public": true
     }
   },
   {
@@ -458,7 +499,8 @@
       "name": "Weihnachten",
       "description": "",
       "color": "#E58383",
-      "category_id": 1
+      "category_id": 1,
+      "is_public": true
     }
   },
   {
@@ -469,7 +511,8 @@
       "name": "Winter",
       "description": "Dieser Heimabend ist nur Winter durchf\u00fchrbar",
       "color": "#5374DB",
-      "category_id": 1
+      "category_id": 1,
+      "is_public": true
     }
   },
   {
@@ -480,7 +523,8 @@
       "name": "Lernen",
       "description": "",
       "color": "#9FF7DB",
-      "category_id": 4
+      "category_id": 4,
+      "is_public": true
     }
   },
   {
@@ -491,7 +535,8 @@
       "name": "W\u00f6lflinge",
       "description": "",
       "color": "#F1F790",
-      "category_id": 3
+      "category_id": 3,
+      "is_public": true
     }
   },
   {
@@ -502,7 +547,8 @@
       "name": "Speziell zu Ostern",
       "description": "",
       "color": "#80BBE0",
-      "category_id": 1
+      "category_id": 1,
+      "is_public": true
     }
   },
   {
@@ -514,7 +560,7 @@
       "description": "",
       "color": "#E58383",
       "category_id": 1,
-      "is_visible": false
+      "is_public": false
     }
   },
   {
@@ -526,7 +572,7 @@
       "description": "",
       "color": "#DE80A9",
       "category_id": 1,
-      "is_visible": false
+      "is_public": false
     }
   },
   {
@@ -538,7 +584,7 @@
       "description": "",
       "color": "#788EC3",
       "category_id": 2,
-      "is_visible": true
+      "is_public": true
     }
   },
   {
@@ -550,7 +596,7 @@
       "description": "",
       "color": "#DE80A9",
       "category_id": 2,
-      "is_visible": true
+      "is_public": true
     }
   },
   {
@@ -562,7 +608,7 @@
       "description": "",
       "color": "#89BDD2",
       "category_id": 9,
-      "is_visible": true
+      "is_public": true
     }
   },
   {
@@ -574,7 +620,7 @@
       "description": "",
       "color": "#4BACE8",
       "category_id": 9,
-      "is_visible": true
+      "is_public": true
     }
   },
   {
@@ -586,7 +632,7 @@
       "description": "",
       "color": "#9FF7DB",
       "category_id": 7,
-      "is_visible": false
+      "is_public": false
     }
   },
   {
@@ -598,7 +644,7 @@
       "description": "",
       "color": "#9FF7DB",
       "category_id": 7,
-      "is_visible": false
+      "is_public": false
     }
   },
   {
@@ -610,7 +656,7 @@
       "description": "",
       "color": "#E27D79",
       "category_id": 7,
-      "is_visible": false
+      "is_public": false
     }
   },
   {
@@ -622,7 +668,7 @@
       "description": "",
       "color": "#DE80A9",
       "category_id": 7,
-      "is_visible": false
+      "is_public": false
     }
   },
   {
@@ -634,7 +680,7 @@
       "description": "",
       "color": "#F0E275",
       "category_id": 7,
-      "is_visible": false
+      "is_public": false
     }
   }
 ]

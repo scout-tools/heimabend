@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework_tracking',
     'django_filters',
-    'storages'
+    'storages',
+    'stdimage'
 ]
 
 MIDDLEWARE = [

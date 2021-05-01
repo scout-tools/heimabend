@@ -3,12 +3,19 @@ import Vuetify from 'vuetify/lib';
 import '@mdi/font/css/materialdesignicons.css';
 
 import colors from 'vuetify/lib/util/colors';
+import InspiIcon from '@/components/icon/Inspi.vue';
 
 Vue.use(Vuetify);
 
 export default new Vuetify({
   icons: {
     iconfont: 'mdi',
+    myIcon: {
+      component: InspiIcon,
+      props: {
+        name: 'inspi',
+      },
+    },
   },
   theme: {
     themes: {

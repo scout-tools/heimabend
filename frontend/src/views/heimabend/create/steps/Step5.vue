@@ -1,7 +1,6 @@
 <template>
-  <v-form ref="form4" v-model="valid">
+  <v-form ref="form5" v-model="valid">
     <v-container>
-
       <v-row class="ma-5">
         <creating-slider
           v-model="data.difficultlevel"
@@ -50,9 +49,14 @@
 
       <v-divider class="my-2" />
       <v-row class="ma-3" justify="center">
-        <v-btn class="mr-5" @click="prevStep()"> Zurück </v-btn>
-
-        <v-btn color="primary" @click="nextStep()"> Weiter </v-btn>
+        <v-btn class="mx-1" @click="prevStep()">
+          <v-icon left> mdi-chevron-left </v-icon>
+          Zurück
+        </v-btn>
+        <v-btn class="mx-1" color="primary" @click="nextStep()">
+          Weiter
+          <v-icon right> mdi-chevron-right </v-icon>
+        </v-btn>
       </v-row>
     </v-container>
   </v-form>
@@ -116,7 +120,7 @@ export default {
       this.$emit('prevStep');
     },
     nextStep() {
-      if (!this.$refs.form4.validate()) {
+      if (!this.$refs.form5.validate()) {
         return;
       }
       this.$emit('nextStep');

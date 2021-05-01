@@ -187,25 +187,12 @@ export default {
     isAgree: true,
   }),
 
-  mounted() {
-    const me = this;
-    setTimeout(() => {
-      me.getAgreeMent();
-    }, 300);
-  },
 
   created() {
     this.$store.commit('setHeaderString', 'Impressum + Datenschutz');
   },
 
   methods: {
-    getAgreeMent() {
-      const me = this;
-      // eslint-disable-next-line no-undef
-      _paq.push(() => {
-        me.isAgree = !this.isUserOptedOut();
-      });
-    },
     show() {
       this.dialog = true;
     },
@@ -215,25 +202,6 @@ export default {
     },
     onClickHeimabendItem() {
       this.$router.push({ name: 'message' });
-    },
-  },
-  computed: {
-    getLabel() {
-      if (this.isAgree) {
-        return 'Dein Besuch dieser Webseite wird aktuell erfasst. Diesen Schalter abwählen wenn dein Nutzerverhalten nicht mehr aufgezeichnet werden soll.';
-      }
-      return 'Dein Besuch dieser Webseite wird aktuell nicht erfasst. Diesen Schalter aktivieren wenn du uns erlauben willst dein Nutzerverhalten zu erfassen';
-    },
-  },
-  watch: {
-    isAgree(value) {
-      if (value) {
-        // eslint-disable-next-line no-undef
-        _paq.push(['forgetUserOptOut']);
-      } else {
-        // eslint-disable-next-line no-undef
-        _paq.push(['optUserOut']);
-      }
     },
   },
 };

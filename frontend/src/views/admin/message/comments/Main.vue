@@ -13,7 +13,6 @@
           {{
             moment(item.createdAt).format('DD.MM.YYYY')
           }}
-
         </template>
         <template v-slot:item.isPublic="{ item }">
           <v-icon :color="item.isPublic ? 'green' : 'red'">

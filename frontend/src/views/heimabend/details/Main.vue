@@ -86,9 +86,11 @@
 import axios from 'axios';
 // eslint-disable-next-line
 import { serviceMixin } from '@/mixins/serviceMixin.js';
+// eslint-disable-next-line
+import CommentBox from '@/components/box/Comment.vue';
 // eslint-disable-next-line import/no-unresolved
 import HeimabendCard from '../cards/Heimabend.vue';
-import CommentBox from './CommentBox.vue';
+
 
 export default {
   mixins: [serviceMixin],
@@ -117,7 +119,7 @@ export default {
     getImageLink(item) {
       const imageId = item[0].headerImage_Image;
       if (imageId && imageId.length) {
-        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${imageId}.default.jpeg`;
+        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${imageId}.big.jpeg`;
       }
       return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
     },
