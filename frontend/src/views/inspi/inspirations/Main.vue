@@ -1,115 +1,61 @@
 <template>
-<v-container>
-  <v-card class="mx-auto" max-width="800" justify="center">
-    <v-card-title justify="center"> Top 10 Aufrufe </v-card-title>
-    <v-slide-group
-      v-model="model"
-      class="pa-4"
-      active-class="success"
-      show-arrows
-    >
-      <v-slide-item v-for="n in data" :key="n.id" v-slot="{ active, toggle }">
-        <v-card class="ma-4" height="120" width="250" @click="onEventClicked(n.id)">
-          <v-card-subtitle class="whiteText justify-center text-center primary">
-            {{ n.title }}
-          </v-card-subtitle>
-          <v-img :src="getImageLink(n)" height="70px"></v-img>
-        </v-card>
-      </v-slide-item>
-    </v-slide-group>
-  </v-card>
+  <v-container>
+    <v-spacer class="py-3" />
+    <EventSlider :data="data1" titel="Top Aufrufe"/>
+    <v-spacer class="py-3" />
+    <EventSlider :data="data2" titel="Neusten Heimabende"/>
+    <v-spacer class="py-3" />
+    <EventSlider :data="data3" titel="Mit Abstand Heimabende"/>
+    <v-spacer class="py-3" />
+    <EventSlider :data="data4" titel="Nachhaltige Heimabende"/>
 
-  <v-spacer class="py-2"/>
-
-  <v-card class="mx-auto" max-width="800" justify="center">
-    <v-card-title justify="center"> 10 Neusten Heimabende </v-card-title>
-    <v-slide-group
-      v-model="model"
-      class="pa-4"
-      active-class="success"
-      show-arrows
-    >
-      <v-slide-item v-for="n in data" :key="n.id" v-slot="{ active, toggle }">
-        <v-card class="ma-4" height="120" width="250" @click="onEventClicked(n.id)">
-          <v-card-subtitle class="whiteText justify-center text-center primary">
-            {{ n.title }}
-          </v-card-subtitle>
-          <v-img :src="getImageLink(n)" height="70px"></v-img>
-        </v-card>
-      </v-slide-item>
-    </v-slide-group>
-  </v-card>
-
-  <v-spacer class="py-2"/>
-
-  <v-card class="mx-auto" max-width="800" justify="center">
-    <v-card-title justify="center"> 10 Besten Bewertungen </v-card-title>
-    <v-slide-group
-      v-model="model"
-      class="pa-4"
-      active-class="success"
-      show-arrows
-    >
-      <v-slide-item v-for="n in data" :key="n.id" v-slot="{ active, toggle }">
-        <v-card class="ma-4" height="120" width="250" @click="onEventClicked(n.id)">
-          <v-card-subtitle class="whiteText justify-center text-center primary">
-            {{ n.title }}
-          </v-card-subtitle>
-          <v-img :src="getImageLink(n)" height="70px"></v-img>
-        </v-card>
-      </v-slide-item>
-    </v-slide-group>
-  </v-card>
-
-    <v-spacer class="py-2"/>
-
-  <v-card class="mx-auto" max-width="800" justify="center">
-    <v-card-title justify="center"> 10 Nachhaltige Heimabende </v-card-title>
-    <v-slide-group
-      v-model="model"
-      class="pa-4"
-      active-class="success"
-      show-arrows
-    >
-      <v-slide-item v-for="n in data" :key="n.id" v-slot="{ active, toggle }">
-        <v-card class="ma-4" height="120" width="250" @click="onEventClicked(n.id)">
-          <v-card-subtitle class="whiteText justify-center text-center primary">
-            {{ n.title }}
-          </v-card-subtitle>
-          <v-img :src="getImageLink(n)" height="70px"></v-img>
-        </v-card>
-      </v-slide-item>
-    </v-slide-group>
-  </v-card>
-</v-container>
+  </v-container>
 </template>
 
 <script>
 // eslint-disable-next-line
+import EventSlider from '@/components/slider/Events.vue';
+// eslint-disable-next-line
 import { serviceMixin } from '@/mixins/serviceMixin.js';
+
 
 export default {
   mixins: [serviceMixin],
+  components: {
+    EventSlider,
+  },
   data: () => ({
     model: null,
-    data: [],
+    data1: [],
+    data2: [],
+    data3: [],
+    data4: [],
   }),
   methods: {
-    getImageLink(item) {
-      if (item.headerImage) {
-        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${item.headerImage}.default.jpeg`;
-      }
-      return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
-    },
     loadData() {
       this.getTopViews().then((response) => {
-        this.data = response.data;
+        this.data1 = response.data;
       });
-    },
-    onEventClicked(id) {
-      this.$router.push({
-        name: 'heimabendDetails',
-        params: { id },
+      this.getService2(
+        'event',
+        new URLSearchParams({ filterTags: '32', limit: '15', ordering: 'created_at' }),
+      ).then((response) => {
+        console.log(response);
+        this.data4 = response.data.results;
+      });
+      this.getService2(
+        'event',
+        new URLSearchParams({ filterTags: '54', limit: '15', ordering: 'created_at' }),
+      ).then((response) => {
+        console.log(response);
+        this.data3 = response.data.results;
+      });
+      this.getService2(
+        'event',
+        new URLSearchParams({ limit: '15', ordering: '-created_at' }),
+      ).then((response) => {
+        console.log(response);
+        this.data2 = response.data.results;
       });
     },
   },

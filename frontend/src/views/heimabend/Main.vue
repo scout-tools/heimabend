@@ -122,7 +122,7 @@ export default {
       const stillRunning = this.isLoadingMore;
       this.isLoadingMore = true;
       if (!stillRunning) {
-        this.getMoreItems(this.axiosParams);
+        this.getMoreItems();
       }
     },
 

@@ -111,12 +111,12 @@ class EventFilter(FilterSet):
 
 class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = Event.objects.all()
-    serializer_class = EventSerializer
+    serializer_class = EventItemSerializer
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
     filterset_class = EventFilter
     ordering = ['-created_at']
-    ordering_fields = ['-created_at', 'title', '-like_score']
+    ordering_fields = ['-created_at', 'created_at', 'title', '-like_score']
     search_fields = ['title', 'description']
     pagination_class = EventPagination
 

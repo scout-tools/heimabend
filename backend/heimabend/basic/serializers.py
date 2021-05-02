@@ -1,6 +1,7 @@
 # serializers.py
 from rest_framework import serializers
-from .models import Tag, Event, Message, Like, TagCategory, Image, MaterialItem, \
+from .models import Tag, Event, Message, Like, TagCategory, \
+    Image, MaterialItem, \
     ExperimentItem, Experiment, MaterialUnit, MaterialName, MessageType, \
     Faq, FaqRating, NextBestHeimabend
 from rest_framework_tracking.models import APIRequestLog
