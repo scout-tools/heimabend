@@ -4,7 +4,8 @@
       <v-row class="mt-6 ml-4">
         <span class="subtitle-1">
           Sammle hier bitte alles an Material, was für die Vorbereitung und
-          Durchführung deiner Idee benötigt wird. Bitte gib die Stückzahl für 6 Personen an.
+          Durchführung deiner Idee benötigt wird. Bitte gib die Stückzahl für 6
+          Personen an.
         </span>
       </v-row>
       <v-row justify="center">
@@ -19,9 +20,7 @@
       </v-row>
       <v-row justify="start">
         <v-btn color="success" @click="addItem">
-          <v-icon left>
-            mdi-plus
-          </v-icon>
+          <v-icon left> mdi-plus </v-icon>
           Neuer Gegenstand
         </v-btn>
       </v-row>
@@ -61,14 +60,7 @@ export default {
     names: [],
     count: -1,
     forXPersons: 6,
-    items: [
-      {
-        id: 1,
-        unitId: 1,
-        quantity: 1,
-        name: '',
-      },
-    ],
+    items: [],
   }),
   props: {
     data: Object,
@@ -88,8 +80,22 @@ export default {
     this.getMaterialUnits();
     this.getMaterialName();
     this.refreshStoreItems('message-type', 'setMessageType');
+    this.loadMaterialData();
   },
   methods: {
+    loadMaterialData() {
+      debugger;
+      if (this.isUpdate) {
+        debugger;
+        this.getService2(
+          'material-item',
+          new URLSearchParams({ event: this.$route.params.id }),
+        ).then((response) => {
+          debugger;
+          this.items = response.data;
+        });
+      }
+    },
     deleteItem(item) {
       const arrayNo = this.items.indexOf(item);
       this.items.splice(arrayNo, 1);
@@ -104,16 +110,14 @@ export default {
       this.count = this.count - 1;
     },
     getMaterialUnits() {
-      this.getService('material-unit')
-        .then((res) => {
-          this.units = res.data;
-        });
+      this.getService('material-unit').then((res) => {
+        this.units = res.data;
+      });
     },
     getMaterialName() {
-      this.getService('material-name')
-        .then((res) => {
-          this.names = res.data;
-        });
+      this.getService('material-name').then((res) => {
+        this.names = res.data;
+      });
     },
     prevStep() {
       this.$emit('prevStep');

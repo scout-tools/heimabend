@@ -193,6 +193,8 @@ class ImageView(LoggingMixin, viewsets.ModelViewSet, generics.GenericAPIView):
 class MaterialItemViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = MaterialItem.objects.all()
     serializer_class = MaterialItemSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ('event',)
 
 
 class MaterialUnitViewSet(LoggingMixin, viewsets.ModelViewSet):

@@ -136,9 +136,11 @@ export default {
   methods: {
     onCloseButtonClicked() {
       this.$store.commit('setIsSubPage', false);
+      // todo: looks strange
     },
     // eslint-disable-next-line no-unused-vars
     onChangeSearchInput() {
+      this.$store.commit('setIsFirstEventLoaded', false);
       this.$store.commit('setNextPath', false);
       this.$store.commit('resetHeimabendItems', []);
       this.$store.commit('setSearchInput', this.currentSearchInput);

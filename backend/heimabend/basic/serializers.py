@@ -49,7 +49,8 @@ class MaterialItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MaterialItem
-        fields = ('quantity', 'material_unit_str', 'material_name_str',)
+        fields = ('quantity', 'material_unit_str',
+                  'material_name_str', 'material_name', 'material_unit', 'event')
 
 
 class LikeSerializer(serializers.ModelSerializer):
@@ -110,7 +111,7 @@ class EventSerializer(serializers.ModelSerializer):
 
 class EventItemSerializer(serializers.ModelSerializer):
     header_image = serializers.SerializerMethodField()
-    material_list = MaterialItemSerializer(many=True)
+    material_list = MaterialItemSerializer(many=True, read_only=True)
 
     class Meta:
         model = Event

@@ -242,7 +242,7 @@ export default {
             createdByEmail: dataStep8.createdByEmail,
           })
           .then((response) => {
-            this.saveMatertial(response.id);
+            this.saveMaterial(response.id);
             this.$router.push({
               name: 'overview',
               params: { showSuccess: true },
@@ -269,7 +269,7 @@ export default {
           .then((response) => {
             this.$router.push({ name: 'overview' });
             this.$emit('dialogClose');
-            this.saveMatertial(response.id);
+            this.saveMaterial(response.id);
           })
           .catch(() => {
             this.showError = true;
@@ -278,7 +278,9 @@ export default {
     },
     saveMaterial(eventId) {
       const materialList = this.$refs.step4.getData();
+      debugger;
       if (materialList && materialList.length) {
+        debugger;
         this.postMaterialItems(materialList, eventId).then(() => {
           this.showSuccess = true;
         });
@@ -287,9 +289,10 @@ export default {
       }
     },
     async postMaterialItems(materialList, eventId) {
+      debugger;
       const path = `${process.env.VUE_APP_API}material-items/`;
       return axios.post(path, {
-        id: materialList.id,
+        id: materialList.id, // todo add for each item
         name: materialList.name,
         quantity: materialList.quantity,
         unitId: materialList.unitId,

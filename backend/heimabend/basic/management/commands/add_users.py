@@ -9,25 +9,46 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         UserModel = get_user_model()
 
-        if not UserModel.objects.filter(username='robert').exists():
-            user_1 = UserModel.objects.create_user(
-                'robert@hratuga.de', password='robert')
-            user_1.is_superuser = True
-            user_1.is_staff = True
-            user_1.save()
+        if not UserModel.objects.filter(username='Robert').exists():
+            user = UserModel.objects.create_user(
+                'Robert', password='robert')
+            user.is_superuser = True
+            user.is_staff = True
+            user.save()
 
-        if not UserModel.objects.filter(username='hagi').exists():
-            user_7 = UserModel.objects.create_user(
-                'hagi@hratuga.de', password='hagi')
-            user_7.is_superuser = False
-            user_7.is_staff = True
-            user_7.save()
+        if not UserModel.objects.filter(username='Hagi').exists():
+            user = UserModel.objects.create_user(
+                'Hagi', password='hagi')
+            user.is_superuser = False
+            user.is_staff = True
+            user.save()
 
-        if not UserModel.objects.filter(username='sheldon').exists():
-            user_7 = UserModel.objects.create_user(
-                'sheldon@wikinger.de', password='sheldon')
-            user_7.is_superuser = False
-            user_7.is_staff = True
-            user_7.save()
+        if not UserModel.objects.filter(username='Sheldon').exists():
+            user = UserModel.objects.create_user(
+                'Sheldon', password='sheldon')
+            user.is_superuser = False
+            user.is_staff = True
+            user.save()
+
+        if not UserModel.objects.filter(username='Resi').exists():
+            user = UserModel.objects.create_user(
+                'Resi', password='resi')
+            user.is_superuser = False
+            user.is_staff = True
+            user.save()
+
+        if not UserModel.objects.filter(username='Emelle').exists():
+            user = UserModel.objects.create_user(
+                'Emelle', password='emelle')
+            user.is_superuser = False
+            user.is_staff = True
+            user.save()
+
+        if not UserModel.objects.filter(username='Nadine').exists():
+            user = UserModel.objects.create_user(
+                'Nadine', password='nadine')
+            user.is_superuser = False
+            user.is_staff = True
+            user.save()
 
         print('user created')

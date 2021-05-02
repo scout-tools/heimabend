@@ -1,5 +1,5 @@
 <template>
-  <v-container class="max-width-class" ma-0 pa-0>
+  <v-container fluid class="max-width-class" ma-0 pa-0>
     <v-row no-gutters>
       <v-col :cols="getMainCols">
         <v-spacer class="mt-8" />
@@ -31,7 +31,7 @@
               :class="getDescriptionClass()"
               v-html="item.description"
             ></p>
-            <v-container v-if="!isDetailsView">
+            <v-container fluid v-if="!isDetailsView">
               <v-row>
                 <v-col cols="2"> </v-col>
                 <v-col cols="8">

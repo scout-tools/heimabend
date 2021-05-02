@@ -159,6 +159,9 @@ export default {
     },
     onResetClick() {
       this.$store.commit('clearFilters');
+      this.$store.commit('setNextPath', false);
+      this.$store.commit('resetHeimabendItems', []);
+      this.$store.commit('setIsFirstEventLoaded', false);
     },
     isTagMatchToEvent(item) {
       const eventTagArray = [];
