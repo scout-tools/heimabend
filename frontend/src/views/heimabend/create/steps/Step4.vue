@@ -84,14 +84,11 @@ export default {
   },
   methods: {
     loadMaterialData() {
-      debugger;
       if (this.isUpdate) {
-        debugger;
         this.getService2(
           'material-item',
           new URLSearchParams({ event: this.$route.params.id }),
         ).then((response) => {
-          debugger;
           this.items = response.data;
         });
       }

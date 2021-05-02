@@ -278,9 +278,7 @@ export default {
     },
     saveMaterial(eventId) {
       const materialList = this.$refs.step4.getData();
-      debugger;
       if (materialList && materialList.length) {
-        debugger;
         this.postMaterialItems(materialList, eventId).then(() => {
           this.showSuccess = true;
         });
@@ -289,7 +287,6 @@ export default {
       }
     },
     async postMaterialItems(materialList, eventId) {
-      debugger;
       const path = `${process.env.VUE_APP_API}material-items/`;
       return axios.post(path, {
         id: materialList.id, // todo add for each item
