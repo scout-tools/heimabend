@@ -105,15 +105,24 @@ export default {
   methods: {
     onClickRestore() {
       this.$store.commit('clearFilters');
+      this.$store.commit('setNextPath', false);
+      this.$store.commit('resetHeimabendItems', []);
+      this.$store.commit('setIsFirstEventLoaded', false);
     },
     onExpandClick() {
       this.isExtended = !this.isExtended;
     },
     onChange() {
       this.$store.commit('changeFilterTags', this.filterTags);
+      this.$store.commit('setNextPath', false);
+      this.$store.commit('resetHeimabendItems', []);
+      this.$store.commit('setIsFirstEventLoaded', false);
     },
     onCloseChip(value) {
+      this.$store.commit('setNextPath', false);
+      this.$store.commit('resetHeimabendItems', []);
       this.$store.commit('removeOneFilter', value);
+      this.$store.commit('setIsFirstEventLoaded', false);
     },
   },
   watch: {

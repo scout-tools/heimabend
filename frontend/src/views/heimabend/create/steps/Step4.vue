@@ -4,7 +4,7 @@
       <v-row class="mt-6 ml-4">
         <span class="subtitle-1">
           Sammle hier bitte alles an Material, was für die Vorbereitung und
-          Durchführung deiner Idee benötigt wird. Bitte geb die Stückzahl für 6 Personen an.
+          Durchführung deiner Idee benötigt wird. Bitte gib die Stückzahl für 6 Personen an.
         </span>
       </v-row>
       <v-row justify="center">
@@ -41,8 +41,9 @@
 
 <script>
 // eslint-disable-next-line
-import { serviceMixin } from '@/mixins/serviceMixin.js';
 import axios from 'axios';
+// eslint-disable-next-line
+import { serviceMixin } from '@/mixins/serviceMixin.js';
 // eslint-disable-next-line
 import MaterialItem from '@/components/form/MaterialItem.vue';
 
@@ -123,9 +124,8 @@ export default {
       }
       this.$emit('nextStep');
     },
-    async postMaterialItems() {
-      const path = `${process.env.VUE_APP_API}material-items/`;
-      return axios.post(path, this.items);
+    getData() {
+      return this.items;
     },
   },
 };

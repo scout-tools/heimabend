@@ -119,7 +119,7 @@ export default {
     getImageLink(item) {
       const imageId = item[0].headerImage_Image;
       if (imageId && imageId.length) {
-        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${imageId}.big.jpeg`;
+        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${imageId}.default.jpeg`;
       }
       return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
     },
@@ -141,12 +141,13 @@ export default {
       window.open(routeData.href, '_blank').focus();
     },
     getEvent() {
-      const path = `${this.API_URL}basic/event/${this.id}/`;
+      const path = `${this.API_URL}event-item/${this.id}`;
       this.loading = true;
       axios
         .get(path)
         .then((res) => {
-          this.item = [res.data];
+          // eslint-disable-next-line prefer-destructuring
+          this.item = [res.data][0];
           this.loading = false;
         })
         .catch(() => {

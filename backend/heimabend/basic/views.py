@@ -18,7 +18,7 @@ from .models import Tag, Event, Message, Like, TagCategory, Image, \
     MaterialItem, ExperimentItem, Experiment, MaterialUnit, \
     MaterialName, MessageType, Faq, FaqRating, NextBestHeimabend
 from .serializers import TagSerializer, EventSerializer, MessageSerializer, \
-    LikeSerializer, HighscoreSerializer, \
+    LikeSerializer, HighscoreSerializer, EventItemSerializer, \
     TagCategorySerializer, StatisticSerializer, ImageSerializer, \
     MaterialItemSerializer, ExperimentItemSerializer, ExperimentSerializer, \
     TopViewsSerializer, EventAdminSerializer, EventTimestampSerializer, \
@@ -125,6 +125,17 @@ class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
             return self.queryset.filter(is_public=True)
         else:
             return self.queryset
+
+
+class EventItem(LoggingMixin, viewsets.ModelViewSet):
+    serializer_class = EventItemSerializer
+
+    def get_queryset(self):
+        queryset = Event.objects.filter(pk=self.kwargs['event_id'])
+        if not self.request.user.is_authenticated:
+            return queryset.filter(is_public=True)
+        else:
+            return queryset
 
 
 class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -311,14 +322,15 @@ class MaterialItems(APIView):
                 material_item.update(
                     quantity=item['quantity'],
                     material_name_id=material_name_obj.id,
-                    material_unit_id=item['unit_id']
+                    event_id=item['event_id']
                 )
                 return_array.append(item['id'])
             else:
                 new_obj = MaterialItem.objects.create(
                     quantity=item['quantity'],
                     material_name_id=material_name_obj.id,
-                    material_unit_id=item['unit_id']
+                    material_unit_id=item['unit_id'],
+                    event_id=item['event_id']
                 )
                 new_obj.save()
 

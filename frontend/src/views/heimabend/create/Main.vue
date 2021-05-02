@@ -217,12 +217,9 @@ export default {
       this.currentStep -= 1;
     },
     finish() {
-      this.$refs.step4.postMaterialItems().then((res) => {
-        console.log(res.data[0]);
-        this.postData(res.data[0]);
-      });
+      this.postData();
     },
-    postData(data) {
+    postData() {
       const dataStep1 = this.$refs.step1.getData();
       const dataStep2 = this.$refs.step2.getData();
       const dataStep3 = this.$refs.step3.getData();
@@ -236,7 +233,6 @@ export default {
             title: dataStep1.title,
             description: dataStep2.description,
             tags: dataStep6.tags.concat(dataStep7.selectedMandatoryFilter),
-            materialItems: data.materialEventIds,
             costsRating: dataStep5.costsRating,
             executionTimeRating: dataStep5.executionTimeRating,
             isPrepairationNeeded: dataStep5.isPrepairationNeeded,
@@ -245,7 +241,8 @@ export default {
             createdBy: dataStep8.createdBy,
             createdByEmail: dataStep8.createdByEmail,
           })
-          .then(() => {
+          .then((response) => {
+            this.saveMatertial(response.id);
             this.$router.push({
               name: 'overview',
               params: { showSuccess: true },
@@ -261,7 +258,6 @@ export default {
             title: dataStep1.title,
             description: dataStep2.description,
             tags: dataStep6.tags.concat(dataStep7.selectedMandatoryFilter),
-            materialItems: data.materialEventIds,
             costsRating: dataStep5.costsRating,
             executionTimeRating: dataStep5.executionTimeRating,
             isPrepairationNeeded: dataStep5.isPrepairationNeeded,
@@ -270,15 +266,35 @@ export default {
             createdBy: dataStep8.createdBy,
             createdByEmail: dataStep8.createdByEmail,
           })
-          .then(() => {
+          .then((response) => {
             this.$router.push({ name: 'overview' });
             this.$emit('dialogClose');
-            this.showSuccess = true;
+            this.saveMatertial(response.id);
           })
           .catch(() => {
             this.showError = true;
           });
       }
+    },
+    saveMaterial(eventId) {
+      const materialList = this.$refs.step4.getData();
+      if (materialList && materialList.length) {
+        this.postMaterialItems(materialList, eventId).then(() => {
+          this.showSuccess = true;
+        });
+      } else {
+        this.showSuccess = true;
+      }
+    },
+    async postMaterialItems(materialList, eventId) {
+      const path = `${process.env.VUE_APP_API}material-items/`;
+      return axios.post(path, {
+        id: materialList.id,
+        name: materialList.name,
+        quantity: materialList.quantity,
+        unitId: materialList.unitId,
+        eventId,
+      });
     },
     cancel() {
       this.$router.push({ name: 'overview' });

@@ -42,6 +42,15 @@ class TagCategorySerializer(serializers.ModelSerializer):
         )
 
 
+class MaterialItemSerializer(serializers.ModelSerializer):
+    material_unit_str = serializers.ReadOnlyField(source='material_unit.name')
+    material_name_str = serializers.ReadOnlyField(source='material_name.name')
+
+    class Meta:
+        model = MaterialItem
+        fields = ('quantity', 'material_unit_str', 'material_name_str',)
+
+
 class LikeSerializer(serializers.ModelSerializer):
     current_median = serializers.SerializerMethodField()
 
@@ -80,7 +89,36 @@ class EventSerializer(serializers.ModelSerializer):
             'title',
             'description',
             'tags',
-            'material_items',
+            'header_image',
+            'costs_rating',
+            'execution_time',
+            'prepairation_time',
+            'created_by',
+            'created_at',
+            'is_public')
+
+    def get_header_image(self, obj):
+        print(obj)
+        image_id = obj.header_image
+        print(image_id)
+        if image_id:
+            if image_id.image:
+                return image_id.image.name
+        return ''
+
+
+class EventItemSerializer(serializers.ModelSerializer):
+    header_image = serializers.SerializerMethodField()
+    material_list = MaterialItemSerializer(many=True)
+
+    class Meta:
+        model = Event
+        fields = (
+            'id',
+            'title',
+            'description',
+            'tags',
+            'material_list',
             'header_image',
             'costs_rating',
             'execution_time',
@@ -95,8 +133,9 @@ class EventSerializer(serializers.ModelSerializer):
 
     def get_header_image(self, obj):
         image_id = obj.header_image
-        if image_id.image:
-            return image_id.image.name
+        if image_id:
+            if image_id.image:
+                return image_id.image.name
         return ''
 
 
@@ -162,13 +201,6 @@ class ImageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class MaterialItemSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = MaterialItem
-        fields = '__all__'
-
-
 class ExperimentSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -225,8 +257,9 @@ class TopViewsSerializer(serializers.ModelSerializer):
 
     def get_header_image(self, obj):
         image_id = obj.header_image
-        # if image_id.image:
-        #     return image_id.image.name
+        if image_id:
+            if image_id.image:
+                return image_id.image.name
         return ''
 
     def get_view_count(self, obj):
@@ -268,13 +301,6 @@ class EventTimestampSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'created_at')
-
-
-class MaterialItemSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = MaterialItem
-        fields = '__all__'
 
 
 class MaterialUnitSerializer(serializers.ModelSerializer):

@@ -1,16 +1,16 @@
 /* eslint-disable no-underscore-dangle */
 <template>
   <v-container fluid>
-    <v-row v-if="!loading || heimabendItems.length">
+    <v-row v-if="!isEventLoading || heimabendItems.length">
     <heimabend-card
       ref="eventCards"
       @refresh="refresh()"
       @loadMore="loadMore()"
       :items="heimabendItems"
-      :loading="loading"
+      :loading="isEventLoading"
       :isMobil="isMobil"
     />
-    <v-container v-if="!heimabendItems.length && !loading">
+    <v-container v-if="!heimabendItems.length && !isEventLoading">
       <v-row justify="center">
         <v-img
           :src="require('@/assets/inspi/inspi_confused.png')"
@@ -70,8 +70,6 @@ export default {
   },
   watch: {
     axiosParams() {
-      this.isFirstEventsLoaded = false;
-      this.$store.commit('resetHeimabendItems');
       this.refresh();
     },
   },
@@ -87,6 +85,9 @@ export default {
       'heimabendItems',
       'scollPosition',
       'nextPath',
+      'isEventLoading',
+      'isFirstEventLoaded',
+      'saveFilterLastFilter',
     ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -108,6 +109,7 @@ export default {
       }
       params.append('page', 1);
       params.append('timestamp', new Date().getTime());
+
       return params;
     },
     showSuccess() {
@@ -134,31 +136,35 @@ export default {
         .then((res) => {
           this.$store.commit('extendHeimabendItems', res.data.results);
           this.$store.commit('setNextPath', res.data.next);
-          this.loading = false;
+          this.$store.commit('setIsEventLoading', false);
           this.isLoadingMore = false;
           this.trackItems(res.data.results);
         })
         .catch(() => {
-          this.loading = false;
+          this.$store.commit('setIsEventLoading', false);
           this.isLoadingMore = false;
         });
     },
 
     refresh() {
       if (
-        this.saveFilterLastFilter.toString() !== this.axiosParams.toString()
-        && !this.isFirstEventsLoaded
+        this.saveFilterLastFilter !== this.axiosParams.toString()
+        && !this.isFirstEventLoaded
       ) {
-        this.getMoreItems();
-        this.saveFilterLastFilter = this.axiosParams;
+        if (this.nextPath) {
+          this.getMoreItems();
+        } else {
+          this.getAllEventItems();
+        }
+        this.$store.commit('setSaveFilterLastFilter', this.axiosParams.toString());
       }
       this.$store.commit('setIsScoringMode', false);
     },
 
     getAllEventItems() {
       const path = `${this.API_URL}basic/event/`;
-      this.loading = true;
-      this.isFirstEventsLoaded = true;
+      this.$store.commit('setIsEventLoading', true);
+      this.$store.commit('setIsFirstEventLoaded', true);
       axios
         .get(path, {
           params: this.axiosParams,
@@ -168,14 +174,14 @@ export default {
           this.$store.commit('setNextPath', res.data.next);
           this.count = res.data.count;
           this.$store.commit('setHeimabendCounter', this.count);
-          this.loading = false;
+          this.$store.commit('setIsEventLoading', false);
           this.isLoadingMore = false;
           // eslint-disable-next-line no-undef
           this.callTrackItems(res.data.results);
           this.getTags();
         })
         .catch(() => {
-          this.loading = false;
+          this.$store.commit('setIsEventLoading', false);
           this.isLoadingMore = false;
         });
     },
@@ -244,21 +250,19 @@ export default {
     setTimeout(() => {
       window.scrollTo(0, this.scollPosition);
     }, 500);
-  },
-
-  mounted() {
-    this.$store.commit('setIsScoringMode', false);
     if (!this.nextPath) {
       this.getAllEventItems();
     }
   },
+
+  mounted() {
+    this.$store.commit('setIsScoringMode', false);
+  },
   data: () => ({
     API_URL: process.env.VUE_APP_API,
-    loading: true,
     isLoadingMore: false,
     count: 0,
     timeout: 13000,
-    saveFilterLastFilter: false,
   }),
 };
 </script>

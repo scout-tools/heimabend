@@ -31,8 +31,14 @@ export default new Vuex.Store({
     heimabendItems: [],
     scollPosition: 0,
     nextPath: '',
+    isEventLoading: false,
+    isFirstEventLoaded: false,
+    saveFilterLastFilter: [],
   },
   getters: {
+    saveFilterLastFilter(state) {
+      return state.saveFilterLastFilter;
+    },
     isAuthenticated(state) {
       return !!state.accessToken;
     },
@@ -102,8 +108,23 @@ export default new Vuex.Store({
     nextPath(state) {
       return state.nextPath;
     },
+    isEventLoading(state) {
+      return state.isEventLoading;
+    },
+    isFirstEventLoaded(state) {
+      return state.isFirstEventLoaded;
+    },
   },
   mutations: {
+    setSaveFilterLastFilter(state, value) {
+      state.saveFilterLastFilter = value;
+    },
+    setIsEventLoading(state, value) {
+      state.isEventLoading = value;
+    },
+    setIsFirstEventLoaded(state, value) {
+      state.isFirstEventLoaded = value;
+    },
     acceptedPrivacy(state, acceptedPrivacy) {
       state.acceptedPrivacy = acceptedPrivacy;
     },
@@ -220,5 +241,5 @@ export default new Vuex.Store({
       commit('setSearchInput', '');
     },
   },
-  plugins: [createPersistedState()],
+  // plugins: [createPersistedState()],
 });

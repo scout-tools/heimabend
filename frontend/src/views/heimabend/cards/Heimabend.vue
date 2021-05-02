@@ -63,18 +63,17 @@
                   </v-tooltip>
                 </v-col>
               </v-row>
+
+              <v-divider/>
+
               <HeimabendRating v-if="false" :item="item" />
             </v-container>
+            <v-container v-else>
+              <v-row align="center" justify="center">
+                <MaterialBox :materialList="item.materialList"/>
+              </v-row>
+            </v-container>
           </v-card-text>
-
-          <v-divider v-if="isDetailsView" class="my-2" />
-          <div v-if="isDetailsView">
-            <div class="text-left ml-10">
-              <u> Material </u>
-            </div>
-
-            TODO
-          </div>
 
           <v-container>
             <v-chip-tooltip
@@ -401,6 +400,8 @@ import MenuRight from '@/views/components/menu/Right.vue';
 // eslint-disable-next-line import/no-unresolved
 import HeimabendRating from '@/components/rating/heimabend/Main.vue';
 // eslint-disable-next-line import/no-unresolved
+import MaterialBox from '@/components/box/Material.vue';
+// eslint-disable-next-line import/no-unresolved
 import HeimabendCardHeader from '@/components/heimabend/CardHeader.vue';
 // eslint-disable-next-line import/no-unresolved
 import Fab from '@/views/components/fab/Standard.vue';
@@ -431,6 +432,7 @@ export default {
     VChipTooltip,
     HeimabendRating,
     HeimabendCardHeader,
+    MaterialBox,
   },
   methods: {
     scroll() {
@@ -555,9 +557,6 @@ export default {
       return `${dateObj.getDate()}.${
         dateObj.getMonth() + 1
       }.${dateObj.getFullYear()} `;
-    },
-    getMaterialArray() {
-      return [];
     },
     onDeleteClick(item) {
       this.$refs.deleteTagModal.show(item);

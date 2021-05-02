@@ -137,7 +137,7 @@ export default {
       this.$emit('prevStep');
     },
     nextStep(skip = false) {
-      if (!this.$refs.form6.validate() || !skip) {
+      if (!this.$refs.form6.validate() && !skip) {
         return;
       }
       this.$emit('nextStep');

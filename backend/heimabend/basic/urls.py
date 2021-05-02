@@ -36,5 +36,6 @@ urlpatterns = [
     path('basic/', include(router.urls)),
     url(r'^upload/$', views.ImageView.as_view({'get': 'list'}), name='file-upload'),
     url(r'^event-publish/$', views.ChangePublishStatus.as_view(), name='event-publish'),
-    url(r'^material-items/$', views.MaterialItems.as_view(), name='material-items')
+    url(r'^material-items/$', views.MaterialItems.as_view(), name='material-items'),
+    url(r'^event-item/(?P<event_id>\w+)$', views.EventItem.as_view({'get': 'list'}), name='event-item')
 ]

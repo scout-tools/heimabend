@@ -139,6 +139,8 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     onChangeSearchInput() {
+      this.$store.commit('setNextPath', false);
+      this.$store.commit('resetHeimabendItems', []);
       this.$store.commit('setSearchInput', this.currentSearchInput);
     },
     onDrawerIconClicked() {

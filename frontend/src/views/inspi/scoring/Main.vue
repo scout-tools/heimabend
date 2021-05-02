@@ -15,7 +15,7 @@
             <b>Deine Meinung</b> ist meine Leibspeise. <br />
             Hilf mir bitte satt zu werden.<br />
             <br />
-            Damit ich dir und allen anderen Pfadfindern passende Inspirationen
+            Damit ich dir und allen anderen Pfadfindern passende Inspiration
             bieten kann, brauche ich
             <b>gutes Futter</b>. <br />
             Füttere mich mit so vielen Ideen und Meinungen von dir wie möglich.

@@ -10,7 +10,7 @@
           <v-icon color="yellow darken-1"> mdi-lightbulb-on </v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title>Inspirationen </v-list-item-title>
+          <v-list-item-title>Inspiration </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 

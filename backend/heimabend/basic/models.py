@@ -79,24 +79,6 @@ class MaterialName(TimeStampMixin):
         return self.__str__()
 
 
-class MaterialItem(TimeStampMixin):
-    id = models.AutoField(
-        auto_created=True,
-        primary_key=True,
-        serialize=False,
-        verbose_name='ID')
-    quantity = models.IntegerField(default=0)
-    number_of_participants = models.IntegerField(default=0, blank=True)
-    material_name = models.ForeignKey(MaterialName, on_delete=models.PROTECT)
-    material_unit = models.ForeignKey(MaterialUnit, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.material_name
-
-    def __repr__(self):
-        return self.__str__()
-
-
 class Tag(TimeStampMixin):
     id = models.AutoField(
         auto_created=True,
@@ -168,7 +150,6 @@ class Event(TimeStampMixin):
         max_length=1,
         default='')
     tags = models.ManyToManyField(Tag, default='')
-    material_items = models.ManyToManyField(MaterialItem, blank=True)
     costs_rating = models.SmallIntegerField(
         default=1, validators=[
             MinValueValidator(0), MaxValueValidator(5)])
@@ -185,6 +166,25 @@ class Event(TimeStampMixin):
 
     def __str__(self):
         return self.title
+
+    def __repr__(self):
+        return self.__str__()
+
+
+class MaterialItem(TimeStampMixin):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    quantity = models.IntegerField(default=0)
+    number_of_participants = models.IntegerField(default=0, blank=True)
+    material_name = models.ForeignKey(MaterialName, on_delete=models.PROTECT)
+    material_unit = models.ForeignKey(MaterialUnit, on_delete=models.PROTECT)
+    event = models.ForeignKey(Event, related_name='material_list', on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return self.material_name
 
     def __repr__(self):
         return self.__str__()
