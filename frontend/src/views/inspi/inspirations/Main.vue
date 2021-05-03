@@ -38,21 +38,21 @@ export default {
       });
       this.getService2(
         'event',
-        new URLSearchParams({ filterTags: '32', limit: '15', ordering: 'created_at' }),
+        new URLSearchParams({ limit: '15', ordering: '-created_at' }),
       ).then((response) => {
-        this.data4 = response.data.results;
+        this.data2 = response.data.results;
       });
       this.getService2(
         'event',
-        new URLSearchParams({ filterTags: '54', limit: '15', ordering: 'created_at' }),
+        new URLSearchParams({ filterTags: '54', limit: '15', ordering: '?' }),
       ).then((response) => {
         this.data3 = response.data.results;
       });
       this.getService2(
         'event',
-        new URLSearchParams({ limit: '15', ordering: '-created_at' }),
+        new URLSearchParams({ filterTags: '32', limit: '15', ordering: '?' }),
       ).then((response) => {
-        this.data2 = response.data.results;
+        this.data4 = response.data.results;
       });
     },
   },

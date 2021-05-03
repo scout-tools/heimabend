@@ -2,7 +2,6 @@
   <v-card flat class="mx-auto" justify="center">
     <v-card-title class="pa-0" justify="center"> {{ titel }} </v-card-title>
     <v-slide-group
-      v-model="model"
       class="pa-0"
       active-class="success"
       show-arrows
@@ -37,12 +36,12 @@ export default {
       }
       return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
     },
-  },
-  onEventClicked(id) {
-    this.$router.push({
-      name: 'heimabendDetails',
-      params: { id },
-    });
+    onEventClicked(id) {
+      this.$router.push({
+        name: 'heimabendDetails',
+        params: { id },
+      });
+    },
   },
 };
 </script>
