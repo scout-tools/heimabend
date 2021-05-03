@@ -6,17 +6,15 @@
       active-class="success"
       show-arrows
     >
-      <v-slide-item v-for="n in data" :key="n.id" v-slot="{ active, toggle }">
+      <v-slide-item v-for="item in data" :key="item.id" v-slot="{ active, toggle }">
         <v-card
           class="ma-2"
-          height="170"
-          width="290"
-          @click="onEventClicked(n.id)"
+          height="180"
+          width="320"
+          @click="onEventClicked(item.id)"
         >
-          <v-card-subtitle class="whiteText justify-center text-center primary">
-            {{ n.title }}
-          </v-card-subtitle>
-          <v-img :src="getImageLink(n)" height="115px"></v-img>
+          <HeimabendCardHeader :item="item"/>
+          <v-img :src="getImageLink(item)" height="115px"></v-img>
         </v-card>
       </v-slide-item>
     </v-slide-group>
@@ -24,10 +22,16 @@
 </template>
 
 <script>
+// eslint-disable-next-line import/no-unresolved
+import HeimabendCardHeader from '@/components/heimabend/CardHeader.vue';
+
 export default {
   props: {
     data: Array,
     titel: String,
+  },
+  components: {
+    HeimabendCardHeader,
   },
   methods: {
     getImageLink(item) {

@@ -67,7 +67,6 @@ export default {
     },
     getHeaderColorClass(tags) {
       let colorclass = 'color-scout';
-
       const hasWo = tags.includes(50);
       const hasScout = tags.includes(51);
       const hasRover = tags.includes(52);

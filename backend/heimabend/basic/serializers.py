@@ -253,6 +253,7 @@ class TopViewsSerializer(serializers.ModelSerializer):
             'id',
             'view_count',
             'title',
+            'tags',
             'created_by',
             'header_image',
         )
