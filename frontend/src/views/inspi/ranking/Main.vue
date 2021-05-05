@@ -38,7 +38,7 @@ export default {
   methods: {
   },
   created() {
-    this.$store.commit('setHeaderString', 'Fakten');
+    this.$store.commit('setHeaderString', 'Zahlen');
   },
 };
 </script>

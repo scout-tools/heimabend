@@ -50,9 +50,5 @@ export default {
     units: Array,
     names: Array,
   },
-  data() {
-    return {
-    };
-  },
 };
 </script>

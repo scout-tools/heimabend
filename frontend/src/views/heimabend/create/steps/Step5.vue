@@ -73,10 +73,6 @@ export default {
         v => (v && v.length > 0) || 'Mindestens ein Thema ist erforderlich',
       ],
     },
-    data: {
-      executionTimeRating: 1,
-      costsRating: 1,
-    },
     valid: true,
     n: 0,
     difficultlevel: 0,

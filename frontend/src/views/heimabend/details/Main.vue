@@ -3,38 +3,7 @@
     <v-row :max-width="getMaxWidth()">
       <v-card color="#F6F6F6"
         class="mx-auto" justify="center" :max-width="getMaxWidth()">
-        <v-card-title class="ml-2 mt-2 pa-0" justify="center">
-        <img
-          :src="require('@/assets/inspi/inspi_flying.png')"
-          class="mr-2"
-          height="50"
-          alt="Bild von Inspi"
-        />
-          Meine Empfehlungen:
-
-        </v-card-title
-        >
-        <v-slide-group class="pa-0" active-class="success" show-arrows>
-          <v-slide-item
-            v-for="n in nextEvents"
-            :key="n.id"
-            v-slot="{ active, toggle }"
-          >
-            <v-card
-              class="ma-4"
-              height="120"
-              width="250"
-              @click="openViewNewTab(n.events[0].id)"
-            >
-              <v-card-subtitle
-                class="whiteText justify-center text-center primary"
-              >
-                {{ n.events[0].title }}
-              </v-card-subtitle>
-              <v-img :src="getImageLink(n.events)" height="65px"></v-img>
-            </v-card>
-          </v-slide-item>
-        </v-slide-group>
+        <EventSlider :data="nextEvents" titel="Auch interessant:"/>
       </v-card>
     </v-row>
     <v-row align="center" justify="center" :max-width="getMaxWidth()">
@@ -47,13 +16,18 @@
     </v-row>
 
     <v-row align="center" class="ma-5" justify="center" :max-width="getMaxWidth()">
-      <comment-box color="#F6F6F6" :max-width="getMaxWidth()"/>
+      <CommentBox
+        headerText="Kommentar schreiben"
+        color="#F6F6F6"
+        allowedMessageTypes="comment"
+        :max-width="getMaxWidth()"/>
     </v-row>
     <v-row justify="center">
       <p :class="textColor">Diesen Heimabend versenden mit:</p>
     </v-row>
     <v-row justify="center">
       <social-sharing
+        name="x123"
         :url="getUrl()"
         title="Heimabend Inspirator"
         :description="getDescription()"
@@ -89,6 +63,8 @@ import { serviceMixin } from '@/mixins/serviceMixin.js';
 // eslint-disable-next-line
 import CommentBox from '@/components/box/Comment.vue';
 // eslint-disable-next-line import/no-unresolved
+import EventSlider from '@/components/slider/Events.vue';
+// eslint-disable-next-line import/no-unresolved
 import HeimabendCard from '../cards/Heimabend.vue';
 
 
@@ -97,6 +73,7 @@ export default {
   components: {
     HeimabendCard,
     CommentBox,
+    EventSlider,
   },
   computed: {
     textColor() {

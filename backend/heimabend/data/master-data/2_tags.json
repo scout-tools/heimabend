@@ -208,7 +208,7 @@
     "pk": 18,
     "fields": {
       "id": 13,
-      "name": "Kim-Spiele",
+      "name": "Kim-Spiel",
       "description": "",
       "color": "#C6C6FF",
       "category_id": 9,
@@ -388,7 +388,7 @@
     "pk": 33,
     "fields": {
       "id": 31,
-      "name": "Spiele",
+      "name": "Spiel",
       "description": "Alles zum Thema Spielen",
       "color": "#B0E462",
       "category_id": 4,
@@ -544,7 +544,7 @@
     "pk": 46,
     "fields": {
       "id": 55,
-      "name": "Speziell zu Ostern",
+      "name": "Ostern",
       "description": "",
       "color": "#80BBE0",
       "category_id": 1,
@@ -556,7 +556,7 @@
     "pk": 47,
     "fields": {
       "id": 56,
-      "name": "Speziell im Advent",
+      "name": "Advent",
       "description": "",
       "color": "#E58383",
       "category_id": 1,
@@ -568,7 +568,7 @@
     "pk": 48,
     "fields": {
       "id": 57,
-      "name": "Speziell zu Karneval",
+      "name": "Karneval",
       "description": "",
       "color": "#DE80A9",
       "category_id": 1,
@@ -616,7 +616,7 @@
     "pk": 52,
     "fields": {
       "id": 66,
-      "name": "Tiere",
+      "name": "Tier",
       "description": "",
       "color": "#4BACE8",
       "category_id": 9,

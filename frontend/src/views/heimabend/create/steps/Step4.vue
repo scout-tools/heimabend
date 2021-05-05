@@ -60,10 +60,21 @@ export default {
     names: [],
     count: -1,
     forXPersons: 6,
+    inputItems: [],
     items: [],
   }),
   props: {
     data: Object,
+  },
+  watch: {
+    inputItems(value) {
+      this.items = value.map(item => ({
+        id: item.id,
+        name: item.materialNameStr,
+        quantity: item.quantity,
+        unitId: item.materialUnit,
+      }));
+    },
   },
   computed: {
     isMobil() {
@@ -89,7 +100,7 @@ export default {
           'material-item',
           new URLSearchParams({ event: this.$route.params.id }),
         ).then((response) => {
-          this.items = response.data;
+          this.inputItems = response.data;
         });
       }
     },
@@ -126,7 +137,13 @@ export default {
       this.$emit('nextStep');
     },
     getData() {
-      return this.items;
+      const material = this.items.map(item => ({
+        id: item.id,
+        name: typeof item.name !== 'object' ? item.name : item.name.name,
+        quantity: item.quantity,
+        unitId: item.unitId,
+      }));
+      return material;
     },
   },
 };

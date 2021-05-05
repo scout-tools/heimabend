@@ -1,7 +1,8 @@
 <template>
-  <v-card flat class="mx-auto" justify="center">
+  <v-card flat v-if="data.length" class="mx-auto" justify="center">
     <v-card-title class="pa-0" justify="center"> {{ titel }} </v-card-title>
     <v-slide-group
+      v-if="data.length"
       class="pa-0"
       active-class="success"
       show-arrows
@@ -18,6 +19,12 @@
         </v-card>
       </v-slide-item>
     </v-slide-group>
+    <v-progress-circular
+      v-else
+      indeterminate
+      size="100"
+      color="white"
+    ></v-progress-circular>
   </v-card>
 </template>
 

@@ -49,8 +49,15 @@ class MaterialItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MaterialItem
-        fields = ('quantity', 'material_unit_str',
-                  'material_name_str', 'material_name', 'material_unit', 'event')
+        fields = (
+            'id',
+            'quantity',
+            'material_unit_str',
+            'material_name_str',
+            'material_name',
+            'material_unit',
+            'event'
+        )
 
 
 class LikeSerializer(serializers.ModelSerializer):
@@ -343,21 +350,41 @@ class FaqRatingSerializer(serializers.ModelSerializer):
 
 class NextBestHeimabendSerializer(serializers.ModelSerializer):
 
-    events = serializers.SerializerMethodField()
+    header_image = serializers.SerializerMethodField()
+    title = serializers.SerializerMethodField()
+    tags = serializers.SerializerMethodField()
+    id = serializers.SerializerMethodField()
 
     class Meta:
         model = NextBestHeimabend
         fields = (
             'event',
             'event_score',
-            'id',
             'score',
-            'events',
+            'header_image',
+            'title',
+            'tags',
+            'id',
         )
 
-    def get_events(self, obj):
-        return Event.objects.filter(id=obj.event_score.id).values(
-            'id',
-            'title',
-            'header_image__image'
-        )
+    def get_id(self, obj):
+        id = Event.objects.filter(id=obj.event_score.id).values('id').first()
+        return id['id']
+
+    def get_title(self, obj):
+        title = Event.objects.filter(
+            id=obj.event_score.id).values('title').first()
+        return title['title']
+
+    def get_header_image(self, obj):
+        image = Event.objects.filter(id=obj.event_score.id).values(
+            'header_image__image').first()
+        print(image)
+        return image['header_image__image']
+
+    def get_tags(self, obj):
+        return_tags = []
+        tags = Event.objects.filter(id=obj.event_score.id).values('tags')
+        for tag in tags:
+            return_tags.append(tag['tags'])
+        return return_tags

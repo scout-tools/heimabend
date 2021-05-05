@@ -21,7 +21,7 @@
           <v-icon color="blue"> mdi-calculator-variant-outline </v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title>Fakten </v-list-item-title>
+          <v-list-item-title>Zahlen </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 

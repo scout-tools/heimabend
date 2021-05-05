@@ -325,7 +325,8 @@ class MaterialItems(APIView):
                 material_item.update(
                     quantity=item['quantity'],
                     material_name_id=material_name_obj.id,
-                    event_id=item['event_id']
+                    event_id=item['event_id'],
+                    material_unit_id=item['unit_id']
                 )
                 return_array.append(item['id'])
             else:

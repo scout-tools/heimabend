@@ -8,7 +8,7 @@
               <v-icon large color="blue">mdi-chat-plus</v-icon>
             </v-col>
             <v-col>
-              <p class="text-left title ma-3"> Eigene Frage schreiben</p>
+              <p class="text-left title ma-3">{{ headerText }}</p>
             </v-col>
           </v-row>
         </v-container>
@@ -48,6 +48,10 @@ export default {
       type: String,
       default: 'all',
     },
+    headerText: {
+      type: String,
+      default: 'Eigene Frage schreiben',
+    },
   },
   components: {
     MessageForm,
@@ -61,7 +65,6 @@ export default {
     data: {},
     responseObj: '',
     timeout: -1,
-    headerText: 'Nachricht an mich',
   }),
 
   methods: {
