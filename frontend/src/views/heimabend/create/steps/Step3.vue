@@ -250,16 +250,16 @@ export default {
   validations: {
     tempData: {
       description: {
-        required: requiredIf(item => !item.imageId || !item.description),
+        required: requiredIf(item => !!item && (!item.imageId || !item.description)),
       },
       photographerName: {
-        required: requiredIf(item => !item.imageId || !item.photographerName),
+        required: requiredIf(item => !!item && (!item.imageId || !item.photographerName)),
       },
       privacyConsent: {
-        required: requiredIf(item => !item.imageId || !item.privacyConsent),
+        required: requiredIf(item => !!item && (!item.imageId || !item.privacyConsent)),
       },
       isOpenSource: {
-        required: requiredIf(item => !item.imageId || !item.isOpenSource),
+        required: requiredIf(item => !!item && (!item.imageId || !item.isOpenSource)),
       },
     },
   },
@@ -292,7 +292,9 @@ export default {
   },
   watch: {
     data(value) {
-      this.tempData = value.headerImage;
+      if (value.headerImage) {
+        this.tempData = value.headerImage;
+      }
       this.imageUuid = this.getUuid(value);
     },
   },
@@ -340,7 +342,10 @@ export default {
   methods: {
     getUuid(value) {
       if (
-        value && value.headerImage.imageUuid && value.headerImage.imageUuid.imageUuid
+        value
+        && value.headerImage
+        && value.headerImage.imageUuid
+        && value.headerImage.imageUuid.imageUuid
       ) {
         return value.headerImage.imageUuid.imageUuid;
       }

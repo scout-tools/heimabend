@@ -452,7 +452,7 @@ export default {
       if (item.headerImage && item.headerImage.imageUuid && item.headerImage.imageUuid.imageUuid) {
         return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${item.headerImage.imageUuid.imageUuid}.default.jpeg`;
       }
-      return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
+      return false;
     },
     yourHeimabendSpan() {
       return this.isMobil ? 'headerIsMobile' : 'headerIsDesktop';

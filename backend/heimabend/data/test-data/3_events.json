@@ -2718,5 +2718,73 @@
             "created_by": "Janny",
             "is_public": 1
         }
+    },
+    {
+        "model": "basic.event",
+        "pk": 161,
+        "fields": {
+            "id": 224,
+            "title": "Versteinern",
+            "description": "<p>Ablauf:<br />Bei dem Spiel Versteinern!&ldquo; machen die Kinder vor der Kamera lustige&nbsp;<br />Bewegungen. Ruft ein zuvor ausgew&auml;hltes Kind Versteinern!&ldquo;, frieren alle Kinder&nbsp;<br />auf der Stelle ein und d&uuml;rfen sich nicht mehr bewegen, bis die Erlaubnis dazu&nbsp;<br />gegeben wird. Wahlweise kann f&uuml;r das Spiel auch Musik verwendet werden.&nbsp;<br />Stoppt die Musik, frieren die Kinder ein und d&uuml;rfen sich so lange nicht&nbsp;<br />bewegen, bis diese fortgesetzt wird. Bewegt sich ein Kind zu fr&uuml;h, setzt es f&uuml;r&nbsp;<br />eine Runde aus.</p>",
+            "costs_rating": 1,
+            "execution_time": 1,
+            "difficulty": 1,
+            "created_by_email": "beringernadine3@gmail.com",
+            "created_at": "2021-04-05 09:37:51.616850",
+            "updated_at": null,
+            "created_by": "Nadine",
+            "is_public": 0
+        }
+    },
+    {
+        "model": "basic.event",
+        "pk": 162,
+        "fields": {
+            "id": 225,
+            "title": "Koffer packen",
+            "description": "<p>Ablauf:<br />Bei dem Spiel Koffer packen&ldquo; packen die Kinder der Reihe nach gedanklich&nbsp;<br />einen Gegenstand in einen Koffer und sprechen dazu: Ich packe meinen Koffer&nbsp;<br />und nehme mit: ein Kuscheltier.&ldquo; Anschlie&szlig;end wird das n&auml;chste Kind&nbsp;<br />aufgerufen, wiederholt den Satz und packt einen weiteren Gegenstand dazu.&nbsp;<br />Idealerweise wird das Spiel so lange gespielt, bis alle Kinder an der Reihe&nbsp;<br />waren. Als Meutenf&uuml;her/innen bietet es sich an, die genannten Begriffe zu notieren, um&nbsp;<br />bei Bedarf schnell zu helfen.</p>",
+            "costs_rating": 1,
+            "execution_time": 1,
+            "difficulty": 1,
+            "created_by_email": "beringernadine3@gmail.com",
+            "created_at": "2021-04-05 09:37:51.616850",
+            "updated_at": null,
+            "created_by": "Nadine",
+            "is_public": 0
+        }
+    },
+    {
+        "model": "basic.event",
+        "pk": 163,
+        "fields": {
+            "id": 226,
+            "title": "Tiere raten",
+            "description": "<p>Ablauf:<br />Bei dem Spiel Tiere raten&ldquo; &uuml;berlegt sich jedes Kind ein beliebiges Tier und&nbsp;<br />notiert es auf einem kleinen Zettel. Anschlie&szlig;end beginnt ein Kind sein&nbsp;<br />ausgew&auml;hltes Tier m&ouml;glichst genau zu beschreiben. Danach ruft das Kind so&nbsp;<br />lange auf, bis das gew&auml;hlte Tier erraten wurde und zeigt seinen Zettel &uuml;ber die&nbsp;<br />Kamera. Als N&auml;chstes ist das Gewinnerkind an der Reihe, das nun sein Tier&nbsp;<br />beschreiben darf. Besonders spannend wird das Spiel, wenn die Kinder exotische&nbsp;<br />Tiere w&auml;hlen</p>",
+            "costs_rating": 1,
+            "execution_time": 1,
+            "difficulty": 1,
+            "created_by_email": "beringernadine3@gmail.com",
+            "created_at": "2021-04-05 09:37:51.616850",
+            "updated_at": null,
+            "created_by": "Nadine",
+            "is_public": 0
+        }
+    },
+    {
+        "model": "basic.event",
+        "pk": 164,
+        "fields": {
+            "id": 227,
+            "title": "Kindermemorix",
+            "description": "<p>Ablauf:<br />Bei dem Spiel Kindermemorix werden zwei freiwillige Kinder aus der&nbsp;<br />Videokonferenz geschickt. Die verbleibenden Kinder finden sich in Paaren&nbsp;<br />zusammen und vereinbaren eine gemeinsame Bewegung. Haben alle Kinder ihre&nbsp;<br />Bewegung gew&auml;hlt, werden die beiden Kinder wieder in die Konferenz geholt&nbsp;<br />und rufen abwechselnd immer zwei Kinder auf, die ihre Bewegung vormachen.&nbsp;<br />Wurden zwei gleiche Bewegungen gefunden, erh&auml;lt das Kind einen Punkt.</p>",
+            "costs_rating": 1,
+            "execution_time": 1,
+            "difficulty": 1,
+            "created_by_email": "beringernadine3@gmail.com",
+            "created_at": "2021-04-05 09:37:51.616850",
+            "updated_at": null,
+            "created_by": "Nadine",
+            "is_public": 0
+        }
     }
 ]
