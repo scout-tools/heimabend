@@ -10,18 +10,12 @@ with open('input/event_dump.json') as json_file:
 for i, event in enumerate(events, start=0):
 
     if (event['imageLink'] is not None):
-        print("pk: i + 1")
-        print(i + 1)
         result_image.append({
             "model": "basic.image",
             "pk": i + 1,
             "fields": {}
         })
-        print('i')
-        print(i)
-        print('result_image[i]')
         j = len(result_image) - 1
-        print(result_image[j])
         result_image[j]['fields']['id'] = event['id']
         result_image[j]['fields']['image'] = 'image/{}.jpeg'.format(event['imageLink'])
         result_image[j]['fields']['created_at'] = event['created_at']
