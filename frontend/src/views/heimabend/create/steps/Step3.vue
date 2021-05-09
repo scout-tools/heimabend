@@ -84,10 +84,9 @@
         </v-row>
       </div>
       <div v-show="addImage">
-        <v-row class="ma-4">
+        <v-row class="ma-4" v-if="false">
           <v-text-field
             v-model="tempData.imageId"
-            v-if="false"
             prepend-icon="mdi-image"
             hint="This field uses counter prop"
             label="Foto-ID"
@@ -250,16 +249,16 @@ export default {
   validations: {
     tempData: {
       description: {
-        required: requiredIf(item => !!item && (!item.imageId || !item.description)),
+        required: requiredIf(item => !!item.id && !!item.description),
       },
       photographerName: {
-        required: requiredIf(item => !!item && (!item.imageId || !item.photographerName)),
+        required: requiredIf(item => !!item.id && !!item.photographerName),
       },
       privacyConsent: {
-        required: requiredIf(item => !!item && (!item.imageId || !item.privacyConsent)),
+        required: requiredIf(item => !!item.id && !!item.privacyConsent),
       },
       isOpenSource: {
-        required: requiredIf(item => !!item && (!item.imageId || !item.isOpenSource)),
+        required: requiredIf(item => !!item.id && !!item.isOpenSource),
       },
     },
   },
