@@ -15,7 +15,7 @@
       </span>
       </v-col>
       <v-col cols="4" align="center" justify="center">
-        <v-img :src="require('@/assets/inspi/inspi_happy.png')" max-width="80" />
+        <v-img :src="require('@/assets/inspi/inspi_happy.webp')" max-width="80" />
       </v-col>
     </v-row>
     <v-divider class="text-left ma-5"/>

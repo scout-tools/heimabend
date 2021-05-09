@@ -56,7 +56,7 @@
       <v-spacer />
       <router-link to="/">
         <img
-          :src="require('@/assets/inspi/inspi_flying.png')"
+          :src="require('@/assets/inspi/inspi_flying.webp')"
           class="mr-2"
           height="70"
           alt="Bild von Inspi"

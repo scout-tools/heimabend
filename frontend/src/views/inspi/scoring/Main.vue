@@ -2,11 +2,8 @@
   <v-form class="ma-4">
     <v-container fluid>
       <v-row align="center" justify="center">
-        <h1>Hallo, ich bin Inspi.</h1>
-      </v-row>
-      <v-row align="center" justify="center">
       <router-link :to="{ name: 'inspi-easter-egg' }">
-        <v-img :src="require('@/assets/inspi/inspi_hungry.png')" max-width="350" />
+        <v-img :src="require('@/assets/inspi/inspi_hungry.png')" max-width="300" />
       </router-link>
       </v-row>
       <v-row align="center" justify="center">
@@ -215,8 +212,8 @@ export default {
   }),
 
   created() {
-    this.$store.commit('setIsScoringMode', true);
     this.$store.commit('setHeaderString', 'Hilf Inspi');
+    this.$store.commit('setIsScoringMode', true);
     this.$store.commit('setIsSubPage', true);
     this.$store.commit('setDrawer', false);
   },

@@ -28,13 +28,13 @@
             }}</v-icon
           >
         </template>
-        <template v-slot:item.action="{ item }">
+        <!-- <template v-slot:item.action="{ item }"> -->
           <!-- <v-icon
             @click="deleteItem(item)"
           >
             mdi-delete
           </v-icon> -->
-        </template>
+        <!-- </template> -->
         <template v-slot:expanded-item="{ item }">
           <td :colspan="headers.length">
             <v-card flat class="ma-2">
@@ -49,11 +49,11 @@
             </v-card>
           </td>
         </template>
-        <template v-slot:item.action="{ item }">
+        <!-- <template v-slot:item.action="{ item }">
           <ActionButtonMenu
             :data="item"
           />
-        </template>
+        </template> -->
       </v-data-table>
     </v-row>
     <delete-modal ref="deleteMessageModal" />
@@ -68,7 +68,7 @@ import DeleteModal from './components/DeleteModal.vue';
 export default {
   components: {
     DeleteModal,
-    ActionButtonMenu,
+    ActionButtonMenu, // eslint-disable-line
   },
 
   data: () => ({

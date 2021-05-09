@@ -2,12 +2,12 @@
   <v-expansion-panels>
     <v-expansion-panel>
       <v-expansion-panel-header color="#F6F6F6" align="center" justify="center">
-        <v-container>
+        <v-container fluid>
           <v-row align="center" justify="center">
             <v-col cols="1">
               <v-icon large color="blue">mdi-chat-plus</v-icon>
             </v-col>
-            <v-col>
+            <v-col cols="10">
               <p class="text-left title ma-3">{{ headerText }}</p>
             </v-col>
           </v-row>

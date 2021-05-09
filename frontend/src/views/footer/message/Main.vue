@@ -85,7 +85,7 @@ export default {
           messageBody: this.data.messageBody,
         })
         .then(() => {
-          this.showSuccess = true;
+          this.$router.push({ name: 'message-final' });
         })
         .catch((error) => {
           this.responseObj = JSON.stringify(error.response.data);

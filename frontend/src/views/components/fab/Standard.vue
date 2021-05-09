@@ -17,7 +17,7 @@
           </v-btn>
         </router-link>
       </template>
-      <v-tooltip top nudge-left="80">
+      <v-tooltip top nudge-top="30">
         <template v-slot:activator="{ on }">
           <router-link :to="{ name: 'heimabendCreate' }" class="no-underline">
             <v-btn @click="onNewEventClick" fab dark color="blue" v-on="on">
@@ -29,7 +29,7 @@
           Hiermit kannst du eine neue Heimabend-Idee hinzufügen.
         </span>
       </v-tooltip>
-      <v-tooltip top nudge-left="80">
+      <v-tooltip top nudge-top="30">
         <template v-slot:activator="{ on }">
           <router-link :to="{ name: 'message' }" class="no-underline">
             <v-btn @click="onNewMessageClick" fab dark color="orange" v-on="on">

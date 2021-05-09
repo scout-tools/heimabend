@@ -186,7 +186,7 @@ export default {
     this.$store.commit('setDrawer', false);
     if (this.getId) {
       axios
-        .get(`${this.API_URL}basic/event/${this.getId}/`)
+        .get(`${this.API_URL}basic/event/${this.getId}/?&timestamp=${new Date().getTime()}`)
         .then((response) => {
           this.data = response.data;
         });
@@ -197,8 +197,10 @@ export default {
         imageData: null,
         imageLink: null,
         materialItems: [],
-        executionTimeRating: 1,
+        executionTime: 1,
+        difficulty: 1,
         costsRating: 1,
+        prepairationTime: 1,
         tags: [47, 46, 44, 43, 42, 45, 51, 50],
         createdBy: null,
         createdByEmail: '',
@@ -222,7 +224,6 @@ export default {
     postData() {
       const dataStep1 = this.$refs.step1.getData();
       const dataStep2 = this.$refs.step2.getData();
-      const dataStep3 = this.$refs.step3.getData();
       const dataStep5 = this.$refs.step5.getData();
       const dataStep6 = this.$refs.step6.getData();
       const dataStep7 = this.$refs.step7.getData();
@@ -234,19 +235,15 @@ export default {
             description: dataStep2.description,
             tags: dataStep6.tags.concat(dataStep7.selectedMandatoryFilter),
             costsRating: dataStep5.costsRating,
-            executionTimeRating: dataStep5.executionTimeRating,
-            isPrepairationNeeded: dataStep5.isPrepairationNeeded,
+            executionTime: dataStep5.executionTime,
+            prepairationTime: dataStep5.prepairationTime,
+            difficulty: dataStep5.difficulty,
             isPublic: false,
-            headerImage: dataStep3.imageId,
             createdBy: dataStep8.createdBy,
             createdByEmail: dataStep8.createdByEmail,
           })
           .then((response) => {
-            this.saveMaterial(response.id);
-            this.$router.push({
-              name: 'overview',
-              params: { showSuccess: true },
-            });
+            this.saveMaterial(response.data.id);
           })
           .catch(() => {
             this.showError = true;
@@ -259,16 +256,14 @@ export default {
             description: dataStep2.description,
             tags: dataStep6.tags.concat(dataStep7.selectedMandatoryFilter),
             costsRating: dataStep5.costsRating,
-            executionTimeRating: dataStep5.executionTimeRating,
-            isPrepairationNeeded: dataStep5.isPrepairationNeeded,
+            executionTime: dataStep5.executionTime,
+            prepairationTime: dataStep5.prepairationTime,
+            difficulty: dataStep5.difficulty,
             isPublic: false,
-            imageLink: dataStep3.imageLink,
             createdBy: dataStep8.createdBy,
             createdByEmail: dataStep8.createdByEmail,
           })
           .then((response) => {
-            this.$router.push({ name: 'overview' });
-            this.$emit('dialogClose');
             this.saveMaterial(response.data.id);
           })
           .catch(() => {
@@ -280,16 +275,54 @@ export default {
       const materialList = this.$refs.step4.getData();
       if (materialList && materialList.length) {
         this.postMaterialItems(materialList, eventId).then(() => {
-          this.showSuccess = true;
+          this.saveImageMeta(eventId);
         });
       } else {
-        this.showSuccess = true;
+        this.saveImageMeta(eventId);
+      }
+    },
+    saveImageMeta(eventId) {
+      const imageMetaData = this.$refs.step3.getData();
+      if (imageMetaData && imageMetaData.id) {
+        this.putImageMeta(imageMetaData, eventId).then(() => {
+          this.$router.push({
+            name: 'heimabendCreateFinale',
+          });
+        });
+      } else if (imageMetaData) {
+        this.postImageMeta(imageMetaData, eventId).then(() => {
+          this.$router.push({
+            name: 'heimabendCreateFinale',
+          });
+        });
       }
     },
     async postMaterialItems(materialList, eventId) {
       const path = `${process.env.VUE_APP_API}material-items/`;
       const material = materialList.map(item => ({ ...item, eventId }));
       return axios.post(path, material);
+    },
+    async postImageMeta(imageMetaData, eventId) {
+      const path = `${process.env.VUE_APP_API}basic/image-meta/`;
+      return axios.post(path, {
+        image: imageMetaData.imageId,
+        description: imageMetaData.description,
+        photographerName: imageMetaData.photographerName,
+        privacyConsent: imageMetaData.privacyConsent,
+        isOpenSource: imageMetaData.isOpenSource,
+        event: eventId,
+      });
+    },
+    async putImageMeta(imageMetaData, eventId) {
+      const path = `${process.env.VUE_APP_API}basic/image-meta/${imageMetaData.id}/`;
+      return axios.put(path, {
+        image: imageMetaData.imageId,
+        description: imageMetaData.description,
+        photographerName: imageMetaData.photographerName,
+        privacyConsent: imageMetaData.privacyConsent,
+        isOpenSource: imageMetaData.isOpenSource,
+        event: eventId,
+      });
     },
     cancel() {
       this.$router.push({ name: 'overview' });

@@ -28,11 +28,11 @@
             }}</v-icon
           >
         </template>
-        <template v-slot:item.action="{ item }">
+        <!-- <template v-slot:item.action="{ item }">
           <ActionButtonMenu
             :data="item"
           />
-        </template>
+        </template> -->
         <template v-slot:expanded-item="{ item }">
           <td :colspan="headers.length">
             <v-card flat class="ma-2">
@@ -62,7 +62,7 @@ import ActionButtonMenu from './components/ActionButtonMenu.vue';
 export default {
   components: {
     DeleteModal,
-    ActionButtonMenu,
+    ActionButtonMenu, // eslint-disable-line
   },
 
   data: () => ({

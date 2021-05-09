@@ -1,25 +1,50 @@
 import json
 
-model = "basic.image"
 
-result = []
+result_image = []
+result_image_meta = []
 
 with open('input/event_dump.json') as json_file:
-    data = json.load(json_file)
+    events = json.load(json_file)
 
-events = data
+for i, event in enumerate(events, start=0):
 
-for i, event in enumerate(events, start=1):
-    result.append({
-        "model": model,
-        "pk": i,
-        "fields": {}
-    })
+    if (event['imageLink'] is not None):
+        print("pk: i + 1")
+        print(i + 1)
+        result_image.append({
+            "model": "basic.image",
+            "pk": i + 1,
+            "fields": {}
+        })
+        print('i')
+        print(i)
+        print('result_image[i]')
+        j = len(result_image) - 1
+        print(result_image[j])
+        result_image[j]['fields']['id'] = event['id']
+        result_image[j]['fields']['image'] = 'image/{}.jpeg'.format(event['imageLink'])
+        result_image[j]['fields']['created_at'] = event['created_at']
 
-    result[i-1]['fields']['id'] = event['id']
-    result[i-1]['fields']['image'] = event['imageLink']
-    result[i-1]['fields']['uploaded_at'] = event['created_at']
+        result_image_meta.append({
+            "model": "basic.imagemeta",
+            "pk": i + 1,
+            "fields": {}
+        })
+
+        result_image_meta[j]['fields']['id'] = event['id']
+        result_image_meta[j]['fields']['image_id'] = event['id']
+        result_image_meta[j]['fields']['event_id'] = event['id']
+        result_image_meta[j]['fields']['is_public'] = True
+        result_image_meta[j]['fields']['description'] = 'Bitte einfügen.'
+        result_image_meta[j]['fields']['is_open_source'] = True
+        result_image_meta[j]['fields']['privacy_consent'] = True
+        result_image_meta[j]['fields']['photographer_name'] = 'Robert'
+        result_image_meta[j]['fields']['uploaded_at'] = event['created_at']
 
 
-with open('output/events.json', 'w') as outfile:
-    json.dump(result, outfile)
+with open('output/image.json', 'w') as outfile:
+    json.dump(result_image, outfile)
+
+with open('output/image_meta.json', 'w') as outfile:
+    json.dump(result_image_meta, outfile)

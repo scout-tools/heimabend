@@ -94,9 +94,9 @@ export default {
       return '900';
     },
     getImageLink(item) {
-      const imageId = item[0].headerImage_Image;
-      if (imageId && imageId.length) {
-        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${imageId}.default.jpeg`;
+      const imageUuid = item[0].headerImage_Image;
+      if (imageUuid && imageUuid.length) {
+        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${imageUuid.imageUuid}.default.jpeg`;
       }
       return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
     },
@@ -118,7 +118,7 @@ export default {
       window.open(routeData.href, '_blank').focus();
     },
     getEvent() {
-      const path = `${this.API_URL}event-item/${this.id}`;
+      const path = `${this.API_URL}event-item/${this.id}?&timestamp=${new Date().getTime()}`;
       this.loading = true;
       axios
         .get(path)
@@ -167,6 +167,7 @@ export default {
     this.$store.commit('setIsSubPage', true);
     this.$store.commit('setDrawer', false);
     this.loadData(this.id);
+    this.$store.commit('setHeaderString', 'Heimabend');
   },
   data: () => ({
     API_URL: process.env.VUE_APP_API,

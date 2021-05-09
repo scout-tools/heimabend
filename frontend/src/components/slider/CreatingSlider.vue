@@ -6,23 +6,24 @@
       </span>
     </v-row>
     <v-row align="center" justify="center">
-        <v-slider
-          class="ma-2"
-          v-model="data"
-          :tick-labels="labels"
-          min="0"
-          :max="labels.length-1"
-          ticks="always"
-          thumb-label="always"
-          tick-size="4"
-          :color="color"
-        >
-          <template v-slot:thumb-label="{ value }">
-            <v-icon color="white">
-              {{ icon }}
-            </v-icon>
-          </template>
-        </v-slider>
+      <v-slider
+        :value="value"
+        class="ma-2"
+        :tick-labels="labels"
+        min="0"
+        :max="labels.length - 1"
+        ticks="always"
+        thumb-label="always"
+        tick-size="4"
+        :color="color"
+        v-on:input="updateValue"
+      >
+        <template v-slot:thumb-label="{ value }">
+          <v-icon color="white">
+            {{ icon }}
+          </v-icon>
+        </template>
+      </v-slider>
     </v-row>
   </v-container>
 </template>
@@ -30,7 +31,7 @@
 <script>
 export default {
   props: {
-    data: Object,
+    value: Number,
     labels: Array,
     icon: String,
     color: String,
@@ -41,10 +42,10 @@ export default {
     n: 0,
     difficultlevel: 0,
   }),
-  computed: {
-  },
-
   methods: {
+    updateValue(value) {
+      this.$emit('input', value);
+    },
   },
 };
 </script>

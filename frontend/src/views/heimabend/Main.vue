@@ -10,7 +10,7 @@
       :loading="isEventLoading"
       :isMobil="isMobil"
     />
-    <v-container v-if="!heimabendItems.length && !isEventLoading">
+    <v-container fluid v-if="!heimabendItems.length && !isEventLoading" style="margin-right: 200px">
       <v-row justify="center">
         <v-img
           :src="require('@/assets/inspi/inspi_confused.png')"
@@ -20,7 +20,7 @@
       </v-row>
 
       <v-row justify="center" class="pa-5">
-        <v-btn color="secondary" @click="onResetClick()">
+        <v-btn color="primary" @click="onResetClick()">
           <v-icon left>
             mdi-filter-remove
           </v-icon>

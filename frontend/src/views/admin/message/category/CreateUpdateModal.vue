@@ -165,6 +165,9 @@ export default {
       categoryId: [
         v => !!v || 'Kategorie ist erforderlich',
       ],
+      sorting: [
+        v => !!v || 'Sortierung ist erforderlich',
+      ],
     },
     data: {
       name: 'Rucksack packen',

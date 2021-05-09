@@ -16,7 +16,8 @@ from rest_framework.views import APIView
 
 from .models import Tag, Event, Message, Like, TagCategory, Image, \
     MaterialItem, ExperimentItem, Experiment, MaterialUnit, \
-    MaterialName, MessageType, Faq, FaqRating, NextBestHeimabend
+    MaterialName, MessageType, Faq, FaqRating, NextBestHeimabend, \
+    ImageMeta
 from .serializers import TagSerializer, EventSerializer, MessageSerializer, \
     LikeSerializer, HighscoreSerializer, EventItemSerializer, \
     TagCategorySerializer, StatisticSerializer, ImageSerializer, \
@@ -24,7 +25,7 @@ from .serializers import TagSerializer, EventSerializer, MessageSerializer, \
     TopViewsSerializer, EventAdminSerializer, EventTimestampSerializer, \
     MaterialUnitSerializer, MaterialNameSerializer, MessageTypeSerializer, \
     FaqSerializer, FaqRatingSerializer, ExperimentOverviewSerializer, \
-    NextBestHeimabendSerializer
+    NextBestHeimabendSerializer, ImageMetaSerializer
 
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -172,6 +173,13 @@ class TopViewsView(viewsets.ViewSet):
             serializer.data, key=lambda k: k['view_count'], reverse=True)[:10]
 
         return Response(serializer_data)
+
+
+class ImageMetaView(LoggingMixin, viewsets.ModelViewSet, generics.GenericAPIView):
+    queryset = ImageMeta.objects.all()
+    serializer_class = ImageMetaSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ('event',)
 
 
 class ImageView(LoggingMixin, viewsets.ModelViewSet, generics.GenericAPIView):

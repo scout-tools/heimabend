@@ -51,7 +51,7 @@
         </v-flex>
       </v-row>
       <delete-modal ref="deleteTagModal" @refresh="onRefresh" />
-      <IsPublicModal ref="isPublicModal" @refresh="onRefresh" />
+      <isPublicModal ref="isPublicModalRef" @refresh="onRefresh" />
     </v-container>
   </div>
   <div v-else>
@@ -73,8 +73,10 @@ import { mapGetters } from 'vuex';
 
 // eslint-disable-next-line import/no-unresolved
 import DeleteModal from '@/views/heimabend/dialogs/DeleteModal.vue';
-import isPublicModal from './components/dialogs/isPublicModal.vue';
-import ActionButtonMenu from './components/ActionButtonMenu.vue';
+// eslint-disable-next-line import/no-unresolved
+import isPublicModal from '@/components/dialog/isPublicModal.vue';
+// eslint-disable-next-line import/no-unresolved
+import ActionButtonMenu from '@/components/button/ActionButtonMenu.vue';
 import store from '@/store'; // eslint-disable-line
 
 export default {
@@ -145,7 +147,7 @@ export default {
       this.$refs.deleteTagModal.show(item);
     },
     onPublishClick(item) {
-      this.$refs.isPublicModal.show(item);
+      this.$refs.isPublicModalRef.show(item);
     },
   },
   computed: {

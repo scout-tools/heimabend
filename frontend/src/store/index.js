@@ -241,5 +241,5 @@ export default new Vuex.Store({
       commit('setSearchInput', '');
     },
   },
-  // plugins: [createPersistedState()],
+  plugins: [createPersistedState()],
 });

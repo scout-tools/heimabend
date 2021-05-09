@@ -28,6 +28,7 @@ router.register(r'admin-event', views.AdminEventViewSet)
 router.register(r'event-timestamp', views.EventTimestampViewSet)
 router.register(r'faq-rating', views.FaqRatingViewSet)
 router.register(r'faq', views.FaqViewSet)
+router.register(r'image-meta', views.ImageMetaView)
 router.register(r'next-best-heimabend', views.NextBestHeimabendViewSet)
 
 # Wire up our API using automatic URL routing.

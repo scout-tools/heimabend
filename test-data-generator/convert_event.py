@@ -27,8 +27,7 @@ for i, event in enumerate(events, start=1):
     result[i-1]['fields']['created_at'] = event['createdAt']
     result[i-1]['fields']['updated_at'] = event['updatedAt']
     result[i-1]['fields']['created_by'] = event['createdBy']
-    result[i-1]['fields']['header_image_id'] = event['id']
-    result[i-1]['fields']['is_active'] = event['isActive']
+    result[i-1]['fields']['is_public'] = event['isActive']
 
 
 with open('output/events.json', 'w') as outfile:

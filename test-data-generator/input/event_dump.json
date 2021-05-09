@@ -2102,7 +2102,7 @@
 		"isPossibleAlone" : 0,
 		"isPossibleDigital" : 0,
 		"created_at" : "2021-03-07 20:00:27.660006",
-		"imageLink" : "b93b6a8a-9606-11eb-84be-0242982ab998.jpeg",
+		"imageLink" : "b93b6a8a-9606-11eb-84be-0242982ab998",
 		"updated_at" : "2021-04-05 12:02:07.140818"
 	},
 	{
@@ -2388,7 +2388,7 @@
 		"isPossibleAlone" : 0,
 		"isPossibleDigital" : 0,
 		"created_at" : "2021-03-07 20:00:27.660006",
-		"imageLink" : "1b14ee4a-9605-11eb-84be-0242982ab998.jpeg",
+		"imageLink" : "1b14ee4a-9605-11eb-84be-0242982ab998",
 		"updated_at" : "2021-04-05 11:51:03.955440"
 	},
 	{
@@ -3714,7 +3714,7 @@
 		"isPossibleAlone" : 0,
 		"isPossibleDigital" : 0,
 		"created_at" : "2021-03-18 21:00:35.334239",
-		"imageLink" : "b614c014-882c-11eb-84be-0242982ab998.jpeg",
+		"imageLink" : "b614c014-882c-11eb-84be-0242982ab998",
 		"updated_at" : "2021-03-19 11:43:27.188459"
 	},
 	{
@@ -4000,7 +4000,7 @@
 		"isPossibleAlone" : 0,
 		"isPossibleDigital" : 0,
 		"created_at" : "2021-04-03 11:14:34.896805",
-		"imageLink" : "82937410-960f-11eb-84be-0242982ab998.jpeg",
+		"imageLink" : "82937410-960f-11eb-84be-0242982ab998",
 		"updated_at" : "2021-04-05 13:05:19.499283"
 	},
 	{
@@ -4026,7 +4026,7 @@
 		"isPossibleAlone" : 0,
 		"isPossibleDigital" : 0,
 		"created_at" : "2021-04-03 11:21:19.145213",
-		"imageLink" : "ef883524-9614-11eb-84be-0242982ab998.jpeg",
+		"imageLink" : "ef883524-9614-11eb-84be-0242982ab998",
 		"updated_at" : "2021-04-05 13:43:47.673005"
 	},
 	{
@@ -4052,7 +4052,7 @@
 		"isPossibleAlone" : 0,
 		"isPossibleDigital" : 0,
 		"created_at" : "2021-04-05 08:54:23.652503",
-		"imageLink" : "2c6886b4-9611-11eb-84be-0242982ab998.jpeg",
+		"imageLink" : "2c6886b4-9611-11eb-84be-0242982ab998",
 		"updated_at" : "2021-04-05 13:18:20.219514"
 	},
 	{
@@ -4078,7 +4078,7 @@
 		"isPossibleAlone" : 0,
 		"isPossibleDigital" : 0,
 		"created_at" : "2021-04-05 09:08:06.759896",
-		"imageLink" : "076409e2-9611-11eb-84be-0242982ab998.jpeg",
+		"imageLink" : "076409e2-9611-11eb-84be-0242982ab998",
 		"updated_at" : "2021-04-05 13:17:58.063702"
 	},
 	{
@@ -4104,7 +4104,7 @@
 		"isPossibleAlone" : 0,
 		"isPossibleDigital" : 0,
 		"created_at" : "2021-04-05 09:15:39.710284",
-		"imageLink" : "ab10038a-9610-11eb-84be-0242982ab998.jpeg",
+		"imageLink" : "ab10038a-9610-11eb-84be-0242982ab998",
 		"updated_at" : "2021-04-05 13:13:33.908977"
 	},
 	{
@@ -4130,7 +4130,7 @@
 		"isPossibleAlone" : 0,
 		"isPossibleDigital" : 0,
 		"created_at" : "2021-04-05 09:34:07.317057",
-		"imageLink" : "3e2251e2-9610-11eb-84be-0242982ab998.jpeg",
+		"imageLink" : "3e2251e2-9610-11eb-84be-0242982ab998",
 		"updated_at" : "2021-04-05 13:17:33.064128"
 	},
 	{
@@ -4156,7 +4156,7 @@
 		"isPossibleAlone" : 0,
 		"isPossibleDigital" : 0,
 		"created_at" : "2021-04-05 09:37:51.616702",
-		"imageLink" : "1598c526-9610-11eb-84be-0242982ab998.jpeg",
+		"imageLink" : "1598c526-9610-11eb-84be-0242982ab998",
 		"updated_at" : "2021-04-05 13:14:04.546197"
 	}
 ]

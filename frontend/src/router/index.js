@@ -3,15 +3,18 @@ import VueRouter from 'vue-router';
 import Inspirations from '@/views/inspi/inspirations/Main.vue';
 
 import Message from '@/views/footer/message/Main.vue';
+import MessageFinale from '@/views/footer/message/FinalMessagePage.vue';
 import Heimabend from '@/views/heimabend/Main.vue';
 import AboutProject from '@/views/footer/aboutProject/Main.vue';
 import Faq from '@/views/footer/aboutProject/Faq.vue';
 import Impressum from '@/views/footer/impressum/Main.vue';
 import HeimabendCreate from '@/views/heimabend/create/Main.vue';
+import HeimabendCreateFinal from '@/views/heimabend/create/FinalEventPage.vue';
 import HeimabendDetails from '@/views/heimabend/details/Main.vue';
 import RankingOverview from '@/views/inspi/ranking/Main.vue';
 import ScoringStart from '@/views/inspi/scoring/Main.vue';
 import ScoringTest from '@/views/inspi/scoring/Test.vue';
+import ScoringFinal from '@/views/inspi/scoring/FinalScoringPage.vue';
 import EasterEgg from '@/views/inspi/easterEgg/Main.vue';
 import Admin from '@/views/admin/Main.vue';
 import AdminOverview from '@/views/admin/overview/Main.vue';
@@ -56,9 +59,19 @@ const routes = [
     component: Message,
   },
   {
+    path: '/message/final',
+    name: 'message-final',
+    component: MessageFinale,
+  },
+  {
     path: '/heimabend/create/',
     name: 'heimabendCreate',
     component: HeimabendCreate,
+  },
+  {
+    path: '/heimabend/create/final',
+    name: 'heimabendCreateFinale',
+    component: HeimabendCreateFinal,
   },
   {
     path: '/heimabend/update/:id',
@@ -87,6 +100,11 @@ const routes = [
     component: ScoringTest,
   },
   {
+    path: '/scoring/final',
+    name: 'scoring-final',
+    component: ScoringFinal,
+  },
+  {
     path: '/inspi/easter-egg',
     name: 'inspi-easter-egg',
     component: EasterEgg,
@@ -103,6 +121,7 @@ const routes = [
       },
       {
         path: 'heimabend',
+        name: 'admin-heimabend',
         component: AdminHeimabend,
       },
       {

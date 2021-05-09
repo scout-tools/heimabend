@@ -49,11 +49,11 @@ export default {
       tab: '/admin',
       selected: null,
       tabs: [
-        {
-          name: 'Übersicht',
-          route: '/admin',
-          icon: 'mdi-clipboard',
-        },
+        // {
+        //   name: 'Übersicht',
+        //   route: '/admin',
+        //   icon: 'mdi-clipboard',
+        // },
         {
           name: 'Heimabend',
           route: '/admin/heimabend',

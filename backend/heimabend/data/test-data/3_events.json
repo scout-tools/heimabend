@@ -13,7 +13,6 @@
             "created_at": "2019-12-26 12:06:28.785478",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 1,
             "is_public": 1
         }
     },
@@ -31,7 +30,6 @@
             "created_at": "2019-12-26 12:06:28.792257",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 2,
             "is_public": 1
         }
     },
@@ -49,7 +47,6 @@
             "created_at": "2019-12-26 12:06:28.794536",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 3,
             "is_public": 1
         }
     },
@@ -67,7 +64,6 @@
             "created_at": "2019-12-26 12:06:28.796728",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 4,
             "is_public": 1
         }
     },
@@ -85,7 +81,6 @@
             "created_at": "2019-12-26 12:06:28.799111",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 5,
             "is_public": 1
         }
     },
@@ -103,7 +98,6 @@
             "created_at": "2019-12-26 12:06:28.801503",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 6,
             "is_public": 1
         }
     },
@@ -121,7 +115,6 @@
             "created_at": "2019-12-26 12:06:28.803768",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 8,
             "is_public": 1
         }
     },
@@ -131,7 +124,7 @@
         "fields": {
             "id": 9,
             "title": "Kompass einfach \u00fcberall selber bauen",
-            "description": "<p>&nbsp;</p>\n<p><img style=\"float: left; margin: 20px;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/P1060984.jpg\" width=\"222\" height=\"223\" /></p>\n<p>Ihr k&ouml;nnt super einfach einen Kompass selber bauen.</p>\n<p>&nbsp;</p>\n<p>Ihr braucht daf&uuml;r nicht besonders viel.</p>\n<p>Ihr braucht nur:</p>\n<ul>\n<li>eine Nadel</li>\n<li>einen &uuml;blichen K&uuml;chenmagneten.</li>\n<li>&nbsp;</li>\n</ul>\n<p>Daf&uuml;r k&ouml;nnt ihr einfach eine N&auml;hnadel an dem Magneten reiben. Dadurch wird die Nadel f&uuml;r einige Stunden magnetisch.</p>\n<p>Danach k&ouml;nnt ihr die Nabel in einer Wasserschale auf ein schwimmendes Blatt legen.</p>\n<p>Die Nadel wird sich dann in Nord/S&uuml;d-Richtung ausrichten. Genau Nord und S&uuml;den zu bestimmen ist aber nicht m&ouml;glich. Aber mit Hilfe der Sonne l&auml;sst sich Norden und S&uuml;den auseinanderhalten.</p>\n<p>&Uuml;brigens mit einer Batterie und einer B&uuml;roklammer k&ouml;nnt ihr zu not ebenfalls eine Nadel magnetisch machen.</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>Hier ein paar weitere Fotos</p>\n<p><img style=\"float: left; margin-left: 10px; margin-right: 10px;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/P1060966.jpg\" width=\"246\" height=\"122\" /></p>\n<p><img style=\"margin-left: 10px; margin-right: 10px;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/P1060977.jpg\" width=\"318\" height=\"122\" /></p>\n<p>&nbsp;</p>\n<p><span style=\"text-decoration: underline;\"><strong>Tipp:</strong></span></p>\n<p>Es ist auch m&ouml;glich mit einer Batterie und einer B&uuml;roklammer ein Magnetfeld zu erzeugen um die Nadel zu magnetisieren</p>\n<p><img style=\"float: left;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/P1060964.jpg\" width=\"230\" height=\"196\" /></p>\n<p><img src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/P1060975.jpg\" width=\"147\" height=\"196\" /></p>",
+            "description": "<p>&nbsp;</p>\n<p><img style=\"float: left; margin: 20px;\" src=\"https://wiki.hratuga.de/files/public-docs/P1060984.jpg\" width=\"222\" height=\"223\" /></p>\n<p>Ihr k&ouml;nnt super einfach einen Kompass selber bauen.</p>\n<p>&nbsp;</p>\n<p>Ihr braucht daf&uuml;r nicht besonders viel.</p>\n<p>Ihr braucht nur:</p>\n<ul>\n<li>eine Nadel</li>\n<li>einen &uuml;blichen K&uuml;chenmagneten.</li>\n<li>&nbsp;</li>\n</ul>\n<p>Daf&uuml;r k&ouml;nnt ihr einfach eine N&auml;hnadel an dem Magneten reiben. Dadurch wird die Nadel f&uuml;r einige Stunden magnetisch.</p>\n<p>Danach k&ouml;nnt ihr die Nabel in einer Wasserschale auf ein schwimmendes Blatt legen.</p>\n<p>Die Nadel wird sich dann in Nord/S&uuml;d-Richtung ausrichten. Genau Nord und S&uuml;den zu bestimmen ist aber nicht m&ouml;glich. Aber mit Hilfe der Sonne l&auml;sst sich Norden und S&uuml;den auseinanderhalten.</p>\n<p>&Uuml;brigens mit einer Batterie und einer B&uuml;roklammer k&ouml;nnt ihr zu not ebenfalls eine Nadel magnetisch machen.</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>Hier ein paar weitere Fotos</p>\n<p><img style=\"float: left; margin-left: 10px; margin-right: 10px;\" src=\"https://wiki.hratuga.de/files/public-docs/P1060966.jpg\" width=\"246\" height=\"122\" /></p>\n<p><img style=\"margin-left: 10px; margin-right: 10px;\" src=\"https://wiki.hratuga.de/files/public-docs/P1060977.jpg\" width=\"318\" height=\"122\" /></p>\n<p>&nbsp;</p>\n<p><span style=\"text-decoration: underline;\"><strong>Tipp:</strong></span></p>\n<p>Es ist auch m&ouml;glich mit einer Batterie und einer B&uuml;roklammer ein Magnetfeld zu erzeugen um die Nadel zu magnetisieren</p>\n<p><img style=\"float: left;\" src=\"https://wiki.hratuga.de/files/public-docs/P1060964.jpg\" width=\"230\" height=\"196\" /></p>\n<p><img src=\"https://wiki.hratuga.de/files/public-docs/P1060975.jpg\" width=\"147\" height=\"196\" /></p>",
             "costs_rating": 1,
             "execution_time": 3,
             "difficulty": 1,
@@ -139,7 +132,6 @@
             "created_at": "2019-12-26 12:06:28.806038",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 9,
             "is_public": 0
         }
     },
@@ -157,7 +149,6 @@
             "created_at": "2019-12-26 12:06:28.808327",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 10,
             "is_public": 0
         }
     },
@@ -175,7 +166,6 @@
             "created_at": "2019-12-26 12:06:28.810655",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 11,
             "is_public": 1
         }
     },
@@ -193,7 +183,6 @@
             "created_at": "2019-12-26 12:06:28.812911",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 12,
             "is_public": 1
         }
     },
@@ -211,7 +200,6 @@
             "created_at": "2020-01-21 17:23:41.170175",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 32,
             "is_public": 0
         }
     },
@@ -229,7 +217,6 @@
             "created_at": "2020-01-21 18:14:16.941057",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 33,
             "is_public": 1
         }
     },
@@ -247,7 +234,6 @@
             "created_at": "2020-01-22 15:30:19.687010",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 34,
             "is_public": 1
         }
     },
@@ -265,7 +251,6 @@
             "created_at": "2020-01-23 20:36:41.276211",
             "updated_at": null,
             "created_by": "Madita",
-            "header_image_id": 37,
             "is_public": 1
         }
     },
@@ -283,7 +268,6 @@
             "created_at": "2020-01-23 20:53:27.598469",
             "updated_at": null,
             "created_by": "Madita",
-            "header_image_id": 38,
             "is_public": 1
         }
     },
@@ -301,7 +285,6 @@
             "created_at": "2020-01-23 21:17:43.483085",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 39,
             "is_public": 1
         }
     },
@@ -319,7 +302,6 @@
             "created_at": "2020-01-25 22:37:59.435124",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 44,
             "is_public": 1
         }
     },
@@ -337,7 +319,6 @@
             "created_at": "2020-01-25 22:42:08.366512",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 45,
             "is_public": 1
         }
     },
@@ -355,7 +336,6 @@
             "created_at": "2020-01-25 22:50:30.714847",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 46,
             "is_public": 1
         }
     },
@@ -373,7 +353,6 @@
             "created_at": "2020-01-25 22:54:11.233177",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 47,
             "is_public": 1
         }
     },
@@ -391,7 +370,6 @@
             "created_at": "2020-02-12 17:04:59.369304",
             "updated_at": null,
             "created_by": "Sheldon",
-            "header_image_id": 50,
             "is_public": 1
         }
     },
@@ -409,7 +387,6 @@
             "created_at": "2020-02-12 17:30:47.502665",
             "updated_at": null,
             "created_by": "Sheldon",
-            "header_image_id": 51,
             "is_public": 1
         }
     },
@@ -427,7 +404,6 @@
             "created_at": "2020-02-12 17:41:10.932245",
             "updated_at": null,
             "created_by": "Sheldon",
-            "header_image_id": 52,
             "is_public": 1
         }
     },
@@ -445,7 +421,6 @@
             "created_at": "2020-03-21 15:38:41.044019",
             "updated_at": null,
             "created_by": "Dorothea",
-            "header_image_id": 55,
             "is_public": 1
         }
     },
@@ -463,7 +438,6 @@
             "created_at": "2020-03-21 16:06:14.788097",
             "updated_at": null,
             "created_by": "Dorothea",
-            "header_image_id": 56,
             "is_public": 1
         }
     },
@@ -481,7 +455,6 @@
             "created_at": "2020-03-21 16:56:24.107532",
             "updated_at": null,
             "created_by": "Jan",
-            "header_image_id": 58,
             "is_public": 1
         }
     },
@@ -491,7 +464,7 @@
         "fields": {
             "id": 59,
             "title": "Fensterbank-Kr\u00e4uterbeet",
-            "description": "<p><img style=\"margin-left: 20px; margin-right: 20px; float: left;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/kresse_1.png\" width=\"291\" height=\"193\" />Jeder kann einen alten Schuhkarton und eine alte Plastikt&uuml;te mitbringen. Der Schuhkarton wird mit der Plastikt&uuml;te ausgelegt und diese dann fest getackert. Dann f&uuml;llt man den Karton mit Blumenerde bis etwa drei Fingerbreit unter dem Rand.</p>\n<p>Eins&auml;en k&ouml;nnt ihr was ihr wollt. F&uuml;r ein schnelles Erfolgserlebnis eignen sich z.B. Kressesamen auc<span style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\">h Setzlinge f&uuml;r Radieschen oder Salat - sie k&ouml;nnen das Beet schnell begr&uuml;nen. Schnittlauch, Petersilie oder doch lieber Blumen? Euch sind keine Grenzen gesetzt!</span></p>\n<p>&nbsp;</p>\n<p>Zus&auml;tzlich k&ouml;nnt ihr euren Schuhkarton noch verzieren oder kleine Schildchen anbringen, damit man wei&szlig; wo was eingepflanzt ist.</p>\n<p><img style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; float: left; margin-left: 10px; margin-right: 10px;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/kresse_4.png\" width=\"200\" />Gie&szlig;en nicht vergessen ;)</p>\n<p>Tipp: Das Kr&auml;uterbeet l&auml;sst sich als kleinere Variante mit Hilfe eines seitlich aufgeschnittenen Milchkartons realisieren. Daf&uuml;r braucht man auch keine Plastikt&uuml;te.</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p><img style=\"margin-left: 10px; margin-right: 10px; float: left;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/kresse_2.png\" width=\"200\" /></p>",
+            "description": "<p><img style=\"margin-left: 20px; margin-right: 20px; float: left;\" src=\"https://wiki.hratuga.de/files/public-docs/kresse_1.png\" width=\"291\" height=\"193\" />Jeder kann einen alten Schuhkarton und eine alte Plastikt&uuml;te mitbringen. Der Schuhkarton wird mit der Plastikt&uuml;te ausgelegt und diese dann fest getackert. Dann f&uuml;llt man den Karton mit Blumenerde bis etwa drei Fingerbreit unter dem Rand.</p>\n<p>Eins&auml;en k&ouml;nnt ihr was ihr wollt. F&uuml;r ein schnelles Erfolgserlebnis eignen sich z.B. Kressesamen auc<span style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\">h Setzlinge f&uuml;r Radieschen oder Salat - sie k&ouml;nnen das Beet schnell begr&uuml;nen. Schnittlauch, Petersilie oder doch lieber Blumen? Euch sind keine Grenzen gesetzt!</span></p>\n<p>&nbsp;</p>\n<p>Zus&auml;tzlich k&ouml;nnt ihr euren Schuhkarton noch verzieren oder kleine Schildchen anbringen, damit man wei&szlig; wo was eingepflanzt ist.</p>\n<p><img style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; float: left; margin-left: 10px; margin-right: 10px;\" src=\"https://wiki.hratuga.de/files/public-docs/kresse_4.png\" width=\"200\" />Gie&szlig;en nicht vergessen ;)</p>\n<p>Tipp: Das Kr&auml;uterbeet l&auml;sst sich als kleinere Variante mit Hilfe eines seitlich aufgeschnittenen Milchkartons realisieren. Daf&uuml;r braucht man auch keine Plastikt&uuml;te.</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p><img style=\"margin-left: 10px; margin-right: 10px; float: left;\" src=\"https://wiki.hratuga.de/files/public-docs/kresse_2.png\" width=\"200\" /></p>",
             "costs_rating": 2,
             "execution_time": 2,
             "difficulty": 1,
@@ -499,7 +472,6 @@
             "created_at": "2020-03-21 17:09:00.183004",
             "updated_at": null,
             "created_by": "Dorothea",
-            "header_image_id": 59,
             "is_public": 1
         }
     },
@@ -517,7 +489,6 @@
             "created_at": "2020-03-21 17:19:07.432544",
             "updated_at": null,
             "created_by": "Jan",
-            "header_image_id": 60,
             "is_public": 1
         }
     },
@@ -527,7 +498,7 @@
         "fields": {
             "id": 61,
             "title": "DNA isolieren",
-            "description": "<p><img style=\"float: left; margin-left: 30px; margin-right: 30px;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/dna_1.png\" width=\"150\" height=\"238\" />Ihr wollt unter dir Forscher gehen? Kein Problem! Wie w&auml;re es z.B. mit Isolation der eigenen DNA?</p>\n<p>Alles was ihr daf&uuml;r braucht seid ihr selbst und eine paar Hausmittel. Die DNA gewinnt ihr aus Zellen der eigenen Mundschleimhaut.</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<ol>\n<li>Zwei Stunden vor dem Versuch Spiritus in einer K&uuml;hltruhe kalt stellen.</li>\n<li>Zwei Minuten den Mund mit Salzwasser sp&uuml;len und davon ein wenig in ein Schnapsglas spucken, sodass etwa die H&auml;lfte gef&uuml;llt ist.</li>\n<li>Nun ein bisschen Sp&uuml;lmittel dazugeben, vorsichtig ohne Schaum verr&uuml;hren und alles etwa 5 Minuten ruhen lassen.</li>\n<li>Jetzt den gek&uuml;hlten eventuell gef&auml;rbten Spiritus dar&uuml;ber geben, ein bisschen abwarten und die DNA flockt als wei&szlig;e F&auml;den oder Wolken gut sichtbar aus und l&auml;sst sich auch auf dem Zahnstocher aufwickeln.</li>\n</ol>\n<p>Eine ausf&uuml;hrliche Anleitung mit Bildern findet ihr unter:</p>\n<p><a title=\"Link zum Dokument\" href=\"https://docs.google.com/document/d/1KFUVW2g9NnumVdSIr9PHp9p_b73MzzDIWrvaKH3iFoo/edit?usp=sharing\" target=\"_blank\" rel=\"noopener\">Link zum Dokument</a></p>\n<p><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/dna_2.png\" width=\"262\" height=\"266\" /></p>\n<p>&nbsp;</p>",
+            "description": "<p><img style=\"float: left; margin-left: 30px; margin-right: 30px;\" src=\"https://wiki.hratuga.de/files/public-docs/dna_1.png\" width=\"150\" height=\"238\" />Ihr wollt unter dir Forscher gehen? Kein Problem! Wie w&auml;re es z.B. mit Isolation der eigenen DNA?</p>\n<p>Alles was ihr daf&uuml;r braucht seid ihr selbst und eine paar Hausmittel. Die DNA gewinnt ihr aus Zellen der eigenen Mundschleimhaut.</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<ol>\n<li>Zwei Stunden vor dem Versuch Spiritus in einer K&uuml;hltruhe kalt stellen.</li>\n<li>Zwei Minuten den Mund mit Salzwasser sp&uuml;len und davon ein wenig in ein Schnapsglas spucken, sodass etwa die H&auml;lfte gef&uuml;llt ist.</li>\n<li>Nun ein bisschen Sp&uuml;lmittel dazugeben, vorsichtig ohne Schaum verr&uuml;hren und alles etwa 5 Minuten ruhen lassen.</li>\n<li>Jetzt den gek&uuml;hlten eventuell gef&auml;rbten Spiritus dar&uuml;ber geben, ein bisschen abwarten und die DNA flockt als wei&szlig;e F&auml;den oder Wolken gut sichtbar aus und l&auml;sst sich auch auf dem Zahnstocher aufwickeln.</li>\n</ol>\n<p>Eine ausf&uuml;hrliche Anleitung mit Bildern findet ihr unter:</p>\n<p><a title=\"Link zum Dokument\" href=\"https://docs.google.com/document/d/1KFUVW2g9NnumVdSIr9PHp9p_b73MzzDIWrvaKH3iFoo/edit?usp=sharing\" target=\"_blank\" rel=\"noopener\">Link zum Dokument</a></p>\n<p><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://wiki.hratuga.de/files/public-docs/dna_2.png\" width=\"262\" height=\"266\" /></p>\n<p>&nbsp;</p>",
             "costs_rating": 1,
             "execution_time": 1,
             "difficulty": 1,
@@ -535,7 +506,6 @@
             "created_at": "2020-03-21 23:23:05.783517",
             "updated_at": null,
             "created_by": "Dorothea",
-            "header_image_id": 61,
             "is_public": 1
         }
     },
@@ -553,7 +523,6 @@
             "created_at": "2020-03-21 23:58:06.650063",
             "updated_at": null,
             "created_by": "Dorothea",
-            "header_image_id": 62,
             "is_public": 1
         }
     },
@@ -571,7 +540,6 @@
             "created_at": "2020-03-22 00:35:45.253298",
             "updated_at": null,
             "created_by": "Kathi",
-            "header_image_id": 63,
             "is_public": 1
         }
     },
@@ -589,7 +557,6 @@
             "created_at": "2020-03-22 13:08:40.427168",
             "updated_at": null,
             "created_by": "Celine",
-            "header_image_id": 64,
             "is_public": 0
         }
     },
@@ -607,7 +574,6 @@
             "created_at": "2020-03-22 14:03:35.822591",
             "updated_at": null,
             "created_by": "Celine",
-            "header_image_id": 65,
             "is_public": 1
         }
     },
@@ -625,7 +591,6 @@
             "created_at": "2020-03-22 14:39:08.302691",
             "updated_at": null,
             "created_by": "Dorothea",
-            "header_image_id": 66,
             "is_public": 1
         }
     },
@@ -643,7 +608,6 @@
             "created_at": "2020-03-22 17:41:22.763349",
             "updated_at": null,
             "created_by": "Celine",
-            "header_image_id": 67,
             "is_public": 1
         }
     },
@@ -661,7 +625,6 @@
             "created_at": "2020-03-22 21:49:54.903559",
             "updated_at": null,
             "created_by": "Resi",
-            "header_image_id": 69,
             "is_public": 1
         }
     },
@@ -679,7 +642,6 @@
             "created_at": "2020-03-23 09:31:04.902043",
             "updated_at": null,
             "created_by": "Dorothea",
-            "header_image_id": 70,
             "is_public": 1
         }
     },
@@ -697,7 +659,6 @@
             "created_at": "2020-03-23 11:08:45.963496",
             "updated_at": null,
             "created_by": "Resi",
-            "header_image_id": 71,
             "is_public": 1
         }
     },
@@ -715,7 +676,6 @@
             "created_at": "2020-03-24 09:49:28.518631",
             "updated_at": null,
             "created_by": "Saskia",
-            "header_image_id": 72,
             "is_public": 1
         }
     },
@@ -733,7 +693,6 @@
             "created_at": "2020-03-24 09:56:30.516416",
             "updated_at": null,
             "created_by": "Saskia",
-            "header_image_id": 73,
             "is_public": 1
         }
     },
@@ -751,7 +710,6 @@
             "created_at": "2020-03-25 11:10:13.214188",
             "updated_at": null,
             "created_by": "Resi",
-            "header_image_id": 74,
             "is_public": 1
         }
     },
@@ -769,7 +727,6 @@
             "created_at": "2020-03-25 14:57:52.378829",
             "updated_at": null,
             "created_by": "Linus",
-            "header_image_id": 75,
             "is_public": 1
         }
     },
@@ -787,7 +744,6 @@
             "created_at": "2020-03-27 14:07:30.409586",
             "updated_at": null,
             "created_by": "Dorothea",
-            "header_image_id": 76,
             "is_public": 1
         }
     },
@@ -805,7 +761,6 @@
             "created_at": "2020-03-27 20:16:43.962717",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 77,
             "is_public": 1
         }
     },
@@ -823,7 +778,6 @@
             "created_at": "2020-03-27 20:29:17.252315",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 78,
             "is_public": 1
         }
     },
@@ -841,7 +795,6 @@
             "created_at": "2020-03-29 12:41:59.695658",
             "updated_at": null,
             "created_by": "Sheldon",
-            "header_image_id": 81,
             "is_public": 1
         }
     },
@@ -859,7 +812,6 @@
             "created_at": "2020-03-29 12:52:40.891139",
             "updated_at": null,
             "created_by": "Felix",
-            "header_image_id": 82,
             "is_public": 1
         }
     },
@@ -877,7 +829,6 @@
             "created_at": "2020-03-29 13:00:03.545966",
             "updated_at": null,
             "created_by": "Sheldon",
-            "header_image_id": 83,
             "is_public": 1
         }
     },
@@ -895,7 +846,6 @@
             "created_at": "2020-03-29 13:12:20.509102",
             "updated_at": null,
             "created_by": "Sheldon",
-            "header_image_id": 84,
             "is_public": 1
         }
     },
@@ -913,7 +863,6 @@
             "created_at": "2020-03-29 14:53:36.707241",
             "updated_at": null,
             "created_by": "Olivia",
-            "header_image_id": 85,
             "is_public": 1
         }
     },
@@ -931,7 +880,6 @@
             "created_at": "2020-03-30 14:43:50.076996",
             "updated_at": null,
             "created_by": "Jan",
-            "header_image_id": 92,
             "is_public": 1
         }
     },
@@ -949,7 +897,6 @@
             "created_at": "2020-03-30 14:44:11.029942",
             "updated_at": null,
             "created_by": "Jan",
-            "header_image_id": 93,
             "is_public": 1
         }
     },
@@ -967,7 +914,6 @@
             "created_at": "2020-03-30 14:44:30.160650",
             "updated_at": null,
             "created_by": "Jan",
-            "header_image_id": 95,
             "is_public": 1
         }
     },
@@ -985,7 +931,6 @@
             "created_at": "2020-03-30 14:45:00.971862",
             "updated_at": null,
             "created_by": "Jan",
-            "header_image_id": 96,
             "is_public": 1
         }
     },
@@ -1003,7 +948,6 @@
             "created_at": "2020-03-30 14:45:24.608665",
             "updated_at": null,
             "created_by": "Jan",
-            "header_image_id": 97,
             "is_public": 1
         }
     },
@@ -1021,7 +965,6 @@
             "created_at": "2020-03-30 14:49:42.678868",
             "updated_at": null,
             "created_by": "Dorothea",
-            "header_image_id": 100,
             "is_public": 1
         }
     },
@@ -1039,7 +982,6 @@
             "created_at": "2020-03-30 15:36:12.337060",
             "updated_at": null,
             "created_by": "Dorothea",
-            "header_image_id": 102,
             "is_public": 1
         }
     },
@@ -1057,7 +999,6 @@
             "created_at": "2020-03-31 16:20:44.404798",
             "updated_at": null,
             "created_by": "Merle",
-            "header_image_id": 104,
             "is_public": 1
         }
     },
@@ -1067,7 +1008,7 @@
         "fields": {
             "id": 105,
             "title": "Eigene Sippenchronik",
-            "description": "<p><img style=\"margin: 25px; float: left;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/chronik.jpg\" width=\"215\" height=\"153\" />Jeder Sippe hat einzigartige Geschichten. Besondere Gegenst&auml;nde und magische Momente.</p>\n<p>Damit eure Sippe richtig gut zusammenwachsen kann, k&ouml;nnt ihr eure Geschichten k&uuml;nstlerisch in eurer Sippenchronik verewigen.</p>\n<p>Daf&uuml;r k&ouml;nnt ihr unz&auml;hlige Varianten nutzen:</p>\n<ul>\n<li>Handschriftliche Texte</li>\n<li>Fotos</li>\n<li>Gedichte</li>\n<li>selbstgeschriebene Lieder</li>\n<li>Blog im Internet</li>\n<li>Wanderkarten mit eurer Strecke</li>\n<li>Sippenwimpel</li>\n<li>Fotostory</li>\n<li>Lieblingsrezepte</li>\n<li>Lieblingslieder</li>\n<li>...</li>\n</ul>\n<p>Eure Ergebnisse k&ouml;nnt ihr in einem besonderem Buch, einem geheimen Umschlag oder in einem toten Briefkasten verwahren.&nbsp;</p>\n<p>Mit Sicherheit freut ihr euch 5 Jahre sp&auml;ter &uuml;ber diese einzigartigen Dokumente</p>",
+            "description": "<p><img style=\"margin: 25px; float: left;\" src=\"https://wiki.hratuga.de/files/public-docs/chronik.jpg\" width=\"215\" height=\"153\" />Jeder Sippe hat einzigartige Geschichten. Besondere Gegenst&auml;nde und magische Momente.</p>\n<p>Damit eure Sippe richtig gut zusammenwachsen kann, k&ouml;nnt ihr eure Geschichten k&uuml;nstlerisch in eurer Sippenchronik verewigen.</p>\n<p>Daf&uuml;r k&ouml;nnt ihr unz&auml;hlige Varianten nutzen:</p>\n<ul>\n<li>Handschriftliche Texte</li>\n<li>Fotos</li>\n<li>Gedichte</li>\n<li>selbstgeschriebene Lieder</li>\n<li>Blog im Internet</li>\n<li>Wanderkarten mit eurer Strecke</li>\n<li>Sippenwimpel</li>\n<li>Fotostory</li>\n<li>Lieblingsrezepte</li>\n<li>Lieblingslieder</li>\n<li>...</li>\n</ul>\n<p>Eure Ergebnisse k&ouml;nnt ihr in einem besonderem Buch, einem geheimen Umschlag oder in einem toten Briefkasten verwahren.&nbsp;</p>\n<p>Mit Sicherheit freut ihr euch 5 Jahre sp&auml;ter &uuml;ber diese einzigartigen Dokumente</p>",
             "costs_rating": 1,
             "execution_time": 1,
             "difficulty": 1,
@@ -1075,7 +1016,6 @@
             "created_at": "2020-03-31 16:23:12.724663",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 105,
             "is_public": 1
         }
     },
@@ -1093,7 +1033,6 @@
             "created_at": "2020-03-31 17:40:31.969760",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 106,
             "is_public": 1
         }
     },
@@ -1111,7 +1050,6 @@
             "created_at": "2020-04-02 09:34:45.723678",
             "updated_at": null,
             "created_by": "Jan",
-            "header_image_id": 110,
             "is_public": 0
         }
     },
@@ -1129,7 +1067,6 @@
             "created_at": "2020-04-02 18:47:37.307278",
             "updated_at": null,
             "created_by": "Jan",
-            "header_image_id": 111,
             "is_public": 1
         }
     },
@@ -1147,7 +1084,6 @@
             "created_at": "2020-04-02 21:48:22.554584",
             "updated_at": null,
             "created_by": "Jakob",
-            "header_image_id": 112,
             "is_public": 1
         }
     },
@@ -1165,7 +1101,6 @@
             "created_at": "2020-04-02 23:26:34.333590",
             "updated_at": null,
             "created_by": "Sheldon",
-            "header_image_id": 113,
             "is_public": 1
         }
     },
@@ -1183,7 +1118,6 @@
             "created_at": "2020-04-03 00:21:46.754469",
             "updated_at": null,
             "created_by": "Dorothea",
-            "header_image_id": 115,
             "is_public": 1
         }
     },
@@ -1201,7 +1135,6 @@
             "created_at": "2020-04-03 11:45:45.737339",
             "updated_at": null,
             "created_by": "Dorothea",
-            "header_image_id": 117,
             "is_public": 1
         }
     },
@@ -1219,7 +1152,6 @@
             "created_at": "2020-04-03 17:55:31.939337",
             "updated_at": null,
             "created_by": "Lukas",
-            "header_image_id": 119,
             "is_public": 1
         }
     },
@@ -1237,7 +1169,6 @@
             "created_at": "2020-04-04 18:48:56.890083",
             "updated_at": null,
             "created_by": "schlumpf",
-            "header_image_id": 120,
             "is_public": 0
         }
     },
@@ -1255,7 +1186,6 @@
             "created_at": "2020-04-04 23:57:10.230816",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 121,
             "is_public": 1
         }
     },
@@ -1265,7 +1195,7 @@
         "fields": {
             "id": 122,
             "title": "Die Wasserlupe",
-            "description": "<p><img style=\"float: left; margin-left: 10px; margin-right: 10px;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/photo_2020-04-16%2013.26.40.jpeg\" width=\"151\" height=\"258\" />Sicher habt ihr auch bemerkt, dass ein Wassertropfen etwas vergr&ouml;&szlig;ern kann - also wie eine Lupe funktioniert. Leider k&ouml;nnen wir kein Wasser &uuml;ber B&uuml;cher sch&uuml;tten, ohne diese kaputt zu machen.</p>\n<p>Deswegen hier eine einfache Anleitung, wie man sich selbst eine Lupe bastelt:</p>\n<p>Schneide daf&uuml;r 2 gleich gro&szlig;e Runde St&uuml;cke aus einer Plastikflasche. Am besten eignet sich hierf&uuml;r der obere Teil der Flasche, da er in der Regel st&auml;rker gew&ouml;lbt ist. Als Vorlage kannst du z.B. einen Flaschendeckel nehmen, gerne aber auch einen gr&ouml;&szlig;eren Gegenstand.</p>\n<p>Lege die beiden Kreise nun so &uuml;bereinander, dass ein Hohlraum entsteht. Verschlie&szlig;e nun den Rand deines Konstrukts. Hierf&uuml;r kannst du einen Nagel &uuml;ber einer Kerze erhitzen oder es mit Sekundenkleber versuchen. Wichtig ist, dass du noch eine Stelle frei l&auml;sst, da wir die Lupe noch mit Wasser f&uuml;llen m&uuml;ssen. Daf&uuml;r kannst du deine Lupe einfach in ein Glas voll Wasser tauchen und sie volllaufen lassen. Jetzt kannst du deine &Ouml;ffnung auch noch verschlie&szlig;en und fertig. Achte darauf, dass deine Lupe auch dicht ist.</p>\n<p>Wenn du m&ouml;chtest kannst du jetzt noch versuchen ein Rahmen f&uuml;r deine Lupe zu basteln. Achte aber darauf, dass du nicht die Lupe besch&auml;digst und sie undicht wird.</p>",
+            "description": "<p><img style=\"float: left; margin-left: 10px; margin-right: 10px;\" src=\"https://wiki.hratuga.de/files/public-docs/photo_2020-04-16%2013.26.40.jpeg\" width=\"151\" height=\"258\" />Sicher habt ihr auch bemerkt, dass ein Wassertropfen etwas vergr&ouml;&szlig;ern kann - also wie eine Lupe funktioniert. Leider k&ouml;nnen wir kein Wasser &uuml;ber B&uuml;cher sch&uuml;tten, ohne diese kaputt zu machen.</p>\n<p>Deswegen hier eine einfache Anleitung, wie man sich selbst eine Lupe bastelt:</p>\n<p>Schneide daf&uuml;r 2 gleich gro&szlig;e Runde St&uuml;cke aus einer Plastikflasche. Am besten eignet sich hierf&uuml;r der obere Teil der Flasche, da er in der Regel st&auml;rker gew&ouml;lbt ist. Als Vorlage kannst du z.B. einen Flaschendeckel nehmen, gerne aber auch einen gr&ouml;&szlig;eren Gegenstand.</p>\n<p>Lege die beiden Kreise nun so &uuml;bereinander, dass ein Hohlraum entsteht. Verschlie&szlig;e nun den Rand deines Konstrukts. Hierf&uuml;r kannst du einen Nagel &uuml;ber einer Kerze erhitzen oder es mit Sekundenkleber versuchen. Wichtig ist, dass du noch eine Stelle frei l&auml;sst, da wir die Lupe noch mit Wasser f&uuml;llen m&uuml;ssen. Daf&uuml;r kannst du deine Lupe einfach in ein Glas voll Wasser tauchen und sie volllaufen lassen. Jetzt kannst du deine &Ouml;ffnung auch noch verschlie&szlig;en und fertig. Achte darauf, dass deine Lupe auch dicht ist.</p>\n<p>Wenn du m&ouml;chtest kannst du jetzt noch versuchen ein Rahmen f&uuml;r deine Lupe zu basteln. Achte aber darauf, dass du nicht die Lupe besch&auml;digst und sie undicht wird.</p>",
             "costs_rating": 1,
             "execution_time": 1,
             "difficulty": 1,
@@ -1273,7 +1203,6 @@
             "created_at": "2020-04-09 11:30:18.559418",
             "updated_at": null,
             "created_by": "Linus",
-            "header_image_id": 122,
             "is_public": 1
         }
     },
@@ -1291,7 +1220,6 @@
             "created_at": "2020-04-09 11:36:54.422090",
             "updated_at": null,
             "created_by": "Linus",
-            "header_image_id": 123,
             "is_public": 1
         }
     },
@@ -1309,7 +1237,6 @@
             "created_at": "2020-04-09 11:39:45.796304",
             "updated_at": null,
             "created_by": "Linus",
-            "header_image_id": 124,
             "is_public": 1
         }
     },
@@ -1327,7 +1254,6 @@
             "created_at": "2020-04-09 11:45:27.549778",
             "updated_at": null,
             "created_by": "Linus",
-            "header_image_id": 125,
             "is_public": 1
         }
     },
@@ -1345,7 +1271,6 @@
             "created_at": "2020-04-14 09:11:48.546142",
             "updated_at": null,
             "created_by": "Julian",
-            "header_image_id": 127,
             "is_public": 1
         }
     },
@@ -1363,7 +1288,6 @@
             "created_at": "2020-04-18 12:52:59.561691",
             "updated_at": null,
             "created_by": "Alina",
-            "header_image_id": 129,
             "is_public": 1
         }
     },
@@ -1381,7 +1305,6 @@
             "created_at": "2020-04-19 11:50:29.840864",
             "updated_at": null,
             "created_by": "Arnold",
-            "header_image_id": 130,
             "is_public": 1
         }
     },
@@ -1399,7 +1322,6 @@
             "created_at": "2020-04-24 16:32:10.581647",
             "updated_at": null,
             "created_by": "S\u00e4ge",
-            "header_image_id": 131,
             "is_public": 1
         }
     },
@@ -1417,7 +1339,6 @@
             "created_at": "2020-04-24 16:47:56.731296",
             "updated_at": null,
             "created_by": "Julian",
-            "header_image_id": 132,
             "is_public": 1
         }
     },
@@ -1427,7 +1348,7 @@
         "fields": {
             "id": 133,
             "title": "Rotkohl-Farborgel",
-            "description": "<p><img style=\"float: left; margin-left: 10px; margin-right: 10px;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/rotkohl_1.png\" width=\"294\" height=\"146\" />Ihr k&ouml;nnt farbenfroh entdecken, wie sauer bzw. alkalisch die verschiedensten Substanzen um euch herum sind. Daf&uuml;r braucht ihr als Indikator lediglich Rotkohlsaft. So einfach kann Forschung sein.&nbsp;</p>\n<h4>&nbsp;</h4>\n<h4><strong>So geht's:</strong></h4>\n<ol>\n<li><span style=\"font-weight: 400;\">Ein paar Bl&auml;tter des Rotkohls klein schneiden und im Topf mit Wasser &uuml;bergie&szlig;en.</span></li>\n<li><span style=\"font-weight: 400;\">Den Rotkohl 10 min. kochen lassen. Dabei ab und an umr&uuml;hren. Falls zu viel Wasser verdampft, einfach etwas nachgie&szlig;en.</span></li>\n<li><span style=\"font-weight: 400;\">Nach dem Abk&uuml;hlen den Saft durch ein Sieb absch&uuml;tten und auf verschiedene Gl&auml;ser aufteilen.</span></li>\n<li><span style=\"font-weight: 400;\">Jeweils eine Haushaltschemikalie dazu geben und die Farbe beobachten.</span></li>\n</ol>\n<p>&nbsp;</p>\n<p><strong>Erl&auml;uterung:</strong></p>\n<p><span style=\"font-weight: 400;\">Der Farbstoff im Rotkohl kann protoniert und deprotoniert (d.h., dass Wasserstoffatome aufgenommen bzw. abgegeben werden) werden. Durch diese strukturelle Ver&auml;nderung hat er bei unterschiedlichem PH-Wert eine andere Farbe.</span></p>\n<ul>\n<li><span style=\"font-weight: 400;\">rot (etwa pH 2 sauer)</span></li>\n<li><span style=\"font-weight: 400;\">pink (etwa pH 4 sauer)</span></li>\n<li><span style=\"font-weight: 400;\">blau-violett (pH 7 neutral)</span></li>\n<li><span style=\"font-weight: 400;\">blau (ab etwa pH 8 alkalisch)</span></li>\n<li><span style=\"font-weight: 400;\">gr&uuml;n (ab etwa pH 12 alkalisch)</span></li>\n<li><span style=\"font-weight: 400;\">gelb (bei ca pH 13-14 stark alkalisch)</span></li>\n</ul>\n<p>&nbsp;</p>",
+            "description": "<p><img style=\"float: left; margin-left: 10px; margin-right: 10px;\" src=\"https://wiki.hratuga.de/files/public-docs/rotkohl_1.png\" width=\"294\" height=\"146\" />Ihr k&ouml;nnt farbenfroh entdecken, wie sauer bzw. alkalisch die verschiedensten Substanzen um euch herum sind. Daf&uuml;r braucht ihr als Indikator lediglich Rotkohlsaft. So einfach kann Forschung sein.&nbsp;</p>\n<h4>&nbsp;</h4>\n<h4><strong>So geht's:</strong></h4>\n<ol>\n<li><span style=\"font-weight: 400;\">Ein paar Bl&auml;tter des Rotkohls klein schneiden und im Topf mit Wasser &uuml;bergie&szlig;en.</span></li>\n<li><span style=\"font-weight: 400;\">Den Rotkohl 10 min. kochen lassen. Dabei ab und an umr&uuml;hren. Falls zu viel Wasser verdampft, einfach etwas nachgie&szlig;en.</span></li>\n<li><span style=\"font-weight: 400;\">Nach dem Abk&uuml;hlen den Saft durch ein Sieb absch&uuml;tten und auf verschiedene Gl&auml;ser aufteilen.</span></li>\n<li><span style=\"font-weight: 400;\">Jeweils eine Haushaltschemikalie dazu geben und die Farbe beobachten.</span></li>\n</ol>\n<p>&nbsp;</p>\n<p><strong>Erl&auml;uterung:</strong></p>\n<p><span style=\"font-weight: 400;\">Der Farbstoff im Rotkohl kann protoniert und deprotoniert (d.h., dass Wasserstoffatome aufgenommen bzw. abgegeben werden) werden. Durch diese strukturelle Ver&auml;nderung hat er bei unterschiedlichem PH-Wert eine andere Farbe.</span></p>\n<ul>\n<li><span style=\"font-weight: 400;\">rot (etwa pH 2 sauer)</span></li>\n<li><span style=\"font-weight: 400;\">pink (etwa pH 4 sauer)</span></li>\n<li><span style=\"font-weight: 400;\">blau-violett (pH 7 neutral)</span></li>\n<li><span style=\"font-weight: 400;\">blau (ab etwa pH 8 alkalisch)</span></li>\n<li><span style=\"font-weight: 400;\">gr&uuml;n (ab etwa pH 12 alkalisch)</span></li>\n<li><span style=\"font-weight: 400;\">gelb (bei ca pH 13-14 stark alkalisch)</span></li>\n</ul>\n<p>&nbsp;</p>",
             "costs_rating": 1,
             "execution_time": 1,
             "difficulty": 1,
@@ -1435,7 +1356,6 @@
             "created_at": "2020-04-30 11:28:17.397047",
             "updated_at": null,
             "created_by": "Caroline",
-            "header_image_id": 133,
             "is_public": 1
         }
     },
@@ -1453,7 +1373,6 @@
             "created_at": "2020-04-30 11:40:15.698762",
             "updated_at": null,
             "created_by": "Caroline",
-            "header_image_id": 134,
             "is_public": 1
         }
     },
@@ -1471,7 +1390,6 @@
             "created_at": "2020-04-30 12:00:25.408698",
             "updated_at": null,
             "created_by": "Caroline",
-            "header_image_id": 135,
             "is_public": 1
         }
     },
@@ -1489,7 +1407,6 @@
             "created_at": "2020-05-01 18:07:51.997209",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 136,
             "is_public": 1
         }
     },
@@ -1507,7 +1424,6 @@
             "created_at": "2020-05-01 20:11:29.230421",
             "updated_at": null,
             "created_by": "Leonie",
-            "header_image_id": 137,
             "is_public": 1
         }
     },
@@ -1525,7 +1441,6 @@
             "created_at": "2020-05-03 21:27:47.460917",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 138,
             "is_public": 1
         }
     },
@@ -1543,7 +1458,6 @@
             "created_at": "2020-05-05 07:10:54.425114",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 139,
             "is_public": 1
         }
     },
@@ -1561,7 +1475,6 @@
             "created_at": "2020-05-05 12:50:17.817240",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 140,
             "is_public": 0
         }
     },
@@ -1579,7 +1492,6 @@
             "created_at": "2020-05-07 21:01:04.907097",
             "updated_at": null,
             "created_by": "Daniel",
-            "header_image_id": 141,
             "is_public": 1
         }
     },
@@ -1597,7 +1509,6 @@
             "created_at": "2020-05-08 18:13:03.696698",
             "updated_at": null,
             "created_by": "Daniel",
-            "header_image_id": 142,
             "is_public": 1
         }
     },
@@ -1607,7 +1518,7 @@
         "fields": {
             "id": 143,
             "title": "PC-Lautpsrecher selber bauen",
-            "description": "<p><img style=\"float: left; margin-left: 10px; margin-right: 10px;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/lautsprecher.jpg\" alt=\"Gelber PC Lautsprecher\" width=\"238\" height=\"362\" /></p>\n<p>F&uuml;r die Freunde der guten T&ouml;ne sind die integrierten Lautsprecher, die es in Monitoren und Laptops gibt meist nicht ausreichend. Gekaufte Lautprecher sind entweder teuer oder klingen nicht besser, denn im Vergleich sind DIY-Lautsprecher f&uuml;r das Gebotene deutlich besser und garnicht schwer selber zu bauen:</p>\n<p>6-Bretter aneinander kleben und 2-L&ouml;cher auss&auml;gen sollte auch mit zwei linken H&auml;nden m&ouml;glich sein. Zudem hat man noch viele gestalterische M&ouml;glichkeiten, wie Farben und Verzierungen. Da Akustisk h&ouml;chst subjektiv und entwicklungtechnisch auch sehr aufwendig ist, sei &uuml;brigens davon abgeraten etwas komplett selbst zu entwickeln.</p>\n<p>Doch zum Gl&uuml;ck gibt es (sehr) viele Anleitungen und Baus&auml;tze im Internet zu finden, die einem die richtigen Treiber (so nennt man die zumeist Runden schwarzen Korpusse, die aus den elektronischen Signale die Schwingungen erzeugen) und die richtige Elektronik zusammenstellen.</p>\n<p>H&auml;ufig braucht man neben den Treibern auch noch Kondensatoren, Spulen und Widerst&auml;nde, damit die hohen T&ouml;ne zum Hocht&ouml;ner und die tiefen T&ouml;ne zum Tieft&ouml;ner (Bass) kommen. Um es einfacher zu halten, wird so etwas hier nicht verbaut, sondern durch Software ersetzt bzw. durch die integrierte Soundkarte in jedem Ger&auml;t. Das schlie&szlig;t den Gebrauch an Mobilger&auml;ten aber leider aus.&nbsp;</p>\n<p>Die Idee f&uuml;r diesen Lautsprecher stammt von <a href=\"http://www.uibel.net/\">http://www.uibel.net/</a> Hier findest du auch Anleitungen f&uuml;r andere h&ouml;herwertige und h&ouml;hrerpreisige Lautsprecher und auch die Aufbauanleitung. Ich orientiere mich an dem <span style=\"color: #ff0000;\"><span style=\"font-size: medium;\"><strong><em>SAKPC EA</em></strong><span style=\"color: #000000;\">.</span></span></span></p>\n<p>Pro St&uuml;ck wird gebraucht:</p>\n<ul>\n<li>\n<p>PEERLESS TC9FD18-08</p>\n</li>\n<li>\n<p>Ba&szlig;reflexrohr HighPower HP 35 (Innendurchmesser 35-29 mm, 123 mm lang)</p>\n</li>\n<li>\n<p>Polklemme T56/24D</p>\n</li>\n<li>\n<p>0,5 Meter Lautsprecherkabel 2 x 0,75 mm2</p>\n</li>\n<li>\n<p>1/2 Packung Polyesterwatte (wei&szlig;)</p>\n</li>\n<li>\n<p>4 Schrauben zur Treiberbefestigung</p>\n</li>\n<li>\n<p>2 Schrauben zur Polklemmenbefestigung</p>\n</li>\n<li>Bei Bedarf: Krokodilklemmen oder Aderendh&uuml;lsen, wenn man nicht L&ouml;ten will</li>\n</ul>\n<p>&nbsp;</p>\n<p>Was dann ca. 20 Euro pro St&uuml;ck = 40 Euro + ca. 5 Euro Holz und 5 Euro f&uuml;r ein Verst&auml;rkermodul kostet.</p>\n<p>An Software wird <span style=\"color: #ba372a;\">Equalizer APO</span> ben&ouml;tigt, die eure Lautsprecher auf vern&uuml;nftige weise ansteuern und eure Musik zu neuen H&ouml;hen verhilft.</p>\n<p>&nbsp;</p>",
+            "description": "<p><img style=\"float: left; margin-left: 10px; margin-right: 10px;\" src=\"https://wiki.hratuga.de/files/public-docs/lautsprecher.jpg\" alt=\"Gelber PC Lautsprecher\" width=\"238\" height=\"362\" /></p>\n<p>F&uuml;r die Freunde der guten T&ouml;ne sind die integrierten Lautsprecher, die es in Monitoren und Laptops gibt meist nicht ausreichend. Gekaufte Lautprecher sind entweder teuer oder klingen nicht besser, denn im Vergleich sind DIY-Lautsprecher f&uuml;r das Gebotene deutlich besser und garnicht schwer selber zu bauen:</p>\n<p>6-Bretter aneinander kleben und 2-L&ouml;cher auss&auml;gen sollte auch mit zwei linken H&auml;nden m&ouml;glich sein. Zudem hat man noch viele gestalterische M&ouml;glichkeiten, wie Farben und Verzierungen. Da Akustisk h&ouml;chst subjektiv und entwicklungtechnisch auch sehr aufwendig ist, sei &uuml;brigens davon abgeraten etwas komplett selbst zu entwickeln.</p>\n<p>Doch zum Gl&uuml;ck gibt es (sehr) viele Anleitungen und Baus&auml;tze im Internet zu finden, die einem die richtigen Treiber (so nennt man die zumeist Runden schwarzen Korpusse, die aus den elektronischen Signale die Schwingungen erzeugen) und die richtige Elektronik zusammenstellen.</p>\n<p>H&auml;ufig braucht man neben den Treibern auch noch Kondensatoren, Spulen und Widerst&auml;nde, damit die hohen T&ouml;ne zum Hocht&ouml;ner und die tiefen T&ouml;ne zum Tieft&ouml;ner (Bass) kommen. Um es einfacher zu halten, wird so etwas hier nicht verbaut, sondern durch Software ersetzt bzw. durch die integrierte Soundkarte in jedem Ger&auml;t. Das schlie&szlig;t den Gebrauch an Mobilger&auml;ten aber leider aus.&nbsp;</p>\n<p>Die Idee f&uuml;r diesen Lautsprecher stammt von <a href=\"http://www.uibel.net/\">http://www.uibel.net/</a> Hier findest du auch Anleitungen f&uuml;r andere h&ouml;herwertige und h&ouml;hrerpreisige Lautsprecher und auch die Aufbauanleitung. Ich orientiere mich an dem <span style=\"color: #ff0000;\"><span style=\"font-size: medium;\"><strong><em>SAKPC EA</em></strong><span style=\"color: #000000;\">.</span></span></span></p>\n<p>Pro St&uuml;ck wird gebraucht:</p>\n<ul>\n<li>\n<p>PEERLESS TC9FD18-08</p>\n</li>\n<li>\n<p>Ba&szlig;reflexrohr HighPower HP 35 (Innendurchmesser 35-29 mm, 123 mm lang)</p>\n</li>\n<li>\n<p>Polklemme T56/24D</p>\n</li>\n<li>\n<p>0,5 Meter Lautsprecherkabel 2 x 0,75 mm2</p>\n</li>\n<li>\n<p>1/2 Packung Polyesterwatte (wei&szlig;)</p>\n</li>\n<li>\n<p>4 Schrauben zur Treiberbefestigung</p>\n</li>\n<li>\n<p>2 Schrauben zur Polklemmenbefestigung</p>\n</li>\n<li>Bei Bedarf: Krokodilklemmen oder Aderendh&uuml;lsen, wenn man nicht L&ouml;ten will</li>\n</ul>\n<p>&nbsp;</p>\n<p>Was dann ca. 20 Euro pro St&uuml;ck = 40 Euro + ca. 5 Euro Holz und 5 Euro f&uuml;r ein Verst&auml;rkermodul kostet.</p>\n<p>An Software wird <span style=\"color: #ba372a;\">Equalizer APO</span> ben&ouml;tigt, die eure Lautsprecher auf vern&uuml;nftige weise ansteuern und eure Musik zu neuen H&ouml;hen verhilft.</p>\n<p>&nbsp;</p>",
             "costs_rating": 3,
             "execution_time": 0,
             "difficulty": 1,
@@ -1615,7 +1526,6 @@
             "created_at": "2020-05-08 18:33:16.195006",
             "updated_at": null,
             "created_by": "Hagi",
-            "header_image_id": 143,
             "is_public": 0
         }
     },
@@ -1633,7 +1543,6 @@
             "created_at": "2020-05-08 18:33:24.546072",
             "updated_at": null,
             "created_by": "Daniel",
-            "header_image_id": 144,
             "is_public": 1
         }
     },
@@ -1651,7 +1560,6 @@
             "created_at": "2020-05-08 22:20:51.614515",
             "updated_at": null,
             "created_by": "Daniel",
-            "header_image_id": 145,
             "is_public": 1
         }
     },
@@ -1669,7 +1577,6 @@
             "created_at": "2020-05-08 22:34:27.896693",
             "updated_at": null,
             "created_by": "Daniel",
-            "header_image_id": 146,
             "is_public": 1
         }
     },
@@ -1687,7 +1594,6 @@
             "created_at": "2020-05-09 11:07:28.804134",
             "updated_at": null,
             "created_by": "Hagi",
-            "header_image_id": 147,
             "is_public": 1
         }
     },
@@ -1705,7 +1611,6 @@
             "created_at": "2020-05-09 13:19:29.157968",
             "updated_at": null,
             "created_by": "Kai",
-            "header_image_id": 148,
             "is_public": 1
         }
     },
@@ -1723,7 +1628,6 @@
             "created_at": "2020-05-09 19:54:32.718421",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 149,
             "is_public": 1
         }
     },
@@ -1741,7 +1645,6 @@
             "created_at": "2020-05-09 20:06:12.492408",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 150,
             "is_public": 1
         }
     },
@@ -1759,7 +1662,6 @@
             "created_at": "2020-05-09 20:56:33.691452",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 151,
             "is_public": 1
         }
     },
@@ -1777,7 +1679,6 @@
             "created_at": "2020-05-10 07:47:06.447641",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 152,
             "is_public": 1
         }
     },
@@ -1795,7 +1696,6 @@
             "created_at": "2020-05-10 10:40:34.532245",
             "updated_at": null,
             "created_by": "Hagi",
-            "header_image_id": 154,
             "is_public": 1
         }
     },
@@ -1813,7 +1713,6 @@
             "created_at": "2020-05-10 16:49:21.698238",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 155,
             "is_public": 1
         }
     },
@@ -1823,7 +1722,7 @@
         "fields": {
             "id": 156,
             "title": "Haik-Kekse backen",
-            "description": "<p>Wer kennt es nicht: Auf einem anstregenden Haik erreicht ihr einen Gipfel und wollt eine kleine Pause machen und dabei etwas Leckeres snacken.</p>\n<p>Aber wer das Falsche isst, ist danach schnapp und die Pause f&auml;llt l&auml;nger aus als geplant.</p>\n<p>Um genau das zu verhindern und weniger ungesundes Zeug im Snack zu haben backt doch einfach Kekse die lecker, haltbar, nachhaltig und energiereich sind:</p>\n<p>Am Heimabend k&ouml;nnt ihr z.B. Bananen-Kokos-Haferflocken Cookies backen und sie f&uuml;r euren Haik in einer Tupperdose mitnehmen. Es ist g&uuml;nstiger, ihr habt keinen M&uuml;ll und definitiv ges&uuml;nder als normale Kekse. Gleichzeitig k&ouml;nnt ihr die Kekse vegan machen:</p>\n<p><strong>Rezept f&uuml;r 12 Kekse:</strong> <br />Eine Tasse Haferflocken &amp; 2 Bananen vermixen und in kleinen Talern auf ein Backblech legen.</p>\n<p>Danach bei 180 &deg;C ca. 20 - 30 Minuten backen, bis sie so Goldbraun wie auf dem Foto sind. Auf dem Foto ist eine Kokos Haselnu&szlig; Variante zu sehen (sehr zu empfehlen!).</p>\n<p>Nat&uuml;rlich k&ouml;nnt ihr dort alles rein packen, was ihr m&ouml;chtet:</p>\n<ul>\n<li>Kokosraspeln</li>\n<li>Honig/ Ahornsirup</li>\n<li>Haseln&uuml;sse/ Waln&uuml;sse/ Madeln</li>\n<li>Schokost&uuml;ckchen</li>\n<li>&Auml;pfel/ Birnen/ ..</li>\n<li>M&ouml;hren/ ...</li>\n<li>oder was eurer Sippe sonst so schmeckt.</li>\n</ul>\n<p><br />Bitte denkt daran bei einer Pause nur ein paar Kekse zu essen, nach dem 3. oder 5. Keks braucht euer Magen viel Energie um die Kekse zu verdauen und ihr habt weniger Kraft zum Wandern. Das gilt &uuml;brigens f&uuml;r alle Arten von Snacks.</p>\n<p>&nbsp;</p>\n<p><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/haferkeks-halb.jpg\" width=\"300\" /></p>",
+            "description": "<p>Wer kennt es nicht: Auf einem anstregenden Haik erreicht ihr einen Gipfel und wollt eine kleine Pause machen und dabei etwas Leckeres snacken.</p>\n<p>Aber wer das Falsche isst, ist danach schnapp und die Pause f&auml;llt l&auml;nger aus als geplant.</p>\n<p>Um genau das zu verhindern und weniger ungesundes Zeug im Snack zu haben backt doch einfach Kekse die lecker, haltbar, nachhaltig und energiereich sind:</p>\n<p>Am Heimabend k&ouml;nnt ihr z.B. Bananen-Kokos-Haferflocken Cookies backen und sie f&uuml;r euren Haik in einer Tupperdose mitnehmen. Es ist g&uuml;nstiger, ihr habt keinen M&uuml;ll und definitiv ges&uuml;nder als normale Kekse. Gleichzeitig k&ouml;nnt ihr die Kekse vegan machen:</p>\n<p><strong>Rezept f&uuml;r 12 Kekse:</strong> <br />Eine Tasse Haferflocken &amp; 2 Bananen vermixen und in kleinen Talern auf ein Backblech legen.</p>\n<p>Danach bei 180 &deg;C ca. 20 - 30 Minuten backen, bis sie so Goldbraun wie auf dem Foto sind. Auf dem Foto ist eine Kokos Haselnu&szlig; Variante zu sehen (sehr zu empfehlen!).</p>\n<p>Nat&uuml;rlich k&ouml;nnt ihr dort alles rein packen, was ihr m&ouml;chtet:</p>\n<ul>\n<li>Kokosraspeln</li>\n<li>Honig/ Ahornsirup</li>\n<li>Haseln&uuml;sse/ Waln&uuml;sse/ Madeln</li>\n<li>Schokost&uuml;ckchen</li>\n<li>&Auml;pfel/ Birnen/ ..</li>\n<li>M&ouml;hren/ ...</li>\n<li>oder was eurer Sippe sonst so schmeckt.</li>\n</ul>\n<p><br />Bitte denkt daran bei einer Pause nur ein paar Kekse zu essen, nach dem 3. oder 5. Keks braucht euer Magen viel Energie um die Kekse zu verdauen und ihr habt weniger Kraft zum Wandern. Das gilt &uuml;brigens f&uuml;r alle Arten von Snacks.</p>\n<p>&nbsp;</p>\n<p><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://wiki.hratuga.de/files/public-docs/haferkeks-halb.jpg\" width=\"300\" /></p>",
             "costs_rating": 2,
             "execution_time": 3,
             "difficulty": 1,
@@ -1831,7 +1730,6 @@
             "created_at": "2020-05-11 15:15:42.322281",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 156,
             "is_public": 1
         }
     },
@@ -1841,7 +1739,7 @@
         "fields": {
             "id": 157,
             "title": "Neue Zeltkonstruktionen testen",
-            "description": "<p>Ihr k&ouml;nnt an Heimabenden verschiedene Konstruktionen mit eurem Zeltmaterial bspw. f&uuml;r den n&auml;chsten Haik ausprobieren.</p>\n<p>Jeder kennt die Zelte mit einer Kohtenplane (= Kr&ouml;te), mit zwei Kohtenplanen (= Lok), vier Kohtenplanen (= Kohte) und sechs Kohtenplanen (= Jurtendach).</p>\n<ul>\n<li>Aber kann man auch eine Kohte mit 3 Planen bauen? Oder mit 5 (wird Juschka genannt)?</li>\n<li>Ist es m&ouml;glich eine Doppelkohte zu bauen?</li>\n<li>Ist eine m&ouml;glich eine Kohte an eine Jurte zu bauen?</li>\n<li>Ist vielleicht sogar eine \"Dreier-Kohte\" m&ouml;glich?&nbsp;</li>\n</ul>\n<p><br />Auf den Bildern ist eine Juschka zu sehen. Das Zelt bietet - zumindest in der Grundfl&auml;che - mehr Platz als eine Kohte, ist allerdings deutlich flacher. Es eignet sich z.B. wenn man in der Mitte kochen m&ouml;chte. Sollte man eine Kohtenplane f&uuml;r das Jurtendach vergessen haben, kann man so zumindest ersatzweise eine \"gro&szlig;e Kohte\" aufbauen.</p>\n<p>Passt auf! Das Kreuz mit 5 Enden zu bauen ist kompliziert und braucht oft mehr Zeit als der restliche Aufbau. Daher macht es Sinn, das Ganze vorher am Heimabend gut zu &uuml;ben.</p>\n<p>Fallen euch noch andere Zeltkonstruktionen ein?</p>\n<p>&nbsp;</p>\n<p><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/zelt-konstruktion-2.jpg\" width=\"300\" /></p>\n<p style=\"text-align: center;\">Kreuz des Titelbildes (Juschka)</p>\n<p style=\"text-align: center;\">&nbsp;</p>\n<p style=\"text-align: center;\"><img src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/zelt-konstruktion-3.jpg\" width=\"300\" /><br />Eingebautes Kreuz des Titelbildes (Juschka)</p>\n<p style=\"text-align: center;\">&nbsp;</p>\n<p style=\"text-align: center;\"><img src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/zelt-konstruktion-4.jpg\" width=\"300\" /><br />Juschka in der Eifel</p>",
+            "description": "<p>Ihr k&ouml;nnt an Heimabenden verschiedene Konstruktionen mit eurem Zeltmaterial bspw. f&uuml;r den n&auml;chsten Haik ausprobieren.</p>\n<p>Jeder kennt die Zelte mit einer Kohtenplane (= Kr&ouml;te), mit zwei Kohtenplanen (= Lok), vier Kohtenplanen (= Kohte) und sechs Kohtenplanen (= Jurtendach).</p>\n<ul>\n<li>Aber kann man auch eine Kohte mit 3 Planen bauen? Oder mit 5 (wird Juschka genannt)?</li>\n<li>Ist es m&ouml;glich eine Doppelkohte zu bauen?</li>\n<li>Ist eine m&ouml;glich eine Kohte an eine Jurte zu bauen?</li>\n<li>Ist vielleicht sogar eine \"Dreier-Kohte\" m&ouml;glich?&nbsp;</li>\n</ul>\n<p><br />Auf den Bildern ist eine Juschka zu sehen. Das Zelt bietet - zumindest in der Grundfl&auml;che - mehr Platz als eine Kohte, ist allerdings deutlich flacher. Es eignet sich z.B. wenn man in der Mitte kochen m&ouml;chte. Sollte man eine Kohtenplane f&uuml;r das Jurtendach vergessen haben, kann man so zumindest ersatzweise eine \"gro&szlig;e Kohte\" aufbauen.</p>\n<p>Passt auf! Das Kreuz mit 5 Enden zu bauen ist kompliziert und braucht oft mehr Zeit als der restliche Aufbau. Daher macht es Sinn, das Ganze vorher am Heimabend gut zu &uuml;ben.</p>\n<p>Fallen euch noch andere Zeltkonstruktionen ein?</p>\n<p>&nbsp;</p>\n<p><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://wiki.hratuga.de/files/public-docs/zelt-konstruktion-2.jpg\" width=\"300\" /></p>\n<p style=\"text-align: center;\">Kreuz des Titelbildes (Juschka)</p>\n<p style=\"text-align: center;\">&nbsp;</p>\n<p style=\"text-align: center;\"><img src=\"https://wiki.hratuga.de/files/public-docs/zelt-konstruktion-3.jpg\" width=\"300\" /><br />Eingebautes Kreuz des Titelbildes (Juschka)</p>\n<p style=\"text-align: center;\">&nbsp;</p>\n<p style=\"text-align: center;\"><img src=\"https://wiki.hratuga.de/files/public-docs/zelt-konstruktion-4.jpg\" width=\"300\" /><br />Juschka in der Eifel</p>",
             "costs_rating": 0,
             "execution_time": 3,
             "difficulty": 1,
@@ -1849,7 +1747,6 @@
             "created_at": "2020-05-15 22:31:56.982232",
             "updated_at": null,
             "created_by": "Daniel",
-            "header_image_id": 157,
             "is_public": 1
         }
     },
@@ -1867,7 +1764,6 @@
             "created_at": "2020-05-18 10:36:44.203112",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 158,
             "is_public": 1
         }
     },
@@ -1885,7 +1781,6 @@
             "created_at": "2020-05-19 21:41:02.435311",
             "updated_at": null,
             "created_by": "Daniel",
-            "header_image_id": 159,
             "is_public": 1
         }
     },
@@ -1903,7 +1798,6 @@
             "created_at": "2020-10-04 08:15:46.909270",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 161,
             "is_public": 1
         }
     },
@@ -1921,7 +1815,6 @@
             "created_at": "2020-10-17 15:19:06.724443",
             "updated_at": null,
             "created_by": "Nadine",
-            "header_image_id": 162,
             "is_public": 1
         }
     },
@@ -1939,7 +1832,6 @@
             "created_at": "2020-10-17 20:57:37.067654",
             "updated_at": null,
             "created_by": "Nadine",
-            "header_image_id": 163,
             "is_public": 1
         }
     },
@@ -1957,7 +1849,6 @@
             "created_at": "2020-11-08 17:23:01.115887",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 164,
             "is_public": 1
         }
     },
@@ -1975,7 +1866,6 @@
             "created_at": "2020-11-09 20:31:26.512600",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 165,
             "is_public": 1
         }
     },
@@ -1985,7 +1875,7 @@
         "fields": {
             "id": 173,
             "title": "Kerzendrehen",
-            "description": "<p><img style=\"margin: 10px; float: left;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/heimabend_kerze_hannah.jpg\" width=\"200\" />Ihr k&ouml;nnt Stabkerzen erw&auml;rmen, sie dann drehen und erstellt damit individuelle Kerzen, die super zum Verschenken oder selbst abbrennen sind!</p>\n<p>Hei&szlig;es Wasser (nicht kochend) in eine Sch&uuml;ssel gie&szlig;en und die Stabkerzen reinlegen, sodass sie ganz mit dem Wasser bedeckt sind.</p>\n<p>Wenn die Kerzen weich genug sind, k&ouml;nnen sie aus der Sch&uuml;ssel geholt werden und mit dem Nudelholz oder einem Glas platt gerollt werden. Dabei ist es wichtig unten und oben ein St&uuml;ck nicht auszurollen, weil sonst die Kerzen nicht mehr in den Kerzenst&auml;nder passen. Es kann passieren, dass sich der Kerzendocht beim Rollen verkleinert. Wenn dieser ganz in die Kerze gezogen wurde, muss die Kerze solange st&uuml;ckweise abgeschnitten werden, bis der Docht wieder gefunden wird.</p>\n<p>Wenn die Kerzen ausgerollt sind (dabei k&ouml;nnen verschiedene Breiten ausprobiert werden), k&ouml;nnen sie per Hand gedreht werden (auch hierbei k&ouml;nnen unterschiedlich starke Drehungen ausprobiert werden).</p>\n<p>Die gedrehten Kerzen sollten dann in die Sch&uuml;ssel mit dem kalten Wasser gelegt werden, damit der Wachs wieder erh&auml;rtet.</p>\n<p>Fertig sind die neuen Kerzen!</p>",
+            "description": "<p><img style=\"margin: 10px; float: left;\" src=\"https://wiki.hratuga.de/files/public-docs/heimabend_kerze_hannah.jpg\" width=\"200\" />Ihr k&ouml;nnt Stabkerzen erw&auml;rmen, sie dann drehen und erstellt damit individuelle Kerzen, die super zum Verschenken oder selbst abbrennen sind!</p>\n<p>Hei&szlig;es Wasser (nicht kochend) in eine Sch&uuml;ssel gie&szlig;en und die Stabkerzen reinlegen, sodass sie ganz mit dem Wasser bedeckt sind.</p>\n<p>Wenn die Kerzen weich genug sind, k&ouml;nnen sie aus der Sch&uuml;ssel geholt werden und mit dem Nudelholz oder einem Glas platt gerollt werden. Dabei ist es wichtig unten und oben ein St&uuml;ck nicht auszurollen, weil sonst die Kerzen nicht mehr in den Kerzenst&auml;nder passen. Es kann passieren, dass sich der Kerzendocht beim Rollen verkleinert. Wenn dieser ganz in die Kerze gezogen wurde, muss die Kerze solange st&uuml;ckweise abgeschnitten werden, bis der Docht wieder gefunden wird.</p>\n<p>Wenn die Kerzen ausgerollt sind (dabei k&ouml;nnen verschiedene Breiten ausprobiert werden), k&ouml;nnen sie per Hand gedreht werden (auch hierbei k&ouml;nnen unterschiedlich starke Drehungen ausprobiert werden).</p>\n<p>Die gedrehten Kerzen sollten dann in die Sch&uuml;ssel mit dem kalten Wasser gelegt werden, damit der Wachs wieder erh&auml;rtet.</p>\n<p>Fertig sind die neuen Kerzen!</p>",
             "costs_rating": 2,
             "execution_time": 2,
             "difficulty": 1,
@@ -1993,7 +1883,6 @@
             "created_at": "2021-01-12 17:32:52.797474",
             "updated_at": null,
             "created_by": "Hannah",
-            "header_image_id": 173,
             "is_public": 1
         }
     },
@@ -2011,7 +1900,6 @@
             "created_at": "2021-02-06 09:35:26.046130",
             "updated_at": null,
             "created_by": "Nadine",
-            "header_image_id": 175,
             "is_public": 1
         }
     },
@@ -2029,7 +1917,6 @@
             "created_at": "2021-02-06 09:42:22.688068",
             "updated_at": null,
             "created_by": "Nadine",
-            "header_image_id": 176,
             "is_public": 1
         }
     },
@@ -2047,7 +1934,6 @@
             "created_at": "2021-02-07 15:25:54.093028",
             "updated_at": null,
             "created_by": "Resi & sophie",
-            "header_image_id": 177,
             "is_public": 1
         }
     },
@@ -2065,7 +1951,6 @@
             "created_at": "2021-02-07 15:41:53.255318",
             "updated_at": null,
             "created_by": "Kimi",
-            "header_image_id": 178,
             "is_public": 1
         }
     },
@@ -2083,7 +1968,6 @@
             "created_at": "2021-02-07 16:06:01.673562",
             "updated_at": null,
             "created_by": "Daniel (AL)",
-            "header_image_id": 179,
             "is_public": 1
         }
     },
@@ -2101,7 +1985,6 @@
             "created_at": "2021-02-07 17:32:21.421426",
             "updated_at": null,
             "created_by": "Ajes",
-            "header_image_id": 180,
             "is_public": 1
         }
     },
@@ -2111,7 +1994,7 @@
         "fields": {
             "id": 181,
             "title": "Selbstgemachte Haselnuss-Schoko Creme",
-            "description": "<p>Habt ihr schon eure <strong>eigene</strong> \"Sippen Schokocreme\" kreiert?</p>\n<p>Nein? - Dann wird es aber Zeit!</p>\n<p><span style=\"text-decoration: underline;\"><strong>Was brauchst du daf&uuml;r?</strong></span></p>\n<p>Nicht viel, du brauchst nicht mal zu kochen. Die Schokocreme hat keine schnell verderblichen Zutaten, wodurch sie haiktauglich wird und&nbsp; genauso schmeckt, wie es deine Sippe mag.</p>\n<p>Seid kreativ und denkt euch eure eigenen Zutaten aus.</p>\n<p>&nbsp;</p>\n<p><strong>Basiszutaten</strong> sind:</p>\n<ul>\n<li>Gemahlene N&uuml;sse (z.B. Haseln&uuml;sse, Mandeln, etc.)</li>\n<li>Kokos&ouml;l/Kokosfett</li>\n<li>Prise Salz</li>\n</ul>\n<p>&nbsp;</p>\n<p>Nun k&ouml;nnt ihr euch <strong>eine Variante</strong> aussuchen:</p>\n<ul>\n<li>einfach mit Nesquik oder Kaba (wie im Titelbild)<br /><span style=\"text-decoration: underline;\">oder&nbsp;</span></li>\n<li>Back-Kakao (bitter)</li>\n<li>Datteln</li>\n</ul>\n<p><img style=\"margin: 10px; float: right;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/WhatsApp%20Image%202021-02-12%20at%2019.15.52.jpeg\" width=\"200\" /></p>\n<p>dazu k&ouml;nnt ihr nat&uuml;rlich noch alles dazu packen was euch einf&auml;llt. Ein paar grobe <strong>Haselnussst&uuml;cke</strong> sind ganz cool.</p>\n<p>&nbsp;</p>\n<p><span style=\"text-decoration: underline;\"><strong>Was m&uuml;sst ihr tun?</strong></span></p>\n<p>Ihr m&uuml;sst einfach nur die Zutaten zusammenmixen, kleinstampfen und nach Bedarf abschmecken. Nat&uuml;rlich k&ouml;nnt ihr euch auch direkt gemahlene N&uuml;sse holen, dann m&uuml;sst ihr sie nicht mehr zermahlen.</p>\n<p><em>Seid kreativ, denkt euch neue Sachen aus! Welche Nussarten schmecken euch am besten? Gibt es andere Zutaten, die dazu passen? Schokost&uuml;ckchen?</em></p>\n<p>Vielleicht k&ouml;nnt ihr auf dem n&auml;chsten Haik oder auf dem n&auml;chsten Lager eure eigene Schokocreme mitbringen? Diese Schokocreme ist nat&uuml;rlich viel nachhaltiger und ges&uuml;nder als Nutella. Au&szlig;erdem kann sie vegan sein (je nach Kakao) und muss nicht k&uuml;hl gelagert werden, was f&uuml;r den Haik super praktisch ist.</p>\n<p>Sie schmeckt nat&uuml;rlich auch besser!</p>",
+            "description": "<p>Habt ihr schon eure <strong>eigene</strong> \"Sippen Schokocreme\" kreiert?</p>\n<p>Nein? - Dann wird es aber Zeit!</p>\n<p><span style=\"text-decoration: underline;\"><strong>Was brauchst du daf&uuml;r?</strong></span></p>\n<p>Nicht viel, du brauchst nicht mal zu kochen. Die Schokocreme hat keine schnell verderblichen Zutaten, wodurch sie haiktauglich wird und&nbsp; genauso schmeckt, wie es deine Sippe mag.</p>\n<p>Seid kreativ und denkt euch eure eigenen Zutaten aus.</p>\n<p>&nbsp;</p>\n<p><strong>Basiszutaten</strong> sind:</p>\n<ul>\n<li>Gemahlene N&uuml;sse (z.B. Haseln&uuml;sse, Mandeln, etc.)</li>\n<li>Kokos&ouml;l/Kokosfett</li>\n<li>Prise Salz</li>\n</ul>\n<p>&nbsp;</p>\n<p>Nun k&ouml;nnt ihr euch <strong>eine Variante</strong> aussuchen:</p>\n<ul>\n<li>einfach mit Nesquik oder Kaba (wie im Titelbild)<br /><span style=\"text-decoration: underline;\">oder&nbsp;</span></li>\n<li>Back-Kakao (bitter)</li>\n<li>Datteln</li>\n</ul>\n<p><img style=\"margin: 10px; float: right;\" src=\"https://wiki.hratuga.de/files/public-docs/WhatsApp%20Image%202021-02-12%20at%2019.15.52.jpeg\" width=\"200\" /></p>\n<p>dazu k&ouml;nnt ihr nat&uuml;rlich noch alles dazu packen was euch einf&auml;llt. Ein paar grobe <strong>Haselnussst&uuml;cke</strong> sind ganz cool.</p>\n<p>&nbsp;</p>\n<p><span style=\"text-decoration: underline;\"><strong>Was m&uuml;sst ihr tun?</strong></span></p>\n<p>Ihr m&uuml;sst einfach nur die Zutaten zusammenmixen, kleinstampfen und nach Bedarf abschmecken. Nat&uuml;rlich k&ouml;nnt ihr euch auch direkt gemahlene N&uuml;sse holen, dann m&uuml;sst ihr sie nicht mehr zermahlen.</p>\n<p><em>Seid kreativ, denkt euch neue Sachen aus! Welche Nussarten schmecken euch am besten? Gibt es andere Zutaten, die dazu passen? Schokost&uuml;ckchen?</em></p>\n<p>Vielleicht k&ouml;nnt ihr auf dem n&auml;chsten Haik oder auf dem n&auml;chsten Lager eure eigene Schokocreme mitbringen? Diese Schokocreme ist nat&uuml;rlich viel nachhaltiger und ges&uuml;nder als Nutella. Au&szlig;erdem kann sie vegan sein (je nach Kakao) und muss nicht k&uuml;hl gelagert werden, was f&uuml;r den Haik super praktisch ist.</p>\n<p>Sie schmeckt nat&uuml;rlich auch besser!</p>",
             "costs_rating": 2,
             "execution_time": 2,
             "difficulty": 1,
@@ -2119,7 +2002,6 @@
             "created_at": "2021-02-12 18:50:39.838130",
             "updated_at": null,
             "created_by": "JoDa",
-            "header_image_id": 181,
             "is_public": 1
         }
     },
@@ -2137,7 +2019,6 @@
             "created_at": "2021-02-12 19:53:55.970113",
             "updated_at": null,
             "created_by": "Caroline",
-            "header_image_id": 182,
             "is_public": 1
         }
     },
@@ -2155,7 +2036,6 @@
             "created_at": "2021-02-12 21:18:51.675330",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 183,
             "is_public": 1
         }
     },
@@ -2173,7 +2053,6 @@
             "created_at": "2021-02-12 21:54:26.059888",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 184,
             "is_public": 1
         }
     },
@@ -2191,7 +2070,6 @@
             "created_at": "2021-02-12 21:58:25.529649",
             "updated_at": null,
             "created_by": "Robert",
-            "header_image_id": 185,
             "is_public": 1
         }
     },
@@ -2201,7 +2079,7 @@
         "fields": {
             "id": 186,
             "title": "Veganen Brotaufstrich selber machen",
-            "description": "<p>Wie klingt <strong>\"Tomate&ndash;Mandel&ndash;Basilikum Creme\" </strong>f&uuml;r euch?</p>\n<p>Ihr wollt diese Creme selber machen? F&uuml;r eure n&auml;chsten Sippenaktion oder f&uuml;r eurer Stammeslager? Oder vielleicht f&uuml;r euren n&auml;chsten Haik?</p>\n<p>Das geht ganz einfach!</p>\n<p>Ihr braucht f&uuml;r 500g Creme nicht mehr als folgende Zutaten:</p>\n<ul>\n<li>1 Glas (ca. 250g) eingelegte getrocknete Tomaten</li>\n<li>ca. 70g gehackte Mandeln</li>\n<li>ca. 150ml &Ouml;liven&ouml;l</li>\n<li>ca. &frac12; Bund frischen Basilikum</li>\n<li>Meersalz</li>\n<li>Pfeffer</li>\n</ul>\n<p>&nbsp;</p>\n<p>Mischt einfach alles zusammen und p&uuml;riert es. Nat&uuml;rlich k&ouml;nnt ihr nun kreativ werden und alles dazumischen was euch noch leckeres dazu einf&auml;llt.</p>\n<p>Viel Spa&szlig;!</p>\n<p><img style=\"margin: 25px;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/WhatsApp%20Image%202021-02-12%20at%2019.10.26.jpeg\" width=\"200\" /></p>",
+            "description": "<p>Wie klingt <strong>\"Tomate&ndash;Mandel&ndash;Basilikum Creme\" </strong>f&uuml;r euch?</p>\n<p>Ihr wollt diese Creme selber machen? F&uuml;r eure n&auml;chsten Sippenaktion oder f&uuml;r eurer Stammeslager? Oder vielleicht f&uuml;r euren n&auml;chsten Haik?</p>\n<p>Das geht ganz einfach!</p>\n<p>Ihr braucht f&uuml;r 500g Creme nicht mehr als folgende Zutaten:</p>\n<ul>\n<li>1 Glas (ca. 250g) eingelegte getrocknete Tomaten</li>\n<li>ca. 70g gehackte Mandeln</li>\n<li>ca. 150ml &Ouml;liven&ouml;l</li>\n<li>ca. &frac12; Bund frischen Basilikum</li>\n<li>Meersalz</li>\n<li>Pfeffer</li>\n</ul>\n<p>&nbsp;</p>\n<p>Mischt einfach alles zusammen und p&uuml;riert es. Nat&uuml;rlich k&ouml;nnt ihr nun kreativ werden und alles dazumischen was euch noch leckeres dazu einf&auml;llt.</p>\n<p>Viel Spa&szlig;!</p>\n<p><img style=\"margin: 25px;\" src=\"https://wiki.hratuga.de/files/public-docs/WhatsApp%20Image%202021-02-12%20at%2019.10.26.jpeg\" width=\"200\" /></p>",
             "costs_rating": 2,
             "execution_time": 3,
             "difficulty": 1,
@@ -2209,7 +2087,6 @@
             "created_at": "2021-02-12 22:39:44.381950",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 186,
             "is_public": 1
         }
     },
@@ -2227,7 +2104,6 @@
             "created_at": "2021-02-16 09:46:09.764182",
             "updated_at": null,
             "created_by": "Jan",
-            "header_image_id": 187,
             "is_public": 1
         }
     },
@@ -2245,7 +2121,6 @@
             "created_at": "2021-02-18 19:36:19.581347",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 188,
             "is_public": 0
         }
     },
@@ -2263,7 +2138,6 @@
             "created_at": "2021-02-18 19:41:41.570980",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 189,
             "is_public": 0
         }
     },
@@ -2281,7 +2155,6 @@
             "created_at": "2021-02-18 19:49:26.758381",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 190,
             "is_public": 0
         }
     },
@@ -2299,7 +2172,6 @@
             "created_at": "2021-02-18 19:52:31.345812",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 191,
             "is_public": 0
         }
     },
@@ -2317,7 +2189,6 @@
             "created_at": "2021-02-18 19:59:16.211318",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 192,
             "is_public": 0
         }
     },
@@ -2335,7 +2206,6 @@
             "created_at": "2021-02-18 20:03:40.045705",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 193,
             "is_public": 0
         }
     },
@@ -2353,7 +2223,6 @@
             "created_at": "2021-02-18 20:10:40.992151",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 194,
             "is_public": 1
         }
     },
@@ -2371,7 +2240,6 @@
             "created_at": "2021-02-18 20:13:21.030991",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 195,
             "is_public": 0
         }
     },
@@ -2389,7 +2257,6 @@
             "created_at": "2021-02-18 20:17:20.931871",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 196,
             "is_public": 0
         }
     },
@@ -2407,7 +2274,6 @@
             "created_at": "2021-02-18 20:20:56.286251",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 197,
             "is_public": 0
         }
     },
@@ -2425,7 +2291,6 @@
             "created_at": "2021-02-18 20:24:07.728683",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 198,
             "is_public": 1
         }
     },
@@ -2443,7 +2308,6 @@
             "created_at": "2021-02-19 08:07:33.349179",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 199,
             "is_public": 1
         }
     },
@@ -2461,7 +2325,6 @@
             "created_at": "2021-02-20 10:27:04.222862",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 200,
             "is_public": 1
         }
     },
@@ -2471,7 +2334,7 @@
         "fields": {
             "id": 201,
             "title": "Lichtmalerei",
-            "description": "<p style=\"text-align: left;\">Male mit einer Taschenlampe dein eigenes Bild f&uuml;r ein Foto.</p>\n<p>Beim Lichtmalen nutzt man eine lange Belichtungszeit der Kamera aus, um durch die Bewegung einer Lichtquelle in einem Foto zu malen.</p>\n<p>Nutze daf&uuml;r eine normale Kamera oder ein Handy und stell die Belichtungszeit sehr hoch ein. Du kannst auch eine spezielle App daf&uuml;r benutzen.</p>\n<p>Nun kannst du mit z.B. einer Taschenlampe etwas in das Foto malen, indem du w&auml;hrend die Kamera das Foto aufnimmt die Taschenlampe bewegst. Je l&auml;nger das Licht an einem Ort bleibt, desto heller wird es sp&auml;ter auf dem Bild.</p>\n<p><img style=\"margin: 20px auto; display: block;\" src=\"https://inspirator-backend-static.s3.eu-central-1.amazonaws.com/media/images/WhatsApp%20Image%202021-03-03%20at%2019.00.45%20(2).jpeg\" alt=\"\" width=\"264\" height=\"375\" /></p>\n<p>Du kannst auch Gegenst&auml;nde oder Personen anstrahlen, um sie auf dem Bild auftauchen zu lassen.</p>\n<p>Experimentiere mit Farben, Hintergr&uuml;nden, Tageszeiten und der Geschwindigkeit.</p>\n<p>&nbsp;</p>\n<p>Brauchst du mehr Inspiration? Dann such doch mal bei Google nach \"light paining\"!</p>",
+            "description": "<p style=\"text-align: left;\">Male mit einer Taschenlampe dein eigenes Bild f&uuml;r ein Foto.</p>\n<p>Beim Lichtmalen nutzt man eine lange Belichtungszeit der Kamera aus, um durch die Bewegung einer Lichtquelle in einem Foto zu malen.</p>\n<p>Nutze daf&uuml;r eine normale Kamera oder ein Handy und stell die Belichtungszeit sehr hoch ein. Du kannst auch eine spezielle App daf&uuml;r benutzen.</p>\n<p>Nun kannst du mit z.B. einer Taschenlampe etwas in das Foto malen, indem du w&auml;hrend die Kamera das Foto aufnimmt die Taschenlampe bewegst. Je l&auml;nger das Licht an einem Ort bleibt, desto heller wird es sp&auml;ter auf dem Bild.</p>\n<p><img style=\"margin: 20px auto; display: block;\" src=\"https://wiki.hratuga.de/files/public-docs/WhatsApp%20Image%202021-03-03%20at%2019.00.45%20(2).jpeg\" alt=\"\" width=\"264\" height=\"375\" /></p>\n<p>Du kannst auch Gegenst&auml;nde oder Personen anstrahlen, um sie auf dem Bild auftauchen zu lassen.</p>\n<p>Experimentiere mit Farben, Hintergr&uuml;nden, Tageszeiten und der Geschwindigkeit.</p>\n<p>&nbsp;</p>\n<p>Brauchst du mehr Inspiration? Dann such doch mal bei Google nach \"light paining\"!</p>",
             "costs_rating": 0,
             "execution_time": 1,
             "difficulty": 1,
@@ -2479,7 +2342,6 @@
             "created_at": "2021-03-03 17:56:53.115144",
             "updated_at": null,
             "created_by": "Leyan",
-            "header_image_id": 201,
             "is_public": 1
         }
     },
@@ -2497,7 +2359,6 @@
             "created_at": "2021-03-15 09:30:20.619548",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 202,
             "is_public": 1
         }
     },
@@ -2515,7 +2376,6 @@
             "created_at": "2021-03-16 10:56:09.411364",
             "updated_at": null,
             "created_by": "sophie",
-            "header_image_id": 203,
             "is_public": 1
         }
     },
@@ -2533,7 +2393,6 @@
             "created_at": "2021-03-16 12:52:01.738808",
             "updated_at": null,
             "created_by": "sophie",
-            "header_image_id": 204,
             "is_public": 1
         }
     },
@@ -2551,7 +2410,6 @@
             "created_at": "2021-03-18 20:34:30.866634",
             "updated_at": null,
             "created_by": "sophie",
-            "header_image_id": 205,
             "is_public": 1
         }
     },
@@ -2569,7 +2427,6 @@
             "created_at": "2021-03-18 21:00:35.334407",
             "updated_at": null,
             "created_by": "sophie",
-            "header_image_id": 206,
             "is_public": 1
         }
     },
@@ -2587,7 +2444,6 @@
             "created_at": "2021-03-19 10:36:11.613861",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 207,
             "is_public": 0
         }
     },
@@ -2605,7 +2461,6 @@
             "created_at": "2021-03-21 08:50:58.713294",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 208,
             "is_public": 0
         }
     },
@@ -2623,7 +2478,6 @@
             "created_at": "2021-03-21 18:38:03.756797",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 209,
             "is_public": 0
         }
     },
@@ -2641,7 +2495,6 @@
             "created_at": "2021-03-26 23:48:47.136444",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 210,
             "is_public": 0
         }
     },
@@ -2659,7 +2512,6 @@
             "created_at": "2021-03-26 23:51:08.931536",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 211,
             "is_public": 0
         }
     },
@@ -2677,7 +2529,6 @@
             "created_at": "2021-03-26 23:55:12.841204",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 212,
             "is_public": 0
         }
     },
@@ -2695,7 +2546,6 @@
             "created_at": "2021-03-27 00:04:41.217783",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 213,
             "is_public": 0
         }
     },
@@ -2713,7 +2563,6 @@
             "created_at": "2021-03-30 10:45:13.246490",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 214,
             "is_public": 0
         }
     },
@@ -2731,7 +2580,6 @@
             "created_at": "2021-03-30 10:46:40.750261",
             "updated_at": null,
             "created_by": "Inspi",
-            "header_image_id": 215,
             "is_public": 0
         }
     },
@@ -2749,7 +2597,6 @@
             "created_at": "2021-04-03 11:02:50.306653",
             "updated_at": null,
             "created_by": "Janny",
-            "header_image_id": 216,
             "is_public": 1
         }
     },
@@ -2767,7 +2614,6 @@
             "created_at": "2021-04-03 11:14:34.896952",
             "updated_at": null,
             "created_by": "Janny",
-            "header_image_id": 217,
             "is_public": 1
         }
     },
@@ -2785,7 +2631,6 @@
             "created_at": "2021-04-03 11:21:19.145367",
             "updated_at": null,
             "created_by": "Janny",
-            "header_image_id": 218,
             "is_public": 1
         }
     },
@@ -2803,7 +2648,6 @@
             "created_at": "2021-04-05 08:54:23.652706",
             "updated_at": null,
             "created_by": "Janny",
-            "header_image_id": 219,
             "is_public": 1
         }
     },
@@ -2821,7 +2665,6 @@
             "created_at": "2021-04-05 09:08:06.760042",
             "updated_at": null,
             "created_by": "Janny",
-            "header_image_id": 220,
             "is_public": 1
         }
     },
@@ -2839,7 +2682,6 @@
             "created_at": "2021-04-05 09:15:39.710430",
             "updated_at": null,
             "created_by": "Janny",
-            "header_image_id": 221,
             "is_public": 1
         }
     },
@@ -2857,7 +2699,6 @@
             "created_at": "2021-04-05 09:34:07.317202",
             "updated_at": null,
             "created_by": "Janny",
-            "header_image_id": 222,
             "is_public": 1
         }
     },
@@ -2875,7 +2716,6 @@
             "created_at": "2021-04-05 09:37:51.616850",
             "updated_at": null,
             "created_by": "Janny",
-            "header_image_id": 223,
             "is_public": 1
         }
     }

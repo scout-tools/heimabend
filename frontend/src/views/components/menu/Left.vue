@@ -47,7 +47,7 @@
 
       <v-divider v-if="isAuthenticated" />
 
-      <v-list-item v-if="isAuthenticated" link bottom :to="{ name: 'admin-overview' }">
+      <v-list-item v-if="isAuthenticated" link bottom :to="{ name: 'admin-heimabend' }">
         <v-list-item-icon>
           <v-icon color="orange"> mdi-tools </v-icon>
         </v-list-item-icon>

@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import Tag, Event, Message, Like, TagCategory, \
     Image, MaterialItem, \
     ExperimentItem, Experiment, MaterialUnit, MaterialName, MessageType, \
-    Faq, FaqRating, NextBestHeimabend
+    Faq, FaqRating, NextBestHeimabend, ImageMeta
 from rest_framework_tracking.models import APIRequestLog
 from rest_framework.serializers import Serializer, FileField
 from django.core.cache import cache
@@ -88,8 +88,7 @@ def getmedian():
 
 
 class EventSerializer(serializers.ModelSerializer):
-
-    header_image = serializers.SerializerMethodField()
+    header_image = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Event
@@ -107,18 +106,55 @@ class EventSerializer(serializers.ModelSerializer):
             'is_public')
 
     def get_header_image(self, obj):
-        print(obj)
-        image_id = obj.header_image
-        print(image_id)
-        if image_id:
-            if image_id.image:
-                return image_id.image.name
-        return ''
+        qs = ImageMeta.objects.filter(event_id=obj.id).first()
+        serializer = ImageMetaSerializer(instance=qs)
+        if ('id' in serializer.data):
+            return serializer.data
+        return None
+
+
+class ImageMetaSerializer(serializers.ModelSerializer):
+    image_uuid = serializers.SerializerMethodField(read_only=True)
+    image_id = serializers.SerializerMethodField(read_only=True)
+    event_id = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = ImageMeta
+        fields = (
+            'image_uuid',
+            'id',
+            'description',
+            'is_open_source',
+            'privacy_consent',
+            'photographer_name',
+            'uploaded_at',
+            'image',
+            'image_id',
+            'event',
+            'event_id'
+        )
+
+    def get_image_uuid(self, obj):
+        qs = Image.objects.filter(id=obj.image_id).first()
+        serializer = ImageSerializer(instance=qs)
+        return serializer.data
+
+    def get_event_id(self, obj):
+        if (obj.event):
+            if (obj.event.id):
+                return obj.event.id
+        return None
+
+    def get_image_id(self, obj):
+        if (obj.image):
+            if (obj.image.id):
+                return obj.image.id
+        return None
 
 
 class EventItemSerializer(serializers.ModelSerializer):
-    header_image = serializers.SerializerMethodField()
-    material_list = MaterialItemSerializer(many=True, read_only=True)
+    header_image = serializers.SerializerMethodField(read_only=True)
+    material_list = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Event
@@ -132,6 +168,7 @@ class EventItemSerializer(serializers.ModelSerializer):
             'costs_rating',
             'execution_time',
             'prepairation_time',
+            'difficulty',
             'created_by',
             'created_by_email',
             'updated_by',
@@ -141,11 +178,16 @@ class EventItemSerializer(serializers.ModelSerializer):
             'like_score')
 
     def get_header_image(self, obj):
-        image_id = obj.header_image
-        if image_id:
-            if image_id.image:
-                return image_id.image.name
-        return ''
+        qs = ImageMeta.objects.filter(event_id=obj.id).first()
+        serializer = ImageMetaSerializer(instance=qs)
+        if ('id' in serializer.data):
+            return serializer.data
+        return None
+
+    def get_material_list(self, obj):
+        qs = MaterialItem.objects.filter(event_id=obj.id)
+        serializer = MaterialItemSerializer(instance=qs, many=True)
+        return serializer.data
 
 
 class MessageSerializer(serializers.ModelSerializer):
@@ -204,10 +246,20 @@ class StatisticSerializer(serializers.ModelSerializer):
 
 
 class ImageSerializer(serializers.ModelSerializer):
+    image_uuid = serializers.SerializerMethodField()
 
     class Meta:
         model = Image
-        fields = '__all__'
+        fields = (
+            'id',
+            'image_uuid',
+            'image',
+        )
+
+    def get_image_uuid(self, obj):
+        xx = obj.image.name.split('/')[1]
+        xxx = xx.split('.')[0]
+        return xxx
 
 
 class ExperimentSerializer(serializers.ModelSerializer):
@@ -252,7 +304,7 @@ class ExperimentOverviewSerializer(serializers.ModelSerializer):
 class TopViewsSerializer(serializers.ModelSerializer):
 
     view_count = serializers.SerializerMethodField()
-    header_image = serializers.SerializerMethodField()
+    header_image = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Event
@@ -266,11 +318,11 @@ class TopViewsSerializer(serializers.ModelSerializer):
         )
 
     def get_header_image(self, obj):
-        image_id = obj.header_image
-        if image_id:
-            if image_id.image:
-                return image_id.image.name
-        return ''
+        qs = ImageMeta.objects.filter(event_id=obj.id).first()
+        serializer = ImageMetaSerializer(instance=qs)
+        if ('id' in serializer.data):
+            return serializer.data
+        return None
 
     def get_view_count(self, obj):
         return APIRequestLog.objects.filter(
@@ -288,7 +340,6 @@ class EventAdminSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'tags',
-            'header_image',
             'created_by',
             'created_by_email',
             'updated_by',
@@ -350,7 +401,7 @@ class FaqRatingSerializer(serializers.ModelSerializer):
 
 class NextBestHeimabendSerializer(serializers.ModelSerializer):
 
-    header_image = serializers.SerializerMethodField()
+    header_image = serializers.SerializerMethodField(read_only=True)
     title = serializers.SerializerMethodField()
     tags = serializers.SerializerMethodField()
     id = serializers.SerializerMethodField()
@@ -377,10 +428,11 @@ class NextBestHeimabendSerializer(serializers.ModelSerializer):
         return title['title']
 
     def get_header_image(self, obj):
-        image = Event.objects.filter(id=obj.event_score.id).values(
-            'header_image__image').first()
-        print(image)
-        return image['header_image__image']
+        qs = ImageMeta.objects.filter(event_id=obj.id).first()
+        serializer = ImageMetaSerializer(instance=qs)
+        if ('id' in serializer.data):
+            return serializer.data
+        return None
 
     def get_tags(self, obj):
         return_tags = []

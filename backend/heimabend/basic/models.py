@@ -115,15 +115,9 @@ class Image(TimeStampMixin):
         'default': (400, 266),
         'small': (200, 133)
     }, delete_orphans=True)
-    description = models.CharField(max_length=255)
-    is_open_source = models.BooleanField(default=False)
-    privacy_consent = models.BooleanField(default=False)
-    photographer_name = models.CharField(
-        max_length=100, default='', blank=True)
-    uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '{} ({})'.format(self.description, self.image)
+        return '{}'.format(self.id)
 
     def __repr__(self):
         return self.__str__()
@@ -144,7 +138,6 @@ class Event(TimeStampMixin):
         max_length=8000,
         default='',
         validators=[
-            MinLengthValidator(75),
             MaxLengthValidator(8000)])
     description_detail = models.CharField(
         max_length=1,
@@ -159,8 +152,6 @@ class Event(TimeStampMixin):
         default=1, validators=[MinValueValidator(0), MaxValueValidator(5)])
     difficulty = models.SmallIntegerField(
         default=1, validators=[MinValueValidator(0), MaxValueValidator(5)])
-    header_image = models.ForeignKey(
-        Image, on_delete=models.PROTECT, blank=True, null=True)
     created_by_email = models.CharField(max_length=60, blank=True)
     like_score = models.IntegerField(default=0)
 
@@ -169,6 +160,26 @@ class Event(TimeStampMixin):
 
     def __repr__(self):
         return self.__str__()
+
+
+class ImageMeta(TimeStampMixin):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+
+        verbose_name='ID')
+    description = models.CharField(max_length=255)
+    is_open_source = models.BooleanField(default=False)
+    privacy_consent = models.BooleanField(default=False)
+    photographer_name = models.CharField(
+        max_length=100, default='', blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    image = models.ForeignKey(
+        Image, on_delete=models.CASCADE, blank=True, null=True)
+
+    event = models.ForeignKey(
+        Event, related_name='event_id', on_delete=models.CASCADE, blank=True, null=True)
 
 
 class MaterialItem(TimeStampMixin):
@@ -181,7 +192,8 @@ class MaterialItem(TimeStampMixin):
     number_of_participants = models.IntegerField(default=0, blank=True)
     material_name = models.ForeignKey(MaterialName, on_delete=models.PROTECT)
     material_unit = models.ForeignKey(MaterialUnit, on_delete=models.PROTECT)
-    event = models.ForeignKey(Event, related_name='material_list', on_delete=models.CASCADE, blank=True, null=True)
+    event = models.ForeignKey(Event, related_name='material_list',
+                              on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.material_name

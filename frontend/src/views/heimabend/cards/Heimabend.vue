@@ -64,7 +64,7 @@
                 </v-col>
               </v-row>
 
-              <v-divider/>
+              <v-divider class="my-4"/>
 
               <HeimabendRating v-if="false" :item="item" />
             </v-container>
@@ -449,10 +449,10 @@ export default {
       this.$emit('loadMore');
     },
     getImageLink(item) {
-      if (item.headerImage) {
-        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${item.headerImage}.default.jpeg`;
+      if (item.headerImage && item.headerImage.imageUuid && item.headerImage.imageUuid.imageUuid) {
+        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${item.headerImage.imageUuid.imageUuid}.default.jpeg`;
       }
-      return null;
+      return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
     },
     yourHeimabendSpan() {
       return this.isMobil ? 'headerIsMobile' : 'headerIsDesktop';

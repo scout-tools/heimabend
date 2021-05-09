@@ -3,7 +3,8 @@
     <v-container>
       <v-row class="ma-5">
         <creating-slider
-          v-model="data.difficultlevel"
+          v-bind:value="data.difficulty"
+          v-on:input="updateDifficulty"
           :headerText="'Schwierigkeitsgrad?'"
           :labels="['Einfach', 'Mittel', 'Schwer']"
           :icon="'mdi-head-snowflake-outline'"
@@ -17,7 +18,8 @@
       <v-row class="ma-5">
         <creating-slider
           :headerText="'Dauer?'"
-          v-model="data.costsRating"
+          v-bind:value="data.executionTime"
+          v-on:input="updateExecutionTime"
           :labels="['30 min', '60 min', '120 min', 'mehr']"
           :icon="'mdi-timer'"
           :color="'blue'"
@@ -28,7 +30,8 @@
       <v-row class="ma-5">
         <creating-slider
           :headerText="'Kosten pro Person?'"
-          v-model="data.costsRating"
+          v-bind:value="data.costsRating"
+          v-on:input="updateCostsRating"
           :labels="['0,00 €' , '0,50 €', '1,00 €', 'mehr']"
           :icon="'mdi-currency-usd'"
           :color="'orange'"
@@ -40,7 +43,8 @@
       <v-row class="ma-5">
         <creating-slider
           :headerText="'Vorbereitungszeit?'"
-          v-model="data.executionTimeRating"
+          v-bind:value="data.prepairationTime"
+          v-on:input="updatePrepairationTime"
           :labels="['wenig', '30 min', '60 min', 'mehr']"
           :icon="'mdi-clock'"
           :color="'red ligthen-1'"
@@ -63,7 +67,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import CreatingSlider from '@/components/slider/CreatingSlider.vue';
 
 export default {
@@ -84,7 +87,6 @@ export default {
     data: Object,
   },
   computed: {
-    ...mapGetters(['tags', 'tagCategory']),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
@@ -94,21 +96,21 @@ export default {
     isUpdate() {
       return !!this.$route.params.id;
     },
-    isLargeProject() {
-      return this.data.executionTimeRating === 0;
-    },
-    isWithoutCosts() {
-      return this.data.costsRating === 0;
-    },
-  },
-
-  mounted() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-    }
   },
 
   methods: {
+    updateCostsRating(costsRating) {
+      this.data.costsRating = costsRating;
+    },
+    updatePrepairationTime(prepairationTime) {
+      this.data.prepairationTime = prepairationTime;
+    },
+    updateExecutionTime(executionTime) {
+      this.data.executionTime = executionTime;
+    },
+    updateDifficulty(difficulty) {
+      this.data.difficulty = difficulty;
+    },
     difficult(val) {
       return this.icons[val];
     },
@@ -123,9 +125,10 @@ export default {
     },
     getData() {
       return {
-        tags: this.data.tags,
         costsRating: this.data.costsRating,
-        executionTimeRating: this.data.executionTimeRating,
+        executionTime: this.data.executionTime,
+        prepairationTime: this.data.prepairationTime,
+        difficulty: this.data.difficulty,
       };
     },
   },

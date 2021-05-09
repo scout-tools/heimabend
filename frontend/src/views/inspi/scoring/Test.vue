@@ -20,7 +20,7 @@
     <v-row v-else align="center" justify="center">
       <v-container>
         <v-row align="center" justify="center">
-          <v-img :src="require('@/assets/inspi/inspi_happy.png')" max-width="350" />
+          <v-img :src="require('@/assets/inspi/inspi_happy.webp')" max-width="350" />
         </v-row>
         <v-row align="center" justify="center">
           <p>Vielen Dank. Jetzt bin ich satt.</p>
