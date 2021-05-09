@@ -179,7 +179,11 @@ class ImageMeta(TimeStampMixin):
         Image, on_delete=models.CASCADE, blank=True, null=True)
 
     event = models.ForeignKey(
-        Event, related_name='event_id', on_delete=models.CASCADE, blank=True, null=True)
+        Event,
+        related_name='event_id',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True)
 
 
 class MaterialItem(TimeStampMixin):

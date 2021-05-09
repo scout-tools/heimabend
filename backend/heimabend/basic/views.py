@@ -145,17 +145,20 @@ class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):
     serializer_class = MessageSerializer
 
 
-class LikeViewSet(LoggingMixin, mixins.CreateModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
+class LikeViewSet(LoggingMixin, mixins.CreateModelMixin, viewsets.ViewSetMixin,
+                  generics.GenericAPIView):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
 
 
-class HighscoreView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
+class HighscoreView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin,
+                    generics.GenericAPIView):
     queryset = Event.objects.values('created_by').distinct()
     serializer_class = HighscoreSerializer
 
 
-class StatisticView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
+class StatisticView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin,
+                    generics.GenericAPIView):
     queryset = Event.objects.values(
         month=ExtractMonth('created_at')).annotate(
             year=ExtractYear('created_at')).values(
@@ -175,7 +178,8 @@ class TopViewsView(viewsets.ViewSet):
         return Response(serializer_data)
 
 
-class ImageMetaView(LoggingMixin, viewsets.ModelViewSet, generics.GenericAPIView):
+class ImageMetaView(LoggingMixin, viewsets.ModelViewSet,
+                    generics.GenericAPIView):
     queryset = ImageMeta.objects.all()
     serializer_class = ImageMetaSerializer
     filter_backends = [DjangoFilterBackend]

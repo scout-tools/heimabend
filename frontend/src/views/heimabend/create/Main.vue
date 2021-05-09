@@ -289,11 +289,15 @@ export default {
             name: 'heimabendCreateFinale',
           });
         });
-      } else if (imageMetaData) {
+      } else if (imageMetaData && imageMetaData.imageId) {
         this.postImageMeta(imageMetaData, eventId).then(() => {
           this.$router.push({
             name: 'heimabendCreateFinale',
           });
+        });
+      } else {
+        this.$router.push({
+          name: 'heimabendCreateFinale',
         });
       }
     },
