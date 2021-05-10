@@ -70,7 +70,7 @@ export default {
         images: [
           {
             name: 'watermark_1',
-            source: 'http://localhost:8080/img/inspi.8e55ecc8.png',
+            source: require('../../../assets/inspi/inspi_flying.png'), // eslint-disable-line
             xref: 'paper',
             yref: 'paper',
             x: 0.4,
