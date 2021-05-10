@@ -1,6 +1,6 @@
    <template>
   <v-sheet tile color="primary" class="allow-scroll fixed">
-    <v-container fluid class="ma-3">
+    <v-container fluid class="pa-3">
       <v-row align="center" justify="center">
         <span class="subtitle-1 whiteText">
           {{ 'Themenauswahl' }}

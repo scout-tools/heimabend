@@ -79,11 +79,6 @@ import { mapGetters } from 'vuex';
 
 export default {
   data: () => ({
-    rules: {
-      tags: [
-        v => (v && v.length > 0) || 'Mindestens ein Thema ist erforderlich',
-      ],
-    },
     data: {
       executionTimeRating: 1,
       costsRating: 1,
@@ -136,10 +131,7 @@ export default {
     prevStep() {
       this.$emit('prevStep');
     },
-    nextStep(skip = false) {
-      if (!this.$refs.form6.validate() && !skip) {
-        return;
-      }
+    nextStep() {
       this.$emit('nextStep');
     },
     getData() {

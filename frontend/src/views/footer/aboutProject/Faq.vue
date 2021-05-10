@@ -1,6 +1,6 @@
 <template>
   <v-container ma-3 fluid>
-    <v-row class="mt-5" justify="center">
+    <v-row class="mt-5" justify="center" v-if="!isMobil">
       <v-col cols="3">
       <div class="box-2 sb1-2 fade-in">
         Hallo, Ich bin Inspi. <br>Wie kann ich dir helfen?
@@ -60,10 +60,14 @@ export default {
     items: [],
     serviceName: 'faq',
   }),
-
+  computed: {
+    isMobil() {
+      return this.$vuetify.breakpoint.mdAndDown;
+    },
+  },
   created() {
     this.getItems(this.serviceName);
-    this.$store.commit('setHeaderString', 'Fragen + Antworten');
+    this.$store.commit('setHeaderString', 'Fragen an Inspi');
   },
 };
 </script>
