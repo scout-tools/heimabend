@@ -216,7 +216,7 @@ class MaterialUnitViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 
 class MaterialNameViewSet(LoggingMixin, viewsets.ModelViewSet):
-    queryset = MaterialName.objects.all()
+    queryset = MaterialName.objects.order_by('name').all()
     serializer_class = MaterialNameSerializer
 
 
@@ -278,12 +278,12 @@ class RandomEventViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 
 class AdminEventViewSet(LoggingMixin, viewsets.ModelViewSet):
-    queryset = Event.objects.all()
+    queryset = Event.objects.order_by('-created_at').all()
     serializer_class = EventAdminSerializer
 
 
 class EventTimestampViewSet(LoggingMixin, viewsets.ModelViewSet):
-    queryset = Event.objects.filter(is_public=True)
+    queryset = Event.objects.filter(is_public=True).order_by('created_at')
     serializer_class = EventTimestampSerializer
 
 

@@ -75,11 +75,11 @@
       <filter-top-sub-bar v-if="isMainPage && !isMobil && !isScoringMode" />
       <router-view class="content" v-scroll="onScroll" />
       <api-down-banner v-if="apiIsDown" />
+      <v-snackbar v-model="showError" color="error" y="top">
+        {{ 'Es ist ein Fehler aufgetreten' }}
+      </v-snackbar>
     </v-main>
     <Footer v-if="!isScoringMode"/>
-    <v-snackbar v-model="showError" color="error" y="top">
-      {{ 'Es ist ein Fehler aufgetreten' }}
-    </v-snackbar>
   </v-app>
 </template>
 

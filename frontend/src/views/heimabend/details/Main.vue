@@ -1,12 +1,12 @@
 <template>
-  <v-container fluid class="ma-5" :max-width="getMaxWidth()">
-    <v-row :max-width="getMaxWidth()">
+  <v-container fluid class="ma-5">
+    <v-row>
       <v-card color="#F6F6F6"
-        class="mx-auto" justify="center" :max-width="getMaxWidth()">
+        class="mx-auto" justify="center">
         <EventSlider :data="nextEvents" titel="Auch interessant:"/>
       </v-card>
     </v-row>
-    <v-row align="center" justify="center" :max-width="getMaxWidth()">
+    <v-row align="center" justify="center">
       <heimabend-card
         @refresh="refresh()"
         :items="getItem"

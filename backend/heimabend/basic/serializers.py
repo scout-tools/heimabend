@@ -428,7 +428,7 @@ class NextBestHeimabendSerializer(serializers.ModelSerializer):
         return title['title']
 
     def get_header_image(self, obj):
-        qs = ImageMeta.objects.filter(event_id=obj.id).first()
+        qs = ImageMeta.objects.filter(event_id=obj.event_score.id).first()
         serializer = ImageMetaSerializer(instance=qs)
         if ('id' in serializer.data):
             return serializer.data

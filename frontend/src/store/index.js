@@ -239,6 +239,9 @@ export default new Vuex.Store({
       commit('changeMandatoryFilter', []);
       commit('changeFilterTags', []);
       commit('setSearchInput', '');
+      commit('resetHeimabendItems');
+      commit('setIsFirstEventLoaded', false);
+      commit('setNextPath', false);
     },
   },
   plugins: [createPersistedState()],
