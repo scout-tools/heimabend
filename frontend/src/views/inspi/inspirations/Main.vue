@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-spacer class="py-3" />
     <EventSlider :data="data1" titel="Top Aufrufe"/>
     <v-spacer class="py-3" />

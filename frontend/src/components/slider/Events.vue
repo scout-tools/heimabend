@@ -1,9 +1,9 @@
 <template>
   <v-card flat class="mx-auto" justify="center">
-    <v-card-title class="pa-0" justify="center"> {{ titel }} </v-card-title>
+    <v-card-title class="pa-0 ml-5" justify="center"> {{ titel }} </v-card-title>
     <v-slide-group
       v-if="data.length"
-      class="pa-0"
+      class="pl-0"
       active-class="success"
       show-arrows
     >
