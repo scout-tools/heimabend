@@ -1,7 +1,6 @@
 <template>
   <v-form
     ref="form6"
-    v-model="valid"
   >
 <v-container>
   <v-row class="mt-6 ml-4">
@@ -17,7 +16,6 @@
       v-model="data.tags"
       :items="getSideBarTags"
       item-value="id"
-      :rules="rules.tags"
       item-text="name"
       deletable-chips
       chips
@@ -83,7 +81,6 @@ export default {
       executionTimeRating: 1,
       costsRating: 1,
     },
-    valid: true,
     n: 0,
   }),
   props: {
