@@ -23,7 +23,7 @@
             class="pa-5 background-sky"
             :src="getImageLink(item)"
             :lazy-src="getTempImage()"
-            max-height="140"
+            height="140"
             contain
           >
             <template v-slot:placeholder>
