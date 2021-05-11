@@ -137,8 +137,8 @@ export default {
     190deg,
     rgba(26, 75, 126, 1) 0%,
     rgba(26, 75, 126, 1) 30%,
-    rgb(199, 133, 20) 70%,
-    rgba(199, 133, 20) 100%
+    rgb(230, 126, 0) 70%,
+    rgba(230, 126, 0) 100%
   );
 }
 .color-scout-rover {
@@ -154,7 +154,7 @@ export default {
   background: rgba(26, 75, 126, 1) 30%;
 }
 .color-wo {
-  background: rgb(199, 133, 20);
+  background: rgb(230, 126, 0);
 }
 .color-rover {
   background: rgb(148, 47, 34);
