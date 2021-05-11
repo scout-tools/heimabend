@@ -4,14 +4,16 @@
       <v-card-title v-bind="attrs" v-on="on" class="pa-0">
         <v-list-item
           two-line
-          class="whiteText justify-center text-center"
-          :class="titleClass(item)"
+          class="justify-center text-truncate"
+          :class="getHeaderColorClass(item.tags)"
         >
           <v-list-item-content>
-            <v-list-item-title class="whiteText justify-center text-center">
+            <v-list-item-title class="whiteText justify-center text-center text-truncate"
+              :class="titleClass()">
               {{ item.title }}
             </v-list-item-title>
-            <v-list-item-subtitle class="whiteText justify-center text-center">
+            <v-list-item-subtitle class="whiteText justify-center text-center"
+              :class="subTitleClass()">
               {{ getType(item) }}
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -33,6 +35,10 @@ export default {
   mixins: [serviceMixin],
   props: {
     item: Object,
+    preview: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -57,12 +63,18 @@ export default {
     ...mapGetters(['tags', 'liked', 'isAuthenticated', 'isScoringMode']),
   },
   methods: {
-    titleClass(item) {
+    titleClass() {
       let styleClass = '';
-      styleClass = this.$vuetify.breakpoint.mdAndUp
-        ? 'headline font-weight-medium'
-        : 'title';
-      styleClass = `${styleClass} ${this.getHeaderColorClass(item.tags)}`;
+      styleClass = this.$vuetify.breakpoint.mdAndUp && !this.preview
+        ? 'text-h5 font-weight-medium'
+        : 'text-subtitle-1';
+      return styleClass;
+    },
+    subTitleClass() {
+      let styleClass = '';
+      styleClass = this.$vuetify.breakpoint.mdAndUp && !this.preview
+        ? 'text-body-1 font-weight-regular'
+        : 'text-body-2 font-weight-regular';
       return styleClass;
     },
     getHeaderColorClass(tags) {
@@ -125,8 +137,8 @@ export default {
     190deg,
     rgba(26, 75, 126, 1) 0%,
     rgba(26, 75, 126, 1) 30%,
-    rgba(230, 154, 23) 70%,
-    rgba(230, 154, 23) 100%
+    rgb(199, 133, 20) 70%,
+    rgba(199, 133, 20) 100%
   );
 }
 .color-scout-rover {
@@ -142,7 +154,7 @@ export default {
   background: rgba(26, 75, 126, 1) 30%;
 }
 .color-wo {
-  background: rgb(230, 154, 23);
+  background: rgb(199, 133, 20);
 }
 .color-rover {
   background: rgb(148, 47, 34);

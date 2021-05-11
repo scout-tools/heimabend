@@ -1,5 +1,5 @@
 <template>
-  <v-card flat v-if="data.length" class="mx-auto" justify="center">
+  <v-card flat class="mx-auto" justify="center">
     <v-card-title class="pa-0" justify="center"> {{ titel }} </v-card-title>
     <v-slide-group
       v-if="data.length"
@@ -7,15 +7,34 @@
       active-class="success"
       show-arrows
     >
-      <v-slide-item v-for="item in data" :key="item.id" v-slot="{ active, toggle }">
+      <v-slide-item
+        v-for="item in data"
+        :key="item.id"
+        v-slot="{ active, toggle }"
+      >
         <v-card
           class="ma-2"
-          height="180"
-          width="320"
+          height="200"
+          width="280"
           @click="onEventClicked(item.id)"
         >
-          <HeimabendCardHeader :item="item"/>
-          <v-img :src="getImageLink(item)" height="115px"></v-img>
+          <HeimabendCardHeader :item="item" :preview="true" />
+          <v-img
+            class="pa-5 background-sky"
+            :src="getImageLink(item)"
+            :lazy-src="getTempImage()"
+            max-height="140"
+            contain
+          >
+            <template v-slot:placeholder>
+              <v-row class="fill-height ma-0" align="center" justify="center">
+                <v-progress-circular
+                  indeterminate
+                  color="grey lighten-5"
+                ></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
         </v-card>
       </v-slide-item>
     </v-slide-group>
@@ -47,6 +66,9 @@ export default {
       }
       return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
     },
+    getTempImage() {
+      return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
+    },
     onEventClicked(id) {
       this.$router.push({
         name: 'heimabendDetails',
@@ -56,3 +78,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.background-sky {
+  background: rgb(199,216,252);
+  background: linear-gradient(41deg,
+  rgba(199,216,252,1) 0%,
+  rgba(255,255,255,1) 100%);
+}
+</style>

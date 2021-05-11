@@ -315,7 +315,7 @@ class TopViewsSerializer(serializers.ModelSerializer):
             'tags',
             'created_by',
             'header_image',
-        )
+            'description')
 
     def get_header_image(self, obj):
         qs = ImageMeta.objects.filter(event_id=obj.id).first()
