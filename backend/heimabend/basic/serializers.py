@@ -404,6 +404,7 @@ class NextBestHeimabendSerializer(serializers.ModelSerializer):
     header_image = serializers.SerializerMethodField(read_only=True)
     title = serializers.SerializerMethodField()
     tags = serializers.SerializerMethodField()
+    description = serializers.SerializerMethodField()
     id = serializers.SerializerMethodField()
 
     class Meta:
@@ -414,6 +415,7 @@ class NextBestHeimabendSerializer(serializers.ModelSerializer):
             'score',
             'header_image',
             'title',
+            'description',
             'tags',
             'id',
         )
@@ -426,6 +428,11 @@ class NextBestHeimabendSerializer(serializers.ModelSerializer):
         title = Event.objects.filter(
             id=obj.event_score.id).values('title').first()
         return title['title']
+
+    def get_description(self, obj):
+        title = Event.objects.filter(
+            id=obj.event_score.id).values('description').first()
+        return title['description']
 
     def get_header_image(self, obj):
         qs = ImageMeta.objects.filter(event_id=obj.event_score.id).first()

@@ -19,17 +19,17 @@
         </div>
       </v-row>
       <v-row justify="start">
-        <v-btn color="success" @click="addItem">
+        <v-btn class="ma-2" color="success" @click="addItem">
           <v-icon left> mdi-plus </v-icon>
           Neuer Gegenstand
         </v-btn>
       </v-row>
       <v-row justify="center">
-        <v-btn class="mx-1" @click="prevStep()">
+        <v-btn class="ma-1" @click="prevStep()">
           <v-icon left> mdi-chevron-left </v-icon>
           Zurück
         </v-btn>
-        <v-btn class="mx-1" color="primary" @click="nextStep()">
+        <v-btn class="ma-1" color="primary" @click="nextStep()">
           Weiter
           <v-icon> mdi-chevron-right </v-icon>
         </v-btn>

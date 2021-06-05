@@ -27,10 +27,11 @@
           ></v-img>
           <v-card-text>
             <p
-              class="text-left subtitle-1 mt-2 test-color-text"
+              class="text-left subtitle-1 mt-2 test-color-text max-width-screen-size"
               :class="getDescriptionClass()"
               v-html="item.description"
-            ></p>
+            >
+            </p>
             <v-container fluid v-if="!isDetailsView">
               <v-row>
                 <v-col cols="2"> </v-col>
@@ -632,6 +633,7 @@ export default {
 }
 .test-color-text {
   color: rgba(0, 0, 0, 0.829);
+  max-width: 95vw;
 }
 .whiteText {
   color: white !important;
@@ -668,5 +670,8 @@ export default {
 }
 .v-tooltip__content {
   pointer-events: initial;
+}
+.max-width-screen-size {
+  overflow: hidden;
 }
 </style>

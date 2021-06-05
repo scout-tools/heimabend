@@ -2,10 +2,6 @@
   <v-form ref="form2" v-model="valid">
     <v-container>
       <v-row class="mt-6 ml-2 text-left">
-        <span class="subtitle-1">
-          Bitte fasse im ersten Absatz deine Idee zusammmen und beschreibe
-          danach deine Idee ausführlicher. <br />
-        </span>
       </v-row>
       <v-row>
         <v-col cols="12">
@@ -79,11 +75,11 @@
         </span>
       </v-row>
       <v-row class="ma-3" justify="center">
-        <v-btn class="mx-1" @click="prevStep()">
+        <v-btn class="ma-1" @click="prevStep()">
           <v-icon left> mdi-chevron-left </v-icon>
           Zurück
         </v-btn>
-        <v-btn class="mx-1" color="primary" @click="nextStep()">
+        <v-btn class="ma-1" color="primary" @click="nextStep()">
           Weiter
           <v-icon right> mdi-chevron-right </v-icon>
         </v-btn>
@@ -93,7 +89,7 @@
                 v-bind="attrs"
                 v-on="on"
                 icon
-                class="mx-1"
+                class="ma-1"
                 color="secondary"
                 @click="nextStep(true)"
               >

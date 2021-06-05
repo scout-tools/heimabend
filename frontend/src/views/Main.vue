@@ -24,16 +24,16 @@
         </v-tooltip>
       </router-link>
       <h1
-        v-if="!isScoringMode && !isSubPage"
+        v-if="!isScoringMode && !isSubPage && !isMobil"
         class="title hand-cursor ml-3 mr-5"
         @click="onHeaderClick()"
       >
-      <span v-if="!isMobil" class="font-weight-thin">
-        Heimabend&nbsp;
-      </span>
+        <span class="font-weight-thin">
+          Heimabend&nbsp;
+        </span>
         <span class="font-weight-light">
           <b class="font-weight-black">Inspi</b>
-          <span v-if="!isMobil">rator</span>
+          <span>rator</span>
         </span>
       </h1>
       <v-text-field
@@ -85,7 +85,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-
+// eslint-disable-next-line
 import Footer from '@/components/navigation/Footer.vue';
 import MenuLeft from './components/menu/Left.vue';
 import ApiDownBanner from './components/banner/ApiDown.vue';
@@ -184,10 +184,6 @@ export default {
 </script>
 
 <style>
-.content {
-  flex: 1;
-  min-height: '100vh' !important;
-}
 .hand-cursor {
   cursor: pointer;
 }

@@ -12,8 +12,9 @@ import HeimabendCreate from '@/views/heimabend/create/Main.vue';
 import HeimabendCreateFinal from '@/views/heimabend/create/FinalEventPage.vue';
 import HeimabendDetails from '@/views/heimabend/details/Main.vue';
 import RankingOverview from '@/views/inspi/ranking/Main.vue';
-import ScoringStart from '@/views/inspi/scoring/Main.vue';
+import ScoringStart from '@/views/inspi/scoring/Landing.vue';
 import ScoringTest from '@/views/inspi/scoring/Test.vue';
+import ScoringSetup from '@/views/inspi/scoring/Setup.vue';
 import ScoringFinal from '@/views/inspi/scoring/FinalScoringPage.vue';
 import EasterEgg from '@/views/inspi/easterEgg/Main.vue';
 import Admin from '@/views/admin/Main.vue';
@@ -95,12 +96,17 @@ const routes = [
     component: ScoringStart,
   },
   {
+    path: '/scoring/setup',
+    name: 'scoring-setup',
+    component: ScoringSetup,
+  },
+  {
     path: '/scoring/test/:id',
     name: 'scoring-test',
     component: ScoringTest,
   },
   {
-    path: '/scoring/final',
+    path: '/scoring/final/:id',
     name: 'scoring-final',
     component: ScoringFinal,
   },

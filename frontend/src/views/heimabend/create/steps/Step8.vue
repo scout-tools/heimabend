@@ -22,7 +22,7 @@
             </template>
             <span>
               {{
-                'Die Heimabend-Idee wird unter deinem Namen veröffentlicht.' +
+                'Die Heimabend-Idee wird unter deinem Pfadfinder-Namen veröffentlicht.' +
                 'Nutze dafür gerne deinen Fahrtennamen.'
               }}
             </span>
@@ -70,11 +70,12 @@
       </v-checkbox>
     </v-row>
     <v-row class="ma-3" justify="center">
-        <v-btn class="mx-1" @click="prevStep()">
+        <v-btn class="ma-1" @click="prevStep()">
           <v-icon left> mdi-chevron-left </v-icon>
           Zurück
         </v-btn>
       <v-btn
+        class="ma-1"
         color="success"
         @click="finish()"
       >

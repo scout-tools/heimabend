@@ -1,12 +1,12 @@
 <template>
   <v-form ref="form5" v-model="valid">
-    <v-container>
-      <v-row class="ma-5">
+    <v-container class="ContainerWidth">
+      <v-row class="my-5">
         <creating-slider
           v-bind:value="data.difficulty"
           v-on:input="updateDifficulty"
-          :headerText="'Schwierigkeitsgrad?'"
-          :labels="['Einfach', 'Mittel', 'Schwer']"
+          :headerText="'Schwierigkeitsgrad (Vorwissen)?'"
+          :labels="['Einfach','',  'Mittel','', 'Schwer']"
           :icon="'mdi-head-snowflake-outline'"
           :color="'green'"
 
@@ -15,24 +15,24 @@
 
       <v-divider class="py-2"/>
 
-      <v-row class="ma-5">
+      <v-row class="my-5">
         <creating-slider
-          :headerText="'Dauer?'"
+          :headerText="'mindest Zeit in min?'"
           v-bind:value="data.executionTime"
           v-on:input="updateExecutionTime"
-          :labels="['30 min', '60 min', '120 min', 'mehr']"
+          :labels="['5', '30', '60', '120', 'mehr']"
           :icon="'mdi-timer'"
           :color="'blue'"
         />
       </v-row>
       <v-divider class="py-2"/>
 
-      <v-row class="ma-5">
+      <v-row class="my-5">
         <creating-slider
-          :headerText="'Kosten pro Person?'"
+          :headerText="'Kosten pro Person in €?'"
           v-bind:value="data.costsRating"
           v-on:input="updateCostsRating"
-          :labels="['0,00 €' , '0,50 €', '1,00 €', 'mehr']"
+          :labels="['0' , '0,50', '1,00', '2,00', 'mehr']"
           :icon="'mdi-currency-usd'"
           :color="'orange'"
         />
@@ -40,12 +40,12 @@
 
       <v-divider class="py-2"/>
 
-      <v-row class="ma-5">
+      <v-row class="my-5">
         <creating-slider
-          :headerText="'Vorbereitungszeit?'"
+          :headerText="'Vorbereitungszeit in min?'"
           v-bind:value="data.prepairationTime"
           v-on:input="updatePrepairationTime"
-          :labels="['wenig', '30 min', '60 min', 'mehr']"
+          :labels="['0', '5', '30', '60', 'mehr']"
           :icon="'mdi-clock'"
           :color="'red ligthen-1'"
         />
@@ -53,11 +53,11 @@
 
       <v-divider class="my-2" />
       <v-row class="ma-3" justify="center">
-        <v-btn class="mx-1" @click="prevStep()">
+        <v-btn class="ma-1" @click="prevStep()">
           <v-icon left> mdi-chevron-left </v-icon>
           Zurück
         </v-btn>
-        <v-btn class="mx-1" color="primary" @click="nextStep()">
+        <v-btn class="ma-1" color="primary" @click="nextStep()">
           Weiter
           <v-icon right> mdi-chevron-right </v-icon>
         </v-btn>
@@ -134,3 +134,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.ContainerWidth {
+  width: 88% !important;
+}
+</style>

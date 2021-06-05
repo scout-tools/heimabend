@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="ma-5">
+  <v-container fluid>
     <v-row align="center" justify="center">
       <router-link :to="{ name: 'inspi-easter-egg' }">
         <v-img

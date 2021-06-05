@@ -187,7 +187,10 @@
                   </v-icon>
                 </template>
                 <span>
-                  {{ 'Gib deiner Heimabend-Idee eine passende Überschrift.' }}
+                  {{
+                    'Entspricht das Bild den Datenschutzrichtlinien.' +
+                    'Es darf keine Bilder enthaltenn.'
+                  }}
                 </span>
               </v-tooltip>
             </template>
@@ -209,7 +212,7 @@
                   </v-icon>
                 </template>
                 <span>
-                  {{ 'Gib deiner Heimabend-Idee eine passende Überschrift.' }}
+                  {{ 'Sind die Bildrechte Open Source?' }}
                 </span>
               </v-tooltip>
             </template>
@@ -218,11 +221,11 @@
         </div>
       </div>
       <v-row class="ma-3" justify="center">
-        <v-btn class="mx-1" @click="prevStep()">
+        <v-btn class="ma-1" @click="prevStep()">
           <v-icon left> mdi-chevron-left </v-icon>
           Zurück
         </v-btn>
-        <v-btn class="mx-1" color="primary" @click="nextStep()">
+        <v-btn class="ma-1" color="primary" @click="nextStep()">
           Weiter
           <v-icon right> mdi-chevron-right </v-icon>
         </v-btn>

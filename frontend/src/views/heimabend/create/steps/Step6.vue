@@ -3,7 +3,7 @@
     ref="form6"
   >
 <v-container>
-  <v-row class="mt-6 ml-4">
+  <v-row class="mt-2">
     <span class="subtitle-1">
       Wähle so viele thematische Kategorien aus, wie zu deiner Heimabend-Idee passen. <br>
       <br>
@@ -11,7 +11,7 @@
       gerne mit dem Kontaktformular direkt an uns wenden.
     </span>
   </v-row>
-  <v-row class="ma-6">
+  <v-row class="mt-3">
     <v-select
       v-model="data.tags"
       :items="getSideBarTags"
@@ -39,12 +39,12 @@
   </v-row>
 
     <v-divider class="my-2"/>
-      <v-row class="ma-3" justify="center">
-        <v-btn class="mx-1" @click="prevStep()">
+      <v-row class="ma-0" justify="center">
+        <v-btn class="ma-1" @click="prevStep()">
           <v-icon left> mdi-chevron-left </v-icon>
           Zurück
         </v-btn>
-        <v-btn class="mx-1" color="primary" @click="nextStep()">
+        <v-btn class="ma-1" color="primary" @click="nextStep()">
           Weiter
           <v-icon right> mdi-chevron-right </v-icon>
         </v-btn>
@@ -54,7 +54,7 @@
                 v-bind="attrs"
                 v-on="on"
                 icon
-                class="mx-1"
+                class="ma-1"
                 color="secondary"
                 @click="nextStep(true)"
               >

@@ -79,6 +79,9 @@ export default {
     },
     getHeaderColorClass(tags) {
       let colorclass = 'color-scout';
+      if (!tags) {
+        return colorclass;
+      }
       const hasWo = tags.includes(50);
       const hasScout = tags.includes(51);
       const hasRover = tags.includes(52);
@@ -98,6 +101,10 @@ export default {
     getToolTipTextClass(tags) {
       let text = 'Für Pfadfinder_innen geeignet';
 
+      if (!tags) {
+        return text;
+      }
+
       const hasWo = tags.includes(50);
       const hasScout = tags.includes(51);
       const hasRover = tags.includes(52);
@@ -116,6 +123,9 @@ export default {
       return text;
     },
     getType(event) {
+      if (!event.tags) {
+        return 'laden...';
+      }
       const tagsObject = this.tags.filter(item => event.tags.includes(item.id)); // eslint-disable-line
       const containsCategoryId = tagsObject.filter(
         ( // eslint-disable-line

@@ -72,7 +72,7 @@
       y='top'
       :timeout="timeout"
     >
-      {{ 'Du bist jetzt im Internen Bereich. Viel Spaß' }}
+      {{ 'Du bist jetzt im Internen Bereich. Viel Spaß!' }}
     </v-snackbar>
 </v-container>
 </template>

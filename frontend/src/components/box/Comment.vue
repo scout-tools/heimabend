@@ -1,7 +1,7 @@
 <template>
   <v-expansion-panels>
     <v-expansion-panel>
-      <v-expansion-panel-header color="#F6F6F6" align="center" justify="center">
+      <v-expansion-panel-header color="#F6F6F6" class="pa-1" align="center" justify="center">
         <v-container fluid>
           <v-row align="center" justify="center">
             <v-col cols="1">
@@ -13,11 +13,13 @@
           </v-row>
         </v-container>
       </v-expansion-panel-header>
-      <v-expansion-panel-content color="#F6F6F6">
+      <v-expansion-panel-content v-if="!messageSent" color="#F6F6F6">
         <message-form
           v-model="data"
           :allowedMessageTypes="allowedMessageTypes"
           :showType="showType"
+          :eventIdParam="eventIdParam"
+          ref="messageForm"
         />
         <v-btn class="mr-4" color="primary" @click="submit"> Absenden </v-btn>
       </v-expansion-panel-content>
@@ -52,6 +54,10 @@ export default {
       type: String,
       default: 'Eigene Frage schreiben',
     },
+    eventIdParam: {
+      type: Number,
+      default: 0,
+    },
   },
   components: {
     MessageForm,
@@ -65,12 +71,9 @@ export default {
     data: {},
     responseObj: '',
     timeout: -1,
+    messageSent: false,
   }),
-
   methods: {
-    getMaxWidth() {
-      return '900';
-    },
     submit() {
       this.saveMessage();
     },
@@ -84,17 +87,24 @@ export default {
           event: this.eventId,
         })
         .then(() => {
-          this.$router.push({ name: 'overview' });
-          this.showSuccess = true;
+          this.onSucessSend();
         })
         .catch((error) => {
           this.responseObj = JSON.stringify(error.response.data);
           this.showError = true;
         });
     },
+    onSucessSend() {
+      this.showSuccess = true;
+      this.$refs.messageForm.resetForm();
+      this.$emit('messageSent');
+    },
   },
   computed: {
     eventId() {
+      if (this.eventIdParam) {
+        return this.eventIdParam;
+      }
       return this.$route.params.id;
     },
   },
