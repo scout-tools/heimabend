@@ -2,9 +2,6 @@
   <v-form class="ma-3">
     <v-container fluid class="maxWidth">
       <v-row align="center" justify="center">
-        <h1 class="display-1 ma-3">Deine Daten</h1>
-      </v-row>
-      <v-row align="center" justify="center">
         <v-col cols="12" class="mt-4 pa-2">
           <p class="text-center pa-0 ma-0"><b>Wie alt bist du?</b></p>
         </v-col>
@@ -58,12 +55,13 @@
           <v-expansion-panels flat>
             <v-expansion-panel>
               <v-expansion-panel-header color="white">
-                <b>Wie genau kannst du mich füttern?</b>
+                <b>Wie genau funktioniert diese Umfrage?</b>
               </v-expansion-panel-header>
               <v-expansion-panel-content color="white">
                 <p class="body-1 block">
-                  Bitte gib zu jedem Heimabend, den ich dir zeige, deine Meinung
-                  ab. Du hast folgene Auswahlmöglichkeiten
+                  Bitte gib zu jeder dir vorgeschlagenen Heimabend-Idee deine
+                  persönliche Meinung ab, bewerte dabei wie gut der Heimabend
+                  beschrieben ist. Du folgende Auswahlmöglichkeiten:
                 </p>
 
                 <v-list-item three-line>
@@ -143,30 +141,13 @@
                     <v-list-item-subtitle>
                       ist unverständlich.
                     </v-list-item-subtitle>
+                    <p>
+                      Du hast während der gesamten Zeit neben der Bewertung auch die
+                      Gelegenheit durch einen Kommentar die jeweilige Heimabend-Idee
+                      genauer zu bewerten.
+                    </p>
                   </v-list-item-content>
                 </v-list-item>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels>
-        </v-card>
-      </v-row>
-      <v-row align="center" justify="center">
-        <v-card class="my-3 maxWidth">
-          <v-expansion-panels flat>
-            <v-expansion-panel>
-              <v-expansion-panel-header color="white">
-                <b>Wie genau funktioniert diese Umfrage?</b>
-              </v-expansion-panel-header>
-              <v-expansion-panel-content color="white">
-                <p class="body-1 block">
-                  Bitte gib zu jeder dir vorgeschlagenen Heimabend-Idee deine
-                  persönliche Bewertung ab. Dabei hast du folgende
-                  Auswahlmöglichkeiten: [ggf. das sehr bei „sehr schlechte
-                  beschrieben“ streichen, um die Hemmschwelle nicht zu erhöhen?]
-                  Du hast während der gesamten Zeit neben der Bewertung auch die
-                  Gelegenheit durch einen Kommentar die jeweilige Heimabend-Idee
-                  genauer zu bewerten.
-                </p>
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>

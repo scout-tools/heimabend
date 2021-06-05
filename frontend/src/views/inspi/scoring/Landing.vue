@@ -25,9 +25,9 @@
     </v-row>
     <v-row>
       <v-col cols="12" align="center" justify="center">
-        <h1 class="display-1 ma-3">
+        <h2 class="ma-3">
           Ich habe Hunger!
-        </h1>
+        </h2>
         <p class="body-1 block">
           Ich ernähre mich von der Meinung der verschiedenen Personen, die diese
           Website nutzen und kann dir erst dann die besten Ideen vorschlagen,
