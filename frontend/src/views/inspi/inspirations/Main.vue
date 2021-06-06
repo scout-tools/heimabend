@@ -3,7 +3,7 @@
     <v-spacer class="py-3" />
     <EventSlider :data="data1" titel="Top Aufrufe" />
     <v-spacer class="py-3" />
-    <EventSlider :data="data2" titel="Neusten Heimabende" />
+    <EventSlider :data="data2" titel="Neuste Heimabende" />
     <v-spacer class="py-3" />
     <EventSlider :data="data3" titel="Mit-Abstand-Heimabende" />
     <v-spacer class="py-3" />

@@ -5,7 +5,7 @@
         <creating-slider
           v-bind:value="data.difficulty"
           v-on:input="updateDifficulty"
-          :headerText="'Schwierigkeitsgrad (Vorwissen)?'"
+          :headerText="'Schwierigkeitsgrad (z.B. Vorwissen oder Fähigkeiten)?'"
           :labels="['Einfach','',  'Mittel','', 'Schwer']"
           :icon="'mdi-head-snowflake-outline'"
           :color="'green'"
@@ -20,7 +20,7 @@
           :headerText="'mindest Zeit in min?'"
           v-bind:value="data.executionTime"
           v-on:input="updateExecutionTime"
-          :labels="['5', '30', '60', '120', 'mehr']"
+          :labels="['5', '30', '60', '90', 'mehr']"
           :icon="'mdi-timer'"
           :color="'blue'"
         />

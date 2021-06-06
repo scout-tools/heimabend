@@ -35,7 +35,7 @@
           Daher möchte ich dich bitten, an der kleinen
           Umfrage teilzunehmen und verschiedene ausgewählte Heimabend-Ideen für
           mich zu bewerten. <br> <br>
-          Ich freue mich auf deine Meinungen.
+          Ich freue mich auf deine Bewertungen.
 
         </p>
       </v-col>

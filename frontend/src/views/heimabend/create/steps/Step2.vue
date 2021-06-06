@@ -68,7 +68,7 @@
           <i
             >Beachte: In dem nächsten Schritt hast du die Möglichkeit deine
             Materialliste zu erstellen, sodass du dein Material nicht im
-            Beschreibungstext auflisten musst</i
+            Beschreibungstext auflisten musst.</i
           >
           <br />
           Viel Spaß dabei!

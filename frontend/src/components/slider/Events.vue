@@ -74,6 +74,7 @@ export default {
         name: 'heimabendDetails',
         params: { id },
       });
+      this.$router.go();
     },
   },
 };

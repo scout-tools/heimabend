@@ -93,9 +93,9 @@ export default {
     n: 0,
     texts: [
       'Pflichtfeld: Um welche Art von Heimabend-Ideen handelt es sich?',
-      'Pflichtfeld: In welchen (Jahres-)Zeiten kann deine Idee durchgeführt werden?',
-      'Pflichtfeld: An welchen Orten kann deine Idee durchgeführt werden?',
       'Pflichtfeld: Für welche Stufen ist deine Idee geeignet?',
+      'Pflichtfeld: An welchen Orten kann deine Idee durchgeführt werden?',
+      'Pflichtfeld: In welchen (Jahres-)Zeiten kann deine Idee durchgeführt werden?',
       'Lässt sich deine Heimabend-Idee einem speziellen Thema zuordnen?',
       'Merkmale für den interen Gebrauch. Nur für Admins.',
     ],
