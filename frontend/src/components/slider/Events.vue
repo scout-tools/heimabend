@@ -10,9 +10,10 @@
         <v-slide-item v-slot="{ active, toggle }">
           <template>
             <div>
+<!--          height: 64px (header) + 140px (img) -->
               <v-card
                 class="ma-2"
-                height="200"
+                height="204"
                 width="280"
                 @click="onEventClicked(item.id)"
               >
@@ -44,7 +45,8 @@
                       ></v-progress-circular>
                     </v-row>
                   </template>
-                </v-img>              </v-card>
+                </v-img>
+              </v-card>
             </div>
           </template>
         </v-slide-item>

@@ -155,10 +155,9 @@ export default {
       }
       return true;
     },
-    loadData(eventId) {
-      this.getNextEvents(eventId).then((response) => {
-        this.nextEvents = response.data;
-      });
+    async loadData(eventId) {
+      const { data } = await this.getNextEvents(eventId);
+      this.nextEvents = data;
     },
   },
 
