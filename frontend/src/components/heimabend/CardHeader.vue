@@ -1,5 +1,5 @@
 <template>
-  <v-tooltip bottom>
+  <v-tooltip bottom :disabled="preview">
     <template v-slot:activator="{ on, attrs }">
       <v-card-title v-bind="attrs" v-on="on" class="pa-0">
         <v-list-item
