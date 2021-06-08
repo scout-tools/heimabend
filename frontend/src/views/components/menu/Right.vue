@@ -1,6 +1,6 @@
    <template>
   <v-sheet tile color="primary" class="allow-scroll fixed">
-    <v-container fluid class="ma-3">
+    <v-container fluid class="pa-3">
       <v-row align="center" justify="center">
         <span class="subtitle-1 whiteText">
           {{ 'Themenauswahl' }}
@@ -43,6 +43,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+// eslint-disable-next-line
 import VChipTooltip from '@/views/components/chip/ChipTooltip.vue';
 
 export default {
@@ -85,6 +86,9 @@ export default {
     // eslint-disable-next-line no-unused-vars
     onChange() {
       this.$store.commit('changeFilterTags', this.filterTags);
+      this.$store.commit('setNextPath', false);
+      this.$store.commit('resetHeimabendItems', []);
+      this.$store.commit('setIsFirstEventLoaded', false);
 
       if (this.oldFilterLength < this.filterTags.length) {
         const id = this.filterTags[this.filterTags.length - 1];
@@ -95,6 +99,9 @@ export default {
     resetTags() {
       this.filterTags = [];
       this.$store.commit('changeFilterTags', []);
+      this.$store.commit('setNextPath', false);
+      this.$store.commit('resetHeimabendItems', []);
+      this.$store.commit('setIsFirstEventLoaded', false);
     },
   },
   watch: {

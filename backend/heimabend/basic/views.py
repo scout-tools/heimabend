@@ -65,7 +65,9 @@ class TagCategoryViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 
 class EventPagination(pagination.PageNumberPagination):
-    page_size = 5  # the no. of company objects you want to send in one go
+    page_size = 5
+    page_size_query_param = 'limit'
+    max_page_size = 1000
 
 
 class EventFilter(FilterSet):
@@ -145,17 +147,20 @@ class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):
     serializer_class = MessageSerializer
 
 
-class LikeViewSet(LoggingMixin, mixins.CreateModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
+class LikeViewSet(LoggingMixin, mixins.CreateModelMixin, viewsets.ViewSetMixin,
+                  generics.GenericAPIView):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
 
 
-class HighscoreView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
+class HighscoreView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin,
+                    generics.GenericAPIView):
     queryset = Event.objects.values('created_by').distinct()
     serializer_class = HighscoreSerializer
 
 
-class StatisticView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
+class StatisticView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin,
+                    generics.GenericAPIView):
     queryset = Event.objects.values(
         month=ExtractMonth('created_at')).annotate(
             year=ExtractYear('created_at')).values(
@@ -175,7 +180,8 @@ class TopViewsView(viewsets.ViewSet):
         return Response(serializer_data)
 
 
-class ImageMetaView(LoggingMixin, viewsets.ModelViewSet, generics.GenericAPIView):
+class ImageMetaView(LoggingMixin, viewsets.ModelViewSet,
+                    generics.GenericAPIView):
     queryset = ImageMeta.objects.all()
     serializer_class = ImageMetaSerializer
     filter_backends = [DjangoFilterBackend]
@@ -212,7 +218,7 @@ class MaterialUnitViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 
 class MaterialNameViewSet(LoggingMixin, viewsets.ModelViewSet):
-    queryset = MaterialName.objects.all()
+    queryset = MaterialName.objects.order_by('name').all()
     serializer_class = MaterialNameSerializer
 
 
@@ -274,12 +280,12 @@ class RandomEventViewSet(LoggingMixin, viewsets.ModelViewSet):
 
 
 class AdminEventViewSet(LoggingMixin, viewsets.ModelViewSet):
-    queryset = Event.objects.all()
+    queryset = Event.objects.order_by('-created_at').all()
     serializer_class = EventAdminSerializer
 
 
 class EventTimestampViewSet(LoggingMixin, viewsets.ModelViewSet):
-    queryset = Event.objects.filter(is_public=True)
+    queryset = Event.objects.filter(is_public=True).order_by('created_at')
     serializer_class = EventTimestampSerializer
 
 

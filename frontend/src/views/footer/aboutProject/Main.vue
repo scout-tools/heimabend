@@ -1,5 +1,5 @@
 <template>
-<v-container>
+<v-container fluid>
   <v-row justify="center">
     <v-flex
       ma-3

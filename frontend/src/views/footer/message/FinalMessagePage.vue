@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="ma-5">
+  <v-container fluid>
     <v-row align="center" justify="center">
       <router-link :to="{ name: 'inspi-easter-egg' }">
         <v-img
@@ -19,14 +19,6 @@
       </v-btn>
       </router-link>
     </v-row>
-    <v-row align="center" justify="center">
-      <CommentBox
-        headerText="Kommentar zum neuen Heimabend schreiben"
-        color="#F6F6F6"
-        :showType="false"
-        allowedMessageTypes="question"
-      />
-    </v-row>
   </v-container>
 </template>
 
@@ -35,9 +27,6 @@
 import CommentBox from '@/components/box/Comment.vue';
 
 export default {
-  components: {
-    CommentBox,
-  },
   created() {
     this.$store.commit('setHeaderString', 'Nachricht gesendet');
   },

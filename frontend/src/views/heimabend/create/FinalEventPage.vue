@@ -11,7 +11,7 @@
     <v-row align="center" justify="center">
       Vielen Dank für deine Heimabend-Idee! <br />
       <br />
-      Wir freuen unsüber deinen Beitrag zum Inspirator. <br />
+      Wir freuen uns über deinen Beitrag zum Inspirator. <br />
       Das Team wird sich deiner Idee zeitnah widmen und sie veröffentlichen.
       <br />
       Bei Rückfragen dazu melden wir uns über die von dir angegebene
@@ -21,9 +21,9 @@
     <v-row align="center" justify="center">
       <router-link
         :to="{ name: 'overview' }">
-      <v-btn class="ma-5" color="primary">
-        Zurück zur Startseite
-      </v-btn>
+        <v-btn class="ma-5" color="primary">
+          Zurück zur Startseite
+        </v-btn>
       </router-link>
     </v-row>
     <v-row align="center" justify="center">

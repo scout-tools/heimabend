@@ -5,7 +5,7 @@
      fixed-tabs
      centered>
       <v-tabs-slider/>
-      <v-tab>Autoren</v-tab>
+      <v-tab>Autor_innen</v-tab>
       <v-tab>Neue Ideen</v-tab>
       <!-- <v-tab>Meist aufgerufen</v-tab> -->
       <!-- <v-tab disabled>Bescuher</v-tab> -->
@@ -38,7 +38,7 @@ export default {
   methods: {
   },
   created() {
-    this.$store.commit('setHeaderString', 'Zahlen');
+    this.$store.commit('setHeaderString', 'Daten');
   },
 };
 </script>

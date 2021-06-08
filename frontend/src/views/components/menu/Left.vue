@@ -21,7 +21,7 @@
           <v-icon color="blue"> mdi-calculator-variant-outline </v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title>Zahlen </v-list-item-title>
+          <v-list-item-title>Daten</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -31,7 +31,7 @@
           <v-icon color="green"> mdi-frequently-asked-questions </v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title> Fragen / Antworten </v-list-item-title>
+          <v-list-item-title> Fragen &amp; Antworten </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <v-divider />

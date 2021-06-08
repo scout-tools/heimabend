@@ -5,17 +5,18 @@
   >
   <v-container fluid>
     <v-row class="mt-6 ml-2">
-      <v-col cols="8">
+      <v-col md="8">
       <span class="text-left subtitle-1">
-        Willkommen bei der <b> Heimabenderstellung </b>. <br>
+        Willkommen bei dem Hinzufügen einer neuen <b>Heimabend-idee!</b> <br>
         <br>
-        Viele Pfadfinder freuen sich
-        schon auf deine Inspiration. Im folgenden führen wir dich durch 7 kleine
-        Schritte. Viel Spaß!
+        Viele Pfadfinderinnen und Pfadfinder freuen sich
+        schon über deine Inspiration. Im Folgenden führen wir dich durch 8
+        Schritte. <br>
+        Viel Spaß!
       </span>
       </v-col>
-      <v-col cols="4" align="center" justify="center">
-        <v-img :src="require('@/assets/inspi/inspi_happy.webp')" max-width="80" />
+      <v-col md="4" align="center" justify="center">
+        <v-img :src="require('@/assets/inspi/inspi_happy.webp')" max-width="100" />
       </v-col>
     </v-row>
     <v-divider class="text-left ma-5"/>
@@ -47,13 +48,13 @@
     <v-divider class="my-2"/>
 
       <v-row class="ma-3" justify="center">
-        <v-btn color="error" class="mx-1" @click="cancel()">
+        <v-btn color="error" class="ma-1" @click="cancel()">
       <v-icon left>
         mdi-close
       </v-icon>
           Abbrechen
         </v-btn>
-        <v-btn class="mx-1" color="primary" @click="nextStep()">
+        <v-btn class="ma-1" color="primary" @click="nextStep()">
           Weiter
           <v-icon right>
             mdi-chevron-right

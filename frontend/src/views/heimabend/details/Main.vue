@@ -1,12 +1,12 @@
 <template>
-  <v-container fluid class="ma-5" :max-width="getMaxWidth()">
-    <v-row :max-width="getMaxWidth()">
+  <v-container fluid>
+    <v-row>
       <v-card color="#F6F6F6"
-        class="mx-auto" justify="center" :max-width="getMaxWidth()">
+        class="mx-auto" justify="center">
         <EventSlider :data="nextEvents" titel="Auch interessant:"/>
       </v-card>
     </v-row>
-    <v-row align="center" justify="center" :max-width="getMaxWidth()">
+    <v-row align="center" justify="center">
       <heimabend-card
         @refresh="refresh()"
         :items="getItem"
@@ -15,7 +15,7 @@
       <v-progress-circular v-if="loading" color="primary" indeterminate />
     </v-row>
 
-    <v-row align="center" class="ma-5" justify="center" :max-width="getMaxWidth()">
+    <v-row align="center" justify="center" :max-width="getMaxWidth()">
       <CommentBox
         headerText="Kommentar schreiben"
         color="#F6F6F6"
@@ -223,10 +223,6 @@ export default {
   border: white;
   border-style: solid;
   border-width: 2px;
-}
-.container {
-  margin: 2px;
-  padding: 2px;
 }
 </style>
 

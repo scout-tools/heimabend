@@ -1,9 +1,8 @@
 <template>
   <v-container fluid>
     <v-row align="center" justify="center">
-        <p>Inspi's Sättigungsgrad</p>
-        <v-progress-linear v-model="getCount" height="25">
-          <strong>{{ Math.ceil(getCount) }}%</strong>
+        <v-progress-linear :value="getCount" height="25" readonly striped color="green">
+          <strong>{{ `Zu ${Math.ceil(getCount)}% satt`}}</strong>
         </v-progress-linear>
     </v-row>
     <v-row v-if="!isFinished">
@@ -20,36 +19,29 @@
     <v-row v-else align="center" justify="center">
       <v-container>
         <v-row align="center" justify="center">
-          <v-img :src="require('@/assets/inspi/inspi_happy.webp')" max-width="350" />
-        </v-row>
-        <v-row align="center" justify="center">
-          <p>Vielen Dank. Jetzt bin ich satt.</p>
-        </v-row>
-
-        <v-divider inset class="my-5"></v-divider>
-
-        <v-row align="center" justify="center">
-          <router-link :to="{ name: 'overview' }" class="no-underline mr-4">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on">
-                  <v-icon left>mdi-flag-checkered</v-icon>
-                  Zurück zum Inspirator
-                </v-btn>
-              </template>
-              <span>Zurück zum Inspirator</span>
-            </v-tooltip>
+          <router-link :to="{ name: 'scoring-final' }" class="no-underline">
+            <v-btn class="ma-2" color="primary">
+              <v-icon left>mdi-fast-forward</v-icon>
+                Weiter
+              </v-btn>
           </router-link>
-        </v-row>
-        <v-divider inset class="my-5"></v-divider>
-        <v-row align="center" justify="center">
-          <v-btn @click="resetCount">
-            <v-icon left>mdi-repeat</v-icon>
-            Nochmal Füttern
-          </v-btn>
         </v-row>
       </v-container>
     </v-row>
+    <v-row class="mb-10" v-if="showCommentBox && !isFinished">
+      <CommentBox
+        class="mb-10"
+        headerText="Verbesserungsvorschlag"
+        color="#F6F6F6"
+        allowedMessageTypes="comment"
+        :eventIdParam="eventId"
+        @messageSent="onMessageSent"
+      />
+    </v-row>
+    <v-row v-if="!showCommentBox && !isFinished" align="center" justify="center" class="mb-10">
+      <p>Danke für den Vorschlag</p>
+    </v-row>
+
     <v-bottom-navigation grow fixed v-model="value">
       <v-tooltip top open-delay="1000">
         <template v-slot:activator="{ on, attrs }">
@@ -94,7 +86,10 @@
 <script>
 import axios from 'axios';
 
-import HeimabendCard from '@/views/heimabend/cards/Heimabend.vue';
+// eslint-disable-next-line
+import CommentBox from '@/components/box/Comment.vue';
+
+import HeimabendCard from '@/views/heimabend/cards/Heimabend.vue'; // eslint-disable-line
 import { serviceMixin } from '@/mixins/serviceMixin.js'; // eslint-disable-line
 
 export default {
@@ -102,6 +97,7 @@ export default {
   props: [],
 
   components: {
+    CommentBox,
     HeimabendCard,
   },
 
@@ -116,6 +112,7 @@ export default {
     score: 0,
     decision: 1,
     isLoading: true,
+    showCommentBox: true,
   }),
 
   mounted() {
@@ -124,7 +121,7 @@ export default {
   },
   computed: {
     getCount() {
-      return Math.min(this.count * 10, 100);
+      return Math.min(this.count * 25, 100);
     },
     isFinished() {
       return this.getCount >= 99;
@@ -164,6 +161,9 @@ export default {
     },
   },
   methods: {
+    onMessageSent() {
+      this.showCommentBox = false;
+    },
     resetCount() {
       this.getFirstEvent();
       this.count = 0;
@@ -198,6 +198,8 @@ export default {
     onClickSendDecison() {
       this.trans = 'slide-right';
       this.saveDecision(this.score);
+      this.showCommentBox = true;
+      window.scrollTo(0, 0);
     },
     onClickComplain() {
       this.trans = 'slide-down';
@@ -216,10 +218,21 @@ export default {
           this.show = true;
           this.count = this.count + 1;
           this.score = 0;
+          this.checkLast();
         })
         .catch(() => {
           this.loading = false;
         });
+    },
+    checkLast() {
+      if (this.isFinished) {
+        this.$router.push({
+          name: 'scoring-final',
+          params: {
+            id: this.experimentId,
+          },
+        });
+      }
     },
   },
 };

@@ -211,6 +211,14 @@ export default {
   },
 
   methods: {
+    resetForm() {
+      this.data = {
+        createdBy: '',
+        createdByEmail: '',
+        messageType: null,
+        messageBody: '',
+      };
+    },
     onKeyPress() {
       this.validate();
       if (this.valid) {

@@ -1,9 +1,9 @@
 <template>
   <v-card flat v-if="data.length" class="mx-auto" justify="center">
-    <v-card-title class="pa-0" justify="center"> {{ titel }} </v-card-title>
+    <v-card-title class="pa-0 ml-5" justify="center"> {{ titel }} </v-card-title>
     <v-slide-group
       v-if="data.length"
-      class="pa-0"
+      class="pl-0"
       active-class="success"
     >
       <v-hover v-slot="{ hover }" v-for="item in data" :key="item.id">
@@ -12,8 +12,8 @@
             <div>
               <v-card
                 class="ma-2"
-                height="180"
-                width="320"
+                height="200"
+                width="280"
                 @click="onEventClicked(item.id)"
               >
                 <v-expand-transition>
@@ -28,9 +28,23 @@
                     </v-card-text>
                   </v-card>
                 </v-expand-transition>
-                <HeimabendCardHeader :item="item" disable-tooltip/>
-                <v-img :src="getImageLink(item)" height="115px"/>
-              </v-card>
+                <HeimabendCardHeader :item="item" :preview="true"/>
+                <v-img
+                  class="pa-5 background-sky"
+                  :src="getImageLink(item)"
+                  :lazy-src="getTempImage()"
+                  height="140"
+                  contain
+                >
+                  <template v-slot:placeholder>
+                    <v-row class="fill-height ma-0" align="center" justify="center">
+                      <v-progress-circular
+                        indeterminate
+                        color="grey lighten-5"
+                      ></v-progress-circular>
+                    </v-row>
+                  </template>
+                </v-img>              </v-card>
             </div>
           </template>
         </v-slide-item>
@@ -64,11 +78,15 @@ export default {
       }
       return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
     },
+    getTempImage() {
+      return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
+    },
     onEventClicked(id) {
       this.$router.push({
         name: 'heimabendDetails',
         params: { id },
       });
+      this.$router.go();
     },
   },
 };
@@ -80,5 +98,12 @@ export default {
   opacity: 0.9;
   position: absolute;
   z-index: 100;
+}
+
+.background-sky {
+  background: rgb(199,216,252);
+  background: linear-gradient(41deg,
+    rgba(199,216,252,1) 0%,
+    rgba(255,255,255,1) 100%);
 }
 </style>

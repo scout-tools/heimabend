@@ -44,11 +44,11 @@
     </v-row>
 
       <v-row class="ma-3" justify="center">
-        <v-btn class="mx-1" @click="prevStep()">
+        <v-btn class="ma-1" @click="prevStep()">
           <v-icon left> mdi-chevron-left </v-icon>
           Zurück
         </v-btn>
-        <v-btn class="mx-1" color="primary" @click="nextStep()">
+        <v-btn class="ma-1" color="primary" @click="nextStep()">
           Weiter
           <v-icon right> mdi-chevron-right </v-icon>
         </v-btn>
@@ -58,7 +58,7 @@
                 v-bind="attrs"
                 v-on="on"
                 icon
-                class="mx-1"
+                class="ma-1"
                 color="secondary"
                 @click="nextStep(true)"
               >
@@ -92,10 +92,10 @@ export default {
     valid: true,
     n: 0,
     texts: [
-      'Pflichtfeld: In welchen (Jahres-)Zeiten kann deine Idee durchgeführt werden?',
-      'Pflichtfeld: An welchen Orten kann deine Idee stattfinden?',
-      'Pflichtfeld: Für welche Stufen ist deine Idee geeignet?',
       'Pflichtfeld: Um welche Art von Heimabend-Ideen handelt es sich?',
+      'Pflichtfeld: Für welche Stufen ist deine Idee geeignet?',
+      'Pflichtfeld: An welchen Orten kann deine Idee durchgeführt werden?',
+      'Pflichtfeld: In welchen (Jahres-)Zeiten kann deine Idee durchgeführt werden?',
       'Lässt sich deine Heimabend-Idee einem speziellen Thema zuordnen?',
       'Merkmale für den interen Gebrauch. Nur für Admins.',
     ],
