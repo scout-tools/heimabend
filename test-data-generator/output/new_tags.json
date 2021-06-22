@@ -1,0 +1,1282 @@
+[
+    {
+        "model": "basic.event_tags",
+        "pk": 2212,
+        "fields": {
+            "event_id": 1,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2213,
+        "fields": {
+            "event_id": 2,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2214,
+        "fields": {
+            "event_id": 3,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2215,
+        "fields": {
+            "event_id": 4,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2216,
+        "fields": {
+            "event_id": 5,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2217,
+        "fields": {
+            "event_id": 6,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2218,
+        "fields": {
+            "event_id": 8,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2219,
+        "fields": {
+            "event_id": 9,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2220,
+        "fields": {
+            "event_id": 10,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2221,
+        "fields": {
+            "event_id": 11,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2222,
+        "fields": {
+            "event_id": 12,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2223,
+        "fields": {
+            "event_id": 32,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2224,
+        "fields": {
+            "event_id": 33,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2225,
+        "fields": {
+            "event_id": 34,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2226,
+        "fields": {
+            "event_id": 37,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2227,
+        "fields": {
+            "event_id": 38,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2228,
+        "fields": {
+            "event_id": 39,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2229,
+        "fields": {
+            "event_id": 44,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2230,
+        "fields": {
+            "event_id": 45,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2231,
+        "fields": {
+            "event_id": 46,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2232,
+        "fields": {
+            "event_id": 47,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2233,
+        "fields": {
+            "event_id": 50,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2234,
+        "fields": {
+            "event_id": 51,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2235,
+        "fields": {
+            "event_id": 52,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2236,
+        "fields": {
+            "event_id": 55,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2237,
+        "fields": {
+            "event_id": 56,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2238,
+        "fields": {
+            "event_id": 58,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2239,
+        "fields": {
+            "event_id": 59,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2240,
+        "fields": {
+            "event_id": 60,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2241,
+        "fields": {
+            "event_id": 61,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2242,
+        "fields": {
+            "event_id": 62,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2243,
+        "fields": {
+            "event_id": 63,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2244,
+        "fields": {
+            "event_id": 64,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2245,
+        "fields": {
+            "event_id": 65,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2246,
+        "fields": {
+            "event_id": 66,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2247,
+        "fields": {
+            "event_id": 67,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2248,
+        "fields": {
+            "event_id": 69,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2249,
+        "fields": {
+            "event_id": 70,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2250,
+        "fields": {
+            "event_id": 71,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2251,
+        "fields": {
+            "event_id": 72,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2252,
+        "fields": {
+            "event_id": 73,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2253,
+        "fields": {
+            "event_id": 74,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2254,
+        "fields": {
+            "event_id": 75,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2255,
+        "fields": {
+            "event_id": 76,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2256,
+        "fields": {
+            "event_id": 77,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2257,
+        "fields": {
+            "event_id": 78,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2258,
+        "fields": {
+            "event_id": 81,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2259,
+        "fields": {
+            "event_id": 82,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2260,
+        "fields": {
+            "event_id": 83,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2261,
+        "fields": {
+            "event_id": 84,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2262,
+        "fields": {
+            "event_id": 85,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2263,
+        "fields": {
+            "event_id": 92,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2264,
+        "fields": {
+            "event_id": 93,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2265,
+        "fields": {
+            "event_id": 95,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2266,
+        "fields": {
+            "event_id": 96,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2267,
+        "fields": {
+            "event_id": 97,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2268,
+        "fields": {
+            "event_id": 100,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2269,
+        "fields": {
+            "event_id": 102,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2270,
+        "fields": {
+            "event_id": 104,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2271,
+        "fields": {
+            "event_id": 105,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2272,
+        "fields": {
+            "event_id": 106,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2273,
+        "fields": {
+            "event_id": 110,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2274,
+        "fields": {
+            "event_id": 111,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2275,
+        "fields": {
+            "event_id": 112,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2276,
+        "fields": {
+            "event_id": 113,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2277,
+        "fields": {
+            "event_id": 115,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2278,
+        "fields": {
+            "event_id": 117,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2279,
+        "fields": {
+            "event_id": 119,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2280,
+        "fields": {
+            "event_id": 120,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2281,
+        "fields": {
+            "event_id": 121,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2282,
+        "fields": {
+            "event_id": 122,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2283,
+        "fields": {
+            "event_id": 123,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2284,
+        "fields": {
+            "event_id": 124,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2285,
+        "fields": {
+            "event_id": 125,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2286,
+        "fields": {
+            "event_id": 127,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2287,
+        "fields": {
+            "event_id": 129,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2288,
+        "fields": {
+            "event_id": 130,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2289,
+        "fields": {
+            "event_id": 131,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2290,
+        "fields": {
+            "event_id": 132,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2291,
+        "fields": {
+            "event_id": 133,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2292,
+        "fields": {
+            "event_id": 134,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2293,
+        "fields": {
+            "event_id": 135,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2294,
+        "fields": {
+            "event_id": 136,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2295,
+        "fields": {
+            "event_id": 137,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2296,
+        "fields": {
+            "event_id": 138,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2297,
+        "fields": {
+            "event_id": 139,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2298,
+        "fields": {
+            "event_id": 140,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2299,
+        "fields": {
+            "event_id": 141,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2300,
+        "fields": {
+            "event_id": 142,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2301,
+        "fields": {
+            "event_id": 143,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2302,
+        "fields": {
+            "event_id": 144,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2303,
+        "fields": {
+            "event_id": 145,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2304,
+        "fields": {
+            "event_id": 146,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2305,
+        "fields": {
+            "event_id": 147,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2306,
+        "fields": {
+            "event_id": 148,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2307,
+        "fields": {
+            "event_id": 149,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2308,
+        "fields": {
+            "event_id": 150,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2309,
+        "fields": {
+            "event_id": 151,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2310,
+        "fields": {
+            "event_id": 152,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2311,
+        "fields": {
+            "event_id": 154,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2312,
+        "fields": {
+            "event_id": 155,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2313,
+        "fields": {
+            "event_id": 156,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2314,
+        "fields": {
+            "event_id": 157,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2315,
+        "fields": {
+            "event_id": 158,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2316,
+        "fields": {
+            "event_id": 159,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2317,
+        "fields": {
+            "event_id": 161,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2318,
+        "fields": {
+            "event_id": 162,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2319,
+        "fields": {
+            "event_id": 163,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2320,
+        "fields": {
+            "event_id": 164,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2321,
+        "fields": {
+            "event_id": 165,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2322,
+        "fields": {
+            "event_id": 173,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2323,
+        "fields": {
+            "event_id": 175,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2324,
+        "fields": {
+            "event_id": 176,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2325,
+        "fields": {
+            "event_id": 177,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2326,
+        "fields": {
+            "event_id": 178,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2327,
+        "fields": {
+            "event_id": 179,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2328,
+        "fields": {
+            "event_id": 180,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2329,
+        "fields": {
+            "event_id": 181,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2330,
+        "fields": {
+            "event_id": 182,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2331,
+        "fields": {
+            "event_id": 183,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2332,
+        "fields": {
+            "event_id": 184,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2333,
+        "fields": {
+            "event_id": 185,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2334,
+        "fields": {
+            "event_id": 186,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2335,
+        "fields": {
+            "event_id": 187,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2336,
+        "fields": {
+            "event_id": 188,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2337,
+        "fields": {
+            "event_id": 189,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2338,
+        "fields": {
+            "event_id": 190,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2339,
+        "fields": {
+            "event_id": 191,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2340,
+        "fields": {
+            "event_id": 192,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2341,
+        "fields": {
+            "event_id": 193,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2342,
+        "fields": {
+            "event_id": 194,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2343,
+        "fields": {
+            "event_id": 195,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2344,
+        "fields": {
+            "event_id": 196,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2345,
+        "fields": {
+            "event_id": 197,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2346,
+        "fields": {
+            "event_id": 198,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2347,
+        "fields": {
+            "event_id": 199,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2348,
+        "fields": {
+            "event_id": 200,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2349,
+        "fields": {
+            "event_id": 201,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2350,
+        "fields": {
+            "event_id": 202,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2351,
+        "fields": {
+            "event_id": 203,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2352,
+        "fields": {
+            "event_id": 204,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2353,
+        "fields": {
+            "event_id": 205,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2354,
+        "fields": {
+            "event_id": 206,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2355,
+        "fields": {
+            "event_id": 207,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2356,
+        "fields": {
+            "event_id": 208,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2357,
+        "fields": {
+            "event_id": 209,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2358,
+        "fields": {
+            "event_id": 210,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2359,
+        "fields": {
+            "event_id": 211,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2360,
+        "fields": {
+            "event_id": 212,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2361,
+        "fields": {
+            "event_id": 213,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2362,
+        "fields": {
+            "event_id": 214,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2363,
+        "fields": {
+            "event_id": 215,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2364,
+        "fields": {
+            "event_id": 216,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2365,
+        "fields": {
+            "event_id": 217,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2366,
+        "fields": {
+            "event_id": 218,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2367,
+        "fields": {
+            "event_id": 219,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2368,
+        "fields": {
+            "event_id": 220,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2369,
+        "fields": {
+            "event_id": 221,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2370,
+        "fields": {
+            "event_id": 222,
+            "tag_id": 74
+        }
+    },
+    {
+        "model": "basic.event_tags",
+        "pk": 2371,
+        "fields": {
+            "event_id": 223,
+            "tag_id": 74
+        }
+    }
+]

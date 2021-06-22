@@ -33,11 +33,4 @@ export default {
   font-weight: bold;
   color: #2c3e50;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-.limegreen {
-    background-color: rgb(40, 158, 40) !important;
-}
 </style>

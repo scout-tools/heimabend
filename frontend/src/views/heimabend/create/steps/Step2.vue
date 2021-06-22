@@ -2,10 +2,6 @@
   <v-form ref="form2" v-model="valid">
     <v-container>
       <v-row class="mt-6 ml-2 text-left">
-        <span class="subtitle-1">
-          Bitte fasse im ersten Absatz deine Idee zusammmen und beschreibe
-          danach deine Idee ausführlicher. <br />
-        </span>
       </v-row>
       <v-row>
         <v-col cols="12">
@@ -72,16 +68,40 @@
           <i
             >Beachte: In dem nächsten Schritt hast du die Möglichkeit deine
             Materialliste zu erstellen, sodass du dein Material nicht im
-            Beschreibungstext auflisten musst</i
+            Beschreibungstext auflisten musst.</i
           >
           <br />
           Viel Spaß dabei!
         </span>
       </v-row>
       <v-row class="ma-3" justify="center">
-        <v-btn class="mr-5" @click="prevStep()"> Zurück </v-btn>
-
-        <v-btn color="primary" @click="nextStep(n)"> Weiter </v-btn>
+        <v-btn class="ma-1" @click="prevStep()">
+          <v-icon left> mdi-chevron-left </v-icon>
+          Zurück
+        </v-btn>
+        <v-btn class="ma-1" color="primary" @click="nextStep()">
+          Weiter
+          <v-icon right> mdi-chevron-right </v-icon>
+        </v-btn>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                v-bind="attrs"
+                v-on="on"
+                icon
+                class="ma-1"
+                color="secondary"
+                @click="nextStep(true)"
+              >
+                <v-icon>
+                  mdi-debug-step-over
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>
+              {{ 'Schritt überspringen' }}
+            </span>
+          </v-tooltip>
       </v-row>
     </v-container>
   </v-form>
@@ -99,14 +119,13 @@ export default {
   data: () => ({
     rules: {},
     getImageUrl: process.env.VUE_APP_API + 'basic/imageupload/', // eslint-disable-line
-    data: {
-      description: '',
-    },
     loading: true,
     valid: true,
     n: 0,
   }),
-
+  props: {
+    data: Object,
+  },
   computed: {
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -129,18 +148,14 @@ export default {
     },
   },
 
-  created() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-    }
-  },
-
   methods: {
     prevStep() {
       this.$emit('prevStep');
     },
-    nextStep() {
-      if (!this.$refs.form2.validate() || this.getCustomText !== 'Ok') {
+    nextStep(skip = false) {
+      if (
+        (!this.$refs.form2.validate() || this.getCustomText !== 'Ok') && !skip
+      ) {
         return;
       }
       this.$emit('nextStep');
@@ -165,8 +180,8 @@ export default {
 
         var reader = new FileReader(); // eslint-disable-line
         reader.onload = function () { // eslint-disable-line
-          var id = 'blobid' + (new Date()).getTime(); // eslint-disable-line
-          var blobCache =  tinymce.activeEditor.editorUpload.blobCache; // eslint-disable-line
+          var id = 'blobid' + new Date().getTime(); // eslint-disable-line
+          var blobCache = tinymce.activeEditor.editorUpload.blobCache; // eslint-disable-line
           var base64 = reader.result.split(',')[1]; // eslint-disable-line
           var blobInfo = blobCache.create(id, file, base64); // eslint-disable-line
           blobCache.add(blobInfo);

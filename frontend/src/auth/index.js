@@ -22,7 +22,7 @@ export default {
         store.commit('apiIsDown', true);
       }
 
-      if (error.response.status === 401) {
+      if (error && error.response && error.response.status === 401) {
         if (error.response.data.detail !== 'No active account found with the given credentials') {
           store.commit('clearTokens');
           window.location.href = '/';

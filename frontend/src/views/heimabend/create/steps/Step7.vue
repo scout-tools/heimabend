@@ -1,6 +1,6 @@
 <template>
   <v-form
-    ref="form6"
+    ref="form7"
     v-model="valid"
   >
     <v-container fluid class="mx-5 pa-0">
@@ -43,21 +43,35 @@
         </v-container>
     </v-row>
 
-    <v-row class="ma-3" justify="center">
-      <v-btn
-        class="mr-5"
-        @click="prevStep()"
-      >
-        Zurück
-      </v-btn>
-
-      <v-btn
-        color="primary"
-        @click="nextStep()"
-      >
-        Weiter
-      </v-btn>
-    </v-row>
+      <v-row class="ma-3" justify="center">
+        <v-btn class="ma-1" @click="prevStep()">
+          <v-icon left> mdi-chevron-left </v-icon>
+          Zurück
+        </v-btn>
+        <v-btn class="ma-1" color="primary" @click="nextStep()">
+          Weiter
+          <v-icon right> mdi-chevron-right </v-icon>
+        </v-btn>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                v-bind="attrs"
+                v-on="on"
+                icon
+                class="ma-1"
+                color="secondary"
+                @click="nextStep(true)"
+              >
+                <v-icon>
+                  mdi-debug-step-over
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>
+              {{ 'Schritt überspringen' }}
+            </span>
+          </v-tooltip>
+      </v-row>
     </v-container>
   </v-form>
 </template>
@@ -66,39 +80,33 @@
 import { mapGetters } from 'vuex';
 
 export default {
-
+  props: {
+    data: Object,
+  },
   data: () => ({
     rules: {
       tags: [
         v => (v && v.length >= 4 && false) || 'Wähle bitte mindestens einen Tag aus.',
       ],
     },
-    data: {
-      tags: [47, 46, 44, 43, 42, 45, 51, 50],
-    },
     valid: true,
     n: 0,
     texts: [
-      'Pflichtfeld: In welchen (Jahres-)Zeiten kann deine Idee durchgeführt werden?',
-      'Pflichtfeld: An welchen Orten kann deine Idee stattfinden?',
-      'Pflichtfeld: Für welche Stufen ist deine Idee geeignet?',
       'Pflichtfeld: Um welche Art von Heimabend-Ideen handelt es sich?',
+      'Pflichtfeld: Für welche Stufen ist deine Idee geeignet?',
+      'Pflichtfeld: An welchen Orten kann deine Idee durchgeführt werden?',
+      'Pflichtfeld: In welchen (Jahres-)Zeiten kann deine Idee durchgeführt werden?',
       'Lässt sich deine Heimabend-Idee einem speziellen Thema zuordnen?',
+      'Merkmale für den interen Gebrauch. Nur für Admins.',
     ],
   }),
 
   computed: {
-    tags() {
-      return this.$store.getters.tags;
-    },
     isCreate() {
       return !this.$route.params.id;
     },
     isUpdate() {
       return !!this.$route.params.id;
-    },
-    getClassForTextContentSteps() {
-      return this.isMobil ? 'mx-0 px-1' : '';
     },
     ...mapGetters([
       'tags',
@@ -108,33 +116,25 @@ export default {
     getTopBarTagCategories() {
       if (this.tagCategory) {
         return this.tagCategory
-          .filter(item => item.is_header);
+          .filter(item => item.isHeader);
       }
       return [];
     },
   },
 
-  mounted() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
+  watch: {
+    data() {
       if (this.data.tags && this.data.tags.length) {
         this.data.tags = this.setIntTags(this.data.tags);
       }
-    }
+    },
   },
-
-  created() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-    }
-  },
-
 
   methods: {
     getMandatoryBarTagCategories() {
       if (this.tagCategory) {
         return this.tagCategory
-          .filter(item => item.is_mandatory);
+          .filter(item => item.isMandatory);
       }
       return [];
     },
@@ -146,7 +146,7 @@ export default {
     },
     getRulesByCategory(category) {
       let returnValue = this.rules.tags;
-      if (!category.is_mandatory) {
+      if (!category.isMandatory) {
         return [];
       }
 
@@ -181,8 +181,8 @@ export default {
     prevStep() {
       this.$emit('prevStep');
     },
-    nextStep() {
-      if (!this.$refs.form6.validate()) {
+    nextStep(skip = false) {
+      if (!this.$refs.form7.validate() && !skip) {
         return;
       }
       this.$emit('nextStep');

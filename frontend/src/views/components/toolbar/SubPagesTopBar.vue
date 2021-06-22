@@ -1,23 +1,25 @@
 <template>
-<div>
-  <v-toolbar
-    flat
-    dense
-    fixed>
-    <router-link
-      :to="{ name: 'overview'}"
-      class="no-underline"
-    >
-      <v-btn text large icon>
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
-    </router-link>
-    <v-toolbar-title>
-    </v-toolbar-title>
-    <v-spacer></v-spacer>
-  </v-toolbar>
-    <v-divider/>
-</div>
+  <v-container fluid>
+    <v-row>
+      <router-link :to="{ name: 'overview' }" class="no-underline mt-4 ml-4">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              fab
+              small
+              outlined
+              color="primary"
+              v-bind="attrs"
+              v-on="on"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </template>
+          <span>Zurück zum Inspirator</span>
+        </v-tooltip>
+      </router-link>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

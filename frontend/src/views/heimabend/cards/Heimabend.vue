@@ -1,28 +1,24 @@
 <template>
-  <v-container class="max-width-class" ma-0 pa-0>
+  <v-container fluid class="max-width-class" ma-0 pa-0>
     <v-row no-gutters>
       <v-col :cols="getMainCols">
-        <v-spacer class="ml-8" />
-        <h2 class="deinHeimabendSpan" :class="yourHeimabendSpan()">
-          {{ getHeaderText }}
+        <v-spacer class="mt-8" />
+        <h2
+          class="deinHeimabendSpan"
+          v-if="!isDetailsView"
+          :class="yourHeimabendSpan()"
+        >
+          {{ getHeaderText(items) }}
         </h2>
         <v-spacer />
         <v-card
           :max-width="getMaxWidth()"
-          elevation="30"
           class="mx-auto ma-3 mb-10 test-color"
           :style="{ transitionDelay: delay }"
-          v-bind:id="`eventcard-${item.id}`"
           v-for="(item, index) in items"
           :key="index"
         >
-          <v-card-title
-            class="whiteText justify-center text-center primary"
-            :class="titleClass()"
-          >
-            {{ item.title }}
-          </v-card-title>
-
+          <HeimabendCardHeader :item="item"/>
           <v-img
             v-if="getImageLink(item)"
             max-height="250"
@@ -31,11 +27,12 @@
           ></v-img>
           <v-card-text>
             <p
-              class="text-left subtitle-1 mt-2 test-color-text"
+              class="text-left subtitle-1 mt-2 test-color-text max-width-screen-size"
               :class="getDescriptionClass()"
               v-html="item.description"
-            ></p>
-            <v-container v-if="!isDetailsView">
+            >
+            </p>
+            <v-container fluid v-if="!isDetailsView">
               <v-row>
                 <v-col cols="2"> </v-col>
                 <v-col cols="8">
@@ -66,54 +63,18 @@
                     </span>
                   </v-tooltip>
                 </v-col>
-                <v-col cols="2">
-                  <v-tooltip nudge-left="80" bottom>
-                    <template v-slot:activator="{ on }">
-                      <v-btn
-                        icon
-                        v-on="on"
-                        :color="getLikeColor(item)"
-                        @click="onLikedClicked(item)"
-                      >
-                        <v-icon :size="getLikeIconSize">
-                          {{ getLikeIcon(item) }}
-                        </v-icon>
-                      </v-btn>
-                    </template>
-                    <span class="mx-1"> Gefällt mir! </span>
-                  </v-tooltip>
-                </v-col>
+              </v-row>
+
+              <v-divider class="my-4"/>
+
+              <HeimabendRating v-if="false" :item="item" />
+            </v-container>
+            <v-container v-else>
+              <v-row align="center" justify="center">
+                <MaterialBox :materialList="item.materialList"/>
               </v-row>
             </v-container>
           </v-card-text>
-
-          <v-divider v-if="isDetailsView" class="my-2" />
-          <div v-if="isDetailsView">
-            <div class="text-left ml-10">
-              <u> Material </u>
-            </div>
-
-            <div
-              v-if="item.material !== ''"
-              class="text-left font-italic ml-10"
-            >
-              <ul>
-                <li
-                  v-for="(item, index4) in getMaterialArray(item.material)"
-                  :key="index4"
-                >
-                  {{ item }}
-                </li>
-              </ul>
-            </div>
-            <div v-else class="text-left">
-              <ul>
-                <li>
-                  {{ emptyMaterialText }}
-                </li>
-              </ul>
-            </div>
-          </div>
 
           <v-container>
             <v-chip-tooltip
@@ -129,12 +90,12 @@
 
           <v-divider
             class="mx-2 ml-12"
-            v-if="!item.isActive && isAuthenticated"
+            v-if="!item.isPublic && isAuthenticated"
             vertical
           />
           <v-tooltip
             nudge-left="80"
-            v-if="!item.isActive && isAuthenticated"
+            v-if="!item.isPublic && isAuthenticated"
             bottom
           >
             <template v-slot:activator="{ on }">
@@ -168,36 +129,6 @@
           >
             <v-icon>mdi-pencil-outline</v-icon>
           </v-btn>
-          <v-tooltip
-            v-if="!isMobil && !isAuthenticated && item.like_score === 10"
-            nudge-left="80"
-            open-on-hover
-            bottom
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                class="px-2 info-cursor"
-                :x-small="isMobil"
-                depressed
-                color="primary"
-                v-on="on"
-              >
-                <v-icon
-                  v-for="i in item.like_score"
-                  color="#F6D300"
-                  :key="i"
-                  :size="30"
-                  readonly
-                >
-                  mdi-star-face
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>
-              {{ getLikeScoreTooltip(item.like_score) }}
-            </span>
-          </v-tooltip>
-
           <v-card-actions px-0 class="lightPrimary pa-0">
             <v-tooltip
               open-on-hover
@@ -374,6 +305,24 @@
               <span>Großprojekt</span>
             </v-tooltip>
             <v-spacer />
+            <v-divider
+              v-if="item.viewCount > 1"
+              :class="verticalMargin"
+              vertical
+            />
+            <v-tooltip
+              v-if="item.viewCount > 1"
+              open-on-hover
+              bottom
+              nudge-left="80"
+            >
+              <template v-slot:activator="{ on }">
+                <v-badge v-on="on" :content="item.viewCount" overlap>
+                  <v-icon v-on="on"> mdi-eye </v-icon>
+                </v-badge>
+              </template>
+              <span>Bisherige Aufrufe</span>
+            </v-tooltip>
             <v-divider :class="verticalMargin" vertical />
             <div class="body-2 ma-2">
               {{ formatDate(item.createdAt) + '\n' + item.createdBy }}
@@ -437,7 +386,7 @@
         <menu-right
           pa-5
           class="fixed menu-right"
-          style="padding-top: 50px; padding-left: 5px; padding-right: 5px"
+          style="padding-top: 45px; padding-left: 5px; padding-right: 5px z-index: 10"
         />
       </v-col>
     </v-row>
@@ -445,20 +394,27 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 import store from '@/store'; // eslint-disable-line
 import { mapGetters } from 'vuex';
 // eslint-disable-next-line import/no-unresolved
 import MenuRight from '@/views/components/menu/Right.vue';
+// eslint-disable-next-line import/no-unresolved
+import HeimabendRating from '@/components/rating/heimabend/Main.vue';
+// eslint-disable-next-line import/no-unresolved
+import MaterialBox from '@/components/box/Material.vue';
+// eslint-disable-next-line import/no-unresolved
+import HeimabendCardHeader from '@/components/heimabend/CardHeader.vue';
 // eslint-disable-next-line import/no-unresolved
 import Fab from '@/views/components/fab/Standard.vue';
 // eslint-disable-next-line import/no-unresolved
 import VChipTooltip from '@/views/components/chip/ChipTooltip.vue';
 // eslint-disable-next-line import/no-unresolved
 import DeleteModal from '../dialogs/DeleteModal.vue';
+// eslint-disable-next-line
+import { serviceMixin } from '@/mixins/serviceMixin.js';
 
 export default {
+  mixins: [serviceMixin],
   props: {
     items: Array,
     loading: {
@@ -475,6 +431,9 @@ export default {
     MenuRight,
     Fab,
     VChipTooltip,
+    HeimabendRating,
+    HeimabendCardHeader,
+    MaterialBox,
   },
   methods: {
     scroll() {
@@ -491,32 +450,22 @@ export default {
       this.$emit('loadMore');
     },
     getImageLink(item) {
-      if (item.imageLink !== '') {
-        return item.imageLink;
+      if (item.headerImage && item.headerImage.imageUuid && item.headerImage.imageUuid.imageUuid) {
+        return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${item.headerImage.imageUuid.imageUuid}.default.jpeg`;
       }
-      return null;
+      return false;
     },
     yourHeimabendSpan() {
       return this.isMobil ? 'headerIsMobile' : 'headerIsDesktop';
     },
-    getMandatoryBarTagCategories() {
-      if (this.tagCategory) {
-        return this.tagCategory.filter((item) => item.is_event_overview); // eslint-disable-line
-      }
-      return [];
-    },
-    convertUrlArray(ary) {
-      return ary.map((e) => e); // eslint-disable-line
-    },
     getEventTags(tagArray) {
       const tagsObject = this.tags.filter((item) => tagArray.includes(item.id)); // eslint-disable-line
-      const containsCategoryId = tagsObject.filter((tag) => // eslint-disable-line
-        [2, 4, 5, 9].includes(tag.category) // eslint-disable-line
+      const containsCategoryId = tagsObject.filter(
+        ( // eslint-disable-line
+          tag // eslint-disable-line
+        ) => [2, 4, 5, 9].includes(tag.category) // eslint-disable-line
       ); // eslint-disable-line
       return containsCategoryId;
-    },
-    filterTagByCategory(tags, categoryId) {
-      return this.tags.filter((item) => item.category === categoryId); // eslint-disable-line
     },
     getDescriptionClass() {
       let string = '';
@@ -529,41 +478,6 @@ export default {
         string = string.concat(' mx-2');
       }
       return string;
-    },
-    onLikedClicked(item) {
-      const eventId = item.id;
-      if (!this.isAlreadyVoted(item)) {
-        this.callEventLikeService(eventId);
-      } else {
-        this.alreadyVotedSnackbar = true;
-      }
-    },
-    getLikeColor(item) {
-      return this.isAlreadyVoted(item) ? 'red lighten-1' : 'red darken-2';
-    },
-    getLikeIcon(item) {
-      return this.isAlreadyVoted(item) ? 'mdi-heart' : 'mdi-heart-outline';
-    },
-    isAlreadyVoted(event) {
-      return this.liked.includes(event.id);
-    },
-    callEventLikeService(eventId) {
-      const me = this; // eslint-disable-line
-      store.commit('setLiked', eventId); // delete that line
-      axios
-        .post(`${this.API_URL}basic/like/`, {
-          eventId: `${process.env.VUE_APP_API}basic/event/${eventId}/`,
-        })
-        .then(() => {
-          store.commit('setLiked', eventId);
-          this.showSuccessLiked = true;
-          // eslint-disable-next-line no-undef
-          _paq.push(['trackEvent', 'like', eventId]);
-        })
-        .catch((error) => {
-          this.responseObj = error;
-          this.showError = true;
-        });
     },
     getCostsToolTip(costsRating) {
       switch (costsRating) {
@@ -606,10 +520,25 @@ export default {
     onRefreshHeimabende() {
       this.$emit('refresh');
     },
-    titleClass() {
-      return this.$vuetify.breakpoint.mdAndUp
+    titleClass(item) {
+      let styleClass = '';
+      styleClass = this.$vuetify.breakpoint.mdAndUp
         ? 'headline font-weight-medium'
         : 'title';
+      styleClass = `${styleClass} ${this.getHeaderColorClass(item.tags)}`;
+      return styleClass;
+    },
+    getHeaderColorClass(tags) {
+      let colorclass = 'color-scout';
+
+      const hasWo = tags.includes(50);
+      const hasScout = tags.includes(51);
+      if (hasWo && hasScout) {
+        colorclass = 'color-wo-scout';
+      } else if (hasWo) {
+        colorclass = 'color-wo';
+      }
+      return colorclass;
     },
     getMaxWidth() {
       return this.isDetailsView ? '900' : '800';
@@ -618,20 +547,17 @@ export default {
       return !this.$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-0';
     },
     onUpdateClick(params) {
+      store.commit('setScollPosition', window.scrollY);
       this.$router.push({ name: 'heimabendUpdate', params });
     },
-    onDetailsClick(item) {
-      // eslint-disable-next-line no-undef
-      _paq.push(['trackContentInteraction', 'clicked', item.title, item.id]);
+    onDetailsClick() {
+      store.commit('setScollPosition', window.scrollY);
     },
     formatDate(date) {
       const dateObj = new Date(date);
       return `${dateObj.getDate()}.${
         dateObj.getMonth() + 1
       }.${dateObj.getFullYear()} `;
-    },
-    getMaterialArray(string) {
-      return string.split(',');
     },
     onDeleteClick(item) {
       this.$refs.deleteTagModal.show(item);
@@ -646,14 +572,11 @@ export default {
     getId() {
       return this.$route.params.id;
     },
-    getIsLvlOne() {
-      return false;
-    },
-    getIsLvlTwo() {
-      return false;
-    },
-    getIsLvlThree() {
-      return false;
+    getHeaderText(items) {
+      if (!items.length) {
+        return 'Kein Treffer';
+      }
+      return !this.isScoringMode ? 'dein Heimabend' : 'Gut beschrieben?';
     },
   },
   data() {
@@ -670,6 +593,9 @@ export default {
       emptyMaterialText: 'Juhu, kein Material nötig ^^',
       data: [],
       count: 0,
+      show: false,
+      rating: 3,
+      addRating: 0,
     };
   },
   mounted() {
@@ -678,32 +604,14 @@ export default {
   },
   computed: {
     ...mapGetters(['tags', 'liked', 'isAuthenticated', 'isScoringMode']),
-    isMainPage() {
-      return this.currentRouteName === 'overview';
-    },
-    currentRouteName() {
-      return this.$route.name;
-    },
     ratingSize() {
       return !this.isMobil ? 24 : 18;
     },
     getIconSize() {
       return !this.isMobil ? 24 : 18;
     },
-    getLikeIconSize() {
-      return !this.isMobil ? 30 : 28;
-    },
-    getHeaderText() {
-      return !this.isScoringMode ? 'dein Heimabend' : 'Gut beschrieben?';
-    },
     getLikeButtonText() {
       return !this.isMobil ? 'Mehr Details zur Idee' : 'Mehr';
-    },
-    paddingleftLebelIcons() {
-      return !this.isMobil ? 'pl-2' : 'pl-1';
-    },
-    maxWidthKnots() {
-      return !this.isMobil ? '18' : '14';
     },
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
@@ -725,14 +633,15 @@ export default {
 }
 .test-color-text {
   color: rgba(0, 0, 0, 0.829);
+  max-width: 95vw;
 }
 .whiteText {
   color: white !important;
 }
 .deinHeimabendSpan {
   font-family: 'Special Elite', sans-serif !important;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .headerIsMobile {
@@ -757,6 +666,12 @@ export default {
   min-width: 200px;
 }
 .negativ-top-margin {
-  margin-top: -130px !important;
+  margin-top: -140px !important;
+}
+.v-tooltip__content {
+  pointer-events: initial;
+}
+.max-width-screen-size {
+  overflow: hidden;
 }
 </style>
