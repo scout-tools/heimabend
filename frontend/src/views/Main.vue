@@ -48,11 +48,25 @@
         @keydown.enter="onChangeSearchInput()"
         v-if="!isScoringMode && isMainPage"
       />
-      <v-spacer />
+      <v-spacer v-if="!isMainPage"/>
       <h1 v-if="!isMainPage" class="title text-uppercase" >
           {{ headerString }}
       </h1>
-
+      <v-tooltip bottom v-if="isMainPage">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            v-bind="attrs"
+            v-on="on"
+            tile
+            icon
+            color="white"
+            @click="onInstaClicked"
+          >
+            <v-icon> mdi-instagram </v-icon>
+          </v-btn>
+        </template>
+        <span>Link zu meinen Instagram Account</span>
+      </v-tooltip>
       <v-spacer />
       <router-link to="/">
         <img
@@ -167,9 +181,13 @@ export default {
       const isOnTop = window.scrollY > 20;
       this.$store.commit('setPageScrolled', isOnTop);
     },
+    onInstaClicked() {
+      window.open('https://www.instagram.com/inspi_rator/?hl=de', '_blank');
+    },
   },
   created() {
     this.$store.dispatch('resetFilters');
+    this.$store.commit('setDrawer', false);
   },
   data: () => ({
     API_URL: process.env.VUE_APP_API,

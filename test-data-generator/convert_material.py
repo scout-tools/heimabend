@@ -10,7 +10,6 @@ with open('input/event_dump.json') as json_file:
 for i, event in enumerate(events, start=1):
     materials = event['material'].split(',')
     event_id = event['id']
-    print(event_id)
     for material in materials:
         material = material.strip()
         if (len(material) < 3):

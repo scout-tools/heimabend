@@ -212,6 +212,7 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter'
     ],
+    "DATE_INPUT_FORMATS": ["%Y-%m-%d"]
 }
 
 SIMPLE_JWT = {

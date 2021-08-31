@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime
+from django.core.exceptions import ValidationError
 
 # models.py
 from django.db import models
@@ -379,6 +380,40 @@ class NextBestHeimabend(TimeStampMixin):
 
     def __str__(self):
         return '{} - {}'.format(self.event, self.event_score)
+
+    def __repr__(self):
+        return self.__str__()
+
+
+class EventOfTheWeek(TimeStampMixin):
+    id = models.AutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID')
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    release_date = models.DateField(blank=True, null=True)
+    tags = models.ManyToManyField(Tag, default='')
+    comment = models.CharField(max_length=2000, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if EventOfTheWeek.objects.exclude(pk=self.pk).filter(
+            release_date=self.release_date
+        ).exists():
+            raise ValidationError(
+                'An dem Montag existier bereits ein Heimabend der Woche.'
+            )
+        if EventOfTheWeek.objects.exclude(pk=self.pk).filter(
+            event_id=self.event_id
+        ).exists():
+            raise ValidationError(
+                'Dieser Heimabend wurde bereits ausgewählt.'
+            )
+
+        super(EventOfTheWeek, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return '{} - {}'.format(self.event, self.release_date)
 
     def __repr__(self):
         return self.__str__()

@@ -30,6 +30,7 @@ router.register(r'faq-rating', views.FaqRatingViewSet)
 router.register(r'faq', views.FaqViewSet)
 router.register(r'image-meta', views.ImageMetaView)
 router.register(r'next-best-heimabend', views.NextBestHeimabendViewSet)
+router.register(r'event-of-the-week', views.EventOfTheWeekViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

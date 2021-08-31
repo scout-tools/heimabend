@@ -14,10 +14,12 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from datetime import date
+
 from .models import Tag, Event, Message, Like, TagCategory, Image, \
     MaterialItem, ExperimentItem, Experiment, MaterialUnit, \
     MaterialName, MessageType, Faq, FaqRating, NextBestHeimabend, \
-    ImageMeta
+    ImageMeta, EventOfTheWeek
 from .serializers import TagSerializer, EventSerializer, MessageSerializer, \
     LikeSerializer, HighscoreSerializer, EventItemSerializer, \
     TagCategorySerializer, StatisticSerializer, ImageSerializer, \
@@ -25,7 +27,7 @@ from .serializers import TagSerializer, EventSerializer, MessageSerializer, \
     TopViewsSerializer, EventAdminSerializer, EventTimestampSerializer, \
     MaterialUnitSerializer, MaterialNameSerializer, MessageTypeSerializer, \
     FaqSerializer, FaqRatingSerializer, ExperimentOverviewSerializer, \
-    NextBestHeimabendSerializer, ImageMetaSerializer
+    NextBestHeimabendSerializer, ImageMetaSerializer, EventOfTheWeekSerializer
 
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -109,6 +111,19 @@ class EventFilter(FilterSet):
             queryset = queryset.filter(
                 tags__id__in=tags_category[filter_elements]).distinct()
 
+        return queryset
+
+
+class EventOfTheWeekFilter(FilterSet):
+    past = BooleanFilter(field_name='release_date', method='get_past')
+
+    class Meta:
+        model = EventOfTheWeek
+        fields = ['release_date']
+
+    def get_past(self, queryset, field_name, value):
+        if value:
+            return queryset.filter(release_date__lte=date.today())
         return queryset
 
 
@@ -309,6 +324,17 @@ class NextBestHeimabendViewSet(LoggingMixin, viewsets.ModelViewSet):
     serializer_class = NextBestHeimabendSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ('event',)
+
+
+class EventOfTheWeekViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = EventOfTheWeek.objects.order_by("release_date").all()
+    serializer_class = EventOfTheWeekSerializer
+    filterset_class = EventOfTheWeekFilter
+    filter_backends = (DjangoFilterBackend,
+                       filters.SearchFilter, filters.OrderingFilter)
+    ordering = ['release_date']
+    ordering_fields = ['-release_date',
+                       'release_date']
 
 
 class MaterialItems(APIView):

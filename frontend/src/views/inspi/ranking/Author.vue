@@ -82,7 +82,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }

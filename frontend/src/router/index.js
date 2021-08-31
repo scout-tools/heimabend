@@ -20,6 +20,7 @@ import EasterEgg from '@/views/inspi/easterEgg/Main.vue';
 import Admin from '@/views/admin/Main.vue';
 import AdminOverview from '@/views/admin/overview/Main.vue';
 import AdminHeimabend from '@/views/admin/heimabend/Main.vue';
+import EventOfTheWeekCreate from '@/views/admin/heimabend/eventOfTheWeek/CreateForm.vue';
 // eslint-disable-next-line import/no-unresolved
 import AdminTag from '@/views/admin/tag/Main.vue';
 import AdminMessage from '@/views/admin/message/Main.vue';
@@ -129,6 +130,11 @@ const routes = [
         path: 'heimabend',
         name: 'admin-heimabend',
         component: AdminHeimabend,
+      },
+      {
+        path: 'event-of-the-week-create',
+        name: 'admin-heimabend-event-of-the-week-create',
+        component: EventOfTheWeekCreate,
       },
       {
         path: 'tag',

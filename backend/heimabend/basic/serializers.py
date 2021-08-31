@@ -3,11 +3,12 @@ from rest_framework import serializers
 from .models import Tag, Event, Message, Like, TagCategory, \
     Image, MaterialItem, \
     ExperimentItem, Experiment, MaterialUnit, MaterialName, MessageType, \
-    Faq, FaqRating, NextBestHeimabend, ImageMeta
+    Faq, FaqRating, NextBestHeimabend, ImageMeta, EventOfTheWeek
 from rest_framework_tracking.models import APIRequestLog
 from rest_framework.serializers import Serializer, FileField
 from django.core.cache import cache
 from django.db.models import Sum
+from datetime import date
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -444,6 +445,71 @@ class NextBestHeimabendSerializer(serializers.ModelSerializer):
     def get_tags(self, obj):
         return_tags = []
         tags = Event.objects.filter(id=obj.event_score.id).values('tags')
+        for tag in tags:
+            return_tags.append(tag['tags'])
+        return return_tags
+
+
+class EventOfTheWeekSerializer(serializers.ModelSerializer):
+    event_obj = serializers.SerializerMethodField()
+    history = serializers.SerializerMethodField()
+    header_image = serializers.SerializerMethodField(read_only=True)
+    title = serializers.SerializerMethodField()
+    tags = serializers.SerializerMethodField()
+    description = serializers.SerializerMethodField()
+    id = serializers.SerializerMethodField()
+
+    class Meta:
+        model = EventOfTheWeek
+        fields = (
+            'id',
+            'release_date',
+            'event',
+            'event_obj',
+            'history',
+            'comment',
+            'header_image',
+            'title',
+            'description',
+            'tags',
+        )
+
+    def get_event_obj(self, obj):
+        event = []
+        if obj.event.id:
+            event = Event.objects.filter(id=obj.event.id).values(
+                'title',
+                'created_by',
+            )
+        return event[0]
+
+    def get_history(self, obj):
+        return date.today() >= obj.release_date
+
+    def get_id(self, obj):
+        id = Event.objects.filter(id=obj.event.id).values('id').first()
+        return id['id']
+
+    def get_title(self, obj):
+        title = Event.objects.filter(
+            id=obj.event.id).values('title').first()
+        return title['title']
+
+    def get_description(self, obj):
+        title = Event.objects.filter(
+            id=obj.event.id).values('description').first()
+        return title['description']
+
+    def get_header_image(self, obj):
+        qs = ImageMeta.objects.filter(event_id=obj.event.id).first()
+        serializer = ImageMetaSerializer(instance=qs)
+        if ('id' in serializer.data):
+            return serializer.data
+        return None
+
+    def get_tags(self, obj):
+        return_tags = []
+        tags = Event.objects.filter(id=obj.event.id).values('tags')
         for tag in tags:
             return_tags.append(tag['tags'])
         return return_tags

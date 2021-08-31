@@ -1,5 +1,22 @@
 <template>
   <v-container fluid class="max-width-class" ma-0 pa-0>
+    <v-row class="lightred ma-0" align="center" justify="center" v-if="!isDetailsView">
+      <v-col align="center" justify="center" :cols=" isMobil ? 3 : 1" >
+        <v-img :src="require('@/assets/inspi/inspi_party.png')" contain max-height="80"/>
+      </v-col>
+      <v-col align="center" justify="center" cols="6">
+        <h2>Heimabend der Woche: <br>
+          <router-link
+          :to="{ name: 'heimabendDetails',
+          params: { id: eventOfTheWeek.event} }"
+          class="no-underline">
+          {{ eventOfTheWeek.title }}
+        </router-link>
+        </h2>
+      </v-col>
+      <v-col :cols=" isMobil ? 1 : 3" >
+      </v-col>
+    </v-row>
     <v-row no-gutters>
       <v-col :cols="getMainCols">
         <v-spacer class="mt-8" />
@@ -449,8 +466,19 @@ export default {
     loadMore() {
       this.$emit('loadMore');
     },
+    getEventOfTheWeek() {
+      this.getEventOfTheWeekHistory(
+        new URLSearchParams({ ordering: '-release_date', past: true }) // eslint-disable-line
+      ).then((response0) => {
+        this.eventOfTheWeek = response0.data[0]; // eslint-disable-line
+      });
+    },
     getImageLink(item) {
-      if (item.headerImage && item.headerImage.imageUuid && item.headerImage.imageUuid.imageUuid) {
+      if (
+        item.headerImage && // eslint-disable-line
+        item.headerImage.imageUuid && // eslint-disable-line
+        item.headerImage.imageUuid.imageUuid
+      ) {
         return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/${item.headerImage.imageUuid.imageUuid}.default.jpeg`;
       }
       return false;
@@ -596,11 +624,16 @@ export default {
       show: false,
       rating: 3,
       addRating: 0,
+      eventOfTheWeek: {
+        event: 1,
+        title: '',
+      },
     };
   },
   mounted() {
     this.scrollToId();
     this.scroll();
+    this.getEventOfTheWeek();
   },
   computed: {
     ...mapGetters(['tags', 'liked', 'isAuthenticated', 'isScoringMode']),
@@ -666,12 +699,16 @@ export default {
   min-width: 200px;
 }
 .negativ-top-margin {
-  margin-top: -140px !important;
+  margin-top: -260px !important;
 }
 .v-tooltip__content {
   pointer-events: initial;
 }
 .max-width-screen-size {
   overflow: hidden;
+}
+.lightred {
+  margin-top: 10px !important;
+  background-color: #ff7f7f !important;
 }
 </style>
