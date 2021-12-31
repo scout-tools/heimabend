@@ -1,5 +1,5 @@
 <template>
-  <v-container class="ma-0 pr-0" fluid>
+  <v-container class="ma-0 pr-12" fluid>
     <v-select
       v-model="selectedFilter"
       :items="filterTagByCategory"

@@ -5,6 +5,7 @@
     color="#F6F6F6"
   >
     <template>
+      <!-- <h6 class="mx-2">{{heimabendCounter }} gefunden</h6> -->
       <active-filter v-if="true"/>
       <v-spacer/>
       <v-btn

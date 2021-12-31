@@ -2,7 +2,7 @@
   <v-container>
     <v-row align="center" justify="center" class="ma-0 pa-0">
       <v-col :cols="isMobil ? 3 : 1">
-        <v-icon large :color="data.color" >
+        <v-icon large :color="data.color">
           {{ data.icon }}
         </v-icon>
       </v-col>
@@ -11,8 +11,10 @@
       </v-col>
     </v-row>
     <v-row align="center">
-      <v-btn-toggle :value="value" :small="isMobil" borderless tile group multiple>
-        <v-btn :small="isMobil" @click="onAllButtonClicked" value="-1"> Alle </v-btn>
+      <v-btn-toggle :value="value" :small="isMobil" borderless tile group>
+        <v-btn :small="isMobil" @click="onAllButtonClicked" value="-1">
+          Alle
+        </v-btn>
         <v-btn
           :small="isMobil"
           :value="filter.score"
@@ -37,10 +39,15 @@ export default {
   },
   methods: {
     onButtonClicked(filter) {
+      debugger;
       this.$store.commit('setNextPath', false);
       this.$store.commit('resetHeimabendItems', []);
       this.$store.commit('setIsFirstEventLoaded', false);
-      this.$store.commit('addNumberFilter', filter);
+      if (this.value !== filter.score) {
+        this.$store.commit('addNumberFilter', filter);
+      } else {
+        this.$store.commit('removeNumberFilter', filter);
+      }
     },
     onAllButtonClicked() {
       this.data.rankings.forEach((element) => {
@@ -54,14 +61,15 @@ export default {
     },
     ...mapGetters(['tags', 'tagCategory', 'mandatoryFilter', 'numberFilter']),
     value() {
-      let newValueArray = [];
+      let newValueArray = null;
       const selfObj = this.numberFilter.filter(
         (item) => item.techname === this.data.techname // eslint-disable-line
-      );
-      if (selfObj.length) {
-        selfObj.forEach((item) => newValueArray.push(item.score)); // eslint-disable-line
+      )[0];
+      debugger;
+      if (selfObj) {
+        newValueArray = selfObj.score;
       } else {
-        newValueArray = ['-1'];
+        newValueArray = '-1';
       }
       return newValueArray;
     },
