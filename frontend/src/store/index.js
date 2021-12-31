@@ -14,7 +14,8 @@ export default new Vuex.Store({
     isPublic: true,
     sorter: '-createdAt',
     filterTags: [],
-    mandatoryFilter: {},
+    mandatoryFilter: [],
+    numberFilter: [],
     heimabendCounter: 0,
     tags: [],
     tagCategory: null,
@@ -34,6 +35,7 @@ export default new Vuex.Store({
     isEventLoading: false,
     isFirstEventLoaded: false,
     saveFilterLastFilter: [],
+    isExtended: false,
   },
   getters: {
     saveFilterLastFilter(state) {
@@ -71,6 +73,9 @@ export default new Vuex.Store({
     },
     mandatoryFilter(state) {
       return state.mandatoryFilter;
+    },
+    numberFilter(state) {
+      return state.numberFilter;
     },
     heimabendCounter(state) {
       return state.heimabendCounter;
@@ -114,8 +119,14 @@ export default new Vuex.Store({
     isFirstEventLoaded(state) {
       return state.isFirstEventLoaded;
     },
+    isExtended(state) {
+      return state.isExtended;
+    },
   },
   mutations: {
+    setIsExtended(state, isExtended) {
+      state.isExtended = isExtended;
+    },
     setSaveFilterLastFilter(state, value) {
       state.saveFilterLastFilter = value;
     },
@@ -145,6 +156,20 @@ export default new Vuex.Store({
     },
     changeMandatoryFilter(state, newTags) {
       state.mandatoryFilter = newTags;
+    },
+    addNumberFilter(state, newTags) {
+      state.numberFilter = [newTags, ...state.numberFilter];
+    },
+    setNumberFilter(state, newTags) {
+      state.numberFilter = newTags;
+    },
+    removeNumberFilter(state, itemToRemove) {
+      const tempArray = state.numberFilter;
+      const index1 = tempArray.indexOf(itemToRemove);
+      if (index1 !== -1) {
+        tempArray.splice(index1, 1);
+      }
+      state.numberFilter = tempArray;
     },
     removeOneFilter(state, itemToRemove) {
       const tempArray = state.mandatoryFilter;
@@ -183,6 +208,7 @@ export default new Vuex.Store({
       state.withoutCosts = false;
       state.filterTags = [];
       state.mandatoryFilter = [];
+      state.numberFilter = [];
     },
     clearAccessToken(state) {
       state.accessToken = null;
@@ -238,6 +264,7 @@ export default new Vuex.Store({
     resetFilters({ commit }) {
       commit('changeMandatoryFilter', []);
       commit('changeFilterTags', []);
+      commit('setNumberFilter', []);
       commit('setSearchInput', '');
       commit('resetHeimabendItems');
       commit('setIsFirstEventLoaded', false);

@@ -17,7 +17,13 @@ export default {
   },
   methods: {
     onCloseChip(value) {
-      this.$store.commit('removeOneFilter', value);
+      if (value && value.id) {
+        this.$store.commit('removeOneFilter', value.id);
+      } else if (value.type && value.type === 'search') {
+        this.$store.commit('setSearchInput', '');
+      } else {
+        this.$store.commit('removeNumberFilter', value);
+      }
     },
   },
   computed: {
@@ -29,15 +35,27 @@ export default {
       'tagCategory',
       'mandatoryFilter',
       'filterTags',
+      'numberFilter',
+      'searchInput',
     ]),
     getActiveTags() {
+      let tags = [];
       // eslint-disable-next-line
       if ((this.mandatoryFilter || this.filterTags) && (this.mandatoryFilter.length || this.filterTags.length)) {
-        return this.tags.filter(
+        tags = this.tags.filter(
           item => this.mandatoryFilter.includes(item.id) || this.filterTags.includes(item.id),
         );
       }
-      return [];
+      tags = tags.concat(this.numberFilter);
+      if (this.searchInput) {
+        tags.push({
+          name: `Suche: ${this.searchInput}`,
+          value: this.searchInput,
+          type: 'search',
+        });
+      }
+
+      return tags;
     },
   },
 };

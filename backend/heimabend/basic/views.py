@@ -4,7 +4,7 @@ import json
 from django.db.models.functions import ExtractMonth, ExtractYear
 from django.http import HttpResponse
 from django_filters import FilterSet, BooleanFilter, OrderingFilter, \
-    ModelMultipleChoiceFilter
+    ModelMultipleChoiceFilter, NumberFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import pagination, viewsets, mixins, generics, \
     filters, status
@@ -73,7 +73,30 @@ class EventPagination(pagination.PageNumberPagination):
 
 
 class EventFilter(FilterSet):
-    prepairation_time = BooleanFilter(field_name='prepairation_time')
+    prepairationTime__gt = NumberFilter(
+        field_name='prepairation_time', lookup_expr='gt')
+    prepairationTime__lt = NumberFilter(
+        field_name='prepairation_time', lookup_expr='lt')
+    prepairationTime = NumberFilter(field_name='prepairation_time')
+
+    costsRating__gt = NumberFilter(
+        field_name='costs_rating', lookup_expr='gt')
+    costsRating__lt = NumberFilter(
+        field_name='costs_rating', lookup_expr='lt')
+    costsRating = NumberFilter(field_name='costs_rating')
+
+    executionTime__gt = NumberFilter(
+        field_name='execution_time', lookup_expr='gt')
+    executionTime__lt = NumberFilter(
+        field_name='execution_time', lookup_expr='lt')
+    executionTime = NumberFilter(field_name='execution_time')
+
+    difficulty__gt = NumberFilter(
+        field_name='difficulty', lookup_expr='gt')
+    difficulty__lt = NumberFilter(
+        field_name='difficulty', lookup_expr='lt')
+    difficulty = NumberFilter(field_name='difficulty')
+
     is_public = BooleanFilter(field_name='is_public', method='get_is_public')
     withoutCosts = BooleanFilter(
         method='get_cost_rating', field_name='costs_rating')
@@ -84,10 +107,22 @@ class EventFilter(FilterSet):
 
     class Meta:
         model = Event
-        fields = ['prepairation_time',
+        fields = [
                   'is_public',
                   'withoutCosts',
                   'filterTags',
+                  'executionTime__gt',
+                  'executionTime__lt',
+                  'executionTime',
+                  'prepairationTime__gt',
+                  'prepairationTime__lt',
+                  'prepairationTime',
+                  'costsRating__gt',
+                  'costsRating__lt',
+                  'costsRating',
+                  'difficulty__gt',
+                  'difficulty__lt',
+                  'difficulty',
                   ]
 
     def get_CostRating(self, queryset, field_name, value):

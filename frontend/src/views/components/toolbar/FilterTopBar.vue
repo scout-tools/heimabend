@@ -1,12 +1,11 @@
 <template>
   <v-toolbar
-    v-if="!isExtended"
     fixed
     flat
     color="#F6F6F6"
   >
     <template>
-      <active-filter v-if="isMobil"/>
+      <active-filter v-if="true"/>
       <v-spacer/>
       <v-btn
         v-if="isMobil"
@@ -54,36 +53,12 @@
                 :category="category"
               />
             </v-col>
-
             <v-col cols="2" v-if="!isMobil"></v-col>
         </v-row>
       </v-container>
-
-
     </template>
   </v-toolbar>
-  <v-navigation-drawer absolute temporary v-model="isExtended" width="100%" right v-else>
-    <v-app-bar hide-on-scroll>
-      <v-icon @click="onExpandClick" class="mr-1">mdi-close</v-icon>
-        <active-filter v-if="isMobil"/>
-      <v-spacer/>
-      <v-btn icon ml-1 @click="onClickRestore" color="black" :disabled="isFilterDefault">
-        <v-icon>
-          mdi-filter-remove
-        </v-icon>
-      </v-btn>
-    </v-app-bar>
-    <v-container fluid class="mx-5 pa-0">
-      <v-row
-        v-for="category in getTopBarTagCategories"
-        :key="category.id"
-        class="ml-1 mr-10 my-5">
-        <filter-tags
-          :category="category"
-        />
-      </v-row>
-    </v-container>
- </v-navigation-drawer>
+
 </template>
 
 <script>
@@ -99,7 +74,6 @@ export default {
   },
   data() {
     return {
-      isExtended: false,
     };
   },
   methods: {
@@ -110,7 +84,7 @@ export default {
       this.$store.commit('setIsFirstEventLoaded', false);
     },
     onExpandClick() {
-      this.isExtended = !this.isExtended;
+      this.$store.commit('setIsExtended', true);
     },
     onChange() {
       this.$store.commit('changeFilterTags', this.filterTags);
@@ -140,6 +114,7 @@ export default {
       'isAuthenticated',
       'heimabendCounter',
       'mandatoryFilter',
+      'isExtended',
     ]),
     getTopBarTagCategories() {
       if (this.tagCategory) {
@@ -157,7 +132,7 @@ export default {
       return !((this.mandatoryFilter && this.mandatoryFilter.length) || this.getFilterTags.length);
     },
     isMobil() {
-      return this.$vuetify.breakpoint.mdAndDown;
+      return true;
     },
     getFilterTags() {
       this.filterTags = this.$store.getters.filterTags; // eslint-disable-line
@@ -166,9 +141,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-span {
-  font-size: 12px !important;
-}
-</style>

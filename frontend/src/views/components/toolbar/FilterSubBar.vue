@@ -16,7 +16,7 @@
             icon
             ma-1
             @click="onClickRestore"
-            color="black"
+            color="green"
             :disabled="isFilterDefault">
             <v-icon>
               mdi-filter-remove

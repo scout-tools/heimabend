@@ -6,7 +6,8 @@
       class="pl-0"
       active-class="success"
     >
-      <v-hover v-slot="{ hover }" v-for="item in data" :key="item.id">
+      <v-hover v-slot="{ hover }" v-for="(item, index) in data"
+        :key="`${titel}-${item.id}-${index}`">
         <v-slide-item v-slot="{ active, toggle }">
           <template>
             <div>

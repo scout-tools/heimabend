@@ -24,6 +24,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     't5hd7kopbj.execute-api.eu-central-1.amazonaws.com',
+    'qff1i8eamb.execute-api.eu-central-1.amazonaws.com',
     'api.inspi.anmelde-tool.de',
 ]
 

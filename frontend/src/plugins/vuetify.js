@@ -20,11 +20,15 @@ export default new Vuetify({
   theme: {
     themes: {
       light: {
-        primary: '#1a4b7e',
+        primary: '#4171A4',
         secondary: '#FFA300',
         accent: '#fefefe',
         backgroundGrey: '#fefefe',
         lightPrimary: colors.blue.lighten4,
+        inspiBlue: '#4171A4',
+        inspiGray: '#3d3d3d',
+        inspiOrange: '#E9B12B',
+        inspiRed: '#CD6162',
       },
     },
   },

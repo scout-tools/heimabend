@@ -78,7 +78,7 @@ export default {
       return styleClass;
     },
     getHeaderColorClass(tags) {
-      let colorclass = 'color-scout';
+      let colorclass = 'inspiBlue';
       if (!tags) {
         return colorclass;
       }
@@ -86,15 +86,15 @@ export default {
       const hasScout = tags.includes(51);
       const hasRover = tags.includes(52);
       if (hasWo && hasScout) {
-        colorclass = 'color-wo-scout';
+        colorclass = 'inspiBlue';
       } else if (hasWo) {
-        colorclass = 'color-wo';
+        colorclass = 'inspiOrange';
       } else if (hasScout && hasRover) {
-        colorclass = 'color-scout-rover';
+        colorclass = 'inspiBlue';
       } else if (hasScout) {
-        colorclass = 'color-scout';
+        colorclass = 'inspiBlue';
       } else if (hasRover) {
-        colorclass = 'color-rover';
+        colorclass = 'inspiRed';
       }
       return colorclass;
     },
@@ -126,6 +126,7 @@ export default {
       if (!event.tags) {
         return 'laden...';
       }
+      let returnString = 'kein Typ';
       const tagsObject = this.tags.filter(item => event.tags.includes(item.id)); // eslint-disable-line
       const containsCategoryId = tagsObject.filter(
         ( // eslint-disable-line
@@ -133,33 +134,18 @@ export default {
         ) => [4].includes(tag.category) // eslint-disable-line
       ); // eslint-disable-line
       if (containsCategoryId.length) {
-        return containsCategoryId[0].name;
+        returnString = '';
+        containsCategoryId.forEach((item, index) => {
+          returnString = `${returnString} ${index ? '&' : ''} ${item.name}`;
+        });
       }
-      return 'kein Typ';
+      return returnString;
     },
   },
 };
 </script>
 
 <style scoped>
-.color-wo-scout {
-  background: linear-gradient(
-    190deg,
-    rgba(26, 75, 126, 1) 0%,
-    rgba(26, 75, 126, 1) 30%,
-    rgb(230, 126, 0) 70%,
-    rgba(230, 126, 0) 100%
-  );
-}
-.color-scout-rover {
-  background: linear-gradient(
-    10deg,
-    rgba(26, 75, 126, 1) 0%,
-    rgba(26, 75, 126, 1) 30%,
-    rgba(148, 47, 34) 70%,
-    rgba(148, 47, 34) 100%
-  );
-}
 .color-scout {
   background: rgba(26, 75, 126, 1) 30%;
 }

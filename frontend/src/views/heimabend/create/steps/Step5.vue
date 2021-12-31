@@ -20,7 +20,7 @@
           :headerText="'mindest Zeit in min?'"
           v-bind:value="data.executionTime"
           v-on:input="updateExecutionTime"
-          :labels="['5', '30', '60', '90', 'mehr']"
+          :labels="['<30', '30', '60', '90', 'mehr']"
           :icon="'mdi-timer'"
           :color="'blue'"
         />

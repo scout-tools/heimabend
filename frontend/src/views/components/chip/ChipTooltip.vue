@@ -14,9 +14,9 @@
           v-bind:class="[cursor, margin]"
           :color="tag.color"
           :value="tag.id"
-          @click:close="$emit('click:close', tag.id)"
+          @click:close="$emit('click:close', tag)"
         >
-          {{ getTagNameById(tag.id) }}
+          {{ tag.name }}
         </v-chip>
       </template>
       <span>

@@ -130,7 +130,6 @@ export default {
     onOpenClick() {},
     onDeleteClick() {
       const { id } = this.selected[0];
-      debugger;
       this.$refs.deleteAnfoModual.show(id);
     },
     openViewNewTab() {
@@ -139,7 +138,6 @@ export default {
         name: 'heimabendDetails',
         params: { event },
       });
-      debugger;
       window.open(routeData.href, '_blank').focus();
     },
     openEditNewTab() {
@@ -148,7 +146,6 @@ export default {
         name: 'heimabendUpdate',
         params: { event },
       });
-      debugger;
       window.open(routeData.href, '_blank').focus();
     },
   },

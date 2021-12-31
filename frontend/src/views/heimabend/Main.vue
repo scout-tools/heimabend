@@ -10,7 +10,7 @@
       :loading="isEventLoading"
       :isMobil="isMobil"
     />
-    <v-container fluid v-if="!heimabendItems.length && !isEventLoading" style="margin-right: 200px">
+    <v-container fluid v-if="!heimabendItems.length && !isEventLoading">
       <v-row justify="center">
         <v-img
           :src="require('@/assets/inspi/inspi_confused.png')"
@@ -60,7 +60,7 @@
 
 <script>
 import axios from 'axios';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 import HeimabendCard from './cards/Heimabend.vue';
 
@@ -74,6 +74,9 @@ export default {
     },
   },
   computed: {
+    ...mapState([
+      'numberFilter',
+    ]),
     ...mapGetters([
       'searchInput',
       'filterTags',
@@ -81,7 +84,6 @@ export default {
       'isAuthenticated',
       'heimabendCounter',
       'mandatoryFilter',
-      'isPublic',
       'heimabendItems',
       'scollPosition',
       'nextPath',
@@ -107,9 +109,13 @@ export default {
           params.append('filterTags', filterTag);
         });
       }
+      if (this.numberFilter && this.numberFilter.length) {
+        this.numberFilter.forEach((filter) => {
+          params.append(filter.techname, filter.score);
+        });
+      }
       params.append('page', 1);
       params.append('timestamp', new Date().getTime());
-
       return params;
     },
     showSuccess() {
@@ -251,7 +257,7 @@ export default {
   created() {
     this.$store.commit('setIsSubPage', false);
     setTimeout(() => {
-      window.scrollTo(0, this.scollPosition);
+      window.scrollTo(0, this.scollPosition - 300);
     }, 500);
     if (!this.nextPath) {
       this.getAllEventItems();

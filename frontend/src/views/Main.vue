@@ -1,13 +1,15 @@
 <template>
   <v-app id="keep">
-    <v-app-bar app clipped-left color="#1a4b7e" dark>
+    <v-app-bar app clipped-left color="#4171A4" dark>
       <v-app-bar-nav-icon
         v-if="!apiIsDown && !isSubPage"
         @click="onDrawerIconClicked()"
       />
       <router-link
         v-if="isSubPage"
-        :to="{ name: 'overview' }" class="no-underline">
+        :to="{ name: 'overview' }"
+        class="no-underline"
+      >
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
@@ -28,30 +30,40 @@
         class="title hand-cursor ml-3 mr-5"
         @click="onHeaderClick()"
       >
-        <span class="font-weight-thin">
-          Heimabend&nbsp;
-        </span>
+        <span class="font-weight-thin"> Heimabend&nbsp; </span>
         <span class="font-weight-light">
           <b class="font-weight-black">Inspi</b>
           <span>rator</span>
         </span>
       </h1>
-      <v-text-field
-        class="px-3"
-        v-model="currentSearchInput"
-        solo-inverted
-        hide-details
-        :label="getLabel"
-        prepend-inner-icon="mdi-magnify"
-        clearable
-        :dense="isMobil"
-        @keydown.enter="onChangeSearchInput()"
-        v-if="!isScoringMode && isMainPage"
-      />
-      <v-spacer v-if="!isMainPage"/>
-      <h1 v-if="!isMainPage" class="title text-uppercase" >
-          {{ headerString }}
+      <v-spacer v-if="!isMainPage" />
+      <h1 v-if="!isMainPage" class="title text-uppercase">
+        {{ headerString }}
       </h1>
+      <v-spacer />
+      <div v-show="searching" transition="slide-x-transition">
+        <v-text-field
+          class="px-3"
+          v-model="currentSearchInput"
+          solo-inverted
+          hide-details
+          :label="getLabel"
+          prepend-inner-icon="mdi-magnify"
+          clearable
+          :dense="isMobil"
+          ref="mainsearchfield"
+          @keydown.enter="onChangeSearchInput()"
+          v-show="!isScoringMode && isMainPage"
+          @blur="searching=false"
+        />
+      </div>
+      <v-btn
+        v-show="!isScoringMode && isMainPage"
+        icon
+        @click="onSearchIconClicked"
+      >
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
       <v-tooltip bottom v-if="isMainPage">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -67,16 +79,19 @@
         </template>
         <span>Link zu meinen Instagram Account</span>
       </v-tooltip>
-      <v-spacer />
       <router-link to="/">
         <img
-          :src="require('@/assets/inspi/inspi_flying.webp')"
+          :src="require('@/assets/inspi/inspi_thinking.png')"
           class="mr-2"
-          height="70"
+          :height="isMobil ? 85 : 98"
           alt="Bild von Inspi"
         />
-        <div id="hideMe" class="box sb1 fade-in" v-if="firstVisit && $route.name == 'overview'">
-          Hallo, Ich bin Inspi. <br>Willkommen auf meiner Seite.
+        <div
+          id="hideMe"
+          class="box sb1 fade-in"
+          v-if="firstVisit && $route.name == 'overview'"
+        >
+          Hallo, Ich bin Inspi. <br />Willkommen auf meiner Seite.
         </div>
       </router-link>
     </v-app-bar>
@@ -85,15 +100,15 @@
 
     <v-main id="lateral">
       <topbar v-if="isMainPage && !isScoringMode" ref="topFilterToolbar" />
-
-      <filter-top-sub-bar v-if="isMainPage && !isMobil && !isScoringMode" />
+      <filter-menu />
+      <!-- <filter-top-sub-bar v-if="isMainPage && !isMobil && !isScoringMode" /> -->
       <router-view class="content" v-scroll="onScroll" />
       <api-down-banner v-if="apiIsDown" />
       <v-snackbar v-model="showError" color="error" y="top">
         {{ 'Es ist ein Fehler aufgetreten' }}
       </v-snackbar>
     </v-main>
-    <Footer v-if="!isScoringMode"/>
+    <Footer v-if="!isScoringMode" />
   </v-app>
 </template>
 
@@ -104,25 +119,35 @@ import Footer from '@/components/navigation/Footer.vue';
 import MenuLeft from './components/menu/Left.vue';
 import ApiDownBanner from './components/banner/ApiDown.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
-import FilterTopSubBar from './components/toolbar/FilterSubBar.vue';
-
+import FilterMenu from '@/components/heimabend/FilterMenu.vue'; // eslint-disable-line
 
 export default {
   components: {
     MenuLeft,
     Topbar,
     ApiDownBanner,
-    FilterTopSubBar,
+    // FilterTopSubBar,
     Footer,
+    FilterMenu,
   },
   computed: {
-    ...mapGetters(['searchInput', 'tags', 'isScoringMode', 'headerString', 'isSubPage', 'isDrawer', 'apiIsDown']),
+    ...mapGetters([
+      'searchInput',
+      'tags',
+      'isScoringMode',
+      'headerString',
+      'isSubPage',
+      'isDrawer',
+      'apiIsDown',
+    ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
     getLabel() {
       const counter = this.$store.getters.heimabendCounter;
-      return this.isMobil ? `Suche in ${counter} Ideen` : `Suche in ${counter} Heimabendideen`;
+      return this.isMobil
+        ? `Suche in ${counter} Ideen`
+        : `Suche in ${counter} Heimabendideen`;
     },
     getMargin() {
       return this.isMobil ? 'ma-1' : 'ma-2';
@@ -148,12 +173,20 @@ export default {
     },
   },
   methods: {
+    onSearchIconClicked() {
+      this.searching = true;
+      setTimeout(() => {
+        // ugly work around
+        this.$nextTick(() => this.$refs.mainsearchfield.focus());
+      }, 50);
+    },
     onCloseButtonClicked() {
       this.$store.commit('setIsSubPage', false);
       // todo: looks strange
     },
     // eslint-disable-next-line no-unused-vars
     onChangeSearchInput() {
+      this.searching = false;
       this.$store.commit('setIsFirstEventLoaded', false);
       this.$store.commit('setNextPath', false);
       this.$store.commit('resetHeimabendItems', []);
@@ -161,7 +194,8 @@ export default {
     },
     onDrawerIconClicked() {
       if (this.isMobil) {
-        setTimeout(() => { // ugly work around
+        setTimeout(() => {
+          // ugly work around
           this.$store.commit('setDrawer', true);
         }, 50);
         this.$store.commit('setDrawer', false);
@@ -188,6 +222,9 @@ export default {
   created() {
     this.$store.dispatch('resetFilters');
     this.$store.commit('setDrawer', false);
+    if (this.firstVisit) {
+      this.$store.commit('setScollPosition', 0);
+    }
   },
   data: () => ({
     API_URL: process.env.VUE_APP_API,
@@ -197,6 +234,7 @@ export default {
     currentSearchInput: '',
     chips: [],
     firstVisit: true,
+    searching: false,
   }),
 };
 </script>
@@ -216,7 +254,7 @@ export default {
 .box {
   width: 300px;
   margin: 50px auto;
-  background: #A6BF98;
+  background: #a6bf98;
   padding: 20px;
   text-align: center;
   font-weight: 900;
@@ -234,14 +272,13 @@ export default {
   width: 0px;
   height: 0px;
   position: absolute;
-  border-left: 10px solid #A6BF98;
+  border-left: 10px solid #a6bf98;
   border-right: 10px solid transparent;
-  border-top: 10px solid #A6BF98;
+  border-top: 10px solid #a6bf98;
   border-bottom: 10px solid transparent;
   right: -19px;
   top: 6px;
 }
-
 
 #hideMe {
   -webkit-animation: cssAnimation 7s forwards;

@@ -6,13 +6,17 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faAt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import {
-  faWhatsapp, faTelegram, faPinterest, faFacebook,
+  faWhatsapp,
+  faTelegram,
+  faPinterest,
+  faFacebook,
 } from '@fortawesome/free-brands-svg-icons';
 import VueMatomo from 'vue-matomo';
 import moment from 'moment';
 import AOS from 'aos';
 import Vuelidate from 'vuelidate';
 import VTooltip from 'v-tooltip';
+// import VueKeyCloak from '@dsb-norge/vue-keycloak-js';
 
 import App from './App.vue';
 import router from './router';
@@ -20,7 +24,6 @@ import auth from './auth';
 import store from './store';
 import vuetify from './plugins/vuetify';
 import 'aos/dist/aos.css';
-
 
 const SocialSharing = require('vue-social-sharing');
 const VueMoment = require('vue-moment');
@@ -48,17 +51,14 @@ new Vue({
   render: h => h(App),
 }).$mount('#app');
 
-
 Vue.use(VTooltip);
 Vue.use(Vuelidate);
 Vue.use(VueMoment);
 Vue.use(SocialSharing);
-Vue.use(VueLodash,
-  {
-    name: 'custom',
-    lodash,
-  });
-
+Vue.use(VueLodash, {
+  name: 'custom',
+  lodash,
+});
 
 Vue.use(VueMatomo, {
   // Configure your matomo server and site by providing
@@ -131,3 +131,14 @@ Vue.use(VueMatomo, {
   // ]
   preInitActions: [],
 });
+
+// Vue.use(VueKeyCloak, {
+//   config: {
+//     realm: 'Mosaik',
+//     url: 'https://auth.anmelde-tool.de/auth',
+//     clientId: 'inspirator-localhost',
+//   },
+//   onReady: (keycloak) => {
+//     console.log(`I wonder what Keycloak returns: ${keycloak}`);
+//   },
+// });
