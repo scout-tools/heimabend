@@ -36,7 +36,7 @@
           <span>rator</span>
         </span>
       </h1>
-      <v-spacer v-if="!isMainPage" />
+      <v-spacer v-if="!isMainPage && !searching" />
       <h1 v-if="!isMainPage" class="title text-uppercase">
         {{ headerString }}
       </h1>
@@ -58,13 +58,13 @@
         />
       </div>
       <v-btn
-        v-show="!isScoringMode && isMainPage"
+        v-show="!isScoringMode && isMainPage && !searching"
         icon
         @click="onSearchIconClicked"
       >
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
-      <v-tooltip bottom v-if="isMainPage">
+      <v-tooltip bottom v-if="isMainPage && !searching">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             v-bind="attrs"
@@ -79,7 +79,7 @@
         </template>
         <span>Link zu meinen Instagram Account</span>
       </v-tooltip>
-      <router-link to="/">
+      <router-link v-show="!searching" to="/">
         <img
           :src="require('@/assets/inspi/inspi_thinking.png')"
           class="mr-2"
@@ -174,7 +174,7 @@ export default {
   },
   methods: {
     onSearchIconClicked() {
-      this.searching = true;
+      this.searching = !this.searching;
       setTimeout(() => {
         // ugly work around
         this.$nextTick(() => this.$refs.mainsearchfield.focus());

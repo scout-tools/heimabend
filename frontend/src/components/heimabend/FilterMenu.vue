@@ -1,15 +1,14 @@
 <template>
   <v-navigation-drawer
     app
-    absolute
     temporary
     v-bind:value="isExtended"
-    :width="isMobil ? '90%': '50%'"
+    :width="isMobil ? '99%': '50%'"
     right
     @input="test"
-    class="mt-20"
+    class="mt-12"
   >
-    <v-container fluid class="ml-10 pa-0 mt-20">
+    <v-container fluid class="ml-4 pa-0 pb-12 my-12">
       <v-row
         v-for="category in getTopBarTagCategories"
         :key="category.id"

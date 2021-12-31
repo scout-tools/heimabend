@@ -48,8 +48,9 @@
               v-for="(tag, index2) in getEventTags(item.tags)"
               :key="index2"
               :tag="tag"
-              margin="ma-2"
+              :margin="isMobil ? 'ma-1' : 'ma-2'"
               cursor="info-cursor"
+              :small="isMobil"
             />
           </v-container>
           <v-divider/>

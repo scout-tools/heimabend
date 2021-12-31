@@ -1,19 +1,20 @@
 <template>
-  <v-container class="py-0">
+  <v-container>
     <v-row align="center" justify="center" class="ma-0 pa-0">
-      <v-col cols="1">
+      <v-col :cols="isMobil ? 3 : 1">
         <v-icon large :color="data.color" >
           {{ data.icon }}
         </v-icon>
       </v-col>
-      <v-col cols="3" class="ma-0 pa-0">
+      <v-col :cols="isMobil ? 7 : 3" class="ma-0 pa-0">
         <p class="text-left title ma-3" :color="data.color">{{ data.name }}</p>
       </v-col>
     </v-row>
     <v-row align="center">
-      <v-btn-toggle :value="value" borderless tile group multiple>
-        <v-btn @click="onAllButtonClicked" value="-1"> Alle </v-btn>
+      <v-btn-toggle :value="value" :small="isMobil" borderless tile group multiple>
+        <v-btn :small="isMobil" @click="onAllButtonClicked" value="-1"> Alle </v-btn>
         <v-btn
+          :small="isMobil"
           :value="filter.score"
           v-for="(filter, index) in data.rankings"
           :key="index"
