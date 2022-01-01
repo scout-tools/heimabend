@@ -47,7 +47,6 @@ export default {
     },
     ...mapGetters(['tags', 'tagCategory', 'mandatoryFilter', 'numberFilter', 'filterTags']),
     value() {
-      console.log(this.numberFilter.map(a => a.score));
       if (this.mandatoryFilter || this.filterTags || this.numberFilter) {
         return this.numberFilter.map(a => a.score);
       }
