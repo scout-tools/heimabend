@@ -3,11 +3,9 @@
     <v-spacer class="py-3" />
     <EventSlider :data="data0" titel="Letzte Heimabende der Woche" />
     <v-spacer class="py-3" />
-    <EventSlider :data="data1" titel="Top Aufrufe" />
+    <EventSlider :data="data1" titel="Top Aufrufe der letzten 90 Tage" />
     <v-spacer class="py-3" />
     <EventSlider :data="data2" titel="Neuste Heimabende" />
-    <v-spacer class="py-3" />
-    <EventSlider :data="data3" titel="Mit-Abstand-Heimabende" />
     <v-spacer class="py-3" />
     <EventSlider :data="data4" titel="Nachhaltige Heimabende" />
     <v-spacer class="py-3" />

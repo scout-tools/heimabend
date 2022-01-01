@@ -21,7 +21,7 @@
                   </v-list-item-title>
 
                   <v-list-item-subtitle
-                    v-text="'von ' + item.createdBy"
+                    v-text="'von ' + item.createdBy + ' | ' + item.viewCount + ' mal aufgerufen'"
                   ></v-list-item-subtitle>
 
                   <v-list-item-subtitle>

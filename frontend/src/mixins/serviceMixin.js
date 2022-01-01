@@ -27,7 +27,7 @@ export const serviceMixin = { // eslint-disable-line
       return axios.get(path);
     },
     async getService2(messageType, params = []) {
-      const path = `${process.env.VUE_APP_API}basic/${messageType}/?&timestamp=${new Date().getTime()}`;
+      const path = `${process.env.VUE_APP_API}basic/${messageType}/?&timestamp=${1}`;
       return axios.get(path, { params });
     },
     getItems(messageType) {

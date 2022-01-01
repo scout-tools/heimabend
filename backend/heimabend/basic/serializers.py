@@ -8,7 +8,8 @@ from rest_framework_tracking.models import APIRequestLog
 from rest_framework.serializers import Serializer, FileField
 from django.core.cache import cache
 from django.db.models import Sum
-from datetime import date
+from datetime import date, timedelta
+from django.utils import timezone
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -326,9 +327,15 @@ class TopViewsSerializer(serializers.ModelSerializer):
         return None
 
     def get_view_count(self, obj):
-        return APIRequestLog.objects.filter(
-            path='/basic/event/{}/'.format(obj.id)
+        some_day_last_week = timezone.now().date() - timedelta(days=90)
+        view_count = APIRequestLog.objects.filter(
+            path__icontains="event-item").filter(
+            requested_at__gte=some_day_last_week,
+        ).filter(
+            path__endswith='/' + str(obj.id)
         ).count()
+
+        return view_count
 
 
 class EventAdminSerializer(serializers.ModelSerializer):
@@ -351,9 +358,14 @@ class EventAdminSerializer(serializers.ModelSerializer):
             'view_count')
 
     def get_view_count(self, obj):
-        return APIRequestLog.objects.filter(
-            path='/basic/event/{}/'.format(obj.id)
+        some_day_last_week = timezone.now().date() - timedelta(days=90)
+        view_count = APIRequestLog.objects.filter(
+            requested_at__gte=some_day_last_week,
+        ).filter(
+            path__endswith=obj.id
         ).count()
+
+        return view_count
 
 
 class EventTimestampSerializer(serializers.ModelSerializer):

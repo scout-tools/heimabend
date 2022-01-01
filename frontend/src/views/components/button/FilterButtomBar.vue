@@ -39,7 +39,6 @@ export default {
   },
   methods: {
     onButtonClicked(filter) {
-      debugger;
       this.$store.commit('setNextPath', false);
       this.$store.commit('resetHeimabendItems', []);
       this.$store.commit('setIsFirstEventLoaded', false);
@@ -65,7 +64,6 @@ export default {
       const selfObj = this.numberFilter.filter(
         (item) => item.techname === this.data.techname // eslint-disable-line
       )[0];
-      debugger;
       if (selfObj) {
         newValueArray = selfObj.score;
       } else {
