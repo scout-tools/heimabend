@@ -2,7 +2,7 @@
 <div>
   <v-chip-group >
     <v-chip-tooltip v-for="(tag, index) in getActiveTags" :key="index"
-      :tag="tag" margin="mr-1" small cursor="info-cursor" close @click:close="onCloseChip"/>
+      :tag="tag" margin="mr-1"  cursor="info-cursor" close @click:close="onCloseChip"/>
   </v-chip-group>
 </div>
 </template>
@@ -17,6 +17,10 @@ export default {
   },
   methods: {
     onCloseChip(value) {
+      this.$store.commit('setNextPath', false);
+      this.$store.commit('resetHeimabendItems', []);
+      this.$store.commit('setIsFirstEventLoaded', false);
+
       if (value && value.id) {
         this.$store.commit('removeOneFilter', value.id);
       } else if (value.type && value.type === 'search') {

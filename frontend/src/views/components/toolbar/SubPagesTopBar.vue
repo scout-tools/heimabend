@@ -12,7 +12,7 @@
               v-bind="attrs"
               v-on="on"
             >
-              <v-icon>mdi-close</v-icon>
+              <v-icon>mdi-arrow-left</v-icon>
             </v-btn>
           </template>
           <span>Zurück zum Inspirator</span>

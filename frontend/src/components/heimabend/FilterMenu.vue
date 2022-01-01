@@ -1,36 +1,69 @@
 <template>
   <v-navigation-drawer
     app
-    temporary
     v-bind:value="isExtended"
-    :width="isMobil ? '99%': '50%'"
+    :width="isMobil ? '99%' : '350px'"
     right
     @input="test"
-    class="mt-12"
   >
-    <v-app-bar hide-on-scroll>
-      <v-icon @click="onExpandClick" class="mr-1">mdi-close</v-icon>
-        <h3 class="mx-2">{{heimabendCounter }} Heimabende gefunden</h3>
-      <v-spacer/>
-      <v-btn icon ml-1 @click="onClickRestore" color="black" :disabled="isFilterDefault">
-        <v-icon>
-          mdi-filter-remove
-        </v-icon>
+    <v-app-bar dark color="inspiBlue">
+      <v-icon v-show="isMobil" @click="onExpandClick" class="mr-1"
+        >mdi-arrow-left</v-icon
+      >
+      <h3 class="mx-2">{{ heimabendCounter }} Heimabende gefunden</h3>
+      <v-spacer />
+      <v-btn
+        icon
+        ml-1
+        @click="onClickRestore"
+        dark
+        :disabled="isFilterDefault"
+      >
+        <v-icon> mdi-filter-remove </v-icon>
       </v-btn>
     </v-app-bar>
-    <v-container fluid class="ml-4 pa-0 pb-12 my-12">
-      <v-row
-        v-for="category in getTopBarTagCategories"
-        :key="category.id"
-        class="ml-1 my-2"
-      >
-        <filter-tags :category="category" />
-      </v-row>
-      <v-row
-        v-for="(numberFilterData, index) in scoreConfig"
-        :key="`filter-${index}`"
-      >
-        <FilterButtomBar :data="numberFilterData" />
+    <v-container fluid class="pa-2">
+      <v-row>
+        <v-expansion-panels flat>
+          <v-expansion-panel
+            v-for="category in getTopBarTagCategories"
+            :key="category.id"
+          >
+            <v-expansion-panel-header>
+              <v-container>
+                <v-row>
+                  <!-- <v-icon class="mx-1">{{
+                    category.icon
+                  }}</v-icon> -->
+                  <h3>{{ category.name }}</h3>
+                </v-row>
+              </v-container>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <FilterCheckboxCategory :data="category" />
+            </v-expansion-panel-content>
+            <v-divider />
+          </v-expansion-panel>
+          <v-expansion-panel
+            v-for="(numberFilterData, index) in scoreConfig"
+            :key="`filter-${index}`"
+          >
+            <v-expansion-panel-header>
+              <v-container>
+                <v-row>
+                  <!-- <v-icon class="mx-1">
+                    {{ numberFilterData.icon }}
+                  </v-icon> -->
+                  <h3>{{ numberFilterData.name }}</h3>
+                </v-row>
+              </v-container>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <FilterCheckboxElement :data="numberFilterData" />
+            </v-expansion-panel-content>
+            <v-divider />
+          </v-expansion-panel>
+        </v-expansion-panels>
       </v-row>
     </v-container>
   </v-navigation-drawer>
@@ -40,24 +73,24 @@
 import { mapGetters } from 'vuex';
 
 import FilterTags from '@/views/components/dropdown/FilterTags.vue'; //eslint-disable-line
-import FilterButtomBar from '@/views/components/button/FilterButtomBar.vue'; //eslint-disable-line
+import FilterCheckboxElement from '@/views/components/button/FilterCheckboxElement.vue'; //eslint-disable-line
+import FilterCheckboxCategory from '@/views/components/button/FilterCheckboxCategory.vue'; //eslint-disable-line
 import { configData } from '@/mixins/configData.js'; //eslint-disable-line
 
 export default {
   mixins: [configData],
   components: {
-    FilterButtomBar,
-    FilterTags,
+    FilterCheckboxElement,
+    FilterCheckboxCategory,
   },
   data() {
-    return {
-    };
+    return {};
   },
-  watch: {
-  },
+  watch: {},
   created() {
-    setTimeout(() => { // ugly work around
-      this.$store.commit('setIsExtended', false);
+    setTimeout(() => {
+      // ugly work around
+      this.$store.commit('setIsExtended', true);
     }, 50);
   },
   computed: {
@@ -100,16 +133,25 @@ export default {
   },
   methods: {
     onClickRestore() {
-      this.$store.commit('clearFilters');
-      this.$store.commit('setNextPath', false);
-      this.$store.commit('resetHeimabendItems', []);
-      this.$store.commit('setIsFirstEventLoaded', false);
+      this.$store.dispatch('resetFilters');
     },
     test(value) {
       this.$store.commit('setIsExtended', value);
     },
     onExpandClick() {
       this.$store.commit('setIsExtended', false);
+    },
+    getColor(id) {
+      const colors = {
+        1: 'inspiRed',
+        2: 'inspiBlue',
+        3: 'green',
+        4: 'inspiRed',
+        5: 'inspiBlue',
+        8: 'inspiOrange',
+        9: 'inspiOrange',
+      };
+      return colors[id];
     },
   },
 };

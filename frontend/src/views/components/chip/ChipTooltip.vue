@@ -12,7 +12,7 @@
           :close="close"
           v-on="on"
           v-bind:class="[cursor, margin]"
-          :color="tag.color"
+          :color="tag.color ? tag.color : 'blue lighten-3'"
           :value="tag.id"
           @click:close="$emit('click:close', tag)"
         >

@@ -135,10 +135,7 @@ export default {
       this.$emit('onUpdateClick', item);
     },
     onResetClick() {
-      this.$store.commit('clearFilters');
-      this.$store.commit('setNextPath', false);
-      this.$store.commit('resetHeimabendItems', []);
-      this.$store.commit('setIsFirstEventLoaded', false);
+      this.$store.dispatch('resetFilters');
     },
     isTagMatchToEvent(item) {
       const eventTagArray = [];

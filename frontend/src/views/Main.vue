@@ -19,7 +19,7 @@
               v-on="on"
               @click="onCloseButtonClicked"
             >
-              <v-icon>mdi-close</v-icon>
+              <v-icon>mdi-arrow-left</v-icon>
             </v-btn>
           </template>
           <span>Zurück zum Inspirator</span>
@@ -101,7 +101,6 @@
     <v-main id="lateral">
       <topbar v-if="isMainPage && !isScoringMode" ref="topFilterToolbar" />
       <filter-menu />
-      <!-- <filter-top-sub-bar v-if="isMainPage && !isMobil && !isScoringMode" /> -->
       <router-view class="content" v-scroll="onScroll" />
       <api-down-banner v-if="apiIsDown" />
       <v-snackbar v-model="showError" color="error" y="top">

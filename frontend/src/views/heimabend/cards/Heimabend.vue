@@ -75,10 +75,10 @@
               v-html="item.description"
             >
             </p>
-            <v-container fluid v-if="!isDetailsView">
+            <v-container class="ma-0" fluid v-if="!isDetailsView">
               <v-row>
                 <v-col cols="2"> </v-col>
-                <v-col cols="8">
+                <v-col cols="8" class="pa-0">
                   <v-tooltip bottom>
                     <template v-slot:activator="{ on }">
                       <router-link
@@ -90,12 +90,11 @@
                       >
                         <v-btn
                           @click="onDetailsClick(item)"
-                          elevation="2"
                           color="#EEEEEE"
                           block
                           v-on="on"
                         >
-                          <v-icon left> mdi-page-next-outline </v-icon>
+                          <v-icon left> mdi-chevron-down </v-icon>
                           {{ getLikeButtonText }}
                         </v-btn>
                       </router-link>
@@ -474,7 +473,7 @@ export default {
       return !this.isMobil ? 24 : 18;
     },
     getLikeButtonText() {
-      return !this.isMobil ? 'Mehr Details zur Idee' : 'Mehr';
+      return !this.isMobil ? 'Vollständigen Heimabend anzeigen' : 'Vollständig';
     },
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;

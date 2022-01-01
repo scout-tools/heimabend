@@ -220,10 +220,7 @@ export default {
       return true;
     },
     resetAllFilter() {
-      this.$store.commit('clearFilters');
-      this.$store.commit('setNextPath', false);
-      this.$store.commit('resetHeimabendItems', []);
-      this.$store.commit('setIsFirstEventLoaded', false);
+      this.$store.dispatch('resetFilters');
     },
     getTags() {
       const path = `${

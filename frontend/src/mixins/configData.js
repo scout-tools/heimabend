@@ -10,7 +10,7 @@ export const configData = {  // eslint-disable-line
         rankings: [
           {
             score: 0,
-            name: 'Einfach',
+            name: 'Sehr Einfach',
             techname: 'difficulty',
           },
           {
@@ -25,19 +25,19 @@ export const configData = {  // eslint-disable-line
           },
           {
             score: 3,
-            name: 'Mittel',
+            name: 'Schwer',
             techname: 'difficulty',
           },
           {
             score: 4,
-            name: 'Schwer',
+            name: 'Sehr Schwer',
             techname: 'difficulty',
           },
         ],
       },
       {
         techname: 'executionTime',
-        name: 'min. Zeit',
+        name: 'min. Durchführungszeit',
         icon: 'mdi-timer',
         color: 'blue',
         rankings: [
@@ -70,7 +70,7 @@ export const configData = {  // eslint-disable-line
       },
       {
         techname: 'costsRating',
-        name: 'Kosten',
+        name: 'Kosten pro Person',
         icon: 'mdi-currency-usd',
         color: 'orange',
         rankings: [
@@ -103,7 +103,7 @@ export const configData = {  // eslint-disable-line
       },
       {
         techname: 'prepairationTime',
-        name: 'Vorbereitung',
+        name: 'Vorbereitungzeit',
         icon: 'mdi-clock',
         color: 'red ligthen-1',
         rankings: [

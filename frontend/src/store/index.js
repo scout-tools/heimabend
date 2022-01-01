@@ -157,11 +157,22 @@ export default new Vuex.Store({
     changeMandatoryFilter(state, newTags) {
       state.mandatoryFilter = newTags;
     },
+    addMandatoryFilter(state, newTags) {
+      state.mandatoryFilter = [newTags, ...state.mandatoryFilter];
+    },
+    removeMandatoryFilter(state, itemToRemove) {
+      const tempArray = state.mandatoryFilter;
+      const index1 = tempArray.indexOf(itemToRemove);
+      if (index1 !== -1) {
+        tempArray.splice(index1, 1);
+      }
+      state.mandatoryFilter = tempArray;
+    },
     addNumberFilter(state, newTags) {
       state.numberFilter = [newTags, ...state.numberFilter];
     },
-    setNumberFilter(state, newTags) {
-      state.numberFilter = newTags;
+    cleanNumberFilter(state) {
+      state.numberFilter.splice(0);
     },
     removeNumberFilter(state, itemToRemove) {
       const tempArray = state.numberFilter;
@@ -208,7 +219,6 @@ export default new Vuex.Store({
       state.withoutCosts = false;
       state.filterTags = [];
       state.mandatoryFilter = [];
-      state.numberFilter = [];
     },
     clearAccessToken(state) {
       state.accessToken = null;
@@ -264,12 +274,12 @@ export default new Vuex.Store({
     resetFilters({ commit }) {
       commit('changeMandatoryFilter', []);
       commit('changeFilterTags', []);
-      commit('setNumberFilter', []);
       commit('setSearchInput', '');
       commit('resetHeimabendItems');
       commit('setIsFirstEventLoaded', false);
       commit('setNextPath', false);
       commit('clearFilters');
+      commit('cleanNumberFilter');
     },
   },
   plugins: [createPersistedState()],

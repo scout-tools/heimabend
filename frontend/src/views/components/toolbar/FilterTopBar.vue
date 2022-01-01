@@ -2,7 +2,7 @@
   <v-toolbar fixed flat color="#F6F6F6">
     <template>
       <!-- <h6 class="mx-2">{{heimabendCounter }} gefunden</h6> -->
-      <active-filter v-if="true" />
+      <active-filter />
       <v-spacer />
       <v-btn
         v-if="isMobil"
@@ -21,7 +21,7 @@
             <v-icon> mdi-filter-menu </v-icon>
           </v-btn>
         </template>
-        <span> Mehr Filter </span>
+        <span> Filter </span>
       </v-tooltip>
 
       <v-container fluid v-if="!isMobil">
@@ -56,10 +56,7 @@ export default {
   },
   methods: {
     onClickRestore() {
-      this.$store.commit('clearFilters');
-      this.$store.commit('setNextPath', false);
-      this.$store.commit('resetHeimabendItems', []);
-      this.$store.commit('setIsFirstEventLoaded', false);
+      this.$store.dispatch('resetFilters');
     },
     onExpandClick() {
       this.$store.commit('setIsExtended', true);
