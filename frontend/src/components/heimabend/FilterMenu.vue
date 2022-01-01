@@ -8,6 +8,16 @@
     @input="test"
     class="mt-12"
   >
+    <v-app-bar hide-on-scroll>
+      <v-icon @click="onExpandClick" class="mr-1">mdi-close</v-icon>
+        <h3 class="mx-2">{{heimabendCounter }} Heimabende gefunden</h3>
+      <v-spacer/>
+      <v-btn icon ml-1 @click="onClickRestore" color="black" :disabled="isFilterDefault">
+        <v-icon>
+          mdi-filter-remove
+        </v-icon>
+      </v-btn>
+    </v-app-bar>
     <v-container fluid class="ml-4 pa-0 pb-12 my-12">
       <v-row
         v-for="category in getTopBarTagCategories"
@@ -62,23 +72,44 @@ export default {
       'heimabendCounter',
       'mandatoryFilter',
       'isExtended',
+      'numberFilter',
     ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
+    },
+    getFilterTags() {
+      this.filterTags = this.$store.getters.filterTags; // eslint-disable-line
+      return this.$store.getters.filterTags;
     },
     getTopBarTagCategories() {
       if (this.tagCategory) {
         if (this.isMobil) {
           return this.tagCategory;
         }
-        return this.tagCategory.filter(item => item.isHeader);
+        return this.tagCategory;
       }
       return [];
     },
+    isFilterDefault() {
+      return !(
+        (this.mandatoryFilter && this.mandatoryFilter.length) || // eslint-disable-line
+        this.getFilterTags.length || // eslint-disable-line
+        (this.numberFilter && this.numberFilter.length)
+      );
+    },
   },
   methods: {
+    onClickRestore() {
+      this.$store.commit('clearFilters');
+      this.$store.commit('setNextPath', false);
+      this.$store.commit('resetHeimabendItems', []);
+      this.$store.commit('setIsFirstEventLoaded', false);
+    },
     test(value) {
       this.$store.commit('setIsExtended', value);
+    },
+    onExpandClick() {
+      this.$store.commit('setIsExtended', false);
     },
   },
 };

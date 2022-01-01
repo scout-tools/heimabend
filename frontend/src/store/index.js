@@ -269,6 +269,7 @@ export default new Vuex.Store({
       commit('resetHeimabendItems');
       commit('setIsFirstEventLoaded', false);
       commit('setNextPath', false);
+      commit('clearFilters');
     },
   },
   plugins: [createPersistedState()],

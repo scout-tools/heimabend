@@ -56,7 +56,11 @@ export default {
       return this.$vuetify.breakpoint.mdAndDown;
     },
     isFilterDefault() {
-      return !((this.mandatoryFilter && this.mandatoryFilter.length) || this.getFilterTags.length);
+      return !(
+        (this.mandatoryFilter && this.mandatoryFilter.length) || // eslint-disable-line
+        this.getFilterTags.length || // eslint-disable-line
+        (this.numberFilter && this.numberFilter.length)
+      );
     },
     getFilterTags() {
       this.filterTags = this.$store.getters.filterTags; // eslint-disable-line
@@ -66,6 +70,7 @@ export default {
       'tags',
       'tagCategory',
       'mandatoryFilter',
+      'numberFilter',
     ]),
   },
 };
