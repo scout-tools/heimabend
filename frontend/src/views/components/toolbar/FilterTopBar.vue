@@ -1,27 +1,36 @@
 <template>
   <v-toolbar fixed flat color="#F6F6F6">
     <template>
-      <!-- <h6 class="mx-2">{{heimabendCounter }} gefunden</h6> -->
-      <active-filter />
-      <v-spacer />
-      <v-btn
-        icon
-        ml-1
-        @click="onClickRestore"
-        color="black"
-        :disabled="isFilterDefault"
-      >
-        <v-icon> mdi-filter-remove </v-icon>
-      </v-btn>
-
-      <v-tooltip v-if="isMobil" nudge-left="80" bottom>
-        <template v-slot:activator="{ on }">
-          <v-btn @click="onExpandClick()" fab v-on="on" text>
-            <v-icon> mdi-filter-menu </v-icon>
-          </v-btn>
-        </template>
-        <span> Filter </span>
-      </v-tooltip>
+      <v-container>
+        <v-row align="center">
+          <v-col :cols="isMobil ? 9 : 11">
+            <!-- <h6 class="mx-2">{{heimabendCounter }} gefunden</h6> -->
+            <active-filter />
+          </v-col>
+          <v-col cols="1">
+            <v-spacer />
+            <v-btn
+              icon
+              ml-1
+              @click="onClickRestore"
+              color="black"
+              :disabled="isFilterDefault"
+            >
+              <v-icon> mdi-filter-remove </v-icon>
+            </v-btn>
+          </v-col>
+          <v-col cols="1" v-if="isMobil">
+            <v-tooltip v-if="isMobil" nudge-left="80" bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn @click="onExpandClick()" fab v-on="on" text>
+                  <v-icon> mdi-filter-menu </v-icon>
+                </v-btn>
+              </template>
+              <span> Filter </span>
+            </v-tooltip>
+          </v-col>
+        </v-row>
+      </v-container>
     </template>
   </v-toolbar>
 </template>
@@ -81,7 +90,7 @@ export default {
         if (this.isMobil) {
           return this.tagCategory;
         }
-        return this.tagCategory.filter(item => item.isHeader);
+        return this.tagCategory.filter((item) => item.isHeader); // eslint-disable-line
       }
       return [];
     },

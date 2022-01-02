@@ -8,7 +8,7 @@
         <v-chip
           :filter="filter"
           light
-          :small="small"
+          :small="isMobil"
           :close="close"
           v-on="on"
           v-bind:class="[cursor, margin]"
@@ -35,6 +35,9 @@ export default {
     ...mapGetters([
       'tags',
     ]),
+    isMobil() {
+      return this.$vuetify.breakpoint.mdAndDown;
+    },
   },
   methods: {
     getTagNameById(idString) {

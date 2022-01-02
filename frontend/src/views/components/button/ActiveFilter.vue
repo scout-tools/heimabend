@@ -1,20 +1,18 @@
 <template>
-<div>
-  <v-chip-group >
-    <v-chip-tooltip v-for="(tag, index) in getActiveTags" :key="index"
-      :tag="tag" margin="mr-1"  cursor="info-cursor" close @click:close="onCloseChip"/>
+  <v-chip-group column>
+    <v-chip label close :small="isMobil"
+      v-for="(tag, index) in getActiveTags"
+      :color="tag.color"
+      :key="index"  @click:close="onCloseChip(tag)">
+      {{ tag.name }}
+    </v-chip>
   </v-chip-group>
-</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import VChipTooltip from '@/views/components/chip/ChipTooltip.vue';
 
 export default {
-  components: {
-    VChipTooltip,
-  },
   methods: {
     onCloseChip(value) {
       this.$store.commit('setNextPath', false);

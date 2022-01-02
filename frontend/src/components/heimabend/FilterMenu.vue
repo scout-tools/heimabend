@@ -2,7 +2,7 @@
   <v-navigation-drawer
     app
     v-bind:value="isExtended"
-    :width="isMobil ? '99%' : '350px'"
+    :width="isMobil ? '100%' : '350px'"
     right
     @input="test"
   >
