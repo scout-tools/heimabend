@@ -1,5 +1,5 @@
 <template>
-  <v-bottom-navigation app horizontal :value="value" color="inspiBlue" grow>
+  <v-bottom-navigation app :value="value" color="inspiBlue" grow>
     <v-btn :to="{ name: 'overview' }">
       <h3>Liste</h3>
 

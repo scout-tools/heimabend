@@ -47,7 +47,6 @@
           v-model="currentSearchInput"
           solo-inverted
           hide-details
-          :label="getLabel"
           prepend-inner-icon="mdi-magnify"
           clearable
           :dense="isMobil"
@@ -217,6 +216,7 @@ export default {
   created() {
     this.$store.dispatch('resetFilters');
     this.$store.commit('setDrawer', false);
+    this.$store.commit('setPageScrolled', false);
     if (this.firstVisit) {
       this.$store.commit('setScollPosition', 0);
     }
