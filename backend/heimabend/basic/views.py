@@ -4,7 +4,7 @@ import json
 from django.db.models.functions import ExtractMonth, ExtractYear
 from django.http import HttpResponse
 from django_filters import FilterSet, BooleanFilter, OrderingFilter, \
-    ModelMultipleChoiceFilter, NumberFilter
+    ModelMultipleChoiceFilter, NumberFilter, BaseInFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import pagination, viewsets, mixins, generics, \
     filters, status
@@ -72,34 +72,47 @@ class EventPagination(pagination.PageNumberPagination):
     max_page_size = 1000
 
 
+class _NumberInFilter(BaseInFilter, NumberFilter):
+    pass
+
+
 class EventFilter(FilterSet):
     prepairationTime__gt = NumberFilter(
         field_name='prepairation_time', lookup_expr='gt')
     prepairationTime__lt = NumberFilter(
         field_name='prepairation_time', lookup_expr='lt')
     prepairationTime = NumberFilter(field_name='prepairation_time')
+    prepairationTime__in = _NumberInFilter(
+        field_name='prepairation_time', lookup_expr='in')
 
     costsRating__gt = NumberFilter(
         field_name='costs_rating', lookup_expr='gt')
     costsRating__lt = NumberFilter(
         field_name='costs_rating', lookup_expr='lt')
     costsRating = NumberFilter(field_name='costs_rating')
+    costsRating__in = _NumberInFilter(
+        field_name='costs_rating', lookup_expr='in')
 
     executionTime__gt = NumberFilter(
         field_name='execution_time', lookup_expr='gt')
     executionTime__lt = NumberFilter(
         field_name='execution_time', lookup_expr='lt')
     executionTime = NumberFilter(field_name='execution_time')
+    executionTime__in = _NumberInFilter(
+        field_name='execution_time', lookup_expr='in')
 
     difficulty__gt = NumberFilter(
         field_name='difficulty', lookup_expr='gt')
     difficulty__lt = NumberFilter(
         field_name='difficulty', lookup_expr='lt')
     difficulty = NumberFilter(field_name='difficulty')
+    difficulty__in = _NumberInFilter(
+        field_name='difficulty', lookup_expr='in')
 
     is_public = BooleanFilter(field_name='is_public', method='get_is_public')
     withoutCosts = BooleanFilter(
         method='get_cost_rating', field_name='costs_rating')
+
     filterTags = ModelMultipleChoiceFilter(field_name='tags__id',
                                            to_field_name='id',
                                            queryset=Tag.objects.all(),
@@ -114,15 +127,19 @@ class EventFilter(FilterSet):
                   'executionTime__gt',
                   'executionTime__lt',
                   'executionTime',
+                  'executionTime__in',
                   'prepairationTime__gt',
                   'prepairationTime__lt',
                   'prepairationTime',
+                  'prepairationTime__in',
                   'costsRating__gt',
                   'costsRating__lt',
                   'costsRating',
+                  'costsRating__in',
                   'difficulty__gt',
                   'difficulty__lt',
                   'difficulty',
+                  'difficulty__in',
                   ]
 
     def get_CostRating(self, queryset, field_name, value):

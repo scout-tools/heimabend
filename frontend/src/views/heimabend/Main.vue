@@ -61,10 +61,12 @@
 <script>
 import axios from 'axios';
 import { mapGetters, mapState } from 'vuex';
+import { configData } from '@/mixins/configData.js'; //eslint-disable-line
 
 import HeimabendCard from './cards/Heimabend.vue';
 
 export default {
+  mixins: [configData],
   components: {
     HeimabendCard,
   },
@@ -109,11 +111,14 @@ export default {
           params.append('filterTags', filterTag);
         });
       }
-      if (this.numberFilter && this.numberFilter.length) {
-        this.numberFilter.forEach((filter) => {
-          params.append(filter.techname, filter.score);
-        });
-      }
+      this.scoreConfig.forEach((filterCategory) => {
+        const categoryFilter = this.numberFilter.filter(
+          filter => filter.techname === filterCategory.techname,
+        );
+        if (categoryFilter && categoryFilter.length) {
+          params.append(`${filterCategory.techname}__in`, categoryFilter.map(a => a.score));
+        }
+      });
       params.append('page', 1);
       params.append('timestamp', new Date().getTime());
       return params;
