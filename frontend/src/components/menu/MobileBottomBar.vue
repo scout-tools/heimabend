@@ -1,19 +1,19 @@
 <template>
   <v-bottom-navigation app horizontal :value="value" color="inspiBlue" grow>
     <v-btn :to="{ name: 'overview' }">
-      <span>Liste</span>
+      <h3>Liste</h3>
 
       <v-icon>mdi-format-list-bulleted-square</v-icon>
     </v-btn>
 
     <v-btn :to="{ name: 'inspirations' }">
-      <span>Inspirationen</span>
+      <h3>Inspirationen</h3>
 
       <v-icon>mdi-lightbulb-on-outline</v-icon>
     </v-btn>
 
     <v-btn @click="openBottomMenu">
-      <span>Sonstige</span>
+      <h3>Sonstige</h3>
 
       <v-icon>mdi-dots-vertical</v-icon>
     </v-btn>

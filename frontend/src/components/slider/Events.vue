@@ -3,7 +3,7 @@
     <v-card-title class="pa-0 ml-5" justify="center"> {{ titel }} </v-card-title>
     <v-slide-group
       v-if="data.length"
-      class="pl-0"
+      class="pa-0"
       active-class="success"
     >
       <v-hover v-slot="{ hover }" v-for="(item, index) in data"

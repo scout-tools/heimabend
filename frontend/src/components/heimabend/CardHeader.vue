@@ -67,7 +67,7 @@ export default {
       let styleClass = '';
       styleClass = this.$vuetify.breakpoint.mdAndUp && !this.preview
         ? 'text-h5 font-weight-medium'
-        : 'text-subtitle-1';
+        : 'text-h6 font-weight-medium';
       return styleClass;
     },
     subTitleClass() {

@@ -24,17 +24,17 @@
     </v-app-bar>
     <v-container fluid class="pa-3">
       <v-row>
-        <v-expansion-panels flat accordion>
+        <v-expansion-panels flat accordion class="ma-1">
           <v-expansion-panel
             v-for="category in getTopBarTagCategories"
             :key="category.id"
           >
             <v-expansion-panel-header>
               <v-container>
-                <v-row>
-                  <!-- <v-icon class="mx-1">{{
+                <v-row align="center">
+                  <v-icon class="mx-1">{{
                     category.icon
-                  }}</v-icon> -->
+                  }}</v-icon>
                   <h3>{{ category.name }}</h3>
                 </v-row>
               </v-container>
@@ -50,10 +50,10 @@
           >
             <v-expansion-panel-header>
               <v-container>
-                <v-row>
-                  <!-- <v-icon class="mx-1">
+                <v-row align="center">
+                  <v-icon class="mx-1">
                     {{ numberFilterData.icon }}
-                  </v-icon> -->
+                  </v-icon>
                   <h3>{{ numberFilterData.name }}</h3>
                 </v-row>
               </v-container>

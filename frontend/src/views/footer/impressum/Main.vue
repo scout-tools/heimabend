@@ -193,13 +193,6 @@ export default {
   },
 
   methods: {
-    show() {
-      this.dialog = true;
-    },
-    cancel() {
-      this.dialog = false;
-      this.$emit('dialogClose');
-    },
     onClickHeimabendItem() {
       this.$router.push({ name: 'message' });
     },

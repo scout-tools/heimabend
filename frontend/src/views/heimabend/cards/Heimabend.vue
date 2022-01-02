@@ -19,7 +19,6 @@
     </v-row> -->
     <v-row no-gutters>
       <v-col cols=12>
-        <v-spacer class="mt-8" />
         <h2
           class="deinHeimabendSpan"
           v-if="!isDetailsView"
