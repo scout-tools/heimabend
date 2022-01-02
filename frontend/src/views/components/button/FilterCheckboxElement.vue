@@ -48,7 +48,9 @@ export default {
     ...mapGetters(['tags', 'tagCategory', 'mandatoryFilter', 'numberFilter', 'filterTags']),
     value() {
       if (this.mandatoryFilter || this.filterTags || this.numberFilter) {
-        return this.numberFilter.map(a => a.score);
+        return this.numberFilter.filter(
+          item => item.techname === this.data.techname,
+        ).map(a => a.score);
       }
       return this.numberFilter;
     },
