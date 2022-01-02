@@ -5,7 +5,6 @@
       <active-filter />
       <v-spacer />
       <v-btn
-        v-if="isMobil"
         icon
         ml-1
         @click="onClickRestore"
@@ -23,19 +22,6 @@
         </template>
         <span> Filter </span>
       </v-tooltip>
-
-      <v-container fluid v-if="!isMobil">
-        <v-row align="center" justify="center">
-          <v-col
-            v-for="category in getTopBarTagCategories"
-            :key="category.id"
-            cols="1.4"
-          >
-            <filter-tags :category="category" />
-          </v-col>
-          <v-col cols="2" v-if="!isMobil"></v-col>
-        </v-row>
-      </v-container>
     </template>
   </v-toolbar>
 </template>
@@ -48,7 +34,6 @@ import ActiveFilter from '@/views/components/button/ActiveFilter.vue'; //eslint-
 
 export default {
   components: {
-    FilterTags,
     ActiveFilter,
   },
   data() {
@@ -111,7 +96,7 @@ export default {
       );
     },
     isMobil() {
-      return true;
+      return this.$vuetify.breakpoint.mdAndDown;
     },
     getFilterTags() {
       this.filterTags = this.$store.getters.filterTags; // eslint-disable-line

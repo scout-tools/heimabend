@@ -89,8 +89,7 @@ export default {
   watch: {},
   created() {
     setTimeout(() => {
-      // ugly work around
-      this.$store.commit('setIsExtended', false);
+      this.$store.commit('setIsExtended', !this.isMobil);
     }, 50);
   },
   computed: {
