@@ -22,10 +22,10 @@
         allowedMessageTypes="comment"
         :max-width="getMaxWidth()"/>
     </v-row>
-    <v-row justify="center">
+    <!-- <v-row justify="center">
       <p :class="textColor">Diesen Heimabend versenden mit:</p>
-    </v-row>
-    <v-row justify="center">
+    </v-row> -->
+    <!-- <v-row justify="center">
       <social-sharing
         name="x123"
         :url="getUrl()"
@@ -51,7 +51,7 @@
           </network>
         </div>
       </social-sharing>
-    </v-row>
+    </v-row> -->
   </v-container>
 </template>
 

@@ -81,7 +81,7 @@
       </v-tooltip>
       <router-link v-show="!searching" to="/">
         <img
-          :src="require('@/assets/inspi/inspi_thinking.png')"
+          :src="require('@/assets/inspi/inspi_thinking.webp')"
           class="mr-2"
           :height="isMobil ? 85 : 98"
           alt="Bild von Inspi"
@@ -162,19 +162,6 @@ export default {
     },
     currentRouteName() {
       return this.$route.name;
-    },
-    acceptedPrivacy() {
-      return !!this.$store.getters.acceptedPrivacy;
-    },
-  },
-  watch: {
-    searchInput(value) {
-      if (value === '' || !value) {
-        this.currentSearchInput = value;
-      } else {
-        // eslint-disable-next-line no-undef
-        _paq.push(['trackSiteSearch', value, false, false]);
-      }
     },
   },
   methods: {

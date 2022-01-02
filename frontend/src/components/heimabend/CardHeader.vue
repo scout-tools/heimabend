@@ -26,8 +26,8 @@
 
 
 <script>
-import store from '@/store'; // eslint-disable-line
 import { mapGetters } from 'vuex';
+
 // eslint-disable-next-line
 import { serviceMixin } from '@/mixins/serviceMixin.js';
 

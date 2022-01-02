@@ -103,13 +103,15 @@ import { mapGetters } from 'vuex';
 // eslint-disable-next-line
 import { validationMixin } from 'vuelidate';
 // eslint-disable-next-line
-import { serviceMixin } from '@/mixins/serviceMixin.js';
 import {
   required,
   minLength,
   maxLength,
   email,
 } from 'vuelidate/lib/validators';
+// eslint-disable-next-line
+import { serviceMixin } from '@/mixins/serviceMixin.js';
+
 
 export default {
   mixins: [validationMixin, serviceMixin],

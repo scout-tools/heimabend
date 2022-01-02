@@ -78,14 +78,6 @@ export default {
     },
   },
   methods: {
-    onNewEventClick() {
-      // eslint-disable-next-line no-undef
-      _paq.push(['trackEvent', 'create', 'heimabendCreate']);
-    },
-    onNewMessageClick() {
-      // eslint-disable-next-line no-undef
-      _paq.push(['trackEvent', 'create', 'message']);
-    },
     async scrollToTop() {
       await this.$vuetify.goTo(0);
       this.$store.commit('setPageScrolled', false);

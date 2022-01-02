@@ -144,7 +144,6 @@ export default {
           this.$store.commit('setNextPath', res.data.next);
           this.$store.commit('setIsEventLoading', false);
           this.isLoadingMore = false;
-          this.trackItems(res.data.results);
         })
         .catch(() => {
           this.$store.commit('setIsEventLoading', false);
@@ -183,7 +182,6 @@ export default {
           this.$store.commit('setIsEventLoading', false);
           this.isLoadingMore = false;
           // eslint-disable-next-line no-undef
-          this.callTrackItems(res.data.results);
           this.getTags();
         })
         .catch(() => {
@@ -195,12 +193,7 @@ export default {
     onUpdateClick(item) {
       this.$emit('onUpdateClick', item);
     },
-    callTrackItems(items) {
-      items.forEach((item) => {
-        // eslint-disable-next-line no-undef
-        _paq.push(['trackContentImpression', item.title, item.id]);
-      });
-    },
+
     onResetClick() {
       this.resetAllFilter();
     },
@@ -253,9 +246,9 @@ export default {
 
   created() {
     this.$store.commit('setIsSubPage', false);
-    setTimeout(() => {
-      window.scrollTo(0, this.scollPosition - 300);
-    }, 500);
+    // setTimeout(() => {
+    //   window.scrollTo(0, this.scollPosition - 300);
+    // }, 500);
     if (!this.nextPath) {
       this.getAllEventItems();
     }

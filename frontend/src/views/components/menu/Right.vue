@@ -89,12 +89,6 @@ export default {
       this.$store.commit('setNextPath', false);
       this.$store.commit('resetHeimabendItems', []);
       this.$store.commit('setIsFirstEventLoaded', false);
-
-      if (this.oldFilterLength < this.filterTags.length) {
-        const id = this.filterTags[this.filterTags.length - 1];
-        // eslint-disable-next-line no-undef
-        _paq.push(['trackEvent', 'tagChanged', id]);
-      }
     },
     resetTags() {
       this.filterTags = [];

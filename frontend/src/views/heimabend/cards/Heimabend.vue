@@ -231,8 +231,8 @@
 </template>
 
 <script>
-import store from '@/store'; // eslint-disable-line
 import { mapGetters } from 'vuex';
+
 // eslint-disable-next-line import/no-unresolved
 // import MenuRight from '@/views/components/menu/Right.vue';
 // eslint-disable-next-line import/no-unresolved
@@ -404,11 +404,11 @@ export default {
       return !this.$vuetify.breakpoint.mdAndUp ? 'mx-2' : 'mx-0';
     },
     onUpdateClick(params) {
-      store.commit('setScollPosition', window.scrollY);
+      this.$store.commit('setScollPosition', window.scrollY);
       this.$router.push({ name: 'heimabendUpdate', params });
     },
     onDetailsClick() {
-      store.commit('setScollPosition', window.scrollY);
+      this.$store.commit('setScollPosition', window.scrollY);
     },
     formatDate(date) {
       const dateObj = new Date(date);
@@ -462,7 +462,6 @@ export default {
   mounted() {
     this.scrollToId();
     this.scroll();
-    this.getEventOfTheWeek();
   },
   computed: {
     ...mapGetters(['tags', 'liked', 'isAuthenticated', 'isScoringMode']),
