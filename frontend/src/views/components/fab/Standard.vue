@@ -8,6 +8,7 @@
       direction="left"
       transition="slide-x-reverse-transition"
       fixed
+      :style="isMobil ? 'bottom: 70px !important' : ''"
     >
       <template v-slot:activator>
         <router-link :to="{ name: 'overview' }" class="no-underline">
@@ -52,6 +53,7 @@
       transition="slide-y-reverse-transition"
       fixed
       class="main mb-16"
+      :style="isMobil ? 'bottom: 70px !important' : ''"
     >
       <template v-slot:activator>
         <v-btn color="secondary" fab @click="scrollToTop">
@@ -71,6 +73,9 @@ export default {
   }),
   computed: {
     ...mapGetters(['isPageScrolled']),
+    isMobil() {
+      return this.$vuetify.breakpoint.mdAndDown;
+    },
   },
   methods: {
     onNewEventClick() {

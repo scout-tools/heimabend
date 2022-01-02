@@ -22,9 +22,9 @@
         <v-icon> mdi-filter-remove </v-icon>
       </v-btn>
     </v-app-bar>
-    <v-container fluid class="pa-2">
+    <v-container fluid class="pa-3">
       <v-row>
-        <v-expansion-panels flat>
+        <v-expansion-panels flat accordion>
           <v-expansion-panel
             v-for="category in getTopBarTagCategories"
             :key="category.id"
@@ -90,7 +90,7 @@ export default {
   created() {
     setTimeout(() => {
       // ugly work around
-      this.$store.commit('setIsExtended', true);
+      this.$store.commit('setIsExtended', false);
     }, 50);
   },
   computed: {

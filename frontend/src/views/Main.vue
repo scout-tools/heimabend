@@ -2,7 +2,7 @@
   <v-app id="keep">
     <v-app-bar app clipped-left color="#4171A4" dark>
       <v-app-bar-nav-icon
-        v-if="!apiIsDown && !isSubPage"
+        v-if="!apiIsDown && !isSubPage &&!isMobil"
         @click="onDrawerIconClicked()"
       />
       <router-link
@@ -96,7 +96,7 @@
       </router-link>
     </v-app-bar>
 
-    <menu-left ref="mainMenuLeft" />
+    <menu-left ref="mainMenuLeft" v-if="!isMobil"/>
 
     <v-main id="lateral">
       <topbar v-if="isMainPage && !isScoringMode" ref="topFilterToolbar" />
@@ -107,7 +107,9 @@
         {{ 'Es ist ein Fehler aufgetreten' }}
       </v-snackbar>
     </v-main>
-    <Footer v-if="!isScoringMode" />
+    <Footer v-if="!isScoringMode && !isMobil" />
+    <MobileBottomBar @openBottomMenu="openBottomMenu" v-if="isMobil"/>
+    <BottomMenu ref="BottomMenuRef" />
   </v-app>
 </template>
 
@@ -119,13 +121,17 @@ import MenuLeft from './components/menu/Left.vue';
 import ApiDownBanner from './components/banner/ApiDown.vue';
 import Topbar from './components/toolbar/FilterTopBar.vue';
 import FilterMenu from '@/components/heimabend/FilterMenu.vue'; // eslint-disable-line
+import MobileBottomBar from '@/components/menu/MobileBottomBar.vue'; // eslint-disable-line
+import BottomMenu from '@/components/menu/BottomMenu.vue'; // eslint-disable-line
 
 export default {
   components: {
     MenuLeft,
     Topbar,
     ApiDownBanner,
+    BottomMenu,
     // FilterTopSubBar,
+    MobileBottomBar,
     Footer,
     FilterMenu,
   },
@@ -172,6 +178,9 @@ export default {
     },
   },
   methods: {
+    openBottomMenu() {
+      this.$refs.BottomMenuRef.show();
+    },
     onSearchIconClicked() {
       this.searching = !this.searching;
       setTimeout(() => {
