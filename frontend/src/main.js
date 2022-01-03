@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueLodash from 'vue-lodash';
+import VueRouter from 'vue-router';
 
 import lodash from 'lodash';
 
@@ -8,7 +9,7 @@ import Vuelidate from 'vuelidate';
 import VTooltip from 'v-tooltip';
 
 import App from './App.vue';
-import router from './router';
+import routes from './router';
 import auth from './auth';
 import store from './store';
 import vuetify from './plugins/vuetify';
@@ -17,6 +18,15 @@ const VueMoment = require('vue-moment');
 
 // Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
+
+const router = new VueRouter({
+  mode: 'history', // add fallback route to prod server
+  base: process.env.BASE_URL,
+  routes,
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
+});
 
 auth.interceptorsSetup(store, router);
 

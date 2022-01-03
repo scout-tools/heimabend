@@ -27,7 +27,8 @@ from .serializers import TagSerializer, EventSerializer, MessageSerializer, \
     TopViewsSerializer, EventAdminSerializer, EventTimestampSerializer, \
     MaterialUnitSerializer, MaterialNameSerializer, MessageTypeSerializer, \
     FaqSerializer, FaqRatingSerializer, ExperimentOverviewSerializer, \
-    NextBestHeimabendSerializer, ImageMetaSerializer, EventOfTheWeekSerializer
+    NextBestHeimabendSerializer, ImageMetaSerializer, EventOfTheWeekSerializer, \
+    EventSitemapSerializer
 
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -349,6 +350,11 @@ class RandomEventViewSet(LoggingMixin, viewsets.ModelViewSet):
 class AdminEventViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = Event.objects.order_by('-created_at').all()
     serializer_class = EventAdminSerializer
+
+
+class EventSitemapViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = Event.objects.all()
+    serializer_class = EventSitemapSerializer
 
 
 class EventTimestampViewSet(LoggingMixin, viewsets.ModelViewSet):

@@ -368,6 +368,15 @@ class EventAdminSerializer(serializers.ModelSerializer):
         return view_count
 
 
+class EventSitemapSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Event
+        fields = (
+            'id',
+            'title')
+
+
 class EventTimestampSerializer(serializers.ModelSerializer):
 
     class Meta:
