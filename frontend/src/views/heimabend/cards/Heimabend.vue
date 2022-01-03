@@ -27,12 +27,17 @@
           {{ getHeaderText(items) }}
         </h2>
         <v-spacer />
+    <v-virtual-scroll
+      :items="items"
+      bench="1"
+      item-height="1050px"
+      height="2000px"
+    >
+      <template v-slot:default="{ item }">
         <v-card
           :max-width="getMaxWidth()"
           class="mx-auto ma-3 mb-10 test-color"
           :style="{ transitionDelay: delay }"
-          v-for="(item, index) in items"
-          :key="index"
         >
           <HeimabendCardHeader :item="item"/>
           <v-img
@@ -165,6 +170,8 @@
             </div>
           </v-card-actions>
         </v-card>
+      </template>
+        </v-virtual-scroll>
         <v-snackbar
           v-model="showError"
           color="error"

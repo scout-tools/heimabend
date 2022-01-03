@@ -1,12 +1,8 @@
 import Vue from 'vue';
-import VueLodash from 'vue-lodash';
 import VueRouter from 'vue-router';
-
-import lodash from 'lodash';
 
 import moment from 'moment';
 import Vuelidate from 'vuelidate';
-import VTooltip from 'v-tooltip';
 
 import App from './App.vue';
 import routes from './router';
@@ -14,7 +10,7 @@ import auth from './auth';
 import store from './store';
 import vuetify from './plugins/vuetify';
 
-const VueMoment = require('vue-moment');
+Vue.use(VueRouter);
 
 // Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
@@ -39,14 +35,7 @@ new Vue({
   render: h => h(App),
 }).$mount('#app');
 
-Vue.use(VTooltip);
 Vue.use(Vuelidate);
-Vue.use(VueMoment);
-// Vue.use(SocialSharing);
-Vue.use(VueLodash, {
-  name: 'custom',
-  lodash,
-});
 
 // Vue.use(VueMatomo, {
 //   // Configure your matomo server and site by providing
