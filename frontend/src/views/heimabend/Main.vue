@@ -40,20 +40,14 @@
     </v-snackbar>
     </v-row>
     <v-row class="mt-10" align="center" justify="center" v-else>
-      <v-card flat >
-        <div class="text-center ma-5">
-          <p> Lade Daten ...</p>
-          <v-progress-circular
-            :size="80"
-            :width="10"
-            class="ma-5"
-            color="primary"
-            indeterminate
-          ></v-progress-circular>
-          <p> Bitte hab etwas Geduld.</p>
-        </div>
-      </v-card>
+    <heimabend-card
+      ref="eventCards-dummy"
+      :items="heimabendItemsDummy"
+      :isMobil="isMobil"
+      :loading="false"
+    />
     </v-row>
+
   </v-container>
 </template>
 
@@ -267,6 +261,13 @@ export default {
     isLoadingMore: false,
     count: 0,
     timeout: 13000,
+    heimabendItemsDummy: [
+      {
+        id: 1,
+        title: null,
+        description: null,
+      },
+    ],
   }),
 };
 </script>

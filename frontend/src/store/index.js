@@ -29,7 +29,10 @@ export default new Vuex.Store({
     isSubPage: false,
     isDrawer: false,
     messageType: [],
-    heimabendItems: [],
+    heimabendItems: [{
+      name: '123123',
+      description: 'description',
+    }],
     scollPosition: 0,
     nextPath: '',
     isEventLoading: false,
