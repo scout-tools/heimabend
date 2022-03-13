@@ -146,6 +146,9 @@ export default {
 </script>
 
 <style scoped>
+.whiteText {
+  color: white !important;
+}
 .color-scout {
   background: rgba(26, 75, 126, 1) 30%;
 }

@@ -314,6 +314,9 @@ export default {
       return this.isMobil ? 'headerIsMobile' : 'headerIsDesktop';
     },
     getEventTags(tagArray) {
+      if (!this.tags || !tagArray) {
+        return '';
+      }
       const tagsObject = this.tags.filter((item) => tagArray.includes(item.id)); // eslint-disable-line
       const containsCategoryId = tagsObject.filter(
         ( // eslint-disable-line
@@ -385,7 +388,6 @@ export default {
     },
     getHeaderColorClass(tags) {
       let colorclass = 'color-scout';
-
       const hasWo = tags.includes(50);
       const hasScout = tags.includes(51);
       if (hasWo && hasScout) {

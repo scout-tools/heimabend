@@ -478,7 +478,6 @@ class EventOfTheWeekSerializer(serializers.ModelSerializer):
     title = serializers.SerializerMethodField()
     tags = serializers.SerializerMethodField()
     description = serializers.SerializerMethodField()
-    id = serializers.SerializerMethodField()
 
     class Meta:
         model = EventOfTheWeek
@@ -506,10 +505,6 @@ class EventOfTheWeekSerializer(serializers.ModelSerializer):
 
     def get_history(self, obj):
         return date.today() >= obj.release_date
-
-    def get_id(self, obj):
-        id = Event.objects.filter(id=obj.event.id).values('id').first()
-        return id['id']
 
     def get_title(self, obj):
         title = Event.objects.filter(

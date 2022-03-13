@@ -71,7 +71,7 @@ const routes = [   // eslint-disable-line
     name: 'heimabendUpdate',
     meta: { sitemap: { ignoreRoute: true } },
     component: () =>
-      import(/* webpackChunkName: "heimabendUpdate" */ './../views/footer/aboutProject/Main.vue'), // eslint-disable-line
+      import(/* webpackChunkName: "heimabendUpdate" */ './../views/heimabend/create/Main.vue'), // eslint-disable-line
   },
   {
     path: '/heimabend/:id',

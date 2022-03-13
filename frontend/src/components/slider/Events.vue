@@ -85,11 +85,14 @@ export default {
       return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
     },
     onEventClicked(id) {
-      this.$router.push({
+      debugger;
+      this.$root.$router.push({
         name: 'heimabendDetails',
         params: { id },
       });
-      this.$router.go();
+      if (this.$router.history.current.name === 'heimabendDetails') {
+        this.$root.$router.go();
+      }
     },
   },
 };
