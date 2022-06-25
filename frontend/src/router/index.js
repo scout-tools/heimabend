@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 
 // function getEvents() {
 //   return new Promise((resolve) => {
