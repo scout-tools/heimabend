@@ -1,5 +1,5 @@
 require = require("esm")(module); // eslint-disable-line
-const { routes } = require('./src/router/index.js'); // eslint-disable-line
+// const { routes } = require('./src/router/index.js'); // eslint-disable-line
 
 module.exports = {
   transpileDependencies: ['vuetify'],
@@ -11,12 +11,12 @@ module.exports = {
       },
     },
   },
-  pluginOptions: {
-    sitemap: {
-      baseURL: 'https://inspirator.dpbm.de',
-      routes,
-      pretty: true,
-      outputDir: 'public/',
-    },
-  },
+  // pluginOptions: {
+  //   sitemap: {
+  //     baseURL: 'https://inspirator.dpbm.de',
+  //     routes,
+  //     pretty: true,
+  //     outputDir: 'public/',
+  //   },
+  // },
 };
