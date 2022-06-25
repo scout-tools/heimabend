@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-function getEvents() {
-  return new Promise((resolve) => {
-    axios.get('http://localhost:8000/basic/admin-sitemap').then((response) => {
-      resolve(response.data);
-    });
-  });
-}
+// function getEvents() {
+//   return new Promise((resolve) => {
+//     axios.get('http://localhost:8000/basic/admin-sitemap').then((response) => {
+//       resolve(response.data);
+//     });
+//   });
+// }
 
 const routes = [   // eslint-disable-line
   {
@@ -76,11 +76,12 @@ const routes = [   // eslint-disable-line
   {
     path: '/heimabend/:id',
     name: 'heimabendDetails',
-    meta: {
-      sitemap: {
-        slugs: async () => await getEvents(), //eslint-disable-line
-      },
-    },
+    meta: { sitemap: { ignoreRoute: true } },
+    // meta: {
+    //   sitemap: {
+    //     slugs: async () => await getEvents(), //eslint-disable-line
+    //   },
+    // },
     component: () =>
       import(/* webpackChunkName: "heimabendDetails" */ './../views/heimabend/details/Main.vue'), // eslint-disable-line
   },
