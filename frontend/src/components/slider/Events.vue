@@ -85,7 +85,6 @@ export default {
       return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
     },
     onEventClicked(id) {
-      debugger;
       this.$root.$router.push({
         name: 'heimabendDetails',
         params: { id },

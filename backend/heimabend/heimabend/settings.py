@@ -25,6 +25,7 @@ ALLOWED_HOSTS = [
     'localhost',
     't5hd7kopbj.execute-api.eu-central-1.amazonaws.com',
     'qff1i8eamb.execute-api.eu-central-1.amazonaws.com',
+    'nrfzwkck0g.execute-api.eu-central-1.amazonaws.com',
     'api.inspi.anmelde-tool.de',
 ]
 
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'django_filters',
     'storages',
     'stdimage'
+    'drf_api_logger',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +62,7 @@ MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
+    'drf_api_logger.middleware.api_logger_middleware.APILoggerMiddleware',
 ]
 
 ROOT_URLCONF = 'heimabend.urls'
@@ -151,6 +154,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+DRF_API_LOGGER_DATABASE = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
