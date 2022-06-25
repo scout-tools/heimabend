@@ -1,143 +1,73 @@
 <template>
-  <v-form
-    ref="form4"
-    v-model="valid"
-  >
-<v-container>
+  <v-form ref="form5" v-model="valid">
+    <v-container class="ContainerWidth">
+      <v-row class="my-5">
+        <creating-slider
+          v-bind:value="data.difficulty"
+          v-on:input="updateDifficulty"
+          :headerText="'Schwierigkeitsgrad (z.B. Vorwissen oder Fähigkeiten)?'"
+          :labels="['Einfach','',  'Mittel','', 'Schwer']"
+          :icon="'mdi-head-snowflake-outline'"
+          :color="'green'"
 
-    <v-row no-gutters>
+        />
+      </v-row>
 
-    <v-row class="mt-6 ml-4">
-      <span class="subtitle-1">
-        Bitte beantworte jede einzelne Frage
-        passend zu deiner Heimabend-Idee
-      </span>
-    </v-row>        <v-switch
-          v-model="data.isPrepairationNeeded"
-          color="secondary"
-          label="Benötigt diese Heimabend-Idee Zeit zur Vorbereitung?">
-        </v-switch>
-    </v-row>
+      <v-divider class="py-2"/>
 
-  <v-divider class="my-2"/>
-  <v-row class="mt-6 ml-4">
-    <span class="subtitle-1">
-      Welche Kosten entstehen bei der Durchführung dieser Heimabend-Idee?
-    </span>
-  </v-row>
+      <v-row class="my-5">
+        <creating-slider
+          :headerText="'mindest Zeit in min?'"
+          v-bind:value="data.executionTime"
+          v-on:input="updateExecutionTime"
+          :labels="['<30', '30', '60', '90', 'mehr']"
+          :icon="'mdi-timer'"
+          :color="'blue'"
+        />
+      </v-row>
+      <v-divider class="py-2"/>
 
-  <v-row>
-    <v-tooltip
-      nudge-left="80"
-      open-on-hover
-      bottom
-    >
-      <template v-slot:activator="{ on }">
-        <v-btn
-          v-on="on"
-          text
-        >
-          <v-rating
-            v-model="data.costsRating"
-            emptyIcon="mdi-currency-usd"
-            fullIcon="mdi-currency-usd"
-            color="orange"
-            background-color="grey"
-            min="0"
-            length="3"
-          ></v-rating>
+      <v-row class="my-5">
+        <creating-slider
+          :headerText="'Kosten pro Person in €?'"
+          v-bind:value="data.costsRating"
+          v-on:input="updateCostsRating"
+          :labels="['0' , '0,50', '1,00', '2,00', 'mehr']"
+          :icon="'mdi-currency-usd'"
+          :color="'orange'"
+        />
+      </v-row>
+
+      <v-divider class="py-2"/>
+
+      <v-row class="my-5">
+        <creating-slider
+          :headerText="'Vorbereitungszeit in min?'"
+          v-bind:value="data.prepairationTime"
+          v-on:input="updatePrepairationTime"
+          :labels="['0', '5', '30', '60', 'mehr']"
+          :icon="'mdi-clock'"
+          :color="'red ligthen-1'"
+        />
+      </v-row>
+
+      <v-divider class="my-2" />
+      <v-row class="ma-3" justify="center">
+        <v-btn class="ma-1" @click="prevStep()">
+          <v-icon left> mdi-chevron-left </v-icon>
+          Zurück
         </v-btn>
-      </template>
-      <span>
-        <p class="text-left">
-        Stufe 1: 0,00€ - 0,50€ pro Person <br>
-        Stufe 2: 1€ - 2€ pro Person <br>
-        Stufe 3: mehr als 2€ pro Person <br>
-        </p>
-      </span>
-    </v-tooltip>
-    <v-switch
-      color="secondary"
-      v-model="isWithoutCosts"
-      small
-      label="Keine Kosten"
-      class="ma-2"
-      @click="onResetPriceClick()"
-    >
-      Ohne Kosten
-    </v-switch>
-  </v-row>
-
-  <v-divider class="my-2"/>
-
-  <v-row class="mt-6 ml-4">
-    <span class="subtitle-1">
-      Wie lange dauert die Durchführung deiner Programmidee?“
-    </span>
-  </v-row>
-  <v-row>
-    <v-tooltip
-      nudge-left="80"
-      open-on-hover
-      bottom
-    >
-      <template v-slot:activator="{ on }">
-        <v-btn
-          v-on="on"
-          text
-        >
-        <v-rating
-          v-model="data.executionTimeRating"
-          emptyIcon="mdi-clock"
-          fullIcon="mdi-clock"
-          color="black"
-          background-color="grey"
-          min="0"
-          length="3"
-        ></v-rating>
-          </v-btn>
-        </template>
-        <span>
-          <p class="text-left">
-          Stufe 1: bis 30 min <br>
-          Stufe 2: 30 min - 60 min<br>
-          Stufe 3: mehr als 60 min<br>
-          </p>
-        </span>
-      </v-tooltip>
-    <v-switch
-      color="secondary"
-      v-model="isLargeProject"
-      small
-      label="Handelt es sich um ein Großprojekt?"
-      class="ma-2"
-      @click="onLargeProjectClick()"
-    >
-      Ohne Kosten
-    </v-switch>
-    </v-row>
-    <v-divider class="my-2"/>
-    <v-row class="ma-3" justify="center">
-      <v-btn
-        class="mr-5"
-        @click="prevStep()"
-      >
-        Zurück
-      </v-btn>
-
-      <v-btn
-        color="primary"
-        @click="nextStep()"
-      >
-        Weiter
-      </v-btn>
-    </v-row>
-</v-container>
-        </v-form>
+        <v-btn class="ma-1" color="primary" @click="nextStep()">
+          Weiter
+          <v-icon right> mdi-chevron-right </v-icon>
+        </v-btn>
+      </v-row>
+    </v-container>
+  </v-form>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import CreatingSlider from '@/components/slider/CreatingSlider.vue';
 
 export default {
   data: () => ({
@@ -146,27 +76,19 @@ export default {
         v => (v && v.length > 0) || 'Mindestens ein Thema ist erforderlich',
       ],
     },
-    data: {
-      executionTimeRating: 1,
-      costsRating: 1,
-      isLvlOne: true,
-      isLvlTwo: true,
-      isLvlThree: true,
-    },
     valid: true,
     n: 0,
+    difficultlevel: 0,
   }),
-
+  components: {
+    CreatingSlider,
+  },
+  props: {
+    data: Object,
+  },
   computed: {
-    ...mapGetters([
-      'tags',
-      'tagCategory',
-    ]),
     isMobil() {
       return this.$vuetify.breakpoint.mdAndDown;
-    },
-    tags() {
-      return this.$store.getters.tags;
     },
     isCreate() {
       return !this.$route.params.id;
@@ -174,77 +96,47 @@ export default {
     isUpdate() {
       return !!this.$route.params.id;
     },
-    isLargeProject() {
-      return this.data.executionTimeRating === 0;
-    },
-    largeProjectButtomColor() {
-      return this.isLargeProject ? 'limegreen' : 'lightgrey';
-    },
-    largeProjectIconColor() {
-      return this.isLargeProject ? 'black' : 'grey';
-    },
-    isWithoutCosts() {
-      return this.data.costsRating === 0;
-    },
-    withoutCostsButtomColor() {
-      return this.isWithoutCosts ? 'limegreen' : 'lightgrey';
-    },
-    withoutCostsIconColor() {
-      return this.isWithoutCosts ? 'red darken-2' : 'grey';
-    },
-    getClassForTextContentSteps() {
-      return this.isMobil ? 'mx-0 px-1' : '';
-    },
-    getSideBarTags() {
-      if (this.tags && this.tagCategory) {
-        const sideBarTagCategories = this.tagCategory.filter(item => item.is_header === false);
-        const sideBarTags = this.filterTagByCategory(sideBarTagCategories[0].id);
-        return sideBarTags;
-      }
-      return [];
-    },
   },
-
-  mounted() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-    }
-  },
-
-  created() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-    }
-  },
-
 
   methods: {
-
-    filterTagByCategory(categoryId) {
-      return this.tags.filter(item => item.category === categoryId);
+    updateCostsRating(costsRating) {
+      this.data.costsRating = costsRating;
     },
-    onResetPriceClick() {
-      this.data.costsRating = 0;
+    updatePrepairationTime(prepairationTime) {
+      this.data.prepairationTime = prepairationTime;
     },
-    onLargeProjectClick() {
-      this.data.executionTimeRating = 0;
+    updateExecutionTime(executionTime) {
+      this.data.executionTime = executionTime;
+    },
+    updateDifficulty(difficulty) {
+      this.data.difficulty = difficulty;
+    },
+    difficult(val) {
+      return this.icons[val];
     },
     prevStep() {
       this.$emit('prevStep');
     },
     nextStep() {
-      if (!this.$refs.form4.validate()) {
+      if (!this.$refs.form5.validate()) {
         return;
       }
       this.$emit('nextStep');
     },
     getData() {
       return {
-        tags: this.data.tags,
         costsRating: this.data.costsRating,
-        executionTimeRating: this.data.executionTimeRating,
+        executionTime: this.data.executionTime,
+        prepairationTime: this.data.prepairationTime,
+        difficulty: this.data.difficulty,
       };
     },
   },
 };
 </script>
+
+<style scoped>
+.ContainerWidth {
+  width: 88% !important;
+}
+</style>

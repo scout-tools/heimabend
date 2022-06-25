@@ -72,7 +72,7 @@
       y='top'
       :timeout="timeout"
     >
-      {{ 'Du bist jetzt im Internen Bereich. Viel Spaß' }}
+      {{ 'Du bist jetzt im Internen Bereich. Viel Spaß!' }}
     </v-snackbar>
 </v-container>
 </template>
@@ -124,9 +124,40 @@ export default {
     },
     onSuccessfulLogin() {
       this.$store.commit('setCurrentUser', this.data.username);
+      this.reloadServices();
     },
     onLogoutClick() {
       this.$store.commit('clearTokens');
+    },
+    reloadServices() {
+      this.getTags();
+      this.getTagCategory();
+    },
+    getTags() {
+      const path = `${
+        this.API_URL
+      }basic/tag/?&timestamp=${new Date().getTime()}`;
+      axios
+        .get(path)
+        .then((res) => {
+          this.$store.commit('setTags', res.data);
+        })
+        .catch(() => {
+          this.showError = true;
+        });
+    },
+    getTagCategory() {
+      const path = `${
+        this.API_URL
+      }basic/tag-category/?&timestamp=${new Date().getTime()}`;
+      axios
+        .get(path)
+        .then((res) => {
+          this.$store.commit('setTagCategory', res.data);
+        })
+        .catch(() => {
+          this.showError = true;
+        });
     },
   },
   computed: {

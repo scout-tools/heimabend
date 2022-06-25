@@ -1,16 +1,17 @@
 <template>
-  <v-container class="ma-0 pa-0" fluid>
+  <v-container class="ma-0 pr-12" fluid>
     <v-select
       v-model="selectedFilter"
-      :items="filterTagByCategory(category.id)"
-      :label="`Wähle ${category.name}`"
+      :items="filterTagByCategory"
+      :label="`${category.name}`"
       item-value="id"
       item-text="name"
       multiple
       dense
       hide-details
       single-line
-      outlined
+      solo-inverted
+      :prepend-inner-icon="category.icon"
       @change="onFilterChanged"
     >
       <template v-slot:selection="{ item, index }">
@@ -40,7 +41,7 @@ export default {
     return {
       selectedFilter: [],
       lastFilter: [],
-      isActiveState: false,
+      isPublicState: false,
       value: [],
     };
   },
@@ -53,6 +54,9 @@ export default {
       'tagCategory',
       'mandatoryFilter',
     ]),
+    filterTagByCategory() {
+      return this.tags.filter(item => item.category === this.category.id);
+    },
   },
   watch: {
     mandatoryFilter(value) {
@@ -61,17 +65,11 @@ export default {
     },
   },
   methods: {
-    filterTagByCategory(categoryId) {
-      return this.tags.filter(item => item.category === categoryId);
-    },
     getDivClass() {
       return !this.isMobil ? 'mx-2' : 'mx-0';
     },
     updateState() {
-      this.isActiveState = this.$store.getters[this.customVariable];
-    },
-    onToggleButton() {
-      this.isActiveState = !this.isActiveState;
+      this.isPublicState = this.$store.getters[this.customVariable];
     },
     // eslint-disable-next-line no-unused-vars
     onFilterChanged(newValue) {
@@ -81,14 +79,20 @@ export default {
           const oldFilter = this.mandatoryFilter;
           oldFilter.push(difference[0]);
           this.$store.commit('changeMandatoryFilter', oldFilter);
+          this.$store.commit('setNextPath', false);
+          this.$store.commit('resetHeimabendItems', []);
+          this.$store.commit('setIsFirstEventLoaded', false);
         } else {
           // const oldFilter = this.mandatoryFilter;
-          const categoryItems = this.filterTagByCategory(this.category.id);
+          const categoryItems = this.filterTagByCategory;
           const difference = categoryItems.filter(x => this.lastFilter.includes(x.id))[0].id;
           const oldFilter = this.mandatoryFilter;
           const index = oldFilter.indexOf(difference);
           oldFilter.splice(index, 1);
           this.$store.commit('changeMandatoryFilter', oldFilter);
+          this.$store.commit('setNextPath', false);
+          this.$store.commit('resetHeimabendItems', []);
+          this.$store.commit('setIsFirstEventLoaded', false);
         }
       }
       this.lastFilter = newValue;

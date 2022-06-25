@@ -4,25 +4,18 @@ import createPersistedState from 'vuex-persistedstate'; // eslint-disable-line
 
 Vue.use(Vuex);
 
-
 export default new Vuex.Store({
   state: {
     accessToken: null,
     refreshToken: null,
     currentUser: null,
-    isPossibleInside: true,
-    isPossibleOutside: false,
-    isPossibleDigital: false,
-    isPossibleAlone: false,
     isPrepairationNeeded: false,
     withoutCosts: false,
-    isActive: true,
+    isPublic: true,
     sorter: '-createdAt',
-    isLvlOne: false,
-    isLvlTwo: false,
-    isLvlThree: false,
     filterTags: [],
-    mandatoryFilter: {},
+    mandatoryFilter: [],
+    numberFilter: [],
     heimabendCounter: 0,
     tags: [],
     tagCategory: null,
@@ -32,16 +25,24 @@ export default new Vuex.Store({
     liked: [],
     pageScrolled: false,
     isScoringMode: false,
+    headerString: 'Inspi',
+    isSubPage: false,
+    isDrawer: false,
+    messageType: [],
+    heimabendItems: [{
+      name: '123123',
+      description: 'description',
+    }],
+    scollPosition: 0,
+    nextPath: '',
+    isEventLoading: false,
+    isFirstEventLoaded: false,
+    saveFilterLastFilter: [],
+    isExtended: false,
   },
   getters: {
-    isLvlOne(state) {
-      return state.isLvlOne;
-    },
-    isLvlTwo(state) {
-      return state.isLvlTwo;
-    },
-    isLvlThree(state) {
-      return state.isLvlThree;
+    saveFilterLastFilter(state) {
+      return state.saveFilterLastFilter;
     },
     isAuthenticated(state) {
       return !!state.accessToken;
@@ -61,38 +62,23 @@ export default new Vuex.Store({
     tagById(state, id) {
       return state.tags.find(tag => tag.id === id);
     },
-    isPossibleInside(state) {
-      return !!state.isPossibleInside;
-    },
-    isPossibleOutside(state) {
-      return !!state.isPossibleOutside;
-    },
-    isPossibleAlone(state) {
-      return !!state.isPossibleAlone;
-    },
-    isPossibleDigital(state) {
-      return !!state.isPossibleDigital;
-    },
     isPrepairationNeeded(state) {
       return !!state.isPrepairationNeeded;
     },
     withoutCosts(state) {
       return !!state.withoutCosts;
     },
-    isActive(state) {
-      return !!state.isActive;
-    },
     getUsername(state) {
       return state.currentUser;
-    },
-    sorter(state) {
-      return state.sorter;
     },
     filterTags(state) {
       return state.filterTags;
     },
     mandatoryFilter(state) {
       return state.mandatoryFilter;
+    },
+    numberFilter(state) {
+      return state.numberFilter;
     },
     heimabendCounter(state) {
       return state.heimabendCounter;
@@ -109,16 +95,55 @@ export default new Vuex.Store({
     isScoringMode(state) {
       return state.isScoringMode;
     },
+    headerString(state) {
+      return state.headerString;
+    },
+    isSubPage(state) {
+      return state.isSubPage;
+    },
+    isDrawer(state) {
+      return state.isDrawer;
+    },
+    messageType(state) {
+      return state.messageType;
+    },
+    heimabendItems(state) {
+      return state.heimabendItems;
+    },
+    scollPosition(state) {
+      return state.scollPosition;
+    },
+    nextPath(state) {
+      return state.nextPath;
+    },
+    isEventLoading(state) {
+      return state.isEventLoading;
+    },
+    isFirstEventLoaded(state) {
+      return state.isFirstEventLoaded;
+    },
+    isExtended(state) {
+      return state.isExtended;
+    },
   },
   mutations: {
+    setIsExtended(state, isExtended) {
+      state.isExtended = isExtended;
+    },
+    setSaveFilterLastFilter(state, value) {
+      state.saveFilterLastFilter = value;
+    },
+    setIsEventLoading(state, value) {
+      state.isEventLoading = value;
+    },
+    setIsFirstEventLoaded(state, value) {
+      state.isFirstEventLoaded = value;
+    },
     acceptedPrivacy(state, acceptedPrivacy) {
       state.acceptedPrivacy = acceptedPrivacy;
     },
     apiIsDown(state, status) {
       state.apiIsDown = status;
-    },
-    changeSorter(state, newSorter) {
-      state.sorter = newSorter;
     },
     setTags(state, newTags) {
       state.tags = newTags;
@@ -135,6 +160,31 @@ export default new Vuex.Store({
     changeMandatoryFilter(state, newTags) {
       state.mandatoryFilter = newTags;
     },
+    addMandatoryFilter(state, newTags) {
+      state.mandatoryFilter = [newTags, ...state.mandatoryFilter];
+    },
+    removeMandatoryFilter(state, itemToRemove) {
+      const tempArray = state.mandatoryFilter;
+      const index1 = tempArray.indexOf(itemToRemove);
+      if (index1 !== -1) {
+        tempArray.splice(index1, 1);
+      }
+      state.mandatoryFilter = tempArray;
+    },
+    addNumberFilter(state, newTags) {
+      state.numberFilter = [newTags, ...state.numberFilter];
+    },
+    cleanNumberFilter(state) {
+      state.numberFilter.splice(0);
+    },
+    removeNumberFilter(state, itemToRemove) {
+      const tempArray = state.numberFilter;
+      const index1 = tempArray.indexOf(itemToRemove);
+      if (index1 !== -1) {
+        tempArray.splice(index1, 1);
+      }
+      state.numberFilter = tempArray;
+    },
     removeOneFilter(state, itemToRemove) {
       const tempArray = state.mandatoryFilter;
       const index1 = tempArray.indexOf(itemToRemove);
@@ -150,58 +200,26 @@ export default new Vuex.Store({
       }
       state.filterTags = tempArray2;
     },
-    setPossibleInside(state, value) {
-      state.isPossibleInside = value;
-    },
-    setPossibleOutside(state, value) {
-      state.isPossibleOutside = value;
-    },
-    setPossibleAlone(state, value) {
-      state.isPossibleAlone = value;
-    },
-    setPossibleDigital(state, value) {
-      state.isPossibleDigital = value;
-    },
     setIsPreperationNeeded(state, value) {
       state.isPrepairationNeeded = value;
     },
     setWithoutCosts(state, value) {
       state.withoutCosts = value;
     },
-    toggleIsActive(state) {
-      state.isActive = !state.isActive;
-    },
-    enableIsActive(state) {
-      state.isActive = true;
-    },
     setHeimabendCounter(state, payload) {
       state.heimabendCounter = payload;
     },
-    setIsLvlOne(state, value) {
-      state.isLvlOne = value;
-    },
-    setIsLvlTwo(state, value) {
-      state.isLvlTwo = value;
-    },
-    setIsLvlThree(state, value) {
-      state.isLvlThree = value;
+    setScollPosition(state, payload) {
+      state.scollPosition = payload;
     },
     setTokens(state, access, refresh) {
       state.accessToken = access;
       state.refreshToken = refresh;
     },
     clearFilters(state) {
-      state.isPossibleInside = true;
-      state.isPossibleOutside = true;
-      state.isPossibleDigital = false;
-      state.isPossibleAlone = false;
-      state.isLvlOne = false;
-      state.isLvlTwo = false;
-      state.isLvlThree = false;
       state.searchInput = '';
       state.isPrepairationNeeded = false;
       state.withoutCosts = false;
-      state.isActive = true;
       state.filterTags = [];
       state.mandatoryFilter = [];
     },
@@ -226,6 +244,30 @@ export default new Vuex.Store({
     setIsScoringMode(state, isScoringMode) {
       state.isScoringMode = isScoringMode;
     },
+    setHeaderString(state, headerString) {
+      state.headerString = headerString;
+    },
+    setIsSubPage(state, isSubPage) {
+      state.isSubPage = isSubPage;
+    },
+    setDrawer(state, isDrawer) {
+      state.isDrawer = isDrawer;
+    },
+    toogleDrawer(state) {
+      state.isDrawer = !state.isDrawer;
+    },
+    setMessageType(state, messageType) {
+      state.messageType = messageType;
+    },
+    extendHeimabendItems(state, newHeimabendItems) {
+      state.heimabendItems = state.heimabendItems.concat(newHeimabendItems);
+    },
+    resetHeimabendItems(state) {
+      state.heimabendItems = [];
+    },
+    setNextPath(state, payload) {
+      state.nextPath = payload;
+    },
   },
   actions: {
     logout({ commit }) {
@@ -233,10 +275,14 @@ export default new Vuex.Store({
       commit('setCurrentUser', null);
     },
     resetFilters({ commit }) {
-      commit('enableIsActive');
       commit('changeMandatoryFilter', []);
       commit('changeFilterTags', []);
       commit('setSearchInput', '');
+      commit('resetHeimabendItems');
+      commit('setIsFirstEventLoaded', false);
+      commit('setNextPath', false);
+      commit('clearFilters');
+      commit('cleanNumberFilter');
     },
   },
   plugins: [createPersistedState()],

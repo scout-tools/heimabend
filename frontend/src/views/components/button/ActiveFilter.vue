@@ -1,23 +1,31 @@
 <template>
-<div>
-  <v-chip-group >
-    <v-chip-tooltip v-for="(tag, index) in getActiveTags" :key="index"
-      :tag="tag" margin="mr-1" small cursor="info-cursor" close @click:close="onCloseChip"/>
+  <v-chip-group column>
+    <v-chip label close :small="isMobil"
+      v-for="(tag, index) in getActiveTags"
+      :color="tag.color"
+      :key="index"  @click:close="onCloseChip(tag)">
+      {{ tag.name }}
+    </v-chip>
   </v-chip-group>
-</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import VChipTooltip from '@/views/components/chip/ChipTooltip.vue';
 
 export default {
-  components: {
-    VChipTooltip,
-  },
   methods: {
     onCloseChip(value) {
-      this.$store.commit('removeOneFilter', value);
+      this.$store.commit('setNextPath', false);
+      this.$store.commit('resetHeimabendItems', []);
+      this.$store.commit('setIsFirstEventLoaded', false);
+
+      if (value && value.id) {
+        this.$store.commit('removeOneFilter', value.id);
+      } else if (value.type && value.type === 'search') {
+        this.$store.commit('setSearchInput', '');
+      } else {
+        this.$store.commit('removeNumberFilter', value);
+      }
     },
   },
   computed: {
@@ -29,15 +37,27 @@ export default {
       'tagCategory',
       'mandatoryFilter',
       'filterTags',
+      'numberFilter',
+      'searchInput',
     ]),
     getActiveTags() {
+      let tags = [];
       // eslint-disable-next-line
       if ((this.mandatoryFilter || this.filterTags) && (this.mandatoryFilter.length || this.filterTags.length)) {
-        return this.tags.filter(
+        tags = this.tags.filter(
           item => this.mandatoryFilter.includes(item.id) || this.filterTags.includes(item.id),
         );
       }
-      return [];
+      tags = tags.concat(this.numberFilter);
+      if (this.searchInput) {
+        tags.push({
+          name: `Suche: ${this.searchInput}`,
+          value: this.searchInput,
+          type: 'search',
+        });
+      }
+
+      return tags;
     },
   },
 };

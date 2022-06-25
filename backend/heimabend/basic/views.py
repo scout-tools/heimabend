@@ -1,10 +1,10 @@
 # views.py
 import json
 
-from django.db.models.functions import ExtractWeek, ExtractYear
+from django.db.models.functions import ExtractMonth, ExtractYear
 from django.http import HttpResponse
 from django_filters import FilterSet, BooleanFilter, OrderingFilter, \
-    ModelMultipleChoiceFilter
+    ModelMultipleChoiceFilter, NumberFilter, BaseInFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import pagination, viewsets, mixins, generics, \
     filters, status
@@ -12,78 +12,147 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework_tracking.mixins import LoggingMixin
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from datetime import date
 
 from .models import Tag, Event, Message, Like, TagCategory, Image, \
-     Material, ExperimentItem, Experiment
+    MaterialItem, ExperimentItem, Experiment, MaterialUnit, \
+    MaterialName, MessageType, Faq, FaqRating, NextBestHeimabend, \
+    ImageMeta, EventOfTheWeek
 from .serializers import TagSerializer, EventSerializer, MessageSerializer, \
-    LikeSerializer, HighscoreSerializer, \
+    LikeSerializer, HighscoreSerializer, EventItemSerializer, \
     TagCategorySerializer, StatisticSerializer, ImageSerializer, \
-    MaterialSerializer, ExperimentItemSerializer, ExperimentSerializer
+    MaterialItemSerializer, ExperimentItemSerializer, ExperimentSerializer, \
+    TopViewsSerializer, EventAdminSerializer, EventTimestampSerializer, \
+    MaterialUnitSerializer, MaterialNameSerializer, MessageTypeSerializer, \
+    FaqSerializer, FaqRatingSerializer, ExperimentOverviewSerializer, \
+    NextBestHeimabendSerializer, ImageMetaSerializer, EventOfTheWeekSerializer, \
+    EventSitemapSerializer
 
 
 class TagViewSet(LoggingMixin, viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Tag.objects.all().order_by('ordered_id', 'name')
+    queryset = Tag.objects.all().order_by('sorting', 'name')
     serializer_class = TagSerializer
-    filter_backends = (DjangoFilterBackend,)
-    filterset_fields = ('is_visible',)
+
+    def get_queryset(self):
+        if not self.request.user.is_authenticated:
+            return self.queryset.filter(is_public=True)
+        else:
+            return self.queryset
+
+    def create(self, request, pk=None, partial=False):
+        return super().create(request, pk, partial=partial)
+
+    def update(self, request, pk=None, partial=False):
+        return super().update(request, pk, partial=partial)
 
 
 class TagCategoryViewSet(LoggingMixin, viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = TagCategory.objects.all().order_by('ordered_id', 'name')
+    queryset = TagCategory.objects.all().order_by('sorting', 'name')
     serializer_class = TagCategorySerializer
-    filter_backends = (DjangoFilterBackend,)
-    filterset_fields = ('is_visible',)
+
+    def get_queryset(self):
+        if not self.request.user.is_authenticated:
+            return self.queryset.filter(is_public=True)
+        else:
+            return self.queryset
+
+    def create(self, request, pk=None, partial=False):
+        return super().create(request, pk, partial=partial)
+
+    def update(self, request, pk=None, partial=False):
+        return super().update(request, pk, partial=partial)
 
 
 class EventPagination(pagination.PageNumberPagination):
-    page_size = 5  # the no. of company objects you want to send in one go
+    page_size = 3
+    page_size_query_param = 'limit'
+    max_page_size = 1000
+
+
+class _NumberInFilter(BaseInFilter, NumberFilter):
+    pass
 
 
 class EventFilter(FilterSet):
-    isPossibleInside = BooleanFilter(field_name='isPossibleInside')
-    isPossibleOutside = BooleanFilter(field_name='isPossibleOutside')
-    isPossibleDigital = BooleanFilter(field_name='isPossibleDigital')
-    isPossibleAlone = BooleanFilter(field_name='isPossibleAlone')
-    isPrepairationNeeded = BooleanFilter(field_name='isPrepairationNeeded')
-    isActive = BooleanFilter(field_name='isActive', method='get_isActive')
+    prepairationTime__gt = NumberFilter(
+        field_name='prepairation_time', lookup_expr='gt')
+    prepairationTime__lt = NumberFilter(
+        field_name='prepairation_time', lookup_expr='lt')
+    prepairationTime = NumberFilter(field_name='prepairation_time')
+    prepairationTime__in = _NumberInFilter(
+        field_name='prepairation_time', lookup_expr='in')
+
+    costsRating__gt = NumberFilter(
+        field_name='costs_rating', lookup_expr='gt')
+    costsRating__lt = NumberFilter(
+        field_name='costs_rating', lookup_expr='lt')
+    costsRating = NumberFilter(field_name='costs_rating')
+    costsRating__in = _NumberInFilter(
+        field_name='costs_rating', lookup_expr='in')
+
+    executionTime__gt = NumberFilter(
+        field_name='execution_time', lookup_expr='gt')
+    executionTime__lt = NumberFilter(
+        field_name='execution_time', lookup_expr='lt')
+    executionTime = NumberFilter(field_name='execution_time')
+    executionTime__in = _NumberInFilter(
+        field_name='execution_time', lookup_expr='in')
+
+    difficulty__gt = NumberFilter(
+        field_name='difficulty', lookup_expr='gt')
+    difficulty__lt = NumberFilter(
+        field_name='difficulty', lookup_expr='lt')
+    difficulty = NumberFilter(field_name='difficulty')
+    difficulty__in = _NumberInFilter(
+        field_name='difficulty', lookup_expr='in')
+
+    is_public = BooleanFilter(field_name='is_public', method='get_is_public')
     withoutCosts = BooleanFilter(
-        method='get_CostRating', field_name='costsRating')
+        method='get_cost_rating', field_name='costs_rating')
 
     filterTags = ModelMultipleChoiceFilter(field_name='tags__id',
                                            to_field_name='id',
                                            queryset=Tag.objects.all(),
                                            method='get_tags')
-    isLvlOne = BooleanFilter(field_name='isLvlOne')
-    isLvlTwo = BooleanFilter(field_name='isLvlTwo')
-    isLvlThree = BooleanFilter(field_name='isLvlThree')
 
     class Meta:
         model = Event
-        fields = ['isPossibleInside',
-                  'isPossibleOutside',
-                  'isPossibleAlone',
-                  'isPossibleDigital',
-                  'isPrepairationNeeded',
-                  'isActive',
+        fields = [
+                  'is_public',
                   'withoutCosts',
                   'filterTags',
-                  'isLvlOne',
-                  'isLvlTwo',
-                  'isLvlThree'
+                  'executionTime__gt',
+                  'executionTime__lt',
+                  'executionTime',
+                  'executionTime__in',
+                  'prepairationTime__gt',
+                  'prepairationTime__lt',
+                  'prepairationTime',
+                  'prepairationTime__in',
+                  'costsRating__gt',
+                  'costsRating__lt',
+                  'costsRating',
+                  'costsRating__in',
+                  'difficulty__gt',
+                  'difficulty__lt',
+                  'difficulty',
+                  'difficulty__in',
                   ]
 
     def get_CostRating(self, queryset, field_name, value):
         if value:
-            return queryset.filter(costsRating=0)
+            return queryset.filter(costs_rating=0)
         return queryset
 
-    def get_isActive(self, queryset, field_name, value):
+    def get_is_public(self, queryset, field_name, value):
         if not value:
             if self.request.user.is_authenticated:
-                return queryset.filter(isActive=value)
-        return queryset.filter(isActive=True)
+                return queryset.filter(is_public=value)
+        return queryset.filter(is_public=True)
 
     def get_tags(self, queryset, field_name, value):
         tags_category = dict()
@@ -98,62 +167,93 @@ class EventFilter(FilterSet):
         return queryset
 
 
+class EventOfTheWeekFilter(FilterSet):
+    past = BooleanFilter(field_name='release_date', method='get_past')
+
+    class Meta:
+        model = EventOfTheWeek
+        fields = ['release_date']
+
+    def get_past(self, queryset, field_name, value):
+        if value:
+            return queryset.filter(release_date__lte=date.today())
+        return queryset
+
+
 class EventViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = Event.objects.all()
-    serializer_class = EventSerializer
+    serializer_class = EventItemSerializer
     filter_backends = (DjangoFilterBackend,
                        filters.SearchFilter, filters.OrderingFilter)
     filterset_class = EventFilter
-    ordering = ['-createdAt']
-    ordering_fields = ['-createdAt', 'title', '-like_score']
-    search_fields = ['title', 'description', 'material']
+    ordering = ['-created_at']
+    ordering_fields = ['-created_at',
+                       'created_at', 'title', '-like_score', '?']
+    search_fields = ['title', 'description', 'tags__name', 'created_by']
     pagination_class = EventPagination
 
     def get_queryset(self):
         if not self.request.user.is_authenticated:
-            return self.queryset.filter(isActive=True)
+            return self.queryset.filter(is_public=True)
+        else:
+            return self.queryset
 
-    def create(self, request, *args, **kwargs):
-        # Check whether new_item exists
-        if 'material_list' in request.data:
-            material_list = request.data['material_list']
-            for new_item in material_list:
-                if not Material.objects.filter(name__exact=new_item).exists():
-                    new_material = Material.objects.create(name=new_item)
-                    new_material.save()
 
-        return super().create(request, *args, **kwargs)
+class EventItem(LoggingMixin, viewsets.ModelViewSet):
+    serializer_class = EventItemSerializer
 
-    def update(self, request, pk=None, partial=False):
-        if 'material_list' in request.data:
-            material_list = request.data['material_list']
-            for new_item in material_list:
-                if not Material.objects.filter(name__exact=new_item).exists():
-                    new_material = Material.objects.create(name=new_item)
-                    new_material.save()
-
-        return super().update(request, pk, partial=partial)
+    def get_queryset(self):
+        queryset = Event.objects.filter(pk=self.kwargs['event_id'])
+        if not self.request.user.is_authenticated:
+            return queryset.filter(is_public=True)
+        else:
+            return queryset
 
 
 class MessageViewSet(LoggingMixin, viewsets.ModelViewSet):
-    queryset = Message.objects.all().order_by('createdAt')
+    queryset = Message.objects.all().order_by('created_at')
     serializer_class = MessageSerializer
 
 
-class LikeViewSet(LoggingMixin, mixins.CreateModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
+class LikeViewSet(LoggingMixin, mixins.CreateModelMixin, viewsets.ViewSetMixin,
+                  generics.GenericAPIView):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
 
 
-class HighscoreView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
-    queryset = Event.objects.values('createdBy').distinct()
+class HighscoreView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin,
+                    generics.GenericAPIView):
+    queryset = Event.objects.values('created_by').distinct()
     serializer_class = HighscoreSerializer
 
 
-class StatisticView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin, generics.GenericAPIView):
-    queryset = Event.objects.values(week=ExtractWeek('createdAt')).annotate(year=ExtractYear('createdAt')).values(
-        'week', 'year').distinct().order_by('year', 'week')
+class StatisticView(LoggingMixin, mixins.ListModelMixin, viewsets.ViewSetMixin,
+                    generics.GenericAPIView):
+    queryset = Event.objects.values(
+        month=ExtractMonth('created_at')).annotate(
+            year=ExtractYear('created_at')).values(
+                'month', 'year').distinct().order_by(
+                    'year', 'month')
     serializer_class = StatisticSerializer
+
+
+class TopViewsView(viewsets.ViewSet):
+    queryset = Event.objects.all()
+
+    def list(self, data):
+        serializer = TopViewsSerializer(self.queryset, many=True)
+        serializer_data = sorted(
+            serializer.data, key=lambda k: k['view_count'], reverse=True)[:10]
+
+        return Response(serializer_data)
+
+
+class ImageMetaView(LoggingMixin, viewsets.ModelViewSet,
+                    generics.GenericAPIView):
+    queryset = ImageMeta.objects.all()
+    serializer_class = ImageMetaSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ('event',)
 
 
 class ImageView(LoggingMixin, viewsets.ModelViewSet, generics.GenericAPIView):
@@ -173,9 +273,26 @@ class ImageView(LoggingMixin, viewsets.ModelViewSet, generics.GenericAPIView):
                             status=status.HTTP_400_BAD_REQUEST)
 
 
-class MaterialViewSet(LoggingMixin, viewsets.ModelViewSet):
-    queryset = Material.objects.all()
-    serializer_class = MaterialSerializer
+class MaterialItemViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = MaterialItem.objects.all()
+    serializer_class = MaterialItemSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ('event',)
+
+
+class MaterialUnitViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = MaterialUnit.objects.all()
+    serializer_class = MaterialUnitSerializer
+
+
+class MaterialNameViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = MaterialName.objects.order_by('name').all()
+    serializer_class = MaterialNameSerializer
+
+
+class MessageTypeViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = MessageType.objects.all()
+    serializer_class = MessageTypeSerializer
 
 
 class ExperimentViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -183,11 +300,145 @@ class ExperimentViewSet(LoggingMixin, viewsets.ModelViewSet):
     serializer_class = ExperimentSerializer
 
 
+class ExperimentOverviewViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = Experiment.objects.all()
+    serializer_class = ExperimentOverviewSerializer
+
+
+class FaqViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = Faq.objects.all()
+    serializer_class = FaqSerializer
+
+
+class FaqRatingViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = FaqRating.objects.all()
+    serializer_class = FaqRatingSerializer
+
+
 class ExperimentItemViewSet(LoggingMixin, viewsets.ModelViewSet):
     queryset = ExperimentItem.objects.all()
     serializer_class = ExperimentItemSerializer
 
+    def create(self, request, *args, **kwargs):
+        serializer = ExperimentItemSerializer(data=request.data)
+        if serializer.is_valid():
+            data = serializer.data
+            event = data['event']
+            score = data['score']
+            if (score == 0):
+                total_ratings = ExperimentItem.objects.filter(
+                    event=event).count()
+                unclear_ratings = ExperimentItem.objects.filter(
+                    event=event).filter(
+                        score=0).count()
+                if (total_ratings >= 1):
+                    unclear_rate = unclear_ratings / total_ratings
+                    if (unclear_rate >= 0.3):
+                        event = Event.objects.filter(id=event)
+                        event.update(is_public=False)
+                        Event.objects.get(id=event).tags.add(
+                            Tag.objects.get(id=70))
+
+        return super().create(request, *args, **kwargs)
+
 
 class RandomEventViewSet(LoggingMixin, viewsets.ModelViewSet):
-    queryset = Event.objects.filter(isActive=True).order_by("?")[:10]
+    queryset = Event.objects.filter(is_public=True).order_by("?")[:10]
     serializer_class = EventSerializer
+
+
+class AdminEventViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = Event.objects.order_by('-created_at').all()
+    serializer_class = EventAdminSerializer
+
+
+class EventSitemapViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = Event.objects.all()
+    serializer_class = EventSitemapSerializer
+
+
+class EventTimestampViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = Event.objects.filter(is_public=True).order_by('created_at')
+    serializer_class = EventTimestampSerializer
+
+
+class ChangePublishStatus(APIView):
+    def post(self, request, *args, **kwargs):
+        posted_data = self.request.data
+        set_active = posted_data['set_active']
+        event_id = posted_data['event']
+
+        event = Event.objects.filter(id=event_id)
+        event.update(is_public=set_active)
+
+        return_data = [
+            {"worked": True}
+        ]
+        return Response(status=200, data=return_data)
+
+
+class NextBestHeimabendViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = NextBestHeimabend.objects.order_by("score").all()
+    serializer_class = NextBestHeimabendSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ('event',)
+
+
+class EventOfTheWeekViewSet(LoggingMixin, viewsets.ModelViewSet):
+    queryset = EventOfTheWeek.objects.order_by("release_date").all()
+    serializer_class = EventOfTheWeekSerializer
+    filterset_class = EventOfTheWeekFilter
+    filter_backends = (DjangoFilterBackend,
+                       filters.SearchFilter, filters.OrderingFilter)
+    ordering = ['release_date']
+    ordering_fields = ['-release_date',
+                       'release_date']
+
+
+class MaterialItems(APIView):
+    def post(self, request, *args, **kwargs):
+        posted_data = self.request.data
+        return_array = []
+        for item in posted_data:
+
+            material_name_count = MaterialName.objects.filter(
+                name=item['name']
+            ).count()
+
+            if (material_name_count == 0):
+                material_name_new = MaterialName.objects.create(
+                    name=item['name']
+                )
+                material_name_new.save()
+
+            material_name_obj = MaterialName.objects.filter(
+                name=item['name']
+            ).first()
+
+            if (item['id'] > 0):
+                material_item = MaterialItem.objects.filter(
+                    id=item['id']
+                )
+
+                material_item.update(
+                    quantity=item['quantity'],
+                    material_name_id=material_name_obj.id,
+                    event_id=item['event_id'],
+                    material_unit_id=item['unit_id']
+                )
+                return_array.append(item['id'])
+            else:
+                new_obj = MaterialItem.objects.create(
+                    quantity=item['quantity'],
+                    material_name_id=material_name_obj.id,
+                    material_unit_id=item['unit_id'],
+                    event_id=item['event_id']
+                )
+                new_obj.save()
+
+                return_array.append(new_obj.id)
+
+        return_data = [
+            {"material_event_ids": return_array}
+        ]
+        return Response(status=200, data=return_data)

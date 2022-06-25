@@ -1,108 +1,182 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Message from '../views/message/Main.vue';
-import Heimabend from '../views/heimabend/Main.vue';
-import AboutProject from '../views/aboutProject/Main.vue';
-import Faq from '../views/aboutProject/Faq.vue';
-import Impressum from '../views/impressum/Main.vue';
-import Tags from '../views/tags/Main.vue';
-import TagCategory from '../views/tags/tagCategory/Main.vue';
-import HeimabendCreate from '../views/heimabend/create/Main.vue';
-import MessageOverview from '../views/message/Overview.vue';
-import HeimabendDetails from '../views/heimabend/details/Main.vue';
-import RankingOverview from '../views/ranking/Main.vue';
-import ScoringStart from '../views/scoring/Main.vue';
-import ScoringTest from '../views/scoring/Test.vue';
-import EasterEgg from '../views/inspi/easterEgg/Main.vue';
+import axios from 'axios';
 
-Vue.use(VueRouter);
+function getEvents() {
+  return new Promise((resolve) => {
+    axios.get('http://localhost:8000/basic/admin-sitemap').then((response) => {
+      resolve(response.data);
+    });
+  });
+}
 
-const routes = [
+const routes = [   // eslint-disable-line
   {
     path: '/',
     name: 'overview',
-    component: Heimabend,
+    component: () => import(/* webpackChunkName: "overview" */ './../views/heimabend/Main.vue'), // eslint-disable-line
   },
   {
     path: '/about',
     name: 'aboutProject',
-    component: AboutProject,
+    component: () =>
+      import(/* webpackChunkName: "aboutProject" */ './../views/footer/aboutProject/Main.vue'), // eslint-disable-line
   },
   {
     path: '/faq',
     name: 'faq',
-    component: Faq,
+    component: () =>
+      import(/* webpackChunkName: "faq" */ './../views/footer/aboutProject/Faq.vue'), // eslint-disable-line
   },
   {
     path: '/impressum',
     name: 'impressum',
-    component: Impressum,
+    component: () =>
+      import(/* webpackChunkName: "impressum" */ './../views/footer/impressum/Main.vue'), // eslint-disable-line
+  },
+  {
+    path: '/datenschutz',
+    name: 'datenschutz',
+    component: () =>
+      import(/* webpackChunkName: "datenschutz" */ './../views/footer/aboutProject/Main.vue'), // eslint-disable-line
   },
   {
     path: '/message',
     name: 'message',
-    component: Message,
+    meta: { sitemap: { ignoreRoute: true } },
+    component: () =>
+      import(/* webpackChunkName: "message" */ './../views/footer/message/Main.vue'), // eslint-disable-line
   },
   {
-    path: '/meassage/overview',
-    name: 'messageOverview',
-    component: MessageOverview,
-  },
-  {
-    path: '/tags',
-    name: 'tags',
-    component: Tags,
-  },
-  {
-    path: '/tagCategory',
-    name: 'tagCategory',
-    component: TagCategory,
+    path: '/message/final',
+    name: 'message-final',
+    meta: { sitemap: { ignoreRoute: true } },
+    component: () =>
+      import(/* webpackChunkName: "messageFinal" */ './../views/footer/message/FinalMessagePage.vue'), // eslint-disable-line
   },
   {
     path: '/heimabend/create/',
     name: 'heimabendCreate',
-    component: HeimabendCreate,
+    meta: { sitemap: { ignoreRoute: true } },
+    component: () =>
+      import(/* webpackChunkName: "heimabendCreate" */ './../views/heimabend/create/Main.vue'), // eslint-disable-line
+  },
+  {
+    path: '/heimabend/create/final',
+    name: 'heimabendCreateFinale',
+    meta: { sitemap: { ignoreRoute: true } },
+    component: () =>
+      import(/* webpackChunkName: "heimabendCreateFinale" */ './../views/heimabend/create/FinalEventPage.vue'), // eslint-disable-line
   },
   {
     path: '/heimabend/update/:id',
     name: 'heimabendUpdate',
-    component: HeimabendCreate,
+    meta: { sitemap: { ignoreRoute: true } },
+    component: () =>
+      import(/* webpackChunkName: "heimabendUpdate" */ './../views/heimabend/create/Main.vue'), // eslint-disable-line
   },
   {
     path: '/heimabend/:id',
     name: 'heimabendDetails',
-    component: HeimabendDetails,
-    props: true,
+    meta: {
+      sitemap: {
+        slugs: async () => await getEvents(), //eslint-disable-line
+      },
+    },
+    component: () =>
+      import(/* webpackChunkName: "heimabendDetails" */ './../views/heimabend/details/Main.vue'), // eslint-disable-line
   },
   {
     path: '/ranking',
     name: 'ranking-overview',
-    component: RankingOverview,
+    component: () =>
+      import(/* webpackChunkName: "rankingOverview" */ './../views/inspi/ranking/Main.vue'), // eslint-disable-line
   },
   {
     path: '/scoring/start',
     name: 'scoring-start',
-    component: ScoringStart,
+    meta: { sitemap: { ignoreRoute: true } },
+    component: () =>
+      import(/* webpackChunkName: "scoringStart" */ './../views/inspi/scoring/Landing.vue'), // eslint-disable-line
+  },
+  {
+    path: '/scoring/setup',
+    name: 'scoring-setup',
+    meta: { sitemap: { ignoreRoute: true } },
+    component: () =>
+      import(/* webpackChunkName: "scoringSetup" */ './../views/inspi/scoring/Setup.vue'), // eslint-disable-line
   },
   {
     path: '/scoring/test/:id',
     name: 'scoring-test',
-    component: ScoringTest,
+    meta: { sitemap: { ignoreRoute: true } },
+    component: () =>
+      import(/* webpackChunkName: "scoringTest" */ './../views/inspi/scoring/Test.vue'), // eslint-disable-line
+  },
+  {
+    path: '/scoring/final/:id',
+    name: 'scoring-final',
+    meta: { sitemap: { ignoreRoute: true } },
+    component: () =>
+      import( /* webpackChunkName: "scoringFinal" */ './../views/inspi/scoring/FinalScoringPage.vue'), // eslint-disable-line
   },
   {
     path: '/inspi/easter-egg',
     name: 'inspi-easter-egg',
-    component: EasterEgg,
+    meta: { sitemap: { ignoreRoute: true } },
+
+    component: () =>
+      import(/* webpackChunkName: "inspiEasterEgg" */ './../views/inspi/easterEgg/Main.vue'), // eslint-disable-line
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    meta: { sitemap: { ignoreRoute: true } },
+    component: () => import(/* webpackChunkName: "admin" */ './../views/admin/Main.vue'), // eslint-disable-line
+    children: [
+      {
+        path: 'overview',
+        name: 'admin-overview',
+        component: () =>
+          import(/* webpackChunkName: "adminOverview" */ './../views/admin/overview/Main.vue'), // eslint-disable-line
+      },
+      {
+        path: 'heimabend',
+        name: 'admin-heimabend',
+        component: () =>
+          import(/* webpackChunkName: "adminHeimabend" */ './../views/admin/heimabend/Main.vue'), // eslint-disable-line
+      },
+      {
+        path: 'event-of-the-week-create',
+        name: 'admin-heimabend-event-of-the-week-create',
+        component: () => import(/* webpackChunkName: "AdminEventOfWeek" */ './../views/admin/heimabend/eventOfTheWeek/CreateForm.vue'), // eslint-disable-line
+      },
+      {
+        path: 'tag',
+        component: () =>
+          import(/* webpackChunkName: "adminTag" */ './../views/admin/tag/Main.vue'), // eslint-disable-line
+      },
+      {
+        path: 'message',
+        component: () =>
+          import(/* webpackChunkName: "adminMessage" */ './../views/admin/message/Main.vue'), // eslint-disable-line
+      },
+      {
+        path: 'material',
+        component: () =>
+          import(/* webpackChunkName: "adminMaterial" */ './../views/admin/material/Main.vue'), // eslint-disable-line
+      },
+      {
+        path: 'score',
+        component: () =>
+          import(/* webpackChunkName: "adminScore" */ './../views/admin/score/Main.vue'), // eslint-disable-line
+      },
+    ],
+  },
+  {
+    path: '/inspirations',
+    name: 'inspirations',
+    component: () =>
+      import(/* webpackChunkName: "inspirations" */ './../views/inspi/inspirations/Main.vue'), // eslint-disable-line
   },
 ];
 
-const router = new VueRouter({
-  mode: 'history', // add fallback route to prod server
-  base: process.env.BASE_URL,
-  routes,
-  scrollBehavior() {
-    return { x: 0, y: 0 };
-  },
-});
-
-export default router;
+export default routes;

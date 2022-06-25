@@ -8,15 +8,15 @@
         <v-chip
           :filter="filter"
           light
-          :small="small"
+          :small="isMobil"
           :close="close"
           v-on="on"
           v-bind:class="[cursor, margin]"
-          :color="tag.color"
+          :color="tag.color ? tag.color : 'blue lighten-3'"
           :value="tag.id"
-          @click:close="$emit('click:close', tag.id)"
+          @click:close="$emit('click:close', tag)"
         >
-          {{ getTagNameById(tag.id) }}
+          {{ tag.name }}
         </v-chip>
       </template>
       <span>
@@ -35,6 +35,9 @@ export default {
     ...mapGetters([
       'tags',
     ]),
+    isMobil() {
+      return this.$vuetify.breakpoint.mdAndDown;
+    },
   },
   methods: {
     getTagNameById(idString) {

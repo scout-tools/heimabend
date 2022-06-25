@@ -1,10 +1,9 @@
 <template>
   <v-form
-    ref="form5"
-    v-model="valid"
+    ref="form6"
   >
 <v-container>
-  <v-row class="mt-6 ml-4">
+  <v-row class="mt-2">
     <span class="subtitle-1">
       Wähle so viele thematische Kategorien aus, wie zu deiner Heimabend-Idee passen. <br>
       <br>
@@ -12,12 +11,11 @@
       gerne mit dem Kontaktformular direkt an uns wenden.
     </span>
   </v-row>
-  <v-row class="ma-6">
+  <v-row class="mt-3">
     <v-select
       v-model="data.tags"
       :items="getSideBarTags"
       item-value="id"
-      :rules="rules.tags"
       item-text="name"
       deletable-chips
       chips
@@ -41,21 +39,35 @@
   </v-row>
 
     <v-divider class="my-2"/>
-    <v-row class="ma-3" justify="center">
-      <v-btn
-        class="mr-5"
-        @click="prevStep()"
-      >
-        Zurück
-      </v-btn>
-
-      <v-btn
-        color="primary"
-        @click="nextStep()"
-      >
-        Weiter
-      </v-btn>
-    </v-row>
+      <v-row class="ma-0" justify="center">
+        <v-btn class="ma-1" @click="prevStep()">
+          <v-icon left> mdi-chevron-left </v-icon>
+          Zurück
+        </v-btn>
+        <v-btn class="ma-1" color="primary" @click="nextStep()">
+          Weiter
+          <v-icon right> mdi-chevron-right </v-icon>
+        </v-btn>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                v-bind="attrs"
+                v-on="on"
+                icon
+                class="ma-1"
+                color="secondary"
+                @click="nextStep(true)"
+              >
+                <v-icon>
+                  mdi-debug-step-over
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>
+              {{ 'Schritt überspringen' }}
+            </span>
+          </v-tooltip>
+      </v-row>
 </v-container>
         </v-form>
 </template>
@@ -65,22 +77,15 @@ import { mapGetters } from 'vuex';
 
 export default {
   data: () => ({
-    rules: {
-      tags: [
-        v => (v && v.length > 0) || 'Mindestens ein Thema ist erforderlich',
-      ],
-    },
     data: {
       executionTimeRating: 1,
       costsRating: 1,
-      isLvlOne: true,
-      isLvlTwo: true,
-      isLvlThree: true,
     },
-    valid: true,
     n: 0,
   }),
-
+  props: {
+    data: Object,
+  },
   computed: {
     ...mapGetters([
       'tags',
@@ -98,37 +103,16 @@ export default {
     isUpdate() {
       return !!this.$route.params.id;
     },
-    isLargeProject() {
-      return this.data.executionTimeRating === 0;
-    },
-    largeProjectButtomColor() {
-      return this.isLargeProject ? 'limegreen' : 'lightgrey';
-    },
-    largeProjectIconColor() {
-      return this.isLargeProject ? 'black' : 'grey';
-    },
-    isWithoutCosts() {
-      return this.data.costsRating === 0;
-    },
-    withoutCostsButtomColor() {
-      return this.isWithoutCosts ? 'limegreen' : 'lightgrey';
-    },
-    withoutCostsIconColor() {
-      return this.isWithoutCosts ? 'red darken-2' : 'grey';
-    },
-    getClassForTextContentSteps() {
-      return this.isMobil ? 'mx-0 px-1' : '';
-    },
     getTopBarTagCategories() {
       if (this.tagCategory) {
         return this.tagCategory
-          .filter(item => item.is_header);
+          .filter(item => item.isHeader);
       }
       return [];
     },
     getSideBarTags() {
       if (this.tags && this.tagCategory) {
-        const sideBarTagCategories = this.tagCategory.filter(item => item.is_header === false);
+        const sideBarTagCategories = this.tagCategory.filter(item => item.id === 9);
         const sideBarTags = this.filterTagByCategory(sideBarTagCategories[0].id);
         return sideBarTags;
       }
@@ -136,19 +120,6 @@ export default {
     },
 
   },
-
-  mounted() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-    }
-  },
-
-  created() {
-    if (this.$route.params.id) {
-      this.data = this.$route.params;
-    }
-  },
-
 
   methods: {
     filterTagByCategory(categoryId) {
@@ -158,9 +129,6 @@ export default {
       this.$emit('prevStep');
     },
     nextStep() {
-      if (!this.$refs.form5.validate()) {
-        return;
-      }
       this.$emit('nextStep');
     },
     getData() {
@@ -171,7 +139,7 @@ export default {
     getMandatoryBarTagCategories() {
       if (this.tagCategory) {
         return this.tagCategory
-          .filter(item => item.is_mandatory);
+          .filter(item => item.isMandatory);
       }
       return [];
     },
@@ -183,7 +151,7 @@ export default {
     },
     getRulesByCategory(category) {
       let returnValue = this.rules.tags;
-      if (!category.is_mandatory) {
+      if (!category.isMandatory) {
         return [];
       }
 

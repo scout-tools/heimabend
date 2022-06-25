@@ -1,0 +1,101 @@
+[
+    {
+        "model": "basic.eventoftheweek",
+        "pk": 1,
+        "fields": {
+            "id": 1, 
+            "event_id": 138,
+            "release_date": "2021-06-21"
+        }
+    },
+    {
+        "model": "basic.eventoftheweek",
+        "pk": 2,
+        "fields": {
+            "id": 2, 
+            "event_id": 186,
+            "release_date": "2021-06-28"
+        }
+    },
+    {
+        "model": "basic.eventoftheweek",
+        "pk": 3,
+        "fields": {
+            "id": 3, 
+            "event_id": 158,
+            "release_date": "2021-07-05"
+        }
+    },
+    {
+        "model": "basic.eventoftheweek",
+        "pk": 4,
+        "fields": {
+            "id": 4, 
+            "event_id": 290,
+            "release_date": "2021-07-12"
+        }
+    },
+    {
+        "model": "basic.eventoftheweek",
+        "pk": 5,
+        "fields": {
+            "id": 5, 
+            "event_id": 186,
+            "release_date": "2021-07-19"
+        }
+    },
+    {
+        "model": "basic.eventoftheweek",
+        "pk": 6,
+        "fields": {
+            "id": 6, 
+            "event_id": 291,
+            "release_date": "2021-07-26"
+        }
+    },
+    {
+        "model": "basic.eventoftheweek",
+        "pk": 7,
+        "fields": {
+            "id": 7, 
+            "event_id": 45,
+            "release_date": "2021-08-02"
+        }
+    },
+    {
+        "model": "basic.eventoftheweek",
+        "pk": 8,
+        "fields": {
+            "id": 8, 
+            "event_id": 219,
+            "release_date": "2021-08-09"
+        }
+    },
+    {
+        "model": "basic.eventoftheweek",
+        "pk": 9,
+        "fields": {
+            "id": 9, 
+            "event_id": 182,
+            "release_date": "2021-08-16"
+        }
+    },
+    {
+        "model": "basic.eventoftheweek",
+        "pk": 10,
+        "fields": {
+            "id": 10, 
+            "event_id": 286,
+            "release_date": "2021-08-23"
+        }
+    },
+    {
+        "model": "basic.eventoftheweek",
+        "pk": 11,
+        "fields": {
+            "id": 11, 
+            "event_id": 151,
+            "release_date": "2021-08-30"
+        }
+    }
+]
