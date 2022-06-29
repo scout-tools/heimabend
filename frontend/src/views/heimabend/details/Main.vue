@@ -101,7 +101,7 @@ export default {
       return `${process.env.VUE_APP_AWS_MEDIA_URL}media/images/inspi_v2.png`;
     },
     getUrl() {
-      return `https://inspirator.dpbm.de/heimabend/${this.id}/`;
+      return `https://heimabend.de/heimabend/${this.id}/`;
     },
     getDescription() {
       return 'Schau dir mal diese Heimabend-Idee an.';
