@@ -13,7 +13,7 @@ module.exports = {
   },
   // pluginOptions: {
   //   sitemap: {
-  //     baseURL: 'https://inspirator.dpbm.de',
+  //     baseURL: 'https://heimabend.de',
   //     routes,
   //     pretty: true,
   //     outputDir: 'public/',
